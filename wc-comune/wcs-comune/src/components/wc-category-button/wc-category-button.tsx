@@ -6,15 +6,14 @@ import { Component, Prop, Event } from '@stencil/core';
   shadow: true
 })
 export class WcCategoryButton {
-  /**
-   * The first name
-   */
   @Prop() category:string;
   @Prop() icon:string;
+  @Prop() class:string;
   @Event() categorySelected: EventEmitter;
 
   categorySelectedHandler(category: string) {
     this.categorySelected.emit(category);
+    console.log("Cliccato", category);
   }
 
   private getCategory(): string {
@@ -27,13 +26,18 @@ export class WcCategoryButton {
       return this.icon
     return ""
   }
+  private getClass(): string{
+    if(this.class)
+      return this.class
+    return ""
+  }
   render() {
     return (
       <div  class="container" onClick={() =>this.categorySelectedHandler(this.category)}>
         <div class="img-button">
           <img src={this.getIcon()}></img>
         </div>
-        <div class="text-button">
+        <div class={'text-button ' + this.getClass()}>
           {this.getCategory()}
         </div>
 

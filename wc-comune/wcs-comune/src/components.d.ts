@@ -13,17 +13,13 @@ import '@stencil/core';
 export namespace Components {
 
   interface WcCategoryButton {
-    /**
-    * The first name
-    */
     'category': string;
+    'class': string;
     'icon': string;
   }
   interface WcCategoryButtonAttributes extends StencilHTMLAttributes {
-    /**
-    * The first name
-    */
     'category'?: string;
+    'class'?: string;
     'icon'?: string;
     'onCategorySelected'?: (event: CustomEvent) => void;
   }

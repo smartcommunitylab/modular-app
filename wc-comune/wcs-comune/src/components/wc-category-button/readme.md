@@ -9,9 +9,9 @@
 
 | Property   | Attribute  | Description    | Type     | Default     |
 | ---------- | ---------- | -------------- | -------- | ----------- |
-| `category` | `category` | The first name | `string` | `undefined` |
+| `category` | `category` |                | `string` | `undefined` |
 | `icon`     | `icon`     |                | `string` | `undefined` |
-
+| `class`     | `class`   |                | `string` | `category`  |
 
 ## Events
 

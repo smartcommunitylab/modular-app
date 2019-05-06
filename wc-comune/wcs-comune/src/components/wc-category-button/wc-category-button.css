@@ -1,16 +1,24 @@
 .container {
-    border: solid 1px gray;
+    border: solid 1px red;
     padding: 8px;
     margin: 8px;
+    box-shadow: 0.5em 0.5em 0.5em 0em lightgrey;
+    max-width: 100%;
 }
 .img-button img{
     margin: auto;
     display: block;
-    width: 200px;
-    height: 200px;
-  
+    min-width: 15%;
+    max-width: 25%;
 }
 .text-button {
     text-align: center;
     margin: 8px;
+    font-size: 22px;
+}
+.green {
+    color: green;
+}
+.red {
+    color: red;
 }
