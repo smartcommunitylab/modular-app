@@ -1,0 +1,15 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>list-poi</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list no-lines>
+    
+    <div *ngFor="let poi of pois">
+      <wc-list-poi [poi]="poi" (click)="goToDetail(poi)" ></wc-list-poi>
+    </div>
+
+  </ion-list>
+</ion-content>

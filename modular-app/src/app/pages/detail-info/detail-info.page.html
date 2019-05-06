@@ -1,0 +1,12 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>detail-info</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <div *ngFor="let info of details">
+    <wc-detail-info [info]="info">
+    </wc-detail-info>
+  </div>
+</ion-content>

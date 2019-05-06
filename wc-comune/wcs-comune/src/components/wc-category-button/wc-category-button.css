@@ -1,0 +1,16 @@
+.container {
+    border: solid 1px gray;
+    padding: 8px;
+    margin: 8px;
+}
+.img-button img{
+    margin: auto;
+    display: block;
+    width: 200px;
+    height: 200px;
+  
+}
+.text-button {
+    text-align: center;
+    margin: 8px;
+}

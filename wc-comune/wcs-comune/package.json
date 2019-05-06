@@ -1,0 +1,29 @@
+{
+  "name": "wcs-comune",
+  "version": "0.0.53",
+  "description": "Stencil Component Starter",
+  "module": "dist/esm/index.js",
+  "main": "dist/index.js",
+  "unpkg": "dist/ionic.js",
+  "types": "dist/types/components.d.ts",
+  "collection": "dist/collection/collection-manifest.json",
+  "files": [
+    "dist/"
+  ],
+  "scripts": {
+    "build": "stencil build --docs",
+    "start": "stencil build --dev --watch --serve",
+    "test": "stencil test --spec --e2e",
+    "test.watch": "stencil test --spec --e2e --watchAll"
+  },
+  "dependencies": {
+    "@types/pouchdb": "^6.3.3",
+    "pouchdb-adapter-leveldb": "^7.0.0",
+    "pouchdb-server": "^4.1.0"
+  },
+  "devDependencies": {
+    "@stencil/core": "0.18.1",
+    "@stencil/sass": "^0.2.1"
+  },
+  "license": "MIT"
+}
