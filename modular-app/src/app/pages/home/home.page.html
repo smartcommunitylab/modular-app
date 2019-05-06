@@ -1,0 +1,27 @@
+<ion-header no-border>
+  <ion-toolbar color="secondary">
+    <ion-title>
+      Comune in tasca
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+  <!-- <wc-poi [poi]="pois[0]" ></wc-poi> -->
+  <!-- <wc-path description="wc-path" path='[{"name":"Stencil","url":"www.stenciljs.com"},{"name":"Google","url":"www.google.com"}]'></wc-path> -->
+
+  <div *ngIf="elementsGallery">
+    <wc-gallery gallery="categories">
+  </wc-gallery>
+</div>
+
+  <ion-grid id="category-buttons">
+    <ion-row>
+      <ion-col *ngFor="let category of categories">
+        <wc-category-button [category]="category.name" [icon]="category.image" (click)="goToCategory(category)">
+        </wc-category-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
