@@ -1,4 +1,5 @@
 import { Component, Prop, Event } from '@stencil/core';
+import { Icons } from '../../shared/icons';
 
 @Component({
   tag: 'wc-category-button',
@@ -10,8 +11,19 @@ export class WcCategoryButton {
   @Prop() icon: string;
   @Prop() iconAlign: string = "left";
   @Prop() bgColor: string = "white";
+  @Prop() iconFill: string;
+  @Prop() textColor: string;
 
   @Event() categorySelected: EventEmitter;
+
+  icons = new Icons();
+
+  componentWillLoad(){
+    if (!this.iconFill)
+      this.iconFill = "black";
+    if (!this.textColor)
+      this.textColor = "black";
+  }
 
   categorySelectedHandler(category: string) {
     this.categorySelected.emit(category);
@@ -22,12 +34,14 @@ export class WcCategoryButton {
     return (
       <div  class="container" style={{backgroundColor:this.bgColor}} onClick={() =>this.categorySelectedHandler(this.category)}>
         <div class="img-button">
-          <img src={this.icon} class={('icon icon-'+this.iconAlign)}></img>
+        <div class={('icon icon-'+this.iconAlign)}>
+          {this.icons.iconList[this.icon](this.iconFill)}
         </div>
-        <div class="text-button">
+          {/* <img src={this.icon} class={('icon icon-'+this.iconAlign)}></img> */}
+        </div>
+        <div class="text-button" style={{color:this.textColor}}>
           {this.category}
         </div>
-
       </div>
     );
   }

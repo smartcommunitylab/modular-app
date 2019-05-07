@@ -17,13 +17,17 @@ export namespace Components {
     'category': string;
     'icon': string;
     'iconAlign': string;
+    'iconFill': string;
+    'textColor': string;
   }
   interface WcCategoryButtonAttributes extends StencilHTMLAttributes {
     'bgColor'?: string;
     'category'?: string;
     'icon'?: string;
     'iconAlign'?: string;
+    'iconFill'?: string;
     'onCategorySelected'?: (event: CustomEvent) => void;
+    'textColor'?: string;
   }
 
   interface WcDetailInfo {
