@@ -13,14 +13,16 @@ import '@stencil/core';
 export namespace Components {
 
   interface WcCategoryButton {
-    'align': string;
+    'bgColor': string;
     'category': string;
     'icon': string;
+    'iconAlign': string;
   }
   interface WcCategoryButtonAttributes extends StencilHTMLAttributes {
-    'align'?: string;
+    'bgColor'?: string;
     'category'?: string;
     'icon'?: string;
+    'iconAlign'?: string;
     'onCategorySelected'?: (event: CustomEvent) => void;
   }
 
