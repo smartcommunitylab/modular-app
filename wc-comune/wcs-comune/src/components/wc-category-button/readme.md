@@ -11,7 +11,7 @@
 | ---------- | ---------- | -------------- | -------- | ----------- |
 | `category` | `category` |                | `string` | `undefined` |
 | `icon`     | `icon`     |                | `string` | `undefined` |
-| `class`     | `class`   |                | `string` | `category`  |
+| `class`    | `class`    |                | `string` | `category`  |
 
 ## Events
 

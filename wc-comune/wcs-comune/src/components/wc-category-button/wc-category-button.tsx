@@ -8,7 +8,7 @@ import { Component, Prop, Event } from '@stencil/core';
 export class WcCategoryButton {
   @Prop() category:string;
   @Prop() icon:string;
-  @Prop() class:string;
+  @Prop() align: string;
   @Event() categorySelected: EventEmitter;
 
   categorySelectedHandler(category: string) {
@@ -26,18 +26,14 @@ export class WcCategoryButton {
       return this.icon
     return ""
   }
-  private getClass(): string{
-    if(this.class)
-      return this.class
-    return ""
-  }
+
   render() {
     return (
       <div  class="container" onClick={() =>this.categorySelectedHandler(this.category)}>
         <div class="img-button">
-          <img src={this.getIcon()}></img>
+          <img src={this.getIcon()} class={('icon icon-'+this.align)}></img>
         </div>
-        <div class={'text-button ' + this.getClass()}>
+        <div class="text-button">
           {this.getCategory()}
         </div>
 

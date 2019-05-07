@@ -4,21 +4,37 @@
     margin: 8px;
     box-shadow: 0.5em 0.5em 0.5em 0em lightgrey;
     max-width: 100%;
+    /* white-space: nowrap; */
 }
-.img-button img{
+.container::after{
+    clear:both;
+    content:"";
+    display:table;
+}
+.img-button {
     margin: auto;
-    display: block;
-    min-width: 15%;
-    max-width: 25%;
 }
 .text-button {
     text-align: center;
     margin: 8px;
     font-size: 22px;
+    
 }
-.green {
-    color: green;
+.icon {
+    min-width: 5%;
+    max-width: 10%;
+    margin: 1%;
 }
-.red {
-    color: red;
+.icon-left {
+    text-align: left;
+    float: left;
+}
+.icon-right {
+    text-align:right;
+    float:right;
+}
+.icon-top {
+    display:block;
+    text-align: center;
+    margin: 0 auto;
 }
