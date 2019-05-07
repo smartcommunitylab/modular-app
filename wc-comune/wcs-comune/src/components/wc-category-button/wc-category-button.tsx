@@ -7,11 +7,17 @@ import { Icons } from '../../shared/icons';
   shadow: true
 })
 export class WcCategoryButton {
+  /** Nome della categoria */
   @Prop() category: string;
+  /** Riferimento icona, vedi file 'shared/icons.tsx' */
   @Prop() icon: string;
+  /** Allineamento icona - top, left, right */
   @Prop() iconAlign: string = "left";
+  /** Colore sfondo container */
   @Prop() bgColor: string = "white";
+  /** Colore riempimento icona */
   @Prop() iconFill: string;
+  /** Colore testo */
   @Prop() textColor: string;
 
   @Event() categorySelected: EventEmitter;
@@ -34,10 +40,9 @@ export class WcCategoryButton {
     return (
       <div  class="container" style={{backgroundColor:this.bgColor}} onClick={() =>this.categorySelectedHandler(this.category)}>
         <div class="img-button">
-        <div class={('icon icon-'+this.iconAlign)}>
-          {this.icons.iconList[this.icon](this.iconFill)}
-        </div>
-          {/* <img src={this.icon} class={('icon icon-'+this.iconAlign)}></img> */}
+          <div class={('icon icon-'+this.iconAlign)}>
+            {this.icons.iconList[this.icon](this.iconFill)}
+          </div>
         </div>
         <div class="text-button" style={{color:this.textColor}}>
           {this.category}

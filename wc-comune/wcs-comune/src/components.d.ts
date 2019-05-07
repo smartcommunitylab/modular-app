@@ -13,20 +13,56 @@ import '@stencil/core';
 export namespace Components {
 
   interface WcCategoryButton {
+    /**
+    * Colore sfondo container
+    */
     'bgColor': string;
+    /**
+    * Nome della categoria
+    */
     'category': string;
+    /**
+    * Riferimento icona, vedi file 'shared/icons.tsx'
+    */
     'icon': string;
+    /**
+    * Allineamento icona - top, left, right
+    */
     'iconAlign': string;
+    /**
+    * Colore riempimento icona
+    */
     'iconFill': string;
+    /**
+    * Colore testo
+    */
     'textColor': string;
   }
   interface WcCategoryButtonAttributes extends StencilHTMLAttributes {
+    /**
+    * Colore sfondo container
+    */
     'bgColor'?: string;
+    /**
+    * Nome della categoria
+    */
     'category'?: string;
+    /**
+    * Riferimento icona, vedi file 'shared/icons.tsx'
+    */
     'icon'?: string;
+    /**
+    * Allineamento icona - top, left, right
+    */
     'iconAlign'?: string;
+    /**
+    * Colore riempimento icona
+    */
     'iconFill'?: string;
     'onCategorySelected'?: (event: CustomEvent) => void;
+    /**
+    * Colore testo
+    */
     'textColor'?: string;
   }
 
