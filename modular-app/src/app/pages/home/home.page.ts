@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class HomePage {
   categories: any = [];
-  elementsGallery: any = [];
+  elementsGallery: string[] = null;
   pois: any = [];
   language: string = "it";
   constructor(public navCtrl: NavController,private router: Router, public dbService: DbService, public alertCtrl: AlertController) {
@@ -23,6 +23,7 @@ export class HomePage {
     this.dbService.getElementsGallery().then((data) => {
       //set gallery with preview
       this.elementsGallery = data.map(x => this.convertGallery(x));
+      console.log(JSON.stringify(this.elementsGallery));
     });
 
   }

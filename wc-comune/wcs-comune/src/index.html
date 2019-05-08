@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0">
@@ -7,9 +8,31 @@
   <script src="/build/ws-comune.js"></script>
 
 </head>
-<body>
 
-  <wc-poi name="ciao" address="pippo"></wc-poi>
-  <wc-path description="ciao"></wc-path>
+<body>
+  
+  <wc-gallery>
+  </wc-gallery>
+  <script>
+    const wcGallery = document.querySelector('wc-gallery');
+    wcGallery.gallery = [{
+      "name": "Museum Pass",
+      "image": "http://www.comune.trento.it/var/comunetn/storage/images/applicazioni/comune-in-tasca/turista/in-evidenza/museum-pass/8622743-10-ita-IT/Museum-Pass.jpg"
+    }, {
+      "name": "Come arrivare a Trento",
+      "image": "http://www.comune.trento.it/var/comunetn/storage/images/applicazioni/comune-in-tasca/turista/in-evidenza/come-arrivare-a-trento/8622728-36-ita-IT/Come-arrivare-a-Trento.jpg"
+    }, {
+      "name": "Livetrento",
+      "image": "http://www.comune.trento.it/var/comunetn/storage/images/applicazioni/comune-in-tasca/turista/in-evidenza/livetrento/9867529-1-ita-IT/Livetrento.jpg"
+    }, {
+      "name": "Muse",
+      "image": "http://www.comune.trento.it/var/comunetn/storage/images-versioned/8554673/1-ita-IT/Muse1.jpg"
+    }, {
+      "name": "Festival dell'Economia 2018: Lavoro e tecnologia",
+      "image": "http://www.comune.trento.it/var/comunetn/storage/images/aree-tematiche/turismo/eventi/tutti-gli-eventi/festival-dell-economia-2018-lavoro-e-tecnologia/11107625-2-ita-IT/Festival-dell-Economia-2018-Lavoro-e-tecnologia.jpg"
+    }];
+
+  </script>
 </body>
+
 </html>
