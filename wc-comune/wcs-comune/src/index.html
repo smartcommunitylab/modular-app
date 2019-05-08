@@ -7,8 +7,14 @@
   <script src="/build/ws-comune.js"></script>
 </head>
 <body>
-    <wc-category-button category="demo1" icon="home" icon-align="left" bg-color="rgb(100,250,10)"></wc-category-button>
-    <wc-category-button category="demo2" icon="help" icon-align="right" bg-color="#bca"></wc-category-button>
-    <wc-category-button category="demo3" icon="map" icon-align="top" icon-fill="red" text-color="red"></wc-category-button>
+  <script>
+    window.onload = function() {
+      var tabs = document.querySelector('wc-tabs');
+      tabs.content=JSON.stringify([{target:'info',icon:'info'},{target:'place',icon:'place'},{target:'map',icon:'map'}]);
+    }
+  </script>
+    <wc-path-list-el id="primo" title="PROVA" text="Descrizione di prova" img="http://placekitten.com/g/100/100" main-color="#5851ff" desc-color="red"></wc-path-list-el>
+    <wc-path-list-el id="secondo" title="PROVA2" text="Descrizione di prova2" img="http://placekitten.com/g/100/100" main-color="#5851ff" desc-color="red"></wc-path-list-el>
+    <wc-tabs content="" icon-color="red" bg-color="lightgrey" tab-actived="info"></wc-tabs>
 </body>
 </html>

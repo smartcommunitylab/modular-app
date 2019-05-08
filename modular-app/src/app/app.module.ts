@@ -11,7 +11,7 @@ import { ComuneModule } from './module-comune/web-components.module';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(),ComuneModule.forRoot(), AppRoutingModule],
+  imports: [BrowserModule, IonicModule.forRoot(), ComuneModule.forRoot(), AppRoutingModule],
   providers: [
     StatusBar,
     SplashScreen,

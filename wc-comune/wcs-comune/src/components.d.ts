@@ -143,25 +143,36 @@ export namespace Components {
     'wcAddress'?: string;
   }
 
-  interface WcPath {
-    /**
-    * The middle name
-    */
-    'description': string;
-    /**
-    * The first name
-    */
-    'path': Object[];
+  interface WcPathListEl {
+    'descColor': string;
+    'id': string;
+    'img': string;
+    'mainColor': string;
+    'text': string;
+    'title': string;
   }
-  interface WcPathAttributes extends StencilHTMLAttributes {
-    /**
-    * The middle name
-    */
-    'description'?: string;
-    /**
-    * The first name
-    */
-    'path'?: Object[];
+  interface WcPathListElAttributes extends StencilHTMLAttributes {
+    'descColor'?: string;
+    'id'?: string;
+    'img'?: string;
+    'mainColor'?: string;
+    'onPathSelected'?: (event: CustomEvent) => void;
+    'text'?: string;
+    'title'?: string;
+  }
+
+  interface WcTabs {
+    'bgColor': string;
+    'content': string;
+    'iconColor': string;
+    'tabActived': string;
+  }
+  interface WcTabsAttributes extends StencilHTMLAttributes {
+    'bgColor'?: string;
+    'content'?: string;
+    'iconColor'?: string;
+    'onTabSelected'?: (event: CustomEvent) => void;
+    'tabActived'?: string;
   }
 }
 
@@ -173,7 +184,8 @@ declare global {
     'WcGallery': Components.WcGallery;
     'WcListCategories': Components.WcListCategories;
     'WcListPoi': Components.WcListPoi;
-    'WcPath': Components.WcPath;
+    'WcPathListEl': Components.WcPathListEl;
+    'WcTabs': Components.WcTabs;
   }
 
   interface StencilIntrinsicElements {
@@ -183,7 +195,8 @@ declare global {
     'wc-gallery': Components.WcGalleryAttributes;
     'wc-list-categories': Components.WcListCategoriesAttributes;
     'wc-list-poi': Components.WcListPoiAttributes;
-    'wc-path': Components.WcPathAttributes;
+    'wc-path-list-el': Components.WcPathListElAttributes;
+    'wc-tabs': Components.WcTabsAttributes;
   }
 
 
@@ -223,10 +236,16 @@ declare global {
     new (): HTMLWcListPoiElement;
   };
 
-  interface HTMLWcPathElement extends Components.WcPath, HTMLStencilElement {}
-  var HTMLWcPathElement: {
-    prototype: HTMLWcPathElement;
-    new (): HTMLWcPathElement;
+  interface HTMLWcPathListElElement extends Components.WcPathListEl, HTMLStencilElement {}
+  var HTMLWcPathListElElement: {
+    prototype: HTMLWcPathListElElement;
+    new (): HTMLWcPathListElElement;
+  };
+
+  interface HTMLWcTabsElement extends Components.WcTabs, HTMLStencilElement {}
+  var HTMLWcTabsElement: {
+    prototype: HTMLWcTabsElement;
+    new (): HTMLWcTabsElement;
   };
 
   interface HTMLElementTagNameMap {
@@ -236,7 +255,8 @@ declare global {
     'wc-gallery': HTMLWcGalleryElement
     'wc-list-categories': HTMLWcListCategoriesElement
     'wc-list-poi': HTMLWcListPoiElement
-    'wc-path': HTMLWcPathElement
+    'wc-path-list-el': HTMLWcPathListElElement
+    'wc-tabs': HTMLWcTabsElement
   }
 
   interface ElementTagNameMap {
@@ -246,7 +266,8 @@ declare global {
     'wc-gallery': HTMLWcGalleryElement;
     'wc-list-categories': HTMLWcListCategoriesElement;
     'wc-list-poi': HTMLWcListPoiElement;
-    'wc-path': HTMLWcPathElement;
+    'wc-path-list-el': HTMLWcPathListElElement;
+    'wc-tabs': HTMLWcTabsElement;
   }
 
 
