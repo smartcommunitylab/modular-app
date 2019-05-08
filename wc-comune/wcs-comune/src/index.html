@@ -9,12 +9,15 @@
 <body>
   <script>
     window.onload = function() {
+      // Generazione stringa JSON per costruzione tabs //
       var tabs = document.querySelector('wc-tabs');
       tabs.content=JSON.stringify([{target:'info',icon:'info'},{target:'place',icon:'place'},{target:'map',icon:'map'}]);
     }
   </script>
     <wc-path-list-el id="primo" title="PROVA" text="Descrizione di prova" img="http://placekitten.com/g/100/100" main-color="#5851ff" desc-color="red"></wc-path-list-el>
     <wc-path-list-el id="secondo" title="PROVA2" text="Descrizione di prova2" img="http://placekitten.com/g/100/100" main-color="#5851ff" desc-color="red"></wc-path-list-el>
+    
+    <!-- Attributo "content" vuoto, popolato al completamento della costruzione della pagina -->
     <wc-tabs content="" icon-color="red" bg-color="lightgrey" tab-actived="info"></wc-tabs>
 </body>
 </html>

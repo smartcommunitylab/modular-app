@@ -144,34 +144,94 @@ export namespace Components {
   }
 
   interface WcPathListEl {
+    /**
+    * Colore descrizione breve
+    */
     'descColor': string;
+    /**
+    * ID percorso
+    */
     'id': string;
+    /**
+    * Immagine del percorso
+    */
     'img': string;
+    /**
+    * Colore titolo e bordo immagine
+    */
     'mainColor': string;
+    /**
+    * Descrizione breve
+    */
     'text': string;
+    /**
+    * Titolo del percorso
+    */
     'title': string;
   }
   interface WcPathListElAttributes extends StencilHTMLAttributes {
+    /**
+    * Colore descrizione breve
+    */
     'descColor'?: string;
+    /**
+    * ID percorso
+    */
     'id'?: string;
+    /**
+    * Immagine del percorso
+    */
     'img'?: string;
+    /**
+    * Colore titolo e bordo immagine
+    */
     'mainColor'?: string;
     'onPathSelected'?: (event: CustomEvent) => void;
+    /**
+    * Descrizione breve
+    */
     'text'?: string;
+    /**
+    * Titolo del percorso
+    */
     'title'?: string;
   }
 
   interface WcTabs {
+    /**
+    * Colore sfondo tabs
+    */
     'bgColor': string;
+    /**
+    * Oggeto JSON contenente i dettagli delle tab.
+    */
     'content': string;
+    /**
+    * Colore icona di default (pagina non attiva)
+    */
     'iconColor': string;
+    /**
+    * Identificativo pagina attiva, fare riferimento a proprietà "content"
+    */
     'tabActived': string;
   }
   interface WcTabsAttributes extends StencilHTMLAttributes {
+    /**
+    * Colore sfondo tabs
+    */
     'bgColor'?: string;
+    /**
+    * Oggeto JSON contenente i dettagli delle tab.
+    */
     'content'?: string;
+    /**
+    * Colore icona di default (pagina non attiva)
+    */
     'iconColor'?: string;
     'onTabSelected'?: (event: CustomEvent) => void;
+    /**
+    * Identificativo pagina attiva, fare riferimento a proprietà "content"
+    */
     'tabActived'?: string;
   }
 }

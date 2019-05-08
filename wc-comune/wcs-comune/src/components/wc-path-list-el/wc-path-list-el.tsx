@@ -6,11 +6,17 @@ import { Component, Prop, Event } from '@stencil/core';
   shadow: true
 })
 export class WcPathList {
+  /** ID percorso */
   @Prop() id: string;
+  /** Immagine del percorso */
   @Prop() img: string;
+  /** Descrizione breve */
   @Prop() text: string;
+  /** Titolo del percorso */
   @Prop() title: string;
+  /** Colore titolo e bordo immagine */
   @Prop() mainColor: string;
+  /** Colore descrizione breve */
   @Prop() descColor: string;
   
   @Event() pathSelected: EventEmitter;

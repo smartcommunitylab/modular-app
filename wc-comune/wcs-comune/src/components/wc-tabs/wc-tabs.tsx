@@ -8,9 +8,20 @@ import { Icons } from '../../shared/icons';
   shadow: true
 })
 export class WcTabs {
+  /** Oggeto JSON contenente i dettagli delle tab. */
+  /*  [
+        {
+          target: <string> --> pagina da visualizzare
+          icon: <string> --> identificativo icona (vedi shared/icons.tsx)
+        }
+      ]
+  */
   @Prop() content: string;
+  /** Colore icona di default (pagina non attiva) */
   @Prop() iconColor: string = "black";
+  /** Colore sfondo tabs */
   @Prop() bgColor: string = "white";
+  /** Identificativo pagina attiva, fare riferimento a proprietà "content" */
   @Prop({mutable: true}) tabActived: string = "info";
   
   @Event() tabSelected: EventEmitter;
@@ -26,16 +37,16 @@ export class WcTabs {
   tabSelectedHandler(tab: string) {
     this.tabActived = tab;
     this.tabSelected.emit(tab);
-    console.log("Cliccato", tab);
   }
 
   render() {
     var tmp = [];
-
+    // Costruzione dinamica delle tab in base alla proprietà "content"
     if(this.objContent){
         this.objContent.forEach(element => {
           tmp.push( 
             <div id={'tab-'+element.target} class="content" onClick={() => this.tabSelectedHandler(element.target)}>
+              {/* Controllo pagina attiva e colore icona */}
               {(this.tabActived == element.target) ? this.icons[element.icon]("white"):this.icons[element.icon](this.iconColor)}
             </div> 
         );

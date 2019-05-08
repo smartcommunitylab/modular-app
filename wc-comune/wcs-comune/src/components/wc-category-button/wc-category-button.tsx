@@ -33,7 +33,6 @@ export class WcCategoryButton {
 
   categorySelectedHandler(category: string) {
     this.categorySelected.emit(category);
-    console.log("Cliccato", category);
   }
 
   render() {
