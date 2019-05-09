@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { DbService } from '../../module-comune/services/db.service';
 
 @Component({
   selector: 'app-detail-poi',

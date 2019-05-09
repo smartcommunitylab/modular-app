@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, AlertController } from '@ionic/angular';
-import { DbService } from '../../module-comune/services/db.service'
+import { DbService } from '../../services/db.service'
 import { Router } from '@angular/router';
+import {ConfigService} from '../../services/config.service'
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -9,13 +10,14 @@ import { Router } from '@angular/router';
 })
 export class HomePage {
   categories: any = [];
-  elementsGallery: any = [];
+  elementsGallery: string[] = null;
   pois: any = [];
   language: string = "it";
-  constructor(public navCtrl: NavController,private router: Router, public dbService: DbService, public alertCtrl: AlertController) {
+  constructor(public navCtrl: NavController,private config: ConfigService,private router: Router, public dbService: DbService, public alertCtrl: AlertController) {
   }
   ionViewDidEnter() {
     this.elementsGallery=[]
+    this.config.init();
     this.dbService.getCategories().then((data) => {
       //set button categories
       this.categories = data.map(x => this.convertCategories(x));
@@ -23,6 +25,7 @@ export class HomePage {
     this.dbService.getElementsGallery().then((data) => {
       //set gallery with preview
       this.elementsGallery = data.map(x => this.convertGallery(x));
+      console.log(JSON.stringify(this.elementsGallery));
     });
 
   }

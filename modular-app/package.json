@@ -31,7 +31,7 @@
     "pouchdb": "^7.0.0",
     "pouchdb-find": "^7.0.0",
     "rxjs": "~6.3.3",
-    "wcs-comune": "~0.0.52",
+    "wcs-comune": "~0.0.82",
     "zone.js": "~0.8.26"
   },
   "devDependencies": {
