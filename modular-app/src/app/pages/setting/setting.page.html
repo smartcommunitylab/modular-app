@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>setting</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <!-- <ion-item *ngFor="let language of languages">
+          <ion-label >{{language}}</ion-label>
+          <ion-checkbox slot="end" [(ngModel)]="entry.isChecked"></ion-checkbox>
+        </ion-item> -->
+  <ion-list>
+      <ion-radio-group (ionChange)="onLanguageChanged($event)" [(ngModel)]="selectedLanguage">
+          <ion-list-header>
+              <ion-label>Lingue</ion-label>
+          </ion-list-header>
+  
+          <ion-item *ngFor="let language of languages">
+              <ion-label>{{language.value}}</ion-label>
+              <ion-radio slot="start" value="{{language.key}}"></ion-radio>
+          </ion-item>
+  
+      </ion-radio-group>
+  </ion-list>
+</ion-content>

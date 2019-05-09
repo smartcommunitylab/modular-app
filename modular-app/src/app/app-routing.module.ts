@@ -8,6 +8,7 @@ const routes: Routes = [
   { path: 'detail-poi', loadChildren: './pages/detail-poi/detail-poi.module#DetailPoiPageModule' },
   { path: 'list-categories', loadChildren: './pages/list-categories/list-categories.module#ListCategoriesPageModule' },
   { path: 'detail-info', loadChildren: './pages/detail-info/detail-info.module#DetailInfoPageModule' },
+  { path: 'setting', loadChildren: './pages/setting/setting.module#SettingPageModule' },
 ];
 
 @NgModule({

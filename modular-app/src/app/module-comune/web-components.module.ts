@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { appInitialize } from './app-initialize';
 import { PathComponent } from './wc-path/ws-path.component';
 import { PoiComponent } from './wc-poi/wc-poi.component';
+import { ConfigService } from '../services/config.service';
 
 @NgModule({
   imports: [
@@ -24,6 +25,7 @@ export class ComuneModule {
     return {
       ngModule: ComuneModule,
       providers: [
+        ConfigService,
         {
           provide: APP_INITIALIZER,
           useFactory: appInitialize,

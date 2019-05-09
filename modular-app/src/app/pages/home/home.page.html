@@ -1,5 +1,8 @@
 <ion-header no-border>
   <ion-toolbar color="secondary">
+      <ion-buttons slot="start">
+          <ion-menu-button></ion-menu-button>
+          </ion-buttons>
     <ion-title>
       Comune in tasca
     </ion-title>
@@ -7,10 +10,6 @@
 </ion-header>
 
 <ion-content padding>
-
-  <!-- <wc-poi [poi]="pois[0]" ></wc-poi> -->
-  <!-- <wc-path description="wc-path" path='[{"name":"Stencil","url":"www.stenciljs.com"},{"name":"Google","url":"www.google.com"}]'></wc-path> -->
-
   <div *ngIf="elementsGallery">
     <wc-gallery [gallery]="elementsGallery">
   </wc-gallery>
