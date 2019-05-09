@@ -8,8 +8,8 @@
   <ion-list no-lines>
     
     <div *ngFor="let poi of pois">
-      <wc-list-poi [poi]="poi" (click)="goToDetail(poi)" ></wc-list-poi>
+      <!-- <wc-list-poi [poi]="poi" (click)="goToDetail(poi)" ></wc-list-poi> -->
+      <wc-path-list-el [id]="poi.id" [img]="poi.image" [title]="poi.title" [text]="poi.subtitle" [main-color]="red" [desc-color]="red"></wc-path-list-el>
     </div>
-
   </ion-list>
 </ion-content>

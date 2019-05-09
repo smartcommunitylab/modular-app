@@ -23,7 +23,7 @@ export class WcPathList {
 
   pathSelectedHandler(path: string) {
     this.pathSelected.emit(path);
-    console.log("Cliccato", path);
+   // console.log("Cliccato", path);
   }
 
   render() {

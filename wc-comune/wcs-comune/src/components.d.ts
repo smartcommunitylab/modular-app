@@ -79,28 +79,6 @@ export namespace Components {
     'info'?: any;
   }
 
-  interface WcDetailPoi {
-    /**
-    * The first name
-    */
-    'poi': any;
-    /**
-    * The middle name
-    */
-    'wcAddress': string;
-  }
-  interface WcDetailPoiAttributes extends StencilHTMLAttributes {
-    'onPoiCompleted'?: (event: CustomEvent) => void;
-    /**
-    * The first name
-    */
-    'poi'?: any;
-    /**
-    * The middle name
-    */
-    'wcAddress'?: string;
-  }
-
   interface WcGallery {
     'gallery': any;
   }
@@ -141,6 +119,59 @@ export namespace Components {
     * The middle name
     */
     'wcAddress'?: string;
+  }
+
+  interface WcPathInfo {
+    /**
+    * Colore titoli
+    */
+    'headingColor': string;
+    /**
+    * Immagine del percorso
+    */
+    'img': string;
+    /**
+    * Informazioni a fine pagina
+    */
+    'info': string;
+    /**
+    * Sottotitolo del percorso
+    */
+    'subtitle': string;
+    /**
+    * Descrizione e testo
+    */
+    'text': string;
+    /**
+    * Titolo del percorso
+    */
+    'title': string;
+  }
+  interface WcPathInfoAttributes extends StencilHTMLAttributes {
+    /**
+    * Colore titoli
+    */
+    'headingColor'?: string;
+    /**
+    * Immagine del percorso
+    */
+    'img'?: string;
+    /**
+    * Informazioni a fine pagina
+    */
+    'info'?: string;
+    /**
+    * Sottotitolo del percorso
+    */
+    'subtitle'?: string;
+    /**
+    * Descrizione e testo
+    */
+    'text'?: string;
+    /**
+    * Titolo del percorso
+    */
+    'title'?: string;
   }
 
   interface WcPathListEl {
@@ -240,10 +271,10 @@ declare global {
   interface StencilElementInterfaces {
     'WcCategoryButton': Components.WcCategoryButton;
     'WcDetailInfo': Components.WcDetailInfo;
-    'WcDetailPoi': Components.WcDetailPoi;
     'WcGallery': Components.WcGallery;
     'WcListCategories': Components.WcListCategories;
     'WcListPoi': Components.WcListPoi;
+    'WcPathInfo': Components.WcPathInfo;
     'WcPathListEl': Components.WcPathListEl;
     'WcTabs': Components.WcTabs;
   }
@@ -251,10 +282,10 @@ declare global {
   interface StencilIntrinsicElements {
     'wc-category-button': Components.WcCategoryButtonAttributes;
     'wc-detail-info': Components.WcDetailInfoAttributes;
-    'wc-detail-poi': Components.WcDetailPoiAttributes;
     'wc-gallery': Components.WcGalleryAttributes;
     'wc-list-categories': Components.WcListCategoriesAttributes;
     'wc-list-poi': Components.WcListPoiAttributes;
+    'wc-path-info': Components.WcPathInfoAttributes;
     'wc-path-list-el': Components.WcPathListElAttributes;
     'wc-tabs': Components.WcTabsAttributes;
   }
@@ -270,12 +301,6 @@ declare global {
   var HTMLWcDetailInfoElement: {
     prototype: HTMLWcDetailInfoElement;
     new (): HTMLWcDetailInfoElement;
-  };
-
-  interface HTMLWcDetailPoiElement extends Components.WcDetailPoi, HTMLStencilElement {}
-  var HTMLWcDetailPoiElement: {
-    prototype: HTMLWcDetailPoiElement;
-    new (): HTMLWcDetailPoiElement;
   };
 
   interface HTMLWcGalleryElement extends Components.WcGallery, HTMLStencilElement {}
@@ -296,6 +321,12 @@ declare global {
     new (): HTMLWcListPoiElement;
   };
 
+  interface HTMLWcPathInfoElement extends Components.WcPathInfo, HTMLStencilElement {}
+  var HTMLWcPathInfoElement: {
+    prototype: HTMLWcPathInfoElement;
+    new (): HTMLWcPathInfoElement;
+  };
+
   interface HTMLWcPathListElElement extends Components.WcPathListEl, HTMLStencilElement {}
   var HTMLWcPathListElElement: {
     prototype: HTMLWcPathListElElement;
@@ -311,10 +342,10 @@ declare global {
   interface HTMLElementTagNameMap {
     'wc-category-button': HTMLWcCategoryButtonElement
     'wc-detail-info': HTMLWcDetailInfoElement
-    'wc-detail-poi': HTMLWcDetailPoiElement
     'wc-gallery': HTMLWcGalleryElement
     'wc-list-categories': HTMLWcListCategoriesElement
     'wc-list-poi': HTMLWcListPoiElement
+    'wc-path-info': HTMLWcPathInfoElement
     'wc-path-list-el': HTMLWcPathListElElement
     'wc-tabs': HTMLWcTabsElement
   }
@@ -322,10 +353,10 @@ declare global {
   interface ElementTagNameMap {
     'wc-category-button': HTMLWcCategoryButtonElement;
     'wc-detail-info': HTMLWcDetailInfoElement;
-    'wc-detail-poi': HTMLWcDetailPoiElement;
     'wc-gallery': HTMLWcGalleryElement;
     'wc-list-categories': HTMLWcListCategoriesElement;
     'wc-list-poi': HTMLWcListPoiElement;
+    'wc-path-info': HTMLWcPathInfoElement;
     'wc-path-list-el': HTMLWcPathListElElement;
     'wc-tabs': HTMLWcTabsElement;
   }
