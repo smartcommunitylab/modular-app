@@ -4,10 +4,12 @@ import { appInitialize } from './app-initialize';
 import { PathComponent } from './wc-path/ws-path.component';
 import { PoiComponent } from './wc-poi/wc-poi.component';
 import { ConfigService } from '../services/config.service';
+import { routing } from './lazy.routing';
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    routing
   ],
   declarations: [
     PoiComponent, //private and public

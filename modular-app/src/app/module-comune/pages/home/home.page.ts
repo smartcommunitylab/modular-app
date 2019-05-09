@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, AlertController } from '@ionic/angular';
-import { DbService } from '../../module-comune/services/db.service'
+import { DbService } from '../../services/db.service'
 import { Router } from '@angular/router';
-import {ConfigService} from '../../module-comune/services/config.service'
+import {ConfigService} from '../../services/config.service'
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',

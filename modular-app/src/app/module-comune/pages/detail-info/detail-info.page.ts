@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { DbService } from '../../module-comune/services/db.service';
+import { DbService } from '../../services/db.service';
 @Component({
   selector: 'app-detail-info',
   templateUrl: './detail-info.page.html',

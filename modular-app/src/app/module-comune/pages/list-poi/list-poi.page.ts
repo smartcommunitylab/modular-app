@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController, AlertController } from '@ionic/angular';
-import { DbService } from '../../module-comune/services/db.service'
+import { DbService } from '../../services/db.service'
 import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
