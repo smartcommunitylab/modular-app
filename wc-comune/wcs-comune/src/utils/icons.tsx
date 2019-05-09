@@ -1,4 +1,4 @@
-export class Icons{
+export class Icons {
 
     public iconList = {
         'home': this.homeIcon,

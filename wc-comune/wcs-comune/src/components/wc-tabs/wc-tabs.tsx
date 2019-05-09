@@ -1,6 +1,5 @@
 import { Component, Prop, Event, Element } from '@stencil/core';
-import { Icons } from '../../shared/icons';
-
+import { Icons } from '../../utils/icons';
 
 @Component({
   tag: 'wc-tabs',
