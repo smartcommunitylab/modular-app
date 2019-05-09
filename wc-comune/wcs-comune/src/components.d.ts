@@ -14,18 +14,56 @@ export namespace Components {
 
   interface WcCategoryButton {
     /**
-    * The first name
+    * Colore sfondo container
+    */
+    'bgColor': string;
+    /**
+    * Nome della categoria
     */
     'category': string;
+    /**
+    * Riferimento icona, vedi file 'shared/icons.tsx'
+    */
     'icon': string;
+    /**
+    * Allineamento icona - top, left, right
+    */
+    'iconAlign': string;
+    /**
+    * Colore riempimento icona
+    */
+    'iconFill': string;
+    /**
+    * Colore testo
+    */
+    'textColor': string;
   }
   interface WcCategoryButtonAttributes extends StencilHTMLAttributes {
     /**
-    * The first name
+    * Colore sfondo container
+    */
+    'bgColor'?: string;
+    /**
+    * Nome della categoria
     */
     'category'?: string;
+    /**
+    * Riferimento icona, vedi file 'shared/icons.tsx'
+    */
     'icon'?: string;
+    /**
+    * Allineamento icona - top, left, right
+    */
+    'iconAlign'?: string;
+    /**
+    * Colore riempimento icona
+    */
+    'iconFill'?: string;
     'onCategorySelected'?: (event: CustomEvent) => void;
+    /**
+    * Colore testo
+    */
+    'textColor'?: string;
   }
 
   interface WcDetailInfo {

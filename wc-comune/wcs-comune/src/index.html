@@ -6,33 +6,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0">
   <title>Stencil Component Starter</title>
   <script src="/build/ws-comune.js"></script>
-
 </head>
 
 <body>
-  
-  <wc-gallery>
-  </wc-gallery>
-  <script>
-    const wcGallery = document.querySelector('wc-gallery');
-    wcGallery.gallery = [{
-      "name": "Museum Pass",
-      "image": "http://www.comune.trento.it/var/comunetn/storage/images/applicazioni/comune-in-tasca/turista/in-evidenza/museum-pass/8622743-10-ita-IT/Museum-Pass.jpg"
-    }, {
-      "name": "Come arrivare a Trento",
-      "image": "http://www.comune.trento.it/var/comunetn/storage/images/applicazioni/comune-in-tasca/turista/in-evidenza/come-arrivare-a-trento/8622728-36-ita-IT/Come-arrivare-a-Trento.jpg"
-    }, {
-      "name": "Livetrento",
-      "image": "http://www.comune.trento.it/var/comunetn/storage/images/applicazioni/comune-in-tasca/turista/in-evidenza/livetrento/9867529-1-ita-IT/Livetrento.jpg"
-    }, {
-      "name": "Muse",
-      "image": "http://www.comune.trento.it/var/comunetn/storage/images-versioned/8554673/1-ita-IT/Muse1.jpg"
-    }, {
-      "name": "Festival dell'Economia 2018: Lavoro e tecnologia",
-      "image": "http://www.comune.trento.it/var/comunetn/storage/images/aree-tematiche/turismo/eventi/tutti-gli-eventi/festival-dell-economia-2018-lavoro-e-tecnologia/11107625-2-ita-IT/Festival-dell-Economia-2018-Lavoro-e-tecnologia.jpg"
-    }];
-
-  </script>
+    <wc-category-button category="demo1" icon="home" icon-align="left" bg-color="rgb(100,250,10)"></wc-category-button>
+    <wc-category-button category="demo2" icon="help" icon-align="right" bg-color="#bca"></wc-category-button>
+    <wc-category-button category="demo3" icon="map" icon-align="top" icon-fill="red" text-color="red"></wc-category-button>
 </body>
 
 </html>

@@ -1,4 +1,5 @@
 import { Component, Prop, Event } from '@stencil/core';
+import { Icons } from '../../shared/icons';
 
 @Component({
   tag: 'wc-category-button',
@@ -6,39 +7,47 @@ import { Component, Prop, Event } from '@stencil/core';
   shadow: true
 })
 export class WcCategoryButton {
-  /**
-   * The first name
-   */
-  @Prop() category:string;
-  @Prop() icon:string;
+  /** Nome della categoria */
+  @Prop() category: string;
+  /** Riferimento icona, vedi file 'shared/icons.tsx' */
+  @Prop() icon: string;
+  /** Allineamento icona - top, left, right */
+  @Prop() iconAlign: string = "left";
+  /** Colore sfondo container */
+  @Prop() bgColor: string = "white";
+  /** Colore riempimento icona */
+  @Prop() iconFill: string;
+  /** Colore testo */
+  @Prop() textColor: string;
+
   @Event() categorySelected: EventEmitter;
+
+  icons = new Icons();
+
+  componentWillLoad(){
+    if (!this.iconFill)
+      this.iconFill = "black";
+    if (!this.textColor)
+      this.textColor = "black";
+  }
 
   categorySelectedHandler(category: string) {
     this.categorySelected.emit(category);
+    console.log("Cliccato", category);
   }
 
-  private getCategory(): string {
-    if (this.category)
-      return this.category
-    return ""
-  }
-  private getIcon(): string {
-    if (this.icon)
-      return this.icon
-    return ""
-  }
   render() {
     return (
-      <div  class="container" onClick={() =>this.categorySelectedHandler(this.category)}>
+      <div  class="container" style={{backgroundColor:this.bgColor}} onClick={() =>this.categorySelectedHandler(this.category)}>
         <div class="img-button">
-          <img src={this.getIcon()}></img>
+          <div class={('icon icon-'+this.iconAlign)}>
+            {this.icons.iconList[this.icon](this.iconFill)}
+          </div>
         </div>
-        <div class="text-button">
-          {this.getCategory()}
+        <div class="text-button" style={{color:this.textColor}}>
+          {this.category}
         </div>
-
       </div>
     );
   }
-
 }
