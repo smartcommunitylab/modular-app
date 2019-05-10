@@ -10,16 +10,17 @@
   <script>
     window.onload = function() {
       // Generazione stringa JSON per costruzione tabs //
-     // var tabs = document.querySelector('wc-tabs');
-    //  tabs.content=JSON.stringify([{target:'info',icon:'info'},{target:'place',icon:'place'},{target:'map',icon:'map'}]);
-      var tmp = `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam eget malesuada lorem. Sed vitae diam sit amet massa efficitur eleifend. Maecenas rutrum erat est, id laoreet justo tincidunt sit amet. Sed maximus tellus vitae condimentum bibendum. Ut eu nunc eu est ultricies feugiat. Aenean iaculis nibh a gravida malesuada. Nam quis enim vitae arcu pulvinar placerat vel a magna. Sed eu odio mauris. In hac habitasse platea dictumst. Curabitur tempus viverra purus, at pellentesque neque euismod id. Duis fringilla vitae nibh eu ornare. Pellentesque sagittis fringilla quam, non finibus mauris mattis sit amet.
+      document.querySelector('wc-tabs').content = JSON.stringify([{target:'info',icon:'info'},{target:'place',icon:'place'},{target:'map',icon:'map'}]);
+    
+      document.querySelector('wc-poi-info').text = `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam eget malesuada lorem. Sed vitae diam sit amet massa efficitur eleifend. Maecenas rutrum erat est, id laoreet justo tincidunt sit amet. Sed maximus tellus vitae condimentum bibendum. Ut eu nunc eu est ultricies feugiat. Aenean iaculis nibh a gravida malesuada. Nam quis enim vitae arcu pulvinar placerat vel a magna. Sed eu odio mauris. In hac habitasse platea dictumst. Curabitur tempus viverra purus, at pellentesque neque euismod id. Duis fringilla vitae nibh eu ornare. Pellentesque sagittis fringilla quam, non finibus mauris mattis sit amet.
 Etiam ut purus ac lorem mollis lacinia eu a augue. Quisque pretium luctus vulputate. Fusce egestas ipsum nunc, ac varius erat ornare non. Cras placerat a lectus vel porttitor. Duis bibendum lorem ut nisi tempor, vel dictum nunc hendrerit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Suspendisse eget dolor dolor. Quisque luctus sollicitudin arcu, a gravida nisi volutpat at. Sed pharetra, nisl vel viverra laoreet, erat risus feugiat ante, a efficitur arcu mi sed elit. Pellentesque egestas, lectus et fermentum posuere, eros ante finibus tortor, at venenatis massa risus nec orci.`;
-      document.querySelector('wc-path-info').text = tmp;
-      console.log(document.querySelector('wc-path-info').text)
+
+      document.querySelector('wc-poi-info').contacts=JSON.stringify({address:"Via Roma 2", distance:"2.5 km", email:"demo@google.com", phone:"333333333", url:"http://google.com"});
     }
   </script>    
     <!-- Attributo "content" vuoto, popolato al completamento della costruzione della pagina -->
-    <!-- <wc-tabs content="" icon-color="red" bg-color="lightgrey" tab-actived="info"></wc-tabs> -->
-    <wc-path-info title="DEMO" subtitle="Sottotitolo" text="" info="Informazioni di prova" img="http://placekitten.com/g/450/350"></wc-path-info>
+    <wc-tabs content="" icon-color="red" bg-color="lightgrey" tab-actived="info"></wc-tabs>
+    <!-- <wc-path-info title="DEMO" subtitle="Sottotitolo" text="" info="Informazioni di prova" img="http://placekitten.com/g/450/350"></wc-path-info> -->
+    <wc-poi-info contacts="" title="DEMO" subtitle="Sottotitolo" text="" info="Informazioni di prova" img="http://placekitten.com/g/450/350" heading-color="violet"></wc-poi-info>
 </body>
 </html>

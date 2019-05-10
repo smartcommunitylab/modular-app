@@ -228,6 +228,68 @@ export namespace Components {
     'title'?: string;
   }
 
+  interface WcPoiInfo {
+    /**
+    * Oggetto JSON per contatti e info aggiuntive
+    */
+    'contacts': string;
+    /**
+    * Colore titoli
+    */
+    'headingColor': string;
+    /**
+    * Immagine del percorso
+    */
+    'img': string;
+    /**
+    * Informazioni a fine pagina
+    */
+    'info': string;
+    /**
+    * Sottotitolo del percorso
+    */
+    'subtitle': string;
+    /**
+    * Descrizione e testo
+    */
+    'text': string;
+    /**
+    * Titolo del percorso
+    */
+    'title': string;
+  }
+  interface WcPoiInfoAttributes extends StencilHTMLAttributes {
+    /**
+    * Oggetto JSON per contatti e info aggiuntive
+    */
+    'contacts'?: string;
+    /**
+    * Colore titoli
+    */
+    'headingColor'?: string;
+    /**
+    * Immagine del percorso
+    */
+    'img'?: string;
+    /**
+    * Informazioni a fine pagina
+    */
+    'info'?: string;
+    'onContactClick'?: (event: CustomEvent) => void;
+    /**
+    * Sottotitolo del percorso
+    */
+    'subtitle'?: string;
+    /**
+    * Descrizione e testo
+    */
+    'text'?: string;
+    /**
+    * Titolo del percorso
+    */
+    'title'?: string;
+  }
+
   interface WcTabs {
     /**
     * Colore sfondo tabs
@@ -276,6 +338,7 @@ declare global {
     'WcListPoi': Components.WcListPoi;
     'WcPathInfo': Components.WcPathInfo;
     'WcPathListEl': Components.WcPathListEl;
+    'WcPoiInfo': Components.WcPoiInfo;
     'WcTabs': Components.WcTabs;
   }
 
@@ -287,6 +350,7 @@ declare global {
     'wc-list-poi': Components.WcListPoiAttributes;
     'wc-path-info': Components.WcPathInfoAttributes;
     'wc-path-list-el': Components.WcPathListElAttributes;
+    'wc-poi-info': Components.WcPoiInfoAttributes;
     'wc-tabs': Components.WcTabsAttributes;
   }
 
@@ -333,6 +397,12 @@ declare global {
     new (): HTMLWcPathListElElement;
   };
 
+  interface HTMLWcPoiInfoElement extends Components.WcPoiInfo, HTMLStencilElement {}
+  var HTMLWcPoiInfoElement: {
+    prototype: HTMLWcPoiInfoElement;
+    new (): HTMLWcPoiInfoElement;
+  };
+
   interface HTMLWcTabsElement extends Components.WcTabs, HTMLStencilElement {}
   var HTMLWcTabsElement: {
     prototype: HTMLWcTabsElement;
@@ -347,6 +417,7 @@ declare global {
     'wc-list-poi': HTMLWcListPoiElement
     'wc-path-info': HTMLWcPathInfoElement
     'wc-path-list-el': HTMLWcPathListElElement
+    'wc-poi-info': HTMLWcPoiInfoElement
     'wc-tabs': HTMLWcTabsElement
   }
 
@@ -358,6 +429,7 @@ declare global {
     'wc-list-poi': HTMLWcListPoiElement;
     'wc-path-info': HTMLWcPathInfoElement;
     'wc-path-list-el': HTMLWcPathListElElement;
+    'wc-poi-info': HTMLWcPoiInfoElement;
     'wc-tabs': HTMLWcTabsElement;
   }
 
