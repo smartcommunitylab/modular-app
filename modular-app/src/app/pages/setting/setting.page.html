@@ -1,18 +1,19 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>setting</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-header no-border>
+        <ion-toolbar color="secondary">
+          <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+          </ion-buttons>
+          <ion-title>
+              {{'title_app'|translate}}
+            </ion-title>
+        </ion-toolbar>
+      </ion-header>
 
 <ion-content padding>
-  <!-- <ion-item *ngFor="let language of languages">
-          <ion-label >{{language}}</ion-label>
-          <ion-checkbox slot="end" [(ngModel)]="entry.isChecked"></ion-checkbox>
-        </ion-item> -->
   <ion-list>
       <ion-radio-group (ionChange)="onLanguageChanged($event)" [(ngModel)]="selectedLanguage">
           <ion-list-header>
-              <ion-label>Lingue</ion-label>
+              <ion-label>{{title}}</ion-label>
           </ion-list-header>
   
           <ion-item *ngFor="let language of languages">

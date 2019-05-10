@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SettingService } from '../../services/setting.service'
+import { TranslateService,  DefaultLangChangeEvent } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-setting',
@@ -13,18 +14,40 @@ export class SettingPage implements OnInit {
   myLanguage: any;
   selectedLanguage: any;
   form: any;
-  constructor(private settingService: SettingService) {
+  title:string;
+  constructor(private settingService: SettingService,private translate: TranslateService) {
     this.setLanguages();
 
   }
 
   ngOnInit() {
+    this.translate.get('title_app').subscribe(
+      value => {
+        this.title= value;
+      }
+    )
+    this.translate.onDefaultLangChange.subscribe((event: DefaultLangChangeEvent) => {
+      this.translate.get('title_app').subscribe(
+        value => {
+          this.title= value;
+        }
+      )
+
+    });
   }
 
+  ionViewDidLoad(){
+
+
+  }
   setLanguages(): any {
     this.setting = this.settingService.getUserSetting();
     this.myLanguage = this.settingService.getUserLanguage();
-    if (this.myLanguage) { this.selectedLanguage = this.myLanguage }
+    if (this.myLanguage) {
+       this.selectedLanguage = this.myLanguage 
+       this.translate.setDefaultLang(this.selectedLanguage);
+
+      }
     var languages = this.settingService.getLanguages();
     if (languages) {
       let keys = Array.from(Object.keys(languages));
@@ -40,5 +63,7 @@ export class SettingPage implements OnInit {
   onLanguageChanged(data) {
     console.log('Lingua = ', this.selectedLanguage);
     this.settingService.setUserLanguage(this.selectedLanguage);
+    this.translate.setDefaultLang(this.selectedLanguage);
+
   }
 }

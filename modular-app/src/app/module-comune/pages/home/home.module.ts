@@ -4,6 +4,7 @@ import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { HomePage } from './home.page';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -11,6 +12,7 @@ import { HomePage } from './home.page';
     CommonModule,
     FormsModule,
     IonicModule,
+    TranslateModule,
     RouterModule.forChild([
       {
         path: '',

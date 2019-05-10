@@ -1,8 +1,13 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>detail-poi</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-header no-border>
+    <ion-toolbar color="secondary">
+      <ion-buttons slot="start">
+          <ion-back-button></ion-back-button>
+        </ion-buttons>
+      <ion-title>
+          {{'title_detail_poi'|translate}}
+        </ion-title>
+    </ion-toolbar>
+  </ion-header>
 
 <ion-content padding>
     <wc-detail-poi [poi]="poi"  ></wc-detail-poi>

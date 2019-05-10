@@ -1,24 +1,25 @@
 <ion-header no-border>
   <ion-toolbar color="secondary">
-      <ion-buttons slot="start">
-          <ion-menu-button></ion-menu-button>
-          </ion-buttons>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
     <ion-title>
-      Comune in tasca
-    </ion-title>
+        {{'title_app'|translate}}
+      </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
-  <div *ngIf="elementsGallery">
+  <div class="gallery" *ngIf="elementsGallery">
     <wc-gallery [gallery]="elementsGallery">
-  </wc-gallery>
-</div>
+    </wc-gallery>
+  </div>
 
   <ion-grid id="category-buttons">
     <ion-row>
       <ion-col *ngFor="let category of categories">
-        <wc-category-button [category]="category.name" [icon]="category.image" (click)="goToCategory(category)">
+        <wc-category-button [category]="category.name" [icon]="category.image" icon-align="top" icon-fill="red"
+          text-color="red" (click)="goToCategory(category)">
         </wc-category-button>
       </ion-col>
     </ion-row>

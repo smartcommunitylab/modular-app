@@ -3,17 +3,27 @@ import { NavController, AlertController } from '@ionic/angular';
 import { DbService } from '../../services/db.service'
 import { Router } from '@angular/router';
 import {ConfigService} from '../../services/config.service'
+import { TranslateService } from '@ngx-translate/core';
+import {MainPage} from '../../class/MainPage'
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage {
+export class HomePage extends MainPage{
   categories: any = [];
   elementsGallery: string[] = null;
   pois: any = [];
   language: string = "it";
-  constructor(public navCtrl: NavController,private config: ConfigService,private router: Router, public dbService: DbService, public alertCtrl: AlertController) {
+  constructor(public navCtrl: NavController,public translate: TranslateService, private config: ConfigService,private router: Router, public dbService: DbService, public alertCtrl: AlertController) {
+    super(translate,navCtrl);
+  }
+  ngOnInit() {
+    this.translate.get('title_page').subscribe(
+      value => {
+        console.log(value)
+      }
+    )
   }
   ionViewDidEnter() {
     this.elementsGallery=[]
