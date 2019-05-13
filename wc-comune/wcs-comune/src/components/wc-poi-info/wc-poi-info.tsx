@@ -7,6 +7,16 @@ import { Icons } from '../../utils/icons';
   shadow: true
 })
 export class WcPathInfo {
+/** Oggeto JSON contenente i dettagli dei contatti. */
+  /*  { 
+        address: <string>, --> Indirizzo
+        distance: <string>, --> Distanza da posizione attuale
+        email?: <string>, --> Indirizzo Email
+        phone?: <string>, --> Numero di telefono
+        url?: <string> --> Link Homepage POI
+      }
+  */
+
   /** Titolo del percorso */
   @Prop() title: string;
   /** Sottotitolo del percorso */

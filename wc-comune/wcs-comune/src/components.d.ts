@@ -121,6 +121,51 @@ export namespace Components {
     'wcAddress'?: string;
   }
 
+  interface WcMap {
+    /**
+    * Icona marker per "posizione attuale"
+    */
+    'mainMarkerIcon': string;
+    /**
+    * Oggeto JSON contenente i dettagli dei POI. Latitudine posizione attuale
+    */
+    'myLat': number;
+    /**
+    * Longitudine posizione attuale
+    */
+    'myLon': number;
+    /**
+    * Icona marker POI
+    */
+    'poiMarkerIcon': string;
+    /**
+    * Array di punti da inserire nella mappa
+    */
+    'points': string;
+  }
+  interface WcMapAttributes extends StencilHTMLAttributes {
+    /**
+    * Icona marker per "posizione attuale"
+    */
+    'mainMarkerIcon'?: string;
+    /**
+    * Oggeto JSON contenente i dettagli dei POI. Latitudine posizione attuale
+    */
+    'myLat'?: number;
+    /**
+    * Longitudine posizione attuale
+    */
+    'myLon'?: number;
+    /**
+    * Icona marker POI
+    */
+    'poiMarkerIcon'?: string;
+    /**
+    * Array di punti da inserire nella mappa
+    */
+    'points'?: string;
+  }
+
   interface WcPathInfo {
     /**
     * Colore titoli
@@ -336,6 +381,7 @@ declare global {
     'WcGallery': Components.WcGallery;
     'WcListCategories': Components.WcListCategories;
     'WcListPoi': Components.WcListPoi;
+    'WcMap': Components.WcMap;
     'WcPathInfo': Components.WcPathInfo;
     'WcPathListEl': Components.WcPathListEl;
     'WcPoiInfo': Components.WcPoiInfo;
@@ -348,6 +394,7 @@ declare global {
     'wc-gallery': Components.WcGalleryAttributes;
     'wc-list-categories': Components.WcListCategoriesAttributes;
     'wc-list-poi': Components.WcListPoiAttributes;
+    'wc-map': Components.WcMapAttributes;
     'wc-path-info': Components.WcPathInfoAttributes;
     'wc-path-list-el': Components.WcPathListElAttributes;
     'wc-poi-info': Components.WcPoiInfoAttributes;
@@ -385,6 +432,12 @@ declare global {
     new (): HTMLWcListPoiElement;
   };
 
+  interface HTMLWcMapElement extends Components.WcMap, HTMLStencilElement {}
+  var HTMLWcMapElement: {
+    prototype: HTMLWcMapElement;
+    new (): HTMLWcMapElement;
+  };
+
   interface HTMLWcPathInfoElement extends Components.WcPathInfo, HTMLStencilElement {}
   var HTMLWcPathInfoElement: {
     prototype: HTMLWcPathInfoElement;
@@ -415,6 +468,7 @@ declare global {
     'wc-gallery': HTMLWcGalleryElement
     'wc-list-categories': HTMLWcListCategoriesElement
     'wc-list-poi': HTMLWcListPoiElement
+    'wc-map': HTMLWcMapElement
     'wc-path-info': HTMLWcPathInfoElement
     'wc-path-list-el': HTMLWcPathListElElement
     'wc-poi-info': HTMLWcPoiInfoElement
@@ -427,6 +481,7 @@ declare global {
     'wc-gallery': HTMLWcGalleryElement;
     'wc-list-categories': HTMLWcListCategoriesElement;
     'wc-list-poi': HTMLWcListPoiElement;
+    'wc-map': HTMLWcMapElement;
     'wc-path-info': HTMLWcPathInfoElement;
     'wc-path-list-el': HTMLWcPathListElElement;
     'wc-poi-info': HTMLWcPoiInfoElement;

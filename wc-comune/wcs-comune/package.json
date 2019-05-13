@@ -17,7 +17,9 @@
     "test.watch": "stencil test --spec --e2e --watchAll"
   },
   "dependencies": {
+    "@ionic/core": "^4.4.0",
     "@types/pouchdb": "^6.3.3",
+    "leaflet": "^1.5.1",
     "pouchdb-adapter-leveldb": "^7.0.0",
     "pouchdb-server": "^4.1.0"
   },

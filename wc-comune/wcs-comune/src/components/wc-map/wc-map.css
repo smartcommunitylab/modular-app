@@ -1,0 +1,11 @@
+.map-container{
+    margin-top:2%;
+}
+.map-container::before{
+    display: table;
+    content: ""
+}
+#map {
+    max-width: 100% !important;
+    height: 600px;
+}
