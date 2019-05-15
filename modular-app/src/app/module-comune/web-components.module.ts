@@ -4,10 +4,25 @@ import { appInitialize } from './app-initialize';
 import { PathComponent } from './wc-path/ws-path.component';
 import { PoiComponent } from './wc-poi/wc-poi.component';
 import { TabsComponent } from './wc-tabs/wc-tabs.component';
+import { ConfigService } from '../services/config.service';
+import { routing } from './lazy.routing';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { HttpClient,HttpClientModule } from '@angular/common/http';
 
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
+}
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    HttpClientModule,
+    TranslateModule.forChild({ loader: {
+      provide: TranslateLoader,
+      useFactory: HttpLoaderFactory,
+      deps: [HttpClient]
+    }}),
+    routing
   ],
   declarations: [
     PoiComponent, //private and public
@@ -27,6 +42,7 @@ export class ComuneModule {
     return {
       ngModule: ComuneModule,
       providers: [
+        ConfigService,
         {
           provide: APP_INITIALIZER,
           useFactory: appInitialize,

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
@@ -7,16 +7,56 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ComuneModule } from './module-comune/web-components.module';
+import { SettingService } from './services/setting.service'
+import { GeoService } from './services/geo.service'
+import { HttpClient,HttpClientModule } from '@angular/common/http';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
 
+export function initializeAppSetting(appInitService: SettingService) {
+  return (): Promise<any> => {
+    return appInitService.Init();
+  }
+}
+export function initializeAppGeo(geoService: GeoService) {
+  return (): Promise<any> => {
+    return geoService.Init();
+  }
+}
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
+}
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
+<<<<<<< HEAD
   imports: [BrowserModule, IonicModule.forRoot(), ComuneModule.forRoot(), AppRoutingModule],
+=======
+  imports: [
+    HttpClientModule,
+    BrowserModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    }),
+    IonicModule.forRoot(),
+    ComuneModule.forRoot(),
+    AppRoutingModule],
+>>>>>>> master
   providers: [
     StatusBar,
     SplashScreen,
+    Geolocation,
+    SettingService,
+    { provide: APP_INITIALIZER, useFactory: initializeAppSetting, deps: [SettingService], multi: true },
+    { provide: APP_INITIALIZER, useFactory: initializeAppGeo, deps: [GeoService], multi: true },
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }

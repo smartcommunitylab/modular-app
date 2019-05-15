@@ -39,9 +39,16 @@ export class WcCategoryButton {
     return (
       <div  class="container" style={{backgroundColor:this.bgColor}} onClick={() =>this.categorySelectedHandler(this.category)}>
         <div class="img-button">
+        
           <div class={('icon icon-'+this.iconAlign)}>
-            {(this.icons.iconList[this.icon]) ? this.icons.iconList[this.icon](this.iconFill) : this.icons.iconList["default"](this.iconFill)}
+          {
+            (this.icons.iconList[this.icon])?
+            this.icons.iconList[this.icon](this.iconFill)
+            :<img src={this.icon}></img>
+
+          }
           </div>
+        
         </div>
         <div class="text-button" style={{color:this.textColor}}>
           {this.category}
