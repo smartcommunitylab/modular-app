@@ -1,5 +1,6 @@
-import { defineCustomElements as WcPoi} from 'wcs-comune/dist/loader';
-import { defineCustomElements as WcPath} from 'wcs-comune/dist/loader';
+import { defineCustomElements as WcPoi } from 'wcs-comune/dist/loader';
+import { defineCustomElements as WcPath } from 'wcs-comune/dist/loader';
+import { defineCustomElements as WcTabs } from 'wcs-comune/dist/loader';
 
 export function appInitialize() {
   return () => {
@@ -8,6 +9,7 @@ export function appInitialize() {
       // Define all of our custom elements
       WcPoi(win);
       WcPath(win);
+      WcTabs(win);
     }
   };
 }

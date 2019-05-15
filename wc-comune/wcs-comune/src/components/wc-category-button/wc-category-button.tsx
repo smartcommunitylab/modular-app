@@ -1,5 +1,5 @@
 import { Component, Prop, Event } from '@stencil/core';
-import { Icons } from '../../shared/icons';
+import { Icons } from '../../utils/icons';
 
 @Component({
   tag: 'wc-category-button',
@@ -33,7 +33,6 @@ export class WcCategoryButton {
 
   categorySelectedHandler(category: string) {
     this.categorySelected.emit(category);
-    console.log("Cliccato", category);
   }
 
   render() {

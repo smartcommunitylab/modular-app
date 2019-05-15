@@ -30,6 +30,9 @@ export function HttpLoaderFactory(http: HttpClient) {
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
+<<<<<<< HEAD
+  imports: [BrowserModule, IonicModule.forRoot(), ComuneModule.forRoot(), AppRoutingModule],
+=======
   imports: [
     HttpClientModule,
     BrowserModule,
@@ -43,6 +46,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     IonicModule.forRoot(),
     ComuneModule.forRoot(),
     AppRoutingModule],
+>>>>>>> master
   providers: [
     StatusBar,
     SplashScreen,

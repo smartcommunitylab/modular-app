@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { appInitialize } from './app-initialize';
 import { PathComponent } from './wc-path/ws-path.component';
 import { PoiComponent } from './wc-poi/wc-poi.component';
+import { TabsComponent } from './wc-tabs/wc-tabs.component';
 import { ConfigService } from '../services/config.service';
 import { routing } from './lazy.routing';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
@@ -25,11 +26,13 @@ export function HttpLoaderFactory(http: HttpClient) {
   ],
   declarations: [
     PoiComponent, //private and public
-    PathComponent
+    PathComponent,
+    TabsComponent
   ],
   exports: [
     PoiComponent, //private and public
-    PathComponent
+    PathComponent,
+    TabsComponent
   ],
   entryComponents: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
