@@ -1,4 +1,4 @@
-import { Component, Prop, Element } from '@stencil/core';
+import { Component, Prop, Element, Event } from '@stencil/core';
 import leaflet from 'leaflet';
 
 @Component({
@@ -10,6 +10,7 @@ export class WcTabs {
    /** Oggeto JSON contenente i dettagli dei POI. */
   /*  [
         {
+          "id": "string", --> ID POI
           "lat": "number", --> Latitidune
           "lon": "number", --> Longitudine
           "name": "string", --> Nome POI
@@ -28,18 +29,31 @@ export class WcTabs {
   @Prop() mainMarkerIcon: string = "marker-icon.png";
   /** Icona marker POI */
   @Prop() poiMarkerIcon: string = "marker-icon.png";
-  
+
+   
+  @Event({
+    eventName: "poiSelected", 
+    composed: true, 
+    bubbles: true
+  }) poiSelected: EventEmitter;
+
   @Element() element: HTMLElement;
   private mapElement: HTMLElement;
-  private pointsObj: [{lat: number, lon: number,name:string, distance:string, address:string}];
+  private pointsObj: [{id:string, lat: number, lon: number,name:string, distance:string, address:string}];
+
+  poiSelectedHandler(id: string) {
+    this.poiSelected.emit(id);
+    console.log("Cliccato", id);
+  }
 
   componentWillLoad(){
     this.pointsObj = JSON.parse(this.points);
+    this.element.shadowRoot.getElementById
   }
 
   componentDidLoad(){
     this.mapElement = this.element.shadowRoot.getElementById('map');
-    var map = leaflet.map(this.mapElement).setView([this.myLat,this.myLon], 13);
+    var map = leaflet.map(this.mapElement,{zoomControl:false}).setView([this.myLat,this.myLon], 13);
 
     var mainIcon = leaflet.icon({
       iconUrl: this.mainMarkerIcon,
@@ -65,19 +79,28 @@ export class WcTabs {
     }).addTo(map);
 
     leaflet.marker([this.myLat,this.myLon],{icon: mainIcon}).addTo(map);
+    leaflet.control.zoom({position:'bottomleft'}).addTo(map);
 
     if(this.points){
       this.pointsObj.forEach(element => {
-        leaflet.marker([element.lat,element.lon],{icon: poiIcon}).addTo(map)
-        .bindPopup("Nome: "+element.name+"<br/>Distanza: "+element.distance);
+        leaflet.marker([element.lat,element.lon],{ icon: poiIcon }).addTo(map)
+        .bindPopup(
+          "<div id='popup-content-poi'>"+
+          "<p>Nome: "+ element.name + "</p>" +
+          "<p>Distanza: "+ element.distance + "</p>" +
+          "<br/><button id='popupOpened'>DETTAGLI</button>"
+        );
       });
     }
+    
+    map.on('popupopen',(e)=>{
+      console.log(e.popup);
+    })
   }
 
   render() {
     return ([
       <link href="https://unpkg.com/leaflet@1.1.0/dist/leaflet.css" rel="stylesheet"/>,
-      // <iframe id="map-container" class="map-container" src="data:text/html;charset=utf-8,&lt;div id=&quot;map&quot;&gt;&lt;/div&gt;"></iframe>
       <div class="map-container">
         <div id="map"></div>
       </div>

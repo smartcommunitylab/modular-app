@@ -23,7 +23,12 @@ export class WcTabs {
   /** Identificativo pagina attiva, fare riferimento a proprietà "content" */
   @Prop({mutable: true}) tabActived: string = "info";
   
-  @Event() tabSelected: EventEmitter;
+  @Event({
+    eventName: "tabSelected", 
+    composed: true, 
+    bubbles: true
+  }) tabSelected: EventEmitter;
+  
   @Element() el: HTMLElement;
 
   private objContent: {target:string, icon:string }[];

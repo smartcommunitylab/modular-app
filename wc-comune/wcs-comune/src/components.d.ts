@@ -156,6 +156,7 @@ export namespace Components {
     * Longitudine posizione attuale
     */
     'myLon'?: number;
+    'onPoiSelected'?: (event: CustomEvent) => void;
     /**
     * Icona marker POI
     */
@@ -299,7 +300,7 @@ export namespace Components {
     */
     'text': string;
     /**
-    * Titolo del percorso
+    * Oggeto JSON contenente i dettagli dei contatti. Titolo del percorso
     */
     'title': string;
   }
@@ -330,7 +331,7 @@ export namespace Components {
     */
     'text'?: string;
     /**
-    * Titolo del percorso
+    * Oggeto JSON contenente i dettagli dei contatti. Titolo del percorso
     */
     'title'?: string;
   }
