@@ -1,0 +1,17 @@
+<ion-header no-border>
+  <ion-toolbar color="secondary">
+    <ion-buttons slot="start">
+        <ion-back-button></ion-back-button>
+      </ion-buttons>
+    <ion-title>
+        {{'title_detail_info'|translate}}
+      </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <div *ngFor="let info of details">
+    <wc-detail-info [info]="info">
+    </wc-detail-info>
+  </div>
+</ion-content>

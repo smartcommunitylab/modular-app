@@ -1,0 +1,18 @@
+<ion-header no-border>
+    <ion-toolbar color="secondary">
+      <ion-buttons slot="start">
+          <ion-back-button></ion-back-button>
+        </ion-buttons>
+      <ion-title>
+          {{'title_list_categories'|translate}}
+        </ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+<ion-content padding>
+  <div *ngIf="categories">
+    <div *ngFor="let category of categories">
+      <wc-list-categories [category]="category.name" (click)="goToCategory(category)"></wc-list-categories>
+    </div>
+  </div>
+</ion-content>
