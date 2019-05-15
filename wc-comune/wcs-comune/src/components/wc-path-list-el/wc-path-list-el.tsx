@@ -19,7 +19,11 @@ export class WcPathList {
   /** Colore descrizione breve */
   @Prop() descColor: string;
   
-  @Event() pathSelected: EventEmitter;
+  @Event({
+    eventName: "pathSelected", 
+    composed: true, 
+    bubbles: true
+  }) pathSelected: EventEmitter;
 
   pathSelectedHandler(path: string) {
     this.pathSelected.emit(path);
@@ -37,7 +41,7 @@ export class WcPathList {
           <h3 style={{color: this.mainColor}}>{this.title}</h3>
         </div>
         <div class="description">
-          <p style={{color: this.descColor}}>{this.text}</p>
+          <p style={{color: this.descColor}} innerHTML= {this.text}></p>
         </div>
       </div>,
 

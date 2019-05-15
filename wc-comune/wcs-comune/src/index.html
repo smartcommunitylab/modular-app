@@ -12,7 +12,7 @@
       // Generazione stringa JSON per costruzione tabs //
       document.querySelector('wc-tabs').content = JSON.stringify([{target:'info',icon:'info'},{target:'place',icon:'place'},{target:'map',icon:'map'}]);
       // Generazione stringa JSON per costruzione mappa //
-      document.querySelector('wc-map').points = JSON.stringify([{lon: 11.15, lat: 46.00,name:"test", distance:5, address:"string"}])
+      document.querySelector('wc-map').points = JSON.stringify([{id:"pippo12",lon: 11.15, lat: 46.00,name:"test", distance:5, address:"string"}])
    /*  document.querySelector('wc-poi-info').text = `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam eget malesuada lorem. Sed vitae diam sit amet massa efficitur eleifend. Maecenas rutrum erat est, id laoreet justo tincidunt sit amet. Sed maximus tellus vitae condimentum bibendum. Ut eu nunc eu est ultricies feugiat. Aenean iaculis nibh a gravida malesuada. Nam quis enim vitae arcu pulvinar placerat vel a magna. Sed eu odio mauris. In hac habitasse platea dictumst. Curabitur tempus viverra purus, at pellentesque neque euismod id. Duis fringilla vitae nibh eu ornare. Pellentesque sagittis fringilla quam, non finibus mauris mattis sit amet.
 Etiam ut purus ac lorem mollis lacinia eu a augue. Quisque pretium luctus vulputate. Fusce egestas ipsum nunc, ac varius erat ornare non. Cras placerat a lectus vel porttitor. Duis bibendum lorem ut nisi tempor, vel dictum nunc hendrerit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Suspendisse eget dolor dolor. Quisque luctus sollicitudin arcu, a gravida nisi volutpat at. Sed pharetra, nisl vel viverra laoreet, erat risus feugiat ante, a efficitur arcu mi sed elit. Pellentesque egestas, lectus et fermentum posuere, eros ante finibus tortor, at venenatis massa risus nec orci.`;
 
@@ -24,7 +24,8 @@ Etiam ut purus ac lorem mollis lacinia eu a augue. Quisque pretium luctus vulput
     <!-- <wc-path-info title="DEMO" subtitle="Sottotitolo" text="" info="Informazioni di prova" img="http://placekitten.com/g/450/350"></wc-path-info> -->
     <!-- <wc-poi-info contacts="" title="DEMO" subtitle="Sottotitolo" text="" info="Informazioni di prova" img="http://placekitten.com/g/450/350" heading-color="violet"></wc-poi-info> -->
     
-   <wc-map points="" my-lon="11.1504241" my-lat="46.0671854" main-marker-icon="http://icons.iconarchive.com/icons/paomedia/small-n-flat/256/map-marker-icon.png"></wc-map>
-  
+   <wc-map points="" my-lon="11.1504241" my-lat="46.0671854" main-marker-icon="http://icons.iconarchive.com/icons/paomedia/small-n-flat/256/map-marker-icon.png" poi-marker-icon="https://cdn4.iconfinder.com/data/icons/ios7-active-tab/512/map_marker-512.png"></wc-map>
+   <!-- <wc-path-list-el id="primo" title="PROVA" text="Descrizione di prova" img="http://placekitten.com/g/100/100" main-color="#5851ff" desc-color="red"></wc-path-list-el>
+    <wc-path-list-el id="secondo" title="PROVA2" text="Descrizione di prova2" img="http://placekitten.com/g/100/100" main-color="#5851ff" desc-color="red"></wc-path-list-el> -->
   </body>
 </html>

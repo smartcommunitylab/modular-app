@@ -1,22 +1,22 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DetailPoiPage } from './detail-poi.page';
+import { DetailPathPage } from './detail-path.page';
 
 describe('DetailPoiPage', () => {
-  let component: DetailPoiPage;
-  let fixture: ComponentFixture<DetailPoiPage>;
+  let component: DetailPathPage;
+  let fixture: ComponentFixture<DetailPathPage>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DetailPoiPage ],
+      declarations: [ DetailPathPage ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DetailPoiPage);
+    fixture = TestBed.createComponent(DetailPathPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

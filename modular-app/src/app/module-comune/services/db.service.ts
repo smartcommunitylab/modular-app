@@ -35,7 +35,7 @@ export class DbService {
       'itineraries': 'itinerary-item',
       'mainevent': 'main-event-item'
     };
-    let options = {
+    const options = {
       live: true,
       retry: true,
       continuous: true
@@ -55,45 +55,50 @@ export class DbService {
   getObjectById(id) {
 
     return this.db.find({
-      selector: {
-        id: id
-      }
+        selector: {
+          '_id': id
+        }
     });
   }
 
 
 
   getObjectByQuery(query) {
-    let view = ""
-    let classification = "";
-    if (query.type)
-      //set view
-      view = this.contentTypes[query.type]
+    let view = '';
+    let classification = '';
+    if (query.type) {
+      // set view
+      view = this.contentTypes[query.type];
+    }
+    if (view){
     if (query.classification) {
       // set classification
       classification = query.classification;
       if (query.type != 'event') {
         return this.db.find({
           selector: {
-            "element-type": view,
-            "classification.it": classification
+            'element-type': view,
+            'classification.it': classification
           }
-        })
+        });
       } else {
         return this.db.find({
           selector: {
-            "element-type": view,
-            "category": classification
+            'element-type': view,
+            'category': classification
           }
-        })
+        });
       }
     } else {
       return this.db.find({
         selector: {
-          "element-type": view
+          'element-type': view
         }
       });
     }
+  }
+    return this.db.find(query);
+  
   }
   getPois() {
 
@@ -107,7 +112,7 @@ export class DbService {
 
         this.pois = [];
 
-        let docs = result.rows.map((row) => {
+        const docs = result.rows.map((row) => {
           this.pois.push(row);
         });
 
@@ -119,7 +124,7 @@ export class DbService {
           include_docs: true,
           view: '_design/poi-item'
         }).on('change', (change) => {
-          this.handleChange(change, "pois");
+          this.handleChange(change, 'pois');
         });
 
       }).catch((error) => {
@@ -144,7 +149,7 @@ export class DbService {
 
         this.menu = [];
 
-        let docs = result.rows.map((row) => {
+        const docs = result.rows.map((row) => {
           this.menu.push(row);
         });
 
@@ -156,7 +161,7 @@ export class DbService {
           include_docs: true,
           view: '_design/menu-item'
         }).on('change', (change) => {
-          this.handleChange(change, "menu");
+          this.handleChange(change, 'menu');
         });
         this.db.createIndex({
           index: { fields: ['id'] }
@@ -184,7 +189,7 @@ export class DbService {
 
         this.gallery = [];
 
-        let docs = result.rows.map((row) => {
+        const docs = result.rows.map((row) => {
           this.gallery.push(row);
         });
 
@@ -196,7 +201,7 @@ export class DbService {
           include_docs: true,
           view: '_design/gallery-item'
         }).on('change', (change) => {
-          this.handleChange(change, "gallery");
+          this.handleChange(change, 'gallery');
         });
 
       }).catch((error) => {
@@ -224,7 +229,7 @@ export class DbService {
 
         this.categories = [];
 
-        let docs = result.rows.map((row) => {
+        const docs = result.rows.map((row) => {
           this.categories.push(row);
         });
 
@@ -235,7 +240,7 @@ export class DbService {
           include_docs: true,
           view: '_design/category-item'
         }).on('change', (change) => {
-          this.handleChange(change, "categories");
+          this.handleChange(change, 'categories');
         });
 
       }).catch((error) => {
@@ -247,7 +252,7 @@ export class DbService {
     });
   }
 
-  // getTodos() { 
+  // getTodos() {
 
   //   if (this.data) {
   //     return Promise.resolve(this.data);
@@ -277,7 +282,7 @@ export class DbService {
 
   //       console.log(error);
 
-  //     }); 
+  //     });
 
   //   });
 
@@ -312,19 +317,15 @@ export class DbService {
 
     });
 
-    //A document was deleted
+    // A document was deleted
     if (change.deleted) {
       this.elements[data].splice(changedIndex, 1);
-    }
-    else {
+    } else {
 
-      //A document was updated
+      // A document was updated
       if (changedDoc) {
         this.elements[data][changedIndex] = change.doc;
-      }
-
-      //A document was added
-      else {
+      } else {
         this.elements[data].push(change.doc);
       }
 

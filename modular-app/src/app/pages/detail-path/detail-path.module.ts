@@ -5,12 +5,12 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { DetailPoiPage } from './detail-poi.page';
+import { DetailPathPage } from './detail-path.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: DetailPoiPage
+    component: DetailPathPage
   }
 ];
 
@@ -22,6 +22,6 @@ const routes: Routes = [
     RouterModule.forChild(routes)
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
-  declarations: [DetailPoiPage]
+  declarations: [DetailPathPage]
 })
-export class DetailPoiPageModule {}
+export class DetailPathPageModule {}

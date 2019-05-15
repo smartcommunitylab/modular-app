@@ -1,5 +1,6 @@
 .map-container{
     margin-top:2%;
+    height: 100%;
 }
 .map-container::before{
     display: table;
@@ -7,5 +8,5 @@
 }
 #map {
     max-width: 100% !important;
-    height: 600px;
-}
+    height: -webkit-fill-available;
+} 
