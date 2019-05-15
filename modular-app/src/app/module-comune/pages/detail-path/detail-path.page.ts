@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { DbService } from '../../module-comune/services/db.service';
+import { DbService } from '../../../module-comune/services/db.service';
 
 @Component({
   selector: 'app-detail-path',
@@ -53,7 +53,7 @@ export class DetailPathPage implements OnInit {
   ionViewDidEnter() {
     const el = document.getElementById('tabs');
     el.addEventListener('tabSelected', path => {
-      this.tabActived = path.detail;
+      this.tabActived = (<any>path).detail;
       if (this.tabActived === 'map'){
         this.buildMapPoints();
       }
