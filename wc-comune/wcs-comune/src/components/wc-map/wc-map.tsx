@@ -48,6 +48,7 @@ export class WcTabs {
 
   componentWillLoad(){
     this.pointsObj = JSON.parse(this.points);
+    this.element.shadowRoot.getElementById
   }
 
   componentDidLoad(){
@@ -84,13 +85,17 @@ export class WcTabs {
       this.pointsObj.forEach(element => {
         leaflet.marker([element.lat,element.lon],{ icon: poiIcon }).addTo(map)
         .bindPopup(
-          "Nome: "+
-          "<br/>Distanza: "+
-          "<br/><button id='popupOpened'>CIAONE</button>"
+          "<div id='popup-content-poi'>"+
+          "<p>Nome: "+ element.name + "</p>" +
+          "<p>Distanza: "+ element.distance + "</p>" +
+          "<br/><button id='popupOpened'>DETTAGLI</button>"
         );
       });
-     
     }
+    
+    map.on('popupopen',(e)=>{
+      console.log(e.popup);
+    })
   }
 
   render() {
