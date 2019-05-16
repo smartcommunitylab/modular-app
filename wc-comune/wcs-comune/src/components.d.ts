@@ -7,7 +7,8 @@
 
 import '@stencil/core';
 
-
+import '@ionic/core';
+import 'ionicons';
 
 
 export namespace Components {
@@ -84,6 +85,7 @@ export namespace Components {
   }
   interface WcGalleryAttributes extends StencilHTMLAttributes {
     'gallery'?: any;
+    'onElementSelected'?: (event: CustomEvent) => void;
   }
 
   interface WcListCategories {

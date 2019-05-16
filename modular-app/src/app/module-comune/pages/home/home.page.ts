@@ -2,21 +2,22 @@ import { Component } from '@angular/core';
 import { NavController, AlertController } from '@ionic/angular';
 import { DbService } from '../../services/db.service'
 import { Router } from '@angular/router';
-import {ConfigService} from '../../services/config.service'
+import { ConfigService } from '../../services/config.service'
 import { TranslateService } from '@ngx-translate/core';
-import {MainPage} from '../../class/MainPage'
+import { MainPage } from '../../class/MainPage'
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage extends MainPage{
+export class HomePage extends MainPage {
   categories: any = [];
   elementsGallery: string[] = null;
   pois: any = [];
   language: string = "it";
-  constructor(public navCtrl: NavController,public translate: TranslateService, private config: ConfigService,private router: Router, public dbService: DbService, public alertCtrl: AlertController) {
-    super(translate,navCtrl);
+  elementsGalleryStr: string;
+  constructor(public navCtrl: NavController, public translate: TranslateService, private config: ConfigService, private router: Router, public dbService: DbService, public alertCtrl: AlertController) {
+    super(translate, navCtrl);
   }
   ngOnInit() {
     this.translate.get('title_page').subscribe(
@@ -26,7 +27,7 @@ export class HomePage extends MainPage{
     )
   }
   ionViewDidEnter() {
-    this.elementsGallery=[]
+    this.elementsGallery = []
     this.config.init();
     this.dbService.getCategories().then((data) => {
       // set button categories
@@ -35,18 +36,32 @@ export class HomePage extends MainPage{
     this.dbService.getElementsGallery().then((data) => {
       // set gallery with preview
       this.elementsGallery = data.map(x => this.convertGallery(x));
-      console.log(JSON.stringify(this.elementsGallery));
+      this.elementsGalleryStr = JSON.stringify(this.elementsGallery);
+      // console.log(JSON.stringify(this.elementsGallery));
     });
-
-  }
-  ionViewDidLoad() {
-    const categoryButtonsElement = document.querySelector('category-buttons');
-    categoryButtonsElement.addEventListener('categorySelected', category => {
+    // const categoryButtonsElement = document.querySelector('category-buttons');
+    window.addEventListener('categorySelected', category => {
       console.log(category);
       this.goToCategory(category);
     });
-
+    window.addEventListener('elementSelected', item => {
+      console.log(item);
+      this.goToItem(item);
+    });
   }
+  
+  // ionViewDidLoad() {
+  //   const categoryButtonsElement = document.querySelector('category-buttons');
+  //   categoryButtonsElement.addEventListener('categorySelected', category => {
+  //     console.log(category);
+  //     this.goToCategory(category);
+  //   });
+  //   categoryButtonsElement.addEventListener('gallery', item => {
+  //     console.log(item);
+  //     this.goToItem(item);
+  //   });
+
+  // }
   convertGallery(x) {
     const galleryElement: any = {};
     if (x && x.key) {
@@ -76,7 +91,9 @@ export class HomePage extends MainPage{
 
   goToCategory(category) {
     this.router.navigate(['/list-categories'], { queryParams: { category: JSON.stringify(category) } });
-    // this.navCtrl.navigateForward('/list-poi');
 
+  }
+  goToItem(item) {
+    console.log(item)
   }
 }

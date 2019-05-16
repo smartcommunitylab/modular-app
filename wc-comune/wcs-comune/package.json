@@ -1,6 +1,6 @@
 {
   "name": "wcs-comune",
-  "version": "0.0.90",
+  "version": "0.0.111",
   "description": "Stencil Component Starter",
   "module": "dist/esm/index.js",
   "main": "dist/index.js",
@@ -17,7 +17,7 @@
     "test.watch": "stencil test --spec --e2e --watchAll"
   },
   "dependencies": {
-    "@ionic/core": "^4.4.0",
+    "@ionic/core": "^4.0.3",
     "@types/pouchdb": "^6.3.3",
     "leaflet": "^1.5.1",
     "pouchdb-adapter-leveldb": "^7.0.0",

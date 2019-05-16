@@ -10,10 +10,10 @@
 </ion-header>
 
 <ion-content padding>
-  <div class="gallery" *ngIf="elementsGallery">
-    <wc-gallery [gallery]="elementsGallery">
+  <!-- <div  *ngIf="elementsGallery"> -->
+    <wc-gallery id="gallery" [gallery]="elementsGalleryStr">
     </wc-gallery>
-  </div>
+  <!-- </div> -->
 
   <ion-grid id="category-buttons">
     <ion-row>

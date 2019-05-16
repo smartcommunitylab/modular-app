@@ -1,6 +1,6 @@
 import { Component, Prop, Event } from '@stencil/core';
 import { Icons } from '../../utils/icons';
-
+// import '@ionic/core';
 @Component({
   tag: 'wc-category-button',
   styleUrl: 'wc-category-button.css',
@@ -38,6 +38,8 @@ export class WcCategoryButton {
   render() {
     return (
       <div  class="container" style={{backgroundColor:this.bgColor}} onClick={() =>this.categorySelectedHandler(this.category)}>
+      
+
         <div class="img-button">
         
           <div class={('icon icon-'+this.iconAlign)}>
