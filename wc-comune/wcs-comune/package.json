@@ -21,7 +21,8 @@
     "@types/pouchdb": "^6.3.3",
     "leaflet": "^1.5.1",
     "pouchdb-adapter-leveldb": "^7.0.0",
-    "pouchdb-server": "^4.1.0"
+    "pouchdb-server": "^4.1.0",
+    "tingle.js": "^0.15.1"
   },
   "devDependencies": {
     "@stencil/core": "0.18.1",

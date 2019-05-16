@@ -166,6 +166,52 @@ export namespace Components {
     'points'?: string;
   }
 
+  interface WcModal {
+    /**
+    * Testo del bottone
+    */
+    'btnText': string;
+    /**
+    * Contenuto inviato nell'evento al click del bottone
+    */
+    'data': any;
+    /**
+    * Visualizza/Nascondi modal
+    */
+    'shown': boolean;
+    /**
+    * Contenuto
+    */
+    'text': string;
+    /**
+    * Titolo Modale
+    */
+    'title': string;
+  }
+  interface WcModalAttributes extends StencilHTMLAttributes {
+    /**
+    * Testo del bottone
+    */
+    'btnText'?: string;
+    /**
+    * Contenuto inviato nell'evento al click del bottone
+    */
+    'data'?: any;
+    'onActionSelected'?: (event: CustomEvent) => void;
+    /**
+    * Visualizza/Nascondi modal
+    */
+    'shown'?: boolean;
+    /**
+    * Contenuto
+    */
+    'text'?: string;
+    /**
+    * Titolo Modale
+    */
+    'title'?: string;
+  }
+
   interface WcPathInfo {
     /**
     * Colore titoli
@@ -299,7 +345,7 @@ export namespace Components {
     */
     'text': string;
     /**
-    * Titolo del percorso
+    * Oggeto JSON contenente i dettagli dei contatti. Titolo del percorso
     */
     'title': string;
   }
@@ -330,7 +376,7 @@ export namespace Components {
     */
     'text'?: string;
     /**
-    * Titolo del percorso
+    * Oggeto JSON contenente i dettagli dei contatti. Titolo del percorso
     */
     'title'?: string;
   }
@@ -382,6 +428,7 @@ declare global {
     'WcListCategories': Components.WcListCategories;
     'WcListPoi': Components.WcListPoi;
     'WcMap': Components.WcMap;
+    'WcModal': Components.WcModal;
     'WcPathInfo': Components.WcPathInfo;
     'WcPathListEl': Components.WcPathListEl;
     'WcPoiInfo': Components.WcPoiInfo;
@@ -395,6 +442,7 @@ declare global {
     'wc-list-categories': Components.WcListCategoriesAttributes;
     'wc-list-poi': Components.WcListPoiAttributes;
     'wc-map': Components.WcMapAttributes;
+    'wc-modal': Components.WcModalAttributes;
     'wc-path-info': Components.WcPathInfoAttributes;
     'wc-path-list-el': Components.WcPathListElAttributes;
     'wc-poi-info': Components.WcPoiInfoAttributes;
@@ -438,6 +486,12 @@ declare global {
     new (): HTMLWcMapElement;
   };
 
+  interface HTMLWcModalElement extends Components.WcModal, HTMLStencilElement {}
+  var HTMLWcModalElement: {
+    prototype: HTMLWcModalElement;
+    new (): HTMLWcModalElement;
+  };
+
   interface HTMLWcPathInfoElement extends Components.WcPathInfo, HTMLStencilElement {}
   var HTMLWcPathInfoElement: {
     prototype: HTMLWcPathInfoElement;
@@ -469,6 +523,7 @@ declare global {
     'wc-list-categories': HTMLWcListCategoriesElement
     'wc-list-poi': HTMLWcListPoiElement
     'wc-map': HTMLWcMapElement
+    'wc-modal': HTMLWcModalElement
     'wc-path-info': HTMLWcPathInfoElement
     'wc-path-list-el': HTMLWcPathListElElement
     'wc-poi-info': HTMLWcPoiInfoElement
@@ -482,6 +537,7 @@ declare global {
     'wc-list-categories': HTMLWcListCategoriesElement;
     'wc-list-poi': HTMLWcListPoiElement;
     'wc-map': HTMLWcMapElement;
+    'wc-modal': HTMLWcModalElement;
     'wc-path-info': HTMLWcPathInfoElement;
     'wc-path-list-el': HTMLWcPathListElElement;
     'wc-poi-info': HTMLWcPoiInfoElement;

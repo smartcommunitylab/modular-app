@@ -14,7 +14,8 @@ export class WcTabs {
           "lon": "number", --> Longitudine
           "name": "string", --> Nome POI
           "distance": "string", --> Distanza da posizione attuale
-          "address": "string" --> Indirizzo
+          "address": "string", --> Indirizzo
+          "id": "<string>" --> Indirizzo
         }
       ]
   */
@@ -31,13 +32,14 @@ export class WcTabs {
   
   @Element() element: HTMLElement;
   private mapElement: HTMLElement;
-  private pointsObj: [{lat: number, lon: number,name:string, distance:string, address:string}];
-
+  private pointsObj: [{lat: number, lon: number,name:string, distance:string, address:string, id:string}];
+  
   componentWillLoad(){
     this.pointsObj = JSON.parse(this.points);
   }
 
   componentDidLoad(){
+    /* CREAZIONE MAPPA */
     this.mapElement = this.element.shadowRoot.getElementById('map');
     var map = leaflet.map(this.mapElement).setView([this.myLat,this.myLon], 13);
 
@@ -66,22 +68,29 @@ export class WcTabs {
 
     leaflet.marker([this.myLat,this.myLon],{icon: mainIcon}).addTo(map);
 
-    if(this.points){
+    if(this.pointsObj){
       this.pointsObj.forEach(element => {
         leaflet.marker([element.lat,element.lon],{icon: poiIcon}).addTo(map)
-        .bindPopup("Nome: "+element.name+"<br/>Distanza: "+element.distance);
+        .on('click',function(){
+          var modal = document.querySelector('wc-modal')
+          modal.setAttribute('data',element.id);
+          modal.setAttribute('text', element.address);
+          modal.setAttribute('title', element.name);
+          modal.setAttribute('btn-text', 'Dettagli');
+          modal.setAttribute('shown','true');
+        });
       });
+      
     }
+    /*********************************************************************************************************************** */
   }
 
   render() {
     return ([
       <link href="https://unpkg.com/leaflet@1.1.0/dist/leaflet.css" rel="stylesheet"/>,
-      // <iframe id="map-container" class="map-container" src="data:text/html;charset=utf-8,&lt;div id=&quot;map&quot;&gt;&lt;/div&gt;"></iframe>
       <div class="map-container">
         <div id="map"></div>
       </div>
-    ])
+    ]);
   }
-
 }
