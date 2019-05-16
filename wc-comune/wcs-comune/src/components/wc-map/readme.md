@@ -23,8 +23,10 @@
           lon: <number>, --> Longitudine
           name: <string>, --> Nome POI
           distance: <string>, --> Distanza da posizione attuale
-          address: <string> --> Indirizzo
+          address: <string>,
+          id: <string> --> Indirizzo
         }
+          
       ]
 ```
 
