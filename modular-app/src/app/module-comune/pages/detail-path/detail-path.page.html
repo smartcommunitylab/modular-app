@@ -28,8 +28,8 @@
         </div>
       </div>
   
-      <div ion-fixed *ngIf="tabActived == 'map'" >
-        <wc-map id="wc-map" [points]="mapPoints" [my-lon]="myLon" [my-lat]="myLat" main-marker-icon="http://icons.iconarchive.com/icons/paomedia/small-n-flat/256/map-marker-icon.png" poi-marker-icon="https://cdn4.iconfinder.com/data/icons/ios7-active-tab/512/map_marker-512.png"></wc-map>
+      <div ion-fixed *ngIf="tabActived == 'map'">
+        <wc-map *ngIf="(myLon && myLat)" id="wc-map" [points]="mapPoints" [my-lon]="myLon" [my-lat]="myLat" main-marker-icon="http://icons.iconarchive.com/icons/paomedia/small-n-flat/256/map-marker-icon.png" poi-marker-icon="https://cdn4.iconfinder.com/data/icons/ios7-active-tab/512/map_marker-512.png"></wc-map>
         <wc-modal title="DEMO" text="Testo di prova" btn-text="Dettagli" shown="false" data="ciao"></wc-modal>
       </div>
   </ion-content>

@@ -40,4 +40,5 @@
 .contacts .contact-info{
     margin-top:1%;
     display:inline-block;
+    max-width: 89%;
 }

@@ -20,9 +20,9 @@ export class WcTabs {
       ]
   */
   /** Latitudine posizione attuale */
-  @Prop() myLat: string;
+  @Prop({mutable:true}) myLat: string;
   /** Longitudine posizione attuale */
-  @Prop() myLon: string;
+  @Prop({mutable:true}) myLon: string;
   /** Array di punti da inserire nella mappa */
   @Prop() points: string;
   /** Icona marker per "posizione attuale" */
@@ -36,6 +36,7 @@ export class WcTabs {
   
   componentWillLoad(){
     this.pointsObj = JSON.parse(this.points);
+    console.log("MAP LAT:",this.myLat)
   }
 
   componentDidLoad(){

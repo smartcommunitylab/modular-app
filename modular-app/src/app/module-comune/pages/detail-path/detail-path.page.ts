@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DbService } from '../../services/db.service';
-import { GeoService } from 'src/app/services/geo.service';
 
  @Component({
   selector: 'app-detail-path',
@@ -18,8 +17,7 @@ export class DetailPathPage implements OnInit {
   mapPoints: any = [];
   myLat = '';
   myLon = '';
-   constructor(private router: Router, private route: ActivatedRoute, private dbService: DbService, private geoSrv: GeoService) { }
-
+   constructor(private router: Router, private route: ActivatedRoute, private dbService: DbService) { }
    private getPois(path: any) {
     path.steps.forEach(element => {
       const query = {
@@ -58,17 +56,15 @@ export class DetailPathPage implements OnInit {
       this.tabActived = path.detail;
       if (this.tabActived === 'map') {
         this.buildMapPoints();
+        if(document.querySelector('wc-map')){
+          console.log("MAPPA TROVATA")
+        }
       }
     });
     window.addEventListener('pathSelected', target => {
       this.goToPoi(target.detail);
     });
   }
-
-  ionViewWillEnter() {
-   
-  }
-
   buildLangPaths() {
     this.paths.description = this.paths.description[this.lang];
     this.paths.info = this.paths.info[this.lang];

@@ -80,7 +80,7 @@ export class WcPathInfo {
         <div class="text" innerHTML={this.text}>
         </div>
         <div class="title-2" style={{color:this.headingColor}}>
-          Informazioni
+          {(this.info && this.info!='') ? "Informazioni": ""}
         </div>
         <div class="info text" innerHTML={this.info}>
         </div>
