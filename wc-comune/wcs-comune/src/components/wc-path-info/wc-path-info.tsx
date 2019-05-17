@@ -29,17 +29,14 @@ export class WcPathInfo {
         <div class="info-title" style={{color:this.headingColor}}>
           {this.title}
         </div>
-        <div class="subtitle">
-          {this.subtitle}
+        <div class="subtitle" innerHTML={this.subtitle}>
         </div>
-        <div class="text">
-          {this.text}
+        <div class="text" innerHTML={this.text}>
         </div>
         <div class="title-2" style={{color:this.headingColor}}>
           Informazioni
         </div>
-        <div class="info text">
-          {this.info}
+        <div class="info text" innerHTML={this.info}>
         </div>
       </div>
     )

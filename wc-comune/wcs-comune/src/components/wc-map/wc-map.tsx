@@ -15,14 +15,14 @@ export class WcTabs {
           "name": "string", --> Nome POI
           "distance": "string", --> Distanza da posizione attuale
           "address": "string", --> Indirizzo
-          "id": "<string>" --> Indirizzo
+          "id": "<string>" --> ID POI
         }
       ]
   */
   /** Latitudine posizione attuale */
-  @Prop() myLat: number;
+  @Prop() myLat: string;
   /** Longitudine posizione attuale */
-  @Prop() myLon: number;
+  @Prop() myLon: string;
   /** Array di punti da inserire nella mappa */
   @Prop() points: string;
   /** Icona marker per "posizione attuale" */

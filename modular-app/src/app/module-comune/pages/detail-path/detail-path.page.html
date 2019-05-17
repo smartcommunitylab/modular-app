@@ -1,0 +1,35 @@
+<ion-header no-border>
+    <ion-toolbar color="secondary">
+      <ion-buttons slot="start">
+          <ion-back-button></ion-back-button>
+        </ion-buttons>
+      <ion-title>
+          PATH-Details
+        </ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+   <wc-tabs id="tabs" [content]="jsonTabs" icon-color="red" bg-color="lightgrey" [tab-actived]="tabActived"></wc-tabs>
+
+   <ion-grid style="height: 100%" *ngIf="isLoading">
+    <ion-row justify-content-center align-items-center style="height: 100%">
+      <ion-spinner name="circles"></ion-spinner>
+    </ion-row>
+  </ion-grid>
+  
+   <ion-content padding *ngIf="!isLoading">
+      <wc-path-info *ngIf="(paths) && (tabActived == 'info')" [title]="paths.title" [subtitle]="paths.subtitle" [text]="paths.description" [info]="paths.info" [img]="paths.image"></wc-path-info>
+      
+      <div id="poi-list">
+        <div *ngIf="tabActived == 'place'">           
+            <div *ngFor="let poi of pois">
+                <wc-path-list-el [id]="poi._id" [img]="poi.image" [title]="poi.title[lang]" [text]="poi.subtitle[lang]" main-color="red"></wc-path-list-el>
+            </div>
+        </div>
+      </div>
+  
+      <div ion-fixed *ngIf="tabActived == 'map'" >
+        <wc-map id="wc-map" [points]="mapPoints" [my-lon]="myLon" [my-lat]="myLat" main-marker-icon="http://icons.iconarchive.com/icons/paomedia/small-n-flat/256/map-marker-icon.png" poi-marker-icon="https://cdn4.iconfinder.com/data/icons/ios7-active-tab/512/map_marker-512.png"></wc-map>
+        <wc-modal title="DEMO" text="Testo di prova" btn-text="Dettagli" shown="false" data="ciao"></wc-modal>
+      </div>
+  </ion-content>

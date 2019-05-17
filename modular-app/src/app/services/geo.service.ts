@@ -13,6 +13,8 @@ export class GeoService {
   watchLocationUpdates: any;
   loading: any;
   isWatching: boolean;
+  currentCoord: any = [];
+
   constructor(private geolocation: Geolocation) {
 
   }
@@ -37,7 +39,7 @@ export class GeoService {
       }
       console.log(geo);
       window["app-module-geolocation"] = geo;
-
+      this.currentCoord = geo;
     });
   }
 

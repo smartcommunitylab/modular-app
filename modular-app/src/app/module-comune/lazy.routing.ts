@@ -8,6 +8,7 @@ const routes: Routes = [
     { path: 'home-page', loadChildren: './pages/home/home.module#HomePageModule' },
     { path: 'list-poi', loadChildren: './pages/list-poi/list-poi.module#ListPoiPageModule' },
     { path: 'detail-poi', loadChildren: './pages/detail-poi/detail-poi.module#DetailPoiPageModule' },
+    { path: 'detail-path', loadChildren: './pages/detail-path/detail-path.module#DetailPathPageModule' },
     { path: 'list-categories', loadChildren: './pages/list-categories/list-categories.module#ListCategoriesPageModule' },
     { path: 'detail-info', loadChildren: './pages/detail-info/detail-info.module#DetailInfoPageModule' }  ];
 

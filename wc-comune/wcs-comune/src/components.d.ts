@@ -129,11 +129,11 @@ export namespace Components {
     /**
     * Oggeto JSON contenente i dettagli dei POI. Latitudine posizione attuale
     */
-    'myLat': number;
+    'myLat': string;
     /**
     * Longitudine posizione attuale
     */
-    'myLon': number;
+    'myLon': string;
     /**
     * Icona marker POI
     */
@@ -151,11 +151,11 @@ export namespace Components {
     /**
     * Oggeto JSON contenente i dettagli dei POI. Latitudine posizione attuale
     */
-    'myLat'?: number;
+    'myLat'?: string;
     /**
     * Longitudine posizione attuale
     */
-    'myLon'?: number;
+    'myLon'?: string;
     /**
     * Icona marker POI
     */
