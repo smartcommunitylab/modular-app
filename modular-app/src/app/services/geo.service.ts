@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { ConfigService } from './config.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class GeoService {
   watchLocationUpdates: any;
   loading: any;
   isWatching: boolean;
-  constructor(private geolocation: Geolocation) {
+  constructor(private geolocation: Geolocation,private config: ConfigService) {
 
   }
   Init(): Promise<any> {
@@ -36,7 +37,11 @@ export class GeoService {
         "long": this.geoLongitude
       }
       console.log(geo);
-      window["app-module-geolocation"] = geo;
+      if (!window[this.config.getAppModuleName()]) {
+        window[this.config.getAppModuleName()] = {}
+      }
+      window[this.config.getAppModuleName()]["geolocation"] = geo;
+      
 
     });
   }

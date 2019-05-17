@@ -1,11 +1,15 @@
 import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { ConfigService } from './config.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SettingService {
 
+  constructor(private config: ConfigService) {
+
+  }
   setUserLanguage(selectedLanguage: any): any {
     this.setting["language"] = selectedLanguage;
     this.setUserSetting(this.setting);
@@ -48,7 +52,10 @@ export class SettingService {
         baseSetting = JSON.parse(localStorage.getItem('comune-setting'));
         language = baseSetting["language"];
       }
-      window["app-module-language"] = language;
+      if (!window[this.config.getAppModuleName()]) {
+        window[this.config.getAppModuleName()] = {}
+      }
+      window[this.config.getAppModuleName()]["language"] = language;
       resolve();
     })
   }

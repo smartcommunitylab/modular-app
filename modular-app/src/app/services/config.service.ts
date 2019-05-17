@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class ConfigService {
+  private appModuleName="app-module";
   private menu: any = [{
     title: {
       "it": "Home",
@@ -25,6 +26,67 @@ export class ConfigService {
   },
   {
     title: {
+      "it": "Highlilghts",
+      "en": "Highlilghts",
+      "de": "Highlilghts"
+    },
+    url: "/home",
+    icon: "home"
+
+  },
+  {
+    title: {
+      "it": "Restaurants & Hotel",
+      "en": "Restaurants & Hotel",
+      "de": "Restaurants & Hotel"
+    },
+    url: "/home",
+    icon: "home"
+
+  },
+  {
+    title: {
+      "it": "Events",
+      "en": "Events",
+      "de": "Events"
+    },
+    url: "/home",
+    icon: "home"
+
+  },
+  {
+    title: {
+      "it": "Touristic Itineraties",
+      "en": "Touristic Itineraties",
+      "de": "Touristic Itineraties"
+    },
+    url: "/home",
+    icon: "home"
+
+  },
+  {
+    title: {
+      "it": "Useful Information",
+      "en": "Useful Information",
+      "de": "Useful Information"
+    },
+    url: "/home",
+    icon: "home"
+
+  },
+  {
+    title: {
+      "it": "Favorites",
+      "en": "Favorites",
+      "de": "Favorites"
+    },
+    url: "/home",
+    icon: "star"
+
+  },
+  
+  {
+    title: {
       "it": "Setting",
       "en": "Setting",
       "de": "Setting"
@@ -32,9 +94,20 @@ export class ConfigService {
     url: "/setting",
     icon: "home"
 
+  },{
+    title: {
+      "it": "Credits",
+      "en": "Credits",
+      "de": "Credits"
+    },
+    url: "/home",
+    icon: "home"
+
   }]
 
-
+getAppModuleName():string {
+  return this.appModuleName;
+}
   getMenuItems(): any {
     //TODO
     if (this.menu)
