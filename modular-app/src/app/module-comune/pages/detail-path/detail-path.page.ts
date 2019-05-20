@@ -15,9 +15,9 @@ export class DetailPathPage implements OnInit {
   tabActived = 'info';
   isLoading = false;
   mapPoints: any = [];
-  myLat = '';
-  myLon = '';
+
    constructor(private router: Router, private route: ActivatedRoute, private dbService: DbService) { }
+
    private getPois(path: any) {
     path.steps.forEach(element => {
       const query = {
@@ -56,9 +56,6 @@ export class DetailPathPage implements OnInit {
       this.tabActived = path.detail;
       if (this.tabActived === 'map') {
         this.buildMapPoints();
-        if(document.querySelector('wc-map')){
-          console.log("MAPPA TROVATA")
-        }
       }
     });
     window.addEventListener('pathSelected', target => {
@@ -83,8 +80,12 @@ export class DetailPathPage implements OnInit {
         distance: 0 // TOFIX
       });
     });
-    this.myLat = window['app-module-geolocation']['lat'].toString();
-    this.myLon = window['app-module-geolocation']['long'].toString();
+    this.mapPoints.push({
+      lat: window['app-module-geolocation']['lat'],
+      lon: window['app-module-geolocation']['long'],
+      name: 'myPos',
+      distance: 0
+    });
     this.mapPoints = JSON.stringify(this.mapPoints);
   }
 

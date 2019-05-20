@@ -7,7 +7,7 @@ import leaflet from 'leaflet';
   shadow: true,
 })
 export class WcTabs {
-   /** Oggeto JSON contenente i dettagli dei POI. */
+   /** Oggeto JSON contenente i dettagli dei POI. ULTIMO ELEMENTO = Posizione attuale*/
   /*  [
         {
           "lat": "number", --> Latitidune
@@ -19,10 +19,6 @@ export class WcTabs {
         }
       ]
   */
-  /** Latitudine posizione attuale */
-  @Prop({mutable:true}) myLat: string;
-  /** Longitudine posizione attuale */
-  @Prop({mutable:true}) myLon: string;
   /** Array di punti da inserire nella mappa */
   @Prop() points: string;
   /** Icona marker per "posizione attuale" */
@@ -32,17 +28,19 @@ export class WcTabs {
   
   @Element() element: HTMLElement;
   private mapElement: HTMLElement;
-  private pointsObj: [{lat: number, lon: number,name:string, distance:string, address:string, id:string}];
+  private pointsObj: [{lat: number, lon: number ,name:string, distance:string, address:string, id:string}];
+  private myPoints: {lat: number, long: number} = {lat:null, long:null};
   
   componentWillLoad(){
     this.pointsObj = JSON.parse(this.points);
-    console.log("MAP LAT:",this.myLat)
+    this.myPoints.lat = this.pointsObj[this.pointsObj.length-1].lat;
+    this.myPoints.long = this.pointsObj[this.pointsObj.length-1].lon;
   }
 
   componentDidLoad(){
     /* CREAZIONE MAPPA */
     this.mapElement = this.element.shadowRoot.getElementById('map');
-    var map = leaflet.map(this.mapElement).setView([this.myLat,this.myLon], 13);
+    var map = leaflet.map(this.mapElement).setView([this.myPoints['lat'],this.myPoints['long']], 13);
 
     var mainIcon = leaflet.icon({
       iconUrl: this.mainMarkerIcon,
@@ -67,21 +65,22 @@ export class WcTabs {
       attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
 
-    leaflet.marker([this.myLat,this.myLon],{icon: mainIcon}).addTo(map);
+    leaflet.marker([this.myPoints['lat'],this.myPoints['long']],{icon: mainIcon}).addTo(map);
 
     if(this.pointsObj){
       this.pointsObj.forEach(element => {
-        leaflet.marker([element.lat,element.lon],{icon: poiIcon}).addTo(map)
-        .on('click',function(){
-          var modal = document.querySelector('wc-modal')
-          modal.setAttribute('data',element.id);
-          modal.setAttribute('text', element.address);
-          modal.setAttribute('title', element.name);
-          modal.setAttribute('btn-text', 'Dettagli');
-          modal.setAttribute('shown','true');
-        });
+        if(element.name !== 'myPos'){
+          leaflet.marker([element.lat,element.lon],{icon: poiIcon}).addTo(map)
+          .on('click',function(){
+            var modal = document.querySelector('wc-modal')
+            modal.setAttribute('data',element.id);
+            modal.setAttribute('text', element.address);
+            modal.setAttribute('title', element.name);
+            modal.setAttribute('btn-text', 'Dettagli');
+            modal.setAttribute('shown','true');
+          });
+        }
       });
-      
     }
     /*********************************************************************************************************************** */
   }

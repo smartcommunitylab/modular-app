@@ -127,19 +127,11 @@ export namespace Components {
     */
     'mainMarkerIcon': string;
     /**
-    * Oggeto JSON contenente i dettagli dei POI. Latitudine posizione attuale
-    */
-    'myLat': string;
-    /**
-    * Longitudine posizione attuale
-    */
-    'myLon': string;
-    /**
     * Icona marker POI
     */
     'poiMarkerIcon': string;
     /**
-    * Array di punti da inserire nella mappa
+    * Oggeto JSON contenente i dettagli dei POI. Array di punti da inserire nella mappa
     */
     'points': string;
   }
@@ -149,19 +141,11 @@ export namespace Components {
     */
     'mainMarkerIcon'?: string;
     /**
-    * Oggeto JSON contenente i dettagli dei POI. Latitudine posizione attuale
-    */
-    'myLat'?: string;
-    /**
-    * Longitudine posizione attuale
-    */
-    'myLon'?: string;
-    /**
     * Icona marker POI
     */
     'poiMarkerIcon'?: string;
     /**
-    * Array di punti da inserire nella mappa
+    * Oggeto JSON contenente i dettagli dei POI. Array di punti da inserire nella mappa
     */
     'points'?: string;
   }

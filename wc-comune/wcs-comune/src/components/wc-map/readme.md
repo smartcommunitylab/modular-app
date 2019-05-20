@@ -15,7 +15,7 @@
 | `poiMarkerIcon`  | `poi-marker-icon`  | Icona marker POI                                                        | `string` | `"marker-icon.png"` |
 | `points`         | `points`           | Array di punti da inserire nella mappa                                  | `string` | `undefined`         |
 
-## Oggetto JSON "points"
+## Oggetto JSON "points --> Ultimo elemento = Posizione attuale"
 ```javascript
     [
         {
