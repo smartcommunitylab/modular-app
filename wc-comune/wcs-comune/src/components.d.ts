@@ -336,6 +336,10 @@ export namespace Components {
     * Titolo del percorso
     */
     'title': string;
+    /**
+    * Tipo di POI
+    */
+    'type': string;
   }
   interface WcPathListElAttributes extends StencilHTMLAttributes {
     /**
@@ -363,6 +367,10 @@ export namespace Components {
     * Titolo del percorso
     */
     'title'?: string;
+    /**
+    * Tipo di POI
+    */
+    'type'?: string;
   }
 
   interface WcTabs {

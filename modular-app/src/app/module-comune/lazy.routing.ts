@@ -6,7 +6,9 @@ const routes: Routes = [
 
     { path: '', redirectTo: 'home-page', pathMatch: 'full' },
     { path: 'home-page', loadChildren: './pages/home/home.module#HomePageModule' },
+    { path: 'list-path', loadChildren: './pages/list-path/list-path.module#ListPathPageModule' },
     { path: 'list-poi', loadChildren: './pages/list-poi/list-poi.module#ListPoiPageModule' },
+    { path: 'list-event', loadChildren: './pages/list-event/list-event.module#ListEventPageModule' },
     { path: 'detail-poi', loadChildren: './pages/detail-poi/detail-poi.module#DetailPoiPageModule' },
     { path: 'detail-path', loadChildren: './pages/detail-path/detail-path.module#DetailPathPageModule' },
     { path: 'list-categories', loadChildren: './pages/list-categories/list-categories.module#ListCategoriesPageModule' },

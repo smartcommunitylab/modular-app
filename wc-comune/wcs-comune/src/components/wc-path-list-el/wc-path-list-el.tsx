@@ -18,11 +18,13 @@ export class WcPathList {
   @Prop() mainColor: string;
   /** Colore descrizione breve */
   @Prop() descColor: string;
+  /** Tipo di POI */
+  @Prop() type: string;
   
   @Event() pathSelected: EventEmitter;
 
   pathSelectedHandler(path: string) {
-    this.pathSelected.emit(path);
+    this.pathSelected.emit(path+";"+this.type);
    // console.log("Cliccato", path);
   }
 

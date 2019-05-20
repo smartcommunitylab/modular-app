@@ -18,12 +18,12 @@
   </ion-grid>
   
    <ion-content padding *ngIf="!isLoading">
-      <wc-path-info *ngIf="(paths) && (tabActived == 'info')" [title]="paths.title" [subtitle]="paths.subtitle" [text]="paths.description" [info]="paths.info" [img]="paths.image"></wc-path-info>
+      <wc-details *ngIf="(paths) && (tabActived == 'info')" [title]="paths.title" [subtitle]="paths.subtitle" [text]="paths.description" [info]="paths.info" [img]="paths.image"></wc-details>
       
       <div id="poi-list">
         <div *ngIf="tabActived == 'place'">           
             <div *ngFor="let poi of pois">
-                <wc-path-list-el [id]="poi._id" [img]="poi.image" [title]="poi.title[lang]" [text]="poi.subtitle[lang]" main-color="red"></wc-path-list-el>
+                <wc-path-list-el type="POI" [id]="poi._id" [img]="poi.image" [title]="poi.title[lang]" [text]="poi.subtitle[lang]" main-color="red"></wc-path-list-el>
             </div>
         </div>
       </div>

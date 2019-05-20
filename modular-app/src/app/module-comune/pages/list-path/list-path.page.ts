@@ -4,15 +4,14 @@ import { DbService } from '../../services/db.service';
 import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-list-poi',
-  templateUrl: './list-poi.page.html',
-  styleUrls: ['./list-poi.page.scss'],
+  selector: 'app-list-path',
+  templateUrl: './list-path.page.html',
+  styleUrls: ['./list-path.page.scss'],
 })
-export class ListPoiPage implements OnInit {
+export class ListPathPage implements OnInit {
   pois: any = [];
   language = 'it';
   category: any;
-  private type: string;
   constructor(public navCtrl: NavController, public dbService: DbService, public alertCtrl: AlertController,
     private router: Router, private route: ActivatedRoute) {
   }
@@ -32,11 +31,9 @@ export class ListPoiPage implements OnInit {
           this.pois = data.docs.map(x => this.convertPois(x));
         });
     }
-    const el = document.getElementById('poi-list');
+    const el = document.getElementById('path-list');
     el.addEventListener('pathSelected', path => {
-      this.type = path.detail.split(';')[1];
-      const id = path.detail.split(';')[0];
-      this.goToDetail(id);
+       this.goToDetail(path.detail);
     });
   }
 
@@ -63,6 +60,6 @@ export class ListPoiPage implements OnInit {
   }
 
   goToDetail(id) {
-    this.router.navigate(['/detail-poi'], { queryParams: { id: id, type: this.type } });
+    this.router.navigate(['/detail-path'], { queryParams: { id: id } });
   }
 }

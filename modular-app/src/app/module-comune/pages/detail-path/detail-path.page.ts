@@ -39,9 +39,10 @@ export class DetailPathPage implements OnInit {
   ngOnInit() {
     this.route.queryParams
       .subscribe(params => {
+        const id = params.id.split(';')[0];
         if (params) {
             this.isLoading = true;
-            this.dbService.getObjectById(params.id).then(data => {
+            this.dbService.getObjectById(id).then(data => {
               this.paths = data.docs[0];
               this.buildLangPaths();
               this.getPois(this.paths);
@@ -65,7 +66,7 @@ export class DetailPathPage implements OnInit {
       this.goToPoi(target.detail);
     });
   }
-  
+
   buildLangPaths() {
     this.paths.description = this.paths.description[this.lang];
     this.paths.info = this.paths.info[this.lang];

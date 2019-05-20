@@ -4,11 +4,11 @@ import { DbService } from '../../services/db.service';
 import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-list-poi',
-  templateUrl: './list-poi.page.html',
-  styleUrls: ['./list-poi.page.scss'],
+  selector: 'app-list-event',
+  templateUrl: './list-event.page.html',
+  styleUrls: ['./list-event.page.scss'],
 })
-export class ListPoiPage implements OnInit {
+export class ListEventPage implements OnInit {
   pois: any = [];
   language = 'it';
   category: any;
