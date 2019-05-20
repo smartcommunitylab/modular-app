@@ -61,6 +61,9 @@ export class DetailPathPage implements OnInit {
     window.addEventListener('pathSelected', target => {
       this.goToPoi(target.detail);
     });
+    window.addEventListener('actionSelected', target => {
+      this.goToPoi(target.detail);
+    });
   }
   buildLangPaths() {
     this.paths.description = this.paths.description[this.lang];
