@@ -16,9 +16,9 @@ export class DetailPathPage implements OnInit {
   isLoading = false;
   mapPoints: any = [];
 
-   constructor(private router: Router, private route: ActivatedRoute, private dbService: DbService) { }
+  constructor(private router: Router, private route: ActivatedRoute, private dbService: DbService) { }
 
-   private getPois(path: any) {
+  private getPois(path: any) {
     path.steps.forEach(element => {
       const query = {
         selector: {
@@ -36,7 +36,7 @@ export class DetailPathPage implements OnInit {
     });
   }
 
-   ngOnInit() {
+  ngOnInit() {
     this.route.queryParams
       .subscribe(params => {
         if (params) {
@@ -50,7 +50,7 @@ export class DetailPathPage implements OnInit {
       });
   }
 
-   ionViewDidEnter() {
+  ionViewDidEnter() {
     const el = document.getElementById('tabs');
     el.addEventListener('tabSelected', path => {
       this.tabActived = path.detail;
@@ -65,6 +65,7 @@ export class DetailPathPage implements OnInit {
       this.goToPoi(target.detail);
     });
   }
+  
   buildLangPaths() {
     this.paths.description = this.paths.description[this.lang];
     this.paths.info = this.paths.info[this.lang];
@@ -72,6 +73,7 @@ export class DetailPathPage implements OnInit {
     this.paths.title = this.paths.title[this.lang];
     this.paths.difficulty = this.paths.difficulty[this.lang];
   }
+
   buildMapPoints() {
     this.pois.forEach(element => {
       this.mapPoints.push({

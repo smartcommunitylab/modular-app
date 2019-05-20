@@ -51,7 +51,7 @@ export class WcTabs {
       shadowAnchor: [4, 62],  
       popupAnchor:  [-3, -76]
     });
-    var poiIcon = leaflet.icon({
+    var poiIcon = leaflet.divIcon({
       iconUrl: this.poiMarkerIcon,
       shadowUrl: null,
       iconSize:     [40, 40], 
