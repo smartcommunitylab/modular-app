@@ -2,8 +2,9 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
-  { path: 'home', loadChildren: './module-comune/web-components.module#ComuneModule' },
+  { path: '', redirectTo: 'home-common', pathMatch: 'full' },
+  // { path: 'home', loadChildren: './module-comune/web-components.module#ComuneModule' },
+  { path: 'home-common', loadChildren: './pages/home-common/home-common.module#HomeCommonPageModule' },
   { path: 'setting', loadChildren: './pages/setting/setting.module#SettingPageModule' },
 
   // { path: 'home', loadChildren: './pages/home/home.module#HomePageModule' },

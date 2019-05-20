@@ -1,0 +1,99 @@
+[{
+    "name": {
+      "it": "Home",
+      "en": "Home",
+      "de": "Home"
+    },
+    "url": "/home",
+    "icon": "home"
+  },
+  {
+    "name": {
+      "it": "Discover",
+      "en": "Discover",
+      "de": "Discover"
+    },
+    "url": "/home",
+    "icon": "home"
+
+  },
+  {
+    "name": {
+      "it": "Highlilghts",
+      "en": "Highlilghts",
+      "de": "Highlilghts"
+    },
+    "url": "/home",
+    "icon": "home"
+
+  },
+  {
+    "name": {
+      "it": "Restaurants & Hotel",
+      "en": "Restaurants & Hotel",
+      "de": "Restaurants & Hotel"
+    },
+    "url": "/home",
+    "icon": "home"
+
+  },
+  {
+    "name": {
+      "it": "Events",
+      "en": "Events",
+      "de": "Events"
+    },
+    "url": "/home",
+    "icon": "home"
+
+  },
+  {
+    "name": {
+      "it": "Touristic Itineraties",
+      "en": "Touristic Itineraties",
+      "de": "Touristic Itineraties"
+    },
+    "url": "/home",
+    "icon": "home"
+
+  },
+  {
+    "name": {
+      "it": "Useful Information",
+      "en": "Useful Information",
+      "de": "Useful Information"
+    },
+    "url": "/home",
+    "icon": "home"
+
+  },
+  {
+    "name": {
+      "it": "Favorites",
+      "en": "Favorites",
+      "de": "Favorites"
+    },
+    "url": "/home",
+    "icon": "star"
+
+  },
+  
+  {
+    "name": {
+      "it": "Setting",
+      "en": "Setting",
+      "de": "Setting"
+    },
+    "url": "/setting",
+    "icon": "home"
+
+  },{
+    "name": {
+      "it": "Credits",
+      "en": "Credits",
+      "de": "Credits"
+    },
+    "url": "/home",
+    "icon": "home"
+
+  }]

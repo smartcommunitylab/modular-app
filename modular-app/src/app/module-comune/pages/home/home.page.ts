@@ -46,22 +46,11 @@ export class HomePage extends MainPage {
     });
     window.addEventListener('elementSelected', item => {
       console.log(item);
-      this.goToItem(item);
+      this.goToItem(item["detail"]);
     });
   }
-  
-  // ionViewDidLoad() {
-  //   const categoryButtonsElement = document.querySelector('category-buttons');
-  //   categoryButtonsElement.addEventListener('categorySelected', category => {
-  //     console.log(category);
-  //     this.goToCategory(category);
-  //   });
-  //   categoryButtonsElement.addEventListener('gallery', item => {
-  //     console.log(item);
-  //     this.goToItem(item);
-  //   });
 
-  // }
+
   convertGallery(x) {
     const galleryElement: any = {};
     if (x && x.key) {
@@ -70,6 +59,9 @@ export class HomePage extends MainPage {
       }
       if (x.key.image) {
         galleryElement.image = x.key.image[this.language];
+      }
+      if (x.key.objectIds) {
+        galleryElement.objectIds = x.key.objectIds;
       }
     }
     return galleryElement;
@@ -85,6 +77,7 @@ export class HomePage extends MainPage {
       if (x.key.image) {
         categoryElement.image = x.key.image;
       }
+
     }
     return categoryElement;
   }
@@ -94,6 +87,12 @@ export class HomePage extends MainPage {
 
   }
   goToItem(item) {
-    console.log(item)
+    console.log(item);
+    this.dbService.getObjectByDataId(item.objectIds[0]).then(res => {
+      var found = res.docs.filter(obj => {
+        return obj["element-type"] != undefined
+      })
+      this.router.navigate(['/detail-poi'], { queryParams: { id: found._id } });
+    })
   }
 }

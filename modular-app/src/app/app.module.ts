@@ -13,6 +13,7 @@ import { HttpClient,HttpClientModule } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { ConfigService } from './services/config.service';
 
 export function initializeAppSetting(appInitService: SettingService) {
   return (): Promise<any> => {
@@ -22,6 +23,11 @@ export function initializeAppSetting(appInitService: SettingService) {
 export function initializeAppGeo(geoService: GeoService) {
   return (): Promise<any> => {
     return geoService.Init();
+  }
+}
+export function initializeAppConfig(configService: ConfigService) {
+  return (): Promise<any> => {
+    return configService.Init();
   }
 }
 export function HttpLoaderFactory(http: HttpClient) {
@@ -48,6 +54,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     SplashScreen,
     Geolocation,
     SettingService,
+    { provide: APP_INITIALIZER, useFactory: initializeAppConfig, deps: [ConfigService], multi: true },
     { provide: APP_INITIALIZER, useFactory: initializeAppSetting, deps: [SettingService], multi: true },
     { provide: APP_INITIALIZER, useFactory: initializeAppGeo, deps: [GeoService], multi: true },
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }

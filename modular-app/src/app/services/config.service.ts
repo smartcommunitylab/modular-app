@@ -1,128 +1,71 @@
 import { Injectable } from '@angular/core';
+import { load } from '@angular/core/src/render3';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ConfigService {
-  private appModuleName="app-module";
-  private menu: any = [{
-    title: {
-      "it": "Home",
-      "en": "Home",
-      "de": "Home"
-    },
-    url: "/home",
-    icon: "home"
-  },
-  {
-    title: {
-      "it": "Discover",
-      "en": "Discover",
-      "de": "Discover"
-    },
-    url: "/home",
-    icon: "home"
+  private appModuleName: string = "app-module";
+  private menu: any;
+  private carousel: any;
+  private moduleEntries: any;
 
-  },
-  {
-    title: {
-      "it": "Highlilghts",
-      "en": "Highlilghts",
-      "de": "Highlilghts"
-    },
-    url: "/home",
-    icon: "home"
+  constructor(private http: HttpClient) { }
 
-  },
-  {
-    title: {
-      "it": "Restaurants & Hotel",
-      "en": "Restaurants & Hotel",
-      "de": "Restaurants & Hotel"
-    },
-    url: "/home",
-    icon: "home"
-
-  },
-  {
-    title: {
-      "it": "Events",
-      "en": "Events",
-      "de": "Events"
-    },
-    url: "/home",
-    icon: "home"
-
-  },
-  {
-    title: {
-      "it": "Touristic Itineraties",
-      "en": "Touristic Itineraties",
-      "de": "Touristic Itineraties"
-    },
-    url: "/home",
-    icon: "home"
-
-  },
-  {
-    title: {
-      "it": "Useful Information",
-      "en": "Useful Information",
-      "de": "Useful Information"
-    },
-    url: "/home",
-    icon: "home"
-
-  },
-  {
-    title: {
-      "it": "Favorites",
-      "en": "Favorites",
-      "de": "Favorites"
-    },
-    url: "/home",
-    icon: "star"
-
-  },
-  
-  {
-    title: {
-      "it": "Setting",
-      "en": "Setting",
-      "de": "Setting"
-    },
-    url: "/setting",
-    icon: "home"
-
-  },{
-    title: {
-      "it": "Credits",
-      "en": "Credits",
-      "de": "Credits"
-    },
-    url: "/home",
-    icon: "home"
-
-  }]
-
-getAppModuleName():string {
-  return this.appModuleName;
-}
-  getMenuItems(): any {
-    //TODO
-    if (this.menu)
-      return this.menu
-    //get all menu items starting with "menu-" and concat
-    var results = [];
-    for (var i = 0; i < window.localStorage.length; i++) {
-      var key = window.localStorage.key(i);
-      if (key.slice(0, 12) === "comune-menu-") {
-        Array.prototype.push.apply(results, JSON.parse(window.localStorage.getItem(key)));
-      }
-    }
-    this.menu = results;
-    return results;
+  Init(): Promise<any> {
+    return new Promise<void>((resolve, reject) => {
+      //load menus from json files
+      this.loadMenu();
+      this.loadCarousel()
+      this.loadModuleEntries()
+      resolve();
+    })
   }
 
-  constructor() { }
+
+  loadMenu(): Promise<any> {
+    if (this.menu) {
+      return Promise.resolve(this.menu);
+    }
+    var promise = new Promise((resolve, reject) => {
+      console.log("Async Work Complete");
+      this.http.get("assets/configuration/side-menu.json").toPromise().then(response => {
+        this.menu = response;
+        resolve(this.menu);
+      });
+    });
+    return promise;
+
+
+  };
+
+  getCarousel():any {
+    return this.carousel;
+  }
+  loadCarousel(): any {
+    if (this.carousel) {
+      return Promise.resolve(this.carousel);
+    }
+    this.http.get("assets/configuration/carousel.json").toPromise().then(response => {
+      this.carousel = response;
+    });
+  }
+  getModuleEntries():any {
+    return this.moduleEntries;
+  }
+  loadModuleEntries(): any {
+    if (this.moduleEntries) {
+      return Promise.resolve(this.moduleEntries);
+    }
+    this.http.get("assets/configuration/module-entries.json").toPromise().then(response => {
+      this.moduleEntries = response;
+    });
+  }
+  getAppModuleName(): string {
+    return this.appModuleName;
+  }
+
+
+
 }

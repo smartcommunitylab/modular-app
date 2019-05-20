@@ -40,10 +40,27 @@ export class DbService {
       retry: true,
       continuous: true
     };
-
     this.db.sync(this.remote, options);
 
   }
+  getObjectByType(type,id) {
+    return this.getObjectById(id);
+    // let view = '';
+    // let classification = '';
+    // if (type) {
+    //   // set view
+    //   view = this.contentTypes[type];
+    // }
+    // if (view) {
+
+    //   return this.db.find({
+    //     selector: {
+    //       'element-type': view
+    //     }
+    //   });
+    // } else return Promise.reject();
+  }
+
   getMenuById(identificator) {
     return this.db.find({
       selector: {
@@ -51,13 +68,22 @@ export class DbService {
       }
     });
   }
+  getObjectByDataId(id) {
+
+    return this.db.find({
+      selector: {
+        'id': id
+      }
+    });
+  }
+
 
   getObjectById(id) {
 
     return this.db.find({
-        selector: {
-          '_id': id
-        }
+      selector: {
+        '_id': id
+      }
     });
   }
 
@@ -70,36 +96,36 @@ export class DbService {
       // set view
       view = this.contentTypes[query.type];
     }
-    if (view){
-    if (query.classification) {
-      // set classification
-      classification = query.classification;
-      if (query.type != 'event') {
-        return this.db.find({
-          selector: {
-            'element-type': view,
-            'classification.it': classification
-          }
-        });
+    if (view) {
+      if (query.classification) {
+        // set classification
+        classification = query.classification;
+        if (query.type != 'event') {
+          return this.db.find({
+            selector: {
+              'element-type': view,
+              'classification.it': classification
+            }
+          });
+        } else {
+          return this.db.find({
+            selector: {
+              'element-type': view,
+              'category': classification
+            }
+          });
+        }
       } else {
         return this.db.find({
           selector: {
-            'element-type': view,
-            'category': classification
+            'element-type': view
           }
         });
       }
-    } else {
-      return this.db.find({
-        selector: {
-          'element-type': view
-        }
-      });
     }
-  }
     return this.db.find(query);
-  
   }
+
   getPois() {
 
     if (this.pois) {

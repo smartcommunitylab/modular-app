@@ -4,7 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
 
-    { path: '', redirectTo: 'home-page', pathMatch: 'full' },
+    // { path: '', redirectTo: 'home-page', pathMatch: 'full' },
     { path: 'home-page', loadChildren: './pages/home/home.module#HomePageModule' },
     { path: 'list-poi', loadChildren: './pages/list-poi/list-poi.module#ListPoiPageModule' },
     { path: 'detail-poi', loadChildren: './pages/detail-poi/detail-poi.module#DetailPoiPageModule' },
