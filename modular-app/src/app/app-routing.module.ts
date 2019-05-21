@@ -6,6 +6,8 @@ const routes: Routes = [
   // { path: 'home', loadChildren: './module-comune/web-components.module#ComuneModule' },
   { path: 'home-common', loadChildren: './pages/home-common/home-common.module#HomeCommonPageModule' },
   { path: 'setting', loadChildren: './pages/setting/setting.module#SettingPageModule' },
+  { path: 'favourites', loadChildren: './pages/favourites/favourites.module#FavouritesPageModule' },
+  { path: 'credits', loadChildren: './credits/credits.module#CreditsPageModule' },
 
   // { path: 'home', loadChildren: './pages/home/home.module#HomePageModule' },
   // { path: 'list-poi', loadChildren: './pages/list-poi/list-poi.module#ListPoiPageModule' },

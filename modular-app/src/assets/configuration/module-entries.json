@@ -1,49 +1,45 @@
-[{
-    "name": {
-      "it": "Home",
-      "en": "Home",
-      "de": "Home"
-    },
-    "url": "/home",
-    "icon": "home"
-  },
+[
   {
+    "id": "profile_cit_2cc4db1674d9e8994658eac954355d31",
     "name": {
       "it": "Discover",
       "en": "Discover",
       "de": "Discover"
     },
-    "url": "/home",
+    "url": "/list-categories",
     "icon": "home"
 
   },
   {
+    "id": "profile_cit_csvimport_Visitare_item_comuneintasca",
     "name": {
       "it": "Highlilghts",
       "en": "Highlilghts",
       "de": "Highlilghts"
     },
-    "url": "/home",
+    "url": "/list-categories",
     "icon": "home"
 
   },
   {
+    "id": "profile_cit_csvimport_Mangiare_e_dormire_item_comuneintasca",
     "name": {
       "it": "Restaurants & Hotel",
       "en": "Restaurants & Hotel",
       "de": "Restaurants & Hotel"
     },
-    "url": "/home",
+    "url": "/list-categories",
     "icon": "home"
 
   },
   {
+    "id": "profile_cit_csvimport_Eventi_item_comuneintasca",
     "name": {
       "it": "Events",
       "en": "Events",
       "de": "Events"
     },
-    "url": "/home",
+    "url": "/list-categories",
     "icon": "home"
 
   },
@@ -53,7 +49,7 @@
       "en": "Touristic Itineraties",
       "de": "Touristic Itineraties"
     },
-    "url": "/home",
+    "url": "/list-categories",
     "icon": "home"
 
   },
@@ -63,7 +59,7 @@
       "en": "Useful Information",
       "de": "Useful Information"
     },
-    "url": "/home",
+    "url": "/list-categories",
     "icon": "home"
 
   },
@@ -73,7 +69,7 @@
       "en": "Favorites",
       "de": "Favorites"
     },
-    "url": "/home",
+    "url": "/favourites",
     "icon": "star"
 
   },
@@ -93,7 +89,7 @@
       "en": "Credits",
       "de": "Credits"
     },
-    "url": "/home",
+    "url": "/credits",
     "icon": "home"
 
   }]

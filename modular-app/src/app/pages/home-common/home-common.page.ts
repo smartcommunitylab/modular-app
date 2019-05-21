@@ -58,37 +58,42 @@ export class HomeCommonPage implements OnInit {
   convertGallery(x) {
     const galleryElement: any = {};
     // if (x) {
-      if (x.name) {
-        galleryElement.name = x.name[this.language];
-      }
-      if (x.image) {
-        galleryElement.image = x.image[this.language];
-      }
-      // if (x.key.objectIds) {
-      //   galleryElement.objectIds = x.key.objectIds;
-      // }
+    if (x.name) {
+      galleryElement.name = x.name[this.language];
+    }
+    if (x.image) {
+      galleryElement.image = x.image[this.language];
+    }
+    // if (x.key.objectIds) {
+    //   galleryElement.objectIds = x.key.objectIds;
+    // }
     // }
     return galleryElement;
   }
 
   convertCategories(x) {
     const categoryElement: any = {};
-    // categoryElement.id = x.key.id;
-    // if (x ) {
-      if (x.name) {
-        categoryElement.name = x.name[this.language];
-      }
-      if (x.icon) {
-        categoryElement.icon = x.icon;
-      }
+    if (x.id) {
+      categoryElement.id = x.id;
+    }
+    if (x.name) {
+      categoryElement.name = x.name[this.language];
+    }
+    if (x.icon) {
+      categoryElement.icon = x.icon;
+    }
+    if (x.url) {
+      categoryElement.url = x.url;
+    }
 
-    // }
     return categoryElement;
   }
 
+  goToLink(category) {
+    this.router.navigate([category.url], { queryParams: { category: JSON.stringify(category) } });
+  }
   goToCategory(category) {
     this.router.navigate(['/list-categories'], { queryParams: { category: JSON.stringify(category) } });
-
   }
   goToItem(item) {
     console.log(item);
@@ -98,5 +103,9 @@ export class HomeCommonPage implements OnInit {
     //   })
     //   this.router.navigate(['/detail-poi'], { queryParams: { id: found._id } });
     // })
+  }
+  openElement(element) {
+    console.log(element);
+
   }
 }
