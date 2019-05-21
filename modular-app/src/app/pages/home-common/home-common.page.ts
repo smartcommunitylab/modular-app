@@ -30,8 +30,9 @@ export class HomeCommonPage implements OnInit {
   }
   ionViewDidEnter() {
     this.elementsGallery = [];
-    this.categories = this.config.getModuleEntries().map(x => this.convertCategories(x));;
-    this.elementsGallery = this.config.getCarousel().map(x => this.convertGallery(x));;
+    this.categories = this.config.getModuleEntries().map(x => this.convertCategories(x));
+    console.log(this.categories)
+    this.elementsGallery = this.config.getCarousel().map(x => this.convertGallery(x));
     // this.config.init();
     // this.dbService.getCategories().then((data) => {
     //   // set button categories
@@ -84,6 +85,9 @@ export class HomeCommonPage implements OnInit {
     }
     if (x.url) {
       categoryElement.url = x.url;
+    }
+    if (x.type) {
+      categoryElement.type = x.type;
     }
 
     return categoryElement;
