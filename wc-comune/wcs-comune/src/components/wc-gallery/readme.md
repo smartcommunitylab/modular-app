@@ -12,6 +12,13 @@
 | `gallery` | `gallery` |             | `any` | `undefined` |
 
 
+## Events
+
+| Event             | Description | Type                |
+| ----------------- | ----------- | ------------------- |
+| `elementSelected` |             | `CustomEvent<void>` |
+
+
 ----------------------------------------------
 
 *Built with [StencilJS](https://stenciljs.com/)*

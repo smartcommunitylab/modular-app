@@ -15,18 +15,13 @@
 | `poiMarkerIcon`  | `poi-marker-icon`  | Icona marker POI                                                        | `string` | `"marker-icon.png"` |
 | `points`         | `points`           | Array di punti da inserire nella mappa                                  | `string` | `undefined`         |
 
-## Oggetto JSON "points"
-```javascript
-    [
-        {
-          lat: <number>, --> Latitidune
-          lon: <number>, --> Longitudine
-          name: <string>, --> Nome POI
-          distance: <string>, --> Distanza da posizione attuale
-          address: <string> --> Indirizzo
-        }
-      ]
-```
+
+## Events
+
+| Event         | Description | Type                |
+| ------------- | ----------- | ------------------- |
+| `poiSelected` |             | `CustomEvent<void>` |
+
 
 ----------------------------------------------
 
