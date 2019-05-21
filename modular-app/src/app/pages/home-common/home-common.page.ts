@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ConfigService } from '../../services/config.service'
 import { elementAttribute } from '@angular/core/src/render3';
+import { UtilsService } from '../../services/utils.service'
 @Component({
   selector: 'app-home-common',
   templateUrl: 'home-common.page.html',
@@ -20,7 +21,8 @@ export class HomeCommonPage implements OnInit {
     public translate: TranslateService,
     private config: ConfigService,
     private router: Router,
-    public alertCtrl: AlertController) {
+    public alertCtrl: AlertController,
+    private utils: UtilsService) {
   }
   ngOnInit() {
     this.translate.get('title_page').subscribe(
@@ -44,22 +46,7 @@ export class HomeCommonPage implements OnInit {
   }
 
 
-  // convertGallery(x) {
-  //   const galleryElement: any = {};
-  //   if (x.id) {
-  //     galleryElement.id = x.id;
-  //   }    if (x.name) {
-  //     galleryElement.name = x.name[this.language];
-  //   }
-  //   if (x.image) {
-  //     galleryElement.image = x.image[this.language];
-  //   }
-  //   // if (x.key.objectIds) {
-  //   //   galleryElement.objectIds = x.key.objectIds;
-  //   // }
-  //   // }
-  //   return galleryElement;
-  // }
+
 
   convert(x) {
     const element: any = {};
@@ -89,7 +76,12 @@ export class HomeCommonPage implements OnInit {
     if (category.url)
       this.router.navigate([category.url], { queryParams: { category: JSON.stringify(category) } });
     else {
-      //TODO error
+      this.translate.get('error_data').subscribe(
+        value => {
+          this.utils.showToast(value)
+
+        }
+      )
     }
   }
   goToCategory(category) {
@@ -99,10 +91,20 @@ export class HomeCommonPage implements OnInit {
     console.log(item);
   }
   openElement(element) {
-    if (element.url)
+    if (element.url && element.objectIds)
       this.router.navigate([element.url], { queryParams: { objectIds: element.objectIds } });
     else {
-      //TODO error
+      this.translate.get('title_app').subscribe(
+        value => {
+          console.log(value);
+          // this.title= value;
+        }
+      )
+      this.translate.get('error_data').subscribe(
+        value => {
+          this.utils.showToast(value)
+        }
+      )
     }
   }
 }
