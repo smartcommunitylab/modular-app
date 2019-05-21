@@ -33,7 +33,7 @@ export class ListPathPage implements OnInit {
     }
     const el = document.getElementById('path-list');
     el.addEventListener('pathSelected', path => {
-       this.goToDetail(path.detail);
+       this.goToDetail((<any>path).detail);
     });
   }
 

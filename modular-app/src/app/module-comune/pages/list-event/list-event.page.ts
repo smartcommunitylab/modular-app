@@ -23,19 +23,19 @@ export class ListEventPage implements OnInit {
         if (params) {
           const cat = JSON.parse(params.category);
           this.category = cat;
-       }
+        }
       });
   }
   ionViewDidEnter() {
     if (this.category && this.category.query) {
-      this.dbService.getObjectByQuery( this.category.query).then((data) => {
-          this.pois = data.docs.map(x => this.convertPois(x));
-        });
+      this.dbService.getObjectByQuery(this.category.query).then((data) => {
+        this.pois = data.docs.map(x => this.convertPois(x));
+      });
     }
     const el = document.getElementById('poi-list');
     el.addEventListener('pathSelected', path => {
-      this.type = path.detail.split(';')[1];
-      const id = path.detail.split(';')[0];
+      this.type = (<any>path).detail.split(';')[1];
+      const id = (<any>path).detail.split(';')[0];
       this.goToDetail(id);
     });
   }
@@ -53,7 +53,7 @@ export class ListEventPage implements OnInit {
         poiElement.description = x.description[this.language];
       }
       if (x.image) {
-         poiElement.image = x.image;
+        poiElement.image = x.image;
       }
       if (x._id) {
         poiElement.id = x._id;
