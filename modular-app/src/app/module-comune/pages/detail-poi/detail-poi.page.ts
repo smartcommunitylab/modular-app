@@ -17,9 +17,12 @@ export class DetailPoiPage implements OnInit {
   ngOnInit() {
     this.route.queryParams
       .subscribe(params => {
-        const id = params.id.split(';')[0]
-        console.log(params); // {order: "popular"}
-        if (params) {
+        if (params.objectIds) {
+          this.manageoLcalId(params.objectIds)
+        }
+        // const id = params.id.split(';')[0]
+        // console.log(params); // {order: "popular"}
+         else if (params) {
           this.type = params.type;
           this.dbService.getObjectById(params.id).then(data => {
             this.poi = data.docs[0];
@@ -28,7 +31,14 @@ export class DetailPoiPage implements OnInit {
         }
       });
   }
-
+  manageoLcalId(objectIds) {
+    if (objectIds.length==1)
+    this.dbService.getObjectByDataId(objectIds[0]).then(data => {
+      this.poi = data.docs[0];
+      this.type =data.docs[0].fromTime? "EVENT":"POI";
+      this.buildContacts();
+    });
+  }
   buildContacts() {
     this.contacts['address'] = this.poi.address[this.lang];
     if (this.type === 'POI') {

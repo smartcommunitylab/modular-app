@@ -3,6 +3,7 @@ import { NavController, AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ConfigService } from '../../services/config.service'
+import { elementAttribute } from '@angular/core/src/render3';
 @Component({
   selector: 'app-home-common',
   templateUrl: 'home-common.page.html',
@@ -30,20 +31,8 @@ export class HomeCommonPage implements OnInit {
   }
   ionViewDidEnter() {
     this.elementsGallery = [];
-    this.categories = this.config.getModuleEntries().map(x => this.convertCategories(x));;
-    this.elementsGallery = this.config.getCarousel().map(x => this.convertGallery(x));;
-    // this.config.init();
-    // this.dbService.getCategories().then((data) => {
-    //   // set button categories
-    //   this.categories = data.map(x => this.convertCategories(x));
-    // });
-    // this.dbService.getElementsGallery().then((data) => {
-    //   // set gallery with preview
-    //   this.elementsGallery = data.map(x => this.convertGallery(x));
-    //   this.elementsGalleryStr = JSON.stringify(this.elementsGallery);
-    //   // console.log(JSON.stringify(this.elementsGallery));
-    // });
-    // const categoryButtonsElement = document.querySelector('category-buttons');
+    this.categories = this.config.getModuleEntries().map(x => this.convert(x));;
+    this.elementsGallery = this.config.getCarousel().map(x => this.convert(x));;
     window.addEventListener('categorySelected', category => {
       console.log(category);
       this.goToCategory(category);
@@ -55,57 +44,65 @@ export class HomeCommonPage implements OnInit {
   }
 
 
-  convertGallery(x) {
-    const galleryElement: any = {};
-    // if (x) {
+  // convertGallery(x) {
+  //   const galleryElement: any = {};
+  //   if (x.id) {
+  //     galleryElement.id = x.id;
+  //   }    if (x.name) {
+  //     galleryElement.name = x.name[this.language];
+  //   }
+  //   if (x.image) {
+  //     galleryElement.image = x.image[this.language];
+  //   }
+  //   // if (x.key.objectIds) {
+  //   //   galleryElement.objectIds = x.key.objectIds;
+  //   // }
+  //   // }
+  //   return galleryElement;
+  // }
+
+  convert(x) {
+    const element: any = {};
+    if (x.id) {
+      element.id = x.id;
+    }
     if (x.name) {
-      galleryElement.name = x.name[this.language];
+      element.name = x.name[this.language];
     }
     if (x.image) {
-      galleryElement.image = x.image[this.language];
-    }
-    // if (x.key.objectIds) {
-    //   galleryElement.objectIds = x.key.objectIds;
-    // }
-    // }
-    return galleryElement;
-  }
-
-  convertCategories(x) {
-    const categoryElement: any = {};
-    if (x.id) {
-      categoryElement.id = x.id;
-    }
-    if (x.name) {
-      categoryElement.name = x.name[this.language];
+      element.image = x.image[this.language];
     }
     if (x.icon) {
-      categoryElement.icon = x.icon;
+      element.icon = x.icon;
     }
     if (x.url) {
-      categoryElement.url = x.url;
+      element.url = x.url;
+    }
+    if (x.objectIds) {
+      element.objectIds = x.objectIds
     }
 
-    return categoryElement;
+    return element;
   }
 
   goToLink(category) {
-    this.router.navigate([category.url], { queryParams: { category: JSON.stringify(category) } });
+    if (category.url)
+      this.router.navigate([category.url], { queryParams: { category: JSON.stringify(category) } });
+    else {
+      //TODO error
+    }
   }
   goToCategory(category) {
     this.router.navigate(['/list-categories'], { queryParams: { category: JSON.stringify(category) } });
   }
   goToItem(item) {
     console.log(item);
-    // this.dbService.getObjectByDataId(item.objectIds[0]).then(res => {
-    //   var found = res.docs.filter(obj => {
-    //     return obj["element-type"] != undefined
-    //   })
-    //   this.router.navigate(['/detail-poi'], { queryParams: { id: found._id } });
-    // })
   }
   openElement(element) {
-    console.log(element);
-
+    if (element.url)
+      this.router.navigate([element.url], { queryParams: { objectIds: element.objectIds } });
+    else {
+      //TODO error
+    }
   }
 }
