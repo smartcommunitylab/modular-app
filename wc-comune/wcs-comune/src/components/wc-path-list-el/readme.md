@@ -15,6 +15,7 @@
 | `mainColor` | `main-color` | Colore titolo e bordo immagine | `string` | `undefined` |
 | `text`      | `text`       | Descrizione breve              | `string` | `undefined` |
 | `title`     | `title`      | Titolo del percorso            | `string` | `undefined` |
+| `type`      | `type`       | Tipo di POI                    | `string` | `undefined` |
 
 
 ## Events

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, AlertController } from '@ionic/angular';
-import { DbService } from '../../services/db.service'
+import { DbService } from '../../services/db.service';
 import { Router } from '@angular/router';
 import { ConfigService } from '../../services/config.service'
 import { TranslateService } from '@ngx-translate/core';
@@ -22,12 +22,12 @@ export class HomePage extends MainPage {
   ngOnInit() {
     this.translate.get('title_page').subscribe(
       value => {
-        console.log(value)
+        console.log(value);
       }
-    )
+    );
   }
   ionViewDidEnter() {
-    this.elementsGallery = []
+    this.elementsGallery = [];
     this.config.init();
     this.dbService.getCategories().then((data) => {
       // set button categories
@@ -48,6 +48,15 @@ export class HomePage extends MainPage {
       console.log(item);
       this.goToItem(item["detail"]);
     });
+
+  }
+  ionViewDidLoad() {
+    const categoryButtonsElement = document.querySelector('category-buttons');
+    categoryButtonsElement.addEventListener('categorySelected', category => {
+      console.log(category);
+      this.goToCategory(category);
+    });
+
   }
 
 
@@ -77,7 +86,6 @@ export class HomePage extends MainPage {
       if (x.key.image) {
         categoryElement.image = x.key.image;
       }
-
     }
     return categoryElement;
   }

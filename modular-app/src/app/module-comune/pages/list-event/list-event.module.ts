@@ -5,13 +5,13 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { DetailPathPage } from './detail-path.page';
+import { ListEventPage } from './list-event.page';
 import { TranslateModule } from '@ngx-translate/core';
 
 const routes: Routes = [
   {
     path: '',
-    component: DetailPathPage
+    component: ListEventPage
   }
 ];
 
@@ -24,6 +24,6 @@ const routes: Routes = [
     RouterModule.forChild(routes)
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
-  declarations: [DetailPathPage]
+  declarations: [ListEventPage]
 })
-export class DetailPathPageModule {}
+export class ListEventPageModule {}

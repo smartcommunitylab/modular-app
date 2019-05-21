@@ -7,7 +7,7 @@ import leaflet from 'leaflet';
   shadow: true,
 })
 export class WcTabs {
-   /** Oggeto JSON contenente i dettagli dei POI. */
+  /** Oggeto JSON contenente i dettagli dei POI. ULTIMO ELEMENTO = Posizione attuale*/
   /*  [
         {
           "id": "string", --> ID POI
@@ -15,14 +15,11 @@ export class WcTabs {
           "lon": "number", --> Longitudine
           "name": "string", --> Nome POI
           "distance": "string", --> Distanza da posizione attuale
-          "address": "string" --> Indirizzo
+          "address": "string", --> Indirizzo
+          "id": "<string>" --> ID POI
         }
       ]
   */
-  /** Latitudine posizione attuale */
-  @Prop() myLat: number;
-  /** Longitudine posizione attuale */
-  @Prop() myLon: number;
   /** Array di punti da inserire nella mappa */
   @Prop() points: string;
   /** Icona marker per "posizione attuale" */
@@ -30,81 +27,78 @@ export class WcTabs {
   /** Icona marker POI */
   @Prop() poiMarkerIcon: string = "marker-icon.png";
 
-   
+
   @Event({
-    eventName: "poiSelected", 
-    composed: true, 
+    eventName: "poiSelected",
+    composed: true,
     bubbles: true
   }) poiSelected: EventEmitter;
 
   @Element() element: HTMLElement;
   private mapElement: HTMLElement;
-  private pointsObj: [{id:string, lat: number, lon: number,name:string, distance:string, address:string}];
+  private pointsObj: [{ lat: number, lon: number, name: string, distance: string, address: string, id: string }];
+  private myPoints: { lat: number, long: number } = { lat: null, long: null };
 
-  poiSelectedHandler(id: string) {
-    this.poiSelected.emit(id);
-    console.log("Cliccato", id);
-  }
-
-  componentWillLoad(){
+  componentWillLoad() {
     this.pointsObj = JSON.parse(this.points);
-    this.element.shadowRoot.getElementById
+    this.myPoints.lat = this.pointsObj[this.pointsObj.length - 1].lat;
+    this.myPoints.long = this.pointsObj[this.pointsObj.length - 1].lon;
   }
 
-  componentDidLoad(){
+  componentDidLoad() {
+    /* CREAZIONE MAPPA */
     this.mapElement = this.element.shadowRoot.getElementById('map');
-    var map = leaflet.map(this.mapElement,{zoomControl:false}).setView([this.myLat,this.myLon], 13);
+    var map = leaflet.map(this.mapElement).setView([this.myPoints['lat'], this.myPoints['long']], 13);
 
     var mainIcon = leaflet.icon({
       iconUrl: this.mainMarkerIcon,
       shadowUrl: null,
-      iconSize:     [40, 40], 
-      shadowSize:   [50, 64], 
-      iconAnchor:   [22, 94], 
-      shadowAnchor: [4, 62],  
-      popupAnchor:  [-3, -76]
+      iconSize: [40, 40],
+      shadowSize: [50, 64],
+      iconAnchor: [22, 94],
+      shadowAnchor: [4, 62],
+      popupAnchor: [-3, -76]
     });
     var poiIcon = leaflet.icon({
       iconUrl: this.poiMarkerIcon,
       shadowUrl: null,
-      iconSize:     [40, 40], 
-      shadowSize:   [0, 0], 
-      iconAnchor:   [22, 94], 
-      shadowAnchor: [0, 0],  
-      popupAnchor:  [-3, -76]
+      iconSize: [40, 40],
+      shadowSize: [0, 0],
+      iconAnchor: [22, 94],
+      shadowAnchor: [0, 0],
+      popupAnchor: [-3, -76]
     });
 
-    leaflet.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
+    leaflet.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
 
-    leaflet.marker([this.myLat,this.myLon],{icon: mainIcon}).addTo(map);
-    leaflet.control.zoom({position:'bottomleft'}).addTo(map);
+    leaflet.marker([this.myPoints['lat'], this.myPoints['long']], { icon: mainIcon }).addTo(map);
 
-    if(this.points){
+    if (this.pointsObj) {
       this.pointsObj.forEach(element => {
-        leaflet.marker([element.lat,element.lon],{ icon: poiIcon }).addTo(map)
-        .bindPopup(
-          "<div id='popup-content-poi'>"+
-          "<p>Nome: "+ element.name + "</p>" +
-          "<p>Distanza: "+ element.distance + "</p>" +
-          "<br/><button id='popupOpened'>DETTAGLI</button>"
-        );
+        if (element.name !== 'myPos') {
+          leaflet.marker([element.lat, element.lon], { icon: poiIcon }).addTo(map)
+            .on('click', function () {
+              var modal = document.querySelector('wc-modal')
+              modal.setAttribute('data', element.id);
+              modal.setAttribute('text', element.address);
+              modal.setAttribute('title', element.name);
+              modal.setAttribute('btn-text', 'Dettagli');
+              modal.setAttribute('shown', 'true');
+            });
+        }
       });
     }
-    
-    map.on('popupopen',(e)=>{
-      console.log(e.popup);
-    })
+    /*********************************************************************************************************************** */
   }
 
   render() {
     return ([
-      <link href="https://unpkg.com/leaflet@1.1.0/dist/leaflet.css" rel="stylesheet"/>,
+      <link href="https://unpkg.com/leaflet@1.1.0/dist/leaflet.css" rel="stylesheet" />,
       <div class="map-container">
         <div id="map"></div>
       </div>
-    ])
+    ]);
   }
-
 }

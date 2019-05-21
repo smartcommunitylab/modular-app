@@ -4,11 +4,11 @@
           <ion-back-button></ion-back-button>
         </ion-buttons>
       <ion-title>
-          {{'title_detail_poi'|translate}}
+        {{poi.title[lang]}}
         </ion-title>
     </ion-toolbar>
   </ion-header>
 
 <ion-content padding>
-    <wc-detail-poi [poi]="poi"  ></wc-detail-poi>
+    <wc-details *ngIf="poi" [title]="poi.title[lang]" [subtitle]="poi.subtitle[lang]"  [text]="poi.description[lang]" [info]="poi.info[lang]" [contacts]="contacts" [img]="poi.image"></wc-details>
 </ion-content>

@@ -10,18 +10,25 @@
 | Property         | Attribute          | Description                                                             | Type     | Default             |
 | ---------------- | ------------------ | ----------------------------------------------------------------------- | -------- | ------------------- |
 | `mainMarkerIcon` | `main-marker-icon` | Icona marker per "posizione attuale"                                    | `string` | `"marker-icon.png"` |
-| `myLat`          | `my-lat`           | Oggeto JSON contenente i dettagli dei POI. Latitudine posizione attuale | `number` | `undefined`         |
-| `myLon`          | `my-lon`           | Longitudine posizione attuale                                           | `number` | `undefined`         |
+| `myLat`          | `my-lat`           | Oggeto JSON contenente i dettagli dei POI. Latitudine posizione attuale | `string` | `undefined`         |
+| `myLon`          | `my-lon`           | Longitudine posizione attuale                                           | `string` | `undefined`         |
 | `poiMarkerIcon`  | `poi-marker-icon`  | Icona marker POI                                                        | `string` | `"marker-icon.png"` |
 | `points`         | `points`           | Array di punti da inserire nella mappa                                  | `string` | `undefined`         |
 
-
-## Events
-
-| Event         | Description | Type                |
-| ------------- | ----------- | ------------------- |
-| `poiSelected` |             | `CustomEvent<void>` |
-
+## Oggetto JSON "points --> Ultimo elemento = Posizione attuale"
+```javascript
+    [
+        {
+          lat: <number>, --> Latitidune
+          lon: <number>, --> Longitudine
+          name: <string>, --> Nome POI
+          distance: <string>, --> Distanza da posizione attuale
+          address: <string>,
+          id: <string> --> Indirizzo
+        }
+          
+      ]
+```
 
 ----------------------------------------------
 

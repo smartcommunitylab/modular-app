@@ -10,9 +10,9 @@
   </ion-header>
 
 <ion-content padding>
-  <ion-list no-lines id="poi-list">
+  <ion-list no-lines id="path-list">
     <div *ngFor="let poi of pois">      
-      <wc-path-list-el type="POI" [id]="poi.id" [img]="poi.image" [title]="poi.title" [text]="poi.subtitle" main-color="red"></wc-path-list-el>
+      <wc-path-list-el type="PATH" [id]="poi.id" [img]="poi.image" [title]="poi.title" [text]="poi.subtitle" main-color="red"></wc-path-list-el>
     </div>
   </ion-list>
 </ion-content>

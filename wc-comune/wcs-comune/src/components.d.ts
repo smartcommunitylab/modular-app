@@ -80,6 +80,68 @@ export namespace Components {
     'info'?: any;
   }
 
+  interface WcDetails {
+    /**
+    * Oggetto JSON per contatti e info aggiuntive
+    */
+    'contacts': string;
+    /**
+    * Colore titoli
+    */
+    'headingColor': string;
+    /**
+    * Immagine del percorso
+    */
+    'img': string;
+    /**
+    * Informazioni a fine pagina
+    */
+    'info': string;
+    /**
+    * Sottotitolo del percorso
+    */
+    'subtitle': string;
+    /**
+    * Descrizione e testo
+    */
+    'text': string;
+    /**
+    * Oggeto JSON contenente i dettagli dei contatti. Titolo del percorso
+    */
+    'title': string;
+  }
+  interface WcDetailsAttributes extends StencilHTMLAttributes {
+    /**
+    * Oggetto JSON per contatti e info aggiuntive
+    */
+    'contacts'?: string;
+    /**
+    * Colore titoli
+    */
+    'headingColor'?: string;
+    /**
+    * Immagine del percorso
+    */
+    'img'?: string;
+    /**
+    * Informazioni a fine pagina
+    */
+    'info'?: string;
+    'onContactClick'?: (event: CustomEvent) => void;
+    /**
+    * Sottotitolo del percorso
+    */
+    'subtitle'?: string;
+    /**
+    * Descrizione e testo
+    */
+    'text'?: string;
+    /**
+    * Oggeto JSON contenente i dettagli dei contatti. Titolo del percorso
+    */
+    'title'?: string;
+  }
+
   interface WcGallery {
     'gallery': any;
   }
@@ -129,19 +191,11 @@ export namespace Components {
     */
     'mainMarkerIcon': string;
     /**
-    * Oggeto JSON contenente i dettagli dei POI. Latitudine posizione attuale
-    */
-    'myLat': number;
-    /**
-    * Longitudine posizione attuale
-    */
-    'myLon': number;
-    /**
     * Icona marker POI
     */
     'poiMarkerIcon': string;
     /**
-    * Array di punti da inserire nella mappa
+    * Oggeto JSON contenente i dettagli dei POI. ULTIMO ELEMENTO = Posizione attuale Array di punti da inserire nella mappa
     */
     'points': string;
   }
@@ -151,22 +205,59 @@ export namespace Components {
     */
     'mainMarkerIcon'?: string;
     /**
-    * Oggeto JSON contenente i dettagli dei POI. Latitudine posizione attuale
-    */
-    'myLat'?: number;
-    /**
-    * Longitudine posizione attuale
-    */
-    'myLon'?: number;
-    'onPoiSelected'?: (event: CustomEvent) => void;
-    /**
     * Icona marker POI
     */
     'poiMarkerIcon'?: string;
     /**
-    * Array di punti da inserire nella mappa
+    * Oggeto JSON contenente i dettagli dei POI. ULTIMO ELEMENTO = Posizione attuale Array di punti da inserire nella mappa
     */
     'points'?: string;
+  }
+
+  interface WcModal {
+    /**
+    * Testo del bottone
+    */
+    'btnText': string;
+    /**
+    * Contenuto inviato nell'evento al click del bottone
+    */
+    'data': any;
+    /**
+    * Visualizza/Nascondi modal
+    */
+    'shown': boolean;
+    /**
+    * Contenuto
+    */
+    'text': string;
+    /**
+    * Titolo Modale
+    */
+    'title': string;
+  }
+  interface WcModalAttributes extends StencilHTMLAttributes {
+    /**
+    * Testo del bottone
+    */
+    'btnText'?: string;
+    /**
+    * Contenuto inviato nell'evento al click del bottone
+    */
+    'data'?: any;
+    'onActionSelected'?: (event: CustomEvent) => void;
+    /**
+    * Visualizza/Nascondi modal
+    */
+    'shown'?: boolean;
+    /**
+    * Contenuto
+    */
+    'text'?: string;
+    /**
+    * Titolo Modale
+    */
+    'title'?: string;
   }
 
   interface WcPathInfo {
@@ -247,6 +338,10 @@ export namespace Components {
     * Titolo del percorso
     */
     'title': string;
+    /**
+    * Tipo di POI
+    */
+    'type': string;
   }
   interface WcPathListElAttributes extends StencilHTMLAttributes {
     /**
@@ -274,68 +369,10 @@ export namespace Components {
     * Titolo del percorso
     */
     'title'?: string;
-  }
-
-  interface WcPoiInfo {
     /**
-    * Oggetto JSON per contatti e info aggiuntive
+    * Tipo di POI
     */
-    'contacts': string;
-    /**
-    * Colore titoli
-    */
-    'headingColor': string;
-    /**
-    * Immagine del percorso
-    */
-    'img': string;
-    /**
-    * Informazioni a fine pagina
-    */
-    'info': string;
-    /**
-    * Sottotitolo del percorso
-    */
-    'subtitle': string;
-    /**
-    * Descrizione e testo
-    */
-    'text': string;
-    /**
-    * Oggeto JSON contenente i dettagli dei contatti. Titolo del percorso
-    */
-    'title': string;
-  }
-  interface WcPoiInfoAttributes extends StencilHTMLAttributes {
-    /**
-    * Oggetto JSON per contatti e info aggiuntive
-    */
-    'contacts'?: string;
-    /**
-    * Colore titoli
-    */
-    'headingColor'?: string;
-    /**
-    * Immagine del percorso
-    */
-    'img'?: string;
-    /**
-    * Informazioni a fine pagina
-    */
-    'info'?: string;
-    'onContactClick'?: (event: CustomEvent) => void;
-    /**
-    * Sottotitolo del percorso
-    */
-    'subtitle'?: string;
-    /**
-    * Descrizione e testo
-    */
-    'text'?: string;
-    /**
-    * Oggeto JSON contenente i dettagli dei contatti. Titolo del percorso
-    */
-    'title'?: string;
+    'type'?: string;
   }
 
   interface WcTabs {
@@ -381,26 +418,28 @@ declare global {
   interface StencilElementInterfaces {
     'WcCategoryButton': Components.WcCategoryButton;
     'WcDetailInfo': Components.WcDetailInfo;
+    'WcDetails': Components.WcDetails;
     'WcGallery': Components.WcGallery;
     'WcListCategories': Components.WcListCategories;
     'WcListPoi': Components.WcListPoi;
     'WcMap': Components.WcMap;
+    'WcModal': Components.WcModal;
     'WcPathInfo': Components.WcPathInfo;
     'WcPathListEl': Components.WcPathListEl;
-    'WcPoiInfo': Components.WcPoiInfo;
     'WcTabs': Components.WcTabs;
   }
 
   interface StencilIntrinsicElements {
     'wc-category-button': Components.WcCategoryButtonAttributes;
     'wc-detail-info': Components.WcDetailInfoAttributes;
+    'wc-details': Components.WcDetailsAttributes;
     'wc-gallery': Components.WcGalleryAttributes;
     'wc-list-categories': Components.WcListCategoriesAttributes;
     'wc-list-poi': Components.WcListPoiAttributes;
     'wc-map': Components.WcMapAttributes;
+    'wc-modal': Components.WcModalAttributes;
     'wc-path-info': Components.WcPathInfoAttributes;
     'wc-path-list-el': Components.WcPathListElAttributes;
-    'wc-poi-info': Components.WcPoiInfoAttributes;
     'wc-tabs': Components.WcTabsAttributes;
   }
 
@@ -415,6 +454,12 @@ declare global {
   var HTMLWcDetailInfoElement: {
     prototype: HTMLWcDetailInfoElement;
     new (): HTMLWcDetailInfoElement;
+  };
+
+  interface HTMLWcDetailsElement extends Components.WcDetails, HTMLStencilElement {}
+  var HTMLWcDetailsElement: {
+    prototype: HTMLWcDetailsElement;
+    new (): HTMLWcDetailsElement;
   };
 
   interface HTMLWcGalleryElement extends Components.WcGallery, HTMLStencilElement {}
@@ -441,6 +486,12 @@ declare global {
     new (): HTMLWcMapElement;
   };
 
+  interface HTMLWcModalElement extends Components.WcModal, HTMLStencilElement {}
+  var HTMLWcModalElement: {
+    prototype: HTMLWcModalElement;
+    new (): HTMLWcModalElement;
+  };
+
   interface HTMLWcPathInfoElement extends Components.WcPathInfo, HTMLStencilElement {}
   var HTMLWcPathInfoElement: {
     prototype: HTMLWcPathInfoElement;
@@ -453,12 +504,6 @@ declare global {
     new (): HTMLWcPathListElElement;
   };
 
-  interface HTMLWcPoiInfoElement extends Components.WcPoiInfo, HTMLStencilElement {}
-  var HTMLWcPoiInfoElement: {
-    prototype: HTMLWcPoiInfoElement;
-    new (): HTMLWcPoiInfoElement;
-  };
-
   interface HTMLWcTabsElement extends Components.WcTabs, HTMLStencilElement {}
   var HTMLWcTabsElement: {
     prototype: HTMLWcTabsElement;
@@ -468,26 +513,28 @@ declare global {
   interface HTMLElementTagNameMap {
     'wc-category-button': HTMLWcCategoryButtonElement
     'wc-detail-info': HTMLWcDetailInfoElement
+    'wc-details': HTMLWcDetailsElement
     'wc-gallery': HTMLWcGalleryElement
     'wc-list-categories': HTMLWcListCategoriesElement
     'wc-list-poi': HTMLWcListPoiElement
     'wc-map': HTMLWcMapElement
+    'wc-modal': HTMLWcModalElement
     'wc-path-info': HTMLWcPathInfoElement
     'wc-path-list-el': HTMLWcPathListElElement
-    'wc-poi-info': HTMLWcPoiInfoElement
     'wc-tabs': HTMLWcTabsElement
   }
 
   interface ElementTagNameMap {
     'wc-category-button': HTMLWcCategoryButtonElement;
     'wc-detail-info': HTMLWcDetailInfoElement;
+    'wc-details': HTMLWcDetailsElement;
     'wc-gallery': HTMLWcGalleryElement;
     'wc-list-categories': HTMLWcListCategoriesElement;
     'wc-list-poi': HTMLWcListPoiElement;
     'wc-map': HTMLWcMapElement;
+    'wc-modal': HTMLWcModalElement;
     'wc-path-info': HTMLWcPathInfoElement;
     'wc-path-list-el': HTMLWcPathListElElement;
-    'wc-poi-info': HTMLWcPoiInfoElement;
     'wc-tabs': HTMLWcTabsElement;
   }
 

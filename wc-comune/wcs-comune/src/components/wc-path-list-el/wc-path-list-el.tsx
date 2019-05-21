@@ -18,6 +18,8 @@ export class WcPathList {
   @Prop() mainColor: string;
   /** Colore descrizione breve */
   @Prop() descColor: string;
+  /** Tipo di POI */
+  @Prop() type: string;
   
   @Event({
     eventName: "pathSelected", 
@@ -26,7 +28,7 @@ export class WcPathList {
   }) pathSelected: EventEmitter;
 
   pathSelectedHandler(path: string) {
-    this.pathSelected.emit(path);
+    this.pathSelected.emit(path+";"+this.type);
    // console.log("Cliccato", path);
   }
 
@@ -41,10 +43,9 @@ export class WcPathList {
           <h3 style={{color: this.mainColor}}>{this.title}</h3>
         </div>
         <div class="description">
-          <p style={{color: this.descColor}} innerHTML= {this.text}></p>
+          <p style={{color: this.descColor}} innerHTML={this.text} ></p>        
         </div>
       </div>,
-
       <hr />
     ]
     );

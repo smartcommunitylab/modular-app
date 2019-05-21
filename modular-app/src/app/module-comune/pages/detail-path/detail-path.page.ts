@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { DbService } from '../../../module-comune/services/db.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { DbService } from '../../services/db.service';
 
 @Component({
   selector: 'app-detail-path',
@@ -11,7 +11,7 @@ export class DetailPathPage implements OnInit {
   paths: any;
   pois: any = [];
   lang = 'it';
-  jsonTabs = JSON.stringify([{target: 'info', icon: 'info'}, {target: 'place', icon: 'place'}, {target: 'map', icon: 'map'}]);
+  jsonTabs = JSON.stringify([{ target: 'info', icon: 'info' }, { target: 'place', icon: 'place' }, { target: 'map', icon: 'map' }]);
   tabActived = 'info';
   isLoading = false;
   mapPoints: any = [];
@@ -40,8 +40,9 @@ export class DetailPathPage implements OnInit {
     this.route.queryParams
       .subscribe(params => {
         if (params) {
-            this.isLoading = true;
-            this.dbService.getObjectById(params.id).then(data => {
+          const id = params.id.split(';')[0];
+          this.isLoading = true;
+          this.dbService.getObjectById(id).then(data => {
             this.paths = data.docs[0];
             this.buildLangPaths();
             this.getPois(this.paths);
@@ -54,11 +55,18 @@ export class DetailPathPage implements OnInit {
     const el = document.getElementById('tabs');
     el.addEventListener('tabSelected', path => {
       this.tabActived = (<any>path).detail;
-      if (this.tabActived === 'map'){
+      if (this.tabActived === 'map') {
         this.buildMapPoints();
       }
     });
+    window.addEventListener('pathSelected', target => {
+      this.goToPoi((<any>target).detail);
+    });
+    window.addEventListener('actionSelected', target => {
+      this.goToPoi((<any>target).detail);
+    });
   }
+
   buildLangPaths() {
     this.paths.description = this.paths.description[this.lang];
     this.paths.info = this.paths.info[this.lang];
@@ -66,11 +74,11 @@ export class DetailPathPage implements OnInit {
     this.paths.title = this.paths.title[this.lang];
     this.paths.difficulty = this.paths.difficulty[this.lang];
   }
+
   buildMapPoints() {
     this.pois.forEach(element => {
-      console.log(element);
       this.mapPoints.push({
-        id: element.id,
+        id: element._id,
         lat: element.location[0],
         lon: element.location[1],
         name: element.title[this.lang],
@@ -78,6 +86,16 @@ export class DetailPathPage implements OnInit {
         distance: 0 // TOFIX
       });
     });
+    this.mapPoints.push({
+      lat: window['app-module-geolocation']['lat'],
+      lon: window['app-module-geolocation']['long'],
+      name: 'myPos',
+      distance: 0
+    });
     this.mapPoints = JSON.stringify(this.mapPoints);
+  }
+
+  goToPoi(id) {
+    this.router.navigate(['/detail-poi'], { queryParams: { id: id } });
   }
 }

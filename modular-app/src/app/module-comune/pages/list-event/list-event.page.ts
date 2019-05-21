@@ -4,11 +4,11 @@ import { DbService } from '../../services/db.service';
 import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-list-poi',
-  templateUrl: './list-poi.page.html',
-  styleUrls: ['./list-poi.page.scss'],
+  selector: 'app-list-event',
+  templateUrl: './list-event.page.html',
+  styleUrls: ['./list-event.page.scss'],
 })
-export class ListPoiPage implements OnInit {
+export class ListEventPage implements OnInit {
   pois: any = [];
   language = 'it';
   category: any;
@@ -16,8 +16,6 @@ export class ListPoiPage implements OnInit {
   constructor(public navCtrl: NavController, public dbService: DbService, public alertCtrl: AlertController,
     private router: Router, private route: ActivatedRoute) {
   }
-
-
   ngOnInit() {
     this.route.queryParams
       .subscribe(params => {
@@ -36,9 +34,8 @@ export class ListPoiPage implements OnInit {
     }
     const el = document.getElementById('poi-list');
     el.addEventListener('pathSelected', path => {
-      // this.goToDetail((<any>path).detail);
-      this.type = ((<any>path).detail).split(';')[1];
-      const id = ((<any>path).detail).split(';')[0];
+      this.type = path.detail.split(';')[1];
+      const id = path.detail.split(';')[0];
       this.goToDetail(id);
     });
   }
@@ -57,9 +54,6 @@ export class ListPoiPage implements OnInit {
       }
       if (x.image) {
          poiElement.image = x.image;
-      }
-      if (x._id) {
-        poiElement.id = x._id;
       }
       if (x._id) {
         poiElement.id = x._id;
