@@ -53,7 +53,7 @@ export class DetailPoiPage implements OnInit {
       if (this.poi.topics) {
         this.contacts['cat'] = this.poi.topics[0];
       }
-      if (this.poi.cost) {
+      if (this.poi.cost && this.poi.cost[this.lang] !== '') {
         this.contacts['price'] = this.poi.cost[this.lang];
       }
     }

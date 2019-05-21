@@ -67,11 +67,14 @@ export class ListCategoriesPage implements OnInit {
   }
 
   goToCategory(category) {
-    if (category.query.type.indexOf('itineraries') > -1) {
-      this.router.navigate(['/list-path'], { queryParams: { category: JSON.stringify(category) } });
-    }
-    if (category.query.type.indexOf('event') > -1) {
-      this.router.navigate(['/list-event'], { queryParams: { category: JSON.stringify(category) } });
+    if (category.query) {
+      if (category.query.type.indexOf('itineraries') > -1) {
+        this.router.navigate(['/list-path'], { queryParams: { category: JSON.stringify(category) } });
+      } else if (category.query.type.indexOf('event') > -1) {
+        this.router.navigate(['/list-event'], { queryParams: { category: JSON.stringify(category) } });
+      }
+    } else {
+      this.router.navigate(['/list-poi'], { queryParams: { category: JSON.stringify(category) } });
     }
   }
 }
