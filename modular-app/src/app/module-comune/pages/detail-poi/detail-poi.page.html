@@ -3,7 +3,7 @@
       <ion-buttons slot="start">
           <ion-back-button></ion-back-button>
         </ion-buttons>
-      <ion-title>
+      <ion-title *ngIf="poi">
         {{poi.title[lang]}}
         </ion-title>
     </ion-toolbar>

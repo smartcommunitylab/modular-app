@@ -94,7 +94,13 @@ export class HomeCommonPage implements OnInit {
   }
 
   goToLink(category) {
+    if (category.type && category.type.indexOf('PATH') > -1) {
+      category.query = {'selector': {'element-type': 'itinerary-item'}, type: 'itineraries'};
+      this.router.navigate(['/list-path'], { queryParams: { category: JSON.stringify(category) } });
+      console.log(category)
+    } else {
     this.router.navigate([category.url], { queryParams: { category: JSON.stringify(category) } });
+    }
   }
   goToCategory(category) {
     this.router.navigate(['/list-categories'], { queryParams: { category: JSON.stringify(category) } });

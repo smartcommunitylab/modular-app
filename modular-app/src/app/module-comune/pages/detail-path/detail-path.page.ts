@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DbService } from '../../services/db.service';
+import { ConfigService } from 'src/app/services/config.service';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-detail-path',
@@ -9,14 +11,22 @@ import { DbService } from '../../services/db.service';
 })
 export class DetailPathPage implements OnInit {
   paths: any;
-  pois: any = [];
+  showPois: any = [];
+  fullPois: any = [];
   lang = 'it';
   jsonTabs = JSON.stringify([{ target: 'info', icon: 'info' }, { target: 'place', icon: 'place' }, { target: 'map', icon: 'map' }]);
   tabActived = 'info';
   isLoading = false;
   mapPoints: any = [];
+  search = false;
 
-  constructor(private router: Router, private route: ActivatedRoute, private dbService: DbService) { }
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private dbService: DbService,
+    private config: ConfigService,
+    private alert: AlertController
+    ) { }
 
   private getPois(path: any) {
     path.steps.forEach(element => {
@@ -28,9 +38,10 @@ export class DetailPathPage implements OnInit {
       };
       this.dbService.getObjectByQuery(query).then(data => {
         if (data.docs[0]) {
-          this.pois.push(data.docs[0]);
+          this.fullPois.push(data.docs[0]);
         }
       }).then(() => {
+        this.showPois = this.fullPois;
         this.isLoading = false;
       });
     });
@@ -76,7 +87,7 @@ export class DetailPathPage implements OnInit {
   }
 
   buildMapPoints() {
-    this.pois.forEach(element => {
+    this.fullPois.forEach(element => {
       this.mapPoints.push({
         id: element._id,
         lat: element.location[0],
@@ -87,8 +98,8 @@ export class DetailPathPage implements OnInit {
       });
     });
     this.mapPoints.push({
-      lat: window['app-module-geolocation']['lat'],
-      lon: window['app-module-geolocation']['long'],
+      lat: window[this.config.getAppModuleName()]['geolocation']['lat'],
+      lon: window[this.config.getAppModuleName()]['geolocation']['long'],
       name: 'myPos',
       distance: 0
     });
@@ -97,5 +108,68 @@ export class DetailPathPage implements OnInit {
 
   goToPoi(id) {
     this.router.navigate(['/detail-poi'], { queryParams: { id: id } });
+  }
+
+  toggleSearch() {
+    this.search = !this.search;
+  }
+  searchChanged(input: any) {
+    const value = input.detail.target.value;
+    const _this = this;
+    this.showPois = this.fullPois.filter(function(el) {
+      return (el.title[_this.lang].toLowerCase().indexOf(value.toLowerCase()) > -1);
+    });
+  }
+  filterClicked() {
+    this.buildAlert();
+    console.log('filter');
+  }
+  async buildAlert() {
+    const _this = this;
+    const alert = await this.alert.create({
+      header: 'Ordina per',
+      inputs: [
+        {
+          name: 'asc',
+          type: 'radio',
+          label: 'A-Z',
+          value: 'asc',
+          checked: true
+        },
+        {
+          name: 'desc',
+          type: 'radio',
+          label: 'Z-A',
+          value: 'desc',
+          checked: false
+        }
+      ],
+      buttons: [
+        {
+          text: 'Annulla',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('Modal Closed');
+          }
+        },
+        {
+          text: 'OK',
+          handler: data => {
+             this.orderArray(data, _this);
+          }
+        }
+      ]
+    });
+
+   await alert.present();
+  }
+  orderArray(condition: string, _this: any) {
+    if (condition.indexOf('asc') > -1) {
+      _this.showPois = this.fullPois.sort(function(a, b) { return a.title[_this.lang].localeCompare(b.title[_this.lang]); });
+    } else {
+      _this.showPois = this.fullPois.sort(function(a, b) { return b.title[_this.lang].localeCompare(a.title[_this.lang]); });
+    }
+     console.log(_this.showPois);
   }
 }
