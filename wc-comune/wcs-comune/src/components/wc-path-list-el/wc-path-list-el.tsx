@@ -37,7 +37,7 @@ export class WcPathList {
       [
       <div class="container" onClick={() => this.pathSelectedHandler(this.id)}>
         <div class="image">
-          <img style={{borderColor: this.mainColor}} src={this.img}></img>
+          <img src={this.img}></img>
         </div>
         <div class="title">
           <h3 style={{color: this.mainColor}}>{this.title}</h3>
@@ -45,8 +45,7 @@ export class WcPathList {
         <div class="description">
           <p style={{color: this.descColor}} innerHTML={this.text} ></p>        
         </div>
-      </div>,
-      <hr />
+      </div>
     ]
     );
   }

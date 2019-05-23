@@ -16,6 +16,7 @@ export class ListEventPage implements OnInit {
   private type: string;
   search = false;
   isLoading = true;
+
   constructor(
     public navCtrl: NavController,
     public dbService: DbService,
@@ -23,8 +24,8 @@ export class ListEventPage implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private alert: AlertController
-    ) {
-  }
+    ) {  }
+
   ngOnInit() {
     this.route.queryParams
       .subscribe(params => {
