@@ -9,9 +9,31 @@
     </ion-toolbar>
   </ion-header>
 
+  <ion-grid style="height: 100%" *ngIf="isLoading">
+      <ion-row justify-content-center align-items-center style="height: 100%">
+        <ion-spinner name="circles"></ion-spinner>
+      </ion-row>
+  </ion-grid>
+
 <ion-content padding>
+    <ion-searchbar *ngIf="search" showCancelButton animated (ionInput)="searchChanged($event)" (ionCancel)="toggleSearch()"></ion-searchbar>
+   <!-- FLOATING BUTTON -->
+   <ion-fab *ngIf="!isLoading" class="fixed" vertical="bottom" horizontal="start" slot="fixed">
+      <ion-fab-button color="danger">
+        <ion-icon name="arrow-dropup-circle"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-list side="top">
+          <ion-fab-button (click)="toggleSearch()">
+            <ion-icon name="search"></ion-icon>
+          </ion-fab-button>
+          <ion-fab-button (click)="filterClicked()">
+              <ion-icon name="funnel"></ion-icon>
+            </ion-fab-button>
+      </ion-fab-list>
+    </ion-fab>
+    <!-- ---------------------------- -->
   <ion-list no-lines id="poi-list">
-    <div *ngFor="let poi of pois">      
+    <div *ngFor="let poi of showPois">      
       <wc-path-list-el type="EVENT" [id]="poi.id" [img]="poi.image" [title]="poi.title" [text]="poi.subtitle" main-color="red"></wc-path-list-el>
     </div>
   </ion-list>

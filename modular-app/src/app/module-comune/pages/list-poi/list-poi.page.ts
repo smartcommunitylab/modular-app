@@ -40,13 +40,11 @@ export class ListPoiPage implements OnInit {
         }).then(() => {
           const tmp = this.pois;
           this.pois = tmp.map(x => this.convertPois(x));
-          console.log(this.pois)
         });
       });
     }
     const el = document.getElementById('poi-list');
     el.addEventListener('pathSelected', path => {
-      // this.goToDetail((<any>path).detail);
       this.type = ((<any>path).detail).split(';')[1];
       const id = ((<any>path).detail).split(';')[0];
       this.goToDetail(id);
