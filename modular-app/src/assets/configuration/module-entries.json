@@ -92,4 +92,13 @@
     "url": "/credits",
     "icon": "home"
 
+  },{
+    "name": {
+      "it": "Trasporti",
+      "en": "Transport",
+      "de": "Transport"
+    },
+    "url": "/home-trasporti",
+    "icon": "home"
+
   }]

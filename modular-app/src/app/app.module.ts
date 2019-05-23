@@ -7,6 +7,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ComuneModule } from './module-comune/web-components.module';
+import { TrasportiModule } from './module-trasporti/module-trasporti.module';
 import { SettingService } from './services/setting.service'
 import { GeoService } from './services/geo.service'
 import { HttpClient,HttpClientModule } from '@angular/common/http';
@@ -31,7 +32,7 @@ export function initializeAppConfig(configService: ConfigService) {
   }
 }
 export function HttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
+  return new TranslateHttpLoader(http, "./assets/common/i18n/", ".json");
 }
 @NgModule({
   declarations: [AppComponent],
@@ -44,10 +45,12 @@ export function HttpLoaderFactory(http: HttpClient) {
         provide: TranslateLoader,
         useFactory: HttpLoaderFactory,
         deps: [HttpClient]
-      }
+      },
+      isolate: true
     }),
     IonicModule.forRoot(),
     ComuneModule.forRoot(),
+    TrasportiModule.forRoot(),
     AppRoutingModule],
   providers: [
     StatusBar,

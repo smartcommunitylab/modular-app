@@ -36,7 +36,7 @@ export class AppComponent {
     if (this.myLanguage) {
       
        this.translate.setDefaultLang(this.myLanguage);
-
+      //  this.translate.use(this.myLanguage)
       }
   }
   sideMenu(): Promise<any> {
