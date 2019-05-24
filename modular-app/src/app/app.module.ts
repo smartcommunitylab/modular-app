@@ -14,6 +14,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { ConfigService } from './services/config.service';
+import { PopoverComponent } from './shared/popover/popover.component';
 
 export function initializeAppSetting(appInitService: SettingService) {
   return (): Promise<any> => {
@@ -34,8 +35,8 @@ export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
 }
 @NgModule({
-  declarations: [AppComponent],
-  entryComponents: [],
+  declarations: [AppComponent, PopoverComponent],
+  entryComponents: [PopoverComponent],
   imports: [
     HttpClientModule,
     BrowserModule,

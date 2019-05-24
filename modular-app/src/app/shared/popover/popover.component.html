@@ -1,0 +1,10 @@
+
+  <ion-radio-group>
+    <ion-item *ngFor="let x of data">
+      <ion-label>{{x}}</ion-label>
+      <ion-radio slot="start" value="{{x}}" (ionSelect)="radioSelected(x)"></ion-radio>
+    </ion-item>
+  </ion-radio-group>
+
+<ion-button expand="full" color="tertiary" (click)="close()">Imposta</ion-button>
+

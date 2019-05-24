@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController, AlertController } from '@ionic/angular';
+import { NavController, AlertController, PopoverController, Events } from '@ionic/angular';
 import { DbService } from '../../services/db.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { PopoverComponent } from 'src/app/shared/popover/popover.component';
 
 @Component({
   selector: 'app-list-event',
@@ -16,6 +17,8 @@ export class ListEventPage implements OnInit {
   private type: string;
   search = false;
   isLoading = true;
+  fullCategories: any = [];
+  categories: any = [];
 
   constructor(
     public navCtrl: NavController,
@@ -23,8 +26,14 @@ export class ListEventPage implements OnInit {
     public alertCtrl: AlertController,
     private router: Router,
     private route: ActivatedRoute,
-    private alert: AlertController
-    ) {  }
+    private alert: AlertController,
+    private popoverController: PopoverController,
+    public events: Events
+    ) {
+      events.subscribe('radio:selected', x => {
+        this.changeCategory(x);
+      });
+    }
 
   ngOnInit() {
     this.route.queryParams
@@ -36,11 +45,14 @@ export class ListEventPage implements OnInit {
         }
       });
   }
+
   ionViewDidEnter() {
     if (this.category && this.category.query) {
       this.dbService.getObjectByQuery(this.category.query).then((data) => {
         this.fullPois = data.docs.map(x => this.convertPois(x));
-        this.showPois = this.fullPois;
+      //  this.showPois = this.fullPois;
+        this.subCategories(this.fullPois);
+        this.buildShowPois();
         this.isLoading = false;
       });
     }
@@ -49,6 +61,28 @@ export class ListEventPage implements OnInit {
       this.type = (<any>path).detail.split(';')[1];
       const id = (<any>path).detail.split(';')[0];
       this.goToDetail(id);
+    });
+  }
+
+  subCategories(array: Array<any>) {
+    array.forEach(element => {
+      if (!this.fullCategories.includes(element.category)) {
+        this.fullCategories.push(element.category);
+      }
+      this.categories = this.fullCategories;
+    });
+  }
+
+  buildShowPois() {
+    this.fullCategories.forEach(e => {
+      this.fullPois.forEach(p => {
+        if (!this.showPois[e]) {
+          this.showPois[e] = [];
+        }
+        if (p.category === e) {
+          this.showPois[e].push(p);
+        }
+      });
     });
   }
 
@@ -70,6 +104,9 @@ export class ListEventPage implements OnInit {
       if (x._id) {
         poiElement.id = x._id;
       }
+      if (x.category) {
+        poiElement.category = x.category;
+      }
     }
     return poiElement;
   }
@@ -81,6 +118,7 @@ export class ListEventPage implements OnInit {
   toggleSearch() {
     this.search = !this.search;
   }
+
   searchChanged(input: any) {
     const value = input.detail.target.value;
     const _this = this;
@@ -88,10 +126,11 @@ export class ListEventPage implements OnInit {
       return (el.title[_this.language].toLowerCase().indexOf(value.toLowerCase()) > -1);
     });
   }
+
   filterClicked() {
     this.buildAlert();
-    console.log('filter');
   }
+
   async buildAlert() {
     const _this = this;
     const alert = await this.alert.create({
@@ -132,6 +171,7 @@ export class ListEventPage implements OnInit {
 
    await alert.present();
   }
+
   orderArray(condition: string, _this: any) {
     if (condition.indexOf('asc') > -1) {
       _this.showPois = this.fullPois.sort(function(a, b) { return a.title[_this.language].localeCompare(b.title[_this.language]); });
@@ -139,5 +179,23 @@ export class ListEventPage implements OnInit {
       _this.showPois = this.fullPois.sort(function(a, b) { return b.title[_this.language].localeCompare(a.title[_this.language]); });
     }
      console.log(_this.showPois);
+  }
+
+  async showPopover() {
+    const popover = await this.popoverController.create({
+      component: PopoverComponent,
+      componentProps: {elements: this.fullCategories, controller: this.popoverController},
+      translucent: true
+    });
+    return await popover.present();
+  }
+
+  changeCategory(cat: any) {
+    this.categories = [];
+    if (cat && cat.indexOf('Tutto') > -1) {
+      this.categories = this.fullCategories;
+    } else {
+      this.categories.push(cat);
+    }
   }
 }

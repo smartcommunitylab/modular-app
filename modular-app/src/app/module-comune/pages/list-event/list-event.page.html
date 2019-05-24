@@ -14,7 +14,8 @@
         <ion-spinner name="circles"></ion-spinner>
       </ion-row>
   </ion-grid>
-
+  
+<ion-button size="small" color="success" (click)="showPopover()">Categoria</ion-button>
 <ion-content padding>
     <ion-searchbar *ngIf="search" showCancelButton animated (ionInput)="searchChanged($event)" (ionCancel)="toggleSearch()"></ion-searchbar>
    <!-- FLOATING BUTTON -->
@@ -33,8 +34,14 @@
     </ion-fab>
     <!-- ---------------------------- -->
   <ion-list no-lines id="poi-list">
-    <div *ngFor="let poi of showPois">      
-      <wc-path-list-el type="EVENT" [id]="poi.id" [img]="poi.image" [title]="poi.title" [text]="poi.subtitle" main-color="red"></wc-path-list-el>
-    </div>
+      <div *ngFor="let c of categories">
+        <div class="category">
+          {{c}}
+        </div>
+        <div *ngFor="let poi of showPois[c]; let i = index">
+          <wc-path-list-el  type="POI" [id]="poi.id" [img]="poi.image" [title]="poi.title" [text]="poi.subtitle" main-color="red"></wc-path-list-el>
+          <div class="spacing" *ngIf="i == showPois.length - 1"></div>
+        </div>
+      </div>
   </ion-list>
 </ion-content>
