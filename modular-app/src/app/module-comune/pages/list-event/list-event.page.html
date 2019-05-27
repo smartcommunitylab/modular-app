@@ -1,22 +1,22 @@
 <ion-header no-border>
-    <ion-toolbar color="secondary">
-      <ion-buttons slot="start">
-          <ion-back-button></ion-back-button>
-        </ion-buttons>
-      <ion-title>
-          {{'title_list_poi'|translate}}
-        </ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-toolbar color="secondary">
+    <ion-buttons slot="start">
+        <ion-back-button></ion-back-button>
+      </ion-buttons>
+    <ion-title>
+        {{'title_list_poi'|translate}}
+      </ion-title>
+  </ion-toolbar>
+</ion-header>
 
-  <ion-grid style="height: 100%" *ngIf="isLoading">
-      <ion-row justify-content-center align-items-center style="height: 100%">
-        <ion-spinner name="circles"></ion-spinner>
-      </ion-row>
-  </ion-grid>
-  
+<ion-grid style="height: 100%" *ngIf="isLoading">
+    <ion-row justify-content-center align-items-center style="height: 100%">
+      <ion-spinner name="circles"></ion-spinner>
+    </ion-row>
+</ion-grid>
+
 <ion-content padding>
-    <ion-button class="popover-btn" size="small" color="success" (click)="showPopover()">Categoria</ion-button>
+    
     <ion-searchbar *ngIf="search" showCancelButton animated (ionInput)="searchChanged($event)" (ionCancel)="toggleSearch()"></ion-searchbar>
    <!-- FLOATING BUTTON -->
    <ion-fab *ngIf="!isLoading" class="fixed" vertical="bottom" horizontal="start" slot="fixed">
@@ -33,13 +33,16 @@
       </ion-fab-list>
     </ion-fab>
     <!-- ---------------------------- -->
+
+  <ion-button *ngIf="!search" class="popover-btn" size="small" color="success" (click)="showPopover()">Categoria</ion-button>
   <ion-list no-lines id="poi-list">
       <div *ngFor="let c of categories">
-        <div class="category">
-          {{c}}
-        </div>
+        <ion-list-header class="category">
+          <ion-label>{{c}}</ion-label>
+          
+        </ion-list-header>
         <div *ngFor="let poi of showPois[c]; let i = index">
-          <wc-path-list-el  type="POI" [id]="poi.id" [img]="poi.image" [title]="poi.title" [text]="poi.subtitle" main-color="red"></wc-path-list-el>
+          <wc-details [img]="poi.image" [title]="poi.title" [subtitle]="poi.subtitle" [text]="poi.text" [info]="poi.info" [contacts]="poi.infos" heading-color="red"></wc-details>
           <div class="spacing" *ngIf="i == showPois.length - 1"></div>
         </div>
       </div>

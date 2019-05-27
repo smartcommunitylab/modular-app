@@ -10,6 +10,9 @@
 @import '~@ionic/angular/css/text-transformation.css';
 @import '~@ionic/angular/css/flex-utils.css';
 
+html {
+    font-family: 'Titillium Web', sans-serif !important;
+}
 .fixed {
     position:fixed !important;
 }
@@ -17,13 +20,12 @@
     height: 50px !important;
 }
 .category {
-    background-color: red;
     width: 100%;
     text-align: center;
-    color: white;
-    font-weight: bold;
+    color: black;
     font-size: 24px;
-    margin-bottom: 2%;
+    margin-bottom: 1%;
+    border-bottom: 1px solid black;
 }
 .popover-btn {
     text-align: right;

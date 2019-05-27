@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavController, AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { ConfigService } from '../../services/config.service'
+import { ConfigService } from '../../services/config.service';
 @Component({
   selector: 'app-home-common',
   templateUrl: 'home-common.page.html',
@@ -13,7 +13,7 @@ export class HomeCommonPage implements OnInit {
   categories: any = [];
   elementsGallery: string[] = null;
   pois: any = [];
-  language: string = "it";
+  language = 'it';
   elementsGalleryStr: string;
   constructor(public navCtrl: NavController,
     public translate: TranslateService,
@@ -24,14 +24,14 @@ export class HomeCommonPage implements OnInit {
   ngOnInit() {
     this.translate.get('title_page').subscribe(
       value => {
-        console.log(value)
+        console.log(value);
       }
-    )
+    );
   }
   ionViewDidEnter() {
     this.elementsGallery = [];
     this.categories = this.config.getModuleEntries().map(x => this.convertCategories(x));
-    console.log(this.categories)
+    console.log(this.categories);
     this.elementsGallery = this.config.getCarousel().map(x => this.convertGallery(x));
     // this.config.init();
     // this.dbService.getCategories().then((data) => {
@@ -47,11 +47,11 @@ export class HomeCommonPage implements OnInit {
     // const categoryButtonsElement = document.querySelector('category-buttons');
     window.addEventListener('categorySelected', category => {
       console.log(category);
-      this.goToCategory(category);
+     // this.goToCategory(category);
     });
     window.addEventListener('elementSelected', item => {
       console.log(item);
-      this.goToItem(item["detail"]);
+      this.goToItem(item['detail']);
     });
   }
 
@@ -94,10 +94,12 @@ export class HomeCommonPage implements OnInit {
   }
 
   goToLink(category) {
-    if (category.type && category.type.indexOf('PATH') > -1) {
+    if (category.type && category.type.indexOf('EVENT') > -1) {
+      category.query = {'selector': {'element-type': 'event-item'}};
+      this.router.navigate(['/list-event'], { queryParams: { category: JSON.stringify(category) } });
+    } else if (category.type && category.type.indexOf('PATH') > -1) {
       category.query = {'selector': {'element-type': 'itinerary-item'}, type: 'itineraries'};
       this.router.navigate(['/list-path'], { queryParams: { category: JSON.stringify(category) } });
-      console.log(category)
     } else {
     this.router.navigate([category.url], { queryParams: { category: JSON.stringify(category) } });
     }

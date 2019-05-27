@@ -53,6 +53,7 @@ export class ListEventPage implements OnInit {
       //  this.showPois = this.fullPois;
         this.subCategories(this.fullPois);
         this.buildShowPois();
+      //  console.log(this.fullCategories)
         this.isLoading = false;
       });
     }
@@ -104,9 +105,28 @@ export class ListEventPage implements OnInit {
       if (x._id) {
         poiElement.id = x._id;
       }
+      if (x.topics) {
+        poiElement.cat = x.topics;
+      }
+      if (x.eventPeriod) {
+        poiElement.date = x.eventPeriod[this.language];
+      }
+      if (x.eventTiming) {
+        poiElement.time = x.eventTiming[this.language];
+      }
+      if (x.info)  {
+        poiElement.info = x.info[this.language];
+      }
+      if (x.address) {
+        poiElement.address = x.address[this.language];
+      }
+      if (x.description) {
+        poiElement.text = x.description[this.language];
+      }
       if (x.category) {
         poiElement.category = x.category;
       }
+      poiElement.infos = JSON.stringify(poiElement);
     }
     return poiElement;
   }

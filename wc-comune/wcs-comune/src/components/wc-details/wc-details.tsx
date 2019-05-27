@@ -91,7 +91,7 @@ export class WcDetails {
           </div>
           <hr/>
           <div class="datetime">
-            {(this.contactsJSON.date)?this.contactsJSON.date:''} {this.contactsJSON.time?this.contactsJSON.time:''}
+            {(this.contactsJSON.date)?this.contactsJSON.date:' '} {(this.contactsJSON.time)?this.contactsJSON.time:' '}
           </div>
           <div class="address">
             {this.contactsJSON.address}
