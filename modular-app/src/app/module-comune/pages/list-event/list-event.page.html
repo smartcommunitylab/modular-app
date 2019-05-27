@@ -15,8 +15,8 @@
       </ion-row>
   </ion-grid>
   
-<ion-button size="small" color="success" (click)="showPopover()">Categoria</ion-button>
 <ion-content padding>
+    <ion-button class="popover-btn" size="small" color="success" (click)="showPopover()">Categoria</ion-button>
     <ion-searchbar *ngIf="search" showCancelButton animated (ionInput)="searchChanged($event)" (ionCancel)="toggleSearch()"></ion-searchbar>
    <!-- FLOATING BUTTON -->
    <ion-fab *ngIf="!isLoading" class="fixed" vertical="bottom" horizontal="start" slot="fixed">

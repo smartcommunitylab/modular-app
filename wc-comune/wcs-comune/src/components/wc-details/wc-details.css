@@ -1,18 +1,27 @@
-.container{
-    max-width: 100%;
+.card{
+    margin:2%;
+    border: 1px solid black;
+}
+.container {
+    margin:2%;
+}
+.image {
+    max-width: 98%;
+    margin: 2%
 }
 .image img{
     height: 200px;
     width: 100%;
+    border: 1px solid black;
+    margin-right: 2%;
 }
 .info-title{
     font-size: 25px;
-    font-weight: bold;
     margin-top:2%;
     margin-bottom:3%;
 }
 .subtitle{
-    font-size: 18px;
+    font-size: 16px;
     font-style: italic;
     margin-bottom:3%;
 }
@@ -25,20 +34,36 @@
     margin-bottom:3%;
     font-size: 15px;
 }
-.contacts{
-    margin:5%;
+
+.tags {
+    margin-bottom:3%;
 }
-.contacts::after{
+
+.tags::after{
     clear:both;
     content:"";
     display:table;
 }
-.contacts .icon{
-    float:left;
-    margin-right:2%;
-}
-.contacts .contact-info{
-    margin-top:1%;
+.tag {
     display:inline-block;
-    max-width: 89%;
+    border: 1px solid black;
+    border-radius: 20px;
+    margin:1%;
+}
+.tag:first-child{
+    margin-left:0px;
+}
+.tag p {
+    margin-top: 1px;
+    margin-bottom: 1px;
+    margin-left: 5px;
+    margin-right: 5px;
+    font-size: 10px
+}
+.datetime {
+    font-weight: bold;
+    margin-bottom:3%;
+}
+.address {
+    margin-bottom:3%;
 }

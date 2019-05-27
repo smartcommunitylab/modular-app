@@ -1,5 +1,5 @@
 import { Component, Prop, Event } from '@stencil/core';
-import { Icons } from '../../utils/icons';
+// import { Icons } from '../../utils/icons';
 import { DetailsInfo } from '../../utils/utils';
 
 @Component({
@@ -18,7 +18,7 @@ export class WcDetails {
         date?: <string>, --> Date evento
         time?: <string>, --> Orari Evento
         price?: <string>, --> Prezzi evento
-        cat?: <string>, --> Categoria Evento
+        cat?: Array<string>, --> Categoria Evento
       }
   */
 
@@ -39,14 +39,14 @@ export class WcDetails {
 
   @Event() contactClick: EventEmitter;
 
-  private icons = new Icons().iconList;
+// private icons = new Icons().iconList;
   private contactsJSON: DetailsInfo;
-  private tmpinfo = [];
+  private tmptags = [];
 
   componentWillLoad(){
     if(this.contacts){
       this.contactsJSON = JSON.parse(this.contacts);
-      this.buildDetail();
+      this.buildTag();
     }
   }
 
@@ -55,29 +55,20 @@ export class WcDetails {
     console.log("Cliccato: ", type, value);
   }
   
-  buildDetail() {
-    var keys = Object.keys(this.contactsJSON)
-    keys.forEach(k => {
-      this.tmpinfo.push(
-        <div class="container" onClick={()=>this.contactClickHandler(k,this.contactsJSON[k])}>
-          <div class="icon">
-          { (k.indexOf("distance")!=0) ? this.icons[k]("red") : this.icons[k](this.headingColor) }
-          </div>
-          <div class="contact-info">
-            {this.contactsJSON[k]}
-          </div>
-        </div>,
-        <br/>
+  buildTag() {
+    this.contactsJSON.cat.forEach(c => {
+      this.tmptags.push(
+        <div class="tag"><p>{c}</p></div>
       )
-    });
+    }) 
   }
 
-  private showContacts(){
+  private showTags(){
     var tmp = 
-    <div class="contacts">
-      {this.tmpinfo}
+    <div class="tags">
+      {this.tmptags}
     </div>
-    if (this.tmpinfo.length > 0){
+    if (this.tmptags.length > 0){
       return tmp;
     }
     else{
@@ -88,22 +79,31 @@ export class WcDetails {
   render() {
     
     return (
-      <div class="container">
+      <div class="card">
         <div class="image">
           <img src={this.img}></img>
         </div>
-        <div class="info-title" style={{color:this.headingColor}}>
-          {this.title}
-        </div>
-        {this.showContacts()}
-        <div class="subtitle" innerHTML={this.subtitle} >
-        </div>
-        <div class="text" innerHTML={this.text}>
-        </div>
-        <div class="title-2" style={{color:this.headingColor}}>
-          {(this.info && this.info!='') ? "Informazioni": ""}
-        </div>
-        <div class="info text" innerHTML={this.info}>
+        <div class="container">
+          <div class="info-title" style={{color:this.headingColor}}>
+            {this.title}
+          </div>
+          <div class="subtitle" innerHTML={this.subtitle} >
+          </div>
+          <hr/>
+          <div class="datetime">
+            {(this.contactsJSON.date)?this.contactsJSON.date:''} {this.contactsJSON.time?this.contactsJSON.time:''}
+          </div>
+          <div class="address">
+            {this.contactsJSON.address}
+          </div>
+          {this.showTags()}
+          <div class="text" innerHTML={this.text}>
+          </div>
+          <div class="title-2" style={{color:this.headingColor}}>
+            {(this.info && this.info!='') ? "Informazioni": ""}
+          </div>
+          <div class="info text" innerHTML={this.info}>
+          </div>
         </div>
       </div>
     )

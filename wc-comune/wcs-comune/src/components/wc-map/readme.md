@@ -7,13 +7,11 @@
 
 ## Properties
 
-| Property         | Attribute          | Description                                                             | Type     | Default             |
-| ---------------- | ------------------ | ----------------------------------------------------------------------- | -------- | ------------------- |
-| `mainMarkerIcon` | `main-marker-icon` | Icona marker per "posizione attuale"                                    | `string` | `"marker-icon.png"` |
-| `myLat`          | `my-lat`           | Oggeto JSON contenente i dettagli dei POI. Latitudine posizione attuale | `string` | `undefined`         |
-| `myLon`          | `my-lon`           | Longitudine posizione attuale                                           | `string` | `undefined`         |
-| `poiMarkerIcon`  | `poi-marker-icon`  | Icona marker POI                                                        | `string` | `"marker-icon.png"` |
-| `points`         | `points`           | Array di punti da inserire nella mappa                                  | `string` | `undefined`         |
+| Property         | Attribute          | Description                                                                                                           | Type     | Default             |
+| ---------------- | ------------------ | --------------------------------------------------------------------------------------------------------------------- | -------- | ------------------- |
+| `mainMarkerIcon` | `main-marker-icon` | Icona marker per "posizione attuale"                                                                                  | `string` | `"marker-icon.png"` |
+| `poiMarkerIcon`  | `poi-marker-icon`  | Icona marker POI                                                                                                      | `string` | `"marker-icon.png"` |
+| `points`         | `points`           | Oggeto JSON contenente i dettagli dei POI. ULTIMO ELEMENTO = Posizione attuale Array di punti da inserire nella mappa | `string` | `undefined`         |
 
 ## Oggetto JSON "points --> Ultimo elemento = Posizione attuale"
 ```javascript
@@ -29,6 +27,14 @@
           
       ]
 ```
+---------------------------------------------
+
+## Events
+
+| Event         | Description | Type                |
+| ------------- | ----------- | ------------------- |
+| `poiSelected` |             | `CustomEvent<void>` |
+
 
 ----------------------------------------------
 
