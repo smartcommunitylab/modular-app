@@ -67,3 +67,17 @@
 .address {
     margin-bottom:3%;
 }
+.contacts {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 5px;
+    margin:0 auto;
+}
+.contact-container {
+    text-align: center
+}
+/* Calcolo larghezza in base a elementi */
+.contact-container{
+    width: 25%;
+}

@@ -16,10 +16,10 @@
 </ion-grid>
 
 <ion-content padding>
-    
     <ion-searchbar *ngIf="search" showCancelButton animated (ionInput)="searchChanged($event)" (ionCancel)="toggleSearch()"></ion-searchbar>
-   <!-- FLOATING BUTTON -->
-   <ion-fab *ngIf="!isLoading" class="fixed" vertical="bottom" horizontal="start" slot="fixed">
+    
+    <!-- FLOATING BUTTON -->
+    <ion-fab *ngIf="!isLoading" class="fixed" vertical="bottom" horizontal="start" slot="fixed">
       <ion-fab-button color="danger">
         <ion-icon name="arrow-dropup-circle"></ion-icon>
       </ion-fab-button>
@@ -36,15 +36,14 @@
 
   <ion-button *ngIf="!search" class="popover-btn" size="small" color="success" (click)="showPopover()">Categoria</ion-button>
   <ion-list no-lines id="poi-list">
-      <div *ngFor="let c of categories">
-        <ion-list-header class="category">
-          <ion-label>{{c}}</ion-label>
-          
-        </ion-list-header>
-        <div *ngFor="let poi of showPois[c]; let i = index">
-          <wc-details [img]="poi.image" [title]="poi.title" [subtitle]="poi.subtitle" [text]="poi.text" [info]="poi.info" [contacts]="poi.infos" heading-color="red"></wc-details>
-          <div class="spacing" *ngIf="i == showPois.length - 1"></div>
-        </div>
+    <div *ngFor="let c of categories">
+      <ion-list-header class="category">
+        <ion-label>{{c}}</ion-label>
+      </ion-list-header>
+      <div *ngFor="let poi of showPois[c]; let i = index">
+        <wc-details [img]="poi.image" [title]="poi.title" [subtitle]="poi.subtitle" [text]="poi.text" [info]="poi.info" [contacts]="poi.infos" heading-color="red"></wc-details>
+        <div class="spacing" *ngIf="i == showPois.length - 1"></div>
       </div>
+    </div>
   </ion-list>
 </ion-content>

@@ -50,10 +50,8 @@ export class ListEventPage implements OnInit {
     if (this.category && this.category.query) {
       this.dbService.getObjectByQuery(this.category.query).then((data) => {
         this.fullPois = data.docs.map(x => this.convertPois(x));
-      //  this.showPois = this.fullPois;
         this.subCategories(this.fullPois);
         this.buildShowPois();
-      //  console.log(this.fullCategories)
         this.isLoading = false;
       });
     }
@@ -126,6 +124,17 @@ export class ListEventPage implements OnInit {
       if (x.category) {
         poiElement.category = x.category;
       }
+      if (x.url) {
+        poiElement.url = x.url;
+      }
+      if (x.contacts) {
+        if (x.contacts.phone) {
+          poiElement.phone = x.contacts.phone;
+        }
+        if (x.contacts.email) {
+          poiElement.email = x.contacts.email;
+        }
+      }
       poiElement.infos = JSON.stringify(poiElement);
     }
     return poiElement;
@@ -142,8 +151,10 @@ export class ListEventPage implements OnInit {
   searchChanged(input: any) {
     const value = input.detail.target.value;
     const _this = this;
-    this.showPois = this.fullPois.filter(function(el) {
-      return (el.title[_this.language].toLowerCase().indexOf(value.toLowerCase()) > -1);
+      _this.categories.forEach(c => {
+      this.showPois[c] = this.fullPois.filter(function(el) {
+        return (el.title.toLowerCase().indexOf(value.toLowerCase()) > -1);
+      });
     });
   }
 
@@ -193,12 +204,13 @@ export class ListEventPage implements OnInit {
   }
 
   orderArray(condition: string, _this: any) {
-    if (condition.indexOf('asc') > -1) {
-      _this.showPois = this.fullPois.sort(function(a, b) { return a.title[_this.language].localeCompare(b.title[_this.language]); });
-    } else {
-      _this.showPois = this.fullPois.sort(function(a, b) { return b.title[_this.language].localeCompare(a.title[_this.language]); });
-    }
-     console.log(_this.showPois);
+    _this.categories.forEach(c => {
+      if (condition.indexOf('asc') > -1) {
+        _this.showPois[c] = this.fullPois.sort(function(a, b) { return a.title.localeCompare(b.title); });
+      } else {
+        _this.showPois[c] = this.fullPois.sort(function(a, b) { return b.title.localeCompare(a.title); });
+      }
+    });
   }
 
   async showPopover() {

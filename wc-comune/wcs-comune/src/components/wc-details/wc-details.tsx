@@ -1,5 +1,5 @@
 import { Component, Prop, Event } from '@stencil/core';
-// import { Icons } from '../../utils/icons';
+import { Icons } from '../../utils/icons';
 import { DetailsInfo } from '../../utils/utils';
 
 @Component({
@@ -39,14 +39,16 @@ export class WcDetails {
 
   @Event() contactClick: EventEmitter;
 
-// private icons = new Icons().iconList;
+  private icons = new Icons().iconList;
   private contactsJSON: DetailsInfo;
   private tmptags = [];
+  private tmpContacts = [];
 
   componentWillLoad(){
     if(this.contacts){
       this.contactsJSON = JSON.parse(this.contacts);
       this.buildTag();
+      this.buildContacts(this.contactsJSON);
     }
   }
 
@@ -76,6 +78,37 @@ export class WcDetails {
     }
   }
 
+  buildContacts(arr: DetailsInfo){
+    var tmp: any = {};
+
+    if (arr.address) {
+      tmp.address = arr.address;
+    }
+    if (arr.phone) {
+      tmp.phone = arr.phone;
+    }
+    if (arr.url) {
+      tmp.url = arr.url;
+      tmp.share = arr.url;
+    }
+
+    var keys = Object.keys(tmp);
+
+    keys.forEach(k => {
+      this.tmpContacts.push(
+        <div class="contact-container" onClick={() => k.indexOf('share') > -1 ? 
+        this.contactClickHandler(k,this.contactsJSON['url']) : 
+        this.contactClickHandler(k,this.contactsJSON[k])
+      }>
+          <div class="icon">
+            {this.icons[k]("black")}
+          </div>
+          <div class="contactLabel">{k}</div>
+        </div>
+      )
+    });
+  }
+
   render() {
     
     return (
@@ -89,9 +122,12 @@ export class WcDetails {
           </div>
           <div class="subtitle" innerHTML={this.subtitle} >
           </div>
+          <div class="contacts">
+            {this.tmpContacts}
+          </div>
           <hr/>
           <div class="datetime">
-            {(this.contactsJSON.date)?this.contactsJSON.date:' '} {(this.contactsJSON.time)?this.contactsJSON.time:' '}
+            {(this.contactsJSON)?((this.contactsJSON.date)?this.contactsJSON.date:' '):''} {(this.contactsJSON)?((this.contactsJSON.time)?this.contactsJSON.time:' '):''}
           </div>
           <div class="address">
             {this.contactsJSON.address}
