@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ConfigService {
+
   menu = [
     {
       title: "Home",
@@ -18,4 +20,5 @@ export class ConfigService {
     localStorage.setItem('comune-menu-', JSON.stringify(this.menu));
 
   }
+
 }

@@ -1,4 +1,5 @@
 {
+    "appId":"trento",
     "serverURL": "https://tn.smartcommunitylab.it/core.mobility",
     "metroparco": "https://tn.smartcommunitylab.it/metroparco/data/tn",
     "messagingServerURL": "https://tn.smartcommunitylab.it/core.communicator",
@@ -32,10 +33,11 @@
     "zoom_map": 15,
     "db_version": 25,
     "visualization": {
-        "primaryLinks": [{
+        "primaryLinks": [
+            {
                 "state": "/plan",
                 "label": "menu_plan",
-                "icon": "ic_search",
+                "icon": "map",
                 "color": "#3BBACF"
             },
 
@@ -54,24 +56,24 @@
             {
                 "state": "/parking/COMUNE_DI_TRENTO",
                 "label": "menu_real_time_park",
-                "icon": "parking",
+                "icon": "car",
                 "color": "#164286"
             },
             {
                 "state": "/parkingMeters",
                 "label": "parking",
-                "icon": "ic_parcometro",
+                "icon": "cash",
                 "color": "#FBA724"
             },
             {
                 "state": "/bikesharing/trento",
                 "label": "bike",
-                "icon": "ic_bike",
+                "icon": "bicycle",
                 "color": "#922d66"
             }, {
                 "state": "/taxi",
                 "label": "menu_taxi",
-                "icon": "taxi",
+                "icon": "car",
                 "color": "#f8cf20"
             }
 

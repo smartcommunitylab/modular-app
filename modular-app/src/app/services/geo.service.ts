@@ -30,12 +30,14 @@ export class GeoService {
     this.isWatching = true;
     this.watchLocationUpdates = this.geolocation.watchPosition();
     this.watchLocationUpdates.subscribe((resp) => {
+      if (resp.coords){
       this.geoLatitude = resp.coords.latitude;
       this.geoLongitude = resp.coords.longitude;
       geo = {
         "lat": this.geoLatitude,
         "long": this.geoLongitude
       }
+    }
       console.log(geo);
       if (!window[this.config.getAppModuleName()]) {
         window[this.config.getAppModuleName()] = {}

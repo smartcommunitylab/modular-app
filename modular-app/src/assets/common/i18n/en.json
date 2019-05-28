@@ -6,6 +6,12 @@
     "title_list_poi":"Points of interests",
     "error_data":"Data error",
     "home_trasporto": "Transport",
-    "menu_real_time_bus_urban":"Autobus"
+    "menu_real_time_bus_urban":"Autobus",
+    "menu_plan": "Plan",
+    "menu_real_time_train": "Trains",
+    "menu_real_time_park": "Parkings",
+    "parking": "Parkimeters",
+    "bike": "Bicycle",
+    "menu_taxi": "Taxi"
 
 }

@@ -1,9 +1,26 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>transport-list</ion-title>
+    <ion-title>{{title}}</ion-title>
+    <!-- <ion-nav-buttons side="right">
+        <button class="button button-icon button-fab button-viaggia-header ion-map" ng-click="showMap()" ng-if="hasMap"></button>
+    </ion-nav-buttons> -->
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
-
+    <ion-list class="route-list space-from-top" *ngIf="view == 'list'">
+        <ion-item *ngFor="let elem of elements" (click)="selectElement(elem)">
+            <div class="card card-tt" >{{elem.title}}</div>
+        </ion-item>
+    </ion-list>
+    <div class="space-from-top" *ngIf="view == 'grid'">
+        <div class="row route-grid-row" *ngFor="let row of gridRows">
+            <div class="col text-center" *ngFor="let elem of row" (click)="selectElement(elem)">
+                <div class="route-grid-element" *ngIf="elem.label" >
+                    <span *ngIf="!elem.gridCode">{{elem.label}}</span>
+                    <span *ngIf="elem.gridCode"><i class="icon"></i></span>
+                </div>
+            </div>
+        </div>
+    </div>
 </ion-content>

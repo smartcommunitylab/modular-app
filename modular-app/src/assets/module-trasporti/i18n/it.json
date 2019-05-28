@@ -1,3 +1,11 @@
 {
-    "home_trasporto": "Trasporti"
+    "home_trasporto": "Trasporti",
+    "menu_plan": "",
+    "menu_real_time_bus_urban": "",
+    "menu_real_time_train": "",
+    "menu_real_time_park": "",
+    "parking": "",
+    "bike": "",
+    "menu_taxi": ""
+
 }

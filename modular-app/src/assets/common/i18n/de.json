@@ -6,6 +6,12 @@
     "title_list_poi":"Punti di interesse",
     "error_data":"Data error",
     "home_trasporto": "Trasnportieren",
-    "menu_real_time_bus_urban":"Autobus"
+    "menu_real_time_bus_urban":"Autobus",
+    "menu_plan": "",
+    "menu_real_time_train": "",
+    "menu_real_time_park": "",
+    "parking": "",
+    "bike": "",
+    "menu_taxi": ""
 
 }

@@ -1,6 +1,6 @@
 {
   "name": "wc-trasporti",
-  "version": "0.0.1",
+  "version": "0.0.4",
   "description": "Stencil Component Starter",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
@@ -18,8 +18,12 @@
     "test": "stencil test --spec --e2e",
     "test.watch": "stencil test --spec --e2e --watchAll"
   },
+  "dependencies": {
+    "@ionic/core": "^4.0.3"
+  },
   "devDependencies": {
-    "@stencil/core": "one"
+    "@stencil/core": "0.18.1",
+    "@stencil/sass": "^0.2.1"
   },
   "license": "MIT"
 }
