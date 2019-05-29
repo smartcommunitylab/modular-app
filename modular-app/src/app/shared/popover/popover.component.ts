@@ -21,6 +21,13 @@ export class PopoverComponent implements OnInit {
     this.pop = this.navParams.get('controller');
   }
 
+  ionViewDidEnter(){
+    const tmp = Array.prototype.slice.call(document.getElementsByTagName('ion-radio'));
+    tmp.forEach(element => {
+      element.shadowRoot.querySelector('button').setAttribute('style', 'z-index:-2; background:white;');
+    });
+  }
+
   radioSelected(input: any) {
     this.selected = input;
   }

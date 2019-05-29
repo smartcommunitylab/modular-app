@@ -113,21 +113,21 @@ export class WcDetails {
     
     return (
       <div class="card">
-        <div class="image">
-          <img src={this.img}></img>
-        </div>
         <div class="container">
           <div class="info-title" style={{color:this.headingColor}}>
             {this.title}
           </div>
           <div class="subtitle" innerHTML={this.subtitle} >
           </div>
+          <div class="image">
+            <img src={this.img}></img>
+          </div>
           <div class="contacts">
             {this.tmpContacts}
           </div>
           <hr/>
           <div class="datetime">
-            {(this.contactsJSON)?((this.contactsJSON.date)?this.contactsJSON.date:' '):''} {(this.contactsJSON)?((this.contactsJSON.time)?this.contactsJSON.time:' '):''}
+            {(this.contactsJSON)?((this.contactsJSON.date)?this.contactsJSON.date:''):''} {(this.contactsJSON)?((this.contactsJSON.time)?this.contactsJSON.time:''):''}
           </div>
           <div class="address">
             {this.contactsJSON.address}
