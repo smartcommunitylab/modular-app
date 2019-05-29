@@ -29,7 +29,8 @@
       "de": "Restaurants & Hotel"
     },
     "url": "/list-categories",
-    "icon": "home"
+    "icon": "home",
+    "type": "R&H"
 
   },
   {

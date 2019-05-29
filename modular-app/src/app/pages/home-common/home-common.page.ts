@@ -33,21 +33,8 @@ export class HomeCommonPage implements OnInit {
     this.categories = this.config.getModuleEntries().map(x => this.convertCategories(x));
     console.log(this.categories);
     this.elementsGallery = this.config.getCarousel().map(x => this.convertGallery(x));
-    // this.config.init();
-    // this.dbService.getCategories().then((data) => {
-    //   // set button categories
-    //   this.categories = data.map(x => this.convertCategories(x));
-    // });
-    // this.dbService.getElementsGallery().then((data) => {
-    //   // set gallery with preview
-    //   this.elementsGallery = data.map(x => this.convertGallery(x));
-    //   this.elementsGalleryStr = JSON.stringify(this.elementsGallery);
-    //   // console.log(JSON.stringify(this.elementsGallery));
-    // });
-    // const categoryButtonsElement = document.querySelector('category-buttons');
     window.addEventListener('categorySelected', category => {
       console.log(category);
-     // this.goToCategory(category);
     });
     window.addEventListener('elementSelected', item => {
       console.log(item);
@@ -58,17 +45,13 @@ export class HomeCommonPage implements OnInit {
 
   convertGallery(x) {
     const galleryElement: any = {};
-    // if (x) {
+
     if (x.name) {
       galleryElement.name = x.name[this.language];
     }
     if (x.image) {
       galleryElement.image = x.image[this.language];
     }
-    // if (x.key.objectIds) {
-    //   galleryElement.objectIds = x.key.objectIds;
-    // }
-    // }
     return galleryElement;
   }
 
@@ -100,6 +83,8 @@ export class HomeCommonPage implements OnInit {
     } else if (category.type && category.type.indexOf('PATH') > -1) {
       category.query = {'selector': {'element-type': 'itinerary-item'}, type: 'itineraries'};
       this.router.navigate(['/list-path'], { queryParams: { category: JSON.stringify(category) } });
+    } else if (category.type && category.type.indexOf('R&H') > -1) {
+      this.router.navigate(['/list-rh'], { queryParams: { category: JSON.stringify(category) } });
     } else {
     this.router.navigate([category.url], { queryParams: { category: JSON.stringify(category) } });
     }
@@ -109,12 +94,7 @@ export class HomeCommonPage implements OnInit {
   }
   goToItem(item) {
     console.log(item);
-    // this.dbService.getObjectByDataId(item.objectIds[0]).then(res => {
-    //   var found = res.docs.filter(obj => {
-    //     return obj["element-type"] != undefined
-    //   })
-    //   this.router.navigate(['/detail-poi'], { queryParams: { id: found._id } });
-    // })
+
   }
   openElement(element) {
     console.log(element);
