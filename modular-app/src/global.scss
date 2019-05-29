@@ -26,10 +26,18 @@ html {
     font-size: 24px;
     margin-bottom: 1%;
     border-bottom: 1px solid black;
+    --padding-top: 0px;
 }
 .popover-btn {
     position:fixed;
     z-index:1;
-    margin-left: 64%;
+    margin-left: 70%;
     top:70px;
+}
+
+.searchbar-input {
+    background: white !important;
+}
+.bg {
+    background: lightgrey;
 }

@@ -49,7 +49,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     }),
     IonicModule.forRoot(),
     ComuneModule.forRoot(),
-    AppRoutingModule],
+    AppRoutingModule
+  ],
   providers: [
     StatusBar,
     SplashScreen,
