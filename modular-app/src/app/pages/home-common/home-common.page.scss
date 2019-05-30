@@ -1,4 +1,17 @@
-.home-button{
-    --color:red;
-    --border-color:red;
+.home-button {
+    color: black;
+    border: 2px solid black;
+    width: 100%;
+    margin-bottom: 5%;
+    background: white;
+    text-align: left;
+    padding: 2%;
+}
+
+.swiper-slide img {
+    max-height: 250px !important;
+}
+
+ion-slides {
+    max-height: 250px;
 }

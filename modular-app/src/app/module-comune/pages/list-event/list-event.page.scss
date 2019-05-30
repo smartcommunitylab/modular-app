@@ -7,3 +7,28 @@ ion-searchbar {
     top: 58px;
     z-index: 3;
 }
+.column {
+    float:left;
+}
+.c-text{
+    width: 60%;
+    margin-left: 20%;
+}
+
+.c-btn {
+    width: 40%;
+    margin-bottom:3%;
+}
+.row{
+    text-align: center;
+    vertical-align: middle;
+    height: 40px;
+}
+.row::after {
+    content: "";
+    display:table;
+    clear:both;
+}
+.order-icon {
+    transform: rotate(90deg)
+}
