@@ -1,0 +1,12 @@
+<ion-header no-border>
+  <ion-toolbar color="secondary">
+    <ion-buttons slot="start">
+        <ion-back-button></ion-back-button>
+      </ion-buttons>
+    <ion-title>
+        {{'map'|translate}}
+      </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<wc-map id="wc-map" [points]="mapPoints" main-marker-icon="http://icons.iconarchive.com/icons/paomedia/small-n-flat/256/map-marker-icon.png" poi-marker-icon="https://cdn4.iconfinder.com/data/icons/ios7-active-tab/512/map_marker-512.png"></wc-map>

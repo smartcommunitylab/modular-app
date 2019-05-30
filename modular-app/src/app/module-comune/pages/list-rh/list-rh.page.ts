@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController, AlertController, PopoverController, Events } from '@ionic/angular';
 import { DbService } from '../../services/db.service';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
 import { PopoverComponent } from 'src/app/shared/popover/popover.component';
 
 @Component({
@@ -86,16 +86,17 @@ export class ListRHPage implements OnInit {
   }
 
   convertPois(x) {
+    let tmp = '';
     const poiElement: any = {};
     if (x) {
       if (x.title) {
         poiElement.title = x.title[this.language];
       }
       if (x.subtitle) {
-        poiElement.subtitle = x.subtitle[this.language];
+        poiElement.description = x.subtitle[this.language];
       }
       if (x.description) {
-        poiElement.description = x.description[this.language];
+        poiElement.description += '<br/>' + x.description[this.language];
       }
       if (x.image) {
         poiElement.image = x.image;
@@ -121,8 +122,9 @@ export class ListRHPage implements OnInit {
         poiElement.category = x.category.charAt(0).toUpperCase() + x.category.slice(1);
       }
       if (x.classification) {
-        poiElement.cat = [];
-        poiElement.cat.push(x.classification[this.language]);
+        poiElement.subtitle = x.classification[this.language];
+       // poiElement.cat = [];
+       // poiElement.cat.push(x.classification[this.language]);
       }
       if (x.url) {
         poiElement.url = x.url;
@@ -132,9 +134,14 @@ export class ListRHPage implements OnInit {
           poiElement.phone = x.contacts.phone;
         }
         if (x.contacts.email) {
+          tmp += '<p>' + x.contacts.email + '</p>';
           poiElement.email = x.contacts.email;
         }
       }
+      if (x.location) {
+        poiElement.location = x.location;
+      }
+      poiElement.text += tmp;
       poiElement.infos = JSON.stringify(poiElement);
     }
     return poiElement;
@@ -164,17 +171,17 @@ export class ListRHPage implements OnInit {
       header: 'Ordina per',
       inputs: [
         {
-          name: 'asc',
+          name: 'near',
           type: 'radio',
-          label: 'A-Z',
-          value: 'asc',
+          label: 'Più vicini',
+          value: 'near',
           checked: true
         },
         {
-          name: 'desc',
+          name: 'open',
           type: 'radio',
-          label: 'Z-A',
-          value: 'desc',
+          label: 'Aperti Adesso',
+          value: 'open',
           checked: false
         }
       ],
@@ -200,13 +207,16 @@ export class ListRHPage implements OnInit {
   }
 
   orderArray(condition: string, _this: any) {
-    _this.categories.forEach(c => {
+
+    /* TODO: Tempo - Distanza */
+
+    /*_this.categories.forEach(c => {
       if (condition.indexOf('asc') > -1) {
         _this.showPois[c] = this.fullPois.sort(function(a, b) { return a.title.localeCompare(b.title); });
       } else {
         _this.showPois[c] = this.fullPois.sort(function(a, b) { return b.title.localeCompare(a.title); });
       }
-    });
+    });*/
   }
 
   async showPopover() {
@@ -225,5 +235,20 @@ export class ListRHPage implements OnInit {
     } else {
       this.categories.push(cat);
     }
+  }
+
+  buildMapPoints() {
+    const tmp: any = [];
+    this.fullPois.forEach(p => {
+      if (p.location) {
+        tmp.push({title: p.title, lat: p.location[0], lon: p.location[1], address: p.address});
+      }
+    });
+    return tmp;
+  }
+
+  goToMap() {
+
+    console.log('CLICKED MAP');
   }
 }

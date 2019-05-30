@@ -58,11 +58,13 @@ export class WcDetails {
   }
   
   buildTag() {
-    this.contactsJSON.cat.forEach(c => {
-      this.tmptags.push(
-        <div class="tag"><p>{c}</p></div>
-      )
-    }) 
+    if(this.contactsJSON.cat){
+      this.contactsJSON.cat.forEach(c => {
+        this.tmptags.push(
+          <div class="tag"><p>{c}</p></div>
+        )
+      });
+    }
   }
 
   private showTags(){

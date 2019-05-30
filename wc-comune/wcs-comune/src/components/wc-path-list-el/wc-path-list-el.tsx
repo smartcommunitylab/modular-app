@@ -20,6 +20,8 @@ export class WcPathList {
   @Prop() descColor: string;
   /** Tipo di POI */
   @Prop() type: string;
+  /** Colore sfondo card */
+  @Prop() bgColor: string = "white";
   
   @Event({
     eventName: "pathSelected", 
@@ -29,13 +31,12 @@ export class WcPathList {
 
   pathSelectedHandler(path: string) {
     this.pathSelected.emit(path+";"+this.type);
-   // console.log("Cliccato", path);
   }
 
   render() {
     return (
       [
-      <div class="container" onClick={() => this.pathSelectedHandler(this.id)}>
+      <div class="container" onClick={() => this.pathSelectedHandler(this.id)} style={{background: this.bgColor}}>
         <div class="image">
           <img src={this.img}></img>
         </div>
