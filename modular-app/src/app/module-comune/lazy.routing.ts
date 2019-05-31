@@ -6,6 +6,7 @@ const routes: Routes = [
 
     // { path: '', redirectTo: 'home-page', pathMatch: 'full' },
     { path: 'home-page', loadChildren: './pages/home/home.module#HomePageModule' },
+    { path: 'map', loadChildren: './pages/map/map.module#MapModule' },
     { path: 'list-path', loadChildren: './pages/list-path/list-path.module#ListPathPageModule' },
     { path: 'list-poi', loadChildren: './pages/list-poi/list-poi.module#ListPoiPageModule' },
     { path: 'list-event', loadChildren: './pages/list-event/list-event.module#ListEventPageModule' },

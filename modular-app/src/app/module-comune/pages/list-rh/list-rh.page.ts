@@ -239,16 +239,21 @@ export class ListRHPage implements OnInit {
 
   buildMapPoints() {
     const tmp: any = [];
-    this.fullPois.forEach(p => {
-      if (p.location) {
-        tmp.push({title: p.title, lat: p.location[0], lon: p.location[1], address: p.address});
-      }
+    const keys = Object.keys(this.showPois);
+    keys.forEach(c => {
+      this.showPois[c].forEach(p => {
+        console.log(p)
+        if (p.location) {
+          tmp.push({name: p.title, lat: p.location[0], lon: p.location[1], address: p.address, distance: 0});
+        }
+      });
     });
+    // console.log(tmp)
     return tmp;
   }
 
   goToMap() {
-
+    this.router.navigate(['/map'], { queryParams: { data: JSON.stringify(this.buildMapPoints()) } } );
     console.log('CLICKED MAP');
   }
 }
