@@ -34,12 +34,7 @@
     "db_version": 25,
     "visualization": {
         "primaryLinks": [
-            {
-                "state": "/plan",
-                "label": "menu_plan",
-                "icon": "map",
-                "color": "#3BBACF"
-            },
+
 
             {
                 "state": "/ttlist/urbano",
@@ -60,21 +55,10 @@
                 "color": "#164286"
             },
             {
-                "state": "/parkingMeters",
-                "label": "parking",
-                "icon": "cash",
-                "color": "#FBA724"
-            },
-            {
                 "state": "/bikesharing/trento",
                 "label": "bike",
                 "icon": "bicycle",
                 "color": "#922d66"
-            }, {
-                "state": "/taxi",
-                "label": "menu_taxi",
-                "icon": "car",
-                "color": "#f8cf20"
             }
 
         ],

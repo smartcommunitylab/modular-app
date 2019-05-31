@@ -7,17 +7,24 @@ import { HttpClient } from '@angular/common/http';
 export class ConfigService {
 
 
-  appId = 'module-trasporti';
+  appId = 'trento';
   ttConfig: Object;
   config: any;
   constructor(private http: HttpClient) {
     this.init();
   }
   getAppAgencies(): any {
-    throw this.config['agencies'];
+    return this.config['agencies'];
   }
   getServerURL(): any {
     return this.config['serverURL'];
+  }
+  getMapPosition(): any {
+    return {
+      lat: this.config['center_map'][0],
+      long: this.config['center_map'][1],
+      zoom: this.config['zoom_map']
+    };
   }
   getAppId(): string {
     return this.appId;

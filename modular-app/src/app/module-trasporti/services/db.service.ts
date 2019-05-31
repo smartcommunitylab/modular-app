@@ -21,6 +21,7 @@ export class DbService {
     private config: ConfigService,
     public plt: Platform,
     private http: HttpClient) {
+      // this.Init();
   }
 
   Init(): Promise<any> {
@@ -122,7 +123,7 @@ export class DbService {
     var that=this;
     var _do = function () {
       (that.db.executeSql("select * from version", [], function (res) {
-        var data = this.convertData(res);
+        var data = that.convertData(res);
         successcallback(data);
       }, errorcallback));
 
@@ -182,6 +183,7 @@ export class DbService {
   getDataURL(remote) {
     if (remote) {
       return this.config.getServerURL() + '/routesDB/' + this.config.getAppId();
+      // return this.config.getServerURL() + '/routesDB/' + this.config.getAppId();
 
     } else {
       return this.LOCAL_DATA_URL;
@@ -218,11 +220,12 @@ export class DbService {
   }
 
   getLocalVersion() {
+    var that = this;
     var deferred = new Promise((resolve, reject) => {
       //return true if a localdb is present
-      this.openDB(function (versions) {
+      that.openDB(function (versions) {
         //turn array into map
-        resolve(this.mapVersions(versions));
+        resolve(that.mapVersions(versions));
       }, function (error) {
         reject(error);
       });
@@ -244,6 +247,7 @@ export class DbService {
   }
 
   synchDB() {
+    var that =this;
     var deferred = new Promise((resolve, reject) => {
       var err = function (e) {
         console.log("DB SYNC ERROR: " + e);
@@ -252,16 +256,15 @@ export class DbService {
       var success = function () {
         resolve(true);
       }
-      this.getLocalVersion().then(function (localversion) {
-        this.http.get(this.config.getServerURL() + '/versions').toPromise().then(remoteversion => {
-          if (this.compareversions(localversion, remoteversion) < 0) {
-            this.installDB(true).then(success, err); //remote
+      that.getLocalVersion().then(function (localversion) {
+        that.http.get(that.config.getServerURL() + '/versions').toPromise().then(remoteversion => {
+          if (that.compareversions(localversion, remoteversion) < 0) {
+            that.installDB(true).then(success, err); //remote
           } else {
             success();
           }
-          this.syncStops(remoteversion);
-        })
-          .error(err);
+          that.syncStops();
+        }).catch(err);
       }, err);
     })
     return deferred;
@@ -288,36 +291,37 @@ export class DbService {
   };
 
   syncStopsForVersions(remoteversion) {
+    var that= this;
     var agencies = this.config.getAppAgencies();
     var versions = {};
     var localStopVersionsKey = this.config.getAppId() + "_localStopVersions";
     var localversion = this.readLocalStopVersions();
 
     agencies.forEach(function (a) {
-      var key = this.config.getAppId() + "_stops_" + a
+      var key = that.config.getAppId() + "_stops_" + a
       var localStops = localStorage[key];
       var localVersion = localversion[a] ? localversion[a] : -1;
       var remoteVersion = remoteversion[a] ? remoteversion[a] : -1;
 
       if (!localStops || localVersion < remoteVersion) {
-        this.http.get(this.config.getServerURL() + '/geostops/' + a + '?lat=' + this.config.getMapPosition().lat + '&lng=' + this.config.getMapPosition().long + '&radius=5').toPromise().then(stops => {
+        that.http.get(that.config.getServerURL() + '/geostops/' + a + '?lat=' + that.config.getMapPosition().lat + '&lng=' + that.config.getMapPosition().long + '&radius=5').toPromise().then(stops => {
           if (Object.prototype.toString.call(stops) === '[object Array]') {
             localStorage[key] = JSON.stringify(stops);
-            this.writeLocalStopVersion(a, remoteVersion);
+            that.writeLocalStopVersion(a, remoteVersion);
           }
-        })
-          .error(function (error) {
-            console.error('ERROR SYNC STOP DATA: ' + error);
-          });
+        }).catch((error: Error) => {
+          console.error('ERROR SYNC STOP DATA: ' + error);
+        });
       }
     });
   }
 
   doQuery(query, params) {
+    var that=this;
     var deferred = new Promise((resolve, reject) => {
       var _do = function () {
-        this.db.executeSql(query, params, function (res) {
-          var data = this.convertData(res);
+        that.db.executeSql(query, params, function (res) {
+          var data = that.convertData(res);
           resolve(data);
         }, function (err) {
           reject(err);
@@ -331,7 +335,7 @@ export class DbService {
         //                      }
         //                  );
       };
-      this.doWithDB(_do, function (e) {
+      that.doWithDB(_do, function (e) {
         console.error("!DB ERROR: " + e);
         reject(e);
       });

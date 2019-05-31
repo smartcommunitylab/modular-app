@@ -53,6 +53,9 @@ export class TransportListPage implements OnInit {
   selectElement(e) {
     // route element: go to table
     if (e.route != null) {
+      if (!this.groupId){
+        this.groupId="no-group";
+      }
       this.router.navigate(['/tt',e.ref,e.agencyId,this.groupId,e.route.routeId]);
 
       // group with single route: go to table

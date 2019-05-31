@@ -13,14 +13,14 @@
             <div class="card card-tt" >{{elem.title}}</div>
         </ion-item>
     </ion-list>
-    <div class="space-from-top" *ngIf="view == 'grid'">
-        <div class="row route-grid-row" *ngFor="let row of gridRows">
-            <div class="col text-center" *ngFor="let elem of row" (click)="selectElement(elem)">
+    <ion-grid class="space-from-top" *ngIf="view == 'grid'">
+        <ion-row class="row route-grid-row" *ngFor="let row of gridRows">
+            <ion-col class="col text-center" *ngFor="let elem of row" (click)="selectElement(elem)">
                 <div class="route-grid-element" *ngIf="elem.label" >
                     <span *ngIf="!elem.gridCode">{{elem.label}}</span>
                     <span *ngIf="elem.gridCode"><i class="icon"></i></span>
                 </div>
-            </div>
-        </div>
-    </div>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
 </ion-content>

@@ -1,5 +1,5 @@
 import { NgModule, ModuleWithProviders, APP_INITIALIZER, CUSTOM_ELEMENTS_SCHEMA, PLATFORM_INITIALIZER } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { routing } from './lazy.routing';
 import { appInitialize } from './app-initialize';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
@@ -29,26 +29,32 @@ export function initializeDb(dbService: DbService) {
         provide: TranslateLoader,
         useFactory: HttpLoaderFactory,
         deps: [HttpClient]
-      },isolate: true
+      }, isolate: true
     }),
   ]
 })
 export class TrasportiModule {
-    static forRoot(): ModuleWithProviders {
-      return {
-        ngModule: TrasportiModule,
-        providers: [
-          ConfigService,
-          SQLite,
-          {
-            provide: APP_INITIALIZER,
-            useFactory: appInitialize,
-            multi: true
-          }, 
-          { provide: PLATFORM_INITIALIZER, useFactory: initializeDb, deps: [DbService], multi: true },
+  static forRoot(): ModuleWithProviders {
+    return {
+      ngModule: TrasportiModule,
+      providers: [
+        ConfigService,
+        SQLite,
+        DatePipe,
+        {
+          provide: APP_INITIALIZER,
+          useFactory: appInitialize,
+          multi: true
+        }
+        // ,        {
+        //   provide: APP_INITIALIZER,
+        //   useFactory: (db: DbService) => function () { return db.Init() },
+        //   deps: [DbService],
+        //   multi: true
+        // }
 
-          
-        ]
-      };
-    }
+
+      ]
+    };
+  }
 }
