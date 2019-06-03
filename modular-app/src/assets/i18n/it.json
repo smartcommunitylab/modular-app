@@ -3,5 +3,6 @@
     "title_detail_info":"Informazioni",
     "title_detail_poi":"Punto di interesse",
     "title_list_categories":"Categorie",
-    "title_list_poi":"Punti di interesse"
+    "title_list_poi":"Punti di interesse",
+    "error_data":"Errore nei dati"
 }

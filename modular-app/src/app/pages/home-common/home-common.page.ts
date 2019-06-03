@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController, AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
-// import { TranslateService } from '@ngx-translate/core';
-import { ConfigService } from '../../services/config.service';
-import { TranslateService } from 'src/app/module-comune/services/translate.service';
-
+import { TranslateService } from '@ngx-translate/core';
+import { ConfigService } from '../../services/config.service'
+import { elementAttribute } from '@angular/core/src/render3';
+import { UtilsService } from '../../services/utils.service'
 @Component({
   selector: 'app-home-common',
   templateUrl: 'home-common.page.html',
@@ -21,7 +21,8 @@ export class HomeCommonPage implements OnInit {
     private config: ConfigService,
     private router: Router,
     public alertCtrl: AlertController,
-    public translate: TranslateService) {
+    public translate: TranslateService,
+    private utils: UtilsService) {
   }
   ngOnInit() {
     // this.translate.get('title_page').subscribe(
@@ -47,48 +48,47 @@ export class HomeCommonPage implements OnInit {
 
   convertGallery(x) {
     const galleryElement: any = {};
-
-    if (x.name) {
-      galleryElement.name = x.name[this.language];
-    }
-    if (x.image) {
-      galleryElement.image = x.image[this.language];
+    if (x && x.key) {
+      if (x.key.name) {
+        galleryElement.name = x.key.name[this.language];
+      }
+      if (x.key.image) {
+        galleryElement.image = x.key.image[this.language];
+      }
+      if (x.key.objectIds) {
+        galleryElement.objectIds = x.key.objectIds;
+      }
     }
     return galleryElement;
   }
 
   convertCategories(x) {
     const categoryElement: any = {};
-    if (x.id) {
-      categoryElement.id = x.id;
+    categoryElement.id = x.key.id;
+    if (x && x.key) {
+      if (x.key.name) {
+        categoryElement.name = x.key.name[this.language];
+      }
+      if (x.key.image) {
+        categoryElement.image = x.key.image;
+      }
     }
-    if (x.name) {
-      categoryElement.name = x.name[this.language];
-    }
-    if (x.icon) {
-      categoryElement.icon = x.icon;
-    }
-    if (x.url) {
-      categoryElement.url = x.url;
-    }
-    if (x.type) {
-      categoryElement.type = x.type;
-    }
-
     return categoryElement;
   }
 
+
+
+
   goToLink(category) {
-    if (category.type && category.type.indexOf('EVENT') > -1) {
-      category.query = {'selector': {'element-type': 'event-item'}};
-      this.router.navigate(['/list-event'], { queryParams: { category: JSON.stringify(category) } });
-    } else if (category.type && category.type.indexOf('PATH') > -1) {
-      category.query = {'selector': {'element-type': 'itinerary-item'}, type: 'itineraries'};
-      this.router.navigate(['/list-path'], { queryParams: { category: JSON.stringify(category) } });
-    } else if (category.type && category.type.indexOf('R&H') > -1) {
-      this.router.navigate(['/list-rh'], { queryParams: { category: JSON.stringify(category) } });
-    } else {
-    this.router.navigate([category.url], { queryParams: { category: JSON.stringify(category) } });
+    if (category.url)
+      this.router.navigate([category.url], { queryParams: { category: JSON.stringify(category) } });
+    else {
+      this.translate.get('error_data').subscribe(
+        value => {
+          this.utils.showToast(value)
+
+        }
+      )
     }
   }
   goToCategory(category) {
@@ -96,10 +96,22 @@ export class HomeCommonPage implements OnInit {
   }
   goToItem(item) {
     console.log(item);
-
   }
   openElement(element) {
-    console.log(element);
-
+    if (element.url && element.objectIds)
+      this.router.navigate([element.url], { queryParams: { objectIds: element.objectIds } });
+    else {
+      this.translate.get('title_app').subscribe(
+        value => {
+          console.log(value);
+          // this.title= value;
+        }
+      )
+      this.translate.get('error_data').subscribe(
+        value => {
+          this.utils.showToast(value)
+        }
+      )
+    }
   }
 }

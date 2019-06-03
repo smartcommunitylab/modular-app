@@ -100,7 +100,7 @@ export class HomePage extends MainPage {
       var found = res.docs.filter(obj => {
         return obj["element-type"] != undefined
       })
-      this.router.navigate(['/detail-poi'], { queryParams: { id: found._id } });
+      this.router.navigate(['/detail-poi'], { queryParams: { _id: found._id } });
     })
   }
 }
