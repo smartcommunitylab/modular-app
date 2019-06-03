@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController, AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
+// import { TranslateService } from '@ngx-translate/core';
 import { ConfigService } from '../../services/config.service';
+import { TranslateService } from 'src/app/module-comune/services/translate.service';
+
 @Component({
   selector: 'app-home-common',
   templateUrl: 'home-common.page.html',
@@ -16,17 +18,17 @@ export class HomeCommonPage implements OnInit {
   language = 'it';
   elementsGalleryStr: string;
   constructor(public navCtrl: NavController,
-    public translate: TranslateService,
     private config: ConfigService,
     private router: Router,
-    public alertCtrl: AlertController) {
+    public alertCtrl: AlertController,
+    public translate: TranslateService) {
   }
   ngOnInit() {
-    this.translate.get('title_page').subscribe(
-      value => {
-        console.log(value);
-      }
-    );
+    // this.translate.get('title_page').subscribe(
+    //   value => {
+    //     console.log(value);
+    //   }
+    // );
   }
   ionViewDidEnter() {
     this.elementsGallery = [];
