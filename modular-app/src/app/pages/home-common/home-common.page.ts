@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { NavController, AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { ConfigService } from '../../services/config.service'
+import { ConfigService } from '../../services/config.service';
 import { elementAttribute } from '@angular/core/src/render3';
-import { UtilsService } from '../../services/utils.service'
+import { UtilsService } from '../../services/utils.service';
 @Component({
   selector: 'app-home-common',
   templateUrl: 'home-common.page.html',
@@ -72,8 +72,8 @@ export class HomeCommonPage implements OnInit {
     if (x.url) {
       categoryElement.url = x.url;
     }
-    if (x.type) {
-      categoryElement.type = x.type;
+    if (x.params) {
+      categoryElement.params = x.params;
     }
 
     return categoryElement;
@@ -82,15 +82,17 @@ export class HomeCommonPage implements OnInit {
 
 
   goToLink(category) {
-    if (category.url)
+    if (category.url) {
+      if (category.params) {
+        category.query = category.params;
+      }
       this.router.navigate([category.url], { queryParams: { category: JSON.stringify(category) } });
-    else {
+    } else {
       this.translate.get('error_data').subscribe(
         value => {
-          this.utils.showToast(value)
-
+          this.utils.showToast(value);
         }
-      )
+      );
     }
   }
   goToCategory(category) {
@@ -100,20 +102,20 @@ export class HomeCommonPage implements OnInit {
     console.log(item);
   }
   openElement(element) {
-    if (element.url && element.objectIds)
+    if (element.url && element.objectIds) {
       this.router.navigate([element.url], { queryParams: { objectIds: element.objectIds } });
-    else {
+    } else {
       this.translate.get('title_app').subscribe(
         value => {
           console.log(value);
           // this.title= value;
         }
-      )
+      );
       this.translate.get('error_data').subscribe(
         value => {
-          this.utils.showToast(value)
+          this.utils.showToast(value);
         }
-      )
+      );
     }
   }
 }

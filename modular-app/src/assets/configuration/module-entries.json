@@ -28,9 +28,9 @@
       "en": "Restaurants & Hotel",
       "de": "Restaurants & Hotel"
     },
-    "url": "/list-categories",
-    "icon": "home",
-    "type": "R&H"
+    "url": "/list-rh",
+    "icon": "home"
+    
 
   },
   {
@@ -40,10 +40,9 @@
       "en": "Events",
       "de": "Events"
     },
-    "url": "/list-categories",
+    "url": "/list-event",
     "icon": "home",
-    "type": "EVENT"
-
+    "params": {"selector": {"element-type": "event-item"}}
   },
   {
     "name": {
@@ -51,9 +50,9 @@
       "en": "Touristic Itineraties",
       "de": "Touristic Itineraties"
     },
-    "url": "/list-categories",
+    "url": "/list-path",
     "icon": "home",
-    "type": "PATH"
+    "params":{"selector": {"element-type": "itinerary-item"}, "type": "itineraries"}
 
   },
   {
