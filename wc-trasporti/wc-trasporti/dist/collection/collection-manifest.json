@@ -1,0 +1,25 @@
+{
+  "components": [
+    {
+      "tag": "wc-trasporti-table",
+      "dependencies": [],
+      "componentClass": "MyComponent",
+      "componentPath": "components/wc-trasporti-table/wc-trasporti-table.js",
+      "styles": {
+        "$": {
+          "stylePaths": [
+            "components/wc-trasporti-table/wc-trasporti-table.css"
+          ]
+        }
+      },
+      "shadow": true
+    }
+  ],
+  "collections": [],
+  "compiler": {
+    "name": "@stencil/core",
+    "version": "0.18.1",
+    "typescriptVersion": "3.3.3"
+  },
+  "bundles": []
+}

@@ -7,5 +7,5 @@ export interface DetailsInfo {
     date?: string,
     time?: string,
     price?: string,
-    cat?: string
+    cat?: Array<string>
   }

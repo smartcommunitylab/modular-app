@@ -15,62 +15,71 @@ export class HomeCommonPage implements OnInit {
   categories: any = [];
   elementsGallery: string[] = null;
   pois: any = [];
-  language: string = "it";
+  language = 'it';
   elementsGalleryStr: string;
   constructor(public navCtrl: NavController,
-    public translate: TranslateService,
     private config: ConfigService,
     private router: Router,
     public alertCtrl: AlertController,
+    public translate: TranslateService,
     private utils: UtilsService) {
   }
   ngOnInit() {
-    this.translate.get('title_page').subscribe(
-      value => {
-        console.log(value)
-      }
-    )
+    // this.translate.get('title_page').subscribe(
+    //   value => {
+    //     console.log(value);
+    //   }
+    // );
   }
   ionViewDidEnter() {
     this.elementsGallery = [];
-    this.categories = this.config.getModuleEntries().map(x => this.convert(x));;
-    this.elementsGallery = this.config.getCarousel().map(x => this.convert(x));;
+    this.categories = this.config.getModuleEntries().map(x => this.convertCategories(x));
+    console.log(this.categories);
+    this.elementsGallery = this.config.getCarousel().map(x => this.convertGallery(x));
     window.addEventListener('categorySelected', category => {
       console.log(category);
-      this.goToCategory(category);
     });
     window.addEventListener('elementSelected', item => {
       console.log(item);
-      this.goToItem(item["detail"]);
+      this.goToItem(item['detail']);
     });
   }
 
 
+  convertGallery(x) {
+    const galleryElement: any = {};
 
-
-  convert(x) {
-    const element: any = {};
-    if (x.id) {
-      element.id = x.id;
-    }
     if (x.name) {
-      element.name = x.name[this.language];
+      galleryElement.name = x.name[this.language];
     }
     if (x.image) {
-      element.image = x.image[this.language];
+      galleryElement.image = x.image[this.language];
+    }
+    return galleryElement;
+  }
+
+  convertCategories(x) {
+    const categoryElement: any = {};
+    if (x.id) {
+      categoryElement.id = x.id;
+    }
+    if (x.name) {
+      categoryElement.name = x.name[this.language];
     }
     if (x.icon) {
-      element.icon = x.icon;
+      categoryElement.icon = x.icon;
     }
     if (x.url) {
-      element.url = x.url;
+      categoryElement.url = x.url;
     }
-    if (x.objectIds) {
-      element.objectIds = x.objectIds
+    if (x.type) {
+      categoryElement.type = x.type;
     }
 
-    return element;
+    return categoryElement;
   }
+
+
 
   goToLink(category) {
     if (category.url)

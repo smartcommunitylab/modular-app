@@ -15,6 +15,7 @@ export class Icons {
         'time': this.timeIcon,
         'price': this.priceIcon,
         'cat': this.catIcon,
+        'share': this.shareIcon,
         'default': this.defaultIcon
     }
 
@@ -85,8 +86,8 @@ export class Icons {
     private addrIcon(color:string){
         return (
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                <path fill="none" d="M0 0h24v24H0V0z"/>
-                <path d="M21 3L3 10.53v.98l6.84 2.65L12.48 21h.98L21 3z" fill={color}/>
+                <path d="M0 0h24v24H0z" fill="none"/>
+                <path d="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71z" fill={color}/>
             </svg>
         )
     }
@@ -95,7 +96,7 @@ export class Icons {
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                 <path d="M0 0h24v24H0z" fill="none"/>
                 <path d="M21.71 11.29l-9-9c-.39-.39-1.02-.39-1.41 0l-9 9c-.39.39-.39 1.02 0 1.41l9 9c.39.39 1.02.39 1.41 0l9-9c.39-.38.39-1.01 0-1.41zM14 14.5V12h-4v3H8v-4c0-.55.45-1 1-1h5V7.5l3.5 3.5-3.5 3.5z" fill={color}/>
-                </svg>
+            </svg>
         )
     }
     private urlIcon(color:string){
@@ -136,6 +137,14 @@ export class Icons {
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                 <path d="M0 0h24v24H0z" fill="none"/>
                 <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z" fill={color}/>
+            </svg>
+        )
+    }
+    private shareIcon(color:string){
+        return(
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                <path d="M0 0h24v24H0z" fill="none"/>
+                <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z" fill={color}/>
             </svg>
         )
     }

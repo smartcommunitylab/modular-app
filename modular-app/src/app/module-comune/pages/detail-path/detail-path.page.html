@@ -1,33 +1,3 @@
-<!-- <ion-header>
-  <ion-toolbar>
-    <ion-title>detail-paths</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<wc-tabs id="tabs" [content]="jsonTabs" icon-color="red" bg-color="lightgrey" [tab-actived]="tabActived"></wc-tabs>
-
-
-
-<ion-grid style="height: 100%" *ngIf="isLoading">
-  <ion-row justify-content-center align-items-center style="height: 100%">
-    <ion-spinner name="circles"></ion-spinner>
-  </ion-row>
-</ion-grid>
-
-<ion-content padding *ngIf="!isLoading">
-    <wc-path-info *ngIf="(paths) && (tabActived == 'info')" [title]="paths.title" [subtitle]="paths.subtitle" [text]="paths.description" [info]="paths.info" [img]="paths.image"></wc-path-info>
-    
-    <div *ngIf="tabActived == 'place'">
-      <div *ngFor="let poi of pois">
-          <wc-path-list-el [id]="poi.id" [img]="poi.image" [title]="poi.title[lang]" [text]="poi.subtitle[lang]" main-color="red"></wc-path-list-el>
-      </div>
-    </div>
-
-    <div ion-fixed *ngIf="tabActived == 'map'" >
-        <wc-map [points]="mapPoints" my-lon="11.1504241" my-lat="46.0671854" main-marker-icon="http://icons.iconarchive.com/icons/paomedia/small-n-flat/256/map-marker-icon.png" poi-marker-icon="https://cdn4.iconfinder.com/data/icons/ios7-active-tab/512/map_marker-512.png"></wc-map>
-    </div>
-</ion-content> -->
-
 <ion-header no-border>
     <ion-toolbar color="secondary">
       <ion-buttons slot="start">
@@ -47,12 +17,30 @@
     </ion-row>
   </ion-grid>
   
+  
+
    <ion-content padding *ngIf="!isLoading">
       <wc-details *ngIf="(paths) && (tabActived == 'info')" [title]="paths.title" [subtitle]="paths.subtitle" [text]="paths.description" [info]="paths.info" [img]="paths.image"></wc-details>
       
       <div id="poi-list">
-        <div *ngIf="tabActived == 'place'">           
-            <div *ngFor="let poi of pois">
+        <div *ngIf="tabActived == 'place'">
+          <ion-searchbar *ngIf="search" showCancelButton animated (ionInput)="searchChanged($event)" (ionCancel)="toggleSearch()"></ion-searchbar>
+          <!-- FLOATING BUTTON -->
+          <ion-fab class="fixed" vertical="bottom" horizontal="start" slot="fixed">
+              <ion-fab-button color="danger">
+                <ion-icon name="arrow-dropup-circle"></ion-icon>
+              </ion-fab-button>
+              <ion-fab-list side="top">
+                  <ion-fab-button (click)="toggleSearch()">
+                    <ion-icon name="search"></ion-icon>
+                  </ion-fab-button>
+                  <ion-fab-button (click)="filterClicked()">
+                      <ion-icon name="funnel"></ion-icon>
+                    </ion-fab-button>
+              </ion-fab-list>
+            </ion-fab>
+            <!-- ------------------------------- -->
+            <div *ngFor="let poi of showPois">
                 <wc-path-list-el type="POI" [id]="poi._id" [img]="poi.image" [title]="poi.title[lang]" [text]="poi.subtitle[lang]" main-color="red"></wc-path-list-el>
             </div>
         </div>

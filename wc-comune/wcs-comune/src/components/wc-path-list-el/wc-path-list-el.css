@@ -1,37 +1,26 @@
 .container {
-    display:grid;
-    grid-template-columns: 25% auto;
     text-align:center;
-    margin: 0 auto;
-}
-.title{
-    grid-column: 2;
+    margin: 1%;
+    border: 1px black solid;
+    margin-bottom: 3%;
 }
 .title > h3 {
-    margin-top: 1%;
-    text-align: left;
-    margin-left: 15px;
+    margin-top: 2%;
+    text-align: center;
 }
 .description{
-    grid-column: 2;
+    margin: 1%;
 }
 .description > p {
-    margin-bottom: 0;
+    margin-bottom: 3%;
     text-align: left;
     margin-left: 15px;
 }
 .image{
-    grid-column: 1;
-    grid-row: 1 / span 2;
-    vertical-align: middle;
-    margin:0;
-    
+    max-height: 175px;
+    overflow: hidden;
+    margin: 5px;
 }
 .image > img {
-    border-style: solid;
-    border-width: 3px;
     max-width: 100%;
-}
-hr{
-    width: 75%;
 }

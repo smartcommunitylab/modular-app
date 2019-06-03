@@ -18,7 +18,7 @@ export class WcDetails {
         date?: <string>, --> Date evento
         time?: <string>, --> Orari Evento
         price?: <string>, --> Prezzi evento
-        cat?: <string>, --> Categoria Evento
+        cat?: Array<string>, --> Categoria Evento
       }
   */
 
@@ -41,12 +41,14 @@ export class WcDetails {
 
   private icons = new Icons().iconList;
   private contactsJSON: DetailsInfo;
-  private tmpinfo = [];
+  private tmptags = [];
+  private tmpContacts = [];
 
   componentWillLoad(){
     if(this.contacts){
       this.contactsJSON = JSON.parse(this.contacts);
-      this.buildDetail();
+      this.buildTag();
+      this.buildContacts(this.contactsJSON);
     }
   }
 
@@ -55,29 +57,22 @@ export class WcDetails {
     console.log("Cliccato: ", type, value);
   }
   
-  buildDetail() {
-    var keys = Object.keys(this.contactsJSON)
-    keys.forEach(k => {
-      this.tmpinfo.push(
-        <div class="container" onClick={()=>this.contactClickHandler(k,this.contactsJSON[k])}>
-          <div class="icon">
-          { (k.indexOf("distance")!=0) ? this.icons[k]("red") : this.icons[k](this.headingColor) }
-          </div>
-          <div class="contact-info">
-            {this.contactsJSON[k]}
-          </div>
-        </div>,
-        <br/>
-      )
-    });
+  buildTag() {
+    if(this.contactsJSON.cat){
+      this.contactsJSON.cat.forEach(c => {
+        this.tmptags.push(
+          <div class="tag"><p>{c}</p></div>
+        )
+      });
+    }
   }
 
-  private showContacts(){
+  private showTags(){
     var tmp = 
-    <div class="contacts">
-      {this.tmpinfo}
+    <div class="tags">
+      {this.tmptags}
     </div>
-    if (this.tmpinfo.length > 0){
+    if (this.tmptags.length > 0){
       return tmp;
     }
     else{
@@ -85,25 +80,68 @@ export class WcDetails {
     }
   }
 
+  buildContacts(arr: DetailsInfo){
+    var tmp: any = {};
+
+    if (arr.address) {
+      tmp.address = arr.address;
+    }
+    if (arr.phone) {
+      tmp.phone = arr.phone;
+    }
+    if (arr.url) {
+      tmp.url = arr.url;
+      tmp.share = arr.url;
+    }
+
+    var keys = Object.keys(tmp);
+
+    keys.forEach(k => {
+      this.tmpContacts.push(
+        <div class="contact-container" onClick={() => k.indexOf('share') > -1 ? 
+        this.contactClickHandler(k,this.contactsJSON['url']) : 
+        this.contactClickHandler(k,this.contactsJSON[k])
+      }>
+          <div class="icon">
+            {this.icons[k]("black")}
+          </div>
+          <div class="contactLabel">{k}</div>
+        </div>
+      )
+    });
+  }
+
   render() {
     
     return (
-      <div class="container">
-        <div class="image">
-          <img src={this.img}></img>
-        </div>
-        <div class="info-title" style={{color:this.headingColor}}>
-          {this.title}
-        </div>
-        {this.showContacts()}
-        <div class="subtitle" innerHTML={this.subtitle} >
-        </div>
-        <div class="text" innerHTML={this.text}>
-        </div>
-        <div class="title-2" style={{color:this.headingColor}}>
-          {(this.info && this.info!='') ? "Informazioni": ""}
-        </div>
-        <div class="info text" innerHTML={this.info}>
+      <div class="card">
+        <div class="container">
+          <div class="info-title" style={{color:this.headingColor}}>
+            {this.title}
+          </div>
+          <div class="subtitle" innerHTML={this.subtitle} >
+          </div>
+          <div class="image">
+            <img src={this.img}></img>
+          </div>
+          <div class="contacts">
+            {this.tmpContacts}
+          </div>
+          <hr/>
+          <div class="datetime">
+            {(this.contactsJSON)?((this.contactsJSON.date)?this.contactsJSON.date:''):''} {(this.contactsJSON)?((this.contactsJSON.time)?this.contactsJSON.time:''):''}
+          </div>
+          <div class="address">
+            {this.contactsJSON.address}
+          </div>
+          {this.showTags()}
+          <div class="text" innerHTML={this.text}>
+          </div>
+          <div class="title-2" style={{color:this.headingColor}}>
+            {(this.info && this.info!='') ? "Informazioni": ""}
+          </div>
+          <div class="info text" innerHTML={this.info}>
+          </div>
         </div>
       </div>
     )

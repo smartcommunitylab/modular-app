@@ -1,0 +1,15 @@
+{
+  "namespace": "mycomponent",
+  "fsNamespace": "mycomponent",
+  "loader": "../mycomponent.js",
+  "core": "mycomponent.bah91zxy.js",
+  "corePolyfilled": "mycomponent.dzxlzcpg.js",
+  "components": {
+    "wc-trasporti-table": {
+      "bundleIds": {
+        "$": "7oheo4hq"
+      },
+      "encapsulation": "shadow"
+    }
+  }
+}

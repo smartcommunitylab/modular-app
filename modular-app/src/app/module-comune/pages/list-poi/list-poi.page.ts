@@ -33,10 +33,18 @@ export class ListPoiPage implements OnInit {
       this.dbService.getObjectByQuery( this.category.query).then((data) => {
           this.pois = data.docs.map(x => this.convertPois(x));
         });
+    } else if (this.category && this.category.objectIds) {
+      this.category.objectIds.forEach(id => {
+        this.dbService.getObjectByDataId(id).then((data) => {
+          this.pois.push(data.docs[0]);
+        }).then(() => {
+          const tmp = this.pois;
+          this.pois = tmp.map(x => this.convertPois(x));
+        });
+      });
     }
     const el = document.getElementById('poi-list');
     el.addEventListener('pathSelected', path => {
-      // this.goToDetail((<any>path).detail);
       this.type = ((<any>path).detail).split(';')[1];
       const id = ((<any>path).detail).split(';')[0];
       this.goToDetail(id);
@@ -58,8 +66,8 @@ export class ListPoiPage implements OnInit {
       if (x.image) {
          poiElement.image = x.image;
       }
-      if (x._id) {
-        poiElement.id = x._id;
+      if (x.id) {
+        poiElement.id = x.id;
       }
       if (x._id) {
         poiElement.id = x._id;

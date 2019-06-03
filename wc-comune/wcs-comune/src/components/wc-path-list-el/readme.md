@@ -9,6 +9,7 @@
 
 | Property    | Attribute    | Description                    | Type     | Default     |
 | ----------- | ------------ | ------------------------------ | -------- | ----------- |
+| `bgColor`   | `bg-color`   | Colore sfondo card             | `string` | `"white"`   |
 | `descColor` | `desc-color` | Colore descrizione breve       | `string` | `undefined` |
 | `id`        | `id`         | ID percorso                    | `string` | `undefined` |
 | `img`       | `img`        | Immagine del percorso          | `string` | `undefined` |

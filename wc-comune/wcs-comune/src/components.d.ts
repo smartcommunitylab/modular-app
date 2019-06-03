@@ -316,6 +316,10 @@ export namespace Components {
 
   interface WcPathListEl {
     /**
+    * Colore sfondo card
+    */
+    'bgColor': string;
+    /**
     * Colore descrizione breve
     */
     'descColor': string;
@@ -345,6 +349,10 @@ export namespace Components {
     'type': string;
   }
   interface WcPathListElAttributes extends StencilHTMLAttributes {
+    /**
+    * Colore sfondo card
+    */
+    'bgColor'?: string;
     /**
     * Colore descrizione breve
     */

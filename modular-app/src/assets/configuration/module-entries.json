@@ -29,7 +29,8 @@
       "de": "Restaurants & Hotel"
     },
     "url": "/list-categories",
-    "icon": "home"
+    "icon": "home",
+    "type": "R&H"
 
   },
   {
@@ -40,7 +41,8 @@
       "de": "Events"
     },
     "url": "/list-categories",
-    "icon": "home"
+    "icon": "home",
+    "type": "EVENT"
 
   },
   {
@@ -50,7 +52,8 @@
       "de": "Touristic Itineraties"
     },
     "url": "/list-categories",
-    "icon": "home"
+    "icon": "home",
+    "type": "PATH"
 
   },
   {

@@ -20,22 +20,25 @@ export class ListCategoriesPage implements OnInit {
         console.log(params); // {order: "popular"}
         if (params) {
           const cat = JSON.parse(params.category);
-          this.dbService.getMenuById(cat.id).then(results => {
-            console.log(results);
-            if (results.docs) {
-              // take the first with items
-              for (let i = 0; i < results.docs.length; i++) {
-                if (results.docs[i].items) {
-                  this.categories = results.docs[i].items;
-                  break;
+          if (cat.type !== 'PATH') {
+            this.dbService.getMenuById(cat.id).then(results => {
+              console.log(results);
+              if (results.docs) {
+                // take the first with items
+                for (let i = 0; i < results.docs.length; i++) {
+                  if (results.docs[i].items) {
+                    this.categories = results.docs[i].items;
+                    break;
+                  }
                 }
+                this.categories = this.categories.map(x => this.convertCategories(x));
               }
-              this.categories = this.categories.map(x => this.convertCategories(x));
-
-            }
-          });
-
-        }
+            });
+          } else {
+            const tmp = {query: {'selector': {'element-type': 'itinerary-item'}, type: 'itineraries'}};
+            this.goToCategory(tmp);
+          }
+      }
       });
 
   }
@@ -61,7 +64,6 @@ export class ListCategoriesPage implements OnInit {
       if (x.objectIds) {
         categoryElement.objectIds = x.objectIds;
       }
-
     }
     return categoryElement;
   }
