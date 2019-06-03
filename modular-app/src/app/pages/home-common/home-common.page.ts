@@ -23,6 +23,7 @@ export class HomeCommonPage implements OnInit {
     public alertCtrl: AlertController,
     public translate: TranslateService,
     private utils: UtilsService) {
+      translate.use(this.language);
   }
   ngOnInit() {
     // this.translate.get('title_page').subscribe(
