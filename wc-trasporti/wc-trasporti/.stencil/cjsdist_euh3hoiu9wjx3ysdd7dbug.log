@@ -1,0 +1,6 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var mycomponent_core_js_1 = require("../mycomponent.core.js");
+function format(t, e, r) { return (t || "") + (e ? " " + e : "") + (r ? " " + r : ""); }
+var MyComponent = function () { function t() { } return t.prototype.getText = function () { return console.log("ciao"), format(this.first, this.middle, this.last); }, t.prototype.render = function () { return mycomponent_core_js_1.h("p", null, "Hello, World! I'm ", this.getText()); }, Object.defineProperty(t, "is", { get: function () { return "wc-trasporti-table"; }, enumerable: !0, configurable: !0 }), Object.defineProperty(t, "encapsulation", { get: function () { return "shadow"; }, enumerable: !0, configurable: !0 }), Object.defineProperty(t, "properties", { get: function () { return { first: { type: String, attr: "first" }, last: { type: String, attr: "last" }, middle: { type: String, attr: "middle" } }; }, enumerable: !0, configurable: !0 }), Object.defineProperty(t, "style", { get: function () { return ""; }, enumerable: !0, configurable: !0 }), t; }();
+exports.WcTrasportiTable = MyComponent;

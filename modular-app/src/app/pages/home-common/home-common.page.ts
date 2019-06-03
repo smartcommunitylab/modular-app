@@ -48,34 +48,36 @@ export class HomeCommonPage implements OnInit {
 
   convertGallery(x) {
     const galleryElement: any = {};
-    if (x && x.key) {
-      if (x.key.name) {
-        galleryElement.name = x.key.name[this.language];
-      }
-      if (x.key.image) {
-        galleryElement.image = x.key.image[this.language];
-      }
-      if (x.key.objectIds) {
-        galleryElement.objectIds = x.key.objectIds;
-      }
+
+    if (x.name) {
+      galleryElement.name = x.name[this.language];
+    }
+    if (x.image) {
+      galleryElement.image = x.image[this.language];
     }
     return galleryElement;
   }
 
   convertCategories(x) {
     const categoryElement: any = {};
-    categoryElement.id = x.key.id;
-    if (x && x.key) {
-      if (x.key.name) {
-        categoryElement.name = x.key.name[this.language];
-      }
-      if (x.key.image) {
-        categoryElement.image = x.key.image;
-      }
+    if (x.id) {
+      categoryElement.id = x.id;
     }
+    if (x.name) {
+      categoryElement.name = x.name[this.language];
+    }
+    if (x.icon) {
+      categoryElement.icon = x.icon;
+    }
+    if (x.url) {
+      categoryElement.url = x.url;
+    }
+    if (x.type) {
+      categoryElement.type = x.type;
+    }
+
     return categoryElement;
   }
-
 
 
 

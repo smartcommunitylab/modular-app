@@ -1,0 +1,28 @@
+import { h } from '../mycomponent.core.js';
+var MyComponent = /** @class */ (function () {
+    function MyComponent() {
+    }
+    MyComponent.prototype.render = function () {
+        {
+            console.log('ciao');
+        }
+        return h("div", null, "Hello, World! I'm ");
+    };
+    Object.defineProperty(MyComponent, "is", {
+        get: function () { return "wc-trasporti-table"; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(MyComponent, "encapsulation", {
+        get: function () { return "shadow"; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(MyComponent, "style", {
+        get: function () { return "/**style-placeholder:wc-trasporti-table:**/"; },
+        enumerable: true,
+        configurable: true
+    });
+    return MyComponent;
+}());
+export { MyComponent as WcTrasportiTable };
