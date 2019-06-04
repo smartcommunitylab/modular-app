@@ -1,4 +1,4 @@
-import { Component, State, Prop } from '@stencil/core';
+import { Component, Prop, State, Element } from '@stencil/core';
 
 @Component({
   tag: 'wc-trasporti-table',
@@ -7,16 +7,16 @@ import { Component, State, Prop } from '@stencil/core';
 })
 
 export class AppHome {
-
-  @State() name: string;
-  @State() oggetto: Array<any>;
+  @Prop() data: string;
+  @State() dataTT: any;
   @State() fermate: string;
   @State() orari: string;
   @Prop() numero: string;
   @Prop() citta: string;
-
+  @Element() private element: HTMLElement;
 
   componentWillLoad() {
+    this.dataTT = JSON.parse(this.data);
     this.rootstyle();
     this.Fetch();
   }
@@ -32,14 +32,23 @@ export class AppHome {
     root.style.setProperty('--top-fermate-dim', '172px');
 
   }
-  BiancoNero() {
+  BiancoNero(param) {
     this.fermate = "";
-    for (let i in this.oggetto) {
+    for (let i in param) {
       this.fermate += parseInt(i) % 2 == 0 ? "<div id='grigioFermate'>" : "<div id='biancoFermate'>";
-      this.fermate += this.oggetto[i].toString() + "</div>";
+      this.fermate += param[i].toString() + "</div>";
     }
   }
-  StampaOrari() {
+
+  componentDidLoad() {
+    console.log(this.element);
+
+    // loop over NodeList as per https://css-tricks.com/snippets/javascript/loop-queryselectorall-matches/
+    const list = this.element.querySelectorAll('li.my-list');
+    [].forEach.call(list, li => li.style.color = 'red');
+  }
+
+  StampaOrari(param) {
     try {
 
 
@@ -47,11 +56,11 @@ export class AppHome {
       let contatore: number = (window.innerWidth / 68);
       this.orari = "";
       let tmp: string = "";
-      for (let i in this.oggetto[0].stopTimes) {
+      for (let i in param[0]) {
         this.orari += parseInt(i) % 2 == 0 ? "<div id='grigioOrari'>" : "<div id='biancoOrari'>";
 
-        for (let j in this.oggetto) {
-          tmp = this.oggetto[j].stopTimes[i] != "" ? this.oggetto[j].stopTimes[i] : "&nbsp&nbsp&nbsp&nbsp&nbsp";
+        for (let j in param) {
+          tmp = param[j][i] != "" ? param[j][i] : "&nbsp&nbsp&nbsp&nbsp&nbsp";
           this.orari += tmp + "&nbsp&nbsp&nbsp";
           contatore--;
         }
@@ -67,25 +76,41 @@ export class AppHome {
         this.orari += "</div>";
         contatore = window.innerWidth / 68;
       }
-    }catch{
+    } catch{
       alert("Dati non disponibili");
     }
   }
   Fetch() {
+    if (this.dataTT) {
+      console.log(this.dataTT);
+      // this.dataTT = this.data['stopNames'];
+      this.BiancoNero(this.dataTT['stops']);
+      // this.dataTT = response['trips'];
+      this.StampaOrari(this.dataTT['times']);
+    }
+    if (this.citta && this.numero) {
+      this.remoteFetch();
+
+    }
+  }
+
+  remoteFetch(): any {
     fetch('https://os.smartcommunitylab.it/core.mobility/timetable/' + this.citta + '/' + this.numero)
-      .then((response: Response) => response.json())
+      .then((response: Response) => {
+        response.json()
+      })
       .then(response => {
-        this.oggetto = response['stopNames'];
-        this.BiancoNero();
-        this.oggetto = response['trips'];
-        this.StampaOrari();
+        this.dataTT = response['stopNames'];
+        this.BiancoNero(this.dataTT);
+        this.dataTT = response['trips'];
+        this.StampaOrari(this.dataTT['times']);
       });
   }
 
   scrollOrari(event) {
     event = event;
-    let elemento = document.getElementById("myDIV");
-    let daScrollare = document.getElementById("listaFermate");
+    let elemento = this.element.querySelectorAll("#myDIV")[0];
+    let daScrollare = this.element.querySelectorAll("#listaFermate")[0];
     daScrollare.scrollTop = elemento.scrollTop;
   }
   visualizza(oggetto: any): string {

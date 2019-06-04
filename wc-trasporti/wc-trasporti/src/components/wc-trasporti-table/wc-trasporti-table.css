@@ -1,1 +1,107 @@
 
+#colonna1{
+    position: relative;
+    width: 20%;
+}
+
+#riga1{
+    position: relative;
+    height: 6%;
+}
+
+*{
+    font-family: monospace;
+}
+#listaFermate{
+    position: absolute;
+    top: var( --top-orari-dim);
+    height: var(--dim-orari-hei);
+    width: var(--dim-orari-wid);
+    overflow: auto;
+    overflow-y:hidden;
+}
+
+#fermate{
+    position: absolute;
+    top:0px;
+    width: 10%;
+}
+
+#contentFermate{
+    height: 800px;
+    width: 300px;
+    
+}
+
+#myDIV {
+    position: absolute; 
+    top: var( --top-fermate-dim);
+    height: var(--dim-fermate-hei);
+    width: var(--dim-fermate-wid);
+    overflow: auto;
+    overflow-x:var(--blocca-barra);
+  }
+  
+  #content {
+    height: 800px;
+    width: 2000px;
+  }
+
+
+  #orari{
+    position: absolute;
+    top:0px;
+    width: 10%;
+    left: 15%;
+  }
+
+
+  #biancoOrari{
+    background-color: rgb(255,255,255);
+    width: fit-content;    
+    position: relative;
+
+  }
+
+  #grigioOrari{
+    background-color: rgb(238,238,238);
+    width: fit-content;
+    position: relative;
+}
+
+
+#biancoFermate{
+    background-color: rgb(255,255,255);
+    position: relative;
+  }
+
+  #grigioFermate{
+    background-color: rgb(238,238,238);
+    position: relative;
+}
+
+::-webkit-scrollbar {
+    width: 10px;    
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: rgb(255,255,255,0); 
+  }
+   
+  ::-webkit-scrollbar-thumb {
+    background: rgb(255,255,255,0); 
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgb(255,255,255,0); 
+  }  
+  :root{
+    --dim-orari-wid: 200px;
+    --dim-orari-hei: 200px;
+    --top-orari-dim: 200px;
+
+    --dim-fermate-wid: 200px;
+    --dim-fermate-hei: 200px;
+    --top-fermate-dim: 200px;
+    --blocca-barra: none;
+  }

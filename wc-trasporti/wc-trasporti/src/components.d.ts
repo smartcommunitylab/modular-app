@@ -12,8 +12,16 @@ import '@stencil/core';
 
 export namespace Components {
 
-  interface WcTrasportiTable {}
-  interface WcTrasportiTableAttributes extends StencilHTMLAttributes {}
+  interface WcTrasportiTable {
+    'citta': string;
+    'data': string;
+    'numero': string;
+  }
+  interface WcTrasportiTableAttributes extends StencilHTMLAttributes {
+    'citta'?: string;
+    'data'?: string;
+    'numero'?: string;
+  }
 }
 
 declare global {

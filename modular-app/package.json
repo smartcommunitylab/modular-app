@@ -42,7 +42,7 @@
     "cordova-plugin-splashscreen": "^5.0.2",
     "cordova-plugin-statusbar": "^2.4.2",
     "cordova-plugin-whitelist": "^1.3.3",
-    "cordova-sqlite-storage": "^3.2.0",
+    "cordova-sqlite-ext": "^3.0.0",
     "core-js": "^2.5.4",
     "emulate": "1.0.2",
     "jszip": "^2.6.0",
@@ -51,7 +51,7 @@
     "pouchdb-find": "^7.0.0",
     "rxjs": "^6.3.3",
     "tslib": "^1.9.3",
-    "wc-trasporti": "0.0.3",
+    "wc-trasporti": "0.0.7",
     "wcs-comune": "0.0.112",
     "zone.js": "~0.8.26"
   },
@@ -87,14 +87,14 @@
   "cordova": {
     "plugins": {
       "cordova-plugin-geolocation": {},
-      "cordova-sqlite-storage": {},
       "cordova-plugin-file": {},
       "cordova-plugin-whitelist": {},
       "cordova-plugin-statusbar": {},
       "cordova-plugin-device": {},
       "cordova-plugin-splashscreen": {},
       "cordova-plugin-ionic-webview": {},
-      "cordova-plugin-ionic-keyboard": {}
+      "cordova-plugin-ionic-keyboard": {},
+      "cordova-sqlite-ext": {}
     },
     "platforms": [
       "browser",

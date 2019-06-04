@@ -21,7 +21,7 @@ export class DbService {
     private config: ConfigService,
     public plt: Platform,
     private http: HttpClient) {
-      // this.Init();
+    // this.Init();
   }
 
   Init(): Promise<any> {
@@ -34,7 +34,7 @@ export class DbService {
   }
 
   getDBFileShortName() {
-    return this.config.getAppId() + "routesdb";
+    return "routesdb_" + this.config.getAppId();
   };
 
   getDBPath() {
@@ -63,16 +63,23 @@ export class DbService {
   }
 
   doWithDB(successcallback, errorcallback) {
-
+    var that = this;
     if (this.db == null) {
-      this.sqlite.create({
-        name: this.getDBFileShortName(),
-        location: 'default'
-      }).then((db: SQLiteObject) => {
-        this.db = db;
+      // this.sqlite.create({
+      //   name: this.getDBFileShortName(),
+      //   location: 'default'
+      // }).then((db: SQLiteObject) => {
+      //   this.db = db;
+      //   successcallback();
+      // }).catch(e => errorcallback());
+      (<any>window).sqlitePlugin.openDatabase({ name: this.getDBFileShortName(), location: 'default', createFromLocation: 1 }, function (db) {
+        that.db = db;
         successcallback();
-      }).catch(e => errorcallback());
-      // this.sqlite.openDatabase({
+      }, function (err) {
+        err => errorcallback()
+      });
+
+      // this.db = this.db.sqlitePlugin({
       //   name: this.getDBFileShortName(),
       //   bgType: 1,
       //   skipBackup: true,
@@ -120,7 +127,7 @@ export class DbService {
   };
 
   openDB(successcallback, errorcallback) {
-    var that=this;
+    var that = this;
     var _do = function () {
       (that.db.executeSql("select * from version", [], function (res) {
         var data = that.convertData(res);
@@ -146,17 +153,18 @@ export class DbService {
         var jszipobj = new JSZip(data);
         // var jszip = new JSZip();
         // jszip.loadAsync(data).then(function (jszipobj) {
-          Object.keys(jszipobj.files).forEach(function (key) {
-            // this.file.listDir('file:///', this.file.dataDirectory)
-            // .then(_ => console.log('Directory exists'))
-            // .catch(err => console.log('Directory doesnt exist'));
-            that.file.createFile(that.getDBPath(), that.getDBFileShortName(), true) 
-              .then(function (success) {
-                var f = jszipobj.file(key);
-                that.file.removeFile(that.getDBPath(), that.getDBFileShortName()).then(function() {
-                  that.file.writeFile(that.getDBPath(), that.getDBFileShortName(), jszipobj.file(key).asArrayBuffer())
+        Object.keys(jszipobj.files).forEach(function (key) {
+          // this.file.listDir('file:///', this.file.dataDirectory)
+          // .then(_ => console.log('Directory exists'))
+          // .catch(err => console.log('Directory doesnt exist'));
+          that.file.createFile(that.getDBPath(), that.getDBFileShortName(), true)
+            .then(function (success) {
+              var f = jszipobj.file(key);
+              that.file.removeFile(that.getDBPath(), that.getDBFileShortName()).then(function () {
+                that.file.writeFile(that.getDBPath(), that.getDBFileShortName(), jszipobj.file(key).asArrayBuffer())
                   .then(function (success) {
                     console.log('success copy');
+                    that.db = null;
                     resolve(true);
 
                   }, function (error) {
@@ -164,15 +172,15 @@ export class DbService {
                     reject(error);
 
                   });
-                })
+              })
 
-              }, function (error) {
-                console.log('error creation');
-                reject(error);
-              });
-          });
+            }, function (error) {
+              console.log('error creation');
+              reject(error);
+            });
         });
-      })
+      });
+    })
     // })
     return promise;
 
@@ -247,7 +255,7 @@ export class DbService {
   }
 
   synchDB() {
-    var that =this;
+    var that = this;
     var deferred = new Promise((resolve, reject) => {
       var err = function (e) {
         console.log("DB SYNC ERROR: " + e);
@@ -291,7 +299,7 @@ export class DbService {
   };
 
   syncStopsForVersions(remoteversion) {
-    var that= this;
+    var that = this;
     var agencies = this.config.getAppAgencies();
     var versions = {};
     var localStopVersionsKey = this.config.getAppId() + "_localStopVersions";
@@ -317,7 +325,7 @@ export class DbService {
   }
 
   doQuery(query, params) {
-    var that=this;
+    var that = this;
     var deferred = new Promise((resolve, reject) => {
       var _do = function () {
         that.db.executeSql(query, params, function (res) {

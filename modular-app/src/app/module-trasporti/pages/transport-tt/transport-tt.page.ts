@@ -10,7 +10,7 @@ import { ActivatedRoute } from '@angular/router';
 export class TransportTtPage implements OnInit {
   agencyId: any;
   routeId: any;
-  dataTT:any={};
+  data:string="";
   constructor(private trasportiService: TransportService, private route: ActivatedRoute) { }
 
   ngOnInit() {
@@ -23,11 +23,11 @@ export class TransportTtPage implements OnInit {
     var that = this;
     this.trasportiService.getTT(this.agencyId, this.routeId , date).then(
       function (data) {
-        console.log(data);
-        that.dataTT=data;
+        console.log(JSON.stringify(data));
+        that.data=JSON.stringify(data);
       }, function (err) {
         console.log(err);
-        that.dataTT=null;
+        that.data=null;
 
       }
     )
