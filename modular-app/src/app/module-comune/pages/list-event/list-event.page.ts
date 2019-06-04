@@ -3,7 +3,7 @@ import { NavController, AlertController, PopoverController, Events } from '@ioni
 import { DbService } from '../../services/db.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { PopoverComponent } from 'src/app/shared/popover/popover.component';
-import { TranslateService } from '../../services/translate.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-list-event',
@@ -33,6 +33,7 @@ export class ListEventPage implements OnInit {
     public events: Events,
     private translate: TranslateService
     ) {
+      translate.use(this.language);
       events.subscribe('radio:selected', x => {
         this.changeCategory(x);
       });
@@ -50,7 +51,6 @@ export class ListEventPage implements OnInit {
   }
 
   ionViewDidEnter() {
-    this.pageTitle = this.translate.translate('event_list');
     if (this.category && this.category.query) {
       this.dbService.getObjectByQuery(this.category.query).then((data) => {
         this.fullPois = data.docs.map(x => this.convertPois(x));

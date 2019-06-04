@@ -3,7 +3,7 @@ import { NavController, AlertController, PopoverController, Events } from '@ioni
 import { DbService } from '../../services/db.service';
 import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
 import { PopoverComponent } from 'src/app/shared/popover/popover.component';
-import { TranslateService } from '../../services/translate.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-list-rh',
@@ -50,7 +50,7 @@ export class ListRHPage implements OnInit {
   }
 
   ionViewDidEnter() {
-    this.pageTitle = this.translate.translate('rh_list');
+
     if (this.category) {
       let query = {'selector': {'element-type': 'hotel-item'}};
       this.dbService.getObjectByQuery(query).then((data) => {

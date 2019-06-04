@@ -23,15 +23,11 @@ export class HomeCommonPage implements OnInit {
     public alertCtrl: AlertController,
     public translate: TranslateService,
     private utils: UtilsService) {
-      translate.use(this.language);
+      translate.use(this.language); // SET DEFAULT LANGUAGE
   }
   ngOnInit() {
-    // this.translate.get('title_page').subscribe(
-    //   value => {
-    //     console.log(value);
-    //   }
-    // );
   }
+
   ionViewDidEnter() {
     this.elementsGallery = [];
     this.categories = this.config.getModuleEntries().map(x => this.convertCategories(x));
@@ -45,7 +41,6 @@ export class HomeCommonPage implements OnInit {
       this.goToItem(item['detail']);
     });
   }
-
 
   convertGallery(x) {
     const galleryElement: any = {};
@@ -79,8 +74,6 @@ export class HomeCommonPage implements OnInit {
 
     return categoryElement;
   }
-
-
 
   goToLink(category) {
     if (category.url) {

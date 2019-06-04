@@ -32,8 +32,8 @@
               },
               {
                 "glob": "**/*",
-                "input": "src/app/module-comune/assets",
-                "output": "assets"
+                "input": "src/app/module-comune/assets/comune",
+                "output": "assets/comune"
               }
             ],
             "styles": [
