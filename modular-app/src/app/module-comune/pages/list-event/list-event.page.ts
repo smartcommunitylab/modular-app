@@ -33,7 +33,7 @@ export class ListEventPage implements OnInit {
     public events: Events,
     private translate: TranslateService
     ) {
-      translate.use(this.language);
+     this.translate.use(this.language);
       events.subscribe('radio:selected', x => {
         this.changeCategory(x);
       });
@@ -57,6 +57,7 @@ export class ListEventPage implements OnInit {
         this.subCategories(this.fullPois);
         this.buildShowPois();
         this.isLoading = false;
+        console.log(this.showPois)
       });
     }
     const el = document.getElementById('poi-list');

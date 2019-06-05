@@ -1,4 +1,4 @@
-import { NgModule, APP_INITIALIZER } from '@angular/core';
+import { NgModule, APP_INITIALIZER, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
@@ -48,7 +48,7 @@ export function HttpLoaderFactory(http: HttpClient) {
       }
     }),
     IonicModule.forRoot(),
-    ComuneModule,
+    ComuneModule.forRoot(),
     AppRoutingModule
   ],
   providers: [
@@ -61,7 +61,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     { provide: APP_INITIALIZER, useFactory: initializeAppGeo, deps: [GeoService], multi: true },
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+ // schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 
 export class AppModule { }
