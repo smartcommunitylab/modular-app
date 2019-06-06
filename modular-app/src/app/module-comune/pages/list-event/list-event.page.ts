@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { NavController, AlertController, PopoverController, Events } from '@ionic/angular';
 import { DbService } from '../../services/db.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { PopoverComponent } from 'src/app/shared/popover/popover.component';
 import { TranslateService } from '@ngx-translate/core';
 import { AlertInput } from '@ionic/core';
+import { ConfigService } from 'src/app/services/config.service';
 
 @Component({
   selector: 'app-list-event',
@@ -14,7 +14,7 @@ import { AlertInput } from '@ionic/core';
 export class ListEventPage implements OnInit {
   showPois: any = [];
   fullPois: any = [];
-  language = 'it';
+  language: string;
   category: any;
   private type: string;
   search = false;
@@ -30,10 +30,11 @@ export class ListEventPage implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private alert: AlertController,
-    private popoverController: PopoverController,
+    private config: ConfigService,
     public events: Events,
     private translate: TranslateService
     ) {
+      this.language = window[this.config.getAppModuleName()]['language'];
      this.translate.use(this.language);
       events.subscribe('radio:selected', x => {
         this.changeCategory(x);

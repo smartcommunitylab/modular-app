@@ -16,7 +16,7 @@ import { AlertInput } from '@ionic/core';
 export class ListRHPage implements OnInit {
   showPois: any = [];
   fullPois: any = [];
-  language = 'it';
+  language: string;
   category: any;
   private type: string;
   search = false;
@@ -39,6 +39,7 @@ export class ListRHPage implements OnInit {
     private translate: TranslateService,
     private geoSrv: GeoService
     ) {
+      this.language = window[this.config.getAppModuleName()]['language'];
       this.mypos = {
         lat: window[this.config.getAppModuleName()]['geolocation']['lat'],
         long: window[this.config.getAppModuleName()]['geolocation']['long']

@@ -11,13 +11,14 @@ import { TranslateService } from '@ngx-translate/core';
 export class MapPage implements OnInit {
 
   mapPoints: string;
-  language = 'it';
+  language: string;
 
   constructor(private route: ActivatedRoute, private config: ConfigService, private translate: TranslateService) { 
     this.translate.use(this.language);
   }
 
   ngOnInit() {
+    this.language = window[this.config.getAppModuleName()]['language']
     let points: any = [];
     this.route.queryParams
     .subscribe(params => {

@@ -13,7 +13,7 @@ export class DetailPathPage implements OnInit {
   paths: any;
   showPois: any = [];
   fullPois: any = [];
-  lang = 'it';
+  language: string;
   jsonTabs = JSON.stringify([{ target: 'info', icon: 'info' }, { target: 'place', icon: 'place' }, { target: 'map', icon: 'map' }]);
   tabActived = 'info';
   isLoading = false;
@@ -26,7 +26,9 @@ export class DetailPathPage implements OnInit {
     private dbService: DbService,
     private config: ConfigService,
     private alert: AlertController
-    ) { }
+    ) {
+      this.language = window[this.config.getAppModuleName()]['language'];
+    }
 
   private getPois(path: any) {
     path.steps.forEach(element => {
@@ -79,11 +81,11 @@ export class DetailPathPage implements OnInit {
   }
 
   buildLangPaths() {
-    this.paths.description = this.paths.description[this.lang];
-    this.paths.info = this.paths.info[this.lang];
-    this.paths.subtitle = this.paths.subtitle[this.lang];
-    this.paths.title = this.paths.title[this.lang];
-    this.paths.difficulty = this.paths.difficulty[this.lang];
+    this.paths.description = this.paths.description[this.language];
+    this.paths.info = this.paths.info[this.language];
+    this.paths.subtitle = this.paths.subtitle[this.language];
+    this.paths.title = this.paths.title[this.language];
+    this.paths.difficulty = this.paths.difficulty[this.language];
   }
 
   buildMapPoints() {
@@ -92,8 +94,8 @@ export class DetailPathPage implements OnInit {
         id: element._id,
         lat: element.location[0],
         lon: element.location[1],
-        name: element.title[this.lang],
-        address: element.address[this.lang],
+        name: element.title[this.language],
+        address: element.address[this.language],
         distance: 0 // TOFIX
       });
     });
@@ -117,7 +119,7 @@ export class DetailPathPage implements OnInit {
     const value = input.detail.target.value;
     const _this = this;
     this.showPois = this.fullPois.filter(function(el) {
-      return (el.title[_this.lang].toLowerCase().indexOf(value.toLowerCase()) > -1);
+      return (el.title[_this.language].toLowerCase().indexOf(value.toLowerCase()) > -1);
     });
   }
   filterClicked() {
