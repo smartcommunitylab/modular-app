@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DbService } from '../../services/db.service';
+import { ConfigService } from 'src/app/services/config.service';
 
 @Component({
   selector: 'app-detail-poi',
@@ -10,9 +11,11 @@ import { DbService } from '../../services/db.service';
 export class DetailPoiPage implements OnInit {
   poi: any;
   contacts: any = {};
-  lang = 'it';
+  language: string;
   type: string;
-  constructor(private router: Router, private route: ActivatedRoute, private dbService: DbService) { }
+  constructor(private router: Router, private route: ActivatedRoute, private dbService: DbService, private config: ConfigService) {
+    this.language = window[this.config.getAppModuleName()]['language'];
+   }
 
   ngOnInit() {
     this.route.queryParams
@@ -40,7 +43,7 @@ export class DetailPoiPage implements OnInit {
     });
   }
   buildContacts() {
-    this.contacts['address'] = this.poi.address[this.lang];
+    this.contacts['address'] = this.poi.address[this.language];
     if (this.type === 'POI') {
       if (this.poi.contacts.email && this.poi.contacts.email !== '') {
         this.contacts['email'] = this.poi.contacts.email;
@@ -55,16 +58,16 @@ export class DetailPoiPage implements OnInit {
 
     } else if (this.type === 'EVENT') {
       if (this.poi.eventPeriod) {
-        this.contacts['date'] = this.poi.eventPeriod[this.lang]
+        this.contacts['date'] = this.poi.eventPeriod[this.language]
       }
       if (this.poi.eventTiming) {
-        this.contacts['time'] = this.poi.eventTiming[this.lang]
+        this.contacts['time'] = this.poi.eventTiming[this.language]
       }
       if (this.poi.topics) {
         this.contacts['cat'] = this.poi.topics[0];
       }
-      if (this.poi.cost && this.poi.cost[this.lang] !== '') {
-        this.contacts['price'] = this.poi.cost[this.lang];
+      if (this.poi.cost && this.poi.cost[this.language] !== '') {
+        this.contacts['price'] = this.poi.cost[this.language];
       }
     }
 

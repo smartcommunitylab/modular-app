@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { NavController, AlertController, PopoverController, Events } from '@ionic/angular';
 import { DbService } from '../../services/db.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { PopoverComponent } from 'src/app/shared/popover/popover.component';
 import { TranslateService } from '@ngx-translate/core';
+import { AlertInput } from '@ionic/core';
+import { ConfigService } from 'src/app/services/config.service';
 
 @Component({
   selector: 'app-list-event',
@@ -13,7 +14,7 @@ import { TranslateService } from '@ngx-translate/core';
 export class ListEventPage implements OnInit {
   showPois: any = [];
   fullPois: any = [];
-  language = 'it';
+  language: string;
   category: any;
   private type: string;
   search = false;
@@ -29,11 +30,12 @@ export class ListEventPage implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private alert: AlertController,
-    private popoverController: PopoverController,
+    private config: ConfigService,
     public events: Events,
     private translate: TranslateService
     ) {
-      translate.use(this.language);
+      this.language = window[this.config.getAppModuleName()]['language'];
+     this.translate.use(this.language);
       events.subscribe('radio:selected', x => {
         this.changeCategory(x);
       });
@@ -57,6 +59,7 @@ export class ListEventPage implements OnInit {
         this.subCategories(this.fullPois);
         this.buildShowPois();
         this.isLoading = false;
+        console.log(this.showPois);
       });
     }
     const el = document.getElementById('poi-list');
@@ -150,6 +153,13 @@ export class ListEventPage implements OnInit {
 
   toggleSearch() {
     this.search = !this.search;
+    const searchbar = document.querySelector('ion-searchbar');
+    if (searchbar.style.display === 'none') {
+      searchbar.style.display = 'unset';
+      searchbar.setFocus();
+    } else {
+      searchbar.style.display = 'none';
+    }
   }
 
   searchChanged(input: any) {
@@ -163,14 +173,38 @@ export class ListEventPage implements OnInit {
   }
 
   filterClicked() {
-    this.buildAlert();
+    this.buildAlert('filter');
   }
 
-  async buildAlert() {
+  async buildAlert(type: string) {
     const _this = this;
-    const alert = await this.alert.create({
-      header: 'Ordina per',
-      inputs: [
+    let alInputs: AlertInput[] = [];
+    let title: string;
+    let handlerFunc: any;
+
+    if (type.indexOf('cat') > -1) {
+      handlerFunc = this.changeCategory;
+      title = 'Seleziona categoria';
+      _this.categories.forEach(c => {
+        alInputs.push({
+          name: c,
+          type: 'radio',
+          label: c,
+          value: c,
+          checked: false
+        });
+      });
+      alInputs.push({
+        name: 'tutto',
+        type: 'radio',
+        label: 'Tutto',
+        value: 'Tutto',
+        checked: true
+      });
+    } else {
+      handlerFunc = this.orderArray;
+      title = 'Ordina per';
+      alInputs = [
         {
           name: 'asc',
           type: 'radio',
@@ -185,20 +219,23 @@ export class ListEventPage implements OnInit {
           value: 'desc',
           checked: false
         }
-      ],
+      ];
+    }
+    const alert = await this.alert.create({
+      header: title,
+      inputs: alInputs,
       buttons: [
         {
           text: 'Annulla',
           role: 'cancel',
           cssClass: 'secondary',
           handler: () => {
-            console.log('Modal Closed');
           }
         },
         {
           text: 'OK',
           handler: data => {
-             this.orderArray(data, _this);
+            handlerFunc(data, _this);
           }
         }
       ]
@@ -217,21 +254,22 @@ export class ListEventPage implements OnInit {
     });
   }
 
-  async showPopover() {
-    const popover = await this.popoverController.create({
-      component: PopoverComponent,
-      componentProps: {elements: this.fullCategories, controller: this.popoverController},
-      translucent: true
-    });
-    return await popover.present();
+  showPopover() {
+    this.buildAlert('cat');
+    // const popover = await this.popoverController.create({
+    //   component: PopoverComponent,
+    //   componentProps: {elements: this.fullCategories, controller: this.popoverController},
+    //   translucent: true
+    // });
+    // return await popover.present();
   }
 
-  changeCategory(cat: any) {
-    this.categories = [];
+  changeCategory(cat: any, _this?: any) {
+    _this.categories = [];
     if (cat && cat.indexOf('Tutto') > -1) {
-      this.categories = this.fullCategories;
+      _this.categories = _this.fullCategories;
     } else {
-      this.categories.push(cat);
+      _this.categories.push(cat);
     }
   }
 }

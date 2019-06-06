@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { DbService } from '../../services/db.service';
 import { ConfigService } from 'src/app/services/config.service';
 import { AlertController } from '@ionic/angular';
+import { GeoService } from 'src/app/services/geo.service';
 
 @Component({
   selector: 'app-detail-path',
@@ -13,20 +14,24 @@ export class DetailPathPage implements OnInit {
   paths: any;
   showPois: any = [];
   fullPois: any = [];
-  lang = 'it';
+  language: string;
   jsonTabs = JSON.stringify([{ target: 'info', icon: 'info' }, { target: 'place', icon: 'place' }, { target: 'map', icon: 'map' }]);
   tabActived = 'info';
   isLoading = false;
   mapPoints: any = [];
   search = false;
+  myPos: any = {};
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private dbService: DbService,
     private config: ConfigService,
-    private alert: AlertController
-    ) { }
+    private alert: AlertController,
+    private geoSrv: GeoService
+    ) {
+      this.language = window[this.config.getAppModuleName()]['language'];
+    }
 
   private getPois(path: any) {
     path.steps.forEach(element => {
@@ -48,6 +53,8 @@ export class DetailPathPage implements OnInit {
   }
 
   ngOnInit() {
+    this.myPos.lat = window[this.config.getAppModuleName()]['geolocation']['lat'];
+    this.myPos.lon = window[this.config.getAppModuleName()]['geolocation']['long'];
     this.route.queryParams
       .subscribe(params => {
         if (params) {
@@ -79,11 +86,13 @@ export class DetailPathPage implements OnInit {
   }
 
   buildLangPaths() {
-    this.paths.description = this.paths.description[this.lang];
-    this.paths.info = this.paths.info[this.lang];
-    this.paths.subtitle = this.paths.subtitle[this.lang];
-    this.paths.title = this.paths.title[this.lang];
-    this.paths.difficulty = this.paths.difficulty[this.lang];
+    this.paths.description = this.paths.description[this.language];
+    this.paths.info = this.paths.info[this.language];
+    this.paths.subtitle = this.paths.subtitle[this.language];
+    this.paths.title = this.paths.title[this.language];
+    this.paths.difficulty = this.paths.difficulty[this.language];
+    console.log(this.paths)
+   // this.paths.contacts = {address: this.paths.address}
   }
 
   buildMapPoints() {
@@ -92,14 +101,14 @@ export class DetailPathPage implements OnInit {
         id: element._id,
         lat: element.location[0],
         lon: element.location[1],
-        name: element.title[this.lang],
-        address: element.address[this.lang],
-        distance: 0 // TOFIX
+        name: element.title[this.language],
+        address: element.address[this.language],
+        distance: this.geoSrv.getDistanceKM(this.myPos, {lat: element.location[0], lon: element.location[1]})
       });
     });
     this.mapPoints.push({
-      lat: window[this.config.getAppModuleName()]['geolocation']['lat'],
-      lon: window[this.config.getAppModuleName()]['geolocation']['long'],
+      lat: this.myPos.lat,
+      lon: this.myPos.lon,
       name: 'myPos',
       distance: 0
     });
@@ -117,7 +126,7 @@ export class DetailPathPage implements OnInit {
     const value = input.detail.target.value;
     const _this = this;
     this.showPois = this.fullPois.filter(function(el) {
-      return (el.title[_this.lang].toLowerCase().indexOf(value.toLowerCase()) > -1);
+      return (el.title[_this.language].toLowerCase().indexOf(value.toLowerCase()) > -1);
     });
   }
   filterClicked() {

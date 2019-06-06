@@ -6,6 +6,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { ConfigService } from './services/config.service'
 import { SettingService } from './services/setting.service';
 import { TranslateService } from '@ngx-translate/core';
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html'
@@ -34,10 +35,10 @@ export class AppComponent {
     });
     this.myLanguage = this.setting.getUserLanguage();
     if (this.myLanguage) {
-      
-       this.translate.setDefaultLang(this.myLanguage);
-
-      }
+      window[this.config.getAppModuleName()]['language'] = this.myLanguage;
+      console.log(window[this.config.getAppModuleName()]['language'])
+      this.translate.setDefaultLang(this.myLanguage);
+    }
   }
   sideMenu(): Promise<any> {
     return this.config.loadMenu();

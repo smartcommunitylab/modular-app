@@ -12,13 +12,14 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 export function HttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http, './assets/i18n/comune/', '.json');
+  return new TranslateHttpLoader(http, './assets/comune/i18n/', '.json');
 }
 @NgModule({
   imports: [
     CommonModule,
     HttpClientModule,
-    TranslateModule.forChild({ loader: {
+    TranslateModule.forRoot({
+      loader: {
         provide: TranslateLoader,
         useFactory: HttpLoaderFactory,
         deps: [HttpClient]
