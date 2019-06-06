@@ -4,6 +4,9 @@ import { DbService } from '../../services/db.service';
 import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
 import { PopoverComponent } from 'src/app/shared/popover/popover.component';
 import { TranslateService } from '@ngx-translate/core';
+import { GeoService } from 'src/app/services/geo.service';
+import { ConfigService } from 'src/app/services/config.service';
+import { AlertInput } from '@ionic/core';
 
 @Component({
   selector: 'app-list-rh',
@@ -21,8 +24,10 @@ export class ListRHPage implements OnInit {
   fullCategories: any = [];
   categories: any = [];
   pageTitle: string;
+  mypos: { lat: number, long: number };
 
   constructor(
+    private config: ConfigService,
     public navCtrl: NavController,
     public dbService: DbService,
     public alertCtrl: AlertController,
@@ -31,8 +36,13 @@ export class ListRHPage implements OnInit {
     private alert: AlertController,
     private popoverController: PopoverController,
     public events: Events,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private geoSrv: GeoService
     ) {
+      this.mypos = {
+        lat: window[this.config.getAppModuleName()]['geolocation']['lat'],
+        long: window[this.config.getAppModuleName()]['geolocation']['long']
+      };
       this.translate.use(this.language);
       events.subscribe('radio:selected', x => {
         this.changeCategory(x);
@@ -154,6 +164,13 @@ export class ListRHPage implements OnInit {
 
   toggleSearch() {
     this.search = !this.search;
+    const searchbar = document.querySelector('ion-searchbar');
+    if (searchbar.style.display === 'none') {
+      searchbar.style.display = 'unset';
+      searchbar.setFocus();
+    } else {
+      searchbar.style.display = 'none';
+    }
   }
 
   searchChanged(input: any) {
@@ -167,14 +184,38 @@ export class ListRHPage implements OnInit {
   }
 
   filterClicked() {
-    this.buildAlert();
+    this.buildAlert('filter');
   }
 
-  async buildAlert() {
+  async buildAlert(type: string) {
     const _this = this;
-    const alert = await this.alert.create({
-      header: 'Ordina per',
-      inputs: [
+    let alInputs: AlertInput[] = [];
+    let title: string;
+    let handlerFunc: any;
+
+    if (type.indexOf('cat') > -1) {
+      handlerFunc = this.changeCategory;
+      title = 'Seleziona categoria';
+      _this.categories.forEach(c => {
+        alInputs.push({
+          name: c,
+          type: 'radio',
+          label: c,
+          value: c,
+          checked: false
+        });
+      });
+      alInputs.push({
+        name: 'tutto',
+        type: 'radio',
+        label: 'Tutto',
+        value: 'Tutto',
+        checked: true
+      });
+    } else {
+      title = 'Ordina Per';
+      handlerFunc = this.orderArray;
+      alInputs = [
         {
           name: 'near',
           type: 'radio',
@@ -189,20 +230,23 @@ export class ListRHPage implements OnInit {
           value: 'open',
           checked: false
         }
-      ],
+      ];
+    }
+    const alert = await this.alert.create({
+      header: title,
+      inputs: alInputs,
       buttons: [
         {
           text: 'Annulla',
           role: 'cancel',
           cssClass: 'secondary',
           handler: () => {
-            console.log('Modal Closed');
           }
         },
         {
           text: 'OK',
           handler: data => {
-             this.orderArray(data, _this);
+            handlerFunc(data, _this);
           }
         }
       ]
@@ -212,8 +256,7 @@ export class ListRHPage implements OnInit {
   }
 
   orderArray(condition: string, _this: any) {
-
-    /* TODO: Tempo - Distanza */
+       /* TODO: Tempo - Distanza */
 
     /*_this.categories.forEach(c => {
       if (condition.indexOf('asc') > -1) {
@@ -224,21 +267,16 @@ export class ListRHPage implements OnInit {
     });*/
   }
 
-  async showPopover() {
-    const popover = await this.popoverController.create({
-      component: PopoverComponent,
-      componentProps: {elements: this.fullCategories, controller: this.popoverController},
-      translucent: true
-    });
-    return await popover.present();
+  showPopover() {
+    this.buildAlert('cat');
   }
 
-  changeCategory(cat: any) {
-    this.categories = [];
+  changeCategory(cat: any, _this?: any) {
+    _this.categories = [];
     if (cat && cat.indexOf('Tutto') > -1) {
-      this.categories = this.fullCategories;
+     _this.categories = _this.fullCategories;
     } else {
-      this.categories.push(cat);
+      _this.categories.push(cat);
     }
   }
 
@@ -247,9 +285,16 @@ export class ListRHPage implements OnInit {
     const keys = Object.keys(this.showPois);
     keys.forEach(c => {
       this.showPois[c].forEach(p => {
-        console.log(p)
+       // console.log(p);
         if (p.location) {
-          tmp.push({name: p.title, lat: p.location[0], lon: p.location[1], address: p.address, distance: 0});
+          // Check if distance < 1 km
+          const dist = this.geoSrv.getDistanceKM(
+                {lat: this.mypos.lat, lon: this.mypos.long},
+                {lat: p.location[0], lon: p.location[1]}
+              );
+          if (dist < 1) {
+            tmp.push({name: p.title, lat: p.location[0], lon: p.location[1], address: p.address, distance: dist});
+          }
         }
       });
     });
@@ -259,6 +304,6 @@ export class ListRHPage implements OnInit {
 
   goToMap() {
     this.router.navigate(['/map'], { queryParams: { data: JSON.stringify(this.buildMapPoints()) } } );
-    console.log('CLICKED MAP');
+   // console.log('CLICKED MAP');
   }
 }

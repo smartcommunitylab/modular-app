@@ -17,7 +17,7 @@
 
 <ion-content>
   
-    <ion-searchbar style="display: none" showCancelButton animated (ionInput)="searchChanged($event)" (ionCancel)="toggleSearch()"></ion-searchbar>
+    <ion-searchbar style="display: none" showCancelButton animated (search)="toggleSearch()" (ionInput)="searchChanged($event)" (ionCancel)="toggleSearch()"></ion-searchbar>
       
     <!-- FLOATING BUTTON -->
     <ion-fab *ngIf="!isLoading" class="fixed" vertical="bottom" horizontal="start" slot="fixed">

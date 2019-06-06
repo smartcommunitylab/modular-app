@@ -178,8 +178,12 @@ export class ListEventPage implements OnInit {
   async buildAlert(type: string) {
     const _this = this;
     let alInputs: AlertInput[] = [];
+    let title: string;
+    let handlerFunc: any;
 
     if (type.indexOf('cat') > -1) {
+      handlerFunc = this.changeCategory;
+      title = 'Seleziona categoria';
       _this.categories.forEach(c => {
         alInputs.push({
           name: c,
@@ -197,6 +201,8 @@ export class ListEventPage implements OnInit {
         checked: true
       });
     } else {
+      handlerFunc = this.orderArray;
+      title = 'Ordina per';
       alInputs = [
         {
           name: 'asc',
@@ -215,7 +221,7 @@ export class ListEventPage implements OnInit {
       ];
     }
     const alert = await this.alert.create({
-      header: 'Ordina per',
+      header: title,
       inputs: alInputs,
       buttons: [
         {
@@ -228,7 +234,7 @@ export class ListEventPage implements OnInit {
         {
           text: 'OK',
           handler: data => {
-             this.orderArray(data, _this);
+            handlerFunc(data, _this);
           }
         }
       ]
@@ -257,12 +263,12 @@ export class ListEventPage implements OnInit {
     // return await popover.present();
   }
 
-  changeCategory(cat: any) {
-    this.categories = [];
+  changeCategory(cat: any, _this?: any) {
+    _this.categories = [];
     if (cat && cat.indexOf('Tutto') > -1) {
-      this.categories = this.fullCategories;
+      _this.categories = _this.fullCategories;
     } else {
-      this.categories.push(cat);
+      _this.categories.push(cat);
     }
   }
 }
