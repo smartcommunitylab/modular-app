@@ -60,12 +60,12 @@ export class GeoService {
     const dLat = this.degreesToRadians(second.lat - first.lat);
     const dLon = this.degreesToRadians(second.lon - first.lon);
 
-    first.lat = this.degreesToRadians(first.lat);
-    second.lat = this.degreesToRadians(second.lat);
+    const lat1 = this.degreesToRadians(first.lat);
+    const lat2 = this.degreesToRadians(second.lat);
 
     const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-            Math.sin(dLon / 2) * Math.sin(dLon / 2) * Math.cos(first.lat) * Math.cos(second.lat);
+            Math.sin(dLon / 2) * Math.sin(dLon / 2) * Math.cos(lat1) * Math.cos(lat2);
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    return Math.round((earthRadiusKm * c) * 100) / 100;
+    return Math.round((earthRadiusKm * c) * 1000) / 1000;
   }
 }

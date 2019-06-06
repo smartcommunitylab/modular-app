@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { DbService } from '../../services/db.service';
 import { ConfigService } from 'src/app/services/config.service';
 import { AlertController } from '@ionic/angular';
+import { GeoService } from 'src/app/services/geo.service';
 
 @Component({
   selector: 'app-detail-path',
@@ -19,13 +20,15 @@ export class DetailPathPage implements OnInit {
   isLoading = false;
   mapPoints: any = [];
   search = false;
+  myPos: any = {};
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private dbService: DbService,
     private config: ConfigService,
-    private alert: AlertController
+    private alert: AlertController,
+    private geoSrv: GeoService
     ) {
       this.language = window[this.config.getAppModuleName()]['language'];
     }
@@ -50,6 +53,8 @@ export class DetailPathPage implements OnInit {
   }
 
   ngOnInit() {
+    this.myPos.lat = window[this.config.getAppModuleName()]['geolocation']['lat'];
+    this.myPos.lon = window[this.config.getAppModuleName()]['geolocation']['long'];
     this.route.queryParams
       .subscribe(params => {
         if (params) {
@@ -96,12 +101,12 @@ export class DetailPathPage implements OnInit {
         lon: element.location[1],
         name: element.title[this.language],
         address: element.address[this.language],
-        distance: 0 // TOFIX
+        distance: this.geoSrv.getDistanceKM(this.myPos, {lat: element.location[0], lon: element.location[1]})
       });
     });
     this.mapPoints.push({
-      lat: window[this.config.getAppModuleName()]['geolocation']['lat'],
-      lon: window[this.config.getAppModuleName()]['geolocation']['long'],
+      lat: this.myPos.lat,
+      lon: this.myPos.lon,
       name: 'myPos',
       distance: 0
     });
