@@ -91,6 +91,8 @@ export class DetailPathPage implements OnInit {
     this.paths.subtitle = this.paths.subtitle[this.language];
     this.paths.title = this.paths.title[this.language];
     this.paths.difficulty = this.paths.difficulty[this.language];
+    console.log(this.paths)
+   // this.paths.contacts = {address: this.paths.address}
   }
 
   buildMapPoints() {
