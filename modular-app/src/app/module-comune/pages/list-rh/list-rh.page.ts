@@ -33,6 +33,7 @@ export class ListRHPage implements OnInit {
     public events: Events,
     private translate: TranslateService
     ) {
+      this.translate.use(this.language);
       events.subscribe('radio:selected', x => {
         this.changeCategory(x);
       });

@@ -10,7 +10,6 @@ import { routing } from './lazy.routing';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { ListEventPageModule } from './pages/list-event/list-event.module';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/comune/i18n/', '.json');
@@ -19,15 +18,15 @@ export function HttpLoaderFactory(http: HttpClient) {
   imports: [
     CommonModule,
     HttpClientModule,
-    TranslateModule.forRoot({ loader: {
+    TranslateModule.forRoot({
+      loader: {
         provide: TranslateLoader,
         useFactory: HttpLoaderFactory,
         deps: [HttpClient]
       },
       isolate: true
     }),
-    routing,
-    ListEventPageModule
+    routing
   ],
   declarations: [
     PoiComponent, // private and public

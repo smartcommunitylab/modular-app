@@ -62,7 +62,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent],
- // schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 
 export class AppModule { }

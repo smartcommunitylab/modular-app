@@ -4,6 +4,7 @@ import { DbService } from '../../services/db.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { PopoverComponent } from 'src/app/shared/popover/popover.component';
 import { TranslateService } from '@ngx-translate/core';
+import { AlertInput } from '@ionic/core';
 
 @Component({
   selector: 'app-list-event',
@@ -57,7 +58,7 @@ export class ListEventPage implements OnInit {
         this.subCategories(this.fullPois);
         this.buildShowPois();
         this.isLoading = false;
-        console.log(this.showPois)
+        console.log(this.showPois);
       });
     }
     const el = document.getElementById('poi-list');
@@ -151,6 +152,13 @@ export class ListEventPage implements OnInit {
 
   toggleSearch() {
     this.search = !this.search;
+    const searchbar = document.querySelector('ion-searchbar');
+    if (searchbar.style.display === 'none') {
+      searchbar.style.display = 'unset';
+      searchbar.setFocus();
+    } else {
+      searchbar.style.display = 'none';
+    }
   }
 
   searchChanged(input: any) {
@@ -164,14 +172,32 @@ export class ListEventPage implements OnInit {
   }
 
   filterClicked() {
-    this.buildAlert();
+    this.buildAlert('filter');
   }
 
-  async buildAlert() {
+  async buildAlert(type: string) {
     const _this = this;
-    const alert = await this.alert.create({
-      header: 'Ordina per',
-      inputs: [
+    let alInputs: AlertInput[] = [];
+
+    if (type.indexOf('cat') > -1) {
+      _this.categories.forEach(c => {
+        alInputs.push({
+          name: c,
+          type: 'radio',
+          label: c,
+          value: c,
+          checked: false
+        });
+      });
+      alInputs.push({
+        name: 'tutto',
+        type: 'radio',
+        label: 'Tutto',
+        value: 'Tutto',
+        checked: true
+      });
+    } else {
+      alInputs = [
         {
           name: 'asc',
           type: 'radio',
@@ -186,14 +212,17 @@ export class ListEventPage implements OnInit {
           value: 'desc',
           checked: false
         }
-      ],
+      ];
+    }
+    const alert = await this.alert.create({
+      header: 'Ordina per',
+      inputs: alInputs,
       buttons: [
         {
           text: 'Annulla',
           role: 'cancel',
           cssClass: 'secondary',
           handler: () => {
-            console.log('Modal Closed');
           }
         },
         {
@@ -218,13 +247,14 @@ export class ListEventPage implements OnInit {
     });
   }
 
-  async showPopover() {
-    const popover = await this.popoverController.create({
-      component: PopoverComponent,
-      componentProps: {elements: this.fullCategories, controller: this.popoverController},
-      translucent: true
-    });
-    return await popover.present();
+  showPopover() {
+    this.buildAlert('cat');
+    // const popover = await this.popoverController.create({
+    //   component: PopoverComponent,
+    //   componentProps: {elements: this.fullCategories, controller: this.popoverController},
+    //   translucent: true
+    // });
+    // return await popover.present();
   }
 
   changeCategory(cat: any) {

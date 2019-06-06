@@ -6,6 +6,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { ConfigService } from './services/config.service'
 import { SettingService } from './services/setting.service';
 import { TranslateService } from '@ngx-translate/core';
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html'
