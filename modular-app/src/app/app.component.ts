@@ -53,6 +53,6 @@ export class AppComponent {
     return this.config.loadMenu();
   }
   getPageTitle(page) {
-    return page.title[this.setting.getUserLanguage()];
+    return page.title[window[this.config.getAppModuleName()]['language']];
   }
 }
