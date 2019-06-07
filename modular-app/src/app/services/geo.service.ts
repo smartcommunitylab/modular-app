@@ -51,10 +51,10 @@ export class GeoService {
     this.isWatching = false;
     this.watchLocationUpdates.unsubscribe();
   }
-  private degreesToRadians(degrees) {
+  private degreesToRadians(degrees): number {
     return degrees * Math.PI / 180;
   }
-  getDistanceKM(first: {lat: number, lon: number}, second: {lat: number, lon: number}) {
+  getDistanceKM(first: {lat: number, lon: number}, second: {lat: number, lon: number}): number {
     const earthRadiusKm = 6371;
 
     const dLat = this.degreesToRadians(second.lat - first.lat);

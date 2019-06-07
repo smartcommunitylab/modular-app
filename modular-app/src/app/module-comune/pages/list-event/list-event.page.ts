@@ -247,9 +247,9 @@ export class ListEventPage implements OnInit {
   orderArray(condition: string, _this: any) {
     _this.categories.forEach(c => {
       if (condition.indexOf('asc') > -1) {
-        _this.showPois[c] = this.fullPois.sort(function(a, b) { return a.title.localeCompare(b.title); });
+        _this.showPois[c] = _this.showPois[c].sort(function(a, b) { return a.title.localeCompare(b.title); });
       } else {
-        _this.showPois[c] = this.fullPois.sort(function(a, b) { return b.title.localeCompare(a.title); });
+        _this.showPois[c] = _this.showPois[c].sort(function(a, b) { return b.title.localeCompare(a.title); });
       }
     });
   }

@@ -247,7 +247,7 @@ export class ListRHPage implements OnInit {
         {
           text: 'OK',
           handler: data => {
-            handlerFunc(data, _this);
+            handlerFunc(data, this);
           }
         }
       ]
@@ -257,15 +257,23 @@ export class ListRHPage implements OnInit {
   }
 
   orderArray(condition: string, _this: any) {
-       /* TODO: Tempo - Distanza */
-
-    /*_this.categories.forEach(c => {
-      if (condition.indexOf('asc') > -1) {
-        _this.showPois[c] = this.fullPois.sort(function(a, b) { return a.title.localeCompare(b.title); });
-      } else {
-        _this.showPois[c] = this.fullPois.sort(function(a, b) { return b.title.localeCompare(a.title); });
-      }
-    });*/
+    _this.isLoading = true;
+    if (condition.indexOf('near') > -1) {
+      _this.categories.forEach(c => {
+        _this.showPois[c] = _this.showPois[c].sort(function(a, b) {
+          let dist1 = 0;
+          let dist2 = 0;
+          if (a.location) {
+            dist1 = _this.geoSrv.getDistanceKM({lat: _this.mypos.lat, lon: _this.mypos.long}, {lat: a.location[0], lon: a.location[1]});
+          }
+          if (b.location) {
+            dist2 = _this.geoSrv.getDistanceKM({lat: _this.mypos.lat, lon: _this.mypos.long}, {lat: b.location[0], lon: b.location[1]});
+          }
+          return dist1 - dist2;
+        });
+      });
+    }
+    _this.isLoading = false;
   }
 
   showPopover() {
