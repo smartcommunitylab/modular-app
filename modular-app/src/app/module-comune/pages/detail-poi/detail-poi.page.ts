@@ -21,11 +21,8 @@ export class DetailPoiPage implements OnInit {
     this.route.queryParams
       .subscribe(params => {
         if (params.objectIds) {
-          this.manageoLcalId(params.objectIds)
-        }
-        // const id = params.id.split(';')[0]
-        // console.log(params); // {order: "popular"}
-         else if (params) {
+          this.manageoLcalId(params.objectIds);
+        } else if (params) {
           this.type = params.type;
           this.dbService.getObjectById(params.id).then(data => {
             this.poi = data.docs[0];
@@ -35,15 +32,18 @@ export class DetailPoiPage implements OnInit {
       });
   }
   manageoLcalId(objectIds) {
-    if (objectIds.length==1)
-    this.dbService.getObjectByDataId(objectIds[0]).then(data => {
-      this.poi = data.docs[0];
-      this.type =data.docs[0].fromTime? "EVENT":"POI";
-      this.buildContacts();
-    });
+    if (objectIds.length == 1) {
+      this.dbService.getObjectByDataId(objectIds[0]).then(data => {
+        this.poi = data.docs[0];
+        this.type = data.docs[0].fromTime ? 'EVENT' : 'POI';
+        this.buildContacts();
+      });
+    }
   }
   buildContacts() {
-    this.contacts['address'] = this.poi.address[this.language];
+    if (this.contacts) {
+      this.contacts['address'] = this.poi.address[this.language];
+    }
     if (this.type === 'POI') {
       if (this.poi.contacts.email && this.poi.contacts.email !== '') {
         this.contacts['email'] = this.poi.contacts.email;
@@ -58,10 +58,10 @@ export class DetailPoiPage implements OnInit {
 
     } else if (this.type === 'EVENT') {
       if (this.poi.eventPeriod) {
-        this.contacts['date'] = this.poi.eventPeriod[this.language]
+        this.contacts['date'] = this.poi.eventPeriod[this.language];
       }
       if (this.poi.eventTiming) {
-        this.contacts['time'] = this.poi.eventTiming[this.language]
+        this.contacts['time'] = this.poi.eventTiming[this.language];
       }
       if (this.poi.topics) {
         this.contacts['cat'] = this.poi.topics[0];

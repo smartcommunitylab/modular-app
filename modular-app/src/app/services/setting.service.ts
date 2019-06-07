@@ -11,28 +11,29 @@ export class SettingService {
     // if (localStorage.getItem("comune-setting"))
     //   this.getUserSetting()
   }
-  setUserLanguage(selectedLanguage: any): any {
-    this.setting["language"] = selectedLanguage;
-    this.setUserSetting(this.setting);
-  }
-  setting: any =[];
+  setting: any = [];
   languages: any = {
-    "it": "Italiano",
-    "en": "English",
-    "de": "Deutch"
+    'it': 'Italiano',
+    'en': 'English',
+    'de': 'Deutch'
+  };
+  setUserLanguage(selectedLanguage: any): any {
+    this.setting['language'] = selectedLanguage;
+    this.setUserSetting(this.setting);
   }
 
   getUserSetting(): any {
-    if (this.setting)
+    if (this.setting) {
       return this.setting;
-    this.setting = JSON.parse(localStorage.getItem("comune-setting"));
+    }
+    this.setting = JSON.parse(localStorage.getItem('comune-setting'));
   }
   setUserSetting(setting) {
-    localStorage.setItem("comune-setting", JSON.stringify(setting));
-    this.setting = JSON.parse(localStorage.getItem("comune-setting"));
+    localStorage.setItem('comune-setting', JSON.stringify(setting));
+    this.setting = JSON.parse(localStorage.getItem('comune-setting'));
   }
   getUserLanguage() {
-    return this.setting["language"];
+    return this.setting['language'];
   }
   getLanguages() {
     return this.languages;
@@ -40,27 +41,36 @@ export class SettingService {
 
   Init(): Promise<any> {
     return new Promise<void>((resolve, reject) => {
-      var language;
-      var baseSetting;
+      let language;
+      let baseSetting;
       if (!localStorage.getItem('comune-setting')) {
 
         baseSetting = {};
+        console.log(navigator);
         language = navigator.language;
-        baseSetting["language"] = language;
+        if (language.indexOf('it') > -1) {
+          language = 'it';
+        }
+        if (language.indexOf('en') > -1) {
+          language = 'en';
+        }
+        if (language.indexOf('de') > -1) {
+          language = 'de';
+        }
+        baseSetting['language'] = language;
         this.setting = baseSetting;
         this.setUserSetting(this.setting);
-      }
-      else {
+      } else {
         baseSetting = JSON.parse(localStorage.getItem('comune-setting'));
         this.setting = baseSetting;
-        language = baseSetting["language"];
+        language = baseSetting['language'];
       }
       if (!window[this.config.getAppModuleName()]) {
-        window[this.config.getAppModuleName()] = {}
+        window[this.config.getAppModuleName()] = {};
       }
-      window[this.config.getAppModuleName()]["language"] = language;
+      window[this.config.getAppModuleName()]['language'] = language;
       resolve();
-    })
+    });
   }
 
 

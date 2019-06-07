@@ -33,10 +33,19 @@ export class AppComponent {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
-    this.myLanguage = this.setting.getUserLanguage();
+    this.myLanguage =  this.setting.getUserLanguage();
     if (this.myLanguage) {
+      if (this.myLanguage.indexOf('it') > -1) {
+        this.myLanguage = 'it';
+      }
+      if (this.myLanguage.indexOf('en') > -1) {
+        this.myLanguage = 'en';
+      }
+      if (this.myLanguage.indexOf('de') > -1) {
+        this.myLanguage = 'de';
+      }
       window[this.config.getAppModuleName()]['language'] = this.myLanguage;
-      console.log(window[this.config.getAppModuleName()]['language'])
+      console.log(window[this.config.getAppModuleName()]['language']);
       this.translate.setDefaultLang(this.myLanguage);
     }
   }

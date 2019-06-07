@@ -23,6 +23,7 @@ export class HomeCommonPage implements OnInit {
     public alertCtrl: AlertController,
     public translate: TranslateService,
     private utils: UtilsService) {
+      this.language = window[this.config.getAppModuleName()]['language'];
       translate.use(this.language); // SET DEFAULT LANGUAGE
   }
   ngOnInit() {
