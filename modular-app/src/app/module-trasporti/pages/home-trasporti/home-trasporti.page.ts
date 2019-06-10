@@ -18,7 +18,7 @@ export class HomeTrasportiPage extends MainPage implements OnInit {
  
   async ngOnInit() {
     const loading = await this.loadingController.create();
-    await loading.present();
+    //await loading.present();
     this.dbService.Init().then(function() {
       loading.dismiss();
     }, function(err){

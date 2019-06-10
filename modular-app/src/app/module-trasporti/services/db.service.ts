@@ -34,7 +34,8 @@ export class DbService {
   }
 
   getDBFileShortName() {
-    return "routesdb_" + this.config.getAppId();
+    return "routesdb_" + this.config.getAppId() + ".db";
+    // return "data.db";
   };
 
   getDBPath() {
@@ -65,36 +66,68 @@ export class DbService {
   doWithDB(successcallback, errorcallback) {
     var that = this;
     if (this.db == null) {
-      // this.sqlite.create({
-      //   name: this.getDBFileShortName(),
-      //   location: 'default'
-      // }).then((db: SQLiteObject) => {
-      //   this.db = db;
-      //   successcallback();
-      // }).catch(e => errorcallback());
-      (<any>window).sqlitePlugin.openDatabase({ name: this.getDBFileShortName(), location: 'default', createFromLocation: 1 }, function (db) {
-        that.db = db;
-        successcallback();
-      }, function (err) {
-        err => errorcallback()
-      });
 
-      // this.db = this.db.sqlitePlugin({
-      //   name: this.getDBFileShortName(),
-      //   bgType: 1,
-      //   skipBackup: true,
-      //   iosDatabaseLocation: 'Documents'
-      // }, function (dbres) {
-      //   (this.db = dbres;
-      //   successcallback();
-      // }, function () {
-      //   console.log('DBOPEN ERROR');
-      //   errorcallback();
-      // });
+    // (<any>window).plugins.sqlDB.remove(this.getDBFileShortName(), 0, function deleteSuccess() {
+    //   console.log('deleted')
+    // }, function deleteError(error) {
+    // });
+
+    //let self = this;
+    (<any>window).plugins.sqlDB.copy(this.getDBFileShortName(), 0, () => {
+      console.log('copied');
+      (<any>window).sqlitePlugin.openDatabase({
+      // this.sqlite.create({
+        name: this.getDBFileShortName(),
+        location: 'default'
+      },  (db) => {
+        that.db=db;
+        db.executeSql("select * from version", [], (res) => {
+          console.log(JSON.stringify(res))
+          successcallback();
+        },(e) => {
+          console.log(JSON.stringify(e));
+          errorcallback();
+        });
+      })
+      
+    },(err) => {
+      console.log(err);
+      if (err.code=516){
+        (<any>window).sqlitePlugin.openDatabase({
+            name: this.getDBFileShortName(),
+            location: 'default'
+          },  (db) => {
+            that.db=db;
+            db.executeSql("select * from version", [], (res) => {
+              console.log(JSON.stringify(res))
+              successcallback();
+            },(e) => {
+              console.log(JSON.stringify(e));
+              errorcallback();
+            });
+          })
+      }
+    })
+    // var that = this;
+    // if (this.db == null) {
+    //   this.sqlite.create({
+    //     name: this.getDBFileShortName(),
+    //     location: 'default'
+    //   }).then((db: SQLiteObject) => {
+    //     that.db = db;
+    //     let  queryNames = "SELECT * FROM testTable";
+    //     db.executeSql(queryNames,[]).then((data) => {
+    //       console.log(data);
+    //       successcallback();
+    //     },err => {
+    //       console.log(err);
+    //     })
+    //   }).catch(e => errorcallback());
     } else {
       successcallback();
     }
-  };
+   // }
+    };
 
   size(obj) {
     var size = 0,
@@ -129,11 +162,14 @@ export class DbService {
   openDB(successcallback, errorcallback) {
     var that = this;
     var _do = function () {
-      (that.db.executeSql("select * from version", [], function (res) {
+      that.db.executeSql("select * from version", [],(res) => {
+        console.log(JSON.stringify(res))
         var data = that.convertData(res);
         successcallback(data);
-      }, errorcallback));
-
+      },(e) => {
+        console.log(JSON.stringify(e));
+        errorcallback();
+      });
     };
     this.doWithDB(_do, errorcallback);
 
@@ -328,11 +364,12 @@ export class DbService {
     var that = this;
     var deferred = new Promise((resolve, reject) => {
       var _do = function () {
-        that.db.executeSql(query, params, function (res) {
+        that.db.executeSql(query, params,(res) => {
           var data = that.convertData(res);
           resolve(data);
-        }, function (err) {
-          reject(err);
+                },(e) => {
+          console.log(JSON.stringify(e));
+          reject(e);
         });
         //                  cordovaSQLite.execQuerySingleResult(query, params,
         //                      function(result) {
