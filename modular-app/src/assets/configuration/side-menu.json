@@ -239,4 +239,13 @@
     },
     "url": "/credits",
     "icon": "information"
+  },
+  {
+    "title": {
+      "it": "Pulizia strade",
+      "en": "streets",
+      "de": "strasse"
+    },
+    "url": "/home-ps",
+    "icon": "information"
   }]

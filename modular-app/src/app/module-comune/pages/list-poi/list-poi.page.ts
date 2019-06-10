@@ -11,7 +11,7 @@ import { ConfigService } from 'src/app/services/config.service';
 })
 export class ListPoiPage implements OnInit {
   pois: any = [];
-  language:string;
+  language: string;
   category: any;
   private type: string;
   constructor(public navCtrl: NavController, public dbService: DbService, public alertCtrl: AlertController,

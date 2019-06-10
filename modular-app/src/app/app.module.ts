@@ -15,6 +15,7 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { ConfigService } from './services/config.service';
 import { PopoverComponent } from './shared/popover/popover.component';
+import { ModulePulstradeModule } from './module-pulstrade/module-pulstrade.module';
 
 export function initializeAppSetting(appInitService: SettingService) {
   return (): Promise<any> => {
@@ -49,7 +50,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     }),
     IonicModule.forRoot(),
     ComuneModule.forRoot(),
-    AppRoutingModule
+    AppRoutingModule,
+    ModulePulstradeModule.forRoot()
   ],
   providers: [
     StatusBar,
