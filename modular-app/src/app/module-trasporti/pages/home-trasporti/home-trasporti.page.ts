@@ -33,8 +33,5 @@ export class HomeTrasportiPage extends MainPage implements OnInit {
       this.primaryLinks = res;
     })
   }
-  // go(link) {
 
-  //   console.log(link);
-  // }
 }

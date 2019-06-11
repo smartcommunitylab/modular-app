@@ -35,7 +35,6 @@ export class DbService {
 
   getDBFileShortName() {
     return "routesdb_" + this.config.getAppId() + ".db";
-    // return "data.db";
   };
 
   getDBPath() {
@@ -67,67 +66,45 @@ export class DbService {
     var that = this;
     if (this.db == null) {
 
-    // (<any>window).plugins.sqlDB.remove(this.getDBFileShortName(), 0, function deleteSuccess() {
-    //   console.log('deleted')
-    // }, function deleteError(error) {
-    // });
-
-    //let self = this;
-    (<any>window).plugins.sqlDB.copy(this.getDBFileShortName(), 0, () => {
-      console.log('copied');
-      (<any>window).sqlitePlugin.openDatabase({
-      // this.sqlite.create({
-        name: this.getDBFileShortName(),
-        location: 'default'
-      },  (db) => {
-        that.db=db;
-        db.executeSql("select * from version", [], (res) => {
-          console.log(JSON.stringify(res))
-          successcallback();
-        },(e) => {
-          console.log(JSON.stringify(e));
-          errorcallback();
-        });
-      })
-      
-    },(err) => {
-      console.log(err);
-      if (err.code=516){
+      (<any>window).plugins.sqlDB.copy(this.getDBFileShortName(), 0, () => {
+        console.log('copied');
         (<any>window).sqlitePlugin.openDatabase({
+          // this.sqlite.create({
+          name: this.getDBFileShortName(),
+          location: 'default'
+        }, (db) => {
+          that.db = db;
+          db.executeSql("select * from version", [], (res) => {
+            console.log(JSON.stringify(res))
+            successcallback();
+          }, (e) => {
+            console.log(JSON.stringify(e));
+            errorcallback();
+          });
+        })
+
+      }, (err) => {
+        console.log(err);
+        if (err.code = 516) {
+          (<any>window).sqlitePlugin.openDatabase({
             name: this.getDBFileShortName(),
             location: 'default'
-          },  (db) => {
-            that.db=db;
+          }, (db) => {
+            that.db = db;
             db.executeSql("select * from version", [], (res) => {
               console.log(JSON.stringify(res))
               successcallback();
-            },(e) => {
+            }, (e) => {
               console.log(JSON.stringify(e));
               errorcallback();
             });
           })
-      }
-    })
-    // var that = this;
-    // if (this.db == null) {
-    //   this.sqlite.create({
-    //     name: this.getDBFileShortName(),
-    //     location: 'default'
-    //   }).then((db: SQLiteObject) => {
-    //     that.db = db;
-    //     let  queryNames = "SELECT * FROM testTable";
-    //     db.executeSql(queryNames,[]).then((data) => {
-    //       console.log(data);
-    //       successcallback();
-    //     },err => {
-    //       console.log(err);
-    //     })
-    //   }).catch(e => errorcallback());
+        }
+      })
     } else {
       successcallback();
     }
-   // }
-    };
+  };
 
   size(obj) {
     var size = 0,
@@ -144,11 +121,6 @@ export class DbService {
     if (res.rows.length > 0) {
       rowsize = this.size(res.rows.item(0));
       for (var i = 0; i < res.rows.length; i++) {
-        //          var rowArray = [];
-        //          var row = res.rows.item(i);
-        //          for (var key in row) {
-        //            rowArray.p
-        //          }
         var row = res.rows.item(i);
         if (rowsize == 1) {
           for (var k in row) data.push(row[k]);
@@ -162,11 +134,11 @@ export class DbService {
   openDB(successcallback, errorcallback) {
     var that = this;
     var _do = function () {
-      that.db.executeSql("select * from version", [],(res) => {
+      that.db.executeSql("select * from version", [], (res) => {
         console.log(JSON.stringify(res))
         var data = that.convertData(res);
         successcallback(data);
-      },(e) => {
+      }, (e) => {
         console.log(JSON.stringify(e));
         errorcallback();
       });
@@ -187,12 +159,8 @@ export class DbService {
         console.log("Reading ZIP file");
         JSZip.support.nodebuffer = false;
         var jszipobj = new JSZip(data);
-        // var jszip = new JSZip();
-        // jszip.loadAsync(data).then(function (jszipobj) {
+
         Object.keys(jszipobj.files).forEach(function (key) {
-          // this.file.listDir('file:///', this.file.dataDirectory)
-          // .then(_ => console.log('Directory exists'))
-          // .catch(err => console.log('Directory doesnt exist'));
           that.file.createFile(that.getDBPath(), that.getDBFileShortName(), true)
             .then(function (success) {
               var f = jszipobj.file(key);
@@ -200,7 +168,7 @@ export class DbService {
                 that.file.writeFile(that.getDBPath(), that.getDBFileShortName(), jszipobj.file(key).asArrayBuffer())
                   .then(function (success) {
                     console.log('success copy');
-                    that.db = null;
+                    // that.db = null;
                     resolve(true);
 
                   }, function (error) {
@@ -364,10 +332,10 @@ export class DbService {
     var that = this;
     var deferred = new Promise((resolve, reject) => {
       var _do = function () {
-        that.db.executeSql(query, params,(res) => {
+        that.db.executeSql(query, params, (res) => {
           var data = that.convertData(res);
           resolve(data);
-                },(e) => {
+        }, (e) => {
           console.log(JSON.stringify(e));
           reject(e);
         });
