@@ -132,7 +132,7 @@ export class WcDetails {
             {(this.contactsJSON)?((this.contactsJSON.date)?this.contactsJSON.date:''):''} {(this.contactsJSON)?((this.contactsJSON.time)?this.contactsJSON.time:''):''}
           </div>
           <div class="address">
-            {this.contactsJSON.address}
+            {(this.contactsJSON)?this.contactsJSON.address:''}
           </div>
           {this.showTags()}
           <div class="text" innerHTML={this.text}>

@@ -80,9 +80,10 @@ export class WcTabs {
         if (element.name !== 'myPos') {
           leaflet.marker([element.lat, element.lon], { icon: poiIcon }).addTo(map)
             .on('click', function () {
+              const text = element.address + "<p>Distanza: " + element.distance + " Km";
               var modal = document.querySelector('wc-modal')
               modal.setAttribute('data', element.id);
-              modal.setAttribute('text', element.address);
+              modal.setAttribute('text', text);
               modal.setAttribute('title', element.name);
               modal.setAttribute('btn-text', 'Dettagli');
               modal.setAttribute('shown', 'true');

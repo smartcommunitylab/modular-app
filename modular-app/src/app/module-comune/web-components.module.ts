@@ -9,30 +9,33 @@ import { ConfigService } from '../services/config.service';
 import { routing } from './lazy.routing';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { HttpClient,HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 export function HttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
+  return new TranslateHttpLoader(http, './assets/comune/i18n/', '.json');
 }
 @NgModule({
   imports: [
     CommonModule,
     HttpClientModule,
-    TranslateModule.forChild({ loader: {
-      provide: TranslateLoader,
-      useFactory: HttpLoaderFactory,
-      deps: [HttpClient]
-    }}),
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      },
+      isolate: true
+    }),
     routing
   ],
   declarations: [
-    PoiComponent, //private and public
+    PoiComponent, // private and public
     PathComponent,
     TabsComponent,
     MapComponent
   ],
   exports: [
-    PoiComponent, //private and public
+    PoiComponent, // private and public
     PathComponent,
     TabsComponent,
     MapComponent

@@ -4,7 +4,7 @@
         <ion-back-button></ion-back-button>
       </ion-buttons>
     <ion-title>
-        {{pageTitle}}
+        {{'EVENTS' | translate}}
       </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -17,7 +17,7 @@
 
 <ion-content>
   
-    <ion-searchbar *ngIf="search" showCancelButton animated (ionInput)="searchChanged($event)" (ionCancel)="toggleSearch()"></ion-searchbar>
+    <ion-searchbar style="display: none" showCancelButton animated (search)="toggleSearch()" (ionInput)="searchChanged($event)" (ionCancel)="toggleSearch()"></ion-searchbar>
       
     <!-- FLOATING BUTTON -->
     <ion-fab *ngIf="!isLoading" class="fixed" vertical="bottom" horizontal="start" slot="fixed">

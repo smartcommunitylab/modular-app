@@ -2,7 +2,7 @@
   {
     "id": "profile_cit_2cc4db1674d9e8994658eac954355d31",
     "name": {
-      "it": "Discover",
+      "it": "Scopri",
       "en": "Discover",
       "de": "Discover"
     },
@@ -13,7 +13,7 @@
   {
     "id": "profile_cit_csvimport_Visitare_item_comuneintasca",
     "name": {
-      "it": "Highlilghts",
+      "it": "Visitare",
       "en": "Highlilghts",
       "de": "Highlilghts"
     },
@@ -24,41 +24,40 @@
   {
     "id": "profile_cit_csvimport_Mangiare_e_dormire_item_comuneintasca",
     "name": {
-      "it": "Restaurants & Hotel",
+      "it": "Ristoranti & Alberghi",
       "en": "Restaurants & Hotel",
       "de": "Restaurants & Hotel"
     },
-    "url": "/list-categories",
-    "icon": "home",
-    "type": "R&H"
+    "url": "/list-rh",
+    "icon": "home"
+    
 
   },
   {
     "id": "profile_cit_csvimport_Eventi_item_comuneintasca",
     "name": {
-      "it": "Events",
+      "it": "Eventi",
       "en": "Events",
       "de": "Events"
     },
-    "url": "/list-categories",
+    "url": "/list-event",
     "icon": "home",
-    "type": "EVENT"
-
+    "params": {"selector": {"element-type": "event-item"}}
   },
   {
     "name": {
-      "it": "Touristic Itineraties",
+      "it": "Percorsi Turistici",
       "en": "Touristic Itineraties",
       "de": "Touristic Itineraties"
     },
-    "url": "/list-categories",
+    "url": "/list-path",
     "icon": "home",
-    "type": "PATH"
+    "params":{"selector": {"element-type": "itinerary-item"}, "type": "itineraries"}
 
   },
   {
     "name": {
-      "it": "Useful Information",
+      "it": "Informazioni",
       "en": "Useful Information",
       "de": "Useful Information"
     },
@@ -68,7 +67,7 @@
   },
   {
     "name": {
-      "it": "Favorites",
+      "it": "Preferiti",
       "en": "Favorites",
       "de": "Favorites"
     },
@@ -79,7 +78,7 @@
   
   {
     "name": {
-      "it": "Setting",
+      "it": "Impostazioni",
       "en": "Setting",
       "de": "Setting"
     },
@@ -88,7 +87,7 @@
 
   },{
     "name": {
-      "it": "Credits",
+      "it": "Crediti",
       "en": "Credits",
       "de": "Credits"
     },

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { SettingService } from '../../services/setting.service'
+import { SettingService } from '../../services/setting.service';
 import { TranslateService,  DefaultLangChangeEvent } from '@ngx-translate/core';
+import { ConfigService } from 'src/app/services/config.service';
 
 @Component({
   selector: 'app-setting',
@@ -14,8 +15,9 @@ export class SettingPage implements OnInit {
   myLanguage: any;
   selectedLanguage: any;
   form: any;
-  title:string;
-  constructor(private settingService: SettingService,private translate: TranslateService) {
+  title: string;
+  constructor(private settingService: SettingService, private translate: TranslateService, private config: ConfigService) {
+    this.translate.use(window[this.config.getAppModuleName()]['language']);
     this.setLanguages();
 
   }
@@ -23,20 +25,20 @@ export class SettingPage implements OnInit {
   ngOnInit() {
     this.translate.get('title_app').subscribe(
       value => {
-        this.title= value;
+        this.title = value;
       }
-    )
+    );
     this.translate.onDefaultLangChange.subscribe((event: DefaultLangChangeEvent) => {
       this.translate.get('title_app').subscribe(
         value => {
-          this.title= value;
+          this.title = value;
         }
-      )
+      );
 
     });
   }
 
-  ionViewDidLoad(){
+  ionViewDidLoad() {
 
 
   }
@@ -44,20 +46,20 @@ export class SettingPage implements OnInit {
     this.setting = this.settingService.getUserSetting();
     this.myLanguage = this.settingService.getUserLanguage();
     if (this.myLanguage) {
-       this.selectedLanguage = this.myLanguage 
+       this.selectedLanguage = this.myLanguage;
        this.translate.setDefaultLang(this.selectedLanguage);
 
       }
-    var languages = this.settingService.getLanguages();
+    const languages = this.settingService.getLanguages();
     if (languages) {
-      let keys = Array.from(Object.keys(languages));
+      const keys = Array.from(Object.keys(languages));
 
       this.languages = keys.map(element => {
         return {
-          "key": element,
-          "value": languages[element]
-        }
-      })
+          'key': element,
+          'value': languages[element]
+        };
+      });
     }
   }
   onLanguageChanged(data) {

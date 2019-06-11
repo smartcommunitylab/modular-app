@@ -7,6 +7,9 @@ import { IonicModule } from '@ionic/angular';
 
 import { ListEventPage } from './list-event.page';
 import { TranslateModule } from '@ngx-translate/core';
+import { HttpClient } from '@angular/common/http';
+import { TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 const routes: Routes = [
   {
@@ -14,13 +17,19 @@ const routes: Routes = [
     component: ListEventPage
   }
 ];
-
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http, './assets/comune/i18n/', '.json');
+}
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    TranslateModule,
+    TranslateModule.forRoot({ loader: {
+      provide: TranslateLoader,
+      useFactory: HttpLoaderFactory,
+      deps: [HttpClient]
+    }}),
     RouterModule.forChild(routes)
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],

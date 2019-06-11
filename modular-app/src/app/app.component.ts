@@ -6,6 +6,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { ConfigService } from './services/config.service'
 import { SettingService } from './services/setting.service';
 import { TranslateService } from '@ngx-translate/core';
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html'
@@ -32,17 +33,26 @@ export class AppComponent {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
-    this.myLanguage = this.setting.getUserLanguage();
+    this.myLanguage =  this.setting.getUserLanguage();
     if (this.myLanguage) {
-      
-       this.translate.setDefaultLang(this.myLanguage);
-
+      if (this.myLanguage.indexOf('it') > -1) {
+        this.myLanguage = 'it';
       }
+      if (this.myLanguage.indexOf('en') > -1) {
+        this.myLanguage = 'en';
+      }
+      if (this.myLanguage.indexOf('de') > -1) {
+        this.myLanguage = 'de';
+      }
+      window[this.config.getAppModuleName()]['language'] = this.myLanguage;
+      console.log(window[this.config.getAppModuleName()]['language']);
+      this.translate.setDefaultLang(this.myLanguage);
+    }
   }
   sideMenu(): Promise<any> {
     return this.config.loadMenu();
   }
   getPageTitle(page) {
-    return page.title[this.setting.getUserLanguage()];
+    return page.title[window[this.config.getAppModuleName()]['language']];
   }
 }

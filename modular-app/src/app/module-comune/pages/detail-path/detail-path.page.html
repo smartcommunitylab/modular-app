@@ -4,7 +4,7 @@
           <ion-back-button></ion-back-button>
         </ion-buttons>
       <ion-title>
-          PATH-Details
+          Dettaglio Percorso
         </ion-title>
     </ion-toolbar>
   </ion-header>
@@ -41,7 +41,7 @@
             </ion-fab>
             <!-- ------------------------------- -->
             <div *ngFor="let poi of showPois">
-                <wc-path-list-el type="POI" [id]="poi._id" [img]="poi.image" [title]="poi.title[lang]" [text]="poi.subtitle[lang]" main-color="red"></wc-path-list-el>
+                <wc-path-list-el type="POI" [id]="poi._id" [img]="poi.image" [title]="poi.title[language]" [text]="poi.subtitle[language]" main-color="red"></wc-path-list-el>
             </div>
         </div>
       </div>

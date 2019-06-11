@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavController, AlertController } from '@ionic/angular';
 import { DbService } from '../../services/db.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { ConfigService } from 'src/app/services/config.service';
 
 @Component({
   selector: 'app-list-poi',
@@ -10,11 +11,12 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class ListPoiPage implements OnInit {
   pois: any = [];
-  language = 'it';
+  language:string;
   category: any;
   private type: string;
   constructor(public navCtrl: NavController, public dbService: DbService, public alertCtrl: AlertController,
-    private router: Router, private route: ActivatedRoute) {
+    private router: Router, private route: ActivatedRoute, private config: ConfigService) {
+      this.language = window[this.config.getAppModuleName()]['language'];
   }
 
 

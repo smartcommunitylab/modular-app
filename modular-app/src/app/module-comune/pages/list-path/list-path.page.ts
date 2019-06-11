@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavController, AlertController } from '@ionic/angular';
 import { DbService } from '../../services/db.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-list-path',
@@ -13,7 +14,8 @@ export class ListPathPage implements OnInit {
   language = 'it';
   category: any;
   constructor(public navCtrl: NavController, public dbService: DbService, public alertCtrl: AlertController,
-    private router: Router, private route: ActivatedRoute) {
+    private router: Router, private route: ActivatedRoute, private translate: TranslateService) {
+      this.translate.use(this.language);
   }
   ngOnInit() {
     this.route.queryParams

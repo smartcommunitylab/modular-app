@@ -221,7 +221,7 @@
       "en": "Favourites",
       "de": "Information"
     },
-    "url": "/detail-poi",
+    "url": "/favourites",
     "icon": "information"
   },{
     "title": {
@@ -229,14 +229,14 @@
       "en": "Setting",
       "de": "Information"
     },
-    "url": "/detail-poi",
-    "icon": "information"
+    "url": "/setting",
+    "icon": "cog"
   },{
     "title": {
       "it": "Credits",
       "en": "Credits",
       "de": "Information"
     },
-    "url": "/detail-poi",
+    "url": "/credits",
     "icon": "information"
   }]

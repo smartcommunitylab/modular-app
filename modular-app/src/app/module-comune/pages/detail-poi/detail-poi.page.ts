@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DbService } from '../../services/db.service';
+import { ConfigService } from 'src/app/services/config.service';
 
 @Component({
   selector: 'app-detail-poi',
@@ -10,19 +11,18 @@ import { DbService } from '../../services/db.service';
 export class DetailPoiPage implements OnInit {
   poi: any;
   contacts: any = {};
-  lang = 'it';
+  language: string;
   type: string;
-  constructor(private router: Router, private route: ActivatedRoute, private dbService: DbService) { }
+  constructor(private router: Router, private route: ActivatedRoute, private dbService: DbService, private config: ConfigService) {
+    this.language = window[this.config.getAppModuleName()]['language'];
+   }
 
   ngOnInit() {
     this.route.queryParams
       .subscribe(params => {
         if (params.objectIds) {
-          this.manageoLcalId(params.objectIds)
-        }
-        // const id = params.id.split(';')[0]
-        // console.log(params); // {order: "popular"}
-         else if (params) {
+          this.manageoLcalId(params.objectIds);
+        } else if (params) {
           this.type = params.type;
           this.dbService.getObjectById(params.id).then(data => {
             this.poi = data.docs[0];
@@ -32,15 +32,18 @@ export class DetailPoiPage implements OnInit {
       });
   }
   manageoLcalId(objectIds) {
-    if (objectIds.length==1)
-    this.dbService.getObjectByDataId(objectIds[0]).then(data => {
-      this.poi = data.docs[0];
-      this.type =data.docs[0].fromTime? "EVENT":"POI";
-      this.buildContacts();
-    });
+    if (objectIds.length == 1) {
+      this.dbService.getObjectByDataId(objectIds[0]).then(data => {
+        this.poi = data.docs[0];
+        this.type = data.docs[0].fromTime ? 'EVENT' : 'POI';
+        this.buildContacts();
+      });
+    }
   }
   buildContacts() {
-    this.contacts['address'] = this.poi.address[this.lang];
+    if (this.contacts) {
+      this.contacts['address'] = this.poi.address[this.language];
+    }
     if (this.type === 'POI') {
       if (this.poi.contacts.email && this.poi.contacts.email !== '') {
         this.contacts['email'] = this.poi.contacts.email;
@@ -55,16 +58,16 @@ export class DetailPoiPage implements OnInit {
 
     } else if (this.type === 'EVENT') {
       if (this.poi.eventPeriod) {
-        this.contacts['date'] = this.poi.eventPeriod[this.lang]
+        this.contacts['date'] = this.poi.eventPeriod[this.language];
       }
       if (this.poi.eventTiming) {
-        this.contacts['time'] = this.poi.eventTiming[this.lang]
+        this.contacts['time'] = this.poi.eventTiming[this.language];
       }
       if (this.poi.topics) {
         this.contacts['cat'] = this.poi.topics[0];
       }
-      if (this.poi.cost && this.poi.cost[this.lang] !== '') {
-        this.contacts['price'] = this.poi.cost[this.lang];
+      if (this.poi.cost && this.poi.cost[this.language] !== '') {
+        this.contacts['price'] = this.poi.cost[this.language];
       }
     }
 

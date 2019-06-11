@@ -4,7 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
 
-    // { path: '', redirectTo: 'home-page', pathMatch: 'full' },
+    { path: '', redirectTo: 'home-common', pathMatch: 'full' },
     { path: 'home-page', loadChildren: './pages/home/home.module#HomePageModule' },
     { path: 'map', loadChildren: './pages/map/map.module#MapModule' },
     { path: 'list-path', loadChildren: './pages/list-path/list-path.module#ListPathPageModule' },
@@ -15,6 +15,7 @@ const routes: Routes = [
     { path: 'detail-path', loadChildren: './pages/detail-path/detail-path.module#DetailPathPageModule' },
     { path: 'list-categories', loadChildren: './pages/list-categories/list-categories.module#ListCategoriesPageModule' },
     { path: 'detail-path', loadChildren: './pages/detail-path/detail-path.module#DetailPathPageModule' },
-    { path: 'detail-info', loadChildren: './pages/detail-info/detail-info.module#DetailInfoPageModule' }  ];
+    { path: 'detail-info', loadChildren: './pages/detail-info/detail-info.module#DetailInfoPageModule' }
+];
 
 export const routing: ModuleWithProviders = RouterModule.forChild(routes);
