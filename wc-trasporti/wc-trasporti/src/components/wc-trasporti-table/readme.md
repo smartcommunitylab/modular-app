@@ -7,11 +7,17 @@
 
 ## Properties
 
-| Property | Attribute | Description | Type     | Default     |
-| -------- | --------- | ----------- | -------- | ----------- |
-| `citta`  | `citta`   |             | `string` | `undefined` |
-| `data`   | `data`    |             | `string` | `undefined` |
-| `numero` | `numero`  |             | `string` | `undefined` |
+| Property        | Attribute       | Description | Type      | Default     |
+| --------------- | --------------- | ----------- | --------- | ----------- |
+| `accessibility` | `accessibility` |             | `boolean` | `undefined` |
+| `arrows`        | `arrows`        |             | `boolean` | `undefined` |
+| `citta`         | `citta`         |             | `string`  | `undefined` |
+| `color`         | `color`         |             | `string`  | `undefined` |
+| `data`          | `data`          |             | `string`  | `undefined` |
+| `day`           | `day`           |             | `string`  | `undefined` |
+| `font`          | `font`          |             | `string`  | `undefined` |
+| `numero`        | `numero`        |             | `string`  | `undefined` |
+| `title`         | `title`         |             | `string`  | `undefined` |
 
 
 ----------------------------------------------

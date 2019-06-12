@@ -1,4 +1,7 @@
-import { Component, Prop, State, Element } from '@stencil/core';
+import { Component, Prop, State, Element,Event, EventEmitter } from '@stencil/core';
+import '@ionic/core';
+import moment from 'moment';
+
 
 @Component({
   tag: 'wc-trasporti-table',
@@ -13,7 +16,18 @@ export class AppHome {
   @State() orari: string;
   @Prop() numero: string;
   @Prop() citta: string;
+  @Prop() title: string;
+  @Prop() day: string;
+  @Prop() arrows: boolean;
+  @Prop() font: string;
+  @Prop() accessibility: boolean;
+  @Prop() color: string;
+  @Event() changeDate: EventEmitter;
+
   @Element() private element: HTMLElement;
+  private titleBar: any;
+  private subtitleBar: any;
+
 
   componentWillLoad() {
     this.dataTT = JSON.parse(this.data);
@@ -46,6 +60,20 @@ export class AppHome {
     // loop over NodeList as per https://css-tricks.com/snippets/javascript/loop-queryselectorall-matches/
     const list = this.element.querySelectorAll('li.my-list');
     [].forEach.call(list, li => li.style.color = 'red');
+
+    this.setStyle();
+  }
+  setStyle(): any {
+    this.titleBar = this.element.querySelector('#titleBar');
+    if (this.titleBar) {
+      this.titleBar.style.backgroundColor = this.color;
+      this.titleBar.style.color = this.textColor(this.color);
+    }
+    this.subtitleBar = this.element.querySelector('#subtitleBar');
+    if (this.subtitleBar) {
+      this.subtitleBar.style.backgroundColor = this.color;
+      this.subtitleBar.style.color = this.textColor(this.color);
+    }
   }
 
   StampaOrari(param) {
@@ -116,18 +144,61 @@ export class AppHome {
   visualizza(oggetto: any): string {
     return oggetto;
   }
+  prevDate() {
+    console.log("prevDate");
+    this.changeDate.emit('prevDate');
+  }
+  nextDate() {
+    console.log("nextDate");
+    this.changeDate.emit('nextDate');
+  }
+  textColor(color) {
+    if (this.isDarkColor(color)) return '#fff';
+    return '#000';
+  };
+  isDarkColor(color) {
+    if (!color) return true;
+    var c = color.substring(1); // strip #
+    var rgb = parseInt(c, 16); // convert rrggbb to decimal
+    var r = (rgb >> 16) & 0xff; // extract red
+    var g = (rgb >> 8) & 0xff; // extract green
+    var b = (rgb >> 0) & 0xff; // extract blue
+
+    var luma = (r + g + b) / 3; //0.2126 * r + 0.7152 * g + 0.0722 * b; // per ITU-R BT.709
+
+    return luma < 128;
+  };
   render() {
     return [
-      <table>
-        <tr>
-          <td id="fermate">
-            <div id="listaFermate" onScroll={((event) => this.scrollOrari(event))}> <div id="contentFermate" innerHTML={this.visualizza(this.fermate)} ></div></div>
-          </td>
-          <td id="orari" >
-            <div id='myDIV' onScroll={((event) => this.scrollOrari(event))}> <div id='content' innerHTML={this.visualizza(this.orari)} ></div></div>
-          </td>
-        </tr>
-      </table>
+      <div>
+        <div id="header-table">
+
+          <div class="row titleBar">
+            <div class="col tt-subtitle">{this.title}</div>
+          </div>
+          <ion-row class="day-bar">
+            <ion-col  size="1" class="col col-25 tt-day btn" onClick={() => this.prevDate()}><ion-icon name="arrow-dropleft"></ion-icon>
+            </ion-col>
+            <ion-col size="10"  class="col col-50 tt-day">{this.formatDate(this.day, 'ddd')} {this.formatDate(this.day, 'D/M/YYYY')}</ion-col>
+            <ion-col size="1"  class="col col-25 tt-day btn" onClick={() => this.nextDate()}><ion-icon name="arrow-dropright"></ion-icon>
+            </ion-col>
+          </ion-row>
+        </div>
+        <table>
+          <tr>
+            <td id="fermate">
+              <div id="listaFermate" onScroll={((event) => this.scrollOrari(event))}> <div id="contentFermate" innerHTML={this.visualizza(this.fermate)} ></div></div>
+            </td>
+            <td id="orari" >
+              <div id='myDIV' onScroll={((event) => this.scrollOrari(event))}> <div id='content' innerHTML={this.visualizza(this.orari)} ></div></div>
+            </td>
+          </tr>
+        </table>
+      </div>
     ];
+  }
+  formatDate(day: string, format): any {
+    // console.log(moment(day).format(format))
+    return moment(Number(day)).format(format);
   }
 }

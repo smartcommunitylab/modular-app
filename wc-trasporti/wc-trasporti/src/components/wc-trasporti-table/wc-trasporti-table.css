@@ -105,3 +105,32 @@
     --top-fermate-dim: 200px;
     --blocca-barra: none;
   }
+
+  .tt-day {
+    font-size: 20px;
+    line-height: 40px;
+    text-align: center;
+    padding: 0;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  
+  .tt-day.btn {
+    font-size: 30px;
+  }
+  
+  .tt-day.btn a:active,
+  .tt-day.btn a:hover,
+  .tt-day.btn a:focus,
+  .tt-day.btn a.activated {
+    opacity: 0.5;
+  }
+  .tt-subtitle {
+    text-align: center;
+  }
+  .titleBar {
+    background-color: red;
+  }
+  .day-bar {
+    background-color: blue;
+  }

@@ -7,20 +7,34 @@
 
 import '@stencil/core';
 
-
+import '@ionic/core';
+import 'ionicons';
 
 
 export namespace Components {
 
   interface WcTrasportiTable {
+    'accessibility': boolean;
+    'arrows': boolean;
     'citta': string;
+    'color': string;
     'data': string;
+    'day': string;
+    'font': string;
     'numero': string;
+    'title': string;
   }
   interface WcTrasportiTableAttributes extends StencilHTMLAttributes {
+    'accessibility'?: boolean;
+    'arrows'?: boolean;
     'citta'?: string;
+    'color'?: string;
     'data'?: string;
+    'day'?: string;
+    'font'?: string;
     'numero'?: string;
+    'onChangeDate'?: (event: CustomEvent) => void;
+    'title'?: string;
   }
 }
 
