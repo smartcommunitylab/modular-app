@@ -7,9 +7,15 @@ import { HttpClient } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { ConfigService } from '../services/config.service';
 import { appInitialize } from './app-initialize';
+import { MapService } from './services/map.service';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/strade/i18n/', '.json');
+}
+export function initializeAppMap(mapSrv: MapService) {
+  return (): Promise<any> => {
+    return mapSrv.Init();
+  };
 }
 
 @NgModule({
@@ -25,6 +31,10 @@ export function HttpLoaderFactory(http: HttpClient) {
       },
       isolate: true
     })
+  ],
+  providers: [
+    MapService,
+    { provide: APP_INITIALIZER, useFactory: initializeAppMap, deps: [MapService], multi: true },
   ],
   entryComponents: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

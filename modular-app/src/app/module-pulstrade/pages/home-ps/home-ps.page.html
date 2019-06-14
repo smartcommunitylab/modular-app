@@ -4,11 +4,25 @@
         <ion-back-button></ion-back-button>
       </ion-buttons>
     <ion-title>
-        Pulizia Strade
-      </ion-title>
+       {{'HOME' | translate}}
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
-  <h1>Home PULSTRADE</h1>
+  <div class="map" style="height:300px; border:1px solid black">
+    <div id="home-map"></div>
+  </div>
+  <ion-button expand="block" color="primary" (click)="goToLink('search')">{{'SEARCH' | translate}}</ion-button>
+  <ion-button expand="block" color="primary" (click)="goToLink('calendar')">{{'CALENDAR' | translate}}</ion-button>
+  <ion-button expand="block" color="primary" (click)="goToLink('notify')">{{'NOTIFY' | translate}}</ion-button>
 </ion-content>
+
+
+<ion-tab-bar slot="bottom">
+  <ion-tab-button tab="home-common" (click)="goToLink('home-common')">
+    <ion-label>Home</ion-label>
+    <ion-icon name="home"></ion-icon>
+  </ion-tab-button>
+</ion-tab-bar>
+

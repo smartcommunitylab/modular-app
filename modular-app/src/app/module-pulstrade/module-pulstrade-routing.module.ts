@@ -3,7 +3,8 @@ import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home-common', pathMatch: 'full' },
-  { path: 'home-ps', loadChildren: './pages/home-ps/home-ps.module#HomePagePSModule' },
+  { path: 'ps', loadChildren: './pages/home-ps/home-ps.module#HomePagePSModule' },
+  { path: 'ps/home-common', redirectTo: 'home-common', pathMatch: 'full'},
 ];
 
 @NgModule({

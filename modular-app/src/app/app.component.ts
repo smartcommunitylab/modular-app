@@ -45,7 +45,6 @@ export class AppComponent {
         this.myLanguage = 'de';
       }
       window[this.config.getAppModuleName()]['language'] = this.myLanguage;
-      console.log(window[this.config.getAppModuleName()]['language']);
       this.translate.setDefaultLang(this.myLanguage);
     }
   }
