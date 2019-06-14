@@ -45,6 +45,7 @@
     "params": {"selector": {"element-type": "event-item"}}
   },
   {
+    "id": "a",
     "name": {
       "it": "Percorsi Turistici",
       "en": "Touristic Itineraties",
@@ -52,10 +53,17 @@
     },
     "url": "/list-path",
     "icon": "home",
-    "params":{"selector": {"element-type": "itinerary-item"}, "type": "itineraries"}
+    "params": {
+      "selector": {
+        "element-type": "itinerary-item"
+      },
+      "type": "itineraries"
+    }
 
   },
   {
+    "id": "b",
+
     "name": {
       "it": "Informazioni",
       "en": "Useful Information",
@@ -66,6 +74,8 @@
 
   },
   {
+    "id": "c",
+
     "name": {
       "it": "Preferiti",
       "en": "Favorites",
@@ -75,8 +85,10 @@
     "icon": "star"
 
   },
-  
+
   {
+    "id": "d",
+
     "name": {
       "it": "Impostazioni",
       "en": "Setting",
@@ -85,7 +97,9 @@
     "url": "/setting",
     "icon": "home"
 
-  },{
+  }, {
+    "id": "e",
+
     "name": {
       "it": "Crediti",
       "en": "Credits",

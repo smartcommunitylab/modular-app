@@ -15,7 +15,8 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { ConfigService } from './services/config.service';
 import { PopoverComponent } from './shared/popover/popover.component';
-
+import { DragulaModule } from 'ng2-dragula';
+import { DelayDragDirective } from './directives/delay-drag.directive';
 export function initializeAppSetting(appInitService: SettingService) {
   return (): Promise<any> => {
     return appInitService.Init();
@@ -40,6 +41,7 @@ export function HttpLoaderFactory(http: HttpClient) {
   imports: [
     HttpClientModule,
     BrowserModule,
+    DragulaModule.forRoot(),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

@@ -5,6 +5,8 @@ import { TranslateService } from '@ngx-translate/core';
 import { ConfigService } from '../../services/config.service';
 import { elementAttribute } from '@angular/core/src/render3';
 import { UtilsService } from '../../services/utils.service';
+import { DragulaService } from 'ng2-dragula';
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-home-common',
   templateUrl: 'home-common.page.html',
@@ -12,19 +14,45 @@ import { UtilsService } from '../../services/utils.service';
 })
 
 export class HomeCommonPage implements OnInit {
+  editMode = false;
   categories: any = [];
+  allCategories: any = [];
   elementsGallery: string[] = null;
   pois: any = [];
   language = 'it';
   elementsGalleryStr: string;
+  subs = new Subscription();
+
   constructor(public navCtrl: NavController,
     private config: ConfigService,
     private router: Router,
     public alertCtrl: AlertController,
     public translate: TranslateService,
+    private dragulaService:DragulaService,
+    
     private utils: UtilsService) {
-      this.language = window[this.config.getAppModuleName()]['language'];
-      translate.use(this.language); // SET DEFAULT LANGUAGE
+    this.language = window[this.config.getAppModuleName()]['language'];
+    translate.use(this.language); // SET DEFAULT LANGUAGE
+    this.subs.add(dragulaService.dropModel('entries')
+      .subscribe(({ el, target, source, sourceModel, targetModel, item }) => {
+        console.log('dropModel:');
+        console.log(el);
+        console.log(source);
+        console.log(target);
+        console.log(sourceModel);
+        console.log(targetModel);
+        console.log(item);
+      })
+    );
+    this.subs.add(dragulaService.removeModel('entries')
+      .subscribe(({ el, source, item, sourceModel }) => {
+        console.log('removeModel:');
+        console.log(el);
+        console.log(source);
+        console.log(sourceModel);
+        console.log(item);
+      })
+    );
   }
   ngOnInit() {
   }
@@ -32,6 +60,19 @@ export class HomeCommonPage implements OnInit {
   ionViewDidEnter() {
     this.elementsGallery = [];
     this.categories = this.config.getModuleEntries().map(x => this.convertCategories(x));
+    this.config.getAllModuleEntries().then(res => {
+      this.allCategories = res.map(x => this.convertCategories(x));
+      this.allCategories = this.allCategories.filter(( el ) =>{
+        //solo gli elementi non presenti nell'array categories.
+        var present = this.categories.filter(element => {
+          console.log(element.id );
+          return element.id === el.id});
+        if (present.length==0)
+          return true
+          return false;
+      }) 
+
+    })
     console.log(this.categories);
     this.elementsGallery = this.config.getCarousel().map(x => this.convertGallery(x));
     window.addEventListener('categorySelected', category => {
@@ -42,7 +83,9 @@ export class HomeCommonPage implements OnInit {
       this.goToItem(item['detail']);
     });
   }
-
+  ngOnDestroy() {
+    this.subs.unsubscribe();
+  }
   convertGallery(x) {
     const galleryElement: any = {};
 
@@ -60,8 +103,8 @@ export class HomeCommonPage implements OnInit {
     if (x.id) {
       categoryElement.id = x.id;
     }
-    if (x.name) {
-      categoryElement.name = x.name[this.language];
+    if (x.name ) {
+      categoryElement.name = x.name ;
     }
     if (x.icon) {
       categoryElement.icon = x.icon;
@@ -95,6 +138,13 @@ export class HomeCommonPage implements OnInit {
   }
   goToItem(item) {
     console.log(item);
+  }
+  saveHome() {
+    this.editMode = false;
+    this.config.storeModuleEntries(this.categories);
+  }
+  editHome() {
+    this.editMode = true;
   }
   openElement(element) {
     if (element.url && element.objectIds) {
