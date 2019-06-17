@@ -1,17 +1,36 @@
 <ion-header no-border>
   <ion-toolbar color="secondary">
     <ion-buttons slot="start">
-        <ion-back-button></ion-back-button>
-      </ion-buttons>
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
     <ion-title>
-       {{'HOME' | translate}}
+      {{'HOME' | translate}}
     </ion-title>
   </ion-toolbar>
 </ion-header>
+
+
+<ion-row>
+  <ion-col>
+    <ion-item class="calButton" (click)="dayBack()">
+      <ion-icon name="arrow-round-back"></ion-icon>
+    </ion-item>
+  </ion-col>
+  <ion-col>
+    <ion-item>
+      <ion-datetime (ionChange)="setDate($event)" class="date" display-format="DD-MM-YYYY" picker-format="DD MM YYYY" [value]="showDate"></ion-datetime>
+    </ion-item>
+  </ion-col>
+  <ion-col>
+    <ion-item class="calButton" (click)="dayForward()">
+      <ion-icon name="arrow-round-forward"></ion-icon>
+    </ion-item>
+  </ion-col>
+</ion-row>
+
 
 <ion-content padding>
   <div class="map">
     <div id="home-map"></div>
   </div>
 </ion-content>
-

@@ -20,6 +20,8 @@ export class HomePage implements OnInit {
   streets: any;
   map: any;
   selectedDate: Date;
+  showDate: string;
+  mapCenter: any = [];
   constructor(private translate: TranslateService,
     private config: ConfigService,
     private router: Router,
@@ -34,7 +36,8 @@ export class HomePage implements OnInit {
 
   ngOnInit() {
     this.selectedDate = new Date();
-    console.log(this.selectedDate.toDateString());
+    this.showDate = this.selectedDate.toISOString();
+    this.mapCenter = [this.myPos.lat, this.myPos.long];
     this.streets = this.mapSrv.getData();
     console.log(this.streets);
     this.buildMap();
@@ -46,22 +49,19 @@ export class HomePage implements OnInit {
     } else {
       this.router.navigate([this.router.url + '/' + path]);
     }
-    console.log(path);
   }
 
   buildMap() {
-    let center = [this.myPos.lat, this.myPos.long];
-    this.map = new leaflet.Map('home-map', { zoomControl: false, attributionControl: false }).setView(center, 15);
+    this.map = new leaflet.Map('home-map', { zoomControl: false, attributionControl: false }).setView(this.mapCenter, 15);
     const _this = this;
     this.map.on('dragend', function (e) {
-      center = [e.target.getCenter().lat, e.target.getCenter().lng];
-      _this.buildPolyline(center);
+      this.mapCenter = [e.target.getCenter().lat, e.target.getCenter().lng];
+      _this.buildPolyline(this.mapCenter);
     });
     this.map.on('zoomend', function (e) {
-      center = [e.target.getCenter().lat, e.target.getCenter().lng];
-      _this.buildPolyline(center);
+      this.mapCenter = [e.target.getCenter().lat, e.target.getCenter().lng];
+      _this.buildPolyline(this.mapCenter);
     });
-
 
     const mainIcon = leaflet.icon({
       iconUrl: 'assets/strade/icons/myMark.png',
@@ -78,7 +78,7 @@ export class HomePage implements OnInit {
       // attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(this.map);
 
-    this.buildPolyline(center);
+    this.buildPolyline(this.mapCenter);
   }
 
   buildPolyline(center) {
@@ -90,19 +90,23 @@ export class HomePage implements OnInit {
         { lat: s.centralCoords[0]['lat'], lon: s.centralCoords[0]['lng'] }
       );
 
-      this.selectedDate = new Date(Date.parse('Wed May 15 2019'));
+      const inDate = (this.selectedDate.getDate() === new Date(s.cleaningDay).getDate());
+      const color = (inDate) ? 'red' : 'green';
 
-      const inDate = (this.selectedDate.setHours(0, 0, 0, 0) === new Date(s.startingTime).setHours(0, 0, 0, 0));
+      const freeStreetContent =
+        `Non sono previste pulizie in data <br/><b>${this.datePipe.transform(this.selectedDate, 'dd/MM/yyyy')}</b> per<br/>
+        <b> ${s.streetName}</b>`;
+      const closedStreetContent = `<b>${s.streetName}</b><br/>Divieto di sosta dalle <b>${new Date(s.stopStartingTime).getHours()}</b> alle
+        <b> ${new Date(s.stopEndingTime).getHours()}</b> in data <br/>
+        <b>${this.datePipe.transform(this.selectedDate, 'dd/MM/yyyy')}</b>`;
 
       if ((dist < ((18 % this.map.getZoom()) - 1) || dist < 0.3)) {
-        const popupContent = (inDate) ? s.streetName : 'Non sono previste pulizie in data <br/><b>'
-          + this.datePipe.transform(this.selectedDate, 'dd/MM/yyyy') + '</b> per <b>' + s.streetName + '</b>';
+        const popupContent = (inDate) ? closedStreetContent : freeStreetContent;
 
-        const polyline = leaflet.polyline(s.polylines, { color: 'red' }).addTo(this.map);
+        const polyline = leaflet.polyline(s.polylines, { color: color }).addTo(this.map);
         polyline.bindPopup(popupContent);
       }
     });
-    console.log(Object.keys(this.map._layers).length);
   }
   clearPolyline(m) {
     for (const i in m._layers) {
@@ -114,5 +118,22 @@ export class HomePage implements OnInit {
         }
       }
     }
+  }
+
+  dayBack() {
+    this.selectedDate.setDate(this.selectedDate.getDate() - 1);
+    this.showDate = this.selectedDate.toISOString();
+    this.mapCenter = [this.map.getCenter().lat, this.map.getCenter().lng];
+    this.buildPolyline(this.mapCenter);
+  }
+  dayForward() {
+    this.selectedDate.setDate(this.selectedDate.getDate() + 1);
+    this.showDate = this.selectedDate.toISOString();
+    this.buildPolyline(this.mapCenter);
+  }
+  setDate(event: any) {
+    this.selectedDate = new Date(event.detail.value);
+    this.showDate = this.selectedDate.toISOString();
+    this.buildPolyline(this.mapCenter);
   }
 }
