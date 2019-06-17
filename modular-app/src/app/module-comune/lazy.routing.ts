@@ -4,7 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
 
-    { path: '', redirectTo: 'home-common', pathMatch: 'full' },
+   // { path: '', redirectTo: 'home-common', pathMatch: 'full' },
     { path: 'home-page', loadChildren: './pages/home/home.module#HomePageModule' },
     { path: 'map', loadChildren: './pages/map/map.module#MapModule' },
     { path: 'list-path', loadChildren: './pages/list-path/list-path.module#ListPathPageModule' },
