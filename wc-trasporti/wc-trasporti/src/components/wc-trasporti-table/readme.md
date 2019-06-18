@@ -20,6 +20,13 @@
 | `title`         | `title`         |             | `string`  | `undefined` |
 
 
+## Events
+
+| Event        | Description | Type                |
+| ------------ | ----------- | ------------------- |
+| `changeDate` |             | `CustomEvent<void>` |
+
+
 ----------------------------------------------
 
 *Built with [StencilJS](https://stenciljs.com/)*

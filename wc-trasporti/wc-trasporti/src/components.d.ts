@@ -21,6 +21,8 @@ export namespace Components {
     'data': string;
     'day': string;
     'font': string;
+    'labeldelay': string;
+    'labeltrips': string;
     'numero': string;
     'title': string;
   }
@@ -32,8 +34,11 @@ export namespace Components {
     'data'?: string;
     'day'?: string;
     'font'?: string;
+    'labeldelay'?: string;
+    'labeltrips'?: string;
     'numero'?: string;
-    'onChangeDate'?: (event: CustomEvent) => void;
+    'onChangeDateEvent'?: (event: CustomEvent) => void;
+    'onShowStopEvent'?: (event: CustomEvent) => void;
     'title'?: string;
   }
 }

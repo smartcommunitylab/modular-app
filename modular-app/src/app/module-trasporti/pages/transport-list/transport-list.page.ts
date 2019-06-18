@@ -56,11 +56,11 @@ export class TransportListPage implements OnInit {
       if (!this.groupId){
         this.groupId="no-group";
       }
-      this.router.navigate(['/tt',e.ref,e.agencyId,this.groupId,e.route.routeSymId]);
+      this.router.navigate(['/tt',e.ref,e.agencyId,this.groupId,e.route.routeSymId,e.title]);
 
       // group with single route: go to table
     } else if (e.group.routes != null && e.group.routes.length == 1) {
-      this.router.navigate(['/tt',e.ref,e.agencyId,e.group.label,e.group.routes[0].routeSymId]);
+      this.router.navigate(['/tt',e.ref,e.agencyId,e.group.label,e.group.routes[0].routeSymId,e.title]);
 
       // group with multiple elements: go to group
     } else {

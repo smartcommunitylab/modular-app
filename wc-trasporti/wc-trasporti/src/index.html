@@ -11,7 +11,8 @@
 
 <body>
   <div>
-    <wc-trasporti-table data='{
+
+    <wc-trasporti-table id='myDIV' data='{
     "stops": ["Piazza Dante \"Stazione Fs\"", "Rosmini S.Maria Maggiore", "Travai Al Nuoto / Muse",
       "Piazza di Fiera", "S.Francesco Porta Nuova", "Venezia \"Port aquila\"", "Venezia Cave",
       "Venezia \"Corallo\"", "Ponte Lodovico", "San Donà", "San Donà \"Chiesa\"", "San Vito", "Cognola S.Vito",
@@ -349,7 +350,15 @@
       {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {},
       {}
     ]
-  }' title="title" day="1560333850" arrows="true" font="big" accessibility=false color="#123456"></wc-trasporti-table>
+  }' title="title" day="1560333850" arrows="true" font="big" accessibility=false color="#123456" labeldelay="RITARDI" labeltrips="labelTrips"></wc-trasporti-table>
+  <script>
+      function myFunction() {
+        console.log("changeing");
+        console.log(document.getElementById("myDIV").data);
+        document.getElementById("myDIV").data = '{}';
+        console.log(document.getElementById("myDIV").data);
+      }
+      </script>
   </div>
 </body>
 

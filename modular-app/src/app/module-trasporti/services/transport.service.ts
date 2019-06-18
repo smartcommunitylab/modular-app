@@ -56,8 +56,8 @@ export class TransportService {
       }
       return Promise.resolve(res);
     });
-
   }
+  
   flattenElement = function (e, res, ref, agencyId) {
     var localAgency = agencyId;
     if (e.agencyId != null) localAgency = e.agencyId;
