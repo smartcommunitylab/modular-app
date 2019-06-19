@@ -8,6 +8,8 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { ConfigService } from '../services/config.service';
 import { appInitialize } from './app-initialize';
 import { MapService } from './services/map.service';
+import { NotificationService } from './services/notification.service';
+import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/strade/i18n/', '.json');
@@ -34,6 +36,8 @@ export function initializeAppMap(mapSrv: MapService) {
   ],
   providers: [
     MapService,
+    NotificationService,
+    LocalNotifications,
     { provide: APP_INITIALIZER, useFactory: initializeAppMap, deps: [MapService], multi: true },
   ],
   entryComponents: [],

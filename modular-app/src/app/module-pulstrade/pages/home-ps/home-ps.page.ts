@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { ConfigService } from 'src/app/services/config.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import leaflet from 'leaflet';
 import { GeoService } from 'src/app/services/geo.service';
 import { MapService } from '../../services/map.service';
@@ -16,7 +16,7 @@ import { DatePipe } from '@angular/common';
 export class HomePage implements OnInit {
 
   language: string;
-  myPos: any;
+  myPos: any = {};
   streets: any;
   map: any;
   selectedDate: Date;
@@ -27,20 +27,42 @@ export class HomePage implements OnInit {
     private router: Router,
     private geo: GeoService,
     private mapSrv: MapService,
-    private datePipe: DatePipe
+    private datePipe: DatePipe,
+    private route: ActivatedRoute
   ) {
     this.language = window[this.config.getAppModuleName()]['language'];
     this.translate.use(this.language);
-    this.myPos = window[this.config.getAppModuleName()]['geolocation'];
+    // this.myPos = window[this.config.getAppModuleName()]['geolocation'];
+  }
+  parseUrlParams(params) {
+    if (Object.keys(params).length > 0) {
+        let coord;
+        coord = JSON.parse(params.coord);
+        console.log(coord);
+        this.myPos.lat = coord[0].lat;
+        this.myPos.long = coord[0].lng;
+
+      } else {
+        this.myPos = window[this.config.getAppModuleName()]['geolocation'];
+      }
   }
 
   ngOnInit() {
-    this.selectedDate = new Date();
-    this.showDate = this.selectedDate.toISOString();
-    this.mapCenter = [this.myPos.lat, this.myPos.long];
-    this.streets = this.mapSrv.getData();
-    console.log(this.streets);
-    this.buildMap();
+
+    this.route.queryParams
+      .subscribe(params => {
+        this.parseUrlParams(params);
+        this.selectedDate = new Date();
+        this.showDate = this.selectedDate.toISOString();
+        this.mapCenter = [this.myPos.lat, this.myPos.long];
+        this.streets = this.mapSrv.getData();
+        console.log(this.streets);
+        this.buildMap();
+      });
+  }
+
+  ionViewWillLeave() {
+    this.myPos = {};
   }
 
   goToLink(path: string) {
@@ -52,8 +74,28 @@ export class HomePage implements OnInit {
   }
 
   buildMap() {
-    this.map = new leaflet.Map('home-map', { zoomControl: false, attributionControl: false }).setView(this.mapCenter, 15);
+    try {this.map.remove()}catch{}
     const _this = this;
+    const searchControl = leaflet.Control.extend({
+      options: {
+        position: 'topright'
+      },
+      onAdd: function (map) {
+        const container = leaflet.DomUtil.create('div', 'leaflet-bar leaflet-control leaflet-control-custom');
+        container.style.backgroundColor = 'white';
+        container.style.width = '30px';
+        container.style.height = '30px';
+        container.style.borderRadius = '50%';
+        container.innerHTML = '<ion-icon style="width: 25px; height: 25px;" name="search"></ion-icon>';
+        container.onclick = function () {
+          _this.router.navigate(['/ps/search']);
+        };
+        return container;
+      }
+    });
+
+    this.map = new leaflet.Map('home-map', { zoomControl: false, attributionControl: false }).setView(this.mapCenter, 15);
+
     this.map.on('dragend', function (e) {
       this.mapCenter = [e.target.getCenter().lat, e.target.getCenter().lng];
       _this.buildPolyline(this.mapCenter);
@@ -78,11 +120,15 @@ export class HomePage implements OnInit {
       // attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(this.map);
 
+    this.map.addControl(new searchControl());
+
     this.buildPolyline(this.mapCenter);
   }
 
   buildPolyline(center) {
-    this.clearPolyline(this.map);
+    if (this.map) {
+      this.clearPolyline(this.map);
+    }
 
     this.streets.forEach(s => {
       const dist = this.geo.getDistanceKM(
@@ -100,7 +146,7 @@ export class HomePage implements OnInit {
         <b> ${new Date(s.stopEndingTime).getHours()}</b> in data <br/>
         <b>${this.datePipe.transform(this.selectedDate, 'dd/MM/yyyy')}</b>`;
 
-      if ((dist < ((18 % this.map.getZoom()) - 1) || dist < 0.3)) {
+      if (inDate && ((dist < ((18 % this.map.getZoom()) - 1) || dist < 0.3))) {
         const popupContent = (inDate) ? closedStreetContent : freeStreetContent;
 
         const polyline = leaflet.polyline(s.polylines, { color: color }).addTo(this.map);
