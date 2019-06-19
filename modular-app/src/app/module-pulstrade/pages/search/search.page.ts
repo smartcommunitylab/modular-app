@@ -2,11 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { ConfigService } from 'src/app/services/config.service';
 import { Router } from '@angular/router';
-import { GeoService } from 'src/app/services/geo.service';
 import { MapService } from '../../services/map.service';
 import { DatePipe } from '@angular/common';
 import { NotificationService } from '../../services/notification.service';
-import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 
 @Component({
   selector: 'app-search',
@@ -23,7 +21,6 @@ export class SearchPage implements OnInit {
   constructor(private translate: TranslateService,
     private config: ConfigService,
     private router: Router,
-    private geo: GeoService,
     private mapSrv: MapService,
     private datePipe: DatePipe,
     private notificationSrv: NotificationService

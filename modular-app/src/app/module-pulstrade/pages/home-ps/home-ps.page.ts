@@ -6,6 +6,7 @@ import leaflet from 'leaflet';
 import { GeoService } from 'src/app/services/geo.service';
 import { MapService } from '../../services/map.service';
 import { DatePipe } from '@angular/common';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home-ps',
@@ -22,13 +23,15 @@ export class HomePage implements OnInit {
   selectedDate: Date;
   showDate: string;
   mapCenter: any = [];
+  private alert: HTMLIonAlertElement = null;
   constructor(private translate: TranslateService,
     private config: ConfigService,
     private router: Router,
     private geo: GeoService,
     private mapSrv: MapService,
     private datePipe: DatePipe,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private alertCtrl: AlertController
   ) {
     this.language = window[this.config.getAppModuleName()]['language'];
     this.translate.use(this.language);
@@ -36,15 +39,15 @@ export class HomePage implements OnInit {
   }
   parseUrlParams(params) {
     if (Object.keys(params).length > 0) {
-        let coord;
-        coord = JSON.parse(params.coord);
-        console.log(coord);
-        this.myPos.lat = coord[0].lat;
-        this.myPos.long = coord[0].lng;
+      let coord;
+      coord = JSON.parse(params.coord);
+      console.log(coord);
+      this.myPos.lat = coord[0].lat;
+      this.myPos.long = coord[0].lng;
 
-      } else {
-        this.myPos = window[this.config.getAppModuleName()]['geolocation'];
-      }
+    } else {
+      this.myPos = window[this.config.getAppModuleName()]['geolocation'];
+    }
   }
 
   ngOnInit() {
@@ -74,7 +77,7 @@ export class HomePage implements OnInit {
   }
 
   buildMap() {
-    try {this.map.remove()}catch{}
+    try { this.map.remove(); } catch { }
     const _this = this;
     const searchControl = leaflet.Control.extend({
       options: {
@@ -88,7 +91,7 @@ export class HomePage implements OnInit {
         container.style.borderRadius = '50%';
         container.innerHTML = '<ion-icon style="width: 25px; height: 25px;" name="search"></ion-icon>';
         container.onclick = function () {
-          _this.router.navigate(['/ps/search']);
+          _this.router.navigate(['/ps-search']);
         };
         return container;
       }
@@ -125,7 +128,8 @@ export class HomePage implements OnInit {
     this.buildPolyline(this.mapCenter);
   }
 
-  buildPolyline(center) {
+  async buildPolyline(center) {
+    let counter = 0;
     if (this.map) {
       this.clearPolyline(this.map);
     }
@@ -136,7 +140,7 @@ export class HomePage implements OnInit {
         { lat: s.centralCoords[0]['lat'], lon: s.centralCoords[0]['lng'] }
       );
 
-      const inDate = (this.selectedDate.getDate() === new Date(s.cleaningDay).getDate());
+      const inDate = (new Date(this.selectedDate).setHours(0, 0, 0, 0) === new Date(s.cleaningDay).setHours(0, 0, 0, 0));
       const color = (inDate) ? 'red' : 'green';
 
       const freeStreetContent =
@@ -151,8 +155,21 @@ export class HomePage implements OnInit {
 
         const polyline = leaflet.polyline(s.polylines, { color: color }).addTo(this.map);
         polyline.bindPopup(popupContent);
+        counter++;
       }
     });
+    if (counter === 0) {
+      if (!this.alert) {
+        this.alert = await this.alertCtrl.create({
+          header: 'Pulizia Strade',
+          message: `Non sono previste pulizie in data <b>${this.datePipe.transform(this.selectedDate, 'dd/MM/yyyy')}</b>`,
+          buttons: ['OK']
+        });
+        await this.alert.present().then(()=>{
+          this.alert = null;
+        });
+      }
+    }
   }
   clearPolyline(m) {
     for (const i in m._layers) {
