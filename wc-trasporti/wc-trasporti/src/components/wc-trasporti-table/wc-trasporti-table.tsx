@@ -336,7 +336,7 @@ export class AppHome {
             //check from data if accessibility
             if (!!data.wheelChairBoarding && data.wheelChairBoarding[row - this.header_row_number] == 1) {
               // if (data.wheelChairBoarding && data.wheelChairBoarding[row - $scope.header_row_number] == 1) {
-              colStr += '<div class="accessibilityBullet"><i class="icon ion-record"></i></div>';
+              colStr += '<div class="accessibilityBullet"><ion-icon name="radio-button-on"></ion-icon></div>';
             } else {
               colStr += '<div class="accessibilityBullet"></div>';
 
