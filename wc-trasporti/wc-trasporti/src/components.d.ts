@@ -23,6 +23,7 @@ export namespace Components {
     'font': string;
     'labeldelay': string;
     'labeltrips': string;
+    'littletable': boolean;
     'numero': string;
     'showtrips': boolean;
     'title': string;
@@ -37,6 +38,7 @@ export namespace Components {
     'font'?: string;
     'labeldelay'?: string;
     'labeltrips'?: string;
+    'littletable'?: boolean;
     'numero'?: string;
     'onChangeDateEvent'?: (event: CustomEvent) => void;
     'onShowStopEvent'?: (event: CustomEvent) => void;

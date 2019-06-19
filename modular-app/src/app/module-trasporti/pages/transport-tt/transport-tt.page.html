@@ -4,7 +4,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
-  <div *ngIf="data" id="table-tt"><wc-trasporti-table  [color]="color" [data]="data" [title]="title" [day]="day" [arrows]="true" [font]="big" [accessibility]="false"></wc-trasporti-table></div>
+<ion-content>
+  <div  id="table-tt"><wc-trasporti-table  *ngIf="data" [color]="color" [data]="data" [title]="title" [day]="day" [arrows]="true" [littletable]="littletable" [showtrips]="showtrips" [labeldelay]="labeldelay" [labeltrips]="labeltrips"  [accessibility]="accessibility"></wc-trasporti-table></div>
     
 </ion-content>

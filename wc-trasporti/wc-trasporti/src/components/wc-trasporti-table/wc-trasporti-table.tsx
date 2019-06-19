@@ -14,17 +14,24 @@ export class AppHome {
 
   @Prop() data: string;
   @State() dataTT: any;
+  @State() fontsize: number;
   @Prop() numero: string;
   @Prop() citta: string;
   @Prop() title: string;
   @Prop() day: string;
   @Prop() arrows: boolean;
   @Prop() font: string;
+
   @Prop() accessibility: boolean;
   @Prop() color: string;
   @Prop() labeldelay: string;
   @Prop() labeltrips: string;
   @Prop() showtrips:boolean;
+  @Prop() littletable:boolean;
+  @Watch('littletable')
+  changeStyle() {
+    this.changeStyleTable();
+  }
   @Event() changeDateEvent: EventEmitter;
   @Event() showStopEvent: EventEmitter;
   @State() fermate: string;
@@ -36,7 +43,7 @@ export class AppHome {
   handleScroll(ev) {
     console.log('the body was scrolled', ev);
   }
-  biggerTable = false;
+  // littletable = false;
   rowHeight = 20;
   headerRowHeight = 25; // has a border
   stopsColWidth = 100; // has border
@@ -66,7 +73,6 @@ export class AppHome {
   tt = null;
   runningDate = new Date();
   scrollHeight: number;
-  fontsize: number;
   header_row_number: number;
   header: any;
   col: any;
@@ -78,7 +84,7 @@ export class AppHome {
 
   //    set the variables for bigger style
   setBiggerStyle() {
-    this.biggerTable = true;
+    this.littletable = true;
     var rowHeight = 30;
     this.rowHeight = rowHeight;
     this.headerRowHeight = 30; // has a border
@@ -107,7 +113,7 @@ export class AppHome {
 
   //    set the variables for smaller style
   setSmallerStyle() {
-    this.biggerTable = false;
+    this.littletable = false;
     var rowHeight = 20;
     this.rowHeight = rowHeight;
     // var headerRowHeight = 20; // has a border
@@ -143,15 +149,15 @@ export class AppHome {
     // $ionicLoading.show({
     //     duration: 2000
     // });
-    setTimeout(function () {
-      if (!this.biggerTable) {
+    setTimeout(() => {
+      if (!this.littletable) {
         this.setBiggerStyle();
         // profileService.setTableBigSize();
       } else {
         this.setSmallerStyle();
         // profileService.setTableLittleSize()
       }
-      this.tableStyle = this.biggerTable ? 'ic_text_size' : 'ic_text_size_outline';
+      this.tableStyle = this.littletable ? 'ic_text_size' : 'ic_text_size_outline';
       // actualPosition = $ionicScrollDelegate.$getByHandle('list').getScrollPosition();
       // actualCol = actualPosition.left / this.colwidth;
       // actualRow = actualPosition.top / this.stopsColLineHeight;
@@ -168,7 +174,7 @@ export class AppHome {
     if (window.innerHeight < window.innerWidth) {
       this.stopsColWidth = 170;
     } else {
-      if (this.biggerTable) {
+      if (this.littletable) {
         this.stopsColWidth = 150;
       } else {
         this.stopsColWidth = 100;
@@ -204,14 +210,14 @@ export class AppHome {
 
 
 
-  @Watch('data')
-  watchHandler(newValue: string) {
-    console.log('The new value of activated is: ', newValue);
-    this.buildData()
-  }
+  // @Watch('data')
+  // watchHandler(newValue: string) {
+  //   console.log('The new value of activated is: ', newValue);
+  //   this.buildData()
+  // }
 
   componentWillLoad() {
-
+    this.changeStyle();
     this.buildData()
 
   }
@@ -474,11 +480,11 @@ export class AppHome {
     return oggetto;
   }
   prevDate() {
-    console.log("prevDate");
+    //console.log("prevDate");
     this.changeDateEvent.emit('prevDate');
   }
   nextDate() {
-    console.log("nextDate");
+    //console.log("nextDate");
     this.changeDateEvent.emit('nextDate');
   }
   textColor(color) {
@@ -498,7 +504,7 @@ export class AppHome {
     return luma < 128;
   };
   showStop() {
-    this.showStopEvent.emit('nextDate');
+    this.showStopEvent.emit();
 
     // showStop($event) {
     // var pos = $ionicScrollDelegate.$getByHandle('list').getScrollPosition().top + $event.clientY - $scope.tableHeaderHeight - headerHeight;

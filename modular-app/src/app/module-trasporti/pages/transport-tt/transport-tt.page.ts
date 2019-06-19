@@ -11,12 +11,17 @@ import { LoadingController } from '@ionic/angular';
 })
 export class TransportTtPage implements OnInit {
   date: Date = new Date();
-  color = "#123456";
-  title = "title";
-  day = "1560333850";
-  arrows = "true";
-  font = "big";
-  accessibility = "false";
+  color:string = "#123456";
+  title:string = "";
+  day:string =  this.date.getTime().toString();
+  // arrows = "true";
+  littletable:boolean = true; //change font size of table
+  showtrips:boolean = true; // show kind of transportation for course. Used for train
+  // sizeFont = "big";
+  labeldelay:string = "RITARDO";
+  labeltrips: string = "TIPO";
+
+  accessibility = false; // shows coulumn of accessibility
   agencyId: any;
   routeId: any;
   data: string = "";
@@ -38,6 +43,9 @@ export class TransportTtPage implements OnInit {
         this.date.setDate(this.date.getDate() + 1);
       this.day = this.date.getTime().toString();
       this.getTT(this.date.getTime());
+    })
+    trasportiTable.addEventListener('showStopEvent', () => {
+      console.log("stop click");
     })
   }
   async getTT(date) {
