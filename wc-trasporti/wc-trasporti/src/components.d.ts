@@ -24,6 +24,7 @@ export namespace Components {
     'labeldelay': string;
     'labeltrips': string;
     'numero': string;
+    'showtrips': boolean;
     'title': string;
   }
   interface WcTrasportiTableAttributes extends StencilHTMLAttributes {
@@ -39,6 +40,7 @@ export namespace Components {
     'numero'?: string;
     'onChangeDateEvent'?: (event: CustomEvent) => void;
     'onShowStopEvent'?: (event: CustomEvent) => void;
+    'showtrips'?: boolean;
     'title'?: string;
   }
 }

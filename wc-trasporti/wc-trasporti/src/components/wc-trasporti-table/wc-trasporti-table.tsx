@@ -24,6 +24,7 @@ export class AppHome {
   @Prop() color: string;
   @Prop() labeldelay: string;
   @Prop() labeltrips: string;
+  @Prop() showtrips:boolean;
   @Event() changeDateEvent: EventEmitter;
   @Event() showStopEvent: EventEmitter;
   @State() fermate: string;
@@ -284,10 +285,28 @@ export class AppHome {
     }
     return str;
   };
+          // convert delay object to string
+          getDelayValue (delay) {
+            var res = '';
+            //    if (delay && delay.SERVICE && delay.SERVICE > 0) {
+            //      res += '<span>'+delay.SERVICE+'\'</span>';
+            //    }
+            //    if (delay && delay.USER && delay.USER > 0) {
+            //      res += '<span>'+delay.USER+'\'</span>';
+            //    }
+            if (delay && delay.SERVICE && delay.SERVICE > 0) {
+                res += delay.SERVICE + '\'';
+            }
+            if (delay && delay.USER && delay.USER > 0) {
+                if (res.length > 0) res += ' / ';
+                res += delay.USER + '\'';
+            }
+            return res;
+        }
   StampaOrari(data) {
 
-    // this.header_row_number = this.route.showTrips ? 2 : 1;
-    this.header_row_number = 1;
+   this.header_row_number = this.showtrips ? 2 : 1;
+   // this.header_row_number = 1;
 
     var dataStr = '';
     var headStr = this.header_row_number == 2 ? ['', ''] : [''];
@@ -326,7 +345,7 @@ export class AppHome {
             // delays header row
           } else if (row == 0) {
             var str = '';
-            // if (data.delays) str = this.getDelayValue(data.delays[col - 1]);
+            if (data.delays) str = this.getDelayValue(data.delays[col - 1]);
             rowContent.push(str);
             str = this.expandStr(str);
             headStr[0] += str;
@@ -500,7 +519,7 @@ export class AppHome {
       backgroundSize: `100% ${this.rowHeight * 2}px`,
       fontSize: `${this.fontsize}px`,
       left: `${this.col ? this.col.style.left : 0}px`,
-      top: `${this.col ? this.col.style.top : 25}px`,
+      top: `${this.col ? this.col.style.top : 25*this.header_row_number}px`,
       // backgroundImage:`-webkit-linear-gradient(90deg,#fff, #fff {{rowHeight}}px, #eee {{rowHeight}}px, #eee {{rowHeight*2}}px`;
       backgroundImage: `linear-gradient(180deg,#fff, #fff ${this.rowHeight}px, #eee ${this.rowHeight}px, #eee ${this.rowHeight * 2}px`
     };
@@ -567,7 +586,7 @@ export class AppHome {
                 <div innerHTML={this.headStr[0]}></div>
                 {
                   this.header_row_number == 2
-                    ? <div innerHTML={this.visualizza(this.fermate)} class="header-row-types"></div>
+                    ? <div class="header-row-types">{this.tableCornerStr}</div>
                     : ""
                 }
               </div>
