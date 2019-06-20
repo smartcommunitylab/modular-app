@@ -47,7 +47,8 @@
     "pouchdb-find": "^7.0.0",
     "rxjs": "^6.3.3",
     "wcs-comune": "0.0.112",
-    "zone.js": "~0.8.26"
+    "zone.js": "~0.8.26",
+    "cordova-plugin-dbcopy": "git+https://github.com/an-rahulpandey/cordova-plugin-dbcopy.git"
   },
   "devDependencies": {
     "@angular-devkit/architect": "~0.11.4",
@@ -98,7 +99,8 @@
       "cordova-plugin-ionic-keyboard": {},
       "cordova-plugin-ionic-webview": {
         "ANDROID_SUPPORT_ANNOTATIONS_VERSION": "27.+"
-      }
+      },
+      "cordova-plugin-dbcopy": {}
     },
     "platforms": [
       "browser",
