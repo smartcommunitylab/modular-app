@@ -47,18 +47,6 @@
                 "label": "menu_real_time_train",
                 "icon": "train",
                 "color": "#cd251c"
-            },
-            {
-                "state": "/parking/COMUNE_DI_TRENTO",
-                "label": "menu_real_time_park",
-                "icon": "car",
-                "color": "#164286"
-            },
-            {
-                "state": "/bikesharing/trento",
-                "label": "bike",
-                "icon": "bicycle",
-                "color": "#922d66"
             }
 
         ],
