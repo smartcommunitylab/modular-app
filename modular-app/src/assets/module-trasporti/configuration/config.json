@@ -37,13 +37,13 @@
 
 
             {
-                "state": "/ttlist/urbano",
+                "state": "urbano",
                 "label": "menu_real_time_bus_urban",
                 "icon": "bus",
                 "color": "#eb8919"
             },
             {
-                "state": "/ttlist/trains",
+                "state": "trains",
                 "label": "menu_real_time_train",
                 "icon": "train",
                 "color": "#cd251c"
