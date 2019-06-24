@@ -43,28 +43,29 @@ export class SearchPage implements OnInit {
       s.idNumber = Math.floor(Math.random() * 10000000);
     });
 
-    this.route.queryParams
-      .subscribe(params => {
-        this.search(params.street);
-        console.log(params.street)
-        console.log('searched');
-      });
-
+    try {
+      this.route.queryParams
+        .subscribe(params => {
+          this.search(params.street);
+        });
+    } catch { }
   }
 
   search(input: any) {
     let val;
-    if (input.detail) {
-      val = input.detail.target.value;
-    } else {
-      val = input;
-    }
-    if (val === '') {
-      this.showStreets = [];
-    } else {
-      this.showStreets = this.streets.filter(function (el) {
-        return (el.streetName.toLowerCase().indexOf(val.toLowerCase()) > -1);
-      });
+    if (input) {
+      if (input.detail) {
+        val = input.detail.target.value;
+      } else {
+        val = input;
+      }
+      if (val === '') {
+        this.showStreets = [];
+      } else {
+        this.showStreets = this.streets.filter(function (el) {
+          return (el.streetName.toLowerCase().indexOf(val.toLowerCase()) > -1);
+        });
+      }
     }
   }
 
@@ -83,7 +84,9 @@ export class SearchPage implements OnInit {
         toggle = document.getElementById('tog-' + s.idNumber);
         this.notificationSrv.setNotification(street);
         element.style.color = 'green';
-        element.innerHTML = 'Notifiche Abilitate';
+        this.translate.get('NOTIFY-ENA').subscribe(s => {
+          element.innerHTML = s;
+        });
         toggle.checked = true;
       });
     } else {
@@ -92,7 +95,9 @@ export class SearchPage implements OnInit {
         toggle = document.getElementById('tog-' + s.idNumber);
         this.notificationSrv.disableNotification(street);
         element.style.color = '#737373';
-        element.innerHTML = 'Notifiche Disabilitate';
+        this.translate.get('NOTIFY-DIS').subscribe(s => {
+          element.innerHTML = s;
+        });
         toggle.checked = false;
       });
     }

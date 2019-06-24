@@ -9,7 +9,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-searchbar showCancelButton animated (ionInput)="search($event)"></ion-searchbar>
+<ion-searchbar showCancelButton animated (ionInput)="search($event)" placeholder="{{'SEARCH' | translate}}"></ion-searchbar>
 
 <ion-content padding>
   <ion-list no-lines *ngIf="showStreets">
@@ -19,12 +19,12 @@
           <div class="left" [routerLink]="['/ps']" [queryParams]="{coord: s.centralCoordStr}" routerDirection="forward">
             <b>{{s.cleaningDayStr}}</b>
             <h1>{{s.streetName}}</h1>
-            <p>Strada chiusa: <b>{{s.stopStartingTimeStr}}</b> - <b>{{s.stopEndingTimeStr}}</b></p>
+            <p>{{'CLOSED' | translate}} <b>{{s.stopStartingTimeStr}}</b> - <b>{{s.stopEndingTimeStr}}</b></p>
           </div>
           <div class="right">
             <ion-toggle [id]="'tog-' + s.idNumber" (ionChange)="toggle($event)" [value]="s.streetName"></ion-toggle>
           </div>
-          <p [id]="'not-' + s.idNumber" class="notification">Notifiche Disabilitate</p>
+          <p [id]="'not-' + s.idNumber" class="notification">{{'NOTIFY-DIS' | translate}}</p>
         </ion-card-content>
       </ion-card>
     </div>

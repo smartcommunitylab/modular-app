@@ -132,6 +132,29 @@ export class HomePage implements OnInit {
 
   async buildPolyline(center) {
     let counter = 0;
+    let noCleaning, forStr, to, inDateStr, noPark, inZone, details;
+    this.translate.get('NO-CLEANING').subscribe(s => {
+      noCleaning = s;
+    });
+    this.translate.get('FOR').subscribe(s => {
+      forStr = s;
+    });
+    this.translate.get('TO').subscribe(s => {
+      to = s;
+    });
+    this.translate.get('IN-DATE').subscribe(s => {
+      inDateStr = s;
+    });
+    this.translate.get('NO-PARKING-FROM').subscribe(s => {
+      noPark = s;
+    });
+    this.translate.get('IN-ZONE').subscribe(s => {
+      inZone = s;
+    });
+    this.translate.get('DETAILS').subscribe(s => {
+      details = s;
+    });
+
     if (this.map) {
       this.clearPolyline(this.map);
     }
@@ -146,12 +169,12 @@ export class HomePage implements OnInit {
       const color = (inDate) ? 'red' : 'green';
 
       const freeStreetContent =
-        `Non sono previste pulizie in data <br/><b>${this.datePipe.transform(this.selectedDate, 'dd/MM/yyyy')}</b> per<br/>
+        `${noCleaning} <br/><b>${this.datePipe.transform(this.selectedDate, 'dd/MM/yyyy')}</b> ${forStr}<br/>
         <b> ${s.streetName}</b>`;
-      const closedStreetContent = `<b>${s.streetName}</b><br/>Divieto di sosta dalle <b>${new Date(s.stopStartingTime).getHours()}</b> alle
-        <b> ${new Date(s.stopEndingTime).getHours()}</b> in data <br/>
+      const closedStreetContent = `<b>${s.streetName}</b><br/>${noPark} <b>${new Date(s.stopStartingTime).getHours()}</b> ${to}
+        <b> ${new Date(s.stopEndingTime).getHours()}</b> ${inDateStr} <br/>
         <b>${this.datePipe.transform(this.selectedDate, 'dd/MM/yyyy')}</b><br/>
-        <a style="float:right; margin-top: -5%">Vedi dettagli</a>`;
+        <a style="float:right; margin-top: -5%">${details}</a>`;
 
 
       if (inDate && ((dist < ((18 % this.map.getZoom()) - 1) || dist < 0.3))) {
@@ -167,9 +190,9 @@ export class HomePage implements OnInit {
         counter++;
       }
     });
-    if (counter === 0) {
+    if (counter === 0 && inZone && noCleaning) {
       this.toast = await this.toastCtrl.create({
-        message: `Nessuna pulizia in data ${this.datePipe.transform(this.selectedDate, 'dd/MM/yyyy')} per questa zona`,
+        message: `${noCleaning} ${this.datePipe.transform(this.selectedDate, 'dd/MM/yyyy')} ${inZone}`,
         duration: 3000,
         showCloseButton: true
       });
