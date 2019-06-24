@@ -22,9 +22,9 @@
             <p>Strada chiusa: <b>{{s.stopStartingTimeStr}}</b> - <b>{{s.stopEndingTimeStr}}</b></p>
           </div>
           <div class="right">
-            <ion-toggle [id]="'tog-' + s.id" (ionChange)="toggle($event)" [value]="s.streetName"></ion-toggle>
+            <ion-toggle [id]="'tog-' + s.idNumber" (ionChange)="toggle($event)" [value]="s.streetName"></ion-toggle>
           </div>
-          <p [id]="'not-' + s.id" class="notification">Notifiche Disabilitate</p>
+          <p [id]="'not-' + s.idNumber" class="notification">Notifiche Disabilitate</p>
         </ion-card-content>
       </ion-card>
     </div>

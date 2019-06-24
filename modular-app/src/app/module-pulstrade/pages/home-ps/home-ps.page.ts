@@ -6,7 +6,7 @@ import leaflet from 'leaflet';
 import { GeoService } from 'src/app/services/geo.service';
 import { MapService } from '../../services/map.service';
 import { DatePipe } from '@angular/common';
-import { AlertController } from '@ionic/angular';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home-ps',
@@ -23,7 +23,7 @@ export class HomePage implements OnInit {
   selectedDate: Date;
   showDate: string;
   mapCenter: any = [];
-  private alert: HTMLIonAlertElement = null;
+  private toast: any;
   constructor(private translate: TranslateService,
     private config: ConfigService,
     private router: Router,
@@ -31,7 +31,7 @@ export class HomePage implements OnInit {
     private mapSrv: MapService,
     private datePipe: DatePipe,
     private route: ActivatedRoute,
-    private alertCtrl: AlertController
+    private toastCtrl: ToastController
   ) {
     this.language = window[this.config.getAppModuleName()]['language'];
     this.translate.use(this.language);
@@ -58,7 +58,9 @@ export class HomePage implements OnInit {
         this.selectedDate = new Date();
         this.showDate = this.selectedDate.toISOString();
         this.mapCenter = [this.myPos.lat, this.myPos.long];
-        this.streets = this.mapSrv.getData();
+        this.streets = this.mapSrv.getData().sort(function (a, b) {
+          return a.cleaningDay - b.cleaningDay;
+        });
         console.log(this.streets);
         this.buildMap();
       });
@@ -148,27 +150,30 @@ export class HomePage implements OnInit {
         <b> ${s.streetName}</b>`;
       const closedStreetContent = `<b>${s.streetName}</b><br/>Divieto di sosta dalle <b>${new Date(s.stopStartingTime).getHours()}</b> alle
         <b> ${new Date(s.stopEndingTime).getHours()}</b> in data <br/>
-        <b>${this.datePipe.transform(this.selectedDate, 'dd/MM/yyyy')}</b>`;
+        <b>${this.datePipe.transform(this.selectedDate, 'dd/MM/yyyy')}</b><br/>
+        <a style="float:right; margin-top: -5%">Vedi dettagli</a>`;
+
 
       if (inDate && ((dist < ((18 % this.map.getZoom()) - 1) || dist < 0.3))) {
         const popupContent = (inDate) ? closedStreetContent : freeStreetContent;
 
         const polyline = leaflet.polyline(s.polylines, { color: color }).addTo(this.map);
-        polyline.bindPopup(popupContent);
+        const popup = leaflet.popup({ className: `pop-${s.streetName.replace(/\s/g, '')}` }).setContent(popupContent);
+        polyline.bindPopup(popup).on('popupopen', (e) => {
+          const el = document.getElementsByClassName(`pop-${s.streetName.replace(/\s/g, '')}`)[0].addEventListener('click', () => {
+            this.goToSearch(s.streetName);
+          });
+        });
         counter++;
       }
     });
     if (counter === 0) {
-      if (!this.alert) {
-        this.alert = await this.alertCtrl.create({
-          header: 'Pulizia Strade',
-          message: `Non sono previste pulizie in data <b>${this.datePipe.transform(this.selectedDate, 'dd/MM/yyyy')}</b>`,
-          buttons: ['OK']
-        });
-        await this.alert.present().then(()=>{
-          this.alert = null;
-        });
-      }
+      this.toast = await this.toastCtrl.create({
+        message: `Nessuna pulizia in data ${this.datePipe.transform(this.selectedDate, 'dd/MM/yyyy')} per questa zona`,
+        duration: 3000,
+        showCloseButton: true
+      });
+      await this.toast.present();
     }
   }
   clearPolyline(m) {
@@ -194,9 +199,45 @@ export class HomePage implements OnInit {
     this.showDate = this.selectedDate.toISOString();
     this.buildPolyline(this.mapCenter);
   }
+  firstDayFwd() {
+    const center = this.mapCenter;
+    this.streets.forEach(s => {
+      const dist = this.geo.getDistanceKM(
+        { lat: center[0], lon: center[1] },
+        { lat: s.centralCoords[0]['lat'], lon: s.centralCoords[0]['lng'] }
+      );
+      if (s.cleaningDay > this.selectedDate) {
+        if ((dist < ((18 % this.map.getZoom()) - 1) || dist < 0.3)) {
+          this.selectedDate = new Date(s.cleaningDay);
+          this.showDate = this.selectedDate.toISOString();
+          this.buildPolyline(center);
+        }
+      }
+    });
+  }
+  firstDayBck() {
+    const center = this.mapCenter;
+    this.streets.forEach(s => {
+      const dist = this.geo.getDistanceKM(
+        { lat: center[0], lon: center[1] },
+        { lat: s.centralCoords[0]['lat'], lon: s.centralCoords[0]['lng'] }
+      );
+      if (s.cleaningDay < this.selectedDate) {
+        if ((dist < ((18 % this.map.getZoom()) - 1) || dist < 0.3)) {
+          this.selectedDate = new Date(s.cleaningDay);
+          this.showDate = this.selectedDate.toISOString();
+          this.buildPolyline(center);
+        }
+      }
+    });
+  }
   setDate(event: any) {
     this.selectedDate = new Date(event.detail.value);
     this.showDate = this.selectedDate.toISOString();
     this.buildPolyline(this.mapCenter);
+  }
+
+  goToSearch(name: string) {
+    this.router.navigate(['ps-search'], { queryParams: { street: name } });
   }
 }

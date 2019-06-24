@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { ConfigService } from 'src/app/services/config.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { MapService } from '../../services/map.service';
 import { DatePipe } from '@angular/common';
 import { NotificationService } from '../../services/notification.service';
@@ -23,7 +23,8 @@ export class SearchPage implements OnInit {
     private router: Router,
     private mapSrv: MapService,
     private datePipe: DatePipe,
-    private notificationSrv: NotificationService
+    private notificationSrv: NotificationService,
+    private route: ActivatedRoute
   ) {
     this.language = window[this.config.getAppModuleName()]['language'];
     this.translate.use(this.language);
@@ -31,7 +32,6 @@ export class SearchPage implements OnInit {
   }
 
   ngOnInit() {
-    console.clear();
     this.streets = this.mapSrv.getData();
     this.streets.forEach(s => {
       s.cleaningDayStr = this.datePipe.transform(s.cleaningDay, 'dd/MM/yyyy');
@@ -40,11 +40,25 @@ export class SearchPage implements OnInit {
       tmp = new Date(s.stopEndingTime).toLocaleTimeString().split(':');
       s.stopEndingTimeStr = `${tmp[0]}:${tmp[1]}`;
       s.centralCoordStr = JSON.stringify(s.centralCoords);
+      s.idNumber = Math.floor(Math.random() * 10000000);
     });
+
+    this.route.queryParams
+      .subscribe(params => {
+        this.search(params.street);
+        console.log(params.street)
+        console.log('searched');
+      });
+
   }
 
   search(input: any) {
-    const val = input.detail.target.value;
+    let val;
+    if (input.detail) {
+      val = input.detail.target.value;
+    } else {
+      val = input;
+    }
     if (val === '') {
       this.showStreets = [];
     } else {
@@ -55,18 +69,18 @@ export class SearchPage implements OnInit {
   }
 
   showInMap(coord) {
-    this.router.navigate(['/ps'], { queryParams: { coord: JSON.stringify(coord) }});
+    this.router.navigate(['/ps'], { queryParams: { coord: JSON.stringify(coord) } });
   }
 
   toggle(event) {
     let element, toggle: any;
-    const street = this.streets.filter(function(val) {
+    const street = this.streets.filter(function (val) {
       return val.streetName === event.detail.value;
     });
     if (event.detail.checked) {
       street.forEach(s => {
-        element =  document.getElementById('not-' + s.id);
-        toggle = document.getElementById('tog-' + s.id);
+        element = document.getElementById('not-' + s.idNumber);
+        toggle = document.getElementById('tog-' + s.idNumber);
         this.notificationSrv.setNotification(street);
         element.style.color = 'green';
         element.innerHTML = 'Notifiche Abilitate';
@@ -74,8 +88,8 @@ export class SearchPage implements OnInit {
       });
     } else {
       street.forEach(s => {
-        element =  document.getElementById('not-' + s.id);
-        toggle = document.getElementById('tog-' + s.id);
+        element = document.getElementById('not-' + s.idNumber);
+        toggle = document.getElementById('tog-' + s.idNumber);
         this.notificationSrv.disableNotification(street);
         element.style.color = '#737373';
         element.innerHTML = 'Notifiche Disabilitate';

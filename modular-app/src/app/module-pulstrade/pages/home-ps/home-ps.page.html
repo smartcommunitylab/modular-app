@@ -10,10 +10,21 @@
 </ion-header>
 
 
+<!-- FLOATING BUTTON -->
+<ion-fab class="fixed" vertical="bottom" horizontal="end" slot="fixed">
+  <ion-fab-button color="danger" [routerLink]="['/ps-notification']" routerDirection="forward">
+    <ion-icon name="notifications"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
+<!-- ---------------------------- -->
+
+
+<!-- TODO: LINK IN POPUP PER PAGINA "RICERCA" CONTENENTE STRADA E LISTA PULIZIE STRADA -->
 <ion-row>
   <ion-col>
-    <ion-item class="calButton" (click)="dayBack()">
-      <ion-icon name="arrow-round-back"></ion-icon>
+    <ion-item class="calButton" >
+      <ion-icon name="skip-backward" (click)="firstDayBck()"></ion-icon>
+      <ion-icon name="arrow-back" (click)="dayBack()"></ion-icon>
     </ion-item>
   </ion-col>
   <ion-col>
@@ -22,8 +33,9 @@
     </ion-item>
   </ion-col>
   <ion-col>
-    <ion-item class="calButton" (click)="dayForward()">
-      <ion-icon name="arrow-round-forward"></ion-icon>
+    <ion-item class="calButton">
+      <ion-icon name="arrow-forward" (click)="dayForward()"></ion-icon>
+      <ion-icon name="skip-forward" (click)="firstDayFwd()"></ion-icon>
     </ion-item>
   </ion-col>
 </ion-row>

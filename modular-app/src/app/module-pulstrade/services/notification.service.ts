@@ -10,7 +10,7 @@ export class NotificationService {
   public setNotification(street) {
     street.forEach(s => {
       this.notify.schedule({
-        id: s.id,
+        id: s.idNumber,
         text: 'Strada in pulizia',
         data: s.streetName,
         trigger: {at: new Date(s.cleaningDay)}
@@ -19,8 +19,13 @@ export class NotificationService {
   }
   public disableNotification(street) {
     street.forEach(s => {
-      this.notify.cancel(s.id);
-      this.notify.clear(s.id);
+      this.notify.cancel(s.idNumber);
+      this.notify.clear(s.idNumber);
+    });
+  }
+  public getNotifications() {
+    this.notify.getAllScheduled().then(data => {
+      console.log(data);
     });
   }
 }
