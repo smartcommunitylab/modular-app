@@ -13,6 +13,36 @@ import 'ionicons';
 
 export namespace Components {
 
+  interface WcTrasportiMap {
+    /**
+    * Icona marker per "posizione attuale"
+    */
+    'mainMarkerIcon': string;
+    /**
+    * Icona marker POI
+    */
+    'poiMarkerIcon': string;
+    /**
+    * Oggeto JSON contenente i dettagli dei POI. ULTIMO ELEMENTO = Posizione attuale Array di punti da inserire nella mappa
+    */
+    'points': string;
+  }
+  interface WcTrasportiMapAttributes extends StencilHTMLAttributes {
+    /**
+    * Icona marker per "posizione attuale"
+    */
+    'mainMarkerIcon'?: string;
+    'onPoiSelected'?: (event: CustomEvent) => void;
+    /**
+    * Icona marker POI
+    */
+    'poiMarkerIcon'?: string;
+    /**
+    * Oggeto JSON contenente i dettagli dei POI. ULTIMO ELEMENTO = Posizione attuale Array di punti da inserire nella mappa
+    */
+    'points'?: string;
+  }
+
   interface WcTrasportiTable {
     'accessibility': boolean;
     'arrows': boolean;
@@ -27,6 +57,7 @@ export namespace Components {
     'numero': string;
     'showtrips': boolean;
     'title': string;
+    'tripsvalue': string;
   }
   interface WcTrasportiTableAttributes extends StencilHTMLAttributes {
     'accessibility'?: boolean;
@@ -44,18 +75,27 @@ export namespace Components {
     'onShowStopEvent'?: (event: CustomEvent) => void;
     'showtrips'?: boolean;
     'title'?: string;
+    'tripsvalue'?: string;
   }
 }
 
 declare global {
   interface StencilElementInterfaces {
+    'WcTrasportiMap': Components.WcTrasportiMap;
     'WcTrasportiTable': Components.WcTrasportiTable;
   }
 
   interface StencilIntrinsicElements {
+    'wc-trasporti-map': Components.WcTrasportiMapAttributes;
     'wc-trasporti-table': Components.WcTrasportiTableAttributes;
   }
 
+
+  interface HTMLWcTrasportiMapElement extends Components.WcTrasportiMap, HTMLStencilElement {}
+  var HTMLWcTrasportiMapElement: {
+    prototype: HTMLWcTrasportiMapElement;
+    new (): HTMLWcTrasportiMapElement;
+  };
 
   interface HTMLWcTrasportiTableElement extends Components.WcTrasportiTable, HTMLStencilElement {}
   var HTMLWcTrasportiTableElement: {
@@ -64,10 +104,12 @@ declare global {
   };
 
   interface HTMLElementTagNameMap {
+    'wc-trasporti-map': HTMLWcTrasportiMapElement
     'wc-trasporti-table': HTMLWcTrasportiTableElement
   }
 
   interface ElementTagNameMap {
+    'wc-trasporti-map': HTMLWcTrasportiMapElement;
     'wc-trasporti-table': HTMLWcTrasportiTableElement;
   }
 

@@ -1,6 +1,6 @@
 {
   "name": "wc-trasporti",
-  "version": "0.0.15",
+  "version": "0.0.16",
   "description": "Stencil Component Starter",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "@ionic/core": "^4.0.3",
+    "leaflet": "^1.5.1",
     "moment": "^2.24.0"
   },
   "devDependencies": {

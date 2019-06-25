@@ -6,6 +6,11 @@
 </ion-header>
 
 <ion-content>
+    <ion-fab vertical="top" horizontal="end" slot="fixed">
+        <ion-fab-button routerLink="/map-spots">
+          <ion-icon name="map" ></ion-icon>
+        </ion-fab-button>
+      </ion-fab>
   <div class="wrapper">
     <div class="scrolling-wrapper-flexbox loop" ng-if="primaryLinks.length>0">
       <ion-chip *ngFor="let m of primaryLinks" (click)="selectInternalElement(m)">

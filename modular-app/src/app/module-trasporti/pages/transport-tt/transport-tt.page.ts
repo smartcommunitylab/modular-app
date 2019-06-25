@@ -11,20 +11,21 @@ import { LoadingController } from '@ionic/angular';
 })
 export class TransportTtPage implements OnInit {
   date: Date = new Date();
-  color:string = "#123456";
-  title:string = "";
-  day:string =  this.date.getTime().toString();
+  color: string = "#123456";
+  title: string = "";
+  day: string = this.date.getTime().toString();
   // arrows = "true";
-  littletable:boolean = true; //change font size of table
-  showtrips:boolean = true; // show kind of transportation for course. Used for train
+  littletable: boolean = true; //change font size of table
+  showtrips: boolean = true; // show kind of transportation for course. Used for train
   // sizeFont = "big";
-  labeldelay:string = "RITARDO";
+  labeldelay: string = "RITARDO";
   labeltrips: string = "TIPO";
 
   accessibility = false; // shows coulumn of accessibility
   agencyId: any;
   routeId: any;
   data: string = "";
+  tripsvalue: string;
   constructor(private trasportiService: TransportService, private loadingController: LoadingController, private route: ActivatedRoute) { }
 
   ngOnInit() {
@@ -53,11 +54,22 @@ export class TransportTtPage implements OnInit {
     loading.present();
     // var that = this;
     this.trasportiService.getTT(this.agencyId, this.routeId, date).then(
-       (data) => {
-        // console.log(JSON.stringify(data));
+      (data: any) => {
+        // get data with delay
         this.data = JSON.stringify(data);
+        //get type
+        var str = "";
+        for (var i = 0; i < data.tripIds.length; i++) {
+          str = str + this.trasportiService.getTripText(this.agencyId, data.tripIds[0]);
+        }
+
+        console.log(str);
+        this.tripsvalue=str;
+        if (this.tripsvalue==""){
+          this.showtrips =false;
+        }
         loading.dismiss();
-            }, (err) => {
+      }, (err) => {
         console.log(err);
         this.data = null;
         loading.dismiss();

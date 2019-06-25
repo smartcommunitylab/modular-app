@@ -57,7 +57,21 @@ export class TransportService {
       return Promise.resolve(res);
     });
   }
-  
+  tripTypeExtractor = function(agencyId,  tripId) {
+    if (agencyId == '5' || agencyId == '6') {
+      return tripId.replace(/\d+.*/g,'').toUpperCase();
+    }
+    return tripId;
+  }
+          // custom trip name if trip row is shown
+        getTripText = function (agencyId, trip) {
+            try {
+                return this.tripTypeExtractor(agencyId,  trip);
+            } catch (e) {
+                return trip;
+            }
+        }
+
   flattenElement = function (e, res, ref, agencyId) {
     var localAgency = agencyId;
     if (e.agencyId != null) localAgency = e.agencyId;

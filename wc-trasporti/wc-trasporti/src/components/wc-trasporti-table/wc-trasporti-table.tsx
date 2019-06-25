@@ -26,6 +26,7 @@ export class AppHome {
   @Prop() color: string;
   @Prop() labeldelay: string;
   @Prop() labeltrips: string;
+  @Prop() tripsvalue:string;
   @Prop() showtrips:boolean;
   @Prop() littletable:boolean;
   @Watch('littletable')
@@ -357,7 +358,8 @@ export class AppHome {
             headStr[0] += str;
             // train lines header row
           } else if (this.header_row_number == 2 && row == 1) {
-            var str1 = this.getTripText(data.tripIds[col - 1]);
+            // var str1 = this.getTripText(data.tripIds[col - 1]);
+            var str1:any = this.tripsvalue;
             rowContent.push(str1);
             str1 = this.expandStr(str1);
             headStr[1] += str1;
@@ -386,11 +388,11 @@ export class AppHome {
 
     this.initMeasures(data, true);
   };
-  getTripText(trip) {
+  getTripText(tripLabel) {
     // try {
     //     return this.TRIP_TYPE_EXTRACTOR($stateParams.agencyId, $scope.route.routeSymId, trip);
     // } catch (e) {
-    return trip;
+    return tripLabel;
     // }
   }
   // StampaOrari(param) {
@@ -601,16 +603,6 @@ export class AppHome {
             </ion-content>
           </div>
         </div>
-        {/* <table>
-          <tr>
-            <td id="fermate">
-              <div id="listaFermate" onScroll={((event) => this.scrollOrari(event))}> <div id="contentFermate" innerHTML={this.visualizza(this.fermate)} ></div></div>
-            </td>
-            <td id="orari" >
-              <div id='myDIV' onScroll={((event) => this.scrollOrari(event))}> <div id='content' innerHTML={this.visualizza(this.orari)} ></div></div>
-            </td>
-          </tr>
-        </table> */}
       </div>
     ];
   }

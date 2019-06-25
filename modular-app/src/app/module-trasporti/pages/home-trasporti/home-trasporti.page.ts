@@ -72,8 +72,10 @@ export class HomeTrasportiPage extends MainPage implements OnInit {
   selectInternalElement(ref){
     var elem:any = document.getElementsByClassName(ref.state);
     if (elem.length>0){
-      this.content.scrollToPoint(elem[0].getBoundingClientRect().left, elem[0].getBoundingClientRect().top,1000);
-    }
+      var scrollheight= elem[0].getBoundingClientRect().top;
+      // if (scrollheight>200){
+      this.content.scrollToPoint(0, scrollheight,1000);}
+    // }
    }
 
   loadListAll(primaryLinks) {

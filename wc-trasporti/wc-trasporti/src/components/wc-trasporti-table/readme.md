@@ -22,6 +22,7 @@
 | `numero`        | `numero`        |             | `string`  | `undefined` |
 | `showtrips`     | `showtrips`     |             | `boolean` | `undefined` |
 | `title`         | `title`         |             | `string`  | `undefined` |
+| `tripsvalue`    | `tripsvalue`    |             | `string`  | `undefined` |
 
 
 ## Events
