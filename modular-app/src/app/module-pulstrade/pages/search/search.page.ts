@@ -5,6 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { MapService } from '../../services/map.service';
 import { DatePipe } from '@angular/common';
 import { NotificationService } from '../../services/notification.service';
+import { Platform } from '@ionic/angular';
 
 @Component({
   selector: 'app-search',
@@ -24,7 +25,8 @@ export class SearchPage implements OnInit {
     private mapSrv: MapService,
     private datePipe: DatePipe,
     private notificationSrv: NotificationService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private platform: Platform
   ) {
     this.language = window[this.config.getAppModuleName()]['language'];
     this.translate.use(this.language);
@@ -40,7 +42,7 @@ export class SearchPage implements OnInit {
       tmp = new Date(s.stopEndingTime).toLocaleTimeString().split(':');
       s.stopEndingTimeStr = `${tmp[0]}:${tmp[1]}`;
       s.centralCoordStr = JSON.stringify(s.centralCoords);
-      s.idNumber = Math.floor(Math.random() * 10000000);
+      s.idNumber = parseInt(s.streetCode.replace(/\_/g, ''));
     });
 
     try {
@@ -74,32 +76,34 @@ export class SearchPage implements OnInit {
   }
 
   toggle(event) {
-    let element, toggle: any;
-    const street = this.streets.filter(function (val) {
-      return val.streetName === event.detail.value;
+    this.platform.ready().then(() => {
+      let element, toggle: any;
+      const street = this.streets.filter(function (val) {
+        return val.streetName === event.detail.value;
+      });
+      if (event.detail.checked) {
+        street.forEach(s => {
+          element = document.getElementById('not-' + s.idNumber);
+          toggle = document.getElementById('tog-' + s.idNumber);
+          this.notificationSrv.setNotification(street);
+          element.style.color = 'green';
+          this.translate.get('NOTIFY-ENA').subscribe(x => {
+            element.innerHTML = x;
+          });
+          toggle.checked = true;
+        });
+      } else {
+        street.forEach(s => {
+          element = document.getElementById('not-' + s.idNumber);
+          toggle = document.getElementById('tog-' + s.idNumber);
+          this.notificationSrv.disableNotification(street);
+          element.style.color = '#737373';
+          this.translate.get('NOTIFY-DIS').subscribe(x => {
+            element.innerHTML = x;
+          });
+          toggle.checked = false;
+        });
+      }
     });
-    if (event.detail.checked) {
-      street.forEach(s => {
-        element = document.getElementById('not-' + s.idNumber);
-        toggle = document.getElementById('tog-' + s.idNumber);
-        this.notificationSrv.setNotification(street);
-        element.style.color = 'green';
-        this.translate.get('NOTIFY-ENA').subscribe(s => {
-          element.innerHTML = s;
-        });
-        toggle.checked = true;
-      });
-    } else {
-      street.forEach(s => {
-        element = document.getElementById('not-' + s.idNumber);
-        toggle = document.getElementById('tog-' + s.idNumber);
-        this.notificationSrv.disableNotification(street);
-        element.style.color = '#737373';
-        this.translate.get('NOTIFY-DIS').subscribe(s => {
-          element.innerHTML = s;
-        });
-        toggle.checked = false;
-      });
-    }
   }
 }

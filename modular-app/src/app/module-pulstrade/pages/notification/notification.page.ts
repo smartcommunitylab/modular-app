@@ -14,6 +14,8 @@ export class NotificationPage implements OnInit {
 
   streets: any;
   language: string;
+  notif: any;
+  showStreets: any = [];
   constructor(
     private mapSrv: MapService,
     private notSrv: NotificationService,
@@ -27,8 +29,54 @@ export class NotificationPage implements OnInit {
 
   ngOnInit() {
     this.streets = this.mapSrv.getData();
+    this.notif = this.notSrv.getNotifications();
+    this.buildShowNot();
+  }
+  printData() {
+    console.log(this.notif);
+  }
+
+  buildShowNot() {
+      this.notif.forEach(n => {
+        this.streets.forEach(s => {
+          if (s.idNumber === n.id) {
+            this.showStreets.push(s);
+            return;
+          }
+        });
+        // console.log(tmp, n.data.replace(/\"/g, ''))
+      });
+      console.log(this.showStreets);
+  }
+  toggle(event) {
     this.platform.ready().then(() => {
-      this.notSrv.getNotifications();
+      let element, toggle: any;
+      const street = this.streets.filter(function (val) {
+        return val.streetName === event.detail.value;
+      });
+      if (event.detail.checked) {
+        street.forEach(s => {
+          element = document.getElementById('not-' + s.idNumber);
+          toggle = document.getElementById('tog-' + s.idNumber);
+          this.notSrv.setNotification(street);
+          element.style.color = 'green';
+          this.translate.get('NOTIFY-ENA').subscribe(x => {
+            element.innerHTML = x;
+          });
+          toggle.checked = true;
+        });
+      } else {
+        street.forEach(s => {
+          element = document.getElementById('not-' + s.idNumber);
+          toggle = document.getElementById('tog-' + s.idNumber);
+          this.notSrv.disableNotification(street);
+          element.style.color = '#737373';
+          this.translate.get('NOTIFY-DIS').subscribe(x => {
+            element.innerHTML = x;
+          });
+          toggle.checked = false;
+        });
+      }
     });
   }
 }

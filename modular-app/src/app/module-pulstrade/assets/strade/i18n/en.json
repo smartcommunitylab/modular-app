@@ -12,5 +12,6 @@
     "CLOSED": "Street closed: ",
     "NOTIFY-ENA": "Notification Enabled",
     "NOTIFY-DIS": "Notification Disabled",
-    "DETAILS": "Details"
+    "DETAILS": "Details",
+    "IN-CLEANING": "Street in Cleanliness"
 }
