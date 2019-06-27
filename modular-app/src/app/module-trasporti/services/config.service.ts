@@ -19,6 +19,50 @@ export class ConfigService {
   getServerURL(): any {
     return this.config['serverURL'];
   }
+  getMaxMarkers(): any  {
+    return this.config['maxMarkers'];
+
+  }
+  getTTData(ref?, agencyId?, groupId?, routeId?) {
+    var res:any = this.ttConfig;
+    if (!!ref) {
+      res = res.elements[ref];
+    }
+    if (!!agencyId) {
+      for (var i = 0; i < res.elements.length; i++) {
+        if (res.elements[i].agencyId == agencyId) {
+          res = res.elements[i];
+          break;
+        }
+      }
+    }
+
+    var searchRec = function (res, groupIds, idx) {
+      if (idx >= groupIds.length) return res;
+      for (var i = 0; i < res.groups.length; i++) {
+        if (res.groups[i].label == groupIds[idx]) {
+          res = searchRec(res.groups[i], groupIds, idx + 1);
+          break;
+        }
+      }
+      return res;
+    };
+
+    if (!!groupId) {
+      var groupIds = groupId.split(',');
+      res = searchRec(res, groupIds, 0);
+    }
+    if (!!routeId) {
+      for (var i = 0; i < res.routes.length; i++) {
+        if (res.routes[i].routeId == routeId) {
+          res = res.routes[i];
+          break;
+        }
+      }
+    }
+    return res;
+  }
+
   getMapPosition(): any {
     return {
       lat: this.config['center_map'][0],

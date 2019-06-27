@@ -6,6 +6,7 @@ import * as JSZip from 'jszip';
 import * as JSZipUtils from 'jszip-utils';
 import { HttpClient } from '@angular/common/http';
 import { File } from '@ionic-native/file/ngx';
+import { TransportService } from './transport.service';
 
 declare var cordova: any;
 
@@ -61,6 +62,36 @@ export class DbService {
     deferred.resolve(false);
 
   }
+  getStopsData(agencies) {
+    var res = [];
+    agencies.forEach((a) => {
+      var local = localStorage[this.config.getAppId() + "_stops_" + a];
+      if (local) {
+        local = JSON.parse(local);
+        if (local && local.length > 0) {
+          local.forEach((s) =>{
+            s.agencyId = a;
+            res.push(s);
+          });
+        }
+      }
+    });
+    return res;
+  };
+  getNextTrips(agencyId, stopId, numberOfResults): any {
+    let promise = new Promise((resolve, reject) => {
+      numberOfResults = numberOfResults || 3;
+      this.http.get(this.config.getServerURL() + '/getlimitedtimetable/' + agencyId + '/' + stopId + '/' + numberOfResults).toPromise().then(data => {
+        resolve(data);
+      }, err => {
+        reject(err);
+
+      })
+    })
+    return promise;
+  };
+
+  
 
   doWithDB(successcallback, errorcallback) {
     var that = this;

@@ -4,8 +4,8 @@ import { TranslateService } from '@ngx-translate/core';
 import { ConfigService } from 'src/app/module-trasporti/services/config.service';
 import { DbService } from '../../services/db.service';
 import { LoadingController, IonContent } from '@ionic/angular';
-import { TransportService } from '../../services/transport.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { TransportService } from '../../services/transport.service';
 
 @Component({
   selector: 'app-home-trasporti',
@@ -28,8 +28,7 @@ export class HomeTrasportiPage extends MainPage implements OnInit {
   gridRows: any[];
   @ViewChild(IonContent) content: IonContent;
 
-  constructor(private transport: TransportService,
-    private router: Router, private route: ActivatedRoute, private loadingController: LoadingController, public translate: TranslateService, private dbService: DbService, private config: ConfigService) {
+  constructor(private router: Router, private transportService:TransportService, private loadingController: LoadingController, public translate: TranslateService, private dbService: DbService, private config: ConfigService) {
     super(translate);
   }
 
@@ -91,13 +90,14 @@ export class HomeTrasportiPage extends MainPage implements OnInit {
         this.hasMap = (<any>element).hasMap;
         this.markerIcon = (<any>element).markerIcon;
         this.icon = (<any>element).icon;
-        var newElems = this.transport.flattenData(element, this.primaryLinks[i].state, this.agencyId);
+        var newElems = this.transportService.flattenData(element, this.primaryLinks[i].state, this.agencyId);
         this.elements = this.elements.concat(newElems);
         this.view = (<any>element).view ? (<any>element).view : 'list';
         if (this.view == 'grid') {
           this.prepareGrid();
         }
       }
+      this.transportService.setElements(this.elements)
       };
       
     })
@@ -131,7 +131,7 @@ titleisPresent(elem) {
   
   loadList(ref):Promise<any> {
 
-    return this.transport.getTTData(ref.state, this.agencyId, this.groupId)
+    return this.transportService.getTTData(ref.state, this.agencyId, this.groupId)
     // .then(res => {
     //   if (res) {
     //     this.hasMap = (<any>res).hasMap;

@@ -16,9 +16,11 @@
 
 ## Events
 
-| Event         | Description | Type                |
-| ------------- | ----------- | ------------------- |
-| `poiSelected` |             | `CustomEvent<void>` |
+| Event          | Description | Type                |
+| -------------- | ----------- | ------------------- |
+| `mapInitiated` |             | `CustomEvent<void>` |
+| `mapMoved`     |             | `CustomEvent<void>` |
+| `poiSelected`  |             | `CustomEvent<void>` |
 
 
 ----------------------------------------------

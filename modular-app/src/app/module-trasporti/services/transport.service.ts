@@ -15,8 +15,18 @@ export class TransportService {
   stopCache = {};
   ttMapData = {};
   ttStopData = {};
-  constructor(private config: ConfigService, private platform: Platform, private datePipe: DatePipe,private dbService: DbService, private http: HttpClient) { }
+  elements = {};
+  constructor(private config: ConfigService, private platform: Platform, private datePipe: DatePipe, private dbService: DbService,  private http: HttpClient) { 
+    console.log("created transport service")
+  }
+  setElements(elements: any): any {
+    this.elements = elements
+  }
+  getElements(): any {
+    return this.elements
+  }
 
+  
   getTTData(ref, agencyId?, groupId?, routeId?): Promise<any> {
     return this.config.getTtJsonConfig().then(res => {
       if (!!ref) {
@@ -57,20 +67,20 @@ export class TransportService {
       return Promise.resolve(res);
     });
   }
-  tripTypeExtractor = function(agencyId,  tripId) {
+  tripTypeExtractor = function (agencyId, tripId) {
     if (agencyId == '5' || agencyId == '6') {
-      return tripId.replace(/\d+.*/g,'').toUpperCase();
+      return tripId.replace(/\d+.*/g, '').toUpperCase();
     }
     return tripId;
   }
-          // custom trip name if trip row is shown
-        getTripText = function (agencyId, trip) {
-            try {
-                return this.tripTypeExtractor(agencyId,  trip);
-            } catch (e) {
-                return trip;
-            }
-        }
+  // custom trip name if trip row is shown
+  getTripText = function (agencyId, trip) {
+    try {
+      return this.tripTypeExtractor(agencyId, trip);
+    } catch (e) {
+      return trip;
+    }
+  }
 
   flattenElement = function (e, res, ref, agencyId) {
     var localAgency = agencyId;
@@ -101,7 +111,7 @@ export class TransportService {
       }
     }
   }
-  flattenData(data, ref, agencyId) {
+  flattenData(data?, ref?, agencyId?) {
     var res = [];
     if (data.elements) {
       for (var i = 0; i < data.elements.length; i++) {
@@ -165,7 +175,7 @@ export class TransportService {
   }
 
   getDelays(agency, route, date) {
-    var that=this;
+    var that = this;
     var deferred = new Promise((resolve, reject) => {
       var d = new Date(date);
       d.setHours(0);
@@ -190,7 +200,7 @@ export class TransportService {
 
   toWheelChairBoarding(agencyId, stops) {
     var res = [];
-    var that=this;
+    var that = this;
     stops.forEach(function (s) {
       var stop = that.getStop(agencyId, s);
       if (!!stop) res.push(stop.wheelChairBoarding);
@@ -260,7 +270,7 @@ export class TransportService {
         result.wheelChairBoarding = that.toWheelChairBoarding(agency, that.toTrimmedList(data[0].stopsIDs));
         result.times = that.uncompressTime(data[0].times, result.stops.length);
         // deferred.notify(result);
-        that.getDelays(agency, route, date).then(function (delays:any) {
+        that.getDelays(agency, route, date).then(function (delays: any) {
           result.delays = delays;
           resolve(result);
         }, function () {
@@ -302,6 +312,57 @@ export class TransportService {
     })
     return deferred;
   };
+  // getStopData(ref, agencyId, stopId):any {
+  //   let promise = new Promise((resolve, reject) => {
+  //     var stop = null;
+  //     var stops = this.getStopsData([agencyId]);
+  //     if (stops) {
+  //       for (var i = 0; i < stops.length; i++) {
+  //         if (stops[i].id == stopId) {
+  //           stop = stops[i];
+  //           break;
+  //         }
+  //       }
+  //       if (stop) {
+  //         this.getNextTrips(stop.agencyId, stop.id, 5).then((data)=> {
+  //           var ttData = this.config.getTTData(ref);
+  //           var flatTTData = this.flattenData(ttData, ref);
+
+  //           flatTTData.forEach( (e) =>{
+  //             var list = [];
+  //             if (e.group) {
+  //               if (e.group.routes) list = list.concat(e.group.routes);
+  //               else if (e.group.route) list.push(e.group.route);
+  //             } else {
+  //               if (e.routes) list = list.concat(e.routes);
+  //               else if (e.route) list.push(e.route);
+  //             }
+  //             list.forEach((r) => {
+  //               if (data[r.routeId] != null) {
+  //                 data[r.routeId].routeElement = e;
+  //                 data[r.routeId].routeObject = r;
+  //                 //                routes.push(data[r.routeId]);
+  //               } else if (data[r.routeSymId] != null) {
+  //                 data[r.routeSymId].routeElement = e;
+  //                 data[r.routeSymId].routeObject = r;
+  //                 //                routes.push(data[r.routeSymId]);
+  //               }
+  //             });
+  //           });
+  //           stop.data = data;
+  //           resolve(stop);
+  //         },  (err) => {
+  //           reject(err);
+  //         });
+  //       } else {
+  //         resolve(null);
+  //       }
+  //     } else {
+  //       resolve(null);
+  //     }
+  //   })
+  //   return promise;
+  // }
 
   getStopData(ref, agencyId, stopId) {
     var deferred = new Promise((resolve, reject) => {
@@ -374,56 +435,56 @@ export class TransportService {
   /**
    * timetable for specified timestamp: converted to date start/end timestamps
    */
-  getTT(agency:string, route:string, date) {
+  getTT(agency: string, route: string, date) {
     var that = this;
-    var deferred = new Promise((resolve, reject)=>{
-    if (! that.platform.is('mobileweb')){
-      // use cache of calendar hashes
-      if (that.calendarCache[agency] == null) {
-        that.calendarCache[agency] = {};
-      }
-      if (that.calendarCache[agency][route] == null) {
-        that.dbService.doQuery("SELECT calendar FROM calendar WHERE agencyID = '" + agency + "' AND route = '" + route + "'", [])
-          .then(function (data:any) {
-            if (!data || data.length == 0) {
-              reject({});
-              return;
-            }
-            that.calendarCache[agency][route] = JSON.parse(data);
-            that.dataFromHash(agency, route, date, resolve, reject);
-          }, function (err) {
+    var deferred = new Promise((resolve, reject) => {
+      if (!that.platform.is('mobileweb')) {
+        // use cache of calendar hashes
+        if (that.calendarCache[agency] == null) {
+          that.calendarCache[agency] = {};
+        }
+        if (that.calendarCache[agency][route] == null) {
+          that.dbService.doQuery("SELECT calendar FROM calendar WHERE agencyID = '" + agency + "' AND route = '" + route + "'", [])
+            .then(function (data: any) {
+              if (!data || data.length == 0) {
+                reject({});
+                return;
+              }
+              that.calendarCache[agency][route] = JSON.parse(data);
+              that.dataFromHash(agency, route, date, resolve, reject);
+            }, function (err) {
+              reject(err);
+            });
+        } else {
+          that.dataFromHash(agency, route, date, resolve, reject);
+        }
+      } else {
+        // use remote call for timetable
+        var d = new Date(date);
+        d.setHours(0);
+        d.setMinutes(0);
+        d.setSeconds(0);
+        d.setMilliseconds(0);
+        var from = d.getTime();
+        d.setHours(23);
+        d.setMinutes(59);
+        var to = d.getTime();
+        route = encodeURIComponent(route);
+        that.http.get(that.config.getServerURL() + '/gettransittimes/' + agency + '/' + route + '/' + from + '/' + to).toPromise()
+          .then(function (data: any) {
+            if (data.times) data.times = data.times[0];
+            if (data.tripIds) data.tripIds = data.tripIds[0];
+            if (data.delays) data.delays = data.delays[0];
+            data.wheelChairBoarding = that.toWheelChairBoarding(agency, data.stopsId);
+            // deferred.notify(data);
+            resolve(data);
+          })
+          .catch(function (err) {
             reject(err);
           });
-      } else {
-        that.dataFromHash(agency, route, date, resolve, reject);
       }
-    } else {
-      // use remote call for timetable
-      var d = new Date(date);
-      d.setHours(0);
-      d.setMinutes(0);
-      d.setSeconds(0);
-      d.setMilliseconds(0);
-      var from = d.getTime();
-      d.setHours(23);
-      d.setMinutes(59);
-      var to = d.getTime();
-      route = encodeURIComponent(route);
-      that.http.get(that.config.getServerURL() + '/gettransittimes/' + agency + '/' + route + '/' + from + '/' + to).toPromise()
-        .then(function (data:any) {
-          if (data.times) data.times = data.times[0];
-          if (data.tripIds) data.tripIds = data.tripIds[0];
-          if (data.delays) data.delays = data.delays[0];
-          data.wheelChairBoarding = that.toWheelChairBoarding(agency, data.stopsId);
-          // deferred.notify(data);
-          resolve(data);
-        })
-        .catch(function (err) {
-          reject(err);
-        });
-    }
 
-  })
+    })
     return deferred;
   }
   /**

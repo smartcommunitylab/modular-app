@@ -32,6 +32,8 @@ export namespace Components {
     * Icona marker per "posizione attuale"
     */
     'mainMarkerIcon'?: string;
+    'onMapInitiated'?: (event: CustomEvent) => void;
+    'onMapMoved'?: (event: CustomEvent) => void;
     'onPoiSelected'?: (event: CustomEvent) => void;
     /**
     * Icona marker POI

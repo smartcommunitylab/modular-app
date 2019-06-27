@@ -40,6 +40,7 @@
     "cordova-plugin-geolocation": "^4.0.1",
     "cordova-plugin-ionic-keyboard": "^2.1.3",
     "cordova-plugin-ionic-webview": "^4.0.1",
+    "cordova-plugin-local-notification": "0.9.0-beta.2",
     "cordova-plugin-splashscreen": "^5.0.2",
     "cordova-plugin-statusbar": "^2.4.2",
     "cordova-plugin-whitelist": "^1.3.3",
@@ -52,7 +53,7 @@
     "pouchdb-find": "^7.0.0",
     "rxjs": "^6.3.3",
     "tslib": "^1.9.3",
-    "wc-trasporti": "0.0.16",
+    "wc-trasporti": "0.0.17",
     "wcs-comune": "~0.0.112",
     "zone.js": "~0.8.26"
   },
@@ -98,7 +99,8 @@
       },
       "cordova-plugin-ionic-keyboard": {},
       "cordova-sqlite-storage": {},
-      "cordova-plugin-dbcopy": {}
+      "cordova-plugin-dbcopy": {},
+      "cordova-plugin-local-notification": {}
     },
     "platforms": [
       "browser",

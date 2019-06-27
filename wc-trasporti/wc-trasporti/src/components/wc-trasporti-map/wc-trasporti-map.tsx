@@ -30,16 +30,20 @@ export class WcTabs {
     bubbles: true
   }) poiSelected: EventEmitter;
 
+  @Event() mapInitiated: EventEmitter;
+  @Event() mapMoved: EventEmitter;
+
   @Element() element: HTMLElement;
   private mapElement: HTMLElement;
+  private map: any;
   private pointsObj: [{ lat: number, long: number, name: string, distance: string, address: string, id: string }];
-  private myPoints:any = null;
+  private myPoints: any = null;
 
   componentWillLoad() {
     if (this.points) {
       this.pointsObj = JSON.parse(this.points);
       if (!this.myPoints)
-      this.myPoints = {}
+        this.myPoints = {}
       this.myPoints.lat = this.pointsObj[this.pointsObj.length - 1].lat;
       this.myPoints.long = this.pointsObj[this.pointsObj.length - 1].long;
     }
@@ -49,8 +53,23 @@ export class WcTabs {
     /* CREAZIONE MAPPA */
     this.mapElement = this.element.shadowRoot.getElementById('map');
     if (this.myPoints) {
-      var map = leaflet.map(this.mapElement).setView([this.myPoints['lat'], this.myPoints['long']], 13);
+      this.map = leaflet.map(this.mapElement).setView([this.myPoints['lat'], this.myPoints['long']], 13)
+      this.map.on('movend', () => {
+        console.log(this.map.getBounds());
+        this.mapMoved.emit(this.map.getBounds())
+      }
+      )
+      this.map.on('zoomend', () => {
+        console.log(this.map.getBounds());
 
+        this.mapMoved.emit(this.map.getBounds())
+    });
+
+    this.map.on('dragend', () => {
+      console.log(this.map.getBounds());
+
+      this.mapMoved.emit(this.map.getBounds())
+    });
       var mainIcon = leaflet.icon({
         iconUrl: this.mainMarkerIcon,
         shadowUrl: null,
@@ -72,21 +91,23 @@ export class WcTabs {
 
       leaflet.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-      }).addTo(map);
+      }).addTo(this.map);
 
-      leaflet.marker([this.myPoints['lat'], this.myPoints['long']], { icon: mainIcon }).addTo(map);
+      leaflet.marker([this.myPoints['lat'], this.myPoints['long']], { icon: mainIcon }).addTo(this.map);
 
       if (this.pointsObj) {
         this.pointsObj.forEach(element => {
           if (element.name !== 'myPos') {
-            leaflet.marker([element.lat, element.long], { icon: poiIcon }).addTo(map)
+            leaflet.marker([element.lat, element.long], { icon: poiIcon }).addTo(this.map)
               .on('click', () => {
                 this.poiSelected.emit(element);
                 console.log(element)
               });
           }
         });
+        this.mapInitiated.emit(this.map.getBounds());
       }
+
     }
     /*********************************************************************************************************************** */
   }
