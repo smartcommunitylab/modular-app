@@ -34,6 +34,11 @@
                 "glob": "**/*",
                 "input": "src/app/module-comune/assets/comune",
                 "output": "assets/comune"
+              },
+              {
+                "glob": "**/*",
+                "input": "src/app/module-info/assets",
+                "output": "assets/info"
               }
             ],
             "styles": [

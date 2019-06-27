@@ -17,6 +17,7 @@ import { ConfigService } from './services/config.service';
 import { PopoverComponent } from './shared/popover/popover.component';
 import { DragulaModule } from 'ng2-dragula';
 import { DelayDragDirective } from './directives/delay-drag.directive';
+import { InfoModule } from './module-info/web-components.module';
 export function initializeAppSetting(appInitService: SettingService) {
   return (): Promise<any> => {
     return appInitService.Init();
@@ -51,6 +52,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     }),
     IonicModule.forRoot(),
     ComuneModule.forRoot(),
+    InfoModule.forRoot(),
     AppRoutingModule
   ],
   providers: [

@@ -108,4 +108,26 @@
     "url": "/credits",
     "icon": "home"
 
+  }, {
+    "id": "f",
+
+    "name": {
+      "it": "Video",
+      "en": "Video",
+      "de": "Video"
+    },
+    "url": "/video",
+    "icon": "home"
+
+  }, {
+    "id": "g",
+
+    "name": {
+      "it": "Notizie",
+      "en": "Notizie",
+      "de": "Notizie"
+    },
+    "url": "/notizie",
+    "icon": "home"
+
   }]
