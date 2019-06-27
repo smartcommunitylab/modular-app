@@ -42,6 +42,17 @@
       "url": "/notizie",
       "icon": "home"
   
+    }, {
+      "id": "h",
+  
+      "name": {
+        "it": "Funerali",
+        "en": "Funerali",
+        "de": "Funerali"
+      },
+      "url": "/funerali",
+      "icon": "home"
+  
     }
   ],
   "citizen": [
@@ -156,6 +167,17 @@
         "de": "Notizie"
       },
       "url": "/notizie",
+      "icon": "home"
+  
+    }, {
+      "id": "h",
+  
+      "name": {
+        "it": "Funerali",
+        "en": "Funerali",
+        "de": "Funerali"
+      },
+      "url": "/funerali",
       "icon": "home"
   
     }
