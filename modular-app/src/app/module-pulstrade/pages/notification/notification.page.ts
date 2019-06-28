@@ -17,10 +17,10 @@ export class NotificationPage implements OnInit {
   notif: any;
   showStreets: any = [];
   constructor(
-    private mapSrv: MapService,
     private notSrv: NotificationService,
     private translate: TranslateService,
     private config: ConfigService,
+    private mapSrv: MapService,
     private platform: Platform
   ) {
     this.language = window[this.config.getAppModuleName()]['language'];
@@ -28,25 +28,24 @@ export class NotificationPage implements OnInit {
   }
 
   ngOnInit() {
+    this.notif = this.notSrv.getNotStreets(); // this.notSrv.getNotifications();
     this.streets = this.mapSrv.getData();
-    this.notif = this.notSrv.getNotifications();
-    this.buildShowNot();
+     this.buildShowNot();
+    // this.showStreets = this.notif;
   }
   printData() {
     console.log(this.notif);
   }
 
   buildShowNot() {
-      this.notif.forEach(n => {
-        this.streets.forEach(s => {
-          if (s.idNumber === n.id) {
-            this.showStreets.push(s);
-            return;
-          }
-        });
-        // console.log(tmp, n.data.replace(/\"/g, ''))
-      });
-      console.log(this.showStreets);
+    let tmp = [];
+    this.notif.forEach(s => {
+      if (tmp.filter(t => t.streetName === s.streetName ).length === 0) {
+        tmp.push(s);
+      }
+    });
+    this.showStreets = tmp;
+    console.log(this.showStreets);
   }
   toggle(event) {
     this.platform.ready().then(() => {
@@ -69,6 +68,7 @@ export class NotificationPage implements OnInit {
         street.forEach(s => {
           element = document.getElementById('not-' + s.idNumber);
           toggle = document.getElementById('tog-' + s.idNumber);
+          console.log(street)
           this.notSrv.disableNotification(street);
           element.style.color = '#737373';
           this.translate.get('NOTIFY-DIS').subscribe(x => {
