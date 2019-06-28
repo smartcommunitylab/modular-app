@@ -35,6 +35,7 @@ export class SearchPage implements OnInit {
 
   ngOnInit() {
     this.streets = this.mapSrv.getData();
+    /** Add DateTimes in string format */
     this.streets.forEach(s => {
       s.cleaningDayStr = this.datePipe.transform(s.cleaningDay, 'dd/MM/yyyy');
       let tmp = new Date(s.stopStartingTime).toLocaleTimeString().split(':');
@@ -42,9 +43,10 @@ export class SearchPage implements OnInit {
       tmp = new Date(s.stopEndingTime).toLocaleTimeString().split(':');
       s.stopEndingTimeStr = `${tmp[0]}:${tmp[1]}`;
       s.centralCoordStr = JSON.stringify(s.centralCoords);
-      s.idNumber = parseInt(s.streetCode.replace(/\_/g, ''));
+      s.idNumber = parseInt(s.streetCode.replace(/\_/g, ''), 10);
     });
 
+    /** Parse URL params */
     try {
       this.route.queryParams
         .subscribe(params => {
@@ -53,6 +55,20 @@ export class SearchPage implements OnInit {
     } catch { }
   }
 
+  /**
+   * Set searchbar focus
+   */
+  ionViewDidEnter() {
+    const el = document.querySelector('ion-searchbar');
+    if (el) {
+      el.setFocus();
+    }
+  }
+
+  /**
+   * Search streets and put them in `showStreets` object
+   * @param input `(change)` event
+   */
   search(input: any) {
     let val;
     if (input) {
@@ -71,10 +87,18 @@ export class SearchPage implements OnInit {
     }
   }
 
+  /**
+   * Go to map page with specified coordinates
+   * @param coord Street coordinates
+   */
   showInMap(coord) {
     this.router.navigate(['/ps'], { queryParams: { coord: JSON.stringify(coord) } });
   }
 
+  /**
+   * Enable or disable notifications
+   * @param event `click` event
+   */
   toggle(event) {
     this.platform.ready().then(() => {
       let element, toggle: any;

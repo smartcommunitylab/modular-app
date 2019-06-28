@@ -9,10 +9,10 @@ import { MapService } from './map.service';
 })
 export class NotificationService {
 
-  private language: string;
-  private activedNots: any = [];
-  private notifiedStreets: any = [];
-  private streets: any = [];
+  private language: string; /** Actived language */
+  private activedNots: any = []; /** Actived notifications */
+  private notifiedStreets: any = []; /** Streets that will be notified */
+  private streets: any = []; /** General street object */
   constructor(
     private notify: LocalNotifications,
     private platform: Platform,
@@ -27,10 +27,17 @@ export class NotificationService {
     this.checkIfFurtherCleanings();
   }
 
+  /**
+   * Schedule notifications based on `cleaningDay` property.
+   * It saves the single street object to `LocalStorage` as a JSON string, it will be used for automatic scheduling
+   * and for the management page view
+   * @param street `Array` of street objects, it could be also one single element
+   */
   public setNotification(street) {
     street.forEach(s => this.notifiedStreets.push(s));
     localStorage.setItem('ps-st-not', JSON.stringify(this.notifiedStreets));
     this.platform.ready().then(() => {
+      /** Get translations */
       this.translate.get('IN-CLEANING').subscribe(tr => {
         const tmp = new Date(new Date().getTime() + 20000).getTime(); // SOLO PER DEBUG; DA TOGLIERE
         const noti = [];
@@ -45,17 +52,22 @@ export class NotificationService {
             });
           }
         });
+        /** Schedule notifications */
         this.notify.schedule(noti);
+        /** Build array for localstorage */
         this.buildActived();
       });
     });
   }
-  public disableNotification(street) {
 
+  /**
+   * Disable notifications and delete streets from `LocalStorage`
+   * @param street streets object
+   */
+  public disableNotification(street) {
     street.forEach(s => {
       let id = this.notifiedStreets.findIndex(n => n.streetName === s.streetName);
-      console.log(id)
-      if(id){
+      if (id) {
         this.notifiedStreets.splice(id, 1);
       }
     });
@@ -67,6 +79,9 @@ export class NotificationService {
       });
     });
   }
+  /**
+   * Build the internal variable `activedNots` made by scheduled notifications
+   */
   private buildActived() {
     this.platform.ready().then(() => {
       this.notify.getScheduledIds().then((data) => {
@@ -78,12 +93,24 @@ export class NotificationService {
       });
     });
   }
+  /**
+   * @return Actived notifications
+   */
   public getNotifications() {
     return this.activedNots;
   }
+  /**
+   * Read `LocalStorage` and return street object
+   * @return Streets object of scheduled notifications
+   */
   public getNotStreets(): any[] {
     return JSON.parse(localStorage.getItem('ps-st-not'));
   }
+  /**
+   * Check if that notification is already scheduled.
+   * @param id Street ID
+   * @param date Trigger notification date
+   */
   public checkIfNotify(id: number, date: number): boolean {
     this.activedNots.forEach(n => {
       if (n.id === id && n.trigger.at === date) {
@@ -92,6 +119,11 @@ export class NotificationService {
     });
     return false;
   }
+  /**
+   * Automatic scheduling for further cleanings.
+   * It checks if in the main `streets` array there is a new cleaning-instance for saved streets.
+   * If yes, it will schedule a new notification
+   */
   private checkIfFurtherCleanings() {
     this.streets.forEach(s => {
       this.getNotStreets().forEach(n => {

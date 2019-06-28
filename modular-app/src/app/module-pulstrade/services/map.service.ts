@@ -20,6 +20,10 @@ export class MapService {
       resolve();
     });
   }
+  /**
+   * Download streets data from API
+   * @return an `Array` of streets
+   */
   loadData(): any {
     if (this.data) {
       return Promise.resolve(this.data);
@@ -28,17 +32,26 @@ export class MapService {
       this.data = this.buildFinalData(response);
     });
   }
+  /**
+   * @return Streets array
+   */
   getData(): any {
     return this.data;
   }
-
+/**
+ * Change the `polylines` property inside the streets array, making it usable by leaflet library
+ * @param arr Streets array
+ */
   buildFinalData(arr) {
     arr.forEach(e => {
       e.polylines = this.parsePolylines(e);
     });
     return arr;
   }
-
+/**
+ * Convert the `byte` coordinates to an `Array<number>` for leaflet polyline build
+ * @param street Street object
+ */
   protected parsePolylines(street) {
     let byte = null;
     let shift = 0;

@@ -12,10 +12,10 @@ import { Platform } from '@ionic/angular';
 })
 export class NotificationPage implements OnInit {
 
-  streets: any;
-  language: string;
-  notif: any;
-  showStreets: any = [];
+  streets: any; /** Full streets object */
+  language: string; /** Actived language */
+  notif: any; /** Notified streets */
+  showStreets: any = []; /** Streets object for page view */
   constructor(
     private notSrv: NotificationService,
     private translate: TranslateService,
@@ -28,15 +28,14 @@ export class NotificationPage implements OnInit {
   }
 
   ngOnInit() {
-    this.notif = this.notSrv.getNotStreets(); // this.notSrv.getNotifications();
+    this.notif = this.notSrv.getNotStreets();
     this.streets = this.mapSrv.getData();
-     this.buildShowNot();
-    // this.showStreets = this.notif;
-  }
-  printData() {
-    console.log(this.notif);
+    this.buildShowNot();
   }
 
+  /**
+   * Build unique streets elements, and put them in `showStreets`
+   */
   buildShowNot() {
     let tmp = [];
     this.notif.forEach(s => {
@@ -45,8 +44,12 @@ export class NotificationPage implements OnInit {
       }
     });
     this.showStreets = tmp;
-    console.log(this.showStreets);
   }
+  /**
+   * Enable or disable notifications for the choosen street.
+   * It also manipulates DOM for dynamic visualization.
+   * @param event `Click` event on ion-toggle
+   */
   toggle(event) {
     this.platform.ready().then(() => {
       let element, toggle: any;
@@ -57,7 +60,7 @@ export class NotificationPage implements OnInit {
         street.forEach(s => {
           element = document.getElementById('not-' + s.idNumber);
           toggle = document.getElementById('tog-' + s.idNumber);
-          this.notSrv.setNotification(street);
+          this.notSrv.setNotification(street); /** Enable Notification */
           element.style.color = 'green';
           this.translate.get('NOTIFY-ENA').subscribe(x => {
             element.innerHTML = x;
@@ -68,8 +71,7 @@ export class NotificationPage implements OnInit {
         street.forEach(s => {
           element = document.getElementById('not-' + s.idNumber);
           toggle = document.getElementById('tog-' + s.idNumber);
-          console.log(street)
-          this.notSrv.disableNotification(street);
+          this.notSrv.disableNotification(street); /** Disable Notification */
           element.style.color = '#737373';
           this.translate.get('NOTIFY-DIS').subscribe(x => {
             element.innerHTML = x;

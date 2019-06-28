@@ -16,13 +16,13 @@ import { ToastController } from '@ionic/angular';
 })
 export class HomePage implements OnInit {
 
-  language: string;
-  myPos: any = {};
-  streets: any;
-  map: any;
-  selectedDate: Date;
-  showDate: string;
-  mapCenter: any = [];
+  language: string; /** Actived language */
+  myPos: any = {}; /** Current GPS location */
+  streets: any; /** Main street object */
+  map: any; /** Leaflet map object */
+  selectedDate: Date; /** Selected date */
+  showDate: string; /** String based on "selected Date" */
+  mapCenter: any = []; /** Coordinates of map center */
   private toast: any;
   constructor(private translate: TranslateService,
     private config: ConfigService,
@@ -35,8 +35,11 @@ export class HomePage implements OnInit {
   ) {
     this.language = window[this.config.getAppModuleName()]['language'];
     this.translate.use(this.language);
-    // this.myPos = window[this.config.getAppModuleName()]['geolocation'];
   }
+  /**
+   * Build center coordinates object `myPos` based on URL params, else use the GPS location
+   * @param params URL Params
+   */
   parseUrlParams(params) {
     if (Object.keys(params).length > 0) {
       let coord;
@@ -50,8 +53,10 @@ export class HomePage implements OnInit {
     }
   }
 
+  /**
+   * Set current date, get streets ordered by `cleaningDay` property, build map
+   */
   ngOnInit() {
-
     this.route.queryParams
       .subscribe(params => {
         this.parseUrlParams(params);
@@ -61,15 +66,21 @@ export class HomePage implements OnInit {
         this.streets = this.mapSrv.getData().sort(function (a, b) {
           return a.cleaningDay - b.cleaningDay;
         });
-        console.log(this.streets);
         this.buildMap();
       });
   }
 
+  /**
+   * Reset center map coordinates
+   */
   ionViewWillLeave() {
     this.myPos = {};
   }
 
+  /**
+   * Go to another page
+   * @param path router link
+   */
   goToLink(path: string) {
     if (path.indexOf('home-module') > -1) {
       this.router.navigate(['/home-module']);
@@ -78,9 +89,13 @@ export class HomePage implements OnInit {
     }
   }
 
+  /**
+   * Build leaflet map, with custom controls and polylines
+   */
   buildMap() {
-    try { this.map.remove(); } catch { }
+    try { this.map.remove(); } catch { } /** Reset map */
     const _this = this;
+    /** Build custom "search" button and add it to map */
     const searchControl = leaflet.Control.extend({
       options: {
         position: 'topright'
@@ -101,15 +116,18 @@ export class HomePage implements OnInit {
 
     this.map = new leaflet.Map('home-map', { zoomControl: false, attributionControl: false }).setView(this.mapCenter, 15);
 
+    /** Build polyline after drag */
     this.map.on('dragend', function (e) {
       this.mapCenter = [e.target.getCenter().lat, e.target.getCenter().lng];
       _this.buildPolyline(this.mapCenter);
     });
+    /** Build polyline after zoom */
     this.map.on('zoomend', function (e) {
       this.mapCenter = [e.target.getCenter().lat, e.target.getCenter().lng];
       _this.buildPolyline(this.mapCenter);
     });
 
+    /** Define marker icon */
     const mainIcon = leaflet.icon({
       iconUrl: 'assets/strade/icons/myMark.png',
       shadowUrl: null,
@@ -125,14 +143,21 @@ export class HomePage implements OnInit {
       // attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(this.map);
 
+    /** Add search button to map */
     this.map.addControl(new searchControl());
 
+    /** Build polylines */
     this.buildPolyline(this.mapCenter);
   }
 
+  /**
+   * Build polylines, with popup, and add them to map
+   * @param center Map center's coordinates
+   */
   async buildPolyline(center) {
     let counter = 0;
     let noCleaning, forStr, to, inDateStr, noPark, inZone, details;
+    /** Get translations for popup */
     this.translate.get('NO-CLEANING').subscribe(s => {
       noCleaning = s;
     });
@@ -155,19 +180,23 @@ export class HomePage implements OnInit {
       details = s;
     });
 
+    /** Reset polyline */
     if (this.map) {
       this.clearPolyline(this.map);
     }
 
+    /** Check distance from center map and street */
     this.streets.forEach(s => {
       const dist = this.geo.getDistanceKM(
         { lat: center[0], lon: center[1] },
         { lat: s.centralCoords[0]['lat'], lon: s.centralCoords[0]['lng'] }
       );
 
+      /** Check if is a 'cleaning day' */
       const inDate = (new Date(this.selectedDate).setHours(0, 0, 0, 0) === new Date(s.cleaningDay).setHours(0, 0, 0, 0));
       const color = (inDate) ? 'red' : 'green';
 
+      /** Build popup content */
       const freeStreetContent =
         `${noCleaning} <br/><b>${this.datePipe.transform(this.selectedDate, 'dd/MM/yyyy')}</b> ${forStr}<br/>
         <b> ${s.streetName}</b>`;
@@ -176,7 +205,9 @@ export class HomePage implements OnInit {
         <b>${this.datePipe.transform(this.selectedDate, 'dd/MM/yyyy')}</b><br/>
         <a style="float:right; margin-top: -5%">${details}</a>`;
 
-
+      /**
+       * Build polyline based on: current day, current zoom, map center
+       */
       if (inDate && ((dist < ((18 % this.map.getZoom()) - 1) || dist < 0.3))) {
         const popupContent = (inDate) ? closedStreetContent : freeStreetContent;
 
@@ -190,6 +221,9 @@ export class HomePage implements OnInit {
         counter++;
       }
     });
+    /**
+     * If no polylines built in map, show 'toast' element
+     */
     if (counter === 0 && inZone && noCleaning) {
       this.toast = await this.toastCtrl.create({
         message: `${noCleaning} ${this.datePipe.transform(this.selectedDate, 'dd/MM/yyyy')} ${inZone}`,
@@ -199,6 +233,10 @@ export class HomePage implements OnInit {
       await this.toast.present();
     }
   }
+  /**
+   * Clear polylines levels
+   * @param m Map object
+   */
   clearPolyline(m) {
     for (const i in m._layers) {
       if (m._layers[i]._path !== undefined) {
@@ -210,18 +248,26 @@ export class HomePage implements OnInit {
       }
     }
   }
-
+  /**
+   * Go one day back
+   */
   dayBack() {
     this.selectedDate.setDate(this.selectedDate.getDate() - 1);
     this.showDate = this.selectedDate.toISOString();
     this.mapCenter = [this.map.getCenter().lat, this.map.getCenter().lng];
     this.buildPolyline(this.mapCenter);
   }
+  /**
+   * Go one day ahead
+   */
   dayForward() {
     this.selectedDate.setDate(this.selectedDate.getDate() + 1);
     this.showDate = this.selectedDate.toISOString();
     this.buildPolyline(this.mapCenter);
   }
+  /**
+   * Get last cleaning day and build polylines
+   */
   firstDayFwd() {
     const center = this.mapCenter;
     this.streets.forEach(s => {
@@ -238,6 +284,9 @@ export class HomePage implements OnInit {
       }
     });
   }
+  /**
+   * Get first cleaning day and build polylines
+   */
   firstDayBck() {
     const center = this.mapCenter;
     this.streets.forEach(s => {
@@ -254,12 +303,19 @@ export class HomePage implements OnInit {
       }
     });
   }
+  /**
+   * Set date based on Ionic Datetime Picker
+   * @param event `ion-datetime` change event
+   */
   setDate(event: any) {
     this.selectedDate = new Date(event.detail.value);
     this.showDate = this.selectedDate.toISOString();
     this.buildPolyline(this.mapCenter);
   }
-
+  /**
+   * Go to search page with defined searching value
+   * @param name Street's name for automatic search
+   */
   goToSearch(name: string) {
     this.router.navigate(['ps-search'], { queryParams: { street: name } });
   }

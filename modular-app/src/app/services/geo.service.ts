@@ -51,9 +51,20 @@ export class GeoService {
     this.isWatching = false;
     this.watchLocationUpdates.unsubscribe();
   }
+  /**
+   * Convert degrees to radians
+   * @param degrees Input degrees
+   * @return radians
+   */
   private degreesToRadians(degrees): number {
     return degrees * Math.PI / 180;
   }
+  /**
+   * Get distance in KM between two coordinates
+   * @param first Starting point
+   * @param second Destination point
+   * @return Distance in KM
+   */
   getDistanceKM(first: {lat: number, lon: number}, second: {lat: number, lon: number}): number {
     const earthRadiusKm = 6371;
 
