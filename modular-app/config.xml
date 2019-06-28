@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="io.ionic.starter" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>Modular App</name>
+<widget id="smartcampuslab.modularapp" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>modularapp master</name>
     <description>An awesome Ionic/Cordova app.</description>
     <author email="hi@ionicframework.com" href="http://ionicframework.com/">Ionic Framework Team</author>
     <content original-src="index.html" src="http://192.168.42.201:8100" />
@@ -76,7 +76,9 @@
         <splash height="480" src="resources/ios/splash/Default~iphone.png" width="320" />
         <splash height="2732" src="resources/ios/splash/Default@2x~universal~anyany.png" width="2732" />
     </platform>
-    <allow-navigation href="http://192.168.42.201:8100" sessionid="1d22571b" />
+    <allow-navigation href="http://192.168.42.201:8100" sessionid="73e1aba0" />
+    <allow-navigation href="http://192.168.42.201:8101" sessionid="3ff08867" />
+    <allow-navigation href="http://192.168.42.201:8102" sessionid="b7719a8b" />
     <engine name="browser" spec="5.0.4" />
     <engine name="android" spec="6.3.0" />
     <plugin name="cordova-plugin-geolocation" spec="^4.0.1" />
@@ -92,4 +94,7 @@
     <plugin name="cordova-sqlite-storage" spec="^3.2.0" />
     <plugin name="cordova-plugin-dbcopy" spec="git+https://github.com/an-rahulpandey/cordova-plugin-dbcopy.git" />
     <plugin name="cordova-plugin-local-notification" spec="0.9.0-beta.2" />
+    <plugin name="cordova-plugin-x-socialsharing" spec="^5.4.7">
+        <variable name="ANDROID_SUPPORT_V4_VERSION" value="24.1.1+" />
+    </plugin>
 </widget>

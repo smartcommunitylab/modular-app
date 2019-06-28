@@ -29,9 +29,12 @@ export class MapSpotsPage implements OnInit {
   popupStop = null;
   currBounds = null;
   tooManyMarkers = false;
-  center = window["app-module"]["geolocation"];
-  //for viaggia trento
-  //var MAX_MARKERS = 20;
+  // center = JSON.stringify(window["app-module"]["geolocation"]);
+  center = `{
+    "latitude":"46.067727",
+    "longitude":"11.151561"
+  }`
+  //tmp
   MAX_MARKERS = 100;
 
   async ngOnInit() {
@@ -39,19 +42,19 @@ export class MapSpotsPage implements OnInit {
       this.flagAccessibility = false;
     }
     this.flagAccessibility = this.profileService.getAccessibility();
-    setTimeout(() => {
-      this.center = window["app-module"]["geolocation"];
-    }, 1000);
+    // setTimeout(() => {
+    //   this.center = JSON.stringify(window["app-module"]["geolocation"]);
+    // }, 1000);
     this.MAX_MARKERS = this.configService.getMaxMarkers();
-    this.filterMarkers(this.flagAccessibility, this.currBounds);
+   // this.filterMarkers(this.flagAccessibility, this.currBounds);
     this.elements = this.transportService.getElements();
     window.addEventListener('mapInitiated', bounds => {
       console.log(bounds);
-      this.filterMarkers(this.flagAccessibility,bounds);
+      this.filterMarkers(this.flagAccessibility,(<any>bounds).detail);
     });
     window.addEventListener('mapMoved', bounds => {
       console.log(bounds);
-      this.filterMarkers(this.flagAccessibility,bounds);
+      this.filterMarkers(this.flagAccessibility,(<any>bounds).detail);
     });
     // this.$on('leafletDirectiveMap.ttMap.moveend', function (event) {
     //   this.filterMarkers();
@@ -162,7 +165,10 @@ export class MapSpotsPage implements OnInit {
 
   async filterMarkers(accessibility, currBounds) {
     const loading = await this.loadingController.create();
-    loading.present();
+    const wcTrasportiMAp:any = document.querySelector('wc-trasporti-map');
+
+    this.currBounds = currBounds;
+    // loading.present();
     // mapService.getMap('ttMap').then(function (map) {
     // var currBounds = map.getBounds();
     if (this.allMarkers == null || accessibility) {
@@ -194,14 +200,14 @@ export class MapSpotsPage implements OnInit {
 
     if (this.allMarkers.length > this.MAX_MARKERS) {
       this.allMarkers.forEach(function (m) {
-        if (!currBounds) {
-          filteredMarkers.push(m);
-        }
-        if (currBounds && currBounds.contains(leaflet.latLng(m.lat, m.lng))) {
+        // if (!currBounds) {
+        //   filteredMarkers.push(m);
+        // }
+        if (currBounds && currBounds.contains(leaflet.latLng(m.latitude, m.longitude))) {
           filteredMarkers.push(m);
         }
       });
-      loading.dismiss()
+      // loading.dismiss()
       if (filteredMarkers.length > this.MAX_MARKERS) {
         console.log('too many markers');
         if (!this.tooManyMarkers) {
@@ -210,15 +216,19 @@ export class MapSpotsPage implements OnInit {
           this.tooManyMarkers = true;
         }
         this.markers = this.convertForWC(filteredMarkers);
+         wcTrasportiMAp.showPoints();
+
         return;
       } else if (filteredMarkers.length < this.MAX_MARKERS) {
         this.tooManyMarkers = false;
       }
     } else {
-      loading.dismiss()
+      // loading.dismiss()
       this.tooManyMarkers = false;
     }
     this.markers = this.convertForWC(filteredMarkers);
+    wcTrasportiMAp.showPoints();
+
   }
   convertForWC(filteredMarkers: any[]): string {
     var returnArray = [];

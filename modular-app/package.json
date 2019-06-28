@@ -44,6 +44,7 @@
     "cordova-plugin-splashscreen": "^5.0.2",
     "cordova-plugin-statusbar": "^2.4.2",
     "cordova-plugin-whitelist": "^1.3.3",
+    "cordova-plugin-x-socialsharing": "^5.4.7",
     "cordova-sqlite-storage": "^3.2.0",
     "core-js": "^2.5.4",
     "emulate": "1.0.2",
@@ -53,7 +54,7 @@
     "pouchdb-find": "^7.0.0",
     "rxjs": "^6.3.3",
     "tslib": "^1.9.3",
-    "wc-trasporti": "0.0.17",
+    "wc-trasporti": "file:../wc-trasporti/wc-trasporti",
     "wcs-comune": "~0.0.112",
     "zone.js": "~0.8.26"
   },
@@ -100,7 +101,10 @@
       "cordova-plugin-ionic-keyboard": {},
       "cordova-sqlite-storage": {},
       "cordova-plugin-dbcopy": {},
-      "cordova-plugin-local-notification": {}
+      "cordova-plugin-local-notification": {},
+      "cordova-plugin-x-socialsharing": {
+        "ANDROID_SUPPORT_V4_VERSION": "24.1.1+"
+      }
     },
     "platforms": [
       "browser",

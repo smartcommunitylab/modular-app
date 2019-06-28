@@ -14,6 +14,7 @@ import 'ionicons';
 export namespace Components {
 
   interface WcTrasportiMap {
+    'center': string;
     /**
     * Icona marker per "posizione attuale"
     */
@@ -26,8 +27,12 @@ export namespace Components {
     * Oggeto JSON contenente i dettagli dei POI. ULTIMO ELEMENTO = Posizione attuale Array di punti da inserire nella mappa
     */
     'points': string;
+    'showPoints': () => Promise<void>;
+    'userPoisition': string;
+    'zoomLevel': number;
   }
   interface WcTrasportiMapAttributes extends StencilHTMLAttributes {
+    'center'?: string;
     /**
     * Icona marker per "posizione attuale"
     */
@@ -43,6 +48,8 @@ export namespace Components {
     * Oggeto JSON contenente i dettagli dei POI. ULTIMO ELEMENTO = Posizione attuale Array di punti da inserire nella mappa
     */
     'points'?: string;
+    'userPoisition'?: string;
+    'zoomLevel'?: number;
   }
 
   interface WcTrasportiTable {
