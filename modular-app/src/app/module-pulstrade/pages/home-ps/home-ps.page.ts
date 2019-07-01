@@ -62,7 +62,7 @@ export class HomePage implements OnInit {
         this.parseUrlParams(params);
         this.selectedDate = new Date();
         this.showDate = this.selectedDate.toISOString();
-        this.mapCenter = [this.myPos.lat, this.myPos.long];
+        this.mapCenter = [this.myPos.lat?this.myPos.lat:0, this.myPos.long?this.myPos.long:0];
         this.streets = this.mapSrv.getData().sort(function (a, b) {
           return a.cleaningDay - b.cleaningDay;
         });

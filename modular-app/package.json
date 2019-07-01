@@ -42,7 +42,16 @@
     "pouchdb-find": "^7.0.0",
     "rxjs": "^6.3.3",
     "wcs-comune": "0.0.112",
-    "zone.js": "~0.8.26"
+    "zone.js": "~0.8.26",
+    "cordova-sqlite-storage": "^3.2.0",
+    "cordova-plugin-file": "^6.0.1",
+    "cordova-plugin-whitelist": "^1.3.3",
+    "cordova-plugin-statusbar": "^2.4.2",
+    "cordova-plugin-device": "^2.0.2",
+    "cordova-plugin-splashscreen": "^5.0.2",
+    "cordova-plugin-ionic-keyboard": "^2.1.3",
+    "cordova-plugin-dbcopy": "git+https://github.com/an-rahulpandey/cordova-plugin-dbcopy.git",
+    "cordova-plugin-x-socialsharing": "^5.4.7"
   },
   "devDependencies": {
     "@angular-devkit/architect": "~0.11.4",
@@ -94,7 +103,11 @@
       "cordova-plugin-ionic-webview": {
         "ANDROID_SUPPORT_ANNOTATIONS_VERSION": "27.+"
       },
-      "cordova-plugin-local-notification": {}
+      "cordova-plugin-local-notification": {},
+      "cordova-plugin-dbcopy": {},
+      "cordova-plugin-x-socialsharing": {
+        "ANDROID_SUPPORT_V4_VERSION": "24.1.1+"
+      }
     },
     "platforms": [
       "browser",

@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { GeoService } from 'src/app/services/geo.service';
+import { Platform } from '@ionic/angular';
 @Injectable({
   providedIn: 'root'
 })
@@ -11,14 +12,16 @@ export class MapService {
 
   private data: any;
 
-  constructor(private http: HttpClient, private geoSrv: GeoService) {
+  constructor(private http: HttpClient, private geoSrv: GeoService, private platform: Platform) {
   }
 
   Init(): Promise<any> {
-    return new Promise<void>((resolve, reject) => {
-      this.loadData();
-      resolve();
-    });
+    return this.platform.ready().then(() => {
+      return new Promise<void>((resolve, reject) => {
+        this.loadData();
+        resolve();
+      });
+    })
   }
   /**
    * Download streets data from API
@@ -38,20 +41,20 @@ export class MapService {
   getData(): any {
     return this.data;
   }
-/**
- * Change the `polylines` property inside the streets array, making it usable by leaflet library
- * @param arr Streets array
- */
+  /**
+   * Change the `polylines` property inside the streets array, making it usable by leaflet library
+   * @param arr Streets array
+   */
   buildFinalData(arr) {
     arr.forEach(e => {
       e.polylines = this.parsePolylines(e);
     });
     return arr;
   }
-/**
- * Convert the `byte` coordinates to an `Array<number>` for leaflet polyline build
- * @param street Street object
- */
+  /**
+   * Convert the `byte` coordinates to an `Array<number>` for leaflet polyline build
+   * @param street Street object
+   */
   protected parsePolylines(street) {
     let byte = null;
     let shift = 0;
