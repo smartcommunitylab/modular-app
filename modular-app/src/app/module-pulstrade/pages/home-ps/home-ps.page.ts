@@ -41,7 +41,7 @@ export class HomePage implements OnInit {
    * @param params URL Params
    */
   parseUrlParams(params) {
-    if (Object.keys(params).length > 0) {
+    if (Object.keys(params).length > 0 && params.coord) {
       let coord;
       coord = JSON.parse(params.coord);
       console.log(coord);

@@ -125,14 +125,15 @@ export class NotificationService {
    * If yes, it will schedule a new notification
    */
   private checkIfFurtherCleanings() {
-    this.streets.forEach(s => {
-      this.getNotStreets().forEach(n => {
-        if (s.streetName === n.streetName) {
-          if (n.cleaningDay > (new Date().getTime())) {
-            this.setNotification(s);
+    if (this.streets && this.streets.lenth > 0)
+      this.streets.forEach(s => {
+        this.getNotStreets().forEach(n => {
+          if (s.streetName === n.streetName) {
+            if (n.cleaningDay > (new Date().getTime())) {
+              this.setNotification(s);
+            }
           }
-        }
+        });
       });
-    });
   }
 }

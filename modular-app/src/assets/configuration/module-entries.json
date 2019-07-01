@@ -141,4 +141,13 @@
     "url": "/funerali",
     "icon": "home"
 
+  },{
+    "id": "i",
+    "name": {
+      "it": "Pulizia strade",
+      "en": "streets",
+      "de": "strasse"
+    },
+    "url": "/ps",
+    "icon": "information"
   }]
