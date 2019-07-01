@@ -16,7 +16,10 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { ConfigService } from './services/config.service';
 import { PopoverComponent } from './shared/popover/popover.component';
 import { ModulePulstradeModule } from './module-pulstrade/module-pulstrade.module';
-
+import { DragulaModule } from 'ng2-dragula';
+import { DelayDragDirective } from './directives/delay-drag.directive';
+import { InfoModule } from './module-info/web-components.module';
+import { FuneraliModule } from './module-funerali/web-components.module';
 export function initializeAppSetting(appInitService: SettingService) {
   return (): Promise<any> => {
     return appInitService.Init();
@@ -41,6 +44,7 @@ export function HttpLoaderFactory(http: HttpClient) {
   imports: [
     HttpClientModule,
     BrowserModule,
+    DragulaModule.forRoot(),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -51,7 +55,10 @@ export function HttpLoaderFactory(http: HttpClient) {
     IonicModule.forRoot(),
     ComuneModule.forRoot(),
     AppRoutingModule,
-    ModulePulstradeModule.forRoot()
+    ModulePulstradeModule.forRoot(),
+    FuneraliModule.forRoot(),
+    InfoModule.forRoot(),
+    AppRoutingModule
   ],
   providers: [
     StatusBar,

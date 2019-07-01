@@ -5,6 +5,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { HomeCommonPage } from './home-common.page';
 import { TranslateModule } from '@ngx-translate/core';
+import { DragulaModule } from 'ng2-dragula';
+import { DelayDragDirective } from 'src/app/directives/delay-drag.directive';
 
 const routes: Routes = [
   {
@@ -18,10 +20,11 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
+    DragulaModule,
     TranslateModule,
     RouterModule.forChild(routes)
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  declarations: [HomeCommonPage]
+  declarations: [HomeCommonPage,DelayDragDirective]
 })
 export class HomeCommonPageModule { }

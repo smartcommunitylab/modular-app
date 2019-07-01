@@ -4,5 +4,7 @@
     "title_detail_poi":"Point of interest",
     "title_list_categories":"Categories",
     "title_list_poi":"Points of interests",
-    "error_data":"Data error"
+    "error_data":"Data error",
+    "citizen_profile_label":"Cittadino",
+    "turist_profile_label":"Turista"
 }
