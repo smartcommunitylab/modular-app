@@ -1,0 +1,28 @@
+<ion-header no-border>
+  <ion-toolbar color="secondary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      {{'NOTIFY' | translate}}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+    <ion-list no-lines *ngIf="showStreets">
+        <div *ngFor="let s of showStreets">
+          <ion-card [id]="s.id">
+            <ion-card-content>
+              <div class="left">
+                <h1>{{s.streetName}}</h1>
+              </div>
+              <div class="right">
+                <ion-toggle [id]="'tog-' + s.idNumber" (ionChange)="toggle($event)" [value]="s.streetName" checked></ion-toggle>
+              </div>
+              <p style="color:green;" [id]="'not-' + s.idNumber" class="notification">{{'NOTIFY-ENA' | translate}}</p>
+            </ion-card-content>
+          </ion-card>
+        </div>
+      </ion-list>
+</ion-content>

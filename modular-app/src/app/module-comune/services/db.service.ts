@@ -1,3 +1,4 @@
+// tslint:disable: no-shadowed-variable
 import { Injectable } from '@angular/core';
 import PouchDB from 'pouchdb';
 import PouchDBFind from 'pouchdb-find';
@@ -23,7 +24,7 @@ export class DbService {
 
     this.db = new PouchDB('comune-in-tasca');
 
-    this.remote = 'http://192.168.42.201:5984/comune-in-tasca'
+    this.remote = 'http://192.168.42.201:5984/comune-in-tasca';
                   // 'http://127.0.0.1:5984/comune-in-tasca';
 
     this.contentTypes = {
@@ -44,7 +45,7 @@ export class DbService {
     this.db.sync(this.remote, options);
 
   }
-  getObjectByType(type,id) {
+  getObjectByType(type, id) {
     return this.getObjectById(id);
     // let view = '';
     // let classification = '';
@@ -101,7 +102,7 @@ export class DbService {
       if (query.classification) {
         // set classification
         classification = query.classification;
-        if (query.type != 'event') {
+        if (query.type !== 'event') {
           return this.db.find({
             selector: {
               'element-type': view,
@@ -245,6 +246,7 @@ export class DbService {
     if (this.categories) {
       return Promise.resolve(this.categories);
     }
+
 
     return new Promise(resolve => {
 

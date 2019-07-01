@@ -1,3 +1,4 @@
+// tslint:disable: no-shadowed-variable
 import { Component, OnInit } from '@angular/core';
 import { NavController, AlertController, PopoverController, Events } from '@ionic/angular';
 import { DbService } from '../../services/db.service';
