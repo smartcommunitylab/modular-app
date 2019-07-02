@@ -17,7 +17,7 @@
         ]
     },
     "plan_policy": "Trento",
-    "maxMarkers":100,
+    "maxMarkers":30,
     "taxi_id": "TAXI_TRENTO",
     "taxi_accuracy": 65,
     "accessibility": true,

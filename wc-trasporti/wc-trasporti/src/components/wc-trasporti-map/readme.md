@@ -13,8 +13,8 @@
 | `mainMarkerIcon` | `main-marker-icon` | Icona marker per "posizione attuale"                                                                                  | `string` | `"./assets/mymarker.png"` |
 | `poiMarkerIcon`  | `poi-marker-icon`  | Icona marker POI                                                                                                      | `string` | `"./assets/marker.png"`   |
 | `points`         | `points`           | Oggeto JSON contenente i dettagli dei POI. ULTIMO ELEMENTO = Posizione attuale Array di punti da inserire nella mappa | `string` | `undefined`               |
-| `userPoisition`  | `user-poisition`   |                                                                                                                       | `string` | `undefined`               |
-| `zoomLevel`      | `zoom-level`       |                                                                                                                       | `number` | `undefined`               |
+| `userpoisition`  | `userpoisition`    |                                                                                                                       | `string` | `undefined`               |
+| `zoomlevel`      | `zoomlevel`        |                                                                                                                       | `number` | `undefined`               |
 
 
 ## Events

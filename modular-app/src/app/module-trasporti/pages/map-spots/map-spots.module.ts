@@ -6,6 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { MapSpotsPage } from './map-spots.page';
+import { StopDetailComponent } from './stop-detail/stop-detail.component';
 
 const routes: Routes = [
   {
@@ -21,7 +22,8 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
+  entryComponents:[StopDetailComponent],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
-  declarations: [MapSpotsPage]
+  declarations: [MapSpotsPage, StopDetailComponent]
 })
 export class MapSpotsPageModule {}

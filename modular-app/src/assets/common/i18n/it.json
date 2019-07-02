@@ -12,6 +12,8 @@
     "menu_real_time_park": "Parcheggi",
     "parking": "Parchimetri",
     "bike": "Biciclette",
-    "menu_taxi": "Taxi"
+    "menu_taxi": "Taxi",
+    "err_too_many_markers":"Troppi marker"
+
 
 }

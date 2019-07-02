@@ -28,8 +28,8 @@ export namespace Components {
     */
     'points': string;
     'showPoints': () => Promise<void>;
-    'userPoisition': string;
-    'zoomLevel': number;
+    'userpoisition': string;
+    'zoomlevel': number;
   }
   interface WcTrasportiMapAttributes extends StencilHTMLAttributes {
     'center'?: string;
@@ -48,8 +48,8 @@ export namespace Components {
     * Oggeto JSON contenente i dettagli dei POI. ULTIMO ELEMENTO = Posizione attuale Array di punti da inserire nella mappa
     */
     'points'?: string;
-    'userPoisition'?: string;
-    'zoomLevel'?: number;
+    'userpoisition'?: string;
+    'zoomlevel'?: number;
   }
 
   interface WcTrasportiTable {

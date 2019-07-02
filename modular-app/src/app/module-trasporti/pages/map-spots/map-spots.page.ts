@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { LoadingController } from '@ionic/angular';
+import { LoadingController, ToastController, ModalController } from '@ionic/angular';
 import { ProfileService } from '../../services/profile.service';
 import { ConfigService } from '../../services/config.service';
 import { DbService } from '../../services/db.service';
 import { TransportService } from '../../services/transport.service';
 import leaflet from 'leaflet';
 import { JsonPipe } from '@angular/common';
+import { TranslateService } from '@ngx-translate/core';
+import { StopDetailComponent } from './stop-detail/stop-detail.component';
 
 @Component({
   selector: 'app-map-spots',
@@ -14,9 +16,9 @@ import { JsonPipe } from '@angular/common';
 })
 export class MapSpotsPage implements OnInit {
   accesibilityKnow: any;
-  markers: string;
+  markers: string ='[{"id":"point2","lat":"46.07559","long":"11.16411"}]';
   //include wc with spots of type selected
-  constructor(private loadingController: LoadingController, private transportService: TransportService, private dbService: DbService, private configService: ConfigService, private profileService: ProfileService) { }
+  constructor(private loadingController: LoadingController,public modalController: ModalController, private translate: TranslateService, private toast: ToastController, private transportService: TransportService, private dbService: DbService, private configService: ConfigService, private profileService: ProfileService) { }
   allMarkers = null;
   mapData = null;
   elements = null;
@@ -30,109 +32,43 @@ export class MapSpotsPage implements OnInit {
   currBounds = null;
   tooManyMarkers = false;
   // center = JSON.stringify(window["app-module"]["geolocation"]);
-  center = `{
-    "latitude":"46.067727",
-    "longitude":"11.151561"
-  }`
+  center = '{"latitude":"46.067727","longitude":"11.151561"}'
   //tmp
-  MAX_MARKERS = 100;
+  MAX_MARKERS = 30;
 
   async ngOnInit() {
     if (!this.accesibilityKnow) {
       this.flagAccessibility = false;
     }
     this.flagAccessibility = this.profileService.getAccessibility();
-    // setTimeout(() => {
-    //   this.center = JSON.stringify(window["app-module"]["geolocation"]);
-    // }, 1000);
+
     this.MAX_MARKERS = this.configService.getMaxMarkers();
-   // this.filterMarkers(this.flagAccessibility, this.currBounds);
     this.elements = this.transportService.getElements();
     window.addEventListener('mapInitiated', bounds => {
       console.log(bounds);
-      this.filterMarkers(this.flagAccessibility,(<any>bounds).detail);
+      this.filterMarkers(this.flagAccessibility, (<any>bounds).detail);
     });
     window.addEventListener('mapMoved', bounds => {
       console.log(bounds);
-      this.filterMarkers(this.flagAccessibility,(<any>bounds).detail);
+      this.filterMarkers(this.flagAccessibility, (<any>bounds).detail);
     });
-    // this.$on('leafletDirectiveMap.ttMap.moveend', function (event) {
-    //   this.filterMarkers();
-    // });
+    window.addEventListener('poiSelected', stop => {
+      console.log(stop);
+      this.showStopDetail((<any>stop).detail);
+    });
 
-    // this.$on('$ionicView.beforeEnter', function () {
-    //   this.mapService.refresh('ttMap');
-    // });
-    // this.$on('leafletDirectiveMarker.ttMap.click', function (e, args) {
-    //   var showPopup = function () {
-    //     $ionicPopup.show({
-    //       templateUrl: 'templates/stopPopup.html',
-    //       title: $filter('translate')('lbl_stop'),
-    //       cssClass: 'parking-popup',
-    //       scope: $scope,
-    //       buttons: [
-    //         {
-    //           text: $filter('translate')('btn_close'),
-    //           type: 'button-close'
-    //         },
-    //         {
-    //           text: '<i class="icon ion-navigate"></i>',
-    //           onTap: this.navigate,
-    //         },
-    //         {
-    //           text: '<i class="icon ion-android-time"></i>',
-    //           onTap: this.showStopData
-    //         }
-    //       ]
-    //     });
-    //     this.mapData = ttService.getTTMapData();
-    //     this.elements = this.mapData.elements;
-    //     this.markerIcon = this.mapData.markerIcon;
-    //     this.icon = this.mapData.icon;
-    //     this.title = this.mapData.title;
-    //     this.ref = this.mapData.ref;
-    //     this.flagAccessibility = this.profileService.getAccessibility();
-    //     this.accessibilityStyle = this.getAccessibilityStyle(this.ref);
-    //   };
-
-    //   var p = this.markers[args.modelName].stop;
-    //   this.popupStop = p;
-    //   const loading = await this.loadingController.create();
-    //   ttService.getNextTrips(this.popupStop.agencyId, this.popupStop.id, 5).then(function (data) {
-    //     loading.dismiss();
-    //     //          var routes = [];
-    //     this.elements.forEach(function (e) {
-    //       var list = [];
-    //       if (e.group) {
-    //         if (e.group.routes) list = list.concat(e.group.routes);
-    //         else if (e.group.route) list.push(e.group.route);
-    //       } else {
-    //         if (e.routes) list = list.concat(e.routes);
-    //         else if (e.route) list.push(e.route);
-    //       }
-    //       list.forEach(function (r) {
-    //         if (data[r.routeId] != null) {
-    //           data[r.routeId].routeElement = e;
-    //           data[r.routeId].routeObject = r;
-    //           //                routes.push(data[r.routeId]);
-    //         } else if (data[r.routeSymId] != null) {
-    //           data[r.routeSymId].routeElement = e;
-    //           data[r.routeSymId].routeObject = r;
-    //           //                routes.push(data[r.routeSymId]);
-    //         }
-    //       });
-    //     });
-    //     this.popupStop.data = data;
-    //     this.popupStop.icon = this.icon;
-    //     //          this.popupStop.routes = routes;
-    //     this.popupStop.visualization = Config.getStopVisualization(this.popupStop.agencyId);
-    //     showPopup();
-    //   }, function (err) {
-    //     Config.loaded();
-    //     showPopup();
-    //     console.log('No data');
-    //   });
-    // });
+  }
+  async showStopDetail(stopId: any) {
+    //show popup with detail information
+      const modal = await this.modalController.create({
+        component: StopDetailComponent,
+        componentProps: {
+          'id': stopId.id,
+          'object': stopId.object
+        }
+      });
+      return await modal.present();
+    
   }
 
   getAccessibilityStyle(ref) {
@@ -165,7 +101,7 @@ export class MapSpotsPage implements OnInit {
 
   async filterMarkers(accessibility, currBounds) {
     const loading = await this.loadingController.create();
-    const wcTrasportiMAp:any = document.querySelector('wc-trasporti-map');
+    const wcTrasportiMAp: any = document.querySelector('wc-trasporti-map');
 
     this.currBounds = currBounds;
     // loading.present();
@@ -212,11 +148,18 @@ export class MapSpotsPage implements OnInit {
         console.log('too many markers');
         if (!this.tooManyMarkers) {
           console.log('too many');
-          // Toast.show($filter('translate')('err_too_many_markers'), "short", "bottom");
-          this.tooManyMarkers = true;
+          this.translate.get('err_too_many_markers').subscribe(async value => {
+            const toast = await this.toast.create({
+              message: value,
+              duration: 2000
+            });
+            toast.present();
+            // this.toast.create($filter('translate')('err_too_many_markers'), "short", "bottom");
+            this.tooManyMarkers = true;
+          })
         }
-        this.markers = this.convertForWC(filteredMarkers);
-         wcTrasportiMAp.showPoints();
+        // this.markers = this.convertForWC(filteredMarkers);
+        wcTrasportiMAp.showPoints();
 
         return;
       } else if (filteredMarkers.length < this.MAX_MARKERS) {
@@ -240,7 +183,7 @@ export class MapSpotsPage implements OnInit {
         "object": JSON.stringify(elem)
       })
     })
-    return  JSON.stringify(returnArray);
+    return JSON.stringify(returnArray);
   }
 };
 

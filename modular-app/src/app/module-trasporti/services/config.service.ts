@@ -14,17 +14,20 @@ export class ConfigService {
     this.init();
   }
   getAppAgencies(): any {
-    return this.config['agencies'];
+    if (this.config)
+      return this.config['agencies'];
   }
   getServerURL(): any {
-    return this.config['serverURL'];
+    if (this.config)
+      return this.config['serverURL'];
   }
-  getMaxMarkers(): any  {
-    return this.config['maxMarkers'];
+  getMaxMarkers(): any {
+    if (this.config)
+      return this.config['maxMarkers'];
 
   }
   getTTData(ref?, agencyId?, groupId?, routeId?) {
-    var res:any = this.ttConfig;
+    var res: any = this.ttConfig;
     if (!!ref) {
       res = res.elements[ref];
     }

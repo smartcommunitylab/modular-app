@@ -20,8 +20,8 @@ export class WcTrasportiMap {
   @Prop() points: string;
   //centro della mappa 
   @Prop() center: string;
-  @Prop() zoomLevel: number;
-  @Prop() userPoisition: string;
+  @Prop() zoomlevel: number;
+  @Prop() userpoisition: string;
   /** Icona marker per "posizione attuale" */
   @Prop() mainMarkerIcon: string = "./assets/mymarker.png";
   /** Icona marker POI */
@@ -122,7 +122,7 @@ internalShowPoints() {
     this.mapElement = this.element.shadowRoot.getElementById('map');
     if (!this.map) {
       console.log("this.map"+this.map)
-      this.map = leaflet.map(this.mapElement).setView([this.centerPoint['lat'], this.centerPoint['long']], this.zoomLevel)
+      this.map = leaflet.map(this.mapElement).setView([this.centerPoint['lat'], this.centerPoint['long']],15)
       this.map.on('movend', () => {
         console.log(this.map.getBounds());
         this.mapMoved.emit(this.map.getBounds())

@@ -1,3 +1,5 @@
 <p>
-  stop-detail works!
+  <ion-item *ngFor="let item of lines" (click)="selectElement(item)">
+    {{item.route}}  {{item.name}} 
+  </ion-item>
 </p>

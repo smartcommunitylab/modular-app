@@ -124,8 +124,6 @@ export class TransportService {
     return res;
   }
 
-
-
   getStopsData(agencies) {
     var res = [];
     var that = this;
@@ -297,7 +295,7 @@ export class TransportService {
       }, errCB);
   };
 
-  getNextTrips(agencyId, stopId, numberOfResults) {
+  getNextTrips(agencyId, stopId, numberOfResults?) {
     var deferred = new Promise((resolve, reject) => {
 
 
