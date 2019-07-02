@@ -2,12 +2,43 @@
   "namespace": "mycomponent",
   "fsNamespace": "mycomponent",
   "loader": "../mycomponent.js",
-  "core": "mycomponent.bah91zxy.js",
-  "corePolyfilled": "mycomponent.dzxlzcpg.js",
+  "global": "mycomponent.global.js",
+  "core": "mycomponent.krlwxukd.js",
+  "corePolyfilled": "mycomponent.yvthgzqh.js",
   "components": {
+    "ion-col": {
+      "bundleIds": {
+        "$": "n5m0psfk"
+      },
+      "encapsulation": "shadow"
+    },
+    "ion-content": {
+      "bundleIds": {
+        "$": "n5m0psfk"
+      },
+      "encapsulation": "shadow"
+    },
+    "ion-icon": {
+      "bundleIds": {
+        "$": "n5m0psfk"
+      },
+      "encapsulation": "shadow"
+    },
+    "ion-row": {
+      "bundleIds": {
+        "$": "n5m0psfk"
+      },
+      "encapsulation": "shadow"
+    },
+    "wc-trasporti-map": {
+      "bundleIds": {
+        "$": "wx8i2nbz"
+      },
+      "encapsulation": "shadow"
+    },
     "wc-trasporti-table": {
       "bundleIds": {
-        "$": "7oheo4hq"
+        "$": "n5m0psfk"
       },
       "encapsulation": "shadow"
     }

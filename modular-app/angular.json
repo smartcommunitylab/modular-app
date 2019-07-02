@@ -50,7 +50,7 @@
               }, {
                 "glob": "**/*",
                 "input": "src/app/module-trasporti/assets",
-                "output": "assets/trasporti"
+                "output": "assets/module-trasporti"
               }
             ],
             "styles": [{
