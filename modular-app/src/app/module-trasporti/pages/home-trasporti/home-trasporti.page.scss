@@ -1,0 +1,20 @@
+.scrolling-wrapper-flexbox {
+    background-color: rgba(255, 255, 255, .5);
+    // left: 0px;
+    // position: fixed;
+    // bottom: 0px;
+    // width: 100vw;
+    // height: 100px;
+    display: flex;
+    overflow-x: auto;
+    z-index: 999;
+    position: fixed;
+
+    ion-chip {
+        flex: 0 0 auto;
+
+    }
+}
+.line-container {
+    padding-top: 40px;
+}

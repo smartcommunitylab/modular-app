@@ -1,0 +1,260 @@
+#colonna1{
+    position: relative;
+    width: 20%;
+}
+
+#riga1{
+    position: relative;
+    height: 6%;
+}
+
+*{
+    font-family: monospace;
+}
+#listaFermate{
+    position: absolute;
+    top: var(--top-table);
+    height: var(--dim-orari-hei);
+    /* width: var(--dim-orari-wid); */
+    overflow: auto;
+    overflow-y:hidden;
+}
+
+#fermate{
+    position: absolute;
+    top:0px;
+    min-width: 100px;
+    max-width: 300px;;
+    width: 10%;
+}
+
+#contentFermate{
+    height: 800px;
+    width: 300px;
+    
+}
+
+#myDIV {
+    position: absolute; 
+    top: var(--top-table);
+    height: var(--dim-fermate-hei);
+    width: var(--dim-fermate-wid);
+    overflow: auto;
+    overflow-x:var(--blocca-barra);
+  }
+  
+  #content {
+    height: 800px;
+    width: 2000px;
+  }
+
+
+  #orari{
+    position: absolute;
+    top:0px;
+    width: 10%;
+    left: 15%;
+  }
+
+
+  #biancoOrari{
+    background-color: rgb(255,255,255);
+    width: fit-content;    
+    position: relative;
+
+  }
+
+  #grigioOrari{
+    background-color: rgb(238,238,238);
+    width: fit-content;
+    position: relative;
+}
+
+
+#biancoFermate{
+    background-color: rgb(255,255,255);
+    position: relative;
+  }
+
+  #grigioFermate{
+    background-color: rgb(238,238,238);
+    position: relative;
+}
+
+::-webkit-scrollbar {
+    width: 10px;    
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: rgb(255,255,255,0); 
+  }
+   
+  ::-webkit-scrollbar-thumb {
+    background: rgb(255,255,255,0); 
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgb(255,255,255,0); 
+  }  
+
+
+  .tt-day {
+    font-size: 20px;
+    line-height: 40px;
+    text-align: center;
+    padding: 0;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  
+  .tt-day.btn {
+    font-size: 30px;
+  }
+  
+  .tt-day.btn a:active,
+  .tt-day.btn a:hover,
+  .tt-day.btn a:focus,
+  .tt-day.btn a.activated {
+    opacity: 0.5;
+  }
+  .tt-subtitle {
+    text-align: center;
+  }
+  /* .titleBar {
+    background-color: red;
+  }
+  .dayBar {
+    background-color: blue;
+  } */
+
+
+  #table-header {
+    white-space: nowrap;
+    font-family: RobotoMono;
+    position: absolute;
+    background-color: #fff;
+    font-size: 12px;
+    /*    left: 100px;*/
+    z-index: 10;
+  }
+  
+  #table-header div {
+    border-bottom: 1px solid #bbb;
+    height: 25px;
+  }
+  
+  #table-header div:first-child {
+    color: #cd251c;
+  }
+  
+  .tt-table #table-col div {
+    /*    width: 20px;*/
+    display: inline-block;
+    margin-right: 5px;
+    text-align: center;
+  }
+  
+  .header-row-types {
+    height: 20px;
+  }
+  
+  #table-table {
+    white-space: nowrap;
+    /* font-family: RobotoMono !important; */
+    /*    left: 100px;*/
+    font-size: 12px;
+    position: absolute;
+    left: 0;
+    -webkit-transition-duration: 0.3s;
+    -moz-transition-duration: 0.3s;
+    -o-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+  }
+  
+  #table-table br {
+    font-family: RobotoMono;
+  }
+  
+  #table-col {
+    line-height: 20px;
+    white-space: nowrap;
+    font-size: 12px;
+    position: absolute;
+    background-color: #fff;
+    /*    width: 100px;*/
+    border-right: 1px solid #bbb;
+    z-index: 10;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /* padding-right: 5px; */
+    padding-left: 3px;
+  }
+  
+  #table-corner {
+    font-size: 12px;
+    height: 25px;
+    /*    border-right: 1px solid #bbb;*/
+    position: absolute;
+    /*    width: 100px;*/
+    background-color: #fff;
+    z-index: 100;
+    text-align: left;
+    padding-left: 3px;
+    /*    top: 50px;*/
+  }
+  
+  #table-corner div {
+    height: 25px;
+    border-bottom: 1px solid #bbb;
+    border-right: 1px solid #bbb;
+    background-color: white;
+  }
+  
+  #table-corner > div .corner-delay {
+    margin-left: 10px;
+    vertical-align: top;
+  }
+  
+  .accessibilityBullet {
+    width: 20px;
+  }
+  
+  .delay {
+    padding-left: 40px;
+  }
+  
+  .table-container {
+    padding: 0px;
+  }
+  
+  .table-container ion-scroll {
+    margin-top: 0;
+  }
+  .tt-table {
+    position: absolute;
+    left: -25px;
+    -webkit-transition-duration: 0.3s;
+    -moz-transition-duration: 0.3s;
+    -o-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+  }
+  
+  .tt-table-acc {
+    left: 0px !important;
+  }
+  
+  
+  .tt-table #table-col div {
+    width: 20px;
+    display: inline-block;
+    margin-right: 5px;
+    text-align: center;
+  }
+  .tt-subtitle {
+    text-align: center;
+  }
+  .table-accessibility {
+    color: #2975a7;
+    margin-right: 4px;
+    font-size: 25px;
+  }

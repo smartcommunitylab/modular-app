@@ -150,4 +150,14 @@
     },
     "url": "/ps",
     "icon": "information"
+  },{
+    "id": "j",
+    "name": {
+      "it": "Trasporti",
+      "en": "Transport",
+      "de": "Transport"
+    },
+    "url": "home-trasporti",
+    "icon": "home"
+
   }]

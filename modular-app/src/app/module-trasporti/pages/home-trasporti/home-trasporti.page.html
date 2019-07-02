@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{'home_trasporto'|translate}} {{'title_app'|translate}}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-fab vertical="top" horizontal="end" slot="fixed">
+        <ion-fab-button routerLink="/map-spots">
+          <ion-icon name="map" ></ion-icon>
+        </ion-fab-button>
+      </ion-fab>
+  <div class="wrapper">
+    <div class="scrolling-wrapper-flexbox loop" ng-if="primaryLinks.length>0">
+      <ion-chip *ngFor="let m of primaryLinks" (click)="selectInternalElement(m)">
+        <ion-icon name="{{m.icon}}" color="dark"></ion-icon>
+        <ion-label>{{m.label|translate}}</ion-label>
+      </ion-chip>
+    </div>
+  </div>
+  <div class="line-container">
+    <ion-list class="route-list space-from-top">
+      <ion-item *ngFor="let elem of elements" class="{{elem.ref}}" (click)="selectElement(elem)">
+        <div class="card card-tt" color [ngStyle]="getStyle(elem)">
+          <span>{{elem.title}}</span>
+          <span *ngIf="titleisPresent(elem)">{{elem.group.routes[0].title}}</span>
+        </div>
+      </ion-item>
+    </ion-list>
+  </div>
+
+  <!-- <ion-list class="home-list" ng-if="primaryLinks.length>0">
+    <ion-item *ngFor="let m of primaryLinks"  routerLink="{{m.state}}">
+        <ion-label>
+          <h3>{{m.label|translate}}</h3>
+        </ion-label>
+        <ion-icon slot="start" name="{{m.icon}}"></ion-icon>
+      </ion-item>
+  </ion-list> -->
+</ion-content>

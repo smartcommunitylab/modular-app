@@ -7,9 +7,10 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ComuneModule } from './module-comune/web-components.module';
-import { SettingService } from './services/setting.service';
-import { GeoService } from './services/geo.service';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { TrasportiModule } from './module-trasporti/module-trasporti.module';
+import { SettingService } from './services/setting.service'
+import { GeoService } from './services/geo.service'
+import { HttpClient,HttpClientModule } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
@@ -50,7 +51,8 @@ export function HttpLoaderFactory(http: HttpClient) {
         provide: TranslateLoader,
         useFactory: HttpLoaderFactory,
         deps: [HttpClient]
-      }
+      },
+      isolate: true
     }),
     IonicModule.forRoot(),
     ComuneModule.forRoot(),
@@ -58,8 +60,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     ModulePulstradeModule.forRoot(),
     FuneraliModule.forRoot(),
     InfoModule.forRoot(),
-    AppRoutingModule
-  ],
+    AppRoutingModule,
+    TrasportiModule.forRoot(),
+    AppRoutingModule],
   providers: [
     StatusBar,
     SplashScreen,
