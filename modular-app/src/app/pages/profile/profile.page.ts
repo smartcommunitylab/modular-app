@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ConfigService } from 'src/app/services/config.service';
 import { Router } from '@angular/router';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-profile',
@@ -9,10 +10,10 @@ import { Router } from '@angular/router';
 })
 export class ProfilePage implements OnInit {
 
-  constructor(private configService: ConfigService, private router: Router) { }
+  constructor(private configService: ConfigService, private router: Router, private navCtrl: NavController) { }
   chooseProfile(type) {
     this.configService.chooseProfile(type).then(() => {
-      this.router.navigate(['/home-common']);
+      this.navCtrl.navigateRoot('/home-common');
     }
     )
 
@@ -21,7 +22,7 @@ export class ProfilePage implements OnInit {
     var type = this.configService.getChoosen();
     if (type != null)
       this.configService.setDefaultHome(type).then(() => {
-        this.router.navigate(['/home-common']);
+        this.navCtrl.navigateRoot('/home-common');
       })
   }
 
