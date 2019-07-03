@@ -122,7 +122,7 @@ internalShowPoints() {
     this.mapElement = this.element.shadowRoot.getElementById('map');
     if (!this.map) {
       console.log("this.map"+this.map)
-      this.map = leaflet.map(this.mapElement).setView([this.centerPoint['lat'], this.centerPoint['long']],15)
+      this.map = leaflet.map(this.mapElement, {tap:false}).setView([this.centerPoint['lat'], this.centerPoint['long']],15)
       this.map.on('movend', () => {
         console.log(this.map.getBounds());
         this.mapMoved.emit(this.map.getBounds())
