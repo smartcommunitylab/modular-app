@@ -37,7 +37,7 @@ export function initializeAppConfig(configService: ConfigService) {
   };
 }
 export function HttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+  return new TranslateHttpLoader(http, './assets/common/i18n/', '.json');
 }
 @NgModule({
   declarations: [AppComponent, PopoverComponent],
