@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { MapSpotsPage } from './map-spots.page';
 import { StopDetailComponent } from './stop-detail/stop-detail.component';
+import { StopSingleLineComponent } from './stop-single-line/stop-single-line.component';
 
 const routes: Routes = [
   {
@@ -24,6 +25,6 @@ const routes: Routes = [
   ],
   entryComponents:[StopDetailComponent],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
-  declarations: [MapSpotsPage, StopDetailComponent]
+  declarations: [MapSpotsPage, StopDetailComponent,StopSingleLineComponent]
 })
 export class MapSpotsPageModule {}
