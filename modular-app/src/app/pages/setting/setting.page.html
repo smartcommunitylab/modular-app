@@ -1,26 +1,31 @@
 <ion-header no-border>
-        <ion-toolbar color="secondary">
-          <ion-buttons slot="start">
+    <ion-toolbar>
+        <ion-buttons slot="start">
             <ion-back-button></ion-back-button>
-          </ion-buttons>
-          <ion-title>
-              {{'title_app'|translate}}
-            </ion-title>
-        </ion-toolbar>
-      </ion-header>
+        </ion-buttons>
+        <ion-title>
+            {{'label_other_settinga'|translate}}
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
 
 <ion-content padding>
-  <ion-list>
-      <ion-radio-group (ionChange)="onLanguageChanged($event)" [(ngModel)]="selectedLanguage">
-          <ion-list-header>
-              <ion-label>{{title}}</ion-label>
-          </ion-list-header>
-  
-          <ion-item *ngFor="let language of languages">
-              <ion-label>{{language.value}}</ion-label>
-              <ion-radio slot="start" value="{{language.key}}"></ion-radio>
-          </ion-item>
-  
-      </ion-radio-group>
-  </ion-list>
+    <ion-list>
+        <ion-radio-group (ionChange)="onLanguageChanged($event)" [(ngModel)]="selectedLanguage">
+            <ion-list-header>
+                <ion-label>{{title}}</ion-label>
+            </ion-list-header>
+
+            <ion-item *ngFor="let language of languages">
+                <ion-label>{{language.value}}</ion-label>
+                <ion-radio slot="start" value="{{language.key}}"></ion-radio>
+            </ion-item>
+
+        </ion-radio-group>
+    </ion-list>
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+        <ion-fab-button class="save-button" (click)="saveOtherSetting()">
+            <ion-icon name="save"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
 </ion-content>

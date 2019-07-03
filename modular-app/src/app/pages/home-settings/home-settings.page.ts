@@ -4,6 +4,8 @@ import { Subscription } from 'rxjs';
 import { Location } from '@angular/common';
 import { ConfigService } from 'src/app/services/config.service';
 import { TranslateService } from '@ngx-translate/core';
+import { Router } from '@angular/router';
+import { SettingService } from 'src/app/services/setting.service';
 @Component({
   selector: 'app-home-settings',
   templateUrl: './home-settings.page.html',
@@ -17,9 +19,11 @@ export class HomeSettingsPage implements OnInit {
 
   constructor(
     private dragulaService: DragulaService,
+    private router: Router,
     private location: Location,
     private config: ConfigService,
-    public translate: TranslateService
+    public translate: TranslateService,
+    private settings:SettingService
   ) {
     this.language = window[this.config.getAppModuleName()]['language'];
     translate.use(this.language);
@@ -48,10 +52,15 @@ export class HomeSettingsPage implements OnInit {
   ngOnInit() {
 
   }
+  doSomething() {
+    console.log('longpress')
+  }
   ngOnDestroy() {
     this.subs.unsubscribe();
   }
   ionViewDidEnter() {
+    this.language = this.settings.getUserLanguage();
+    this.translate.use(this.language);
     this.categories = this.config.getModuleEntries().map(x => this.convertCategories(x));
     this.config.getAllModuleEntries().then(res => {
       this.allCategories = res.map(x => this.convertCategories(x));
@@ -94,5 +103,8 @@ export class HomeSettingsPage implements OnInit {
     }
 
     return categoryElement;
+  }
+  goToSettings() {
+    this.router.navigate(['/setting']);
   }
 }

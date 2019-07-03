@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SettingService } from '../../services/setting.service';
 import { TranslateService,  DefaultLangChangeEvent } from '@ngx-translate/core';
 import { ConfigService } from 'src/app/services/config.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-setting',
@@ -16,7 +17,10 @@ export class SettingPage implements OnInit {
   selectedLanguage: any;
   form: any;
   title: string;
-  constructor(private settingService: SettingService, private translate: TranslateService, private config: ConfigService) {
+  constructor(private settingService: SettingService,
+    private location:Location,
+     private translate: TranslateService, 
+     private config: ConfigService) {
     this.translate.use(window[this.config.getAppModuleName()]['language']);
     this.setLanguages();
 
@@ -62,10 +66,14 @@ export class SettingPage implements OnInit {
       });
     }
   }
-  onLanguageChanged(data) {
-    console.log('Lingua = ', this.selectedLanguage);
+  saveOtherSetting() {
     this.settingService.setUserLanguage(this.selectedLanguage);
     this.translate.setDefaultLang(this.selectedLanguage);
+    this.location.back()
+
+  }
+  onLanguageChanged(data) {
+    console.log('Lingua = ', this.selectedLanguage);
 
   }
 }

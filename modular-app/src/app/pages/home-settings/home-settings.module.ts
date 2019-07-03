@@ -4,7 +4,6 @@ import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
-
 import { HomeSettingsPage } from './home-settings.page';
 import { DragulaModule } from 'ng2-dragula';
 import { TranslateModule } from '@ngx-translate/core';
