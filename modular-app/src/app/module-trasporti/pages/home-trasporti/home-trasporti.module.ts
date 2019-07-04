@@ -6,7 +6,9 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { HomeTrasportiPage } from './home-trasporti.page';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { HttpClient } from '@angular/common/http';
 
 const routes: Routes = [
   {
@@ -14,14 +16,21 @@ const routes: Routes = [
     component: HomeTrasportiPage
   }
 ];
-
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http, "./assets/trasporti/i18n/", ".json");
+}
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    TranslateModule,
-    RouterModule.forChild(routes)
+    TranslateModule.forChild({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }, isolate: true
+    }),    RouterModule.forChild(routes)
   ],
   declarations: [HomeTrasportiPage]
 })

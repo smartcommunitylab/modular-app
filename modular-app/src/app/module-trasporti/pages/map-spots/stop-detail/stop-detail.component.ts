@@ -28,9 +28,7 @@ export class StopDetailComponent implements OnInit {
       this.transportService.getNextTrips(this.stop.agencyId, this.stop.id, NUMBER_OF_TRIP).then((data: any) => {
         console.log(data);
         this.data = data;
-        
-        for (const k in data) {
-         
+        for (const k in data) {  
           this.lines.push(data[k]);
         }
       })

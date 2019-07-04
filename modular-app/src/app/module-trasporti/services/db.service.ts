@@ -16,7 +16,7 @@ declare var cordova: any;
 export class DbService {
   file = new File();
   db: any;
-  LOCAL_DATA_URL = 'assets/module-trasporti/data/routesdb.zip';
+  LOCAL_DATA_URL = 'assets/trasporti/data/routesdb.zip';
 
   constructor(private sqlite: SQLite,
     private config: ConfigService,

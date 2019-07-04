@@ -87,7 +87,7 @@ export class ConfigService {
     }
   }
   init(): Promise<any> {
-    return this.http.get("assets/module-trasporti/configuration/config.json").toPromise().then(response => {
+    return this.http.get("assets/trasporti/configuration/config.json").toPromise().then(response => {
       this.config = response;
       return Promise.resolve(this.config);
     }, err => {
@@ -97,7 +97,7 @@ export class ConfigService {
     if (this.ttConfig) {
       return Promise.resolve(this.ttConfig);
     }
-    return this.http.get("assets/module-trasporti/data/tt.json").toPromise().then(response => {
+    return this.http.get("assets/trasporti/data/tt.json").toPromise().then(response => {
       this.ttConfig = response;
       return Promise.resolve(this.ttConfig);
     }, err => {

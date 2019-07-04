@@ -10,7 +10,7 @@ import { DbService } from './services/db.service';
 import { SQLite } from '@ionic-native/sqlite/ngx';
 
 export function HttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http, "./assets/module-trasporti/i18n/", ".json");
+  return new TranslateHttpLoader(http, "./assets/trasporti/i18n/", ".json");
 }
 export function initializeDb(dbService: DbService) {
   return (): Promise<any> => {

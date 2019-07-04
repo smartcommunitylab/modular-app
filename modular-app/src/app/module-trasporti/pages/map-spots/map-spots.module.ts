@@ -8,6 +8,9 @@ import { IonicModule } from '@ionic/angular';
 import { MapSpotsPage } from './map-spots.page';
 import { StopDetailComponent } from './stop-detail/stop-detail.component';
 import { StopSingleLineComponent } from './stop-single-line/stop-single-line.component';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { HttpClient } from '@angular/common/http';
 
 const routes: Routes = [
   {
@@ -15,13 +18,21 @@ const routes: Routes = [
     component: MapSpotsPage
   }
 ];
-
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http, "./assets/trasporti/i18n/", ".json");
+}
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    RouterModule.forChild(routes)
+    TranslateModule.forChild({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }, isolate: true
+    }),    RouterModule.forChild(routes)
   ],
   entryComponents:[StopDetailComponent],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],

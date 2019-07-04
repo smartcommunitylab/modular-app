@@ -293,7 +293,7 @@ export class WcTrasportiStop {
         //check first value of data and put the hour to row[0], the other are values until it changes
 
         if (k == 0) {
-          rowContent = "<span class='hour'>"+time.getHours() + "</span>|";
+          rowContent = "<span class='hour'>"+ (time.getHours() < 10 ? ' ' : '') +time.getHours() + "</span>|";
         }
         if (k > 0 && previousTime && time.getHours() != previousTime.getHours()) {
           if (time.getDay() != previousTime.getDay()) {

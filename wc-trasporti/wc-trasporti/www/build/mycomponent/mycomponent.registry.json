@@ -2,49 +2,49 @@
   "namespace": "mycomponent",
   "fsNamespace": "mycomponent",
   "loader": "../mycomponent.js",
-  "corePolyfilled": "es5-build-disabled.js",
   "global": "mycomponent.global.js",
-  "core": "mycomponent.core.js",
+  "core": "mycomponent.x11ri9ma.js",
+  "corePolyfilled": "mycomponent.zekbgk0c.js",
   "components": {
     "ion-col": {
       "bundleIds": {
-        "$": "ion-col"
+        "$": "btprpnmn"
       },
       "encapsulation": "shadow"
     },
     "ion-content": {
       "bundleIds": {
-        "$": "wc-trasporti-table"
+        "$": "qmvww460"
       },
       "encapsulation": "shadow"
     },
     "ion-icon": {
       "bundleIds": {
-        "$": "ion-col"
+        "$": "btprpnmn"
       },
       "encapsulation": "shadow"
     },
     "ion-row": {
       "bundleIds": {
-        "$": "ion-col"
+        "$": "btprpnmn"
       },
       "encapsulation": "shadow"
     },
     "wc-trasporti-map": {
       "bundleIds": {
-        "$": "wc-trasporti-map"
+        "$": "jdccabjd"
       },
       "encapsulation": "shadow"
     },
     "wc-trasporti-stop": {
       "bundleIds": {
-        "$": "wc-trasporti-stop"
+        "$": "g94hkb4x"
       },
       "encapsulation": "shadow"
     },
     "wc-trasporti-table": {
       "bundleIds": {
-        "$": "wc-trasporti-table"
+        "$": "qmvww460"
       },
       "encapsulation": "shadow"
     }

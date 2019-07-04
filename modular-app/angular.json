@@ -49,8 +49,8 @@
                 "output": "assets/info"
               }, {
                 "glob": "**/*",
-                "input": "src/app/module-trasporti/assets",
-                "output": "assets/module-trasporti"
+                "input": "src/app/module-trasporti/assets/trasporti",
+                "output": "assets/trasporti"
               }
             ],
             "styles": [{
