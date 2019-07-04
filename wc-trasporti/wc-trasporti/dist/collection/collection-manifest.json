@@ -66,6 +66,136 @@
       "shadow": true
     },
     {
+      "tag": "wc-trasporti-stop",
+      "dependencies": [
+        "ion-col",
+        "ion-icon",
+        "ion-row"
+      ],
+      "componentClass": "WcTrasportiStop",
+      "componentPath": "components/wc-trasporti-stop/wc-trasporti-stop.js",
+      "styles": {
+        "$": {
+          "stylePaths": [
+            "components/wc-trasporti-stop/wc-trasporti-stop.css"
+          ]
+        }
+      },
+      "props": [
+        {
+          "name": "accessibility",
+          "type": "Boolean",
+          "attr": "accessibility"
+        },
+        {
+          "name": "arrows",
+          "type": "Boolean",
+          "attr": "arrows"
+        },
+        {
+          "name": "citta",
+          "type": "String",
+          "attr": "citta"
+        },
+        {
+          "name": "color",
+          "type": "String",
+          "attr": "color"
+        },
+        {
+          "name": "data",
+          "type": "String",
+          "attr": "data"
+        },
+        {
+          "name": "day",
+          "type": "String",
+          "attr": "day"
+        },
+        {
+          "name": "font",
+          "type": "String",
+          "attr": "font"
+        },
+        {
+          "name": "labeldelay",
+          "type": "String",
+          "attr": "labeldelay"
+        },
+        {
+          "name": "labeltrips",
+          "type": "String",
+          "attr": "labeltrips"
+        },
+        {
+          "name": "littletable",
+          "type": "Boolean",
+          "attr": "littletable",
+          "watch": [
+            "changeStyle"
+          ]
+        },
+        {
+          "name": "name",
+          "type": "String",
+          "attr": "name"
+        },
+        {
+          "name": "numero",
+          "type": "String",
+          "attr": "numero"
+        },
+        {
+          "name": "route",
+          "type": "String",
+          "attr": "route"
+        },
+        {
+          "name": "showtrips",
+          "type": "Boolean",
+          "attr": "showtrips"
+        },
+        {
+          "name": "tripsvalue",
+          "type": "String",
+          "attr": "tripsvalue"
+        }
+      ],
+      "states": [
+        {
+          "name": "dataTT"
+        },
+        {
+          "name": "fermate"
+        },
+        {
+          "name": "fontsize"
+        },
+        {
+          "name": "orari"
+        }
+      ],
+      "listeners": [
+        {
+          "event": "scroll",
+          "method": "handleScroll",
+          "capture": false
+        }
+      ],
+      "hostElement": {
+        "name": "element"
+      },
+      "events": [
+        {
+          "event": "changeDateEvent"
+        },
+        {
+          "event": "showStopEvent"
+        }
+      ],
+      "shadow": true
+    },
+    {
       "tag": "wc-trasporti-table",
       "dependencies": [
         "ion-col",

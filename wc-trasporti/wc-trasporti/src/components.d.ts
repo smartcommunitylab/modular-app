@@ -52,6 +52,43 @@ export namespace Components {
     'zoomlevel'?: number;
   }
 
+  interface WcTrasportiStop {
+    'accessibility': boolean;
+    'arrows': boolean;
+    'citta': string;
+    'color': string;
+    'data': string;
+    'day': string;
+    'font': string;
+    'labeldelay': string;
+    'labeltrips': string;
+    'littletable': boolean;
+    'name': string;
+    'numero': string;
+    'route': string;
+    'showtrips': boolean;
+    'tripsvalue': string;
+  }
+  interface WcTrasportiStopAttributes extends StencilHTMLAttributes {
+    'accessibility'?: boolean;
+    'arrows'?: boolean;
+    'citta'?: string;
+    'color'?: string;
+    'data'?: string;
+    'day'?: string;
+    'font'?: string;
+    'labeldelay'?: string;
+    'labeltrips'?: string;
+    'littletable'?: boolean;
+    'name'?: string;
+    'numero'?: string;
+    'onChangeDateEvent'?: (event: CustomEvent) => void;
+    'onShowStopEvent'?: (event: CustomEvent) => void;
+    'route'?: string;
+    'showtrips'?: boolean;
+    'tripsvalue'?: string;
+  }
+
   interface WcTrasportiTable {
     'accessibility': boolean;
     'arrows': boolean;
@@ -91,11 +128,13 @@ export namespace Components {
 declare global {
   interface StencilElementInterfaces {
     'WcTrasportiMap': Components.WcTrasportiMap;
+    'WcTrasportiStop': Components.WcTrasportiStop;
     'WcTrasportiTable': Components.WcTrasportiTable;
   }
 
   interface StencilIntrinsicElements {
     'wc-trasporti-map': Components.WcTrasportiMapAttributes;
+    'wc-trasporti-stop': Components.WcTrasportiStopAttributes;
     'wc-trasporti-table': Components.WcTrasportiTableAttributes;
   }
 
@@ -106,6 +145,12 @@ declare global {
     new (): HTMLWcTrasportiMapElement;
   };
 
+  interface HTMLWcTrasportiStopElement extends Components.WcTrasportiStop, HTMLStencilElement {}
+  var HTMLWcTrasportiStopElement: {
+    prototype: HTMLWcTrasportiStopElement;
+    new (): HTMLWcTrasportiStopElement;
+  };
+
   interface HTMLWcTrasportiTableElement extends Components.WcTrasportiTable, HTMLStencilElement {}
   var HTMLWcTrasportiTableElement: {
     prototype: HTMLWcTrasportiTableElement;
@@ -114,11 +159,13 @@ declare global {
 
   interface HTMLElementTagNameMap {
     'wc-trasporti-map': HTMLWcTrasportiMapElement
+    'wc-trasporti-stop': HTMLWcTrasportiStopElement
     'wc-trasporti-table': HTMLWcTrasportiTableElement
   }
 
   interface ElementTagNameMap {
     'wc-trasporti-map': HTMLWcTrasportiMapElement;
+    'wc-trasporti-stop': HTMLWcTrasportiStopElement;
     'wc-trasporti-table': HTMLWcTrasportiTableElement;
   }
 

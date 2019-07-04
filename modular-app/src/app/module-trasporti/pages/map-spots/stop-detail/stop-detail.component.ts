@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { NavParams } from '@ionic/angular';
+import { NavParams, ModalController } from '@ionic/angular';
 import { TransportService } from 'src/app/module-trasporti/services/transport.service';
 import { Router } from '@angular/router';
 
@@ -15,7 +15,9 @@ export class StopDetailComponent implements OnInit {
   stop: any = {};
   lines: any[] = [];
   data: any = {};
-  constructor(private navParams: NavParams, private transportService: TransportService, private router: Router) {
+  detail: boolean=false;
+  selectedStop: any;
+  constructor(private navParams: NavParams,private modalCtrl: ModalController, private transportService: TransportService, private router: Router) {
     // componentProps can also be accessed at construction time using NavParams
     console.log(navParams.get('id') + navParams.get('object'));
 
@@ -26,19 +28,25 @@ export class StopDetailComponent implements OnInit {
       this.transportService.getNextTrips(this.stop.agencyId, this.stop.id, NUMBER_OF_TRIP).then((data: any) => {
         console.log(data);
         this.data = data;
-        //show table with line and expands when u click
+        
         for (const k in data) {
-          // console.log(data[k].name + data[k].route);
+         
           this.lines.push(data[k]);
         }
-        //         name: "P.Dante Rosmini S.Rocco Povo Polo Soc."
-        // route: "13"
       })
 
     }
   }
   selectElement(line) {
-    this.router.navigate(['/timeStop', this.data[line]]);
+    this.detail=true;
+    console.log(line);
+    this.selectedStop=line;
   }
-
+  dismiss() {
+    // using the injected ModalController this page
+    // can "dismiss" itself and optionally pass back data
+    this.modalCtrl.dismiss({
+      'dismissed': true
+    });
+  }
 }

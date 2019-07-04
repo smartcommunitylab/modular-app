@@ -14,13 +14,10 @@ export class TransportTtPage implements OnInit {
   color: string = "#123456";
   title: string = "";
   day: string = this.date.getTime().toString();
-  // arrows = "true";
   littletable: boolean = true; //change font size of table
   showtrips: boolean = true; // show kind of transportation for course. Used for train
-  // sizeFont = "big";
   labeldelay: string = "RITARDO";
   labeltrips: string = "TIPO";
-
   accessibility = false; // shows coulumn of accessibility
   agencyId: any;
   routeId: any;
