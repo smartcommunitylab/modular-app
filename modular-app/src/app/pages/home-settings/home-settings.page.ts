@@ -6,6 +6,7 @@ import { ConfigService } from 'src/app/services/config.service';
 import { TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router';
 import { SettingService } from 'src/app/services/setting.service';
+import { NavController } from '@ionic/angular';
 @Component({
   selector: 'app-home-settings',
   templateUrl: './home-settings.page.html',
@@ -21,6 +22,7 @@ export class HomeSettingsPage implements OnInit {
     private dragulaService: DragulaService,
     private router: Router,
     private location: Location,
+    private navCtrl: NavController,
     private config: ConfigService,
     public translate: TranslateService,
     private settings:SettingService
@@ -82,7 +84,9 @@ export class HomeSettingsPage implements OnInit {
     this.close();
   }
   close() {
-    this.location.back()
+    this.navCtrl.navigateRoot('/home-common');
+
+    // this.location.back()
   }
   convertCategories(x) {
     const categoryElement: any = {};

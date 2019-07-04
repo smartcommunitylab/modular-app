@@ -132,30 +132,6 @@
       "url": "/favourites",
       "icon": "star"
 
-    },
-
-    {
-      "id": "d",
-
-      "name": {
-        "it": "Impostazioni",
-        "en": "Setting",
-        "de": "Setting"
-      },
-      "url": "/setting",
-      "icon": "home"
-
-    }, {
-      "id": "e",
-
-      "name": {
-        "it": "Crediti",
-        "en": "Credits",
-        "de": "Credits"
-      },
-      "url": "/credits",
-      "icon": "home"
-
     }, {
       "id": "f",
   

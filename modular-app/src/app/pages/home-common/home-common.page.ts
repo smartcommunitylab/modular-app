@@ -29,7 +29,7 @@ export class HomeCommonPage implements OnInit {
     public alertCtrl: AlertController,
     public translate: TranslateService,
     // private dragulaService:DragulaService,
-    
+
     private utils: UtilsService) {
     this.language = window[this.config.getAppModuleName()]['language'];
     translate.use(this.language); // SET DEFAULT LANGUAGE
@@ -94,6 +94,15 @@ export class HomeCommonPage implements OnInit {
     if (x.image) {
       galleryElement.image = x.image[this.language];
     }
+    if (x.url) {
+      galleryElement.url = x.url;
+    }
+    if (x.params) {
+      galleryElement.params = x.params;
+    }
+    if (x.objectIds) {
+      galleryElement.objectIds = x.objectIds;
+    }
     return galleryElement;
   }
 
@@ -102,8 +111,8 @@ export class HomeCommonPage implements OnInit {
     if (x.id) {
       categoryElement.id = x.id;
     }
-    if (x.name ) {
-      categoryElement.name = x.name ;
+    if (x.name) {
+      categoryElement.name = x.name;
     }
     if (x.icon) {
       categoryElement.icon = x.icon;
