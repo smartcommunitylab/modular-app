@@ -8,8 +8,14 @@ import { DbService } from '../../services/db.service';
   styleUrls: ['./list-categories.page.scss'],
 })
 export class ListCategoriesPage implements OnInit {
+  showPois: any = [];
   categories: any;
   language = 'it';
+  fullCategories: any = [];
+  fullPois: any = [];
+  isLoading = true;
+  private type: string;
+
   constructor(private router: Router, private route: ActivatedRoute, public dbService: DbService
   ) { }
 
@@ -32,6 +38,23 @@ export class ListCategoriesPage implements OnInit {
                   }
                 }
                 this.categories = this.categories.map(x => this.convertCategories(x));
+                this.categories.forEach(element => {
+                  if (element && element.query) {
+                    this.dbService.getObjectByQuery(element.query).then((data) => {
+                      this.fullPois = data.docs.map(x => this.convertPois(x));
+                      this.subCategories(this.fullPois);
+                      this.buildShowPois();
+                      this.isLoading = false;
+                      console.log(this.showPois);
+                    });
+                  }
+                  const el = document.getElementById('poi-list');
+                  el.addEventListener('pathSelected', path => {
+                    this.type = (<any>path).detail.split(';')[1];
+                    const id = (<any>path).detail.split(';')[0];
+                    this.goToDetail(id);
+                  });
+                });
               }
             });
           } else {
@@ -42,6 +65,81 @@ export class ListCategoriesPage implements OnInit {
       });
 
   }
+  buildShowPois() {
+    this.fullCategories.forEach(e => {
+      this.fullPois.forEach(p => {
+        if (!this.showPois[e]) {
+          this.showPois[e] = [];
+        }
+        if (p.category === e) {
+          this.showPois[e].push(p);
+        }
+      });
+    });
+  }
+  convertPois(x) {
+    const poiElement: any = {};
+    if (x) {
+      if (x.title) {
+        poiElement.title = x.title[this.language];
+      }
+      if (x.subtitle) {
+        poiElement.subtitle = x.subtitle[this.language];
+      }
+      if (x.description) {
+        poiElement.description = x.description[this.language];
+      }
+      if (x.image) {
+        poiElement.image = x.image;
+      }
+      if (x._id) {
+        poiElement.id = x._id;
+      }
+      if (x.topics) {
+        poiElement.cat = x.topics;
+      }
+      if (x.eventPeriod) {
+        poiElement.date = x.eventPeriod[this.language];
+      }
+      if (x.eventTiming) {
+        poiElement.time = x.eventTiming[this.language];
+      }
+      if (x.info)  {
+        poiElement.info = x.info[this.language];
+      }
+      if (x.address) {
+        poiElement.address = x.address[this.language];
+      }
+      if (x.description) {
+        poiElement.text = x.description[this.language];
+      }
+      if (x.category) {
+        poiElement.category = x.category;
+      }
+      if (x.url) {
+        poiElement.url = x.url;
+      }
+      if (x.contacts) {
+        if (x.contacts.phone) {
+          poiElement.phone = x.contacts.phone;
+        }
+        if (x.contacts.email) {
+          poiElement.email = x.contacts.email;
+        }
+      }
+      poiElement.infos = JSON.stringify(poiElement);
+    }
+    return poiElement;
+  }
+  subCategories(array: Array<any>) {
+    array.forEach(element => {
+      if (!this.fullCategories.includes(element.category)) {
+        this.fullCategories.push(element.category);
+      }
+      this.categories = this.fullCategories;
+    });
+  }
+
   ionViewDidLoad() {
     const categoryButtonsElement = document.querySelector('category-buttons');
     categoryButtonsElement.addEventListener('categorySelected', category => { console.log('ciao'); });
@@ -68,6 +166,9 @@ export class ListCategoriesPage implements OnInit {
     return categoryElement;
   }
 
+  goToDetail(id) {
+    this.router.navigate(['/detail-poi'], { queryParams: { id: id, type: this.type } });
+  }
   goToCategory(category) {
     if (category.query) {
       if (category.query.type.indexOf('itineraries') > -1) {

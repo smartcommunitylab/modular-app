@@ -14,6 +14,10 @@ export class ConfigService {
   private carousel: any;
   private moduleEntries: any;
   private allModuleEntries: any;
+  private defaultPosition= {
+    lat:0,
+    long:0
+  }
   constructor(private http: HttpClient) { }
 
   Init(): Promise<any> {
@@ -24,6 +28,9 @@ export class ConfigService {
       this.loadModuleEntries()
       resolve();
     })
+  }
+  getDefaultPosition() {
+    return this.defaultPosition;
   }
   setChoosen(type) {
     localStorage.setItem(CHOOSEN_KEY, type);

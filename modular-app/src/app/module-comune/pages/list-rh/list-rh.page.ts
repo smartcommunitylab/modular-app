@@ -39,17 +39,22 @@ export class ListRHPage implements OnInit {
     public events: Events,
     private translate: TranslateService,
     private geoSrv: GeoService
-    ) {
+  ) {
+    if (window[this.config.getAppModuleName()]['language'])
       this.language = window[this.config.getAppModuleName()]['language'];
+    if (window[this.config.getAppModuleName()]['geolocation'])
       this.mypos = {
         lat: window[this.config.getAppModuleName()]['geolocation']['lat'],
         long: window[this.config.getAppModuleName()]['geolocation']['long']
       };
-      this.translate.use(this.language);
-      events.subscribe('radio:selected', x => {
-        this.changeCategory(x);
-      });
-    }
+      else {
+        this.mypos = this.config.getDefaultPosition();
+      }
+    this.translate.use(this.language);
+    events.subscribe('radio:selected', x => {
+      this.changeCategory(x);
+    });
+  }
 
   ngOnInit() {
     this.route.queryParams
@@ -65,11 +70,11 @@ export class ListRHPage implements OnInit {
   ionViewDidEnter() {
 
     if (this.category) {
-      let query = {'selector': {'element-type': 'hotel-item'}};
+      let query = { 'selector': { 'element-type': 'hotel-item' } };
       this.dbService.getObjectByQuery(query).then((data) => {
         this.fullPois = data.docs.map(x => this.convertPois(x));
       }).then(x => {
-        query = {'selector': {'element-type': 'restaurant-item'}};
+        query = { 'selector': { 'element-type': 'restaurant-item' } };
         this.dbService.getObjectByQuery(query).then((data) => {
           this.fullPois = this.fullPois.concat(data.docs.map(x => this.convertPois(x)));
           this.subCategories(this.fullPois);
@@ -124,7 +129,7 @@ export class ListRHPage implements OnInit {
       if (x.timetable) {
         poiElement.date = x.timetable[this.language];
       }
-      if (x.closing)  {
+      if (x.closing) {
         if (x.closing[this.language]) {
           poiElement.info = '<b>Chiusura: ' + x.closing[this.language] + '</b>';
         }
@@ -140,8 +145,8 @@ export class ListRHPage implements OnInit {
       }
       if (x.classification) {
         poiElement.subtitle = x.classification[this.language];
-       // poiElement.cat = [];
-       // poiElement.cat.push(x.classification[this.language]);
+        // poiElement.cat = [];
+        // poiElement.cat.push(x.classification[this.language]);
       }
       if (x.url) {
         poiElement.url = x.url;
@@ -178,8 +183,8 @@ export class ListRHPage implements OnInit {
   searchChanged(input: any) {
     const value = input.detail.target.value;
     const _this = this;
-      _this.categories.forEach(c => {
-      this.showPois[c] = this.fullPois.filter(function(el) {
+    _this.categories.forEach(c => {
+      this.showPois[c] = this.fullPois.filter(function (el) {
         return (el.title.toLowerCase().indexOf(value.toLowerCase()) > -1);
       });
     });
@@ -254,21 +259,21 @@ export class ListRHPage implements OnInit {
       ]
     });
 
-   await alert.present();
+    await alert.present();
   }
 
   orderArray(condition: string, _this: any) {
     _this.isLoading = true;
     if (condition.indexOf('near') > -1) {
       _this.categories.forEach(c => {
-        _this.showPois[c] = _this.showPois[c].sort(function(a, b) {
+        _this.showPois[c] = _this.showPois[c].sort(function (a, b) {
           let dist1 = 0;
           let dist2 = 0;
           if (a.location) {
-            dist1 = _this.geoSrv.getDistanceKM({lat: _this.mypos.lat, lon: _this.mypos.long}, {lat: a.location[0], lon: a.location[1]});
+            dist1 = _this.geoSrv.getDistanceKM({ lat: _this.mypos.lat, lon: _this.mypos.long }, { lat: a.location[0], lon: a.location[1] });
           }
           if (b.location) {
-            dist2 = _this.geoSrv.getDistanceKM({lat: _this.mypos.lat, lon: _this.mypos.long}, {lat: b.location[0], lon: b.location[1]});
+            dist2 = _this.geoSrv.getDistanceKM({ lat: _this.mypos.lat, lon: _this.mypos.long }, { lat: b.location[0], lon: b.location[1] });
           }
           return dist1 - dist2;
         });
@@ -284,7 +289,7 @@ export class ListRHPage implements OnInit {
   changeCategory(cat: any, _this?: any) {
     _this.categories = [];
     if (cat && cat.indexOf('Tutto') > -1) {
-     _this.categories = _this.fullCategories;
+      _this.categories = _this.fullCategories;
     } else {
       _this.categories.push(cat);
     }
@@ -295,15 +300,15 @@ export class ListRHPage implements OnInit {
     const keys = Object.keys(this.showPois);
     keys.forEach(c => {
       this.showPois[c].forEach(p => {
-       // console.log(p);
+        // console.log(p);
         if (p.location) {
           // Check if distance < 1 km
           const dist = this.geoSrv.getDistanceKM(
-                {lat: this.mypos.lat, lon: this.mypos.long},
-                {lat: p.location[0], lon: p.location[1]}
-              );
+            { lat: this.mypos.lat, lon: this.mypos.long },
+            { lat: p.location[0], lon: p.location[1] }
+          );
           if (dist < 1) {
-            tmp.push({name: p.title, lat: p.location[0], lon: p.location[1], address: p.address, distance: dist});
+            tmp.push({ name: p.title, lat: p.location[0], lon: p.location[1], address: p.address, distance: dist });
           }
         }
       });
@@ -313,7 +318,7 @@ export class ListRHPage implements OnInit {
   }
 
   goToMap() {
-    this.router.navigate(['/map'], { queryParams: { data: JSON.stringify(this.buildMapPoints()) } } );
-   // console.log('CLICKED MAP');
+    this.router.navigate(['/map'], { queryParams: { data: JSON.stringify(this.buildMapPoints()) } });
+    // console.log('CLICKED MAP');
   }
 }
