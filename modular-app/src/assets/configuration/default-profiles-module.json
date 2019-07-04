@@ -110,8 +110,7 @@
 
     },
     {
-      "id": "b",
-
+      "id": "profile_cit_csvimport_Info_utili_item_comuneintasca",
       "name": {
         "it": "Informazioni",
         "en": "Useful Information",
@@ -121,18 +120,7 @@
       "icon": "home"
 
     },
-    {
-      "id": "c",
-
-      "name": {
-        "it": "Preferiti",
-        "en": "Favorites",
-        "de": "Favorites"
-      },
-      "url": "/favourites",
-      "icon": "star"
-
-    }, {
+ {
       "id": "f",
   
       "name": {
