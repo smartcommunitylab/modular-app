@@ -8,6 +8,7 @@ import { HomeSettingsPage } from './home-settings.page';
 import { DragulaModule } from 'ng2-dragula';
 import { TranslateModule } from '@ngx-translate/core';
 import { DelayDragDirective } from 'src/app/directives/delay-drag.directive';
+import { LongPressModule } from 'ionic-long-press';
 
 const routes: Routes = [
   {
@@ -23,6 +24,7 @@ const routes: Routes = [
     IonicModule,
     DragulaModule,
     TranslateModule,
+    LongPressModule,
     RouterModule.forChild(routes)
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

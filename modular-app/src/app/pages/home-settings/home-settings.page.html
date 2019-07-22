@@ -15,7 +15,7 @@
       </ion-chip>
   <ion-grid id="category-buttons">
     <ion-row dragula="entries" [(dragulaModel)]="categories" lines="none">
-      <ion-col size="6" delayDragLift *ngFor="let category of categories">
+      <ion-col size="6"ion-long-press [interval]="400" delayDrag *ngFor="let category of categories">
         <div class="home-button" (press)="doSomething()">
           <div>
             <div>{{category.name[language]}}</div>
@@ -29,7 +29,7 @@
   </ion-grid>
   <div class="wrapper">
     <div class="scrolling-wrapper-flexbox loop" dragula="entries" [(dragulaModel)]="allCategories">
-      <div class="card"  delayDragLift *ngFor="let category of allCategories" (press)="doSomething()">
+      <div class="card" ion-long-press [interval]="400" delayDrag *ngFor="let category of allCategories" (press)="doSomething()">
         <h2>{{category.name[language]}}</h2>
       </div>
     </div>
