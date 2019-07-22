@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="smartcampuslab.modularapp" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="it.smartcommunitylab.modularapp" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>modularapp master</name>
     <description>An awesome Ionic/Cordova app.</description>
     <author email="hi@ionicframework.com" href="http://ionicframework.com/">Ionic Framework Team</author>
@@ -79,7 +79,7 @@
     <allow-navigation href="http://192.168.42.201:8100" sessionid="73e1aba0" />
     <allow-navigation href="http://192.168.42.201:8101" sessionid="352ccd8c" />
     <chcp>
-        <config-file url="https://dev.smartcommunitylab.it/cordova/chcp.json" />
+        <config-file url="https://dev.smartcommunitylab.it/modularapp/chcp.json" />
     </chcp>
     <engine name="browser" spec="5.0.4" />
     <engine name="android" spec="6.3.0" />

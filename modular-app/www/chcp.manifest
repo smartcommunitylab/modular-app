@@ -2245,11 +2245,11 @@
   },
   {
     "file": "main.js",
-    "hash": "f1ad6eeb6bd5dc68f8d48f6208843514"
+    "hash": "1964ce1a82fb78c817ad7b62b649bcdb"
   },
   {
     "file": "main.js.map",
-    "hash": "18bbf6caa94f8ba3dce378c2f01e82a0"
+    "hash": "1180259d5f35376f8df34587ebf6453a"
   },
   {
     "file": "manifest.json",
@@ -2333,11 +2333,11 @@
   },
   {
     "file": "pages-home-settings-home-settings-module.js",
-    "hash": "63e6c87fbe91f27b2507b775515ab4d1"
+    "hash": "df28da452aec3588bf787e93cf53d951"
   },
   {
     "file": "pages-home-settings-home-settings-module.js.map",
-    "hash": "6e2f36a84149b51ece8351b3abff7e5a"
+    "hash": "11bb27cb46d05063776529de4268867a"
   },
   {
     "file": "pages-home-trasporti-home-trasporti-module.js",
@@ -5497,10 +5497,10 @@
   },
   {
     "file": "vendor.js",
-    "hash": "f9835f30459aff7096ffb2a517978833"
+    "hash": "b5ba12bac5fc81899ab7316f97705fce"
   },
   {
     "file": "vendor.js.map",
-    "hash": "ca48d53cf22bd16d76cc66f5dbc6c88d"
+    "hash": "bc8b013edecc038ffe191f80db852175"
   }
 ]
