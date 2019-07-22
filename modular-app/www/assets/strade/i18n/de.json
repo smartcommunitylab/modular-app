@@ -1,0 +1,17 @@
+{
+    "HOME": "Straßenreinigung",
+    "SEARCH": "Suche",
+    "CALENDAR": "Kalender",
+    "NOTIFY": "Benachrichtigungsmanagement",
+    "NO-CLEANING": "Keine Reinigung geplant",
+    "IN-ZONE": "in diesem Bereich",
+    "NO-PARKING-FROM": "Kein Parken von",
+    "TO": "bis",
+    "FOR": "für",
+    "IN-DATE": "am datum",
+    "CLOSED": "Straße gesperrt: ",
+    "NOTIFY-ENA": "Aktivierte Benachrichtigungen",
+    "NOTIFY-DIS": "Deaktivierte Benachrichtigungen",
+    "DETAILS": "Details",
+    "IN-CLEANING": "Straße in Sauberkeit"
+}

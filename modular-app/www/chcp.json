@@ -1,0 +1,8 @@
+{
+  "name": "modularApp",
+  "ios_identifier": "it.smartcommunitylab.viaggiatrento.playgo",
+  "android_identifier": "it.smartcommunitylab.viaggiatrento.playgo",
+  "update": "start",
+  "content_url": "https://tn.smartcommunitylab.it/cordova",
+  "release": "2019.07.22-10.16.34"
+}

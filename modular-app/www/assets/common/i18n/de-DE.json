@@ -1,0 +1,17 @@
+{
+    "title_app": "Application modularische",
+    "title_detail_info":"Informazioni",
+    "title_detail_poi":"Punto di interesse",
+    "title_list_categories":"Categorie",
+    "title_list_poi":"Punti di interesse",
+    "error_data":"Data error",
+    "home_trasporto": "Trasnportieren",
+    "menu_real_time_bus_urban":"Autobus",
+    "menu_plan": "",
+    "menu_real_time_train": "",
+    "menu_real_time_park": "",
+    "parking": "",
+    "bike": "",
+    "menu_taxi": ""
+
+}

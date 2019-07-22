@@ -1,0 +1,167 @@
+{
+  "turist": [{
+      "id": "profile_cit_2cc4db1674d9e8994658eac954355d31",
+      "name": {
+        "it": "Scopri",
+        "en": "Discover",
+        "de": "Discover"
+      },
+      "url": "/list-categories",
+      "icon": "home"
+
+    },
+    {
+      "id": "profile_cit_csvimport_Visitare_item_comuneintasca",
+      "name": {
+        "it": "Visitare",
+        "en": "Highlilghts",
+        "de": "Highlilghts"
+      },
+      "url": "/list-categories",
+      "icon": "home"
+
+    }, {
+      "id": "f",
+  
+      "name": {
+        "it": "Video",
+        "en": "Video",
+        "de": "Video"
+      },
+      "url": "/video",
+      "icon": "home"
+  
+    }, {
+      "id": "g",
+  
+      "name": {
+        "it": "Notizie",
+        "en": "Notizie",
+        "de": "Notizie"
+      },
+      "url": "/notizie",
+      "icon": "home"
+  
+    }, {
+      "id": "h",
+  
+      "name": {
+        "it": "Funerali",
+        "en": "Funerali",
+        "de": "Funerali"
+      },
+      "url": "/funerali",
+      "icon": "home"
+  
+    },{
+      "id": "i",
+      "name": {
+        "it": "Pulizia strade",
+        "en": "streets",
+        "de": "strasse"
+      },
+      "url": "/ps",
+      "icon": "information"
+    }
+  ],
+  "citizen": [
+    {
+      "id": "profile_cit_csvimport_Mangiare_e_dormire_item_comuneintasca",
+      "name": {
+        "it": "Ristoranti & Alberghi",
+        "en": "Restaurants & Hotel",
+        "de": "Restaurants & Hotel"
+      },
+      "url": "/list-rh",
+      "icon": "home"
+
+
+    },
+    {
+      "id": "profile_cit_csvimport_Eventi_item_comuneintasca",
+      "name": {
+        "it": "Eventi",
+        "en": "Events",
+        "de": "Events"
+      },
+      "url": "/list-event",
+      "icon": "home",
+      "params": {
+        "selector": {
+          "element-type": "event-item"
+        }
+      }
+    },
+    {
+      "id": "a",
+      "name": {
+        "it": "Percorsi Turistici",
+        "en": "Touristic Itineraties",
+        "de": "Touristic Itineraties"
+      },
+      "url": "/list-path",
+      "icon": "home",
+      "params": {
+        "selector": {
+          "element-type": "itinerary-item"
+        },
+        "type": "itineraries"
+      }
+
+    },
+    {
+      "id": "profile_cit_csvimport_Info_utili_item_comuneintasca",
+      "name": {
+        "it": "Informazioni",
+        "en": "Useful Information",
+        "de": "Useful Information"
+      },
+      "url": "/list-categories",
+      "icon": "home"
+
+    },
+ {
+      "id": "f",
+  
+      "name": {
+        "it": "Video",
+        "en": "Video",
+        "de": "Video"
+      },
+      "url": "/video",
+      "icon": "home"
+  
+    }, {
+      "id": "g",
+  
+      "name": {
+        "it": "Notizie",
+        "en": "Notizie",
+        "de": "Notizie"
+      },
+      "url": "/notizie",
+      "icon": "home"
+  
+    }, {
+      "id": "h",
+  
+      "name": {
+        "it": "Funerali",
+        "en": "Funerali",
+        "de": "Funerali"
+      },
+      "url": "/funerali",
+      "icon": "home"
+  
+    },{
+      "id": "i",
+      "name": {
+        "it": "Pulizia strade",
+        "en": "streets",
+        "de": "strasse"
+      },
+      "url": "/ps",
+      "icon": "information"
+    }
+  ]
+}

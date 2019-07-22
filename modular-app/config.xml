@@ -78,6 +78,9 @@
     </platform>
     <allow-navigation href="http://192.168.42.201:8100" sessionid="73e1aba0" />
     <allow-navigation href="http://192.168.42.201:8101" sessionid="352ccd8c" />
+    <chcp>
+        <config-file url="https://dev.smartcommunitylab.it/cordova/chcp.json" />
+    </chcp>
     <engine name="browser" spec="5.0.4" />
     <engine name="android" spec="6.3.0" />
     <plugin name="cordova-plugin-geolocation" spec="^4.0.1" />

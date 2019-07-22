@@ -5,6 +5,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { ConfigService } from './services/config.service'
 import { SettingService } from './services/setting.service';
 import { TranslateService } from '@ngx-translate/core';
+import { HotCodePush } from '@ionic-native/hot-code-push/ngx';
 
 @Component({
   selector: 'app-root',
@@ -19,7 +20,8 @@ export class AppComponent {
     private statusBar: StatusBar,
     private config: ConfigService,
     private setting: SettingService,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private hotCodePush: HotCodePush
   ) {
     this.sideMenu().then(res => {
       this.navigate = res;
@@ -31,8 +33,9 @@ export class AppComponent {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+      this.updateApp();
     });
-    this.myLanguage =  this.setting.getUserLanguage();
+    this.myLanguage = this.setting.getUserLanguage();
     if (this.myLanguage) {
       if (this.myLanguage.indexOf('it') > -1) {
         this.myLanguage = 'it';
@@ -46,6 +49,9 @@ export class AppComponent {
       window[this.config.getAppModuleName()]['language'] = this.myLanguage;
       this.translate.setDefaultLang(this.myLanguage);
     }
+  }
+  updateApp(): any {
+    this.hotCodePush.fetchUpdate({}).then(data => { console.log('Update available'); });
   }
   sideMenu(): Promise<any> {
     return this.config.loadMenu();

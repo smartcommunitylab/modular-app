@@ -1,0 +1,14 @@
+{
+    "home_trasporto": "Trasporti",
+    "menu_plan": "",
+    "menu_real_time_bus_urban": "Autobus",
+    "menu_real_time_train": "Treni",
+    "menu_real_time_park": "",
+    "parking": "",
+    "bike": "",
+    "menu_taxi": "",
+    "err_too_many_markers":"Troppi marker",
+    "label_delay":"RITARDO",
+    "label_trips":"TIPO"
+
+}
