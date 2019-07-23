@@ -114,7 +114,7 @@ var HomeTrasportiPageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\n  <ion-toolbar>\n    <ion-title>{{'home_trasporto'|translate}} {{'title_app'|translate}}\n    </ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n    <ion-fab vertical=\"top\" horizontal=\"end\" slot=\"fixed\">\n        <ion-fab-button routerLink=\"/map-spots\">\n          <ion-icon name=\"map\" ></ion-icon>\n        </ion-fab-button>\n      </ion-fab>\n  <div class=\"wrapper\">\n    <div class=\"scrolling-wrapper-flexbox loop\" ng-if=\"primaryLinks.length>0\">\n      <ion-chip *ngFor=\"let m of primaryLinks\" (click)=\"selectInternalElement(m)\">\n        <ion-icon name=\"{{m.icon}}\" color=\"dark\"></ion-icon>\n        <ion-label>{{m.label|translate}}</ion-label>\n      </ion-chip>\n    </div>\n  </div>\n  <div class=\"line-container\">\n    <ion-list class=\"route-list space-from-top\">\n      <ion-item *ngFor=\"let elem of elements\" class=\"{{elem.ref}}\" (click)=\"selectElement(elem)\">\n        <div class=\"card card-tt\" color [ngStyle]=\"getStyle(elem)\">\n          <span>{{elem.title}}</span>\n          <span *ngIf=\"titleisPresent(elem)\">{{elem.group.routes[0].title}}</span>\n        </div>\n      </ion-item>\n    </ion-list>\n  </div>\n\n  <!-- <ion-list class=\"home-list\" ng-if=\"primaryLinks.length>0\">\n    <ion-item *ngFor=\"let m of primaryLinks\"  routerLink=\"{{m.state}}\">\n        <ion-label>\n          <h3>{{m.label|translate}}</h3>\n        </ion-label>\n        <ion-icon slot=\"start\" name=\"{{m.icon}}\"></ion-icon>\n      </ion-item>\n  </ion-list> -->\n</ion-content>"
+module.exports = "<ion-header no-border>\n  <ion-toolbar>\n      <ion-buttons slot=\"start\">\n          <ion-back-button></ion-back-button>\n      </ion-buttons>\n    <ion-title>{{'home_trasporto'|translate}}\n    </ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <!-- <ion-fab vertical=\"top\" horizontal=\"end\" slot=\"fixed\">\n        <ion-fab-button routerLink=\"/map-spots\">\n          <ion-icon name=\"map\" ></ion-icon>\n        </ion-fab-button>\n      </ion-fab> -->\n  <div class=\"wrapper\">\n    <div class=\"scrolling-wrapper-flexbox loop\" ng-if=\"primaryLinks.length>0\">\n      <ion-chip *ngFor=\"let m of primaryLinks\" (click)=\"selectInternalElement(m)\">\n        <ion-icon class=\"interaction\" name=\"{{m.icon}}\"></ion-icon>\n        <ion-label class=\"interaction\">{{m.label|translate}}</ion-label>\n      </ion-chip>\n    </div>\n  </div>\n  <div class=\"line-container\">\n    <ion-list class=\"route-list space-from-top\">\n      <div *ngFor=\"let elem of elements; let i = index\">\n        <ion-item *ngIf=\"compareElements(i)\" class=\"label-type ion-text-center\">\n          <div>{{getLabel(i)|translate}}</div>\n        </ion-item>\n        <ion-item>\n          <div class=\"{{elem.ref}}\" (click)=\"selectElement(elem)\">\n            <div class=\"card card-tt\" color>\n              <div class=\"line-tt\" [ngStyle]=\"getStyle(elem)\"><span *ngIf=\"inside(elem.title)\">{{elem.title}}</span>\n              </div>\n              <span *ngIf=\"!inside(elem.title)\">{{elem.title}}</span>\n              <span *ngIf=\"titleisPresent(elem)\">{{elem.group.routes[0].title}}</span>\n            </div>\n          </div>\n        </ion-item>\n      </div>\n    </ion-list>\n  </div>\n\n  <!-- <ion-list class=\"home-list\" ng-if=\"primaryLinks.length>0\">\n    <ion-item *ngFor=\"let m of primaryLinks\"  routerLink=\"{{m.state}}\">\n        <ion-label>\n          <h3>{{m.label|translate}}</h3>\n        </ion-label>\n        <ion-icon slot=\"start\" name=\"{{m.icon}}\"></ion-icon>\n      </ion-item>\n  </ion-list> -->\n</ion-content>"
 
 /***/ }),
 
@@ -125,7 +125,7 @@ module.exports = "<ion-header>\n  <ion-toolbar>\n    <ion-title>{{'home_trasport
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".scrolling-wrapper-flexbox {\n  background-color: rgba(255, 255, 255, 0.5);\n  display: flex;\n  overflow-x: auto;\n  z-index: 999;\n  position: fixed; }\n  .scrolling-wrapper-flexbox ion-chip {\n    flex: 0 0 auto; }\n  .line-container {\n  padding-top: 40px; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL2NoaW44L0RvY3VtZW50cy93b3JrL21vZHVsYXJBcHAvbW9kdWxhci1hcHAvc3JjL2FwcC9tb2R1bGUtdHJhc3BvcnRpL3BhZ2VzL2hvbWUtdHJhc3BvcnRpL2hvbWUtdHJhc3BvcnRpLnBhZ2Uuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLDJDQUF5QztFQU16QyxjQUFhO0VBQ2IsaUJBQWdCO0VBQ2hCLGFBQVk7RUFDWixnQkFBZSxFQU1sQjtFQWhCRDtJQWFRLGVBQWMsRUFFakI7RUFFTDtFQUNJLGtCQUFpQixFQUNwQiIsImZpbGUiOiJzcmMvYXBwL21vZHVsZS10cmFzcG9ydGkvcGFnZXMvaG9tZS10cmFzcG9ydGkvaG9tZS10cmFzcG9ydGkucGFnZS5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLnNjcm9sbGluZy13cmFwcGVyLWZsZXhib3gge1xuICAgIGJhY2tncm91bmQtY29sb3I6IHJnYmEoMjU1LCAyNTUsIDI1NSwgLjUpO1xuICAgIC8vIGxlZnQ6IDBweDtcbiAgICAvLyBwb3NpdGlvbjogZml4ZWQ7XG4gICAgLy8gYm90dG9tOiAwcHg7XG4gICAgLy8gd2lkdGg6IDEwMHZ3O1xuICAgIC8vIGhlaWdodDogMTAwcHg7XG4gICAgZGlzcGxheTogZmxleDtcbiAgICBvdmVyZmxvdy14OiBhdXRvO1xuICAgIHotaW5kZXg6IDk5OTtcbiAgICBwb3NpdGlvbjogZml4ZWQ7XG5cbiAgICBpb24tY2hpcCB7XG4gICAgICAgIGZsZXg6IDAgMCBhdXRvO1xuXG4gICAgfVxufVxuLmxpbmUtY29udGFpbmVyIHtcbiAgICBwYWRkaW5nLXRvcDogNDBweDtcbn0iXX0= */"
+module.exports = ".wrapper .scrolling-wrapper-flexbox {\n  -ms-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);\n  -o-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);\n  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);\n  background-color: white;\n  width: 100%;\n  display: flex;\n  overflow-x: auto;\n  z-index: 999;\n  position: fixed; }\n  .wrapper .scrolling-wrapper-flexbox ion-chip {\n    flex: 0 0 auto;\n    background-color: white; }\n  .line-container {\n  padding-top: 40px; }\n  .line-container .line-tt {\n    border-radius: 8px;\n    height: 50px;\n    width: 50px;\n    text-align: center;\n    line-height: 50px;\n    display: inline-block; }\n  .line-container .label-type {\n    width: 100%;\n    font-weight: bold;\n    --background: #e3e3e3;\n    --color: #707070;\n    font-size: 22px; }\n  .line-container .label-type div {\n      width: 100%; }\n  .interaction {\n  color: #11b3ef; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL2NoaW44L0RvY3VtZW50cy93b3JrL21vZHVsYXJBcHAvbW9kdWxhci1hcHAvc3JjL2FwcC9tb2R1bGUtdHJhc3BvcnRpL3BhZ2VzL2hvbWUtdHJhc3BvcnRpL2hvbWUtdHJhc3BvcnRpLnBhZ2Uuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUtRLCtFQUE4RTtFQUM5RSw4RUFBNkU7RUFDN0UsMkVBQTBFO0VBQzFFLHdCQUFzQjtFQUN0QixZQUFXO0VBTVgsY0FBYTtFQUNiLGlCQUFnQjtFQUNoQixhQUFZO0VBQ1osZ0JBQWUsRUFLbEI7RUF2Qkw7SUFvQlksZUFBYztJQUNkLHdCQUF1QixFQUMxQjtFQUlUO0VBQ0ksa0JBQWlCLEVBbUJwQjtFQXBCRDtJQUdRLG1CQUFrQjtJQUNsQixhQUFZO0lBQ1osWUFBVztJQUNYLG1CQUFrQjtJQUNsQixrQkFBaUI7SUFDakIsc0JBQXFCLEVBQ3hCO0VBVEw7SUFXUSxZQUFXO0lBQ1gsa0JBQWlCO0lBQ2pCLHNCQUFhO0lBQ2IsaUJBQVE7SUFDUixnQkFBZSxFQUlsQjtFQW5CTDtNQWlCWSxZQUFXLEVBQ2Q7RUFHVDtFQUNJLGVBQWMsRUFDakIiLCJmaWxlIjoic3JjL2FwcC9tb2R1bGUtdHJhc3BvcnRpL3BhZ2VzL2hvbWUtdHJhc3BvcnRpL2hvbWUtdHJhc3BvcnRpLnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi53cmFwcGVyIHtcblxuICAgIC5zY3JvbGxpbmctd3JhcHBlci1mbGV4Ym94IHtcbiAgICAgICAgLXdlYmtpdC1ib3gtc2hhZG93OiAwIDEwcHggMjBweCByZ2JhKDAsIDAsIDAsIDAuMTkpLCAwIDZweCA2cHggcmdiYSgwLCAwLCAwLCAwLjIzKTtcbiAgICAgICAgLW1vei1ib3gtc2hhZG93OiAwIDEwcHggMjBweCByZ2JhKDAsIDAsIDAsIDAuMTkpLCAwIDZweCA2cHggcmdiYSgwLCAwLCAwLCAwLjIzKTtcbiAgICAgICAgLW1zLWJveC1zaGFkb3c6IDAgMTBweCAyMHB4IHJnYmEoMCwgMCwgMCwgMC4xOSksIDAgNnB4IDZweCByZ2JhKDAsIDAsIDAsIDAuMjMpO1xuICAgICAgICAtby1ib3gtc2hhZG93OiAwIDEwcHggMjBweCByZ2JhKDAsIDAsIDAsIDAuMTkpLCAwIDZweCA2cHggcmdiYSgwLCAwLCAwLCAwLjIzKTtcbiAgICAgICAgYm94LXNoYWRvdzogMCAxMHB4IDIwcHggcmdiYSgwLCAwLCAwLCAwLjE5KSwgMCA2cHggNnB4IHJnYmEoMCwgMCwgMCwgMC4yMyk7XG4gICAgICAgIGJhY2tncm91bmQtY29sb3I6d2hpdGU7XG4gICAgICAgIHdpZHRoOiAxMDAlO1xuICAgICAgICAvLyBsZWZ0OiAwcHg7XG4gICAgICAgIC8vIHBvc2l0aW9uOiBmaXhlZDtcbiAgICAgICAgLy8gYm90dG9tOiAwcHg7XG4gICAgICAgIC8vIHdpZHRoOiAxMDB2dztcbiAgICAgICAgLy8gaGVpZ2h0OiAxMDBweDtcbiAgICAgICAgZGlzcGxheTogZmxleDtcbiAgICAgICAgb3ZlcmZsb3cteDogYXV0bztcbiAgICAgICAgei1pbmRleDogOTk5O1xuICAgICAgICBwb3NpdGlvbjogZml4ZWQ7XG4gICAgICAgIGlvbi1jaGlwIHtcbiAgICAgICAgICAgIGZsZXg6IDAgMCBhdXRvO1xuICAgICAgICAgICAgYmFja2dyb3VuZC1jb2xvcjogd2hpdGU7XG4gICAgICAgIH1cbiAgICB9XG59XG5cbi5saW5lLWNvbnRhaW5lciB7XG4gICAgcGFkZGluZy10b3A6IDQwcHg7XG4gICAgLmxpbmUtdHQge1xuICAgICAgICBib3JkZXItcmFkaXVzOiA4cHg7XG4gICAgICAgIGhlaWdodDogNTBweDtcbiAgICAgICAgd2lkdGg6IDUwcHg7XG4gICAgICAgIHRleHQtYWxpZ246IGNlbnRlcjtcbiAgICAgICAgbGluZS1oZWlnaHQ6IDUwcHg7XG4gICAgICAgIGRpc3BsYXk6IGlubGluZS1ibG9jaztcbiAgICB9XG4gICAgLmxhYmVsLXR5cGV7XG4gICAgICAgIHdpZHRoOiAxMDAlO1xuICAgICAgICBmb250LXdlaWdodDogYm9sZDtcbiAgICAgICAgLS1iYWNrZ3JvdW5kOiAjZTNlM2UzO1xuICAgICAgICAtLWNvbG9yOiAjNzA3MDcwO1xuICAgICAgICBmb250LXNpemU6IDIycHg7XG4gICAgICAgIGRpdntcbiAgICAgICAgICAgIHdpZHRoOiAxMDAlO1xuICAgICAgICB9XG4gICAgfVxufVxuLmludGVyYWN0aW9uIHtcbiAgICBjb2xvcjogIzExYjNlZjtcbn0iXX0= */"
 
 /***/ }),
 
@@ -284,6 +284,18 @@ var HomeTrasportiPage = /** @class */ (function (_super) {
         }
         // }
     };
+    HomeTrasportiPage.prototype.compareElements = function (i) {
+        if (i == 0)
+            return true;
+        if (i == this.elements.length - 1)
+            return false;
+        if (this.elements[i].ref != this.elements[i - 1].ref)
+            return true;
+        return false;
+    };
+    HomeTrasportiPage.prototype.getLabel = function (i) {
+        return this.elements[i].ref;
+    };
     HomeTrasportiPage.prototype.loadListAll = function (primaryLinks) {
         var _this = this;
         var funcs = [];
@@ -311,17 +323,20 @@ var HomeTrasportiPage = /** @class */ (function (_super) {
         });
     };
     HomeTrasportiPage.prototype.getStyle = function (elem) {
-        return { 'background-color': elem.color };
+        return { 'border': '2px solid ' + elem.color };
     };
     HomeTrasportiPage.prototype.titleisPresent = function (elem) {
         return (elem && elem.group && elem.group.routes && elem.group.routes.length > 0 && elem.group.routes[0].title) ? true : false;
     };
+    HomeTrasportiPage.prototype.inside = function (string) {
+        return string.length < 3;
+    };
     HomeTrasportiPage.prototype.selectElement = function (e) {
         // route element: go to table
         if (e.route != null) {
-            if (!this.groupId) {
-                this.groupId = "no-group";
-            }
+            // if (!this.groupId) {
+            //   this.groupId = "no-group";
+            // }
             this.router.navigate(['/tt', e.ref, e.agencyId, this.groupId, e.route.routeSymId, e.title]);
             // group with single route: go to table
         }

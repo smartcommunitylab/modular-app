@@ -1273,15 +1273,15 @@
   },
   {
     "file": "assets/common/i18n/de.json",
-    "hash": "0a6225ad5f6c64f80fb9aea325a3cd91"
+    "hash": "cb49d9eff4e18495dc8d7a8c80c67383"
   },
   {
     "file": "assets/common/i18n/en.json",
-    "hash": "a10e2e281e55899bbb5446c164636a72"
+    "hash": "0bd08276695c6a0ad91d5f1f31df7fc9"
   },
   {
     "file": "assets/common/i18n/it.json",
-    "hash": "45b65373ffb960c9d22f640b9f81243b"
+    "hash": "315101c057c1bb40efa0ad23d728b3ca"
   },
   {
     "file": "assets/comune/i18n/de.json",
@@ -1381,15 +1381,15 @@
   },
   {
     "file": "assets/trasporti/i18n/de.json",
-    "hash": "5a33224612744468bf0188a6b564532d"
+    "hash": "404ea896647b22a26b1f06df924335b8"
   },
   {
     "file": "assets/trasporti/i18n/en.json",
-    "hash": "1685a76790c370f6394d2d448794323e"
+    "hash": "404ea896647b22a26b1f06df924335b8"
   },
   {
     "file": "assets/trasporti/i18n/it.json",
-    "hash": "62bd2c6b2e1461343736079a211c5f80"
+    "hash": "bdd193374b39e3e2531c2ba5073d5a6f"
   },
   {
     "file": "assets/trasporti/marker.png",
@@ -1557,11 +1557,11 @@
   },
   {
     "file": "pages-home-common-home-common-module.js",
-    "hash": "6732d5181922f81e7c7eb04564ef05fd"
+    "hash": "e562eb005caa4f6ba3266a22a78a399c"
   },
   {
     "file": "pages-home-common-home-common-module.js.map",
-    "hash": "d7900259399909f104d17513660980c6"
+    "hash": "b09a9ad869a7a90f73b481068f9f7a4d"
   },
   {
     "file": "pages-home-home-module.js",
@@ -1581,19 +1581,19 @@
   },
   {
     "file": "pages-home-settings-home-settings-module.js",
-    "hash": "7feb425f4b5c18008d3bfed82aff9620"
+    "hash": "e7e90e00bbef34cb8c5c7e7bb3618306"
   },
   {
     "file": "pages-home-settings-home-settings-module.js.map",
-    "hash": "3ff0cf28c5e3eaea1beab7508e3bcdde"
+    "hash": "bf433fa4e1c8bc3e5d8fb506565fda41"
   },
   {
     "file": "pages-home-trasporti-home-trasporti-module.js",
-    "hash": "55476e608a49979780a6dfe7679155a1"
+    "hash": "38d739a7988904eb5dc57cf944d0968d"
   },
   {
     "file": "pages-home-trasporti-home-trasporti-module.js.map",
-    "hash": "6f58af0889ab8587ed30e864865d307c"
+    "hash": "379ec260356937fc81504e09f37d04f2"
   },
   {
     "file": "pages-list-categories-list-categories-module.js",
@@ -1669,11 +1669,11 @@
   },
   {
     "file": "pages-profile-profile-module.js",
-    "hash": "564c80d3eb093e212f610be73f36ed88"
+    "hash": "7d0bb49c4ab970bdfe3695caa63ce564"
   },
   {
     "file": "pages-profile-profile-module.js.map",
-    "hash": "882592150e700425709c71264173766b"
+    "hash": "97297cf6c7f09975bd390b7f499e939c"
   },
   {
     "file": "pages-search-search-module.js",
@@ -1693,19 +1693,19 @@
   },
   {
     "file": "pages-transport-list-transport-list-module.js",
-    "hash": "7087f44afa9a06d6c661eef1ad3857a1"
+    "hash": "7f663ec1a92cd8935ba56d9b13a52cf0"
   },
   {
     "file": "pages-transport-list-transport-list-module.js.map",
-    "hash": "7657218156f9a3ca6a8d3b3cb0338bd7"
+    "hash": "59bb9dafcdb0b533a457f29bb5b9fbd5"
   },
   {
     "file": "pages-transport-tt-transport-tt-module.js",
-    "hash": "71fccf1ad0437176155bfd353b040f02"
+    "hash": "304732dea5a2181c61e702a770e45b58"
   },
   {
     "file": "pages-transport-tt-transport-tt-module.js.map",
-    "hash": "3078063ff2714e80f6579b2ae264df1d"
+    "hash": "e68082c051f851309a5a64d784b0464d"
   },
   {
     "file": "pages-video-video-module.js",
@@ -1877,11 +1877,11 @@
   },
   {
     "file": "styles.js",
-    "hash": "1c7fe735d4710d00a5c50b731ba03d38"
+    "hash": "8cf7d7a64d4279b4903cd0a83706cbaa"
   },
   {
     "file": "styles.js.map",
-    "hash": "959613c80dab65768f3c3c54d19f28ef"
+    "hash": "6e728525ef7ed94decec4410076eb617"
   },
   {
     "file": "svg/ios-add-circle-outline.svg",

@@ -8,7 +8,10 @@
     "home_trasporto": "Trasporti",
     "title_home_setting":"Personalizza la tua homepage",
     "label_other_settinga":"Altri settings",
+    "label_about":"About",
     "label_setting_drag":"Trascina i box per aggiungerli alla home page",
     "turist_profile_label":"Turista",
-    "citizen_profile_label": "Cittadino"
+    "citizen_profile_label": "Cittadino",
+    "title_first_launch": "Tutti i servizi, una sola app"
+
 }

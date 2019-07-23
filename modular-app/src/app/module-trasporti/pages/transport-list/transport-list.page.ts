@@ -75,7 +75,7 @@ export class TransportListPage implements OnInit {
         this.hasMap = (<any>res).hasMap;
         this.markerIcon = (<any>res).markerIcon;
         this.icon = (<any>res).icon;
-
+ 
         // var title = $filter('translate')((<any>data).title ? (<any>data).title : (<any>data).label);
         // if (title.length < 5) title = $filter('translate')('lbl_line') + ' ' + title;
         var title = "Todo"

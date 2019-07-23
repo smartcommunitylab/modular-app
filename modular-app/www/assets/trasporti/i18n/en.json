@@ -1,5 +1,5 @@
 {
-    "home_trasporto": "Transport",
+    "home_trasporto": "Orari trasporti",
     "menu_plan": "",
     "menu_real_time_bus_urban": "Autobus",
     "menu_real_time_train": "Treni",
@@ -9,5 +9,7 @@
     "menu_taxi": "",
     "err_too_many_markers":"Troppi marker",
     "label_delay":"RITARDO",
-    "label_trips":"TIPO"
+    "label_trips":"TIPO",
+    "urbano":"Autobus",
+    "trains":"Treni"
 }
