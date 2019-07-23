@@ -1,21 +1,643 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[137],{
 
-/***/ "./node_modules/@ionic/core/dist/esm/es5/build/4ovfvgj2.sc.entry.js":
-/*!**************************************************************************!*\
-  !*** ./node_modules/@ionic/core/dist/esm/es5/build/4ovfvgj2.sc.entry.js ***!
-  \**************************************************************************/
-/*! exports provided: IonLoading, IonLoadingController */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ "./node_modules/wcs-info/dist/esm/legacy/css-shim-229ebf7a-229ebf7a.js":
+/*!*****************************************************************************!*\
+  !*** ./node_modules/wcs-info/dist/esm/legacy/css-shim-229ebf7a-229ebf7a.js ***!
+  \*****************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonLoading", function() { return Loading; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonLoadingController", function() { return LoadingController; });
-/* harmony import */ var _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../polyfills/tslib.js */ "./node_modules/@ionic/core/dist/esm/es5/polyfills/tslib.js");
-/* harmony import */ var _ionic_core_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../ionic.core.js */ "./node_modules/@ionic/core/dist/esm/es5/ionic.core.js");
-/* harmony import */ var _chunk_4f24dff4_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chunk-4f24dff4.js */ "./node_modules/@ionic/core/dist/esm/es5/build/chunk-4f24dff4.js");
-/* harmony import */ var _chunk_7c632336_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./chunk-7c632336.js */ "./node_modules/@ionic/core/dist/esm/es5/build/chunk-7c632336.js");
-function iosEnterAnimation(e,t){var n=new e,o=new e;o.addElement(t.querySelector("ion-backdrop"));var i=new e;return i.addElement(t.querySelector(".loading-wrapper")),o.fromTo("opacity",.01,.3),i.fromTo("opacity",.01,1).fromTo("scale",1.1,1),Promise.resolve(n.addElement(t).easing("ease-in-out").duration(200).add(o).add(i))}function iosLeaveAnimation(e,t){var n=new e,o=new e;o.addElement(t.querySelector("ion-backdrop"));var i=new e;return i.addElement(t.querySelector(".loading-wrapper")),o.fromTo("opacity",.3,0),i.fromTo("opacity",.99,0).fromTo("scale",1,.9),Promise.resolve(n.addElement(t).easing("ease-in-out").duration(200).add(o).add(i))}function mdEnterAnimation(e,t){var n=new e,o=new e;o.addElement(t.querySelector("ion-backdrop"));var i=new e;return i.addElement(t.querySelector(".loading-wrapper")),o.fromTo("opacity",.01,.32),i.fromTo("opacity",.01,1).fromTo("scale",1.1,1),Promise.resolve(n.addElement(t).easing("ease-in-out").duration(200).add(o).add(i))}function mdLeaveAnimation(e,t){var n=new e,o=new e;o.addElement(t.querySelector("ion-backdrop"));var i=new e;return i.addElement(t.querySelector(".loading-wrapper")),o.fromTo("opacity",.32,0),i.fromTo("opacity",.99,0).fromTo("scale",1,.9),Promise.resolve(n.addElement(t).easing("ease-in-out").duration(200).add(o).add(i))}var Loading=function(){function e(){this.presented=!1,this.keyboardClose=!0,this.duration=0,this.backdropDismiss=!1,this.showBackdrop=!0,this.translucent=!1,this.animated=!0}return e.prototype.componentWillLoad=function(){void 0===this.spinner&&(this.spinner=this.config.get("loadingSpinner","ios"===this.mode?"lines":"crescent"))},e.prototype.onBackdropTap=function(){this.dismiss(void 0,_chunk_4f24dff4_js__WEBPACK_IMPORTED_MODULE_2__["a"])},e.prototype.present=function(){return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this,void 0,void 0,function(){var e=this;return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this,function(t){switch(t.label){case 0:return[4,Object(_chunk_4f24dff4_js__WEBPACK_IMPORTED_MODULE_2__["c"])(this,"loadingEnter",iosEnterAnimation,mdEnterAnimation,void 0)];case 1:return t.sent(),this.duration>0&&(this.durationTimeout=setTimeout(function(){return e.dismiss()},this.duration+10)),[2]}})})},e.prototype.dismiss=function(e,t){return this.durationTimeout&&clearTimeout(this.durationTimeout),Object(_chunk_4f24dff4_js__WEBPACK_IMPORTED_MODULE_2__["d"])(this,e,t,"loadingLeave",iosLeaveAnimation,mdLeaveAnimation)},e.prototype.onDidDismiss=function(){return Object(_chunk_4f24dff4_js__WEBPACK_IMPORTED_MODULE_2__["e"])(this.el,"ionLoadingDidDismiss")},e.prototype.onWillDismiss=function(){return Object(_chunk_4f24dff4_js__WEBPACK_IMPORTED_MODULE_2__["e"])(this.el,"ionLoadingWillDismiss")},e.prototype.hostData=function(){return{style:{zIndex:4e4+this.overlayIndex},class:Object.assign({},Object(_chunk_7c632336_js__WEBPACK_IMPORTED_MODULE_3__["a"])(this.cssClass),{"loading-translucent":this.translucent})}},e.prototype.render=function(){return[Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("ion-backdrop",{visible:this.showBackdrop,tappable:this.backdropDismiss}),Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div",{class:"loading-wrapper",role:"dialog"},this.spinner&&Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div",{class:"loading-spinner"},Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("ion-spinner",{name:this.spinner})),this.message&&Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div",{class:"loading-content"},this.message))]},Object.defineProperty(e,"is",{get:function(){return"ion-loading"},enumerable:!0,configurable:!0}),Object.defineProperty(e,"encapsulation",{get:function(){return"scoped"},enumerable:!0,configurable:!0}),Object.defineProperty(e,"properties",{get:function(){return{animated:{type:Boolean,attr:"animated"},backdropDismiss:{type:Boolean,attr:"backdrop-dismiss"},config:{context:"config"},cssClass:{type:String,attr:"css-class"},dismiss:{method:!0},duration:{type:Number,attr:"duration"},el:{elementRef:!0},enterAnimation:{type:"Any",attr:"enter-animation"},keyboardClose:{type:Boolean,attr:"keyboard-close"},leaveAnimation:{type:"Any",attr:"leave-animation"},message:{type:String,attr:"message"},mode:{type:String,attr:"mode"},onDidDismiss:{method:!0},onWillDismiss:{method:!0},overlayIndex:{type:Number,attr:"overlay-index"},present:{method:!0},showBackdrop:{type:Boolean,attr:"show-backdrop"},spinner:{type:String,attr:"spinner",mutable:!0},translucent:{type:Boolean,attr:"translucent"}}},enumerable:!0,configurable:!0}),Object.defineProperty(e,"events",{get:function(){return[{name:"ionLoadingDidPresent",method:"didPresent",bubbles:!0,cancelable:!0,composed:!0},{name:"ionLoadingWillPresent",method:"willPresent",bubbles:!0,cancelable:!0,composed:!0},{name:"ionLoadingWillDismiss",method:"willDismiss",bubbles:!0,cancelable:!0,composed:!0},{name:"ionLoadingDidDismiss",method:"didDismiss",bubbles:!0,cancelable:!0,composed:!0}]},enumerable:!0,configurable:!0}),Object.defineProperty(e,"listeners",{get:function(){return[{name:"ionBackdropTap",method:"onBackdropTap"}]},enumerable:!0,configurable:!0}),Object.defineProperty(e,"style",{get:function(){return".sc-ion-loading-ios-h{--min-width:auto;--width:auto;--min-height:auto;--height:auto;-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;left:0;right:0;top:0;bottom:0;display:-ms-flexbox;display:flex;position:fixed;-ms-flex-align:center;align-items:center;-ms-flex-pack:center;justify-content:center;font-family:var(--ion-font-family,inherit);contain:strict;-ms-touch-action:none;touch-action:none;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;z-index:1000}.overlay-hidden.sc-ion-loading-ios-h{display:none}.loading-wrapper.sc-ion-loading-ios{display:-ms-flexbox;display:flex;-ms-flex-align:inherit;align-items:inherit;-ms-flex-pack:inherit;justify-content:inherit;width:var(--width);min-width:var(--min-width);max-width:var(--max-width);height:var(--height);min-height:var(--min-height);max-height:var(--max-height);background:var(--background);opacity:0;z-index:10}.spinner-bubbles.sc-ion-loading-ios, .spinner-circles.sc-ion-loading-ios, .spinner-crescent.sc-ion-loading-ios, .spinner-dots.sc-ion-loading-ios, .spinner-lines.sc-ion-loading-ios, .spinner-lines-small.sc-ion-loading-ios{color:var(--spinner-color)}.sc-ion-loading-ios-h{--background:var(--ion-color-step-50,#f2f2f2);--max-width:270px;--max-height:90%;--spinner-color:var(--ion-color-step-600,#666);color:var(--ion-text-color,#000);font-size:14px}.loading-wrapper.sc-ion-loading-ios{border-radius:8px;padding-left:34px;padding-right:34px;padding-top:24px;padding-bottom:24px}\@supports ((-webkit-margin-start:0) or (margin-inline-start:0)) or (-webkit-margin-start:0){.loading-wrapper.sc-ion-loading-ios{padding-left:unset;padding-right:unset;-webkit-padding-start:34px;padding-inline-start:34px;-webkit-padding-end:34px;padding-inline-end:34px}}.loading-translucent.sc-ion-loading-ios-h   .loading-wrapper.sc-ion-loading-ios{background-color:rgba(var(--ion-background-color-rgb,255,255,255),.8);-webkit-backdrop-filter:saturate(180%) blur(20px);backdrop-filter:saturate(180%) blur(20px)}.loading-content.sc-ion-loading-ios{font-weight:700}.loading-spinner.sc-ion-loading-ios + .loading-content.sc-ion-loading-ios{margin-left:16px}\@supports ((-webkit-margin-start:0) or (margin-inline-start:0)) or (-webkit-margin-start:0){.loading-spinner.sc-ion-loading-ios + .loading-content.sc-ion-loading-ios{margin-left:unset;-webkit-margin-start:16px;margin-inline-start:16px}}"},enumerable:!0,configurable:!0}),Object.defineProperty(e,"styleMode",{get:function(){return"ios"},enumerable:!0,configurable:!0}),e}(),LoadingController=function(){function e(){}return e.prototype.create=function(e){return Object(_chunk_4f24dff4_js__WEBPACK_IMPORTED_MODULE_2__["f"])(this.doc.createElement("ion-loading"),e)},e.prototype.dismiss=function(e,t,n){return Object(_chunk_4f24dff4_js__WEBPACK_IMPORTED_MODULE_2__["g"])(this.doc,e,t,"ion-loading",n)},e.prototype.getTop=function(){return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this,void 0,void 0,function(){return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this,function(e){return[2,Object(_chunk_4f24dff4_js__WEBPACK_IMPORTED_MODULE_2__["h"])(this.doc,"ion-loading")]})})},Object.defineProperty(e,"is",{get:function(){return"ion-loading-controller"},enumerable:!0,configurable:!0}),Object.defineProperty(e,"properties",{get:function(){return{create:{method:!0},dismiss:{method:!0},doc:{context:"document"},getTop:{method:!0}}},enumerable:!0,configurable:!0}),e}();
+/*
+Extremely simple css parser. Intended to be not more than what we need
+and definitely not necessarily correct =).
+*/
+/** @unrestricted */
+var StyleNode = /** @class */ (function () {
+    function StyleNode() {
+        this.start = 0;
+        this.end = 0;
+        this.previous = null;
+        this.parent = null;
+        this.rules = null;
+        this.parsedCssText = '';
+        this.cssText = '';
+        this.atRule = false;
+        this.type = 0;
+        this.keyframesName = '';
+        this.selector = '';
+        this.parsedSelector = '';
+    }
+    return StyleNode;
+}());
+// given a string of css, return a simple rule tree
+/**
+ * @param {string} text
+ * @return {StyleNode}
+ */
+function parse(text) {
+    text = clean(text);
+    return parseCss(lex(text), text);
+}
+// remove stuff we don't care about that may hinder parsing
+/**
+ * @param {string} cssText
+ * @return {string}
+ */
+function clean(cssText) {
+    return cssText.replace(RX.comments, '').replace(RX.port, '');
+}
+// super simple {...} lexer that returns a node tree
+/**
+ * @param {string} text
+ * @return {StyleNode}
+ */
+function lex(text) {
+    var root = new StyleNode();
+    root['start'] = 0;
+    root['end'] = text.length;
+    var n = root;
+    for (var i = 0, l = text.length; i < l; i++) {
+        if (text[i] === OPEN_BRACE) {
+            if (!n['rules']) {
+                n['rules'] = [];
+            }
+            var p = n;
+            var previous = p['rules'][p['rules'].length - 1] || null;
+            n = new StyleNode();
+            n['start'] = i + 1;
+            n['parent'] = p;
+            n['previous'] = previous;
+            p['rules'].push(n);
+        }
+        else if (text[i] === CLOSE_BRACE) {
+            n['end'] = i + 1;
+            n = n['parent'] || root;
+        }
+    }
+    return root;
+}
+// add selectors/cssText to node tree
+/**
+ * @param {StyleNode} node
+ * @param {string} text
+ * @return {StyleNode}
+ */
+function parseCss(node, text) {
+    var t = text.substring(node['start'], node['end'] - 1);
+    node['parsedCssText'] = node['cssText'] = t.trim();
+    if (node.parent) {
+        var ss = node.previous ? node.previous['end'] : node.parent['start'];
+        t = text.substring(ss, node['start'] - 1);
+        t = _expandUnicodeEscapes(t);
+        t = t.replace(RX.multipleSpaces, ' ');
+        // TODO(sorvell): ad hoc; make selector include only after last ;
+        // helps with mixin syntax
+        t = t.substring(t.lastIndexOf(';') + 1);
+        var s = node['parsedSelector'] = node['selector'] = t.trim();
+        node['atRule'] = (s.indexOf(AT_START) === 0);
+        // note, support a subset of rule types...
+        if (node['atRule']) {
+            if (s.indexOf(MEDIA_START) === 0) {
+                node['type'] = types.MEDIA_RULE;
+            }
+            else if (s.match(RX.keyframesRule)) {
+                node['type'] = types.KEYFRAMES_RULE;
+                node['keyframesName'] = node['selector'].split(RX.multipleSpaces).pop();
+            }
+        }
+        else {
+            if (s.indexOf(VAR_START) === 0) {
+                node['type'] = types.MIXIN_RULE;
+            }
+            else {
+                node['type'] = types.STYLE_RULE;
+            }
+        }
+    }
+    var r$ = node['rules'];
+    if (r$) {
+        for (var i = 0, l = r$.length, r = void 0; (i < l) && (r = r$[i]); i++) {
+            parseCss(r, text);
+        }
+    }
+    return node;
+}
+/**
+ * conversion of sort unicode escapes with spaces like `\33 ` (and longer) into
+ * expanded form that doesn't require trailing space `\000033`
+ * @param {string} s
+ * @return {string}
+ */
+function _expandUnicodeEscapes(s) {
+    return s.replace(/\\([0-9a-f]{1,6})\s/gi, function () {
+        var code = arguments[1], repeat = 6 - code.length;
+        while (repeat--) {
+            code = '0' + code;
+        }
+        return '\\' + code;
+    });
+}
+/** @enum {number} */
+var types = {
+    STYLE_RULE: 1,
+    KEYFRAMES_RULE: 7,
+    MEDIA_RULE: 4,
+    MIXIN_RULE: 1000
+};
+var OPEN_BRACE = '{';
+var CLOSE_BRACE = '}';
+// helper regexp's
+var RX = {
+    comments: /\/\*[^*]*\*+([^/*][^*]*\*+)*\//gim,
+    port: /@import[^;]*;/gim,
+    customProp: /(?:^[^;\-\s}]+)?--[^;{}]*?:[^{};]*?(?:[;\n]|$)/gim,
+    mixinProp: /(?:^[^;\-\s}]+)?--[^;{}]*?:[^{};]*?{[^}]*?}(?:[;\n]|$)?/gim,
+    mixinApply: /@apply\s*\(?[^);]*\)?\s*(?:[;\n]|$)?/gim,
+    varApply: /[^;:]*?:[^;]*?var\([^;]*\)(?:[;\n]|$)?/gim,
+    keyframesRule: /^@[^\s]*keyframes/,
+    multipleSpaces: /\s+/g
+};
+var VAR_START = '--';
+var MEDIA_START = '@media';
+var AT_START = '@';
+function findRegex(regex, cssText, offset) {
+    regex['lastIndex'] = 0;
+    var r = cssText.substring(offset).match(regex);
+    if (r) {
+        var start = offset + r['index'];
+        return {
+            start: start,
+            end: start + r[0].length
+        };
+    }
+    return null;
+}
+var VAR_USAGE_START = /\bvar\(/;
+var VAR_ASSIGN_START = /\B--[\w-]+\s*:/;
+var COMMENTS = /\/\*[^*]*\*+([^/*][^*]*\*+)*\//gim;
+var TRAILING_LINES = /^[\t ]+\n/gm;
+function resolveVar(props, prop, fallback) {
+    if (props[prop]) {
+        return props[prop];
+    }
+    if (fallback) {
+        return executeTemplate(fallback, props);
+    }
+    return '';
+}
+function findVarEndIndex(cssText, offset) {
+    var count = 0;
+    var i = offset;
+    for (; i < cssText.length; i++) {
+        var c = cssText[i];
+        if (c === '(') {
+            count++;
+        }
+        else if (c === ')') {
+            count--;
+            if (count <= 0) {
+                return i + 1;
+            }
+        }
+    }
+    return i;
+}
+function parseVar(cssText, offset) {
+    var varPos = findRegex(VAR_USAGE_START, cssText, offset);
+    if (!varPos) {
+        return null;
+    }
+    var endVar = findVarEndIndex(cssText, varPos.start);
+    var varContent = cssText.substring(varPos.end, endVar - 1);
+    var _a = varContent.split(','), propName = _a[0], fallback = _a.slice(1);
+    return {
+        start: varPos.start,
+        end: endVar,
+        propName: propName.trim(),
+        fallback: fallback.length > 0 ? fallback.join(',').trim() : undefined
+    };
+}
+function compileVar(cssText, template, offset) {
+    var varMeta = parseVar(cssText, offset);
+    if (!varMeta) {
+        template.push(cssText.substring(offset, cssText.length));
+        return cssText.length;
+    }
+    var propName = varMeta.propName;
+    var fallback = varMeta.fallback != null ? compileTemplate(varMeta.fallback) : undefined;
+    template.push(cssText.substring(offset, varMeta.start), function (params) { return resolveVar(params, propName, fallback); });
+    return varMeta.end;
+}
+function executeTemplate(template, props) {
+    var final = '';
+    for (var i = 0; i < template.length; i++) {
+        var s = template[i];
+        final += (typeof s === 'string')
+            ? s
+            : s(props);
+    }
+    return final;
+}
+function findEndValue(cssText, offset) {
+    var onStr = false;
+    var double = false;
+    var i = offset;
+    for (; i < cssText.length; i++) {
+        var c = cssText[i];
+        if (onStr) {
+            if (double && c === '"') {
+                onStr = false;
+            }
+            if (!double && c === '\'') {
+                onStr = false;
+            }
+        }
+        else {
+            if (c === '"') {
+                onStr = true;
+                double = true;
+            }
+            else if (c === '\'') {
+                onStr = true;
+                double = false;
+            }
+            else if (c === ';') {
+                return i + 1;
+            }
+            else if (c === '}') {
+                return i;
+            }
+        }
+    }
+    return i;
+}
+function removeCustomAssigns(cssText) {
+    var final = '';
+    var offset = 0;
+    while (true) {
+        var assignPos = findRegex(VAR_ASSIGN_START, cssText, offset);
+        var start = assignPos ? assignPos.start : cssText.length;
+        final += cssText.substring(offset, start);
+        if (assignPos) {
+            offset = findEndValue(cssText, start);
+        }
+        else {
+            break;
+        }
+    }
+    return final;
+}
+function compileTemplate(cssText) {
+    var index = 0;
+    cssText = cssText.replace(COMMENTS, '');
+    cssText = removeCustomAssigns(cssText)
+        .replace(TRAILING_LINES, '');
+    var segments = [];
+    while (index < cssText.length) {
+        index = compileVar(cssText, segments, index);
+    }
+    return segments;
+}
+function resolveValues(selectors) {
+    var props = {};
+    selectors.forEach(function (selector) {
+        selector.declarations.forEach(function (dec) {
+            props[dec.prop] = dec.value;
+        });
+    });
+    var propsValues = {};
+    var entries = Object.entries(props);
+    var _loop_1 = function (i) {
+        var dirty = false;
+        entries.forEach(function (_a) {
+            var key = _a[0], value = _a[1];
+            var propValue = executeTemplate(value, propsValues);
+            if (propValue !== propsValues[key]) {
+                propsValues[key] = propValue;
+                dirty = true;
+            }
+        });
+        if (!dirty) {
+            return "break";
+        }
+    };
+    for (var i = 0; i < 10; i++) {
+        var state_1 = _loop_1(i);
+        if (state_1 === "break")
+            break;
+    }
+    return propsValues;
+}
+function getSelectors(root, index) {
+    if (index === void 0) {
+        index = 0;
+    }
+    if (!root.rules) {
+        return [];
+    }
+    var selectors = [];
+    root.rules
+        .filter(function (rule) { return rule.type === types.STYLE_RULE; })
+        .forEach(function (rule) {
+        var declarations = getDeclarations(rule.cssText);
+        if (declarations.length > 0) {
+            rule.parsedSelector.split(',').forEach(function (selector) {
+                selector = selector.trim();
+                selectors.push({
+                    selector: selector,
+                    declarations: declarations,
+                    specificity: computeSpecificity(selector),
+                    nu: index
+                });
+            });
+        }
+        index++;
+    });
+    return selectors;
+}
+function computeSpecificity(_selector) {
+    return 1;
+}
+var IMPORTANT = '!important';
+var FIND_DECLARATIONS = /(?:^|[;\s{]\s*)(--[\w-]*?)\s*:\s*(?:((?:'(?:\\'|.)*?'|"(?:\\"|.)*?"|\([^)]*?\)|[^};{])+)|\{([^}]*)\}(?:(?=[;\s}])|$))/gm;
+function getDeclarations(cssText) {
+    var declarations = [];
+    var xArray;
+    while (xArray = FIND_DECLARATIONS.exec(cssText.trim())) {
+        var _a = normalizeValue(xArray[2]), value = _a.value, important = _a.important;
+        declarations.push({
+            prop: xArray[1].trim(),
+            value: compileTemplate(value),
+            important: important,
+        });
+    }
+    return declarations;
+}
+function normalizeValue(value) {
+    var regex = /\s+/gim;
+    value = value.replace(regex, ' ').trim();
+    var important = value.endsWith(IMPORTANT);
+    if (important) {
+        value = value.substr(0, value.length - IMPORTANT.length).trim();
+    }
+    return {
+        value: value,
+        important: important
+    };
+}
+function getActiveSelectors(hostEl, hostScopeMap, globalScopes) {
+    // computes the css scopes that might affect this particular element
+    var scopes = globalScopes.concat(getScopesForElement(hostScopeMap, hostEl));
+    // each scope might have an array of associated selectors
+    // let's flatten the complete array of selectors from all the scopes
+    var selectorSet = getSelectorsForScopes(scopes);
+    // we filter to only the selectors that matches the hostEl
+    var activeSelectors = selectorSet.filter(function (selector) { return matches(hostEl, selector.selector); });
+    // sort selectors by specifity
+    return sortSelectors(activeSelectors);
+}
+function getScopesForElement(hostTemplateMap, node) {
+    var scopes = [];
+    while (node) {
+        var scope = hostTemplateMap.get(node);
+        if (scope) {
+            scopes.push(scope);
+        }
+        node = node.parentElement;
+    }
+    return scopes;
+}
+function getSelectorsForScopes(scopes) {
+    var selectors = [];
+    scopes.forEach(function (scope) {
+        selectors.push.apply(selectors, scope.selectors);
+    });
+    return selectors;
+}
+function sortSelectors(selectors) {
+    selectors.sort(function (a, b) {
+        if (a.specificity === b.specificity) {
+            return a.nu - b.nu;
+        }
+        return a.specificity - b.specificity;
+    });
+    return selectors;
+}
+function matches(el, selector) {
+    return el.matches(selector);
+}
+function parseCSS(original) {
+    var ast = parse(original);
+    var template = compileTemplate(original);
+    var selectors = getSelectors(ast);
+    return {
+        original: original,
+        template: template,
+        selectors: selectors,
+        isDynamic: template.length > 1
+    };
+}
+function addGlobalStyle(globalScopes, styleEl) {
+    var css = parseCSS(styleEl.innerHTML);
+    css.styleEl = styleEl;
+    globalScopes.push(css);
+}
+function updateGlobalScopes(scopes) {
+    var selectors = getSelectorsForScopes(scopes);
+    var props = resolveValues(selectors);
+    scopes.forEach(function (scope) {
+        if (scope.isDynamic) {
+            scope.styleEl.innerHTML = executeTemplate(scope.template, props);
+        }
+    });
+}
+function reScope(scope, cssScopeId) {
+    var template = scope.template.map(function (segment) {
+        return (typeof segment === 'string')
+            ? replaceScope(segment, scope.cssScopeId, cssScopeId)
+            : segment;
+    });
+    var selectors = scope.selectors.map(function (sel) {
+        return Object.assign({}, sel, { selector: replaceScope(sel.selector, scope.cssScopeId, cssScopeId) });
+    });
+    return Object.assign({}, scope, { template: template,
+        selectors: selectors,
+        cssScopeId: cssScopeId });
+}
+function replaceScope(original, oldScopeId, newScopeId) {
+    original = replaceAll(original, "\\." + oldScopeId, "." + newScopeId);
+    return original;
+}
+function replaceAll(input, find, replace) {
+    return input.replace(new RegExp(find, 'g'), replace);
+}
+function loadDocument(doc, globalScopes) {
+    return loadDocumentLinks(doc, globalScopes).then(function () {
+        loadDocumentStyles(doc, globalScopes);
+    });
+}
+function loadDocumentLinks(doc, globalScopes) {
+    var promises = [];
+    var linkElms = doc.querySelectorAll('link[rel="stylesheet"][href]');
+    for (var i = 0; i < linkElms.length; i++) {
+        promises.push(addGlobalLink(doc, globalScopes, linkElms[i]));
+    }
+    return Promise.all(promises);
+}
+function loadDocumentStyles(doc, globalScopes) {
+    var styleElms = doc.querySelectorAll('style');
+    for (var i = 0; i < styleElms.length; i++) {
+        addGlobalStyle(globalScopes, styleElms[i]);
+    }
+}
+function addGlobalLink(doc, globalScopes, linkElm) {
+    var url = linkElm.href;
+    return fetch(url).then(function (rsp) { return rsp.text(); }).then(function (text) {
+        if (hasCssVariables(text) && linkElm.parentNode) {
+            if (hasRelativeUrls(text)) {
+                text = fixRelativeUrls(text, url);
+            }
+            var styleEl = doc.createElement('style');
+            styleEl.innerHTML = text;
+            addGlobalStyle(globalScopes, styleEl);
+            linkElm.parentNode.insertBefore(styleEl, linkElm);
+            linkElm.remove();
+        }
+    }).catch(function (err) {
+        console.error(err);
+    });
+}
+// This regexp tries to determine when a variable is declared, for example:
+//
+// .my-el { --highlight-color: green; }
+//
+// but we don't want to trigger when a classname uses "--" or a pseudo-class is
+// used. We assume that the only characters that can preceed a variable
+// declaration are "{", from an opening block, ";" from a preceeding rule, or a
+// space. This prevents the regexp from matching a word in a selector, since
+// they would need to start with a "." or "#". (We assume element names don't
+// start with "--").
+var CSS_VARIABLE_REGEXP = /[\s;{]--[-a-zA-Z0-9]+\s*:/m;
+function hasCssVariables(css) {
+    return css.indexOf('var(') > -1 || CSS_VARIABLE_REGEXP.test(css);
+}
+// This regexp find all url() usages with relative urls
+var CSS_URL_REGEXP = /url[\s]*\([\s]*['"]?(?![http|/])([^\'\"\)]*)[\s]*['"]?\)[\s]*/gim;
+function hasRelativeUrls(css) {
+    CSS_URL_REGEXP.lastIndex = 0;
+    return CSS_URL_REGEXP.test(css);
+}
+function fixRelativeUrls(css, originalUrl) {
+    // get the basepath from the original import url
+    var basePath = originalUrl.replace(/[^/]*$/, '');
+    // replace the relative url, with the new relative url
+    return css.replace(CSS_URL_REGEXP, function (fullMatch, url) {
+        // rhe new relative path is the base path + uri
+        // TODO: normalize relative URL
+        var relativeUrl = basePath + url;
+        return fullMatch.replace(url, relativeUrl);
+    });
+}
+var CustomStyle = /** @class */ (function () {
+    function CustomStyle(win, doc) {
+        this.win = win;
+        this.doc = doc;
+        this.count = 0;
+        this.hostStyleMap = new WeakMap();
+        this.hostScopeMap = new WeakMap();
+        this.globalScopes = [];
+        this.scopesMap = new Map();
+    }
+    CustomStyle.prototype.initShim = function () {
+        var _this = this;
+        return new Promise(function (resolve) {
+            _this.win.requestAnimationFrame(function () {
+                loadDocument(_this.doc, _this.globalScopes).then(function () { return resolve(); });
+            });
+        });
+    };
+    CustomStyle.prototype.addLink = function (linkEl) {
+        var _this = this;
+        return addGlobalLink(this.doc, this.globalScopes, linkEl).then(function () {
+            _this.updateGlobal();
+        });
+    };
+    CustomStyle.prototype.addGlobalStyle = function (styleEl) {
+        addGlobalStyle(this.globalScopes, styleEl);
+        this.updateGlobal();
+    };
+    CustomStyle.prototype.createHostStyle = function (hostEl, cssScopeId, cssText) {
+        if (this.hostScopeMap.has(hostEl)) {
+            throw new Error('host style already created');
+        }
+        var baseScope = this.registerHostTemplate(cssText, cssScopeId);
+        var isDynamicScoped = !!(baseScope.isDynamic && baseScope.cssScopeId);
+        var needStyleEl = isDynamicScoped || !baseScope.styleEl;
+        var styleEl = this.doc.createElement('style');
+        if (!needStyleEl) {
+            styleEl.innerHTML = cssText;
+        }
+        else {
+            if (isDynamicScoped) {
+                styleEl['s-sc'] = cssScopeId = baseScope.cssScopeId + "-" + this.count;
+                styleEl.innerHTML = '/*needs update*/';
+                this.hostStyleMap.set(hostEl, styleEl);
+                this.hostScopeMap.set(hostEl, reScope(baseScope, cssScopeId));
+                this.count++;
+            }
+            else {
+                baseScope.styleEl = styleEl;
+                if (!baseScope.isDynamic) {
+                    styleEl.innerHTML = executeTemplate(baseScope.template, {});
+                }
+                this.globalScopes.push(baseScope);
+                this.updateGlobal();
+                this.hostScopeMap.set(hostEl, baseScope);
+            }
+        }
+        return styleEl;
+    };
+    CustomStyle.prototype.removeHost = function (hostEl) {
+        var css = this.hostStyleMap.get(hostEl);
+        if (css) {
+            css.remove();
+        }
+        this.hostStyleMap.delete(hostEl);
+        this.hostScopeMap.delete(hostEl);
+    };
+    CustomStyle.prototype.updateHost = function (hostEl) {
+        var scope = this.hostScopeMap.get(hostEl);
+        if (scope && scope.isDynamic && scope.cssScopeId) {
+            var styleEl = this.hostStyleMap.get(hostEl);
+            if (styleEl) {
+                var selectors = getActiveSelectors(hostEl, this.hostScopeMap, this.globalScopes);
+                var props = resolveValues(selectors);
+                styleEl.innerHTML = executeTemplate(scope.template, props);
+            }
+        }
+    };
+    CustomStyle.prototype.updateGlobal = function () {
+        updateGlobalScopes(this.globalScopes);
+    };
+    CustomStyle.prototype.registerHostTemplate = function (cssText, scopeId) {
+        var scope = this.scopesMap.get(scopeId);
+        if (!scope) {
+            scope = parseCSS(cssText);
+            scope.cssScopeId = scopeId;
+            this.scopesMap.set(scopeId, scope);
+        }
+        return scope;
+    };
+    return CustomStyle;
+}());
+var win = window;
+function needsShim() {
+    return !(win.CSS && win.CSS.supports && win.CSS.supports('color', 'var(--c)'));
+}
+if (!win.__stencil_cssshim && needsShim()) {
+    win.__stencil_cssshim = new CustomStyle(win, document);
+}
+
 
 /***/ })
 

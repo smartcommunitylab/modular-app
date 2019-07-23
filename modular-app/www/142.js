@@ -1,24 +1,641 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[142],{
 
-/***/ "./node_modules/@ionic/core/dist/esm/es5/build/bhtvuxzz.entry.js":
-/*!***********************************************************************!*\
-  !*** ./node_modules/@ionic/core/dist/esm/es5/build/bhtvuxzz.entry.js ***!
-  \***********************************************************************/
-/*! exports provided: IonPopover, IonPopoverController */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ "./node_modules/wcs-info/dist/esm/polyfills/css-shim.js":
+/*!**************************************************************!*\
+  !*** ./node_modules/wcs-info/dist/esm/polyfills/css-shim.js ***!
+  \**************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonPopover", function() { return Popover; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonPopoverController", function() { return PopoverController; });
-/* harmony import */ var _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../polyfills/tslib.js */ "./node_modules/@ionic/core/dist/esm/es5/polyfills/tslib.js");
-/* harmony import */ var _ionic_core_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../ionic.core.js */ "./node_modules/@ionic/core/dist/esm/es5/ionic.core.js");
-/* harmony import */ var _chunk_4f24dff4_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chunk-4f24dff4.js */ "./node_modules/@ionic/core/dist/esm/es5/build/chunk-4f24dff4.js");
-/* harmony import */ var _chunk_7c632336_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./chunk-7c632336.js */ "./node_modules/@ionic/core/dist/esm/es5/build/chunk-7c632336.js");
-/* harmony import */ var _chunk_99929188_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./chunk-99929188.js */ "./node_modules/@ionic/core/dist/esm/es5/build/chunk-99929188.js");
-/* harmony import */ var _chunk_90d954cd_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./chunk-90d954cd.js */ "./node_modules/@ionic/core/dist/esm/es5/build/chunk-90d954cd.js");
-/* harmony import */ var _chunk_da1efb5f_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./chunk-da1efb5f.js */ "./node_modules/@ionic/core/dist/esm/es5/build/chunk-da1efb5f.js");
-function iosEnterAnimation(e,t,o){var n="top",r="left",i=t.querySelector(".popover-content"),s=i.getBoundingClientRect(),a=s.width,l=s.height,p=window.innerWidth,d=window.innerHeight,c=o&&o.target&&o.target.getBoundingClientRect(),m=null!=c&&"top"in c?c.top:d/2-l/2,u=null!=c&&"left"in c?c.left:p/2,f=c&&c.width||0,v=c&&c.height||0,h=t.querySelector(".popover-arrow"),y=h.getBoundingClientRect(),b=y.width,P=y.height;null==c&&(h.style.display="none");var D={top:m+v,left:u+f/2-b/2},g={top:m+v+(P-1),left:u+f/2-a/2},O=!1,_=!1;g.left<POPOVER_IOS_BODY_PADDING+25?(O=!0,g.left=POPOVER_IOS_BODY_PADDING):a+POPOVER_IOS_BODY_PADDING+g.left+25>p&&(_=!0,g.left=p-a-POPOVER_IOS_BODY_PADDING,r="right"),m+v+l>d&&m-l>0?(D.top=m-(P+1),g.top=m-l-(P-1),t.className=t.className+" popover-bottom",n="bottom"):m+v+l>d&&(i.style.bottom=POPOVER_IOS_BODY_PADDING+"%"),h.style.top=D.top+"px",h.style.left=D.left+"px",i.style.top=g.top+"px",i.style.left=g.left+"px",O&&(i.style.left="calc("+g.left+"px + var(--ion-safe-area-left, 0px))"),_&&(i.style.left="calc("+g.left+"px - var(--ion-safe-area-right, 0px))"),i.style.transformOrigin=n+" "+r;var w=new e,E=new e;E.addElement(t.querySelector("ion-backdrop")),E.fromTo("opacity",.01,.08);var A=new e;return A.addElement(t.querySelector(".popover-wrapper")),A.fromTo("opacity",.01,1),Promise.resolve(w.addElement(t).easing("ease").duration(100).add(E).add(A))}var POPOVER_IOS_BODY_PADDING=5;function iosLeaveAnimation(e,t){var o=new e,n=new e;n.addElement(t.querySelector("ion-backdrop"));var r=new e;return r.addElement(t.querySelector(".popover-wrapper")),r.fromTo("opacity",.99,0),n.fromTo("opacity",.08,0),Promise.resolve(o.addElement(t).easing("ease").duration(500).add(n).add(r))}function mdEnterAnimation(e,t,o){var n="rtl"===document.dir,r="top",i=n?"right":"left",s=t.querySelector(".popover-content"),a=s.getBoundingClientRect(),l=a.width,p=a.height,d=window.innerWidth,c=window.innerHeight,m=o&&o.target&&o.target.getBoundingClientRect(),u=null!=m&&"top"in m?m.top:c/2-p/2,f=m&&m.height||0,v={top:u,left:null!=m&&"left"in m?n?m.left-l+m.width:m.left:d/2-l/2};v.left<POPOVER_MD_BODY_PADDING?v.left=POPOVER_MD_BODY_PADDING:l+POPOVER_MD_BODY_PADDING+v.left>d&&(v.left=d-l-POPOVER_MD_BODY_PADDING,i=n?"left":"right"),u+f+p>c&&u-p>0?(v.top=u-p,t.className=t.className+" popover-bottom",r="bottom"):u+f+p>c&&(s.style.bottom=POPOVER_MD_BODY_PADDING+"px"),s.style.top=v.top+"px",s.style.left=v.left+"px",s.style.transformOrigin=r+" "+i;var h=new e,y=new e;y.addElement(t.querySelector("ion-backdrop")),y.fromTo("opacity",.01,.32);var b=new e;b.addElement(t.querySelector(".popover-wrapper")),b.fromTo("opacity",.01,1);var P=new e;P.addElement(t.querySelector(".popover-content")),P.fromTo("scale",.001,1);var D=new e;return D.addElement(t.querySelector(".popover-viewport")),D.fromTo("opacity",.01,1),Promise.resolve(h.addElement(t).easing("cubic-bezier(0.36,0.66,0.04,1)").duration(300).add(y).add(b).add(P).add(D))}var POPOVER_MD_BODY_PADDING=12;function mdLeaveAnimation(e,t){var o=new e,n=new e;n.addElement(t.querySelector("ion-backdrop"));var r=new e;return r.addElement(t.querySelector(".popover-wrapper")),r.fromTo("opacity",.99,0),n.fromTo("opacity",.32,0),Promise.resolve(o.addElement(t).easing("ease").duration(500).add(n).add(r))}var Popover=function(){function e(){this.presented=!1,this.keyboardClose=!0,this.backdropDismiss=!0,this.showBackdrop=!0,this.translucent=!1,this.animated=!0}return e.prototype.onDismiss=function(e){e.stopPropagation(),e.preventDefault(),this.dismiss()},e.prototype.onBackdropTap=function(){this.dismiss(void 0,_chunk_4f24dff4_js__WEBPACK_IMPORTED_MODULE_2__["a"])},e.prototype.lifecycle=function(e){var t=this.usersElement,o=LIFECYCLE_MAP[e.type];if(t&&o){var n=new CustomEvent(o,{bubbles:!1,cancelable:!1,detail:e.detail});t.dispatchEvent(n)}},e.prototype.present=function(){return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this,void 0,void 0,function(){var e,t,o;return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this,function(n){switch(n.label){case 0:if(this.presented)return[2];if(!(e=this.el.querySelector(".popover-content")))throw new Error("container is undefined");return t=Object.assign({},this.componentProps,{popover:this.el}),o=this,[4,Object(_chunk_99929188_js__WEBPACK_IMPORTED_MODULE_4__["a"])(this.delegate,e,this.component,["popover-viewport",this.el["s-sc"]],t)];case 1:return o.usersElement=n.sent(),[4,Object(_chunk_da1efb5f_js__WEBPACK_IMPORTED_MODULE_6__["a"])(this.usersElement)];case 2:return n.sent(),[2,Object(_chunk_4f24dff4_js__WEBPACK_IMPORTED_MODULE_2__["c"])(this,"popoverEnter",iosEnterAnimation,mdEnterAnimation,this.event)]}})})},e.prototype.dismiss=function(e,t){return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this,void 0,void 0,function(){var o;return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this,function(n){switch(n.label){case 0:return[4,Object(_chunk_4f24dff4_js__WEBPACK_IMPORTED_MODULE_2__["d"])(this,e,t,"popoverLeave",iosLeaveAnimation,mdLeaveAnimation,this.event)];case 1:return(o=n.sent())?[4,Object(_chunk_99929188_js__WEBPACK_IMPORTED_MODULE_4__["b"])(this.delegate,this.usersElement)]:[3,3];case 2:n.sent(),n.label=3;case 3:return[2,o]}})})},e.prototype.onDidDismiss=function(){return Object(_chunk_4f24dff4_js__WEBPACK_IMPORTED_MODULE_2__["e"])(this.el,"ionPopoverDidDismiss")},e.prototype.onWillDismiss=function(){return Object(_chunk_4f24dff4_js__WEBPACK_IMPORTED_MODULE_2__["e"])(this.el,"ionPopoverWillDismiss")},e.prototype.hostData=function(){return{"aria-modal":"true","no-router":!0,style:{zIndex:2e4+this.overlayIndex},class:Object.assign({},Object(_chunk_7c632336_js__WEBPACK_IMPORTED_MODULE_3__["a"])(this.cssClass),{"popover-translucent":this.translucent})}},e.prototype.render=function(){return[Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("ion-backdrop",{tappable:this.backdropDismiss,visible:this.showBackdrop}),Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div",{class:"popover-wrapper"},Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div",{class:"popover-arrow"}),Object(_ionic_core_js__WEBPACK_IMPORTED_MODULE_1__["h"])("div",{class:"popover-content"}))]},Object.defineProperty(e,"is",{get:function(){return"ion-popover"},enumerable:!0,configurable:!0}),Object.defineProperty(e,"encapsulation",{get:function(){return"scoped"},enumerable:!0,configurable:!0}),Object.defineProperty(e,"properties",{get:function(){return{animated:{type:Boolean,attr:"animated"},backdropDismiss:{type:Boolean,attr:"backdrop-dismiss"},component:{type:String,attr:"component"},componentProps:{type:"Any",attr:"component-props"},config:{context:"config"},cssClass:{type:String,attr:"css-class"},delegate:{type:"Any",attr:"delegate"},dismiss:{method:!0},el:{elementRef:!0},enterAnimation:{type:"Any",attr:"enter-animation"},event:{type:"Any",attr:"event"},keyboardClose:{type:Boolean,attr:"keyboard-close"},leaveAnimation:{type:"Any",attr:"leave-animation"},mode:{type:String,attr:"mode"},onDidDismiss:{method:!0},onWillDismiss:{method:!0},overlayIndex:{type:Number,attr:"overlay-index"},present:{method:!0},showBackdrop:{type:Boolean,attr:"show-backdrop"},translucent:{type:Boolean,attr:"translucent"}}},enumerable:!0,configurable:!0}),Object.defineProperty(e,"events",{get:function(){return[{name:"ionPopoverDidPresent",method:"didPresent",bubbles:!0,cancelable:!0,composed:!0},{name:"ionPopoverWillPresent",method:"willPresent",bubbles:!0,cancelable:!0,composed:!0},{name:"ionPopoverWillDismiss",method:"willDismiss",bubbles:!0,cancelable:!0,composed:!0},{name:"ionPopoverDidDismiss",method:"didDismiss",bubbles:!0,cancelable:!0,composed:!0}]},enumerable:!0,configurable:!0}),Object.defineProperty(e,"listeners",{get:function(){return[{name:"ionDismiss",method:"onDismiss"},{name:"ionBackdropTap",method:"onBackdropTap"},{name:"ionPopoverDidPresent",method:"lifecycle"},{name:"ionPopoverWillPresent",method:"lifecycle"},{name:"ionPopoverWillDismiss",method:"lifecycle"},{name:"ionPopoverDidDismiss",method:"lifecycle"}]},enumerable:!0,configurable:!0}),Object.defineProperty(e,"style",{get:function(){return".sc-ion-popover-ios-h{--background:var(--ion-background-color,#fff);--min-width:0;--min-height:0;--max-width:auto;--height:auto;left:0;right:0;top:0;bottom:0;display:-ms-flexbox;display:flex;position:fixed;-ms-flex-align:center;align-items:center;-ms-flex-pack:center;justify-content:center;color:var(--ion-text-color,#000);z-index:1000}.overlay-hidden.sc-ion-popover-ios-h{display:none}.popover-wrapper.sc-ion-popover-ios{opacity:0;z-index:10}.popover-content.sc-ion-popover-ios{display:-ms-flexbox;display:flex;position:absolute;-ms-flex-direction:column;flex-direction:column;width:var(--width);min-width:var(--min-width);max-width:var(--max-width);height:var(--height);min-height:var(--min-height);max-height:var(--max-height);background:var(--background);-webkit-box-shadow:var(--box-shadow);box-shadow:var(--box-shadow);overflow:auto;z-index:10}.popover-viewport.sc-ion-popover-ios{--ion-safe-area-top:0px;--ion-safe-area-right:0px;--ion-safe-area-bottom:0px;--ion-safe-area-left:0px}.sc-ion-popover-ios-h{--width:200px;--max-height:90%;--box-shadow:none}.popover-content.sc-ion-popover-ios{border-radius:10px}.popover-arrow.sc-ion-popover-ios{display:block;position:absolute;width:20px;height:10px;overflow:hidden}.popover-arrow.sc-ion-popover-ios:after{left:3px;top:3px;border-radius:3px;position:absolute;width:14px;height:14px;-webkit-transform:rotate(45deg);transform:rotate(45deg);background:var(--background);content:\"\";z-index:10}[dir=rtl].sc-ion-popover-ios-h   .popover-arrow.sc-ion-popover-ios:after, [dir=rtl]   .sc-ion-popover-ios-h   .popover-arrow.sc-ion-popover-ios:after{right:3px}.popover-bottom.sc-ion-popover-ios-h   .popover-arrow.sc-ion-popover-ios{top:auto;bottom:-10px}.popover-bottom.sc-ion-popover-ios-h   .popover-arrow.sc-ion-popover-ios:after{top:-6px}.popover-translucent.sc-ion-popover-ios-h   .popover-arrow.sc-ion-popover-ios:after, .popover-translucent.sc-ion-popover-ios-h   .popover-content.sc-ion-popover-ios{background:rgba(var(--ion-background-color-rgb,255,255,255),.8);-webkit-backdrop-filter:saturate(180%) blur(20px);backdrop-filter:saturate(180%) blur(20px)}"},enumerable:!0,configurable:!0}),Object.defineProperty(e,"styleMode",{get:function(){return"ios"},enumerable:!0,configurable:!0}),e}(),LIFECYCLE_MAP={ionPopoverDidPresent:"ionViewDidEnter",ionPopoverWillPresent:"ionViewWillEnter",ionPopoverWillDismiss:"ionViewWillLeave",ionPopoverDidDismiss:"ionViewDidLeave"},PopoverController=function(){function e(){}return e.prototype.create=function(e){return Object(_chunk_4f24dff4_js__WEBPACK_IMPORTED_MODULE_2__["f"])(this.doc.createElement("ion-popover"),e)},e.prototype.dismiss=function(e,t,o){return Object(_chunk_4f24dff4_js__WEBPACK_IMPORTED_MODULE_2__["g"])(this.doc,e,t,"ion-popover",o)},e.prototype.getTop=function(){return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this,void 0,void 0,function(){return _polyfills_tslib_js__WEBPACK_IMPORTED_MODULE_0__["__generator"](this,function(e){return[2,Object(_chunk_4f24dff4_js__WEBPACK_IMPORTED_MODULE_2__["h"])(this.doc,"ion-popover")]})})},Object.defineProperty(e,"is",{get:function(){return"ion-popover-controller"},enumerable:!0,configurable:!0}),Object.defineProperty(e,"properties",{get:function(){return{create:{method:!0},dismiss:{method:!0},doc:{context:"document"},getTop:{method:!0}}},enumerable:!0,configurable:!0}),e}();
+/*
+Extremely simple css parser. Intended to be not more than what we need
+and definitely not necessarily correct =).
+*/
+/** @unrestricted */
+var StyleNode = /** @class */ (function () {
+    function StyleNode() {
+        this.start = 0;
+        this.end = 0;
+        this.previous = null;
+        this.parent = null;
+        this.rules = null;
+        this.parsedCssText = '';
+        this.cssText = '';
+        this.atRule = false;
+        this.type = 0;
+        this.keyframesName = '';
+        this.selector = '';
+        this.parsedSelector = '';
+    }
+    return StyleNode;
+}());
+// given a string of css, return a simple rule tree
+/**
+ * @param {string} text
+ * @return {StyleNode}
+ */
+function parse(text) {
+    text = clean(text);
+    return parseCss(lex(text), text);
+}
+// remove stuff we don't care about that may hinder parsing
+/**
+ * @param {string} cssText
+ * @return {string}
+ */
+function clean(cssText) {
+    return cssText.replace(RX.comments, '').replace(RX.port, '');
+}
+// super simple {...} lexer that returns a node tree
+/**
+ * @param {string} text
+ * @return {StyleNode}
+ */
+function lex(text) {
+    var root = new StyleNode();
+    root['start'] = 0;
+    root['end'] = text.length;
+    var n = root;
+    for (var i = 0, l = text.length; i < l; i++) {
+        if (text[i] === OPEN_BRACE) {
+            if (!n['rules']) {
+                n['rules'] = [];
+            }
+            var p = n;
+            var previous = p['rules'][p['rules'].length - 1] || null;
+            n = new StyleNode();
+            n['start'] = i + 1;
+            n['parent'] = p;
+            n['previous'] = previous;
+            p['rules'].push(n);
+        }
+        else if (text[i] === CLOSE_BRACE) {
+            n['end'] = i + 1;
+            n = n['parent'] || root;
+        }
+    }
+    return root;
+}
+// add selectors/cssText to node tree
+/**
+ * @param {StyleNode} node
+ * @param {string} text
+ * @return {StyleNode}
+ */
+function parseCss(node, text) {
+    var t = text.substring(node['start'], node['end'] - 1);
+    node['parsedCssText'] = node['cssText'] = t.trim();
+    if (node.parent) {
+        var ss = node.previous ? node.previous['end'] : node.parent['start'];
+        t = text.substring(ss, node['start'] - 1);
+        t = _expandUnicodeEscapes(t);
+        t = t.replace(RX.multipleSpaces, ' ');
+        // TODO(sorvell): ad hoc; make selector include only after last ;
+        // helps with mixin syntax
+        t = t.substring(t.lastIndexOf(';') + 1);
+        var s = node['parsedSelector'] = node['selector'] = t.trim();
+        node['atRule'] = (s.indexOf(AT_START) === 0);
+        // note, support a subset of rule types...
+        if (node['atRule']) {
+            if (s.indexOf(MEDIA_START) === 0) {
+                node['type'] = types.MEDIA_RULE;
+            }
+            else if (s.match(RX.keyframesRule)) {
+                node['type'] = types.KEYFRAMES_RULE;
+                node['keyframesName'] = node['selector'].split(RX.multipleSpaces).pop();
+            }
+        }
+        else {
+            if (s.indexOf(VAR_START) === 0) {
+                node['type'] = types.MIXIN_RULE;
+            }
+            else {
+                node['type'] = types.STYLE_RULE;
+            }
+        }
+    }
+    var r$ = node['rules'];
+    if (r$) {
+        for (var i = 0, l = r$.length, r = void 0; (i < l) && (r = r$[i]); i++) {
+            parseCss(r, text);
+        }
+    }
+    return node;
+}
+/**
+ * conversion of sort unicode escapes with spaces like `\33 ` (and longer) into
+ * expanded form that doesn't require trailing space `\000033`
+ * @param {string} s
+ * @return {string}
+ */
+function _expandUnicodeEscapes(s) {
+    return s.replace(/\\([0-9a-f]{1,6})\s/gi, function () {
+        var code = arguments[1], repeat = 6 - code.length;
+        while (repeat--) {
+            code = '0' + code;
+        }
+        return '\\' + code;
+    });
+}
+/** @enum {number} */
+var types = {
+    STYLE_RULE: 1,
+    KEYFRAMES_RULE: 7,
+    MEDIA_RULE: 4,
+    MIXIN_RULE: 1000
+};
+var OPEN_BRACE = '{';
+var CLOSE_BRACE = '}';
+// helper regexp's
+var RX = {
+    comments: /\/\*[^*]*\*+([^/*][^*]*\*+)*\//gim,
+    port: /@import[^;]*;/gim,
+    customProp: /(?:^[^;\-\s}]+)?--[^;{}]*?:[^{};]*?(?:[;\n]|$)/gim,
+    mixinProp: /(?:^[^;\-\s}]+)?--[^;{}]*?:[^{};]*?{[^}]*?}(?:[;\n]|$)?/gim,
+    mixinApply: /@apply\s*\(?[^);]*\)?\s*(?:[;\n]|$)?/gim,
+    varApply: /[^;:]*?:[^;]*?var\([^;]*\)(?:[;\n]|$)?/gim,
+    keyframesRule: /^@[^\s]*keyframes/,
+    multipleSpaces: /\s+/g
+};
+var VAR_START = '--';
+var MEDIA_START = '@media';
+var AT_START = '@';
+function findRegex(regex, cssText, offset) {
+    regex['lastIndex'] = 0;
+    var r = cssText.substring(offset).match(regex);
+    if (r) {
+        var start = offset + r['index'];
+        return {
+            start: start,
+            end: start + r[0].length
+        };
+    }
+    return null;
+}
+var VAR_USAGE_START = /\bvar\(/;
+var VAR_ASSIGN_START = /\B--[\w-]+\s*:/;
+var COMMENTS = /\/\*[^*]*\*+([^/*][^*]*\*+)*\//gim;
+var TRAILING_LINES = /^[\t ]+\n/gm;
+function resolveVar(props, prop, fallback) {
+    if (props[prop]) {
+        return props[prop];
+    }
+    if (fallback) {
+        return executeTemplate(fallback, props);
+    }
+    return '';
+}
+function findVarEndIndex(cssText, offset) {
+    var count = 0;
+    var i = offset;
+    for (; i < cssText.length; i++) {
+        var c = cssText[i];
+        if (c === '(') {
+            count++;
+        }
+        else if (c === ')') {
+            count--;
+            if (count <= 0) {
+                return i + 1;
+            }
+        }
+    }
+    return i;
+}
+function parseVar(cssText, offset) {
+    var varPos = findRegex(VAR_USAGE_START, cssText, offset);
+    if (!varPos) {
+        return null;
+    }
+    var endVar = findVarEndIndex(cssText, varPos.start);
+    var varContent = cssText.substring(varPos.end, endVar - 1);
+    var _a = varContent.split(','), propName = _a[0], fallback = _a.slice(1);
+    return {
+        start: varPos.start,
+        end: endVar,
+        propName: propName.trim(),
+        fallback: fallback.length > 0 ? fallback.join(',').trim() : undefined
+    };
+}
+function compileVar(cssText, template, offset) {
+    var varMeta = parseVar(cssText, offset);
+    if (!varMeta) {
+        template.push(cssText.substring(offset, cssText.length));
+        return cssText.length;
+    }
+    var propName = varMeta.propName;
+    var fallback = varMeta.fallback != null ? compileTemplate(varMeta.fallback) : undefined;
+    template.push(cssText.substring(offset, varMeta.start), function (params) { return resolveVar(params, propName, fallback); });
+    return varMeta.end;
+}
+function executeTemplate(template, props) {
+    var final = '';
+    for (var i = 0; i < template.length; i++) {
+        var s = template[i];
+        final += (typeof s === 'string')
+            ? s
+            : s(props);
+    }
+    return final;
+}
+function findEndValue(cssText, offset) {
+    var onStr = false;
+    var double = false;
+    var i = offset;
+    for (; i < cssText.length; i++) {
+        var c = cssText[i];
+        if (onStr) {
+            if (double && c === '"') {
+                onStr = false;
+            }
+            if (!double && c === '\'') {
+                onStr = false;
+            }
+        }
+        else {
+            if (c === '"') {
+                onStr = true;
+                double = true;
+            }
+            else if (c === '\'') {
+                onStr = true;
+                double = false;
+            }
+            else if (c === ';') {
+                return i + 1;
+            }
+            else if (c === '}') {
+                return i;
+            }
+        }
+    }
+    return i;
+}
+function removeCustomAssigns(cssText) {
+    var final = '';
+    var offset = 0;
+    while (true) {
+        var assignPos = findRegex(VAR_ASSIGN_START, cssText, offset);
+        var start = assignPos ? assignPos.start : cssText.length;
+        final += cssText.substring(offset, start);
+        if (assignPos) {
+            offset = findEndValue(cssText, start);
+        }
+        else {
+            break;
+        }
+    }
+    return final;
+}
+function compileTemplate(cssText) {
+    var index = 0;
+    cssText = cssText.replace(COMMENTS, '');
+    cssText = removeCustomAssigns(cssText)
+        .replace(TRAILING_LINES, '');
+    var segments = [];
+    while (index < cssText.length) {
+        index = compileVar(cssText, segments, index);
+    }
+    return segments;
+}
+function resolveValues(selectors) {
+    var props = {};
+    selectors.forEach(function (selector) {
+        selector.declarations.forEach(function (dec) {
+            props[dec.prop] = dec.value;
+        });
+    });
+    var propsValues = {};
+    var entries = Object.entries(props);
+    var _loop_1 = function (i) {
+        var dirty = false;
+        entries.forEach(function (_a) {
+            var key = _a[0], value = _a[1];
+            var propValue = executeTemplate(value, propsValues);
+            if (propValue !== propsValues[key]) {
+                propsValues[key] = propValue;
+                dirty = true;
+            }
+        });
+        if (!dirty) {
+            return "break";
+        }
+    };
+    for (var i = 0; i < 10; i++) {
+        var state_1 = _loop_1(i);
+        if (state_1 === "break")
+            break;
+    }
+    return propsValues;
+}
+function getSelectors(root, index) {
+    if (index === void 0) { index = 0; }
+    if (!root.rules) {
+        return [];
+    }
+    var selectors = [];
+    root.rules
+        .filter(function (rule) { return rule.type === types.STYLE_RULE; })
+        .forEach(function (rule) {
+        var declarations = getDeclarations(rule.cssText);
+        if (declarations.length > 0) {
+            rule.parsedSelector.split(',').forEach(function (selector) {
+                selector = selector.trim();
+                selectors.push({
+                    selector: selector,
+                    declarations: declarations,
+                    specificity: computeSpecificity(selector),
+                    nu: index
+                });
+            });
+        }
+        index++;
+    });
+    return selectors;
+}
+function computeSpecificity(_selector) {
+    return 1;
+}
+var IMPORTANT = '!important';
+var FIND_DECLARATIONS = /(?:^|[;\s{]\s*)(--[\w-]*?)\s*:\s*(?:((?:'(?:\\'|.)*?'|"(?:\\"|.)*?"|\([^)]*?\)|[^};{])+)|\{([^}]*)\}(?:(?=[;\s}])|$))/gm;
+function getDeclarations(cssText) {
+    var declarations = [];
+    var xArray;
+    while (xArray = FIND_DECLARATIONS.exec(cssText.trim())) {
+        var _a = normalizeValue(xArray[2]), value = _a.value, important = _a.important;
+        declarations.push({
+            prop: xArray[1].trim(),
+            value: compileTemplate(value),
+            important: important,
+        });
+    }
+    return declarations;
+}
+function normalizeValue(value) {
+    var regex = /\s+/gim;
+    value = value.replace(regex, ' ').trim();
+    var important = value.endsWith(IMPORTANT);
+    if (important) {
+        value = value.substr(0, value.length - IMPORTANT.length).trim();
+    }
+    return {
+        value: value,
+        important: important
+    };
+}
+function getActiveSelectors(hostEl, hostScopeMap, globalScopes) {
+    // computes the css scopes that might affect this particular element
+    var scopes = globalScopes.concat(getScopesForElement(hostScopeMap, hostEl));
+    // each scope might have an array of associated selectors
+    // let's flatten the complete array of selectors from all the scopes
+    var selectorSet = getSelectorsForScopes(scopes);
+    // we filter to only the selectors that matches the hostEl
+    var activeSelectors = selectorSet.filter(function (selector) { return matches(hostEl, selector.selector); });
+    // sort selectors by specifity
+    return sortSelectors(activeSelectors);
+}
+function getScopesForElement(hostTemplateMap, node) {
+    var scopes = [];
+    while (node) {
+        var scope = hostTemplateMap.get(node);
+        if (scope) {
+            scopes.push(scope);
+        }
+        node = node.parentElement;
+    }
+    return scopes;
+}
+function getSelectorsForScopes(scopes) {
+    var selectors = [];
+    scopes.forEach(function (scope) {
+        selectors.push.apply(selectors, scope.selectors);
+    });
+    return selectors;
+}
+function sortSelectors(selectors) {
+    selectors.sort(function (a, b) {
+        if (a.specificity === b.specificity) {
+            return a.nu - b.nu;
+        }
+        return a.specificity - b.specificity;
+    });
+    return selectors;
+}
+function matches(el, selector) {
+    return el.matches(selector);
+}
+function parseCSS(original) {
+    var ast = parse(original);
+    var template = compileTemplate(original);
+    var selectors = getSelectors(ast);
+    return {
+        original: original,
+        template: template,
+        selectors: selectors,
+        isDynamic: template.length > 1
+    };
+}
+function addGlobalStyle(globalScopes, styleEl) {
+    var css = parseCSS(styleEl.innerHTML);
+    css.styleEl = styleEl;
+    globalScopes.push(css);
+}
+function updateGlobalScopes(scopes) {
+    var selectors = getSelectorsForScopes(scopes);
+    var props = resolveValues(selectors);
+    scopes.forEach(function (scope) {
+        if (scope.isDynamic) {
+            scope.styleEl.innerHTML = executeTemplate(scope.template, props);
+        }
+    });
+}
+function reScope(scope, cssScopeId) {
+    var template = scope.template.map(function (segment) {
+        return (typeof segment === 'string')
+            ? replaceScope(segment, scope.cssScopeId, cssScopeId)
+            : segment;
+    });
+    var selectors = scope.selectors.map(function (sel) {
+        return Object.assign({}, sel, { selector: replaceScope(sel.selector, scope.cssScopeId, cssScopeId) });
+    });
+    return Object.assign({}, scope, { template: template,
+        selectors: selectors,
+        cssScopeId: cssScopeId });
+}
+function replaceScope(original, oldScopeId, newScopeId) {
+    original = replaceAll(original, "\\." + oldScopeId, "." + newScopeId);
+    return original;
+}
+function replaceAll(input, find, replace) {
+    return input.replace(new RegExp(find, 'g'), replace);
+}
+function loadDocument(doc, globalScopes) {
+    return loadDocumentLinks(doc, globalScopes).then(function () {
+        loadDocumentStyles(doc, globalScopes);
+    });
+}
+function loadDocumentLinks(doc, globalScopes) {
+    var promises = [];
+    var linkElms = doc.querySelectorAll('link[rel="stylesheet"][href]');
+    for (var i = 0; i < linkElms.length; i++) {
+        promises.push(addGlobalLink(doc, globalScopes, linkElms[i]));
+    }
+    return Promise.all(promises);
+}
+function loadDocumentStyles(doc, globalScopes) {
+    var styleElms = doc.querySelectorAll('style');
+    for (var i = 0; i < styleElms.length; i++) {
+        addGlobalStyle(globalScopes, styleElms[i]);
+    }
+}
+function addGlobalLink(doc, globalScopes, linkElm) {
+    var url = linkElm.href;
+    return fetch(url).then(function (rsp) { return rsp.text(); }).then(function (text) {
+        if (hasCssVariables(text) && linkElm.parentNode) {
+            if (hasRelativeUrls(text)) {
+                text = fixRelativeUrls(text, url);
+            }
+            var styleEl = doc.createElement('style');
+            styleEl.innerHTML = text;
+            addGlobalStyle(globalScopes, styleEl);
+            linkElm.parentNode.insertBefore(styleEl, linkElm);
+            linkElm.remove();
+        }
+    }).catch(function (err) {
+        console.error(err);
+    });
+}
+// This regexp tries to determine when a variable is declared, for example:
+//
+// .my-el { --highlight-color: green; }
+//
+// but we don't want to trigger when a classname uses "--" or a pseudo-class is
+// used. We assume that the only characters that can preceed a variable
+// declaration are "{", from an opening block, ";" from a preceeding rule, or a
+// space. This prevents the regexp from matching a word in a selector, since
+// they would need to start with a "." or "#". (We assume element names don't
+// start with "--").
+var CSS_VARIABLE_REGEXP = /[\s;{]--[-a-zA-Z0-9]+\s*:/m;
+function hasCssVariables(css) {
+    return css.indexOf('var(') > -1 || CSS_VARIABLE_REGEXP.test(css);
+}
+// This regexp find all url() usages with relative urls
+var CSS_URL_REGEXP = /url[\s]*\([\s]*['"]?(?![http|/])([^\'\"\)]*)[\s]*['"]?\)[\s]*/gim;
+function hasRelativeUrls(css) {
+    CSS_URL_REGEXP.lastIndex = 0;
+    return CSS_URL_REGEXP.test(css);
+}
+function fixRelativeUrls(css, originalUrl) {
+    // get the basepath from the original import url
+    var basePath = originalUrl.replace(/[^/]*$/, '');
+    // replace the relative url, with the new relative url
+    return css.replace(CSS_URL_REGEXP, function (fullMatch, url) {
+        // rhe new relative path is the base path + uri
+        // TODO: normalize relative URL
+        var relativeUrl = basePath + url;
+        return fullMatch.replace(url, relativeUrl);
+    });
+}
+var CustomStyle = /** @class */ (function () {
+    function CustomStyle(win, doc) {
+        this.win = win;
+        this.doc = doc;
+        this.count = 0;
+        this.hostStyleMap = new WeakMap();
+        this.hostScopeMap = new WeakMap();
+        this.globalScopes = [];
+        this.scopesMap = new Map();
+    }
+    CustomStyle.prototype.initShim = function () {
+        var _this = this;
+        return new Promise(function (resolve) {
+            _this.win.requestAnimationFrame(function () {
+                loadDocument(_this.doc, _this.globalScopes).then(function () { return resolve(); });
+            });
+        });
+    };
+    CustomStyle.prototype.addLink = function (linkEl) {
+        var _this = this;
+        return addGlobalLink(this.doc, this.globalScopes, linkEl).then(function () {
+            _this.updateGlobal();
+        });
+    };
+    CustomStyle.prototype.addGlobalStyle = function (styleEl) {
+        addGlobalStyle(this.globalScopes, styleEl);
+        this.updateGlobal();
+    };
+    CustomStyle.prototype.createHostStyle = function (hostEl, cssScopeId, cssText) {
+        if (this.hostScopeMap.has(hostEl)) {
+            throw new Error('host style already created');
+        }
+        var baseScope = this.registerHostTemplate(cssText, cssScopeId);
+        var isDynamicScoped = !!(baseScope.isDynamic && baseScope.cssScopeId);
+        var needStyleEl = isDynamicScoped || !baseScope.styleEl;
+        var styleEl = this.doc.createElement('style');
+        if (!needStyleEl) {
+            styleEl.innerHTML = cssText;
+        }
+        else {
+            if (isDynamicScoped) {
+                styleEl['s-sc'] = cssScopeId = baseScope.cssScopeId + "-" + this.count;
+                styleEl.innerHTML = '/*needs update*/';
+                this.hostStyleMap.set(hostEl, styleEl);
+                this.hostScopeMap.set(hostEl, reScope(baseScope, cssScopeId));
+                this.count++;
+            }
+            else {
+                baseScope.styleEl = styleEl;
+                if (!baseScope.isDynamic) {
+                    styleEl.innerHTML = executeTemplate(baseScope.template, {});
+                }
+                this.globalScopes.push(baseScope);
+                this.updateGlobal();
+                this.hostScopeMap.set(hostEl, baseScope);
+            }
+        }
+        return styleEl;
+    };
+    CustomStyle.prototype.removeHost = function (hostEl) {
+        var css = this.hostStyleMap.get(hostEl);
+        if (css) {
+            css.remove();
+        }
+        this.hostStyleMap.delete(hostEl);
+        this.hostScopeMap.delete(hostEl);
+    };
+    CustomStyle.prototype.updateHost = function (hostEl) {
+        var scope = this.hostScopeMap.get(hostEl);
+        if (scope && scope.isDynamic && scope.cssScopeId) {
+            var styleEl = this.hostStyleMap.get(hostEl);
+            if (styleEl) {
+                var selectors = getActiveSelectors(hostEl, this.hostScopeMap, this.globalScopes);
+                var props = resolveValues(selectors);
+                styleEl.innerHTML = executeTemplate(scope.template, props);
+            }
+        }
+    };
+    CustomStyle.prototype.updateGlobal = function () {
+        updateGlobalScopes(this.globalScopes);
+    };
+    CustomStyle.prototype.registerHostTemplate = function (cssText, scopeId) {
+        var scope = this.scopesMap.get(scopeId);
+        if (!scope) {
+            scope = parseCSS(cssText);
+            scope.cssScopeId = scopeId;
+            this.scopesMap.set(scopeId, scope);
+        }
+        return scope;
+    };
+    return CustomStyle;
+}());
+var win = window;
+function needsShim() {
+    return !(win.CSS && win.CSS.supports && win.CSS.supports('color', 'var(--c)'));
+}
+if (!win.__stencil_cssshim && needsShim()) {
+    win.__stencil_cssshim = new CustomStyle(win, document);
+}
+
 
 /***/ })
 

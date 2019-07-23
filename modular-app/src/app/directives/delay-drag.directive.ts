@@ -34,7 +34,7 @@ export class DelayDragDirective {
       evt.stopPropagation();
       clearTimeout(this.touchTimeout);
     }
-    evt.preventDefault();
+    // evt.preventDefault();
   }
 
   @HostListener('touchend', ['$event'])

@@ -3,7 +3,6 @@ import { NavController, AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ConfigService } from '../../services/config.service';
-import { elementAttribute } from '@angular/core/src/render3';
 import { UtilsService } from '../../services/utils.service';
 // import { DragulaService } from 'ng2-dragula';
 // import { Subscription } from 'rxjs';

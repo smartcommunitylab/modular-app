@@ -614,13 +614,13 @@ if (typeof Object.create === 'function') {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var pouchdb_utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! pouchdb-utils */ "./node_modules/pouchdb-utils/lib/index-browser.es.js");
-/* harmony import */ var pouchdb_md5__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! pouchdb-md5 */ "./node_modules/pouchdb-md5/lib/index-browser.es.js");
-/* harmony import */ var pouchdb_collections__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! pouchdb-collections */ "./node_modules/pouchdb-collections/lib/index.es.js");
-/* harmony import */ var pouchdb_binary_utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! pouchdb-binary-utils */ "./node_modules/pouchdb-binary-utils/lib/index-browser.es.js");
-/* harmony import */ var pouchdb_collate__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! pouchdb-collate */ "./node_modules/pouchdb-collate/lib/index.es.js");
-/* harmony import */ var pouchdb_errors__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! pouchdb-errors */ "./node_modules/pouchdb-errors/lib/index.es.js");
-/* harmony import */ var pouchdb_fetch__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! pouchdb-fetch */ "./node_modules/pouchdb-fetch/lib/index-browser.es.js");
+/* harmony import */ var pouchdb_collections__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! pouchdb-collections */ "./node_modules/pouchdb-collections/lib/index.es.js");
+/* harmony import */ var pouchdb_binary_utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! pouchdb-binary-utils */ "./node_modules/pouchdb-binary-utils/lib/index-browser.es.js");
+/* harmony import */ var pouchdb_collate__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! pouchdb-collate */ "./node_modules/pouchdb-collate/lib/index.es.js");
+/* harmony import */ var pouchdb_errors__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! pouchdb-errors */ "./node_modules/pouchdb-errors/lib/index.es.js");
+/* harmony import */ var pouchdb_fetch__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! pouchdb-fetch */ "./node_modules/pouchdb-fetch/lib/index-browser.es.js");
+/* harmony import */ var pouchdb_utils__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! pouchdb-utils */ "./node_modules/pouchdb-utils/lib/index-browser.es.js");
+/* harmony import */ var pouchdb_md5__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! pouchdb-md5 */ "./node_modules/pouchdb-md5/lib/index-browser.es.js");
 /* harmony import */ var pouchdb_mapreduce_utils__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! pouchdb-mapreduce-utils */ "./node_modules/pouchdb-mapreduce-utils/lib/index.es.js");
 
 
@@ -692,7 +692,7 @@ function createView(sourceDB, viewName, mapFun, reduceFun, temporary, localDocNa
   var promiseForView = sourceDB.info().then(function (info) {
 
     var depDbName = info.db_name + '-mrview-' +
-      (temporary ? 'temp' : Object(pouchdb_md5__WEBPACK_IMPORTED_MODULE_1__["stringMd5"])(viewSignature));
+      (temporary ? 'temp' : Object(pouchdb_md5__WEBPACK_IMPORTED_MODULE_6__["stringMd5"])(viewSignature));
 
     // save the view name in the source db so it can be cleaned up if necessary
     // (e.g. when the _design doc is deleted, remove all associated view data)
@@ -710,7 +710,7 @@ function createView(sourceDB, viewName, mapFun, reduceFun, temporary, localDocNa
       depDbs[depDbName] = true;
       return doc;
     }
-    return Object(pouchdb_utils__WEBPACK_IMPORTED_MODULE_0__["upsert"])(sourceDB, '_local/' + localDocName, diffFunction).then(function () {
+    return Object(pouchdb_utils__WEBPACK_IMPORTED_MODULE_5__["upsert"])(sourceDB, '_local/' + localDocName, diffFunction).then(function () {
       return sourceDB.registerDependentDatabase(depDbName).then(function (res) {
         var db = res.db;
         db.auto_compaction = true;
@@ -766,12 +766,12 @@ function emitError(db, e) {
   try {
     db.emit('error', e);
   } catch (err) {
-    Object(pouchdb_utils__WEBPACK_IMPORTED_MODULE_0__["guardedConsole"])('error',
+    Object(pouchdb_utils__WEBPACK_IMPORTED_MODULE_5__["guardedConsole"])('error',
       'The user\'s map/reduce function threw an uncaught error.\n' +
       'You can debug this error by doing:\n' +
       'myDatabase.on(\'error\', function (err) { debugger; });\n' +
       'Please double-check your map/reduce function.');
-    Object(pouchdb_utils__WEBPACK_IMPORTED_MODULE_0__["guardedConsole"])('error', e);
+    Object(pouchdb_utils__WEBPACK_IMPORTED_MODULE_5__["guardedConsole"])('error', e);
   }
 }
 
@@ -827,8 +827,8 @@ function createAbstractMapReduce(localDocName, mapper, reducer, ddocValidator) {
   }
 
   function sortByKeyThenValue(x, y) {
-    var keyCompare = Object(pouchdb_collate__WEBPACK_IMPORTED_MODULE_4__["collate"])(x.key, y.key);
-    return keyCompare !== 0 ? keyCompare : Object(pouchdb_collate__WEBPACK_IMPORTED_MODULE_4__["collate"])(x.value, y.value);
+    var keyCompare = Object(pouchdb_collate__WEBPACK_IMPORTED_MODULE_2__["collate"])(x.key, y.key);
+    return keyCompare !== 0 ? keyCompare : Object(pouchdb_collate__WEBPACK_IMPORTED_MODULE_2__["collate"])(x.value, y.value);
   }
 
   function sliceResults(results, limit, skip) {
@@ -857,7 +857,7 @@ function createAbstractMapReduce(localDocName, mapper, reducer, ddocValidator) {
       }
       Object.keys(atts).forEach(function (filename) {
         var att = atts[filename];
-        atts[filename].data = Object(pouchdb_binary_utils__WEBPACK_IMPORTED_MODULE_3__["base64StringToBlobOrBuffer"])(att.data, att.content_type);
+        atts[filename].data = Object(pouchdb_binary_utils__WEBPACK_IMPORTED_MODULE_1__["base64StringToBlobOrBuffer"])(att.data, att.content_type);
       });
     });
   }
@@ -920,7 +920,7 @@ function createAbstractMapReduce(localDocName, mapper, reducer, ddocValidator) {
 
     if (typeof options[startkeyName] !== 'undefined' &&
       typeof options[endkeyName] !== 'undefined' &&
-      Object(pouchdb_collate__WEBPACK_IMPORTED_MODULE_4__["collate"])(options[startkeyName], options[endkeyName]) > 0) {
+      Object(pouchdb_collate__WEBPACK_IMPORTED_MODULE_2__["collate"])(options[startkeyName], options[endkeyName]) > 0) {
       throw new pouchdb_mapreduce_utils__WEBPACK_IMPORTED_MODULE_7__["QueryParseError"]('No rows can match your key range, ' +
         'reverse your start_key and end_key or set {descending : true}');
     } else if (fun.reduce && options.reduce !== false) {
@@ -1000,7 +1000,7 @@ function createAbstractMapReduce(localDocName, mapper, reducer, ddocValidator) {
     if (typeof fun === 'string') {
       var parts = parseViewName(fun);
       return db.fetch('_design/' + parts[0] + '/_view/' + parts[1] + params, {
-        headers: new pouchdb_fetch__WEBPACK_IMPORTED_MODULE_6__["Headers"]({'Content-Type': 'application/json'}),
+        headers: new pouchdb_fetch__WEBPACK_IMPORTED_MODULE_4__["Headers"]({'Content-Type': 'application/json'}),
         method: method,
         body: JSON.stringify(body)
       }).then(function (response) {
@@ -1010,7 +1010,7 @@ function createAbstractMapReduce(localDocName, mapper, reducer, ddocValidator) {
       }).then(function (result) {
         if (!ok) {
           result.status = status;
-          throw Object(pouchdb_errors__WEBPACK_IMPORTED_MODULE_5__["generateErrorFromResponse"])(result);
+          throw Object(pouchdb_errors__WEBPACK_IMPORTED_MODULE_3__["generateErrorFromResponse"])(result);
         }
         // fail the entire request if the result contains an error
         result.rows.forEach(function (row) {
@@ -1034,7 +1034,7 @@ function createAbstractMapReduce(localDocName, mapper, reducer, ddocValidator) {
     });
 
     return db.fetch('_temp_view' + params, {
-      headers: new pouchdb_fetch__WEBPACK_IMPORTED_MODULE_6__["Headers"]({'Content-Type': 'application/json'}),
+      headers: new pouchdb_fetch__WEBPACK_IMPORTED_MODULE_4__["Headers"]({'Content-Type': 'application/json'}),
       method: 'POST',
       body: JSON.stringify(body)
     }).then(function (response) {
@@ -1044,7 +1044,7 @@ function createAbstractMapReduce(localDocName, mapper, reducer, ddocValidator) {
     }).then(function (result) {
       if (!ok) {
         result.status = status;
-        throw Object(pouchdb_errors__WEBPACK_IMPORTED_MODULE_5__["generateErrorFromResponse"])(result);
+        throw Object(pouchdb_errors__WEBPACK_IMPORTED_MODULE_3__["generateErrorFromResponse"])(result);
       }
       return result;
     }).then(postprocessAttachments(opts));
@@ -1121,7 +1121,7 @@ function createAbstractMapReduce(localDocName, mapper, reducer, ddocValidator) {
 
     function processKeyValueDocs(metaDoc, kvDocsRes) {
       var kvDocs = [];
-      var oldKeys = new pouchdb_collections__WEBPACK_IMPORTED_MODULE_2__["Set"]();
+      var oldKeys = new pouchdb_collections__WEBPACK_IMPORTED_MODULE_0__["Set"]();
 
       for (var i = 0, len = kvDocsRes.rows.length; i < len; i++) {
         var row = kvDocsRes.rows[i];
@@ -1177,7 +1177,7 @@ function createAbstractMapReduce(localDocName, mapper, reducer, ddocValidator) {
         return Promise.all(docIds.map(function (docId) {
           return getDocsToPersist(docId, view, docIdsToChangesAndEmits);
         })).then(function (listOfDocsToPersist) {
-          var docsToPersist = Object(pouchdb_utils__WEBPACK_IMPORTED_MODULE_0__["flatten"])(listOfDocsToPersist);
+          var docsToPersist = Object(pouchdb_utils__WEBPACK_IMPORTED_MODULE_5__["flatten"])(listOfDocsToPersist);
           lastSeqDoc.seq = seq;
           docsToPersist.push(lastSeqDoc);
           // write all docs in a single operation, update the seq once
@@ -1207,11 +1207,11 @@ function createAbstractMapReduce(localDocName, mapper, reducer, ddocValidator) {
     var doc;
 
     function emit(key, value) {
-      var output = {id: doc._id, key: Object(pouchdb_collate__WEBPACK_IMPORTED_MODULE_4__["normalizeKey"])(key)};
+      var output = {id: doc._id, key: Object(pouchdb_collate__WEBPACK_IMPORTED_MODULE_2__["normalizeKey"])(key)};
       // Don't explicitly store the value unless it's defined and non-null.
       // This saves on storage space, because often people don't use it.
       if (typeof value !== 'undefined' && value !== null) {
-        output.value = Object(pouchdb_collate__WEBPACK_IMPORTED_MODULE_4__["normalizeKey"])(value);
+        output.value = Object(pouchdb_collate__WEBPACK_IMPORTED_MODULE_2__["normalizeKey"])(value);
       }
       mapResults.push(output);
     }
@@ -1253,7 +1253,7 @@ function createAbstractMapReduce(localDocName, mapper, reducer, ddocValidator) {
     }
 
     function createDocIdsToChangesAndEmits(results) {
-      var docIdsToChangesAndEmits = new pouchdb_collections__WEBPACK_IMPORTED_MODULE_2__["Map"]();
+      var docIdsToChangesAndEmits = new pouchdb_collections__WEBPACK_IMPORTED_MODULE_0__["Map"]();
       for (var i = 0, len = results.length; i < len; i++) {
         var change = results[i];
         if (change.doc._id[0] !== '_') {
@@ -1277,15 +1277,15 @@ function createAbstractMapReduce(localDocName, mapper, reducer, ddocValidator) {
     }
 
     function createIndexableKeysToKeyValues(mapResults) {
-      var indexableKeysToKeyValues = new pouchdb_collections__WEBPACK_IMPORTED_MODULE_2__["Map"]();
+      var indexableKeysToKeyValues = new pouchdb_collections__WEBPACK_IMPORTED_MODULE_0__["Map"]();
       var lastKey;
       for (var i = 0, len = mapResults.length; i < len; i++) {
         var emittedKeyValue = mapResults[i];
         var complexKey = [emittedKeyValue.key, emittedKeyValue.id];
-        if (i > 0 && Object(pouchdb_collate__WEBPACK_IMPORTED_MODULE_4__["collate"])(emittedKeyValue.key, lastKey) === 0) {
+        if (i > 0 && Object(pouchdb_collate__WEBPACK_IMPORTED_MODULE_2__["collate"])(emittedKeyValue.key, lastKey) === 0) {
           complexKey.push(i); // dup key+id, so make it unique
         }
-        indexableKeysToKeyValues.set(Object(pouchdb_collate__WEBPACK_IMPORTED_MODULE_4__["toIndexableString"])(complexKey), emittedKeyValue);
+        indexableKeysToKeyValues.set(Object(pouchdb_collate__WEBPACK_IMPORTED_MODULE_2__["toIndexableString"])(complexKey), emittedKeyValue);
         lastKey = emittedKeyValue.key;
       }
       return indexableKeysToKeyValues;
@@ -1319,7 +1319,7 @@ function createAbstractMapReduce(localDocName, mapper, reducer, ddocValidator) {
         groupKey = groupKey.slice(0, lvl);
       }
 
-      if (last && Object(pouchdb_collate__WEBPACK_IMPORTED_MODULE_4__["collate"])(last.groupKey, groupKey) === 0) {
+      if (last && Object(pouchdb_collate__WEBPACK_IMPORTED_MODULE_2__["collate"])(last.groupKey, groupKey) === 0) {
         last.keys.push([e.key, e.id]);
         last.values.push(e.value);
         return;
@@ -1385,7 +1385,7 @@ function createAbstractMapReduce(localDocName, mapper, reducer, ddocValidator) {
             }
           }
 
-          var parsedKeyAndDocId = Object(pouchdb_collate__WEBPACK_IMPORTED_MODULE_4__["parseIndexableString"])(result.doc._id);
+          var parsedKeyAndDocId = Object(pouchdb_collate__WEBPACK_IMPORTED_MODULE_2__["parseIndexableString"])(result.doc._id);
           return {
             key: parsedKeyAndDocId[0],
             id: parsedKeyAndDocId[1],
@@ -1420,7 +1420,7 @@ function createAbstractMapReduce(localDocName, mapper, reducer, ddocValidator) {
           attachments: opts.attachments,
           binary: opts.binary
         }).then(function (allDocsRes) {
-          var docIdsToDocs = new pouchdb_collections__WEBPACK_IMPORTED_MODULE_2__["Map"]();
+          var docIdsToDocs = new pouchdb_collections__WEBPACK_IMPORTED_MODULE_0__["Map"]();
           allDocsRes.rows.forEach(function (row) {
             docIdsToDocs.set(row.id, row.doc);
           });
@@ -1442,8 +1442,8 @@ function createAbstractMapReduce(localDocName, mapper, reducer, ddocValidator) {
       var keys = opts.keys;
       var fetchPromises = keys.map(function (key) {
         var viewOpts = {
-          startkey : Object(pouchdb_collate__WEBPACK_IMPORTED_MODULE_4__["toIndexableString"])([key]),
-          endkey   : Object(pouchdb_collate__WEBPACK_IMPORTED_MODULE_4__["toIndexableString"])([key, {}])
+          startkey : Object(pouchdb_collate__WEBPACK_IMPORTED_MODULE_2__["toIndexableString"])([key]),
+          endkey   : Object(pouchdb_collate__WEBPACK_IMPORTED_MODULE_2__["toIndexableString"])([key, {}])
         };
         /* istanbul ignore if */
         if (opts.update_seq) {
@@ -1451,7 +1451,7 @@ function createAbstractMapReduce(localDocName, mapper, reducer, ddocValidator) {
         }
         return fetchFromView(viewOpts);
       });
-      return Promise.all(fetchPromises).then(pouchdb_utils__WEBPACK_IMPORTED_MODULE_0__["flatten"]).then(onMapResultsReady);
+      return Promise.all(fetchPromises).then(pouchdb_utils__WEBPACK_IMPORTED_MODULE_5__["flatten"]).then(onMapResultsReady);
     } else { // normal query, no 'keys'
       var viewOpts = {
         descending : opts.descending
@@ -1476,8 +1476,8 @@ function createAbstractMapReduce(localDocName, mapper, reducer, ddocValidator) {
       }
       if (typeof startkey !== 'undefined') {
         viewOpts.startkey = opts.descending ?
-          Object(pouchdb_collate__WEBPACK_IMPORTED_MODULE_4__["toIndexableString"])([startkey, {}]) :
-          Object(pouchdb_collate__WEBPACK_IMPORTED_MODULE_4__["toIndexableString"])([startkey]);
+          Object(pouchdb_collate__WEBPACK_IMPORTED_MODULE_2__["toIndexableString"])([startkey, {}]) :
+          Object(pouchdb_collate__WEBPACK_IMPORTED_MODULE_2__["toIndexableString"])([startkey]);
       }
       if (typeof endkey !== 'undefined') {
         var inclusiveEnd = opts.inclusive_end !== false;
@@ -1485,12 +1485,12 @@ function createAbstractMapReduce(localDocName, mapper, reducer, ddocValidator) {
           inclusiveEnd = !inclusiveEnd;
         }
 
-        viewOpts.endkey = Object(pouchdb_collate__WEBPACK_IMPORTED_MODULE_4__["toIndexableString"])(
+        viewOpts.endkey = Object(pouchdb_collate__WEBPACK_IMPORTED_MODULE_2__["toIndexableString"])(
           inclusiveEnd ? [endkey, {}] : [endkey]);
       }
       if (typeof opts.key !== 'undefined') {
-        var keyStart = Object(pouchdb_collate__WEBPACK_IMPORTED_MODULE_4__["toIndexableString"])([opts.key]);
-        var keyEnd = Object(pouchdb_collate__WEBPACK_IMPORTED_MODULE_4__["toIndexableString"])([opts.key, {}]);
+        var keyStart = Object(pouchdb_collate__WEBPACK_IMPORTED_MODULE_2__["toIndexableString"])([opts.key]);
+        var keyEnd = Object(pouchdb_collate__WEBPACK_IMPORTED_MODULE_2__["toIndexableString"])([opts.key, {}]);
         if (viewOpts.descending) {
           viewOpts.endkey = keyStart;
           viewOpts.startkey = keyEnd;
@@ -1511,7 +1511,7 @@ function createAbstractMapReduce(localDocName, mapper, reducer, ddocValidator) {
 
   function httpViewCleanup(db) {
     return db.fetch('_view_cleanup', {
-      headers: new pouchdb_fetch__WEBPACK_IMPORTED_MODULE_6__["Headers"]({'Content-Type': 'application/json'}),
+      headers: new pouchdb_fetch__WEBPACK_IMPORTED_MODULE_4__["Headers"]({'Content-Type': 'application/json'}),
       method: 'POST'
     }).then(function (response) {
       return response.json();
@@ -1520,14 +1520,14 @@ function createAbstractMapReduce(localDocName, mapper, reducer, ddocValidator) {
 
   function localViewCleanup(db) {
     return db.get('_local/' + localDocName).then(function (metaDoc) {
-      var docsToViews = new pouchdb_collections__WEBPACK_IMPORTED_MODULE_2__["Map"]();
+      var docsToViews = new pouchdb_collections__WEBPACK_IMPORTED_MODULE_0__["Map"]();
       Object.keys(metaDoc.views).forEach(function (fullViewName) {
         var parts = parseViewName(fullViewName);
         var designDocName = '_design/' + parts[0];
         var viewName = parts[1];
         var views = docsToViews.get(designDocName);
         if (!views) {
-          views = new pouchdb_collections__WEBPACK_IMPORTED_MODULE_2__["Set"]();
+          views = new pouchdb_collections__WEBPACK_IMPORTED_MODULE_0__["Set"]();
           docsToViews.set(designDocName, views);
         }
         views.add(viewName);
@@ -1577,7 +1577,7 @@ function createAbstractMapReduce(localDocName, mapper, reducer, ddocValidator) {
     if (typeof db._query === 'function') {
       return customQuery(db, fun, opts);
     }
-    if (Object(pouchdb_utils__WEBPACK_IMPORTED_MODULE_0__["isRemote"])(db)) {
+    if (Object(pouchdb_utils__WEBPACK_IMPORTED_MODULE_5__["isRemote"])(db)) {
       return httpQuery(db, fun, opts);
     }
 
@@ -1630,7 +1630,7 @@ function createAbstractMapReduce(localDocName, mapper, reducer, ddocValidator) {
         return createViewPromise.then(function (view) {
           if (opts.stale === 'ok' || opts.stale === 'update_after') {
             if (opts.stale === 'update_after') {
-              Object(pouchdb_utils__WEBPACK_IMPORTED_MODULE_0__["nextTick"])(function () {
+              Object(pouchdb_utils__WEBPACK_IMPORTED_MODULE_5__["nextTick"])(function () {
                 updateView(view);
               });
             }
@@ -1670,7 +1670,7 @@ function createAbstractMapReduce(localDocName, mapper, reducer, ddocValidator) {
     if (typeof db._viewCleanup === 'function') {
       return customViewCleanup(db);
     }
-    if (Object(pouchdb_utils__WEBPACK_IMPORTED_MODULE_0__["isRemote"])(db)) {
+    if (Object(pouchdb_utils__WEBPACK_IMPORTED_MODULE_5__["isRemote"])(db)) {
       return httpViewCleanup(db);
     }
     return localViewCleanup(db);
@@ -2500,13 +2500,13 @@ var h = Headers;
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var pouchdb_utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! pouchdb-utils */ "./node_modules/pouchdb-utils/lib/index-browser.es.js");
-/* harmony import */ var pouchdb_errors__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! pouchdb-errors */ "./node_modules/pouchdb-errors/lib/index.es.js");
-/* harmony import */ var pouchdb_fetch__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! pouchdb-fetch */ "./node_modules/pouchdb-fetch/lib/index-browser.es.js");
-/* harmony import */ var pouchdb_selector_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! pouchdb-selector-core */ "./node_modules/pouchdb-selector-core/lib/index.es.js");
-/* harmony import */ var pouchdb_abstract_mapreduce__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! pouchdb-abstract-mapreduce */ "./node_modules/pouchdb-abstract-mapreduce/lib/index.es.js");
-/* harmony import */ var pouchdb_collate__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! pouchdb-collate */ "./node_modules/pouchdb-collate/lib/index.es.js");
-/* harmony import */ var pouchdb_md5__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! pouchdb-md5 */ "./node_modules/pouchdb-md5/lib/index-browser.es.js");
+/* harmony import */ var pouchdb_errors__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! pouchdb-errors */ "./node_modules/pouchdb-errors/lib/index.es.js");
+/* harmony import */ var pouchdb_fetch__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! pouchdb-fetch */ "./node_modules/pouchdb-fetch/lib/index-browser.es.js");
+/* harmony import */ var pouchdb_abstract_mapreduce__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! pouchdb-abstract-mapreduce */ "./node_modules/pouchdb-abstract-mapreduce/lib/index.es.js");
+/* harmony import */ var pouchdb_md5__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! pouchdb-md5 */ "./node_modules/pouchdb-md5/lib/index-browser.es.js");
+/* harmony import */ var pouchdb_collate__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! pouchdb-collate */ "./node_modules/pouchdb-collate/lib/index.es.js");
+/* harmony import */ var pouchdb_selector_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! pouchdb-selector-core */ "./node_modules/pouchdb-selector-core/lib/index.es.js");
+/* harmony import */ var pouchdb_utils__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! pouchdb-utils */ "./node_modules/pouchdb-utils/lib/index-browser.es.js");
 
 
 
@@ -2520,7 +2520,7 @@ __webpack_require__.r(__webpack_exports__);
 // to be liberal with what we accept in order to prevent mental
 // breakdowns in our users
 function massageCreateIndexRequest(requestDef) {
-  requestDef = Object(pouchdb_utils__WEBPACK_IMPORTED_MODULE_0__["clone"])(requestDef);
+  requestDef = Object(pouchdb_utils__WEBPACK_IMPORTED_MODULE_6__["clone"])(requestDef);
 
   if (!requestDef.index) {
     requestDef.index = {};
@@ -2546,7 +2546,7 @@ function massageCreateIndexRequest(requestDef) {
 
 function dbFetch(db, path, opts, callback) {
   var status, ok;
-  opts.headers = new pouchdb_fetch__WEBPACK_IMPORTED_MODULE_2__["Headers"]({'Content-type': 'application/json'});
+  opts.headers = new pouchdb_fetch__WEBPACK_IMPORTED_MODULE_1__["Headers"]({'Content-type': 'application/json'});
   db.fetch(path, opts).then(function (response) {
     status = response.status;
     ok = response.ok;
@@ -2554,7 +2554,7 @@ function dbFetch(db, path, opts, callback) {
   }).then(function (json) {
     if (!ok) {
       json.status = status;
-      var err = Object(pouchdb_errors__WEBPACK_IMPORTED_MODULE_1__["generateErrorFromResponse"])(json);
+      var err = Object(pouchdb_errors__WEBPACK_IMPORTED_MODULE_0__["generateErrorFromResponse"])(json);
       callback(err);
     } else {
       callback(null, json);
@@ -2633,11 +2633,11 @@ function callbackify(fun) {
 
 function promisedCallback(promise, callback) {
   promise.then(function (res) {
-    Object(pouchdb_utils__WEBPACK_IMPORTED_MODULE_0__["nextTick"])(function () {
+    Object(pouchdb_utils__WEBPACK_IMPORTED_MODULE_6__["nextTick"])(function () {
       callback(null, res);
     });
   }, function (reason) {
-    Object(pouchdb_utils__WEBPACK_IMPORTED_MODULE_0__["nextTick"])(function () {
+    Object(pouchdb_utils__WEBPACK_IMPORTED_MODULE_6__["nextTick"])(function () {
       callback(reason);
     });
   });
@@ -2660,7 +2660,7 @@ var flatten = getArguments(function (args) {
 function mergeObjects(arr) {
   var res = {};
   for (var i = 0, len = arr.length; i < len; i++) {
-    res = Object(pouchdb_utils__WEBPACK_IMPORTED_MODULE_0__["assign"])(res, arr[i]);
+    res = Object(pouchdb_utils__WEBPACK_IMPORTED_MODULE_6__["assign"])(res, arr[i]);
   }
   return res;
 }
@@ -2670,10 +2670,10 @@ function mergeObjects(arr) {
 function pick(obj, arr) {
   var res = {};
   for (var i = 0, len = arr.length; i < len; i++) {
-    var parsedField = Object(pouchdb_selector_core__WEBPACK_IMPORTED_MODULE_3__["parseField"])(arr[i]);
-    var value = Object(pouchdb_selector_core__WEBPACK_IMPORTED_MODULE_3__["getFieldFromDoc"])(obj, parsedField);
+    var parsedField = Object(pouchdb_selector_core__WEBPACK_IMPORTED_MODULE_5__["parseField"])(arr[i]);
+    var value = Object(pouchdb_selector_core__WEBPACK_IMPORTED_MODULE_5__["getFieldFromDoc"])(obj, parsedField);
     if (typeof value !== 'undefined') {
-      Object(pouchdb_selector_core__WEBPACK_IMPORTED_MODULE_3__["setFieldInDoc"])(res, parsedField, value);
+      Object(pouchdb_selector_core__WEBPACK_IMPORTED_MODULE_5__["setFieldInDoc"])(res, parsedField, value);
     }
   }
   return res;
@@ -2779,7 +2779,7 @@ function createDeepMultiMapper(fields, emit) {
   return function (doc) {
     var toEmit = [];
     for (var i = 0, iLen = fields.length; i < iLen; i++) {
-      var parsedField = Object(pouchdb_selector_core__WEBPACK_IMPORTED_MODULE_3__["parseField"])(fields[i]);
+      var parsedField = Object(pouchdb_selector_core__WEBPACK_IMPORTED_MODULE_5__["parseField"])(fields[i]);
       var value = doc;
       for (var j = 0, jLen = parsedField.length; j < jLen; j++) {
         var key = parsedField[j];
@@ -2795,7 +2795,7 @@ function createDeepMultiMapper(fields, emit) {
 }
 
 function createDeepSingleMapper(field, emit) {
-  var parsedField = Object(pouchdb_selector_core__WEBPACK_IMPORTED_MODULE_3__["parseField"])(field);
+  var parsedField = Object(pouchdb_selector_core__WEBPACK_IMPORTED_MODULE_5__["parseField"])(field);
   return function (doc) {
     var value = doc;
     for (var i = 0, len = parsedField.length; i < len; i++) {
@@ -2881,12 +2881,16 @@ function ddocValidator(ddoc, viewName) {
   }
 }
 
-var abstractMapper = Object(pouchdb_abstract_mapreduce__WEBPACK_IMPORTED_MODULE_4__["default"])(
+var abstractMapper = Object(pouchdb_abstract_mapreduce__WEBPACK_IMPORTED_MODULE_2__["default"])(
   /* localDocName */ 'indexes',
   mapper,
   reducer,
   ddocValidator
 );
+
+function abstractMapper$1 (db) {
+  return db._customFindAbstractMapper || abstractMapper;
+}
 
 // normalize the "sort" value
 function massageSort(sort) {
@@ -2932,7 +2936,7 @@ function massageIndexDef(indexDef) {
 function getKeyFromDoc(doc, index) {
   var res = [];
   for (var i = 0; i < index.def.fields.length; i++) {
-    var field = Object(pouchdb_selector_core__WEBPACK_IMPORTED_MODULE_3__["getKey"])(index.def.fields[i]);
+    var field = Object(pouchdb_selector_core__WEBPACK_IMPORTED_MODULE_5__["getKey"])(index.def.fields[i]);
     res.push(doc[field]);
   }
   return res;
@@ -2959,7 +2963,7 @@ function filterInclusiveStart(rows, targetValue, index) {
       }
     }
     //ABS as we just looking for values that don't match
-    if (Math.abs(Object(pouchdb_collate__WEBPACK_IMPORTED_MODULE_5__["collate"])(docKey, targetValue)) > 0) {
+    if (Math.abs(Object(pouchdb_collate__WEBPACK_IMPORTED_MODULE_4__["collate"])(docKey, targetValue)) > 0) {
       // no need to filter any further; we're past the key
       break;
     }
@@ -2968,7 +2972,7 @@ function filterInclusiveStart(rows, targetValue, index) {
 }
 
 function reverseOptions(opts) {
-  var newOpts = Object(pouchdb_utils__WEBPACK_IMPORTED_MODULE_0__["clone"])(opts);
+  var newOpts = Object(pouchdb_utils__WEBPACK_IMPORTED_MODULE_6__["clone"])(opts);
   delete newOpts.startkey;
   delete newOpts.endkey;
   delete newOpts.inclusive_start;
@@ -2991,7 +2995,7 @@ function reverseOptions(opts) {
 
 function validateIndex(index) {
   var ascFields = index.fields.filter(function (field) {
-    return Object(pouchdb_selector_core__WEBPACK_IMPORTED_MODULE_3__["getValue"])(field) === 'asc';
+    return Object(pouchdb_selector_core__WEBPACK_IMPORTED_MODULE_5__["getValue"])(field) === 'asc';
   });
   if (ascFields.length !== 0 && ascFields.length !== index.fields.length) {
     throw new Error('unsupported mixed sorting');
@@ -3043,7 +3047,7 @@ function validateFindRequest(requestDef) {
 // need to use the longer of the two: ['a', 'b']
 function getUserFields(selector, sort) {
   var selectorFields = Object.keys(selector);
-  var sortFields = sort? sort.map(pouchdb_selector_core__WEBPACK_IMPORTED_MODULE_3__["getKey"]) : [];
+  var sortFields = sort? sort.map(pouchdb_selector_core__WEBPACK_IMPORTED_MODULE_5__["getKey"]) : [];
   var userFields;
   if (selectorFields.length >= sortFields.length) {
     userFields = selectorFields;
@@ -3072,13 +3076,13 @@ function getUserFields(selector, sort) {
 
   return {
     fields: userFields,
-    sortOrder: sort.map(pouchdb_selector_core__WEBPACK_IMPORTED_MODULE_3__["getKey"])
+    sortOrder: sort.map(pouchdb_selector_core__WEBPACK_IMPORTED_MODULE_5__["getKey"])
   };
 }
 
 function createIndex$1(db, requestDef) {
   requestDef = massageCreateIndexRequest(requestDef);
-  var originalIndexDef = Object(pouchdb_utils__WEBPACK_IMPORTED_MODULE_0__["clone"])(requestDef.index);
+  var originalIndexDef = Object(pouchdb_utils__WEBPACK_IMPORTED_MODULE_6__["clone"])(requestDef.index);
   requestDef.index = massageIndexDef(requestDef.index);
 
   validateIndex(requestDef.index);
@@ -3087,7 +3091,7 @@ function createIndex$1(db, requestDef) {
   // run if required
   var md5;
   function getMd5() {
-    return md5 || (md5 = Object(pouchdb_md5__WEBPACK_IMPORTED_MODULE_6__["stringMd5"])(JSON.stringify(requestDef)));
+    return md5 || (md5 = Object(pouchdb_md5__WEBPACK_IMPORTED_MODULE_3__["stringMd5"])(JSON.stringify(requestDef)));
   }
 
   var viewName = requestDef.name || ('idx-' + getMd5());
@@ -3126,7 +3130,7 @@ function createIndex$1(db, requestDef) {
 
   db.constructor.emit('debug', ['find', 'creating index', ddocId]);
 
-  return Object(pouchdb_utils__WEBPACK_IMPORTED_MODULE_0__["upsert"])(db, ddocId, updateDdoc).then(function () {
+  return Object(pouchdb_utils__WEBPACK_IMPORTED_MODULE_6__["upsert"])(db, ddocId, updateDdoc).then(function () {
     if (hasInvalidLanguage) {
       throw new Error('invalid language for ddoc with id "' +
       ddocId +
@@ -3137,7 +3141,7 @@ function createIndex$1(db, requestDef) {
     // TODO: abstract-pouchdb-mapreduce should support auto-updating
     // TODO: should also use update_after, but pouchdb/pouchdb#3415 blocks me
     var signature = ddocName + '/' + viewName;
-    return abstractMapper.query.call(db, signature, {
+    return abstractMapper$1(db).query.call(db, signature, {
       limit: 0,
       reduce: false
     }).then(function () {
@@ -3187,7 +3191,7 @@ function getIndexes$1(db) {
 
     // these are sorted by view name for some reason
     res.indexes.sort(function (left, right) {
-      return Object(pouchdb_selector_core__WEBPACK_IMPORTED_MODULE_3__["compare"])(left.name, right.name);
+      return Object(pouchdb_selector_core__WEBPACK_IMPORTED_MODULE_5__["compare"])(left.name, right.name);
     });
     res.total_rows = res.indexes.length;
     return res;
@@ -3203,7 +3207,7 @@ var COLLATE_HI = {"\uffff": {}};
 // couchdb second-lowest collation value
 
 function checkFieldInIndex(index, field) {
-  var indexFields = index.def.fields.map(pouchdb_selector_core__WEBPACK_IMPORTED_MODULE_3__["getKey"]);
+  var indexFields = index.def.fields.map(pouchdb_selector_core__WEBPACK_IMPORTED_MODULE_5__["getKey"]);
   for (var i = 0, len = indexFields.length; i < len; i++) {
     var indexField = indexFields[i];
     if (field === indexField) {
@@ -3220,7 +3224,7 @@ function checkFieldInIndex(index, field) {
 // so that's what this determines
 function userOperatorLosesPrecision(selector, field) {
   var matcher = selector[field];
-  var userOperator = Object(pouchdb_selector_core__WEBPACK_IMPORTED_MODULE_3__["getKey"])(matcher);
+  var userOperator = Object(pouchdb_selector_core__WEBPACK_IMPORTED_MODULE_5__["getKey"])(matcher);
 
   return userOperator !== '$eq';
 }
@@ -3228,7 +3232,7 @@ function userOperatorLosesPrecision(selector, field) {
 // sort the user fields by their position in the index,
 // if they're in the index
 function sortFieldsByIndex(userFields, index) {
-  var indexFields = index.def.fields.map(pouchdb_selector_core__WEBPACK_IMPORTED_MODULE_3__["getKey"]);
+  var indexFields = index.def.fields.map(pouchdb_selector_core__WEBPACK_IMPORTED_MODULE_5__["getKey"]);
 
   return userFields.slice().sort(function (a, b) {
     var aIdx = indexFields.indexOf(a);
@@ -3239,7 +3243,7 @@ function sortFieldsByIndex(userFields, index) {
     if (bIdx === -1) {
       bIdx = Number.MAX_VALUE;
     }
-    return Object(pouchdb_selector_core__WEBPACK_IMPORTED_MODULE_3__["compare"])(aIdx, bIdx);
+    return Object(pouchdb_selector_core__WEBPACK_IMPORTED_MODULE_5__["compare"])(aIdx, bIdx);
   });
 }
 
@@ -3324,23 +3328,15 @@ function checkFieldsLogicallySound(indexFields, selector) {
     return true;
   }
 
-  var hasLogicalOperator = Object.keys(matcher).some(function (matcherKey) {
-    return !(isNonLogicalMatcher(matcherKey));
-  });
-
-  if (!hasLogicalOperator) {
-    return false;
-  }
-
   var isInvalidNe = Object.keys(matcher).length === 1 &&
-    Object(pouchdb_selector_core__WEBPACK_IMPORTED_MODULE_3__["getKey"])(matcher) === '$ne';
+    Object(pouchdb_selector_core__WEBPACK_IMPORTED_MODULE_5__["getKey"])(matcher) === '$ne';
 
   return !isInvalidNe;
 }
 
 function checkIndexMatches(index, sortOrder, fields, selector) {
 
-  var indexFields = index.def.fields.map(pouchdb_selector_core__WEBPACK_IMPORTED_MODULE_3__["getKey"]);
+  var indexFields = index.def.fields.map(pouchdb_selector_core__WEBPACK_IMPORTED_MODULE_5__["getKey"]);
 
   var fieldsMatch = checkIndexFieldsMatch(indexFields, sortOrder, fields);
 
@@ -3395,7 +3391,7 @@ function findBestMatchingIndex(selector, userFields, sortOrder, indexes, useInde
   var userFieldsMap = arrayToObject(userFields);
 
   function scoreIndex(index) {
-    var indexFields = index.def.fields.map(pouchdb_selector_core__WEBPACK_IMPORTED_MODULE_3__["getKey"]);
+    var indexFields = index.def.fields.map(pouchdb_selector_core__WEBPACK_IMPORTED_MODULE_5__["getKey"]);
     var score = 0;
     for (var i = 0, len = indexFields.length; i < len; i++) {
       var indexField = indexFields[i];
@@ -3453,10 +3449,14 @@ function getSingleFieldQueryOptsFor(userOperator, userValue) {
         inclusive_start: false
       };
   }
+
+  return {
+    startkey: COLLATE_LO
+  };
 }
 
 function getSingleFieldCoreQueryPlan(selector, index) {
-  var field = Object(pouchdb_selector_core__WEBPACK_IMPORTED_MODULE_3__["getKey"])(index.def.fields[0]);
+  var field = Object(pouchdb_selector_core__WEBPACK_IMPORTED_MODULE_5__["getKey"])(index.def.fields[0]);
   //ignoring this because the test to exercise the branch is skipped at the moment
   /* istanbul ignore next */
   var matcher = selector[field] || {};
@@ -3470,7 +3470,6 @@ function getSingleFieldCoreQueryPlan(selector, index) {
 
     if (isNonLogicalMatcher(userOperator)) {
       inMemoryFields.push(field);
-      return;
     }
 
     var userValue = matcher[userOperator];
@@ -3520,7 +3519,7 @@ function getMultiFieldCoreQueryPlan(userOperator, userValue) {
 
 function getMultiFieldQueryOpts(selector, index) {
 
-  var indexFields = index.def.fields.map(pouchdb_selector_core__WEBPACK_IMPORTED_MODULE_3__["getKey"]);
+  var indexFields = index.def.fields.map(pouchdb_selector_core__WEBPACK_IMPORTED_MODULE_5__["getKey"]);
 
   var inMemoryFields = [];
   var startkey = [];
@@ -3665,7 +3664,7 @@ function indexToSignature(index) {
 }
 
 function doAllDocs(db, originalOpts) {
-  var opts = Object(pouchdb_utils__WEBPACK_IMPORTED_MODULE_0__["clone"])(originalOpts);
+  var opts = Object(pouchdb_utils__WEBPACK_IMPORTED_MODULE_6__["clone"])(originalOpts);
 
   // CouchDB responds in weird ways when you provide a non-string to _id;
   // we mimic the behavior for consistency. See issue66 tests for details.
@@ -3701,7 +3700,7 @@ function doAllDocs(db, originalOpts) {
 
 function find$1(db, requestDef, explain) {
   if (requestDef.selector) {
-    requestDef.selector = Object(pouchdb_selector_core__WEBPACK_IMPORTED_MODULE_3__["massageSelector"])(requestDef.selector);
+    requestDef.selector = Object(pouchdb_selector_core__WEBPACK_IMPORTED_MODULE_5__["massageSelector"])(requestDef.selector);
   }
 
   if (requestDef.sort) {
@@ -3724,13 +3723,13 @@ function find$1(db, requestDef, explain) {
 
     validateSort(requestDef, indexToUse);
 
-    var opts = Object(pouchdb_utils__WEBPACK_IMPORTED_MODULE_0__["assign"])({
+    var opts = Object(pouchdb_utils__WEBPACK_IMPORTED_MODULE_6__["assign"])({
       include_docs: true,
       reduce: false
     }, queryPlan.queryOpts);
 
     if ('startkey' in opts && 'endkey' in opts &&
-        Object(pouchdb_collate__WEBPACK_IMPORTED_MODULE_5__["collate"])(opts.startkey, opts.endkey) > 0) {
+        Object(pouchdb_collate__WEBPACK_IMPORTED_MODULE_4__["collate"])(opts.startkey, opts.endkey) > 0) {
       // can't possibly return any results, startkey > endkey
       /* istanbul ignore next */
       return {docs: []};
@@ -3738,7 +3737,7 @@ function find$1(db, requestDef, explain) {
 
     var isDescending = requestDef.sort &&
       typeof requestDef.sort[0] !== 'string' &&
-      Object(pouchdb_selector_core__WEBPACK_IMPORTED_MODULE_3__["getValue"])(requestDef.sort[0]) === 'desc';
+      Object(pouchdb_selector_core__WEBPACK_IMPORTED_MODULE_5__["getValue"])(requestDef.sort[0]) === 'desc';
 
     if (isDescending) {
       // either all descending or all ascending
@@ -3766,7 +3765,7 @@ function find$1(db, requestDef, explain) {
         return doAllDocs(db, opts);
       } else {
         var signature = indexToSignature(indexToUse);
-        return abstractMapper.query.call(db, signature, opts);
+        return abstractMapper$1(db).query.call(db, signature, opts);
       }
     }).then(function (res) {
       if (opts.inclusive_start === false) {
@@ -3777,7 +3776,7 @@ function find$1(db, requestDef, explain) {
 
       if (queryPlan.inMemoryFields.length) {
         // need to filter some stuff in-memory
-        res.rows = Object(pouchdb_selector_core__WEBPACK_IMPORTED_MODULE_3__["filterInMemoryFields"])(res.rows, requestDef, queryPlan.inMemoryFields);
+        res.rows = Object(pouchdb_selector_core__WEBPACK_IMPORTED_MODULE_5__["filterInMemoryFields"])(res.rows, requestDef, queryPlan.inMemoryFields);
       }
 
       var resp = {
@@ -3850,8 +3849,8 @@ function deleteIndex$1(db, index) {
     return doc;
   }
 
-  return Object(pouchdb_utils__WEBPACK_IMPORTED_MODULE_0__["upsert"])(db, docId, deltaFun).then(function () {
-    return abstractMapper.viewCleanup.apply(db);
+  return Object(pouchdb_utils__WEBPACK_IMPORTED_MODULE_6__["upsert"])(db, docId, deltaFun).then(function () {
+    return abstractMapper$1(db).viewCleanup.apply(db);
   }).then(function () {
     return {ok: true};
   });
@@ -3864,18 +3863,18 @@ var getIndexesAsCallback = callbackify(getIndexes$1);
 var deleteIndexAsCallback = callbackify(deleteIndex$1);
 
 var plugin = {};
-plugin.createIndex = Object(pouchdb_utils__WEBPACK_IMPORTED_MODULE_0__["toPromise"])(function (requestDef, callback) {
+plugin.createIndex = Object(pouchdb_utils__WEBPACK_IMPORTED_MODULE_6__["toPromise"])(function (requestDef, callback) {
 
   if (typeof requestDef !== 'object') {
     return callback(new Error('you must provide an index to create'));
   }
 
-  var createIndex$$1 = Object(pouchdb_utils__WEBPACK_IMPORTED_MODULE_0__["isRemote"])(this) ?
+  var createIndex$$1 = Object(pouchdb_utils__WEBPACK_IMPORTED_MODULE_6__["isRemote"])(this) ?
     createIndex : createIndexAsCallback;
   createIndex$$1(this, requestDef, callback);
 });
 
-plugin.find = Object(pouchdb_utils__WEBPACK_IMPORTED_MODULE_0__["toPromise"])(function (requestDef, callback) {
+plugin.find = Object(pouchdb_utils__WEBPACK_IMPORTED_MODULE_6__["toPromise"])(function (requestDef, callback) {
 
   if (typeof callback === 'undefined') {
     callback = requestDef;
@@ -3886,11 +3885,11 @@ plugin.find = Object(pouchdb_utils__WEBPACK_IMPORTED_MODULE_0__["toPromise"])(fu
     return callback(new Error('you must provide search parameters to find()'));
   }
 
-  var find$$1 = Object(pouchdb_utils__WEBPACK_IMPORTED_MODULE_0__["isRemote"])(this) ? find : findAsCallback;
+  var find$$1 = Object(pouchdb_utils__WEBPACK_IMPORTED_MODULE_6__["isRemote"])(this) ? find : findAsCallback;
   find$$1(this, requestDef, callback);
 });
 
-plugin.explain = Object(pouchdb_utils__WEBPACK_IMPORTED_MODULE_0__["toPromise"])(function (requestDef, callback) {
+plugin.explain = Object(pouchdb_utils__WEBPACK_IMPORTED_MODULE_6__["toPromise"])(function (requestDef, callback) {
 
   if (typeof callback === 'undefined') {
     callback = requestDef;
@@ -3901,23 +3900,23 @@ plugin.explain = Object(pouchdb_utils__WEBPACK_IMPORTED_MODULE_0__["toPromise"])
     return callback(new Error('you must provide search parameters to explain()'));
   }
 
-  var find$$1 = Object(pouchdb_utils__WEBPACK_IMPORTED_MODULE_0__["isRemote"])(this) ? explain : explainAsCallback;
+  var find$$1 = Object(pouchdb_utils__WEBPACK_IMPORTED_MODULE_6__["isRemote"])(this) ? explain : explainAsCallback;
   find$$1(this, requestDef, callback);
 });
 
-plugin.getIndexes = Object(pouchdb_utils__WEBPACK_IMPORTED_MODULE_0__["toPromise"])(function (callback) {
+plugin.getIndexes = Object(pouchdb_utils__WEBPACK_IMPORTED_MODULE_6__["toPromise"])(function (callback) {
 
-  var getIndexes$$1 = Object(pouchdb_utils__WEBPACK_IMPORTED_MODULE_0__["isRemote"])(this) ? getIndexes : getIndexesAsCallback;
+  var getIndexes$$1 = Object(pouchdb_utils__WEBPACK_IMPORTED_MODULE_6__["isRemote"])(this) ? getIndexes : getIndexesAsCallback;
   getIndexes$$1(this, callback);
 });
 
-plugin.deleteIndex = Object(pouchdb_utils__WEBPACK_IMPORTED_MODULE_0__["toPromise"])(function (indexDef, callback) {
+plugin.deleteIndex = Object(pouchdb_utils__WEBPACK_IMPORTED_MODULE_6__["toPromise"])(function (indexDef, callback) {
 
   if (typeof indexDef !== 'object') {
     return callback(new Error('you must provide an index to delete'));
   }
 
-  var deleteIndex$$1 = Object(pouchdb_utils__WEBPACK_IMPORTED_MODULE_0__["isRemote"])(this) ?
+  var deleteIndex$$1 = Object(pouchdb_utils__WEBPACK_IMPORTED_MODULE_6__["isRemote"])(this) ?
     deleteIndex : deleteIndexAsCallback;
   deleteIndex$$1(this, indexDef, callback);
 });
@@ -3945,12 +3944,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "QueryParseError", function() { return QueryParseError; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NotFoundError", function() { return NotFoundError; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BuiltInError", function() { return BuiltInError; });
-/* harmony import */ var inherits__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! inherits */ "./node_modules/inherits/inherits_browser.js");
-/* harmony import */ var inherits__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(inherits__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var pouchdb_collections__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! pouchdb-collections */ "./node_modules/pouchdb-collections/lib/index.es.js");
-/* harmony import */ var argsarray__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! argsarray */ "./node_modules/argsarray/index.js");
-/* harmony import */ var argsarray__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(argsarray__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var pouchdb_utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! pouchdb-utils */ "./node_modules/pouchdb-utils/lib/index-browser.es.js");
+/* harmony import */ var pouchdb_collections__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! pouchdb-collections */ "./node_modules/pouchdb-collections/lib/index.es.js");
+/* harmony import */ var argsarray__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! argsarray */ "./node_modules/argsarray/index.js");
+/* harmony import */ var argsarray__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(argsarray__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var pouchdb_utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! pouchdb-utils */ "./node_modules/pouchdb-utils/lib/index-browser.es.js");
+/* harmony import */ var inherits__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! inherits */ "./node_modules/inherits/inherits_browser.js");
+/* harmony import */ var inherits__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(inherits__WEBPACK_IMPORTED_MODULE_3__);
 
 
 
@@ -3966,7 +3965,7 @@ function QueryParseError(message) {
   } catch (e) {}
 }
 
-inherits__WEBPACK_IMPORTED_MODULE_0___default()(QueryParseError, Error);
+inherits__WEBPACK_IMPORTED_MODULE_3___default()(QueryParseError, Error);
 
 function NotFoundError(message) {
   this.status = 404;
@@ -3978,7 +3977,7 @@ function NotFoundError(message) {
   } catch (e) {}
 }
 
-inherits__WEBPACK_IMPORTED_MODULE_0___default()(NotFoundError, Error);
+inherits__WEBPACK_IMPORTED_MODULE_3___default()(NotFoundError, Error);
 
 function BuiltInError(message) {
   this.status = 500;
@@ -3990,16 +3989,16 @@ function BuiltInError(message) {
   } catch (e) {}
 }
 
-inherits__WEBPACK_IMPORTED_MODULE_0___default()(BuiltInError, Error);
+inherits__WEBPACK_IMPORTED_MODULE_3___default()(BuiltInError, Error);
 
 function promisedCallback(promise, callback) {
   if (callback) {
     promise.then(function (res) {
-      Object(pouchdb_utils__WEBPACK_IMPORTED_MODULE_3__["nextTick"])(function () {
+      Object(pouchdb_utils__WEBPACK_IMPORTED_MODULE_2__["nextTick"])(function () {
         callback(null, res);
       });
     }, function (reason) {
-      Object(pouchdb_utils__WEBPACK_IMPORTED_MODULE_3__["nextTick"])(function () {
+      Object(pouchdb_utils__WEBPACK_IMPORTED_MODULE_2__["nextTick"])(function () {
         callback(reason);
       });
     });
@@ -4008,7 +4007,7 @@ function promisedCallback(promise, callback) {
 }
 
 function callbackify(fun) {
-  return argsarray__WEBPACK_IMPORTED_MODULE_2___default()(function (args) {
+  return argsarray__WEBPACK_IMPORTED_MODULE_1___default()(function (args) {
     var cb = args.pop();
     var promise = fun.apply(this, args);
     if (typeof cb === 'function') {
@@ -4044,7 +4043,7 @@ function sequentialize(queue, promiseFactory) {
 // uniq an array of strings, order not guaranteed
 // similar to underscore/lodash _.uniq
 function uniq(arr) {
-  var theSet = new pouchdb_collections__WEBPACK_IMPORTED_MODULE_1__["Set"](arr);
+  var theSet = new pouchdb_collections__WEBPACK_IMPORTED_MODULE_0__["Set"](arr);
   var result = new Array(theSet.size);
   var index = -1;
   theSet.forEach(function (value) {
@@ -4383,6 +4382,37 @@ function mergeEq(value, fieldMatchers) {
   fieldMatchers.$eq = value;
 }
 
+//#7458: execute function mergeAndedSelectors on nested $and
+function mergeAndedSelectorsNested(obj) {
+    for (var prop in obj) {
+        if (Array.isArray(obj)) {
+            for (var i in obj) {
+                if (obj[i]['$and']) {
+                    obj[i] = mergeAndedSelectors(obj[i]['$and']);
+                }
+            }
+        }
+        var value = obj[prop];
+        if (typeof value === 'object') {
+            mergeAndedSelectorsNested(value); // <- recursive call
+        }
+    }
+    return obj;
+}
+
+//#7458: determine id $and is present in selector (at any level)
+function isAndInSelector(obj, isAnd) {
+    for (var prop in obj) {
+        if (prop === '$and') {
+            isAnd = true;
+        }
+        var value = obj[prop];
+        if (typeof value === 'object') {
+            isAnd = isAndInSelector(value, isAnd); // <- recursive call
+        }
+    }
+    return isAnd;
+}
 
 //
 // normalize the selector
@@ -4390,10 +4420,14 @@ function mergeEq(value, fieldMatchers) {
 function massageSelector(input) {
   var result = Object(pouchdb_utils__WEBPACK_IMPORTED_MODULE_0__["clone"])(input);
   var wasAnded = false;
-  if ('$and' in result) {
-    result = mergeAndedSelectors(result['$and']);
-    wasAnded = true;
-  }
+    //#7458: if $and is present in selector (at any level) merge nested $and
+    if (isAndInSelector(result, false)) {
+        result = mergeAndedSelectorsNested(result);
+        if ('$and' in result) {
+            result = mergeAndedSelectors(result['$and']);
+        }
+        wasAnded = true;
+    }
 
   ['$or', '$nor'].forEach(function (orOrNor) {
     if (orOrNor in result) {
@@ -4504,10 +4538,16 @@ function matchSelector(matcher, doc, parsedField, docFieldValue) {
     return true;
   }
 
-  return Object.keys(matcher).every(function (userOperator) {
-    var userValue = matcher[userOperator];
-    return match(userOperator, doc, userValue, parsedField, docFieldValue);
-  });
+  // is matcher an object, if so continue recursion
+  if (typeof matcher === 'object') {
+    return Object.keys(matcher).every(function (userOperator) {
+      var userValue = matcher[userOperator];
+      return match(userOperator, doc, userValue, parsedField, docFieldValue);
+    });
+  }
+
+  // no more depth, No need to recurse further
+  return matcher === docFieldValue;
 }
 
 function matchCominationalSelector(field, matcher, doc) {
@@ -4757,7 +4797,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "assign", function() { return assign$1; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "bulkGetShim", function() { return bulkGet; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "changesHandler", function() { return Changes; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "clone", function() { return clone$1; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "clone", function() { return clone; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "defaultBackOff", function() { return defaultBackOff; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "explainError", function() { return explainError; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "filterChange", function() { return filterChange; });
@@ -4781,19 +4821,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var argsarray__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! argsarray */ "./node_modules/argsarray/index.js");
 /* harmony import */ var argsarray__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(argsarray__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var pouchdb_collections__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! pouchdb-collections */ "./node_modules/pouchdb-collections/lib/index.es.js");
-/* harmony import */ var immediate__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! immediate */ "./node_modules/immediate/lib/browser.js");
-/* harmony import */ var immediate__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(immediate__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony reexport (default from non-harmony) */ __webpack_require__.d(__webpack_exports__, "nextTick", function() { return immediate__WEBPACK_IMPORTED_MODULE_2___default.a; });
-/* harmony import */ var events__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! events */ "./node_modules/events/events.js");
-/* harmony import */ var events__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(events__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var inherits__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! inherits */ "./node_modules/inherits/inherits_browser.js");
-/* harmony import */ var inherits__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(inherits__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var pouchdb_errors__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! pouchdb-errors */ "./node_modules/pouchdb-errors/lib/index.es.js");
+/* harmony import */ var inherits__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! inherits */ "./node_modules/inherits/inherits_browser.js");
+/* harmony import */ var inherits__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(inherits__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var immediate__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! immediate */ "./node_modules/immediate/lib/browser.js");
+/* harmony import */ var immediate__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(immediate__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony reexport (default from non-harmony) */ __webpack_require__.d(__webpack_exports__, "nextTick", function() { return immediate__WEBPACK_IMPORTED_MODULE_3___default.a; });
+/* harmony import */ var pouchdb_errors__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! pouchdb-errors */ "./node_modules/pouchdb-errors/lib/index.es.js");
+/* harmony import */ var events__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! events */ "./node_modules/events/events.js");
+/* harmony import */ var events__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(events__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var uuid__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! uuid */ "./node_modules/uuid/index.js");
 /* harmony import */ var uuid__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(uuid__WEBPACK_IMPORTED_MODULE_6__);
 /* harmony import */ var pouchdb_md5__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! pouchdb-md5 */ "./node_modules/pouchdb-md5/lib/index-browser.es.js");
-/* harmony import */ var pouchdb_utils__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! pouchdb-utils */ "./node_modules/pouchdb-utils/lib/index-browser.es.js");
-
 
 
 
@@ -4852,7 +4890,7 @@ function isPlainObject(value) {
     Ctor instanceof Ctor && funcToString.call(Ctor) == objectCtorString);
 }
 
-function clone$1(object) {
+function clone(object) {
   var newObject;
   var i;
   var len;
@@ -4864,7 +4902,7 @@ function clone$1(object) {
   if (Array.isArray(object)) {
     newObject = [];
     for (i = 0, len = object.length; i < len; i++) {
-      newObject[i] = clone$1(object[i]);
+      newObject[i] = clone(object[i]);
     }
     return newObject;
   }
@@ -4887,7 +4925,7 @@ function clone$1(object) {
   for (i in object) {
     /* istanbul ignore else */
     if (Object.prototype.hasOwnProperty.call(object, i)) {
-      var value = clone$1(object[i]);
+      var value = clone(object[i]);
       if (typeof value !== 'undefined') {
         newObject[i] = value;
       }
@@ -4914,7 +4952,7 @@ function toPromise(func) {
   //create the function we will be returning
   return argsarray__WEBPACK_IMPORTED_MODULE_0___default()(function (args) {
     // Clone arguments
-    args = clone$1(args);
+    args = clone(args);
     var self = this;
     // if the last argument is a function, assume its a callback
     var usedCB = (typeof args[args.length - 1] === 'function') ? args.pop() : false;
@@ -5154,7 +5192,7 @@ function hasLocalStorage() {
 
 // Custom nextTick() shim for browsers. In node, this will just be process.nextTick(). We
 
-inherits__WEBPACK_IMPORTED_MODULE_4___default()(Changes, events__WEBPACK_IMPORTED_MODULE_3__["EventEmitter"]);
+inherits__WEBPACK_IMPORTED_MODULE_2___default()(Changes, events__WEBPACK_IMPORTED_MODULE_5__["EventEmitter"]);
 
 /* istanbul ignore next */
 function attachBrowserEvents(self) {
@@ -5166,7 +5204,7 @@ function attachBrowserEvents(self) {
 }
 
 function Changes() {
-  events__WEBPACK_IMPORTED_MODULE_3__["EventEmitter"].call(this);
+  events__WEBPACK_IMPORTED_MODULE_5__["EventEmitter"].call(this);
   this._listeners = {};
 
   attachBrowserEvents(this);
@@ -5205,7 +5243,7 @@ Changes.prototype.addListener = function (dbName, id, db, opts) {
       }
     }).on('complete', function () {
       if (inprogress === 'waiting') {
-        immediate__WEBPACK_IMPORTED_MODULE_2___default()(eventFunction);
+        immediate__WEBPACK_IMPORTED_MODULE_3___default()(eventFunction);
       }
       inprogress = false;
     }).on('error', onError);
@@ -5219,7 +5257,7 @@ Changes.prototype.removeListener = function (dbName, id) {
   if (!(id in this._listeners)) {
     return;
   }
-  events__WEBPACK_IMPORTED_MODULE_3__["EventEmitter"].prototype.removeListener.call(this, dbName,
+  events__WEBPACK_IMPORTED_MODULE_5__["EventEmitter"].prototype.removeListener.call(this, dbName,
     this._listeners[id]);
   delete this._listeners[id];
 };
@@ -5315,7 +5353,7 @@ function tryFilter(filter, doc, req) {
     return !filter(doc, req);
   } catch (err) {
     var msg = 'Filter function threw: ' + err.toString();
-    return Object(pouchdb_errors__WEBPACK_IMPORTED_MODULE_5__["createError"])(pouchdb_errors__WEBPACK_IMPORTED_MODULE_5__["BAD_REQUEST"], msg);
+    return Object(pouchdb_errors__WEBPACK_IMPORTED_MODULE_4__["createError"])(pouchdb_errors__WEBPACK_IMPORTED_MODULE_4__["BAD_REQUEST"], msg);
   }
 }
 
@@ -5400,11 +5438,11 @@ var res$1 = res;
 function invalidIdError(id) {
   var err;
   if (!id) {
-    err = Object(pouchdb_errors__WEBPACK_IMPORTED_MODULE_5__["createError"])(pouchdb_errors__WEBPACK_IMPORTED_MODULE_5__["MISSING_ID"]);
+    err = Object(pouchdb_errors__WEBPACK_IMPORTED_MODULE_4__["createError"])(pouchdb_errors__WEBPACK_IMPORTED_MODULE_4__["MISSING_ID"]);
   } else if (typeof id !== 'string') {
-    err = Object(pouchdb_errors__WEBPACK_IMPORTED_MODULE_5__["createError"])(pouchdb_errors__WEBPACK_IMPORTED_MODULE_5__["INVALID_ID"]);
+    err = Object(pouchdb_errors__WEBPACK_IMPORTED_MODULE_4__["createError"])(pouchdb_errors__WEBPACK_IMPORTED_MODULE_4__["INVALID_ID"]);
   } else if (/^_/.test(id) && !(/^_(design|local)/).test(id)) {
-    err = Object(pouchdb_errors__WEBPACK_IMPORTED_MODULE_5__["createError"])(pouchdb_errors__WEBPACK_IMPORTED_MODULE_5__["RESERVED_ID"]);
+    err = Object(pouchdb_errors__WEBPACK_IMPORTED_MODULE_4__["createError"])(pouchdb_errors__WEBPACK_IMPORTED_MODULE_4__["RESERVED_ID"]);
   }
   if (err) {
     throw err;
@@ -5430,7 +5468,7 @@ function isRemote(db) {
 
 function listenerCount(ee, type) {
   return 'listenerCount' in ee ? ee.listenerCount(type) :
-                                 events__WEBPACK_IMPORTED_MODULE_3__["EventEmitter"].listenerCount(ee, type);
+                                 events__WEBPACK_IMPORTED_MODULE_5__["EventEmitter"].listenerCount(ee, type);
 }
 
 function parseDesignDocFunctionName(s) {
@@ -5552,7 +5590,7 @@ function tryAndPut(db, doc, diffFun) {
 }
 
 function rev(doc, deterministic_revs) {
-  var clonedDoc = Object(pouchdb_utils__WEBPACK_IMPORTED_MODULE_8__["clone"])(doc);
+  var clonedDoc = clone(doc);
   if (!deterministic_revs) {
     return uuid__WEBPACK_IMPORTED_MODULE_6___default.a.v4().replace(/-/g, '').toLowerCase();
   }
@@ -5577,20 +5615,20 @@ var uuid = uuid__WEBPACK_IMPORTED_MODULE_6___default.a.v4;
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var argsarray__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! argsarray */ "./node_modules/argsarray/index.js");
-/* harmony import */ var argsarray__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(argsarray__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var immediate__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! immediate */ "./node_modules/immediate/lib/browser.js");
-/* harmony import */ var immediate__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(immediate__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var events__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! events */ "./node_modules/events/events.js");
-/* harmony import */ var events__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(events__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var inherits__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! inherits */ "./node_modules/inherits/inherits_browser.js");
-/* harmony import */ var inherits__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(inherits__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var spark_md5__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! spark-md5 */ "./node_modules/spark-md5/spark-md5.js");
-/* harmony import */ var spark_md5__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(spark_md5__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var uuid__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! uuid */ "./node_modules/uuid/index.js");
-/* harmony import */ var uuid__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(uuid__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var vuvuzela__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vuvuzela */ "./node_modules/vuvuzela/index.js");
-/* harmony import */ var vuvuzela__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(vuvuzela__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var immediate__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! immediate */ "./node_modules/immediate/lib/browser.js");
+/* harmony import */ var immediate__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(immediate__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var uuid__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! uuid */ "./node_modules/uuid/index.js");
+/* harmony import */ var uuid__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(uuid__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var spark_md5__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! spark-md5 */ "./node_modules/spark-md5/spark-md5.js");
+/* harmony import */ var spark_md5__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(spark_md5__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var vuvuzela__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vuvuzela */ "./node_modules/vuvuzela/index.js");
+/* harmony import */ var vuvuzela__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(vuvuzela__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var argsarray__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! argsarray */ "./node_modules/argsarray/index.js");
+/* harmony import */ var argsarray__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(argsarray__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var inherits__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! inherits */ "./node_modules/inherits/inherits_browser.js");
+/* harmony import */ var inherits__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(inherits__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var events__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! events */ "./node_modules/events/events.js");
+/* harmony import */ var events__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(events__WEBPACK_IMPORTED_MODULE_6__);
 
 
 
@@ -5598,199 +5636,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-function isBinaryObject(object) {
-  return (typeof ArrayBuffer !== 'undefined' && object instanceof ArrayBuffer) ||
-    (typeof Blob !== 'undefined' && object instanceof Blob);
-}
-
-function cloneArrayBuffer(buff) {
-  if (typeof buff.slice === 'function') {
-    return buff.slice(0);
-  }
-  // IE10-11 slice() polyfill
-  var target = new ArrayBuffer(buff.byteLength);
-  var targetArray = new Uint8Array(target);
-  var sourceArray = new Uint8Array(buff);
-  targetArray.set(sourceArray);
-  return target;
-}
-
-function cloneBinaryObject(object) {
-  if (object instanceof ArrayBuffer) {
-    return cloneArrayBuffer(object);
-  }
-  var size = object.size;
-  var type = object.type;
-  // Blob
-  if (typeof object.slice === 'function') {
-    return object.slice(0, size, type);
-  }
-  // PhantomJS slice() replacement
-  return object.webkitSlice(0, size, type);
-}
-
-// most of this is borrowed from lodash.isPlainObject:
-// https://github.com/fis-components/lodash.isplainobject/
-// blob/29c358140a74f252aeb08c9eb28bef86f2217d4a/index.js
-
-var funcToString = Function.prototype.toString;
-var objectCtorString = funcToString.call(Object);
-
-function isPlainObject(value) {
-  var proto = Object.getPrototypeOf(value);
-  /* istanbul ignore if */
-  if (proto === null) { // not sure when this happens, but I guess it can
-    return true;
-  }
-  var Ctor = proto.constructor;
-  return (typeof Ctor == 'function' &&
-    Ctor instanceof Ctor && funcToString.call(Ctor) == objectCtorString);
-}
-
-function clone(object) {
-  var newObject;
-  var i;
-  var len;
-
-  if (!object || typeof object !== 'object') {
-    return object;
-  }
-
-  if (Array.isArray(object)) {
-    newObject = [];
-    for (i = 0, len = object.length; i < len; i++) {
-      newObject[i] = clone(object[i]);
-    }
-    return newObject;
-  }
-
-  // special case: to avoid inconsistencies between IndexedDB
-  // and other backends, we automatically stringify Dates
-  if (object instanceof Date) {
-    return object.toISOString();
-  }
-
-  if (isBinaryObject(object)) {
-    return cloneBinaryObject(object);
-  }
-
-  if (!isPlainObject(object)) {
-    return object; // don't clone objects like Workers
-  }
-
-  newObject = {};
-  for (i in object) {
-    /* istanbul ignore else */
-    if (Object.prototype.hasOwnProperty.call(object, i)) {
-      var value = clone(object[i]);
-      if (typeof value !== 'undefined') {
-        newObject[i] = value;
-      }
-    }
-  }
-  return newObject;
-}
-
-function once(fun) {
-  var called = false;
-  return argsarray__WEBPACK_IMPORTED_MODULE_0___default()(function (args) {
-    /* istanbul ignore if */
-    if (called) {
-      // this is a smoke test and should never actually happen
-      throw new Error('once called more than once');
-    } else {
-      called = true;
-      fun.apply(this, args);
-    }
-  });
-}
-
-function toPromise(func) {
-  //create the function we will be returning
-  return argsarray__WEBPACK_IMPORTED_MODULE_0___default()(function (args) {
-    // Clone arguments
-    args = clone(args);
-    var self = this;
-    // if the last argument is a function, assume its a callback
-    var usedCB = (typeof args[args.length - 1] === 'function') ? args.pop() : false;
-    var promise = new Promise(function (fulfill, reject) {
-      var resp;
-      try {
-        var callback = once(function (err, mesg) {
-          if (err) {
-            reject(err);
-          } else {
-            fulfill(mesg);
-          }
-        });
-        // create a callback for this invocation
-        // apply the function in the orig context
-        args.push(callback);
-        resp = func.apply(self, args);
-        if (resp && typeof resp.then === 'function') {
-          fulfill(resp);
-        }
-      } catch (e) {
-        reject(e);
-      }
-    });
-    // if there is a callback, call it back
-    if (usedCB) {
-      promise.then(function (result) {
-        usedCB(null, result);
-      }, usedCB);
-    }
-    return promise;
-  });
-}
-
-function logApiCall(self, name, args) {
-  /* istanbul ignore if */
-  if (self.constructor.listeners('debug').length) {
-    var logArgs = ['api', self.name, name];
-    for (var i = 0; i < args.length - 1; i++) {
-      logArgs.push(args[i]);
-    }
-    self.constructor.emit('debug', logArgs);
-
-    // override the callback itself to log the response
-    var origCallback = args[args.length - 1];
-    args[args.length - 1] = function (err, res) {
-      var responseArgs = ['api', self.name, name];
-      responseArgs = responseArgs.concat(
-        err ? ['error', err] : ['success', res]
-      );
-      self.constructor.emit('debug', responseArgs);
-      origCallback(err, res);
-    };
-  }
-}
-
-function adapterFun(name, callback) {
-  return toPromise(argsarray__WEBPACK_IMPORTED_MODULE_0___default()(function (args) {
-    if (this._closed) {
-      return Promise.reject(new Error('database is closed'));
-    }
-    if (this._destroyed) {
-      return Promise.reject(new Error('database is destroyed'));
-    }
-    var self = this;
-    logApiCall(self, name, args);
-    if (!this.taskqueue.isReady) {
-      return new Promise(function (fulfill, reject) {
-        self.taskqueue.addTask(function (failed) {
-          if (failed) {
-            reject(failed);
-          } else {
-            fulfill(self[name].apply(self, args));
-          }
-        });
-      });
-    }
-    return callback.apply(this, args);
-  }));
-}
 
 function mangle(key) {
   return '$' + key;
@@ -5887,6 +5732,199 @@ var ExportedMap;
     ExportedSet = Set$1;
     ExportedMap = Map$1;
   }
+}
+
+function isBinaryObject(object) {
+  return (typeof ArrayBuffer !== 'undefined' && object instanceof ArrayBuffer) ||
+    (typeof Blob !== 'undefined' && object instanceof Blob);
+}
+
+function cloneArrayBuffer(buff) {
+  if (typeof buff.slice === 'function') {
+    return buff.slice(0);
+  }
+  // IE10-11 slice() polyfill
+  var target = new ArrayBuffer(buff.byteLength);
+  var targetArray = new Uint8Array(target);
+  var sourceArray = new Uint8Array(buff);
+  targetArray.set(sourceArray);
+  return target;
+}
+
+function cloneBinaryObject(object) {
+  if (object instanceof ArrayBuffer) {
+    return cloneArrayBuffer(object);
+  }
+  var size = object.size;
+  var type = object.type;
+  // Blob
+  if (typeof object.slice === 'function') {
+    return object.slice(0, size, type);
+  }
+  // PhantomJS slice() replacement
+  return object.webkitSlice(0, size, type);
+}
+
+// most of this is borrowed from lodash.isPlainObject:
+// https://github.com/fis-components/lodash.isplainobject/
+// blob/29c358140a74f252aeb08c9eb28bef86f2217d4a/index.js
+
+var funcToString = Function.prototype.toString;
+var objectCtorString = funcToString.call(Object);
+
+function isPlainObject(value) {
+  var proto = Object.getPrototypeOf(value);
+  /* istanbul ignore if */
+  if (proto === null) { // not sure when this happens, but I guess it can
+    return true;
+  }
+  var Ctor = proto.constructor;
+  return (typeof Ctor == 'function' &&
+    Ctor instanceof Ctor && funcToString.call(Ctor) == objectCtorString);
+}
+
+function clone(object) {
+  var newObject;
+  var i;
+  var len;
+
+  if (!object || typeof object !== 'object') {
+    return object;
+  }
+
+  if (Array.isArray(object)) {
+    newObject = [];
+    for (i = 0, len = object.length; i < len; i++) {
+      newObject[i] = clone(object[i]);
+    }
+    return newObject;
+  }
+
+  // special case: to avoid inconsistencies between IndexedDB
+  // and other backends, we automatically stringify Dates
+  if (object instanceof Date) {
+    return object.toISOString();
+  }
+
+  if (isBinaryObject(object)) {
+    return cloneBinaryObject(object);
+  }
+
+  if (!isPlainObject(object)) {
+    return object; // don't clone objects like Workers
+  }
+
+  newObject = {};
+  for (i in object) {
+    /* istanbul ignore else */
+    if (Object.prototype.hasOwnProperty.call(object, i)) {
+      var value = clone(object[i]);
+      if (typeof value !== 'undefined') {
+        newObject[i] = value;
+      }
+    }
+  }
+  return newObject;
+}
+
+function once(fun) {
+  var called = false;
+  return argsarray__WEBPACK_IMPORTED_MODULE_4___default()(function (args) {
+    /* istanbul ignore if */
+    if (called) {
+      // this is a smoke test and should never actually happen
+      throw new Error('once called more than once');
+    } else {
+      called = true;
+      fun.apply(this, args);
+    }
+  });
+}
+
+function toPromise(func) {
+  //create the function we will be returning
+  return argsarray__WEBPACK_IMPORTED_MODULE_4___default()(function (args) {
+    // Clone arguments
+    args = clone(args);
+    var self = this;
+    // if the last argument is a function, assume its a callback
+    var usedCB = (typeof args[args.length - 1] === 'function') ? args.pop() : false;
+    var promise = new Promise(function (fulfill, reject) {
+      var resp;
+      try {
+        var callback = once(function (err, mesg) {
+          if (err) {
+            reject(err);
+          } else {
+            fulfill(mesg);
+          }
+        });
+        // create a callback for this invocation
+        // apply the function in the orig context
+        args.push(callback);
+        resp = func.apply(self, args);
+        if (resp && typeof resp.then === 'function') {
+          fulfill(resp);
+        }
+      } catch (e) {
+        reject(e);
+      }
+    });
+    // if there is a callback, call it back
+    if (usedCB) {
+      promise.then(function (result) {
+        usedCB(null, result);
+      }, usedCB);
+    }
+    return promise;
+  });
+}
+
+function logApiCall(self, name, args) {
+  /* istanbul ignore if */
+  if (self.constructor.listeners('debug').length) {
+    var logArgs = ['api', self.name, name];
+    for (var i = 0; i < args.length - 1; i++) {
+      logArgs.push(args[i]);
+    }
+    self.constructor.emit('debug', logArgs);
+
+    // override the callback itself to log the response
+    var origCallback = args[args.length - 1];
+    args[args.length - 1] = function (err, res) {
+      var responseArgs = ['api', self.name, name];
+      responseArgs = responseArgs.concat(
+        err ? ['error', err] : ['success', res]
+      );
+      self.constructor.emit('debug', responseArgs);
+      origCallback(err, res);
+    };
+  }
+}
+
+function adapterFun(name, callback) {
+  return toPromise(argsarray__WEBPACK_IMPORTED_MODULE_4___default()(function (args) {
+    if (this._closed) {
+      return Promise.reject(new Error('database is closed'));
+    }
+    if (this._destroyed) {
+      return Promise.reject(new Error('database is destroyed'));
+    }
+    var self = this;
+    logApiCall(self, name, args);
+    if (!this.taskqueue.isReady) {
+      return new Promise(function (fulfill, reject) {
+        self.taskqueue.addTask(function (failed) {
+          if (failed) {
+            reject(failed);
+          } else {
+            fulfill(self[name].apply(self, args));
+          }
+        });
+      });
+    }
+    return callback.apply(this, args);
+  }));
 }
 
 // like underscore/lodash _.pick()
@@ -6047,7 +6085,7 @@ function hasLocalStorage() {
 
 // Custom nextTick() shim for browsers. In node, this will just be process.nextTick(). We
 
-inherits__WEBPACK_IMPORTED_MODULE_3___default()(Changes, events__WEBPACK_IMPORTED_MODULE_2__["EventEmitter"]);
+inherits__WEBPACK_IMPORTED_MODULE_5___default()(Changes, events__WEBPACK_IMPORTED_MODULE_6__["EventEmitter"]);
 
 /* istanbul ignore next */
 function attachBrowserEvents(self) {
@@ -6059,7 +6097,7 @@ function attachBrowserEvents(self) {
 }
 
 function Changes() {
-  events__WEBPACK_IMPORTED_MODULE_2__["EventEmitter"].call(this);
+  events__WEBPACK_IMPORTED_MODULE_6__["EventEmitter"].call(this);
   this._listeners = {};
 
   attachBrowserEvents(this);
@@ -6098,7 +6136,7 @@ Changes.prototype.addListener = function (dbName, id, db, opts) {
       }
     }).on('complete', function () {
       if (inprogress === 'waiting') {
-        immediate__WEBPACK_IMPORTED_MODULE_1___default()(eventFunction);
+        immediate__WEBPACK_IMPORTED_MODULE_0___default()(eventFunction);
       }
       inprogress = false;
     }).on('error', onError);
@@ -6112,7 +6150,7 @@ Changes.prototype.removeListener = function (dbName, id) {
   if (!(id in this._listeners)) {
     return;
   }
-  events__WEBPACK_IMPORTED_MODULE_2__["EventEmitter"].prototype.removeListener.call(this, dbName,
+  events__WEBPACK_IMPORTED_MODULE_6__["EventEmitter"].prototype.removeListener.call(this, dbName,
     this._listeners[id]);
   delete this._listeners[id];
 };
@@ -6203,7 +6241,7 @@ var assign;
 
 var $inject_Object_assign = assign;
 
-inherits__WEBPACK_IMPORTED_MODULE_3___default()(PouchError, Error);
+inherits__WEBPACK_IMPORTED_MODULE_5___default()(PouchError, Error);
 
 function PouchError(status, error, reason) {
   Error.call(this, reason);
@@ -6387,7 +6425,7 @@ function isRemote(db) {
 
 function listenerCount(ee, type) {
   return 'listenerCount' in ee ? ee.listenerCount(type) :
-                                 events__WEBPACK_IMPORTED_MODULE_2__["EventEmitter"].listenerCount(ee, type);
+                                 events__WEBPACK_IMPORTED_MODULE_6__["EventEmitter"].listenerCount(ee, type);
 }
 
 function parseDesignDocFunctionName(s) {
@@ -6656,7 +6694,7 @@ function binaryMd5(data, callback) {
   var chunkSize = Math.min(MD5_CHUNK_SIZE, len);
   var chunks = Math.ceil(len / chunkSize);
   var currentChunk = 0;
-  var buffer = inputIsString ? new spark_md5__WEBPACK_IMPORTED_MODULE_4___default.a() : new spark_md5__WEBPACK_IMPORTED_MODULE_4___default.a.ArrayBuffer();
+  var buffer = inputIsString ? new spark_md5__WEBPACK_IMPORTED_MODULE_2___default.a() : new spark_md5__WEBPACK_IMPORTED_MODULE_2___default.a.ArrayBuffer();
 
   var append = inputIsString ? appendString : appendBlob;
 
@@ -6685,20 +6723,20 @@ function binaryMd5(data, callback) {
 }
 
 function stringMd5(string) {
-  return spark_md5__WEBPACK_IMPORTED_MODULE_4___default.a.hash(string);
+  return spark_md5__WEBPACK_IMPORTED_MODULE_2___default.a.hash(string);
 }
 
-function rev$$1(doc, deterministic_revs) {
+function rev(doc, deterministic_revs) {
   var clonedDoc = clone(doc);
   if (!deterministic_revs) {
-    return uuid__WEBPACK_IMPORTED_MODULE_5___default.a.v4().replace(/-/g, '').toLowerCase();
+    return uuid__WEBPACK_IMPORTED_MODULE_1___default.a.v4().replace(/-/g, '').toLowerCase();
   }
 
   delete clonedDoc._rev_tree;
   return stringMd5(JSON.stringify(clonedDoc));
 }
 
-var uuid = uuid__WEBPACK_IMPORTED_MODULE_5___default.a.v4;
+var uuid = uuid__WEBPACK_IMPORTED_MODULE_1___default.a.v4;
 
 // We fetch all leafs of the revision tree, and sort them based on tree length
 // and whether they were deleted, undeleted documents with the longest revision
@@ -7151,7 +7189,7 @@ function latest(rev, metadata) {
   throw new Error('Unable to resolve latest revision for id ' + metadata.id + ', rev ' + rev);
 }
 
-inherits__WEBPACK_IMPORTED_MODULE_3___default()(Changes$1, events__WEBPACK_IMPORTED_MODULE_2__["EventEmitter"]);
+inherits__WEBPACK_IMPORTED_MODULE_5___default()(Changes$1, events__WEBPACK_IMPORTED_MODULE_6__["EventEmitter"]);
 
 function tryCatchInChangeListener(self, change, pending, lastSeq) {
   // isolate try/catches to avoid V8 deoptimizations
@@ -7163,7 +7201,7 @@ function tryCatchInChangeListener(self, change, pending, lastSeq) {
 }
 
 function Changes$1(db, opts, callback) {
-  events__WEBPACK_IMPORTED_MODULE_2__["EventEmitter"].call(this);
+  events__WEBPACK_IMPORTED_MODULE_6__["EventEmitter"].call(this);
   var self = this;
   this.db = db;
   opts = opts ? clone(opts) : {};
@@ -7337,7 +7375,7 @@ Changes$1.prototype.doChanges = function (opts) {
   /* istanbul ignore else */
   if (newPromise && typeof newPromise.cancel === 'function') {
     var cancel = self.cancel;
-    self.cancel = argsarray__WEBPACK_IMPORTED_MODULE_0___default()(function (args) {
+    self.cancel = argsarray__WEBPACK_IMPORTED_MODULE_4___default()(function (args) {
       newPromise.cancel();
       cancel.apply(this, args);
     });
@@ -7401,14 +7439,14 @@ function computeHeight(revs) {
   var height = {};
   var edges = [];
   traverseRevTree(revs, function (isLeaf, pos, id, prnt) {
-    var rev = pos + "-" + id;
+    var rev$$1 = pos + "-" + id;
     if (isLeaf) {
-      height[rev] = 0;
+      height[rev$$1] = 0;
     }
     if (prnt !== undefined) {
-      edges.push({from: prnt, to: rev});
+      edges.push({from: prnt, to: rev$$1});
     }
-    return rev;
+    return rev$$1;
   });
 
   edges.reverse();
@@ -7454,7 +7492,7 @@ function doNextCompaction(self) {
       } else {
         callback(null, res);
       }
-      immediate__WEBPACK_IMPORTED_MODULE_1___default()(function () {
+      immediate__WEBPACK_IMPORTED_MODULE_0___default()(function () {
         self._compactionQueue.shift();
         if (self._compactionQueue.length) {
           doNextCompaction(self);
@@ -7472,10 +7510,10 @@ function attachmentNameError(name) {
   return false;
 }
 
-inherits__WEBPACK_IMPORTED_MODULE_3___default()(AbstractPouchDB, events__WEBPACK_IMPORTED_MODULE_2__["EventEmitter"]);
+inherits__WEBPACK_IMPORTED_MODULE_5___default()(AbstractPouchDB, events__WEBPACK_IMPORTED_MODULE_6__["EventEmitter"]);
 
 function AbstractPouchDB() {
-  events__WEBPACK_IMPORTED_MODULE_2__["EventEmitter"].call(this);
+  events__WEBPACK_IMPORTED_MODULE_6__["EventEmitter"].call(this);
 
   // re-bind prototyped methods
   for (var p in AbstractPouchDB.prototype) {
@@ -7530,7 +7568,7 @@ AbstractPouchDB.prototype.put = adapterFun('put', function (doc, opts, cb) {
     var oldRevNum = parseInt(parts[0], 10);
 
     var newRevNum = oldRevNum + 1;
-    var newRevId = rev$$1();
+    var newRevId = rev();
 
     doc._revisions = {
       start: newRevNum,
@@ -7549,20 +7587,20 @@ AbstractPouchDB.prototype.put = adapterFun('put', function (doc, opts, cb) {
 });
 
 AbstractPouchDB.prototype.putAttachment =
-  adapterFun('putAttachment', function (docId, attachmentId, rev,
+  adapterFun('putAttachment', function (docId, attachmentId, rev$$1,
                                               blob, type) {
   var api = this;
   if (typeof type === 'function') {
     type = blob;
-    blob = rev;
-    rev = null;
+    blob = rev$$1;
+    rev$$1 = null;
   }
   // Lets fix in https://github.com/pouchdb/pouchdb/issues/3267
   /* istanbul ignore if */
   if (typeof type === 'undefined') {
     type = blob;
-    blob = rev;
-    rev = null;
+    blob = rev$$1;
+    rev$$1 = null;
   }
   if (!type) {
     guardedConsole('warn', 'Attachment', attachmentId, 'on document', docId, 'is missing content_type');
@@ -7580,7 +7618,7 @@ AbstractPouchDB.prototype.putAttachment =
   }
 
   return api.get(docId).then(function (doc) {
-    if (doc._rev !== rev) {
+    if (doc._rev !== rev$$1) {
       throw createError(REV_CONFLICT);
     }
 
@@ -7597,7 +7635,7 @@ AbstractPouchDB.prototype.putAttachment =
 });
 
 AbstractPouchDB.prototype.removeAttachment =
-  adapterFun('removeAttachment', function (docId, attachmentId, rev,
+  adapterFun('removeAttachment', function (docId, attachmentId, rev$$1,
                                                  callback) {
   var self = this;
   self.get(docId, function (err, obj) {
@@ -7606,7 +7644,7 @@ AbstractPouchDB.prototype.removeAttachment =
       callback(err);
       return;
     }
-    if (obj._rev !== rev) {
+    if (obj._rev !== rev$$1) {
       callback(createError(REV_CONFLICT));
       return;
     }
@@ -7683,8 +7721,8 @@ AbstractPouchDB.prototype.revsDiff =
     var missingForId = req[id].slice(0);
     traverseRevTree(rev_tree, function (isLeaf, pos, revHash, ctx,
       opts) {
-        var rev = pos + '-' + revHash;
-        var idx = missingForId.indexOf(rev);
+        var rev$$1 = pos + '-' + revHash;
+        var idx = missingForId.indexOf(rev$$1);
         if (idx === -1) {
           return;
         }
@@ -7692,14 +7730,14 @@ AbstractPouchDB.prototype.revsDiff =
         missingForId.splice(idx, 1);
         /* istanbul ignore if */
         if (opts.status !== 'available') {
-          addToMissing(id, rev);
+          addToMissing(id, rev$$1);
         }
       });
 
     // Traversing the tree is synchronous, so now `missingForId` contains
     // revisions that were not found in the tree
-    missingForId.forEach(function (rev) {
-      addToMissing(id, rev);
+    missingForId.forEach(function (rev$$1) {
+      addToMissing(id, rev$$1);
     });
   }
 
@@ -7752,16 +7790,16 @@ AbstractPouchDB.prototype.compactDocument =
     var height = computeHeight(revTree);
     var candidates = [];
     var revs = [];
-    Object.keys(height).forEach(function (rev) {
-      if (height[rev] > maxHeight) {
-        candidates.push(rev);
+    Object.keys(height).forEach(function (rev$$1) {
+      if (height[rev$$1] > maxHeight) {
+        candidates.push(rev$$1);
       }
     });
 
     traverseRevTree(revTree, function (isLeaf, pos, revHash, ctx, opts) {
-      var rev = pos + '-' + revHash;
-      if (opts.status === 'available' && candidates.indexOf(rev) !== -1) {
-        revs.push(rev);
+      var rev$$1 = pos + '-' + revHash;
+      if (opts.status === 'available' && candidates.indexOf(rev$$1) !== -1) {
+        revs.push(rev$$1);
       }
     });
     self._doCompaction(docId, revs, callback);
@@ -7942,6 +7980,13 @@ AbstractPouchDB.prototype.get = adapterFun('get', function (id, opts, cb) {
         }
       }
 
+      /* istanbul ignore if */
+      if (!path) {
+        err = new Error('invalid rev tree');
+        err.docId = id;
+        return cb(err);
+      }
+
       var indexOfRev = path.ids.map(function (x) { return x.id; })
         .indexOf(doc._rev.split('-')[1]) + 1;
       var howMany = path.ids.length - indexOfRev;
@@ -7951,18 +7996,18 @@ AbstractPouchDB.prototype.get = adapterFun('get', function (id, opts, cb) {
       if (opts.revs) {
         doc._revisions = {
           start: (path.pos + path.ids.length) - 1,
-          ids: path.ids.map(function (rev) {
-            return rev.id;
+          ids: path.ids.map(function (rev$$1) {
+            return rev$$1.id;
           })
         };
       }
       if (opts.revs_info) {
         var pos =  path.pos + path.ids.length;
-        doc._revs_info = path.ids.map(function (rev) {
+        doc._revs_info = path.ids.map(function (rev$$1) {
           pos--;
           return {
-            rev: pos + '-' + rev.id,
-            status: rev.opts.status
+            rev: pos + '-' + rev$$1.id,
+            status: rev$$1.opts.status
           };
         });
       }
@@ -8379,7 +8424,7 @@ function prepareForDestruction(self) {
   self.constructor.emit('ref', self);
 }
 
-inherits__WEBPACK_IMPORTED_MODULE_3___default()(PouchDB, AbstractPouchDB);
+inherits__WEBPACK_IMPORTED_MODULE_5___default()(PouchDB, AbstractPouchDB);
 function PouchDB(name, opts) {
   // In Node our test suite only tests this for PouchAlt unfortunately
   /* istanbul ignore if */
@@ -8456,11 +8501,11 @@ PouchDB.preferredAdapters = [];
 
 PouchDB.prefix = '_pouch_';
 
-var eventEmitter = new events__WEBPACK_IMPORTED_MODULE_2__["EventEmitter"]();
+var eventEmitter = new events__WEBPACK_IMPORTED_MODULE_6__["EventEmitter"]();
 
 function setUpEventEmitter(Pouch) {
-  Object.keys(events__WEBPACK_IMPORTED_MODULE_2__["EventEmitter"].prototype).forEach(function (key) {
-    if (typeof events__WEBPACK_IMPORTED_MODULE_2__["EventEmitter"].prototype[key] === 'function') {
+  Object.keys(events__WEBPACK_IMPORTED_MODULE_6__["EventEmitter"].prototype).forEach(function (key) {
+    if (typeof events__WEBPACK_IMPORTED_MODULE_6__["EventEmitter"].prototype[key] === 'function') {
       Pouch[key] = eventEmitter[key].bind(eventEmitter);
     }
   });
@@ -8553,7 +8598,7 @@ PouchDB.defaults = function (defaultOpts) {
     PouchDB.call(this, name, opts);
   }
 
-  inherits__WEBPACK_IMPORTED_MODULE_3___default()(PouchAlt, PouchDB);
+  inherits__WEBPACK_IMPORTED_MODULE_5___default()(PouchAlt, PouchDB);
 
   PouchAlt.preferredAdapters = PouchDB.preferredAdapters.slice();
   Object.keys(PouchDB).forEach(function (key) {
@@ -8574,7 +8619,7 @@ PouchDB.fetch = function (url, opts) {
 };
 
 // managed automatically by set-version.js
-var version = "7.0.0";
+var version = "7.1.1";
 
 // this would just be "return doc[field]", but fields
 // can be "deep" due to dot notation
@@ -8764,6 +8809,37 @@ function mergeEq(value, fieldMatchers) {
   fieldMatchers.$eq = value;
 }
 
+//#7458: execute function mergeAndedSelectors on nested $and
+function mergeAndedSelectorsNested(obj) {
+    for (var prop in obj) {
+        if (Array.isArray(obj)) {
+            for (var i in obj) {
+                if (obj[i]['$and']) {
+                    obj[i] = mergeAndedSelectors(obj[i]['$and']);
+                }
+            }
+        }
+        var value = obj[prop];
+        if (typeof value === 'object') {
+            mergeAndedSelectorsNested(value); // <- recursive call
+        }
+    }
+    return obj;
+}
+
+//#7458: determine id $and is present in selector (at any level)
+function isAndInSelector(obj, isAnd) {
+    for (var prop in obj) {
+        if (prop === '$and') {
+            isAnd = true;
+        }
+        var value = obj[prop];
+        if (typeof value === 'object') {
+            isAnd = isAndInSelector(value, isAnd); // <- recursive call
+        }
+    }
+    return isAnd;
+}
 
 //
 // normalize the selector
@@ -8771,10 +8847,14 @@ function mergeEq(value, fieldMatchers) {
 function massageSelector(input) {
   var result = clone(input);
   var wasAnded = false;
-  if ('$and' in result) {
-    result = mergeAndedSelectors(result['$and']);
-    wasAnded = true;
-  }
+    //#7458: if $and is present in selector (at any level) merge nested $and
+    if (isAndInSelector(result, false)) {
+        result = mergeAndedSelectorsNested(result);
+        if ('$and' in result) {
+            result = mergeAndedSelectors(result['$and']);
+        }
+        wasAnded = true;
+    }
 
   ['$or', '$nor'].forEach(function (orOrNor) {
     if (orOrNor in result) {
@@ -9262,10 +9342,16 @@ function matchSelector(matcher, doc, parsedField, docFieldValue) {
     return true;
   }
 
-  return Object.keys(matcher).every(function (userOperator) {
-    var userValue = matcher[userOperator];
-    return match(userOperator, doc, userValue, parsedField, docFieldValue);
-  });
+  // is matcher an object, if so continue recursion
+  if (typeof matcher === 'object') {
+    return Object.keys(matcher).every(function (userOperator) {
+      var userValue = matcher[userOperator];
+      return match(userOperator, doc, userValue, parsedField, docFieldValue);
+    });
+  }
+
+  // no more depth, No need to recurse further
+  return matcher === docFieldValue;
 }
 
 function matchCominationalSelector(field, matcher, doc) {
@@ -9665,13 +9751,13 @@ var dataWords = toObject([
   '_replication_stats'
 ]);
 
-function parseRevisionInfo(rev) {
-  if (!/^\d+-./.test(rev)) {
+function parseRevisionInfo(rev$$1) {
+  if (!/^\d+-./.test(rev$$1)) {
     return createError(INVALID_REV);
   }
-  var idx = rev.indexOf('-');
-  var left = rev.substring(0, idx);
-  var right = rev.substring(idx + 1);
+  var idx = rev$$1.indexOf('-');
+  var left = rev$$1.substring(0, idx);
+  var right = rev$$1.substring(idx + 1);
   return {
     prefix: parseInt(left, 10),
     id: right
@@ -9715,7 +9801,7 @@ function parseDoc(doc, newEdits, dbOpts) {
     if (!doc._id) {
       doc._id = uuid();
     }
-    newRevId = rev$$1(doc, dbOpts.deterministic_revs);
+    newRevId = rev(doc, dbOpts.deterministic_revs);
     if (doc._rev) {
       revInfo = parseRevisionInfo(doc._rev);
       if (revInfo.error) {
@@ -10081,7 +10167,7 @@ function safeJsonParse(str) {
     return JSON.parse(str);
   } catch (e) {
     /* istanbul ignore next */
-    return vuvuzela__WEBPACK_IMPORTED_MODULE_6___default.a.parse(str);
+    return vuvuzela__WEBPACK_IMPORTED_MODULE_3___default.a.parse(str);
   }
 }
 
@@ -10090,7 +10176,7 @@ function safeJsonStringify(json) {
     return JSON.stringify(json);
   } catch (e) {
     /* istanbul ignore next */
-    return vuvuzela__WEBPACK_IMPORTED_MODULE_6___default.a.stringify(json);
+    return vuvuzela__WEBPACK_IMPORTED_MODULE_3___default.a.stringify(json);
   }
 }
 
@@ -10265,9 +10351,9 @@ function compactRevs(revs, docId, txn) {
     });
   }
 
-  revs.forEach(function (rev) {
+  revs.forEach(function (rev$$1) {
     var index = seqStore.index('_doc_id_rev');
-    var key = docId + "::" + rev;
+    var key = docId + "::" + rev$$1;
     index.getKey(key).onsuccess = function (e) {
       var seq = e.target.result;
       if (typeof seq !== 'number') {
@@ -11093,7 +11179,7 @@ function enqueueTask(action, callback, PouchDB) {
     action(function runCallback(err, res) {
       tryCode(callback, err, res, PouchDB);
       running = false;
-      immediate__WEBPACK_IMPORTED_MODULE_1___default()(function runNext() {
+      immediate__WEBPACK_IMPORTED_MODULE_0___default()(function runNext() {
         applyNext(PouchDB);
       });
     });
@@ -11374,9 +11460,9 @@ function init(api, opts, callback) {
         var metadata = cursor.value;
         var docId = metadata.id;
         var local = isLocalId(docId);
-        var rev = winningRev(metadata);
+        var rev$$1 = winningRev(metadata);
         if (local) {
-          var docIdRev = docId + "::" + rev;
+          var docIdRev = docId + "::" + rev$$1;
           // remove all seq entries
           // associated with this docId
           var start = docId + "::";
@@ -11577,20 +11663,20 @@ function init(api, opts, callback) {
         return finish();
       }
 
-      var rev;
+      var rev$$1;
       if (!opts.rev) {
-        rev = metadata.winningRev;
+        rev$$1 = metadata.winningRev;
         var deleted = isDeleted(metadata);
         if (deleted) {
           err = createError(MISSING_DOC, "deleted");
           return finish();
         }
       } else {
-        rev = opts.latest ? latest(opts.rev, metadata) : opts.rev;
+        rev$$1 = opts.latest ? latest(opts.rev, metadata) : opts.rev;
       }
 
       var objectStore = txn.objectStore(BY_SEQ_STORE);
-      var key = metadata.id + '::' + rev;
+      var key = metadata.id + '::' + rev$$1;
 
       objectStore.index('_doc_id_rev').get(key).onsuccess = function (e) {
         doc = e.target.result;
@@ -11711,8 +11797,8 @@ function init(api, opts, callback) {
       var metadata = decodeMetadata(event.target.result);
       traverseRevTree(metadata.rev_tree, function (isLeaf, pos,
                                                          revHash, ctx, opts) {
-        var rev = pos + '-' + revHash;
-        if (revs.indexOf(rev) !== -1) {
+        var rev$$1 = pos + '-' + revHash;
+        if (revs.indexOf(rev$$1) !== -1) {
           opts.status = 'missing';
         }
       });
@@ -11880,7 +11966,7 @@ function init(api, opts, callback) {
   if (cached) {
     idb = cached.idb;
     api._meta = cached.global;
-    return immediate__WEBPACK_IMPORTED_MODULE_1___default()(function () {
+    return immediate__WEBPACK_IMPORTED_MODULE_0___default()(function () {
       callback(null, api);
     });
   }
@@ -12116,7 +12202,7 @@ var supportsBulkGetMap = {};
 
 function readAttachmentsAsBlobOrBuffer(row) {
   var doc = row.doc || row.ok;
-  var atts = doc._attachments;
+  var atts = doc && doc._attachments;
   if (!atts) {
     return;
   }
@@ -12242,6 +12328,8 @@ function HttpPouch(opts, callback) {
     options = options || {};
     options.headers = options.headers || new h();
 
+    options.credentials = 'include';
+
     if (opts.auth || host.auth) {
       var nAuth = opts.auth || host.auth;
       var str = nAuth.username + ':' + nAuth.password;
@@ -12264,7 +12352,7 @@ function HttpPouch(opts, callback) {
   };
 
   function adapterFun$$1(name, fun) {
-    return adapterFun(name, argsarray__WEBPACK_IMPORTED_MODULE_0___default()(function (args) {
+    return adapterFun(name, argsarray__WEBPACK_IMPORTED_MODULE_4___default()(function (args) {
       setup().then(function () {
         return fun.apply(this, args);
       }).catch(function (e) {
@@ -12361,7 +12449,7 @@ function HttpPouch(opts, callback) {
     return setupPromise;
   }
 
-  immediate__WEBPACK_IMPORTED_MODULE_1___default()(function () {
+  immediate__WEBPACK_IMPORTED_MODULE_0___default()(function () {
     callback(null, api);
   });
 
@@ -12375,12 +12463,13 @@ function HttpPouch(opts, callback) {
   api.id = adapterFun$$1('id', function (callback) {
     ourFetch(genUrl(host, '')).then(function (response) {
       return response.json();
+    }).catch(function () {
+      return {};
     }).then(function (result) {
+      // Bad response or missing `uuid` should not prevent ID generation.
       var uuid$$1 = (result && result.uuid) ?
           (result.uuid + host.db) : genDBUrl(host, '');
       callback(null, uuid$$1);
-    }).catch(function (err) {
-      callback(err);
     });
   });
 
@@ -12509,7 +12598,10 @@ function HttpPouch(opts, callback) {
 
   api.fetch = function (path, options) {
     return setup().then(function () {
-      return ourFetch(genDBUrl(host, path), options);
+      var url = path.substring(0, 1) === '/' ?
+        genUrl(host, path.substring(1)) :
+        genDBUrl(host, path);
+      return ourFetch(url, options);
     });
   };
 
@@ -12663,8 +12755,8 @@ function HttpPouch(opts, callback) {
       }
     }
 
-    var rev = (doc._rev || opts.rev);
-    var url = genDBUrl(host, encodeDocId(doc._id)) + '?rev=' + rev;
+    var rev$$1 = (doc._rev || opts.rev);
+    var url = genDBUrl(host, encodeDocId(doc._id)) + '?rev=' + rev$$1;
 
     fetchJSON(url, {method: 'DELETE'}, cb).catch(cb);
   });
@@ -12710,10 +12802,10 @@ function HttpPouch(opts, callback) {
   // Remove the attachment given by the id and rev
   api.removeAttachment =  adapterFun$$1('removeAttachment', function (docId,
                                                                    attachmentId,
-                                                                   rev,
+                                                                   rev$$1,
                                                                    callback) {
     var url = genDBUrl(host, encodeDocId(docId) + '/' +
-                       encodeAttachmentId(attachmentId)) + '?rev=' + rev;
+                       encodeAttachmentId(attachmentId)) + '?rev=' + rev$$1;
     fetchJSON(url, {method: 'DELETE'}, callback).catch(callback);
   });
 
@@ -12721,18 +12813,18 @@ function HttpPouch(opts, callback) {
   // to the document with the given id, the revision given by rev, and
   // add it to the database given by host.
   api.putAttachment = adapterFun$$1('putAttachment', function (docId, attachmentId,
-                                                            rev, blob,
+                                                            rev$$1, blob,
                                                             type, callback) {
     if (typeof type === 'function') {
       callback = type;
       type = blob;
-      blob = rev;
-      rev = null;
+      blob = rev$$1;
+      rev$$1 = null;
     }
     var id = encodeDocId(docId) + '/' + encodeAttachmentId(attachmentId);
     var url = genDBUrl(host, id);
-    if (rev) {
-      url += '?rev=' + rev;
+    if (rev$$1) {
+      url += '?rev=' + rev$$1;
     }
 
     if (typeof blob === 'string') {
@@ -13102,7 +13194,7 @@ function HttpPouch(opts, callback) {
 
       if ((opts.continuous && !(limit && leftToFetch <= 0)) || !finished) {
         // Queue a call to fetch again with the newest sequence number
-        immediate__WEBPACK_IMPORTED_MODULE_1___default()(function () { fetchData(lastFetchedSeq, fetched); });
+        immediate__WEBPACK_IMPORTED_MODULE_0___default()(function () { fetchData(lastFetchedSeq, fetched); });
       } else {
         // We're done, call the callback
         opts.complete(null, results);
@@ -13175,7 +13267,7 @@ function QueryParseError(message) {
   } catch (e) {}
 }
 
-inherits__WEBPACK_IMPORTED_MODULE_3___default()(QueryParseError, Error);
+inherits__WEBPACK_IMPORTED_MODULE_5___default()(QueryParseError, Error);
 
 function NotFoundError(message) {
   this.status = 404;
@@ -13187,7 +13279,7 @@ function NotFoundError(message) {
   } catch (e) {}
 }
 
-inherits__WEBPACK_IMPORTED_MODULE_3___default()(NotFoundError, Error);
+inherits__WEBPACK_IMPORTED_MODULE_5___default()(NotFoundError, Error);
 
 function BuiltInError(message) {
   this.status = 500;
@@ -13199,16 +13291,16 @@ function BuiltInError(message) {
   } catch (e) {}
 }
 
-inherits__WEBPACK_IMPORTED_MODULE_3___default()(BuiltInError, Error);
+inherits__WEBPACK_IMPORTED_MODULE_5___default()(BuiltInError, Error);
 
 function promisedCallback(promise, callback) {
   if (callback) {
     promise.then(function (res) {
-      immediate__WEBPACK_IMPORTED_MODULE_1___default()(function () {
+      immediate__WEBPACK_IMPORTED_MODULE_0___default()(function () {
         callback(null, res);
       });
     }, function (reason) {
-      immediate__WEBPACK_IMPORTED_MODULE_1___default()(function () {
+      immediate__WEBPACK_IMPORTED_MODULE_0___default()(function () {
         callback(reason);
       });
     });
@@ -13217,7 +13309,7 @@ function promisedCallback(promise, callback) {
 }
 
 function callbackify(fun) {
-  return argsarray__WEBPACK_IMPORTED_MODULE_0___default()(function (args) {
+  return argsarray__WEBPACK_IMPORTED_MODULE_4___default()(function (args) {
     var cb = args.pop();
     var promise = fun.apply(this, args);
     if (typeof cb === 'function') {
@@ -14324,7 +14416,7 @@ function createAbstractMapReduce(localDocName, mapper, reducer, ddocValidator) {
         return createViewPromise.then(function (view) {
           if (opts.stale === 'ok' || opts.stale === 'update_after') {
             if (opts.stale === 'update_after') {
-              immediate__WEBPACK_IMPORTED_MODULE_1___default()(function () {
+              immediate__WEBPACK_IMPORTED_MODULE_0___default()(function () {
                 updateView(view);
               });
             }
@@ -14464,8 +14556,8 @@ var mapreduce = {
   viewCleanup: viewCleanup
 };
 
-function isGenOne$1(rev) {
-  return /^1-/.test(rev);
+function isGenOne$1(rev$$1) {
+  return /^1-/.test(rev$$1);
 }
 
 function fileHasChanged(localDoc, remoteDoc, filename) {
@@ -15181,7 +15273,7 @@ function replicate(src, target, opts, returnValue, result) {
   }
 
 
-  function processPendingBatch(immediate) {
+  function processPendingBatch(immediate$$1) {
     if (pendingBatch.changes.length === 0) {
       if (batches.length === 0 && !currentBatch) {
         if ((continuous && changesOpts.live) || changesCompleted) {
@@ -15195,7 +15287,7 @@ function replicate(src, target, opts, returnValue, result) {
       return;
     }
     if (
-      immediate ||
+      immediate$$1 ||
       changesCompleted ||
       pendingBatch.changes.length >= batch_size
     ) {
@@ -15288,7 +15380,7 @@ function replicate(src, target, opts, returnValue, result) {
     }
     pendingBatch.seq = change.seq || lastSeq;
     pendingBatch.changes.push(change);
-    immediate__WEBPACK_IMPORTED_MODULE_1___default()(function () {
+    immediate__WEBPACK_IMPORTED_MODULE_0___default()(function () {
       processPendingBatch(batches.length === 0 && changesOpts.live);
     });
   }
@@ -15472,9 +15564,9 @@ function replicate(src, target, opts, returnValue, result) {
 
 // We create a basic promise so the caller can cancel the replication possibly
 // before we have actually started listening to changes etc
-inherits__WEBPACK_IMPORTED_MODULE_3___default()(Replication, events__WEBPACK_IMPORTED_MODULE_2__["EventEmitter"]);
+inherits__WEBPACK_IMPORTED_MODULE_5___default()(Replication, events__WEBPACK_IMPORTED_MODULE_6__["EventEmitter"]);
 function Replication() {
-  events__WEBPACK_IMPORTED_MODULE_2__["EventEmitter"].call(this);
+  events__WEBPACK_IMPORTED_MODULE_6__["EventEmitter"].call(this);
   this.cancelled = false;
   this.state = 'pending';
   var self = this;
@@ -15555,7 +15647,7 @@ function replicateWrapper(src, target, opts, callback) {
   return replicateRet;
 }
 
-inherits__WEBPACK_IMPORTED_MODULE_3___default()(Sync, events__WEBPACK_IMPORTED_MODULE_2__["EventEmitter"]);
+inherits__WEBPACK_IMPORTED_MODULE_5___default()(Sync, events__WEBPACK_IMPORTED_MODULE_6__["EventEmitter"]);
 function sync(src, target, opts, callback) {
   if (typeof opts === 'function') {
     callback = opts;

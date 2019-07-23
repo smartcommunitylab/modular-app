@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { load } from '@angular/core/src/render3';
 import { HttpClient } from '@angular/common/http';
 const CHOOSEN_KEY: string = "choosen";
 const MODULE_ENTRIES_KEY: string = "moduleEntries";

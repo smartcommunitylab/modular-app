@@ -14,9 +14,14 @@
         <ion-label>{{'label_other_settinga'|translate}}</ion-label>
       </ion-chip>
   <ion-grid id="category-buttons">
-    <ion-row dragula="entries" [(dragulaModel)]="categories" lines="none">
-      <ion-col size="6"ion-long-press [interval]="400" delayDrag *ngFor="let category of categories">
-        <div class="home-button" (press)="doSomething()">
+      <ion-row cdkDropList
+      #todoList="cdkDropList"
+      [cdkDropListData]="categories"
+      [cdkDropListConnectedTo]="[doneList]"
+      (cdkDropListDropped)="drop($event)">
+    <!-- <ion-row dragula="entries" [(dragulaModel)]="categories" lines="none"> -->
+      <ion-col size="6" cdkDrag  *ngFor="let category of categories">
+        <div class="home-button" >
           <div>
             <div>{{category.name[language]}}</div>
           </div>
@@ -28,8 +33,13 @@
     </div>
   </ion-grid>
   <div class="wrapper">
-    <div class="scrolling-wrapper-flexbox loop" dragula="entries" [(dragulaModel)]="allCategories">
-      <div class="card" ion-long-press [interval]="400" delayDrag *ngFor="let category of allCategories" (press)="doSomething()">
+      <!-- <div class="scrolling-wrapper-flexbox loop" dragula="entries" [(dragulaModel)]="allCategories"> -->
+          <div class="scrolling-wrapper-flexbox loop" cdkDropList
+          #doneList="cdkDropList"
+          [cdkDropListData]="allCategories"
+          [cdkDropListConnectedTo]="[todoList]"
+          (cdkDropListDropped)="drop($event)">
+              <div class="card"  cdkDrag  *ngFor="let category of allCategories" >
         <h2>{{category.name[language]}}</h2>
       </div>
     </div>

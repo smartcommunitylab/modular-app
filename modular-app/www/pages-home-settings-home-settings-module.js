@@ -1,5 +1,7405 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["pages-home-settings-home-settings-module"],{
 
+/***/ "./node_modules/@angular/cdk/esm5/bidi.es5.js":
+/*!****************************************************!*\
+  !*** ./node_modules/@angular/cdk/esm5/bidi.es5.js ***!
+  \****************************************************/
+/*! exports provided: Directionality, DIR_DOCUMENT, Dir, BidiModule, ɵa */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Directionality", function() { return Directionality; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DIR_DOCUMENT", function() { return DIR_DOCUMENT; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Dir", function() { return Dir; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BidiModule", function() { return BidiModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵa", function() { return DIR_DOCUMENT_FACTORY; });
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/**
+ * @license
+ * Copyright Google LLC All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+
+
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * Injection token used to inject the document into Directionality.
+ * This is used so that the value can be faked in tests.
+ *
+ * We can't use the real document in tests because changing the real `dir` causes geometry-based
+ * tests in Safari to fail.
+ *
+ * We also can't re-provide the DOCUMENT token from platform-brower because the unit tests
+ * themselves use things like `querySelector` in test code.
+ *
+ * This token is defined in a separate file from Directionality as a workaround for
+ * https://github.com/angular/angular/issues/22559
+ *
+ * \@docs-private
+ * @type {?}
+ */
+var DIR_DOCUMENT = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["InjectionToken"]('cdk-dir-doc', {
+    providedIn: 'root',
+    factory: DIR_DOCUMENT_FACTORY,
+});
+/**
+ * \@docs-private
+ * @return {?}
+ */
+function DIR_DOCUMENT_FACTORY() {
+    return Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["inject"])(_angular_common__WEBPACK_IMPORTED_MODULE_0__["DOCUMENT"]);
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * The directionality (LTR / RTL) context for the application (or a subtree of it).
+ * Exposes the current direction and a stream of direction changes.
+ */
+var Directionality = /** @class */ (function () {
+    function Directionality(_document) {
+        /**
+         * The current 'ltr' or 'rtl' value.
+         */
+        this.value = 'ltr';
+        /**
+         * Stream that emits whenever the 'ltr' / 'rtl' state changes.
+         */
+        this.change = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"]();
+        if (_document) {
+            // TODO: handle 'auto' value -
+            // We still need to account for dir="auto".
+            // It looks like HTMLElemenet.dir is also "auto" when that's set to the attribute,
+            // but getComputedStyle return either "ltr" or "rtl". avoiding getComputedStyle for now
+            /** @type {?} */
+            var bodyDir = _document.body ? _document.body.dir : null;
+            /** @type {?} */
+            var htmlDir = _document.documentElement ? _document.documentElement.dir : null;
+            /** @type {?} */
+            var value = bodyDir || htmlDir;
+            this.value = (value === 'ltr' || value === 'rtl') ? value : 'ltr';
+        }
+    }
+    /**
+     * @return {?}
+     */
+    Directionality.prototype.ngOnDestroy = /**
+     * @return {?}
+     */
+    function () {
+        this.change.complete();
+    };
+    Directionality.decorators = [
+        { type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"], args: [{ providedIn: 'root' },] },
+    ];
+    /** @nocollapse */
+    Directionality.ctorParameters = function () { return [
+        { type: undefined, decorators: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["Optional"] }, { type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["Inject"], args: [DIR_DOCUMENT,] }] }
+    ]; };
+    /** @nocollapse */ Directionality.ngInjectableDef = Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["defineInjectable"])({ factory: function Directionality_Factory() { return new Directionality(Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["inject"])(DIR_DOCUMENT, 8)); }, token: Directionality, providedIn: "root" });
+    return Directionality;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * Directive to listen for changes of direction of part of the DOM.
+ *
+ * Provides itself as Directionality such that descendant directives only need to ever inject
+ * Directionality to get the closest direction.
+ */
+var Dir = /** @class */ (function () {
+    function Dir() {
+        /**
+         * Normalized direction that accounts for invalid/unsupported values.
+         */
+        this._dir = 'ltr';
+        /**
+         * Whether the `value` has been set to its initial value.
+         */
+        this._isInitialized = false;
+        /**
+         * Event emitted when the direction changes.
+         */
+        this.change = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"]();
+    }
+    Object.defineProperty(Dir.prototype, "dir", {
+        /** @docs-private */
+        get: /**
+         * \@docs-private
+         * @return {?}
+         */
+        function () { return this._dir; },
+        set: /**
+         * @param {?} value
+         * @return {?}
+         */
+        function (value) {
+            /** @type {?} */
+            var old = this._dir;
+            /** @type {?} */
+            var normalizedValue = value ? value.toLowerCase() : value;
+            this._rawDir = value;
+            this._dir = (normalizedValue === 'ltr' || normalizedValue === 'rtl') ? normalizedValue : 'ltr';
+            if (old !== this._dir && this._isInitialized) {
+                this.change.emit(this._dir);
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Dir.prototype, "value", {
+        /** Current layout direction of the element. */
+        get: /**
+         * Current layout direction of the element.
+         * @return {?}
+         */
+        function () { return this.dir; },
+        enumerable: true,
+        configurable: true
+    });
+    /** Initialize once default value has been set. */
+    /**
+     * Initialize once default value has been set.
+     * @return {?}
+     */
+    Dir.prototype.ngAfterContentInit = /**
+     * Initialize once default value has been set.
+     * @return {?}
+     */
+    function () {
+        this._isInitialized = true;
+    };
+    /**
+     * @return {?}
+     */
+    Dir.prototype.ngOnDestroy = /**
+     * @return {?}
+     */
+    function () {
+        this.change.complete();
+    };
+    Dir.decorators = [
+        { type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["Directive"], args: [{
+                    selector: '[dir]',
+                    providers: [{ provide: Directionality, useExisting: Dir }],
+                    host: { '[attr.dir]': '_rawDir' },
+                    exportAs: 'dir',
+                },] },
+    ];
+    Dir.propDecorators = {
+        change: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["Output"], args: ['dirChange',] }],
+        dir: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"] }]
+    };
+    return Dir;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var BidiModule = /** @class */ (function () {
+    function BidiModule() {
+    }
+    BidiModule.decorators = [
+        { type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"], args: [{
+                    exports: [Dir],
+                    declarations: [Dir],
+                },] },
+    ];
+    return BidiModule;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+
+//# sourceMappingURL=bidi.es5.js.map
+
+
+/***/ }),
+
+/***/ "./node_modules/@angular/cdk/esm5/coercion.es5.js":
+/*!********************************************************!*\
+  !*** ./node_modules/@angular/cdk/esm5/coercion.es5.js ***!
+  \********************************************************/
+/*! exports provided: coerceBooleanProperty, coerceNumberProperty, _isNumberValue, coerceArray, coerceCssPixelValue, coerceElement */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "coerceBooleanProperty", function() { return coerceBooleanProperty; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "coerceNumberProperty", function() { return coerceNumberProperty; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "_isNumberValue", function() { return _isNumberValue; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "coerceArray", function() { return coerceArray; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "coerceCssPixelValue", function() { return coerceCssPixelValue; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "coerceElement", function() { return coerceElement; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/**
+ * @license
+ * Copyright Google LLC All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * Coerces a data-bound value (typically a string) to a boolean.
+ * @param {?} value
+ * @return {?}
+ */
+function coerceBooleanProperty(value) {
+    return value != null && "" + value !== 'false';
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @param {?} value
+ * @param {?=} fallbackValue
+ * @return {?}
+ */
+function coerceNumberProperty(value, fallbackValue) {
+    if (fallbackValue === void 0) { fallbackValue = 0; }
+    return _isNumberValue(value) ? Number(value) : fallbackValue;
+}
+/**
+ * Whether the provided value is considered a number.
+ * \@docs-private
+ * @param {?} value
+ * @return {?}
+ */
+function _isNumberValue(value) {
+    // parseFloat(value) handles most of the cases we're interested in (it treats null, empty string,
+    // and other non-number values as NaN, where Number just uses 0) but it considers the string
+    // '123hello' to be a valid number. Therefore we also check if Number(value) is NaN.
+    return !isNaN(parseFloat((/** @type {?} */ (value)))) && !isNaN(Number(value));
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * Wraps the provided value in an array, unless the provided value is an array.
+ * @template T
+ * @param {?} value
+ * @return {?}
+ */
+function coerceArray(value) {
+    return Array.isArray(value) ? value : [value];
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * Coerces a value to a CSS pixel value.
+ * @param {?} value
+ * @return {?}
+ */
+function coerceCssPixelValue(value) {
+    if (value == null) {
+        return '';
+    }
+    return typeof value === 'string' ? value : value + "px";
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * Coerces an ElementRef or an Element into an element.
+ * Useful for APIs that can accept either a ref or the native element itself.
+ * @template T
+ * @param {?} elementOrRef
+ * @return {?}
+ */
+function coerceElement(elementOrRef) {
+    return elementOrRef instanceof _angular_core__WEBPACK_IMPORTED_MODULE_0__["ElementRef"] ? elementOrRef.nativeElement : elementOrRef;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+
+//# sourceMappingURL=coercion.es5.js.map
+
+
+/***/ }),
+
+/***/ "./node_modules/@angular/cdk/esm5/collections.es5.js":
+/*!***********************************************************!*\
+  !*** ./node_modules/@angular/cdk/esm5/collections.es5.js ***!
+  \***********************************************************/
+/*! exports provided: UniqueSelectionDispatcher, ArrayDataSource, isDataSource, DataSource, getMultipleValuesInSingleSelectionError, SelectionModel */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UniqueSelectionDispatcher", function() { return UniqueSelectionDispatcher; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ArrayDataSource", function() { return ArrayDataSource; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isDataSource", function() { return isDataSource; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DataSource", function() { return DataSource; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getMultipleValuesInSingleSelectionError", function() { return getMultipleValuesInSingleSelectionError; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SelectionModel", function() { return SelectionModel; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/**
+ * @license
+ * Copyright Google LLC All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+
+
+
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @abstract
+ * @template T
+ */
+var  /**
+ * @abstract
+ * @template T
+ */
+DataSource = /** @class */ (function () {
+    function DataSource() {
+    }
+    return DataSource;
+}());
+/**
+ * Checks whether an object is a data source.
+ * @param {?} value
+ * @return {?}
+ */
+function isDataSource(value) {
+    // Check if the value is a DataSource by observing if it has a connect function. Cannot
+    // be checked as an `instanceof DataSource` since people could create their own sources
+    // that match the interface, but don't extend DataSource.
+    return value && typeof value.connect === 'function';
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * DataSource wrapper for a native array.
+ * @template T
+ */
+var  /**
+ * DataSource wrapper for a native array.
+ * @template T
+ */
+ArrayDataSource = /** @class */ (function (_super) {
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(ArrayDataSource, _super);
+    function ArrayDataSource(_data) {
+        var _this = _super.call(this) || this;
+        _this._data = _data;
+        return _this;
+    }
+    /**
+     * @return {?}
+     */
+    ArrayDataSource.prototype.connect = /**
+     * @return {?}
+     */
+    function () {
+        return this._data instanceof rxjs__WEBPACK_IMPORTED_MODULE_1__["Observable"] ? this._data : Object(rxjs__WEBPACK_IMPORTED_MODULE_1__["of"])(this._data);
+    };
+    /**
+     * @return {?}
+     */
+    ArrayDataSource.prototype.disconnect = /**
+     * @return {?}
+     */
+    function () { };
+    return ArrayDataSource;
+}(DataSource));
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * Class to be used to power selecting one or more options from a list.
+ * @template T
+ */
+var  /**
+ * Class to be used to power selecting one or more options from a list.
+ * @template T
+ */
+SelectionModel = /** @class */ (function () {
+    function SelectionModel(_multiple, initiallySelectedValues, _emitChanges) {
+        if (_multiple === void 0) { _multiple = false; }
+        if (_emitChanges === void 0) { _emitChanges = true; }
+        var _this = this;
+        this._multiple = _multiple;
+        this._emitChanges = _emitChanges;
+        /**
+         * Currently-selected values.
+         */
+        this._selection = new Set();
+        /**
+         * Keeps track of the deselected options that haven't been emitted by the change event.
+         */
+        this._deselectedToEmit = [];
+        /**
+         * Keeps track of the selected options that haven't been emitted by the change event.
+         */
+        this._selectedToEmit = [];
+        /**
+         * Event emitted when the value has changed.
+         */
+        this.changed = new rxjs__WEBPACK_IMPORTED_MODULE_1__["Subject"]();
+        /**
+         * Event emitted when the value has changed.
+         * @deprecated Use `changed` instead.
+         * \@breaking-change 8.0.0 To be changed to `changed`
+         */
+        this.onChange = this.changed;
+        if (initiallySelectedValues && initiallySelectedValues.length) {
+            if (_multiple) {
+                initiallySelectedValues.forEach(function (value) { return _this._markSelected(value); });
+            }
+            else {
+                this._markSelected(initiallySelectedValues[0]);
+            }
+            // Clear the array in order to avoid firing the change event for preselected values.
+            this._selectedToEmit.length = 0;
+        }
+    }
+    Object.defineProperty(SelectionModel.prototype, "selected", {
+        /** Selected values. */
+        get: /**
+         * Selected values.
+         * @return {?}
+         */
+        function () {
+            if (!this._selected) {
+                this._selected = Array.from(this._selection.values());
+            }
+            return this._selected;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    /**
+     * Selects a value or an array of values.
+     */
+    /**
+     * Selects a value or an array of values.
+     * @param {...?} values
+     * @return {?}
+     */
+    SelectionModel.prototype.select = /**
+     * Selects a value or an array of values.
+     * @param {...?} values
+     * @return {?}
+     */
+    function () {
+        var _this = this;
+        var values = [];
+        for (var _i = 0; _i < arguments.length; _i++) {
+            values[_i] = arguments[_i];
+        }
+        this._verifyValueAssignment(values);
+        values.forEach(function (value) { return _this._markSelected(value); });
+        this._emitChangeEvent();
+    };
+    /**
+     * Deselects a value or an array of values.
+     */
+    /**
+     * Deselects a value or an array of values.
+     * @param {...?} values
+     * @return {?}
+     */
+    SelectionModel.prototype.deselect = /**
+     * Deselects a value or an array of values.
+     * @param {...?} values
+     * @return {?}
+     */
+    function () {
+        var _this = this;
+        var values = [];
+        for (var _i = 0; _i < arguments.length; _i++) {
+            values[_i] = arguments[_i];
+        }
+        this._verifyValueAssignment(values);
+        values.forEach(function (value) { return _this._unmarkSelected(value); });
+        this._emitChangeEvent();
+    };
+    /**
+     * Toggles a value between selected and deselected.
+     */
+    /**
+     * Toggles a value between selected and deselected.
+     * @param {?} value
+     * @return {?}
+     */
+    SelectionModel.prototype.toggle = /**
+     * Toggles a value between selected and deselected.
+     * @param {?} value
+     * @return {?}
+     */
+    function (value) {
+        this.isSelected(value) ? this.deselect(value) : this.select(value);
+    };
+    /**
+     * Clears all of the selected values.
+     */
+    /**
+     * Clears all of the selected values.
+     * @return {?}
+     */
+    SelectionModel.prototype.clear = /**
+     * Clears all of the selected values.
+     * @return {?}
+     */
+    function () {
+        this._unmarkAll();
+        this._emitChangeEvent();
+    };
+    /**
+     * Determines whether a value is selected.
+     */
+    /**
+     * Determines whether a value is selected.
+     * @param {?} value
+     * @return {?}
+     */
+    SelectionModel.prototype.isSelected = /**
+     * Determines whether a value is selected.
+     * @param {?} value
+     * @return {?}
+     */
+    function (value) {
+        return this._selection.has(value);
+    };
+    /**
+     * Determines whether the model does not have a value.
+     */
+    /**
+     * Determines whether the model does not have a value.
+     * @return {?}
+     */
+    SelectionModel.prototype.isEmpty = /**
+     * Determines whether the model does not have a value.
+     * @return {?}
+     */
+    function () {
+        return this._selection.size === 0;
+    };
+    /**
+     * Determines whether the model has a value.
+     */
+    /**
+     * Determines whether the model has a value.
+     * @return {?}
+     */
+    SelectionModel.prototype.hasValue = /**
+     * Determines whether the model has a value.
+     * @return {?}
+     */
+    function () {
+        return !this.isEmpty();
+    };
+    /**
+     * Sorts the selected values based on a predicate function.
+     */
+    /**
+     * Sorts the selected values based on a predicate function.
+     * @param {?=} predicate
+     * @return {?}
+     */
+    SelectionModel.prototype.sort = /**
+     * Sorts the selected values based on a predicate function.
+     * @param {?=} predicate
+     * @return {?}
+     */
+    function (predicate) {
+        if (this._multiple && this.selected) {
+            (/** @type {?} */ (this._selected)).sort(predicate);
+        }
+    };
+    /**
+     * Gets whether multiple values can be selected.
+     */
+    /**
+     * Gets whether multiple values can be selected.
+     * @return {?}
+     */
+    SelectionModel.prototype.isMultipleSelection = /**
+     * Gets whether multiple values can be selected.
+     * @return {?}
+     */
+    function () {
+        return this._multiple;
+    };
+    /** Emits a change event and clears the records of selected and deselected values. */
+    /**
+     * Emits a change event and clears the records of selected and deselected values.
+     * @private
+     * @return {?}
+     */
+    SelectionModel.prototype._emitChangeEvent = /**
+     * Emits a change event and clears the records of selected and deselected values.
+     * @private
+     * @return {?}
+     */
+    function () {
+        // Clear the selected values so they can be re-cached.
+        this._selected = null;
+        if (this._selectedToEmit.length || this._deselectedToEmit.length) {
+            this.changed.next({
+                source: this,
+                added: this._selectedToEmit,
+                removed: this._deselectedToEmit
+            });
+            this._deselectedToEmit = [];
+            this._selectedToEmit = [];
+        }
+    };
+    /** Selects a value. */
+    /**
+     * Selects a value.
+     * @private
+     * @param {?} value
+     * @return {?}
+     */
+    SelectionModel.prototype._markSelected = /**
+     * Selects a value.
+     * @private
+     * @param {?} value
+     * @return {?}
+     */
+    function (value) {
+        if (!this.isSelected(value)) {
+            if (!this._multiple) {
+                this._unmarkAll();
+            }
+            this._selection.add(value);
+            if (this._emitChanges) {
+                this._selectedToEmit.push(value);
+            }
+        }
+    };
+    /** Deselects a value. */
+    /**
+     * Deselects a value.
+     * @private
+     * @param {?} value
+     * @return {?}
+     */
+    SelectionModel.prototype._unmarkSelected = /**
+     * Deselects a value.
+     * @private
+     * @param {?} value
+     * @return {?}
+     */
+    function (value) {
+        if (this.isSelected(value)) {
+            this._selection.delete(value);
+            if (this._emitChanges) {
+                this._deselectedToEmit.push(value);
+            }
+        }
+    };
+    /** Clears out the selected values. */
+    /**
+     * Clears out the selected values.
+     * @private
+     * @return {?}
+     */
+    SelectionModel.prototype._unmarkAll = /**
+     * Clears out the selected values.
+     * @private
+     * @return {?}
+     */
+    function () {
+        var _this = this;
+        if (!this.isEmpty()) {
+            this._selection.forEach(function (value) { return _this._unmarkSelected(value); });
+        }
+    };
+    /**
+     * Verifies the value assignment and throws an error if the specified value array is
+     * including multiple values while the selection model is not supporting multiple values.
+     */
+    /**
+     * Verifies the value assignment and throws an error if the specified value array is
+     * including multiple values while the selection model is not supporting multiple values.
+     * @private
+     * @param {?} values
+     * @return {?}
+     */
+    SelectionModel.prototype._verifyValueAssignment = /**
+     * Verifies the value assignment and throws an error if the specified value array is
+     * including multiple values while the selection model is not supporting multiple values.
+     * @private
+     * @param {?} values
+     * @return {?}
+     */
+    function (values) {
+        if (values.length > 1 && !this._multiple) {
+            throw getMultipleValuesInSingleSelectionError();
+        }
+    };
+    return SelectionModel;
+}());
+/**
+ * Returns an error that reports that multiple values are passed into a selection model
+ * with a single value.
+ * \@docs-private
+ * @return {?}
+ */
+function getMultipleValuesInSingleSelectionError() {
+    return Error('Cannot pass multiple values into SelectionModel with single-value mode.');
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * Class to coordinate unique selection based on name.
+ * Intended to be consumed as an Angular service.
+ * This service is needed because native radio change events are only fired on the item currently
+ * being selected, and we still need to uncheck the previous selection.
+ *
+ * This service does not *store* any IDs and names because they may change at any time, so it is
+ * less error-prone if they are simply passed through when the events occur.
+ */
+var UniqueSelectionDispatcher = /** @class */ (function () {
+    function UniqueSelectionDispatcher() {
+        this._listeners = [];
+    }
+    /**
+     * Notify other items that selection for the given name has been set.
+     * @param id ID of the item.
+     * @param name Name of the item.
+     */
+    /**
+     * Notify other items that selection for the given name has been set.
+     * @param {?} id ID of the item.
+     * @param {?} name Name of the item.
+     * @return {?}
+     */
+    UniqueSelectionDispatcher.prototype.notify = /**
+     * Notify other items that selection for the given name has been set.
+     * @param {?} id ID of the item.
+     * @param {?} name Name of the item.
+     * @return {?}
+     */
+    function (id, name) {
+        for (var _i = 0, _a = this._listeners; _i < _a.length; _i++) {
+            var listener = _a[_i];
+            listener(id, name);
+        }
+    };
+    /**
+     * Listen for future changes to item selection.
+     * @return Function used to deregister listener
+     */
+    /**
+     * Listen for future changes to item selection.
+     * @param {?} listener
+     * @return {?} Function used to deregister listener
+     */
+    UniqueSelectionDispatcher.prototype.listen = /**
+     * Listen for future changes to item selection.
+     * @param {?} listener
+     * @return {?} Function used to deregister listener
+     */
+    function (listener) {
+        var _this = this;
+        this._listeners.push(listener);
+        return function () {
+            _this._listeners = _this._listeners.filter(function (registered) {
+                return listener !== registered;
+            });
+        };
+    };
+    /**
+     * @return {?}
+     */
+    UniqueSelectionDispatcher.prototype.ngOnDestroy = /**
+     * @return {?}
+     */
+    function () {
+        this._listeners = [];
+    };
+    UniqueSelectionDispatcher.decorators = [
+        { type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["Injectable"], args: [{ providedIn: 'root' },] },
+    ];
+    /** @nocollapse */ UniqueSelectionDispatcher.ngInjectableDef = Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["defineInjectable"])({ factory: function UniqueSelectionDispatcher_Factory() { return new UniqueSelectionDispatcher(); }, token: UniqueSelectionDispatcher, providedIn: "root" });
+    return UniqueSelectionDispatcher;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+
+//# sourceMappingURL=collections.es5.js.map
+
+
+/***/ }),
+
+/***/ "./node_modules/@angular/cdk/esm5/drag-drop.es5.js":
+/*!*********************************************************!*\
+  !*** ./node_modules/@angular/cdk/esm5/drag-drop.es5.js ***!
+  \*********************************************************/
+/*! exports provided: DragDrop, DragRef, DropListRef, CdkDropList, CDK_DROP_LIST, CDK_DROP_LIST_CONTAINER, moveItemInArray, transferArrayItem, copyArrayItem, DragDropModule, DragDropRegistry, CdkDropListGroup, CDK_DRAG_CONFIG_FACTORY, CDK_DRAG_CONFIG, CdkDrag, CdkDragHandle, CdkDragPreview, CdkDragPlaceholder, ɵb */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DragDrop", function() { return DragDrop; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DragRef", function() { return DragRef; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DropListRef", function() { return DropListRef; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CdkDropList", function() { return CdkDropList; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CDK_DROP_LIST", function() { return CDK_DROP_LIST; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CDK_DROP_LIST_CONTAINER", function() { return CDK_DROP_LIST_CONTAINER; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "moveItemInArray", function() { return moveItemInArray; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "transferArrayItem", function() { return transferArrayItem; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "copyArrayItem", function() { return copyArrayItem; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DragDropModule", function() { return DragDropModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DragDropRegistry", function() { return DragDropRegistry; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CdkDropListGroup", function() { return CdkDropListGroup; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CDK_DRAG_CONFIG_FACTORY", function() { return CDK_DRAG_CONFIG_FACTORY; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CDK_DRAG_CONFIG", function() { return CDK_DRAG_CONFIG; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CdkDrag", function() { return CdkDrag; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CdkDragHandle", function() { return CdkDragHandle; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CdkDragPreview", function() { return CdkDragPreview; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CdkDragPlaceholder", function() { return CdkDragPlaceholder; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵb", function() { return CDK_DRAG_PARENT; });
+/* harmony import */ var _angular_cdk_platform__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/cdk/platform */ "./node_modules/@angular/cdk/esm5/platform.es5.js");
+/* harmony import */ var _angular_cdk_coercion__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/cdk/coercion */ "./node_modules/@angular/cdk/esm5/coercion.es5.js");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
+/* harmony import */ var _angular_cdk_scrolling__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/cdk/scrolling */ "./node_modules/@angular/cdk/esm5/scrolling.es5.js");
+/* harmony import */ var _angular_cdk_bidi__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/cdk/bidi */ "./node_modules/@angular/cdk/esm5/bidi.es5.js");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+/**
+ * @license
+ * Copyright Google LLC All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+
+
+
+
+
+
+
+
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * Shallow-extends a stylesheet object with another stylesheet object.
+ * \@docs-private
+ * @param {?} dest
+ * @param {?} source
+ * @return {?}
+ */
+function extendStyles(dest, source) {
+    for (var key in source) {
+        if (source.hasOwnProperty(key)) {
+            dest[(/** @type {?} */ (key))] = source[(/** @type {?} */ (key))];
+        }
+    }
+    return dest;
+}
+/**
+ * Toggles whether the native drag interactions should be enabled for an element.
+ * \@docs-private
+ * @param {?} element Element on which to toggle the drag interactions.
+ * @param {?} enable Whether the drag interactions should be enabled.
+ * @return {?}
+ */
+function toggleNativeDragInteractions(element, enable) {
+    /** @type {?} */
+    var userSelect = enable ? '' : 'none';
+    extendStyles(element.style, {
+        touchAction: enable ? '' : 'none',
+        webkitUserDrag: enable ? '' : 'none',
+        webkitTapHighlightColor: enable ? '' : 'transparent',
+        userSelect: userSelect,
+        msUserSelect: userSelect,
+        webkitUserSelect: userSelect,
+        MozUserSelect: userSelect
+    });
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * Parses a CSS time value to milliseconds.
+ * @param {?} value
+ * @return {?}
+ */
+function parseCssTimeUnitsToMs(value) {
+    // Some browsers will return it in seconds, whereas others will return milliseconds.
+    /** @type {?} */
+    var multiplier = value.toLowerCase().indexOf('ms') > -1 ? 1 : 1000;
+    return parseFloat(value) * multiplier;
+}
+/**
+ * Gets the transform transition duration, including the delay, of an element in milliseconds.
+ * @param {?} element
+ * @return {?}
+ */
+function getTransformTransitionDurationInMs(element) {
+    /** @type {?} */
+    var computedStyle = getComputedStyle(element);
+    /** @type {?} */
+    var transitionedProperties = parseCssPropertyValue(computedStyle, 'transition-property');
+    /** @type {?} */
+    var property = transitionedProperties.find(function (prop) { return prop === 'transform' || prop === 'all'; });
+    // If there's no transition for `all` or `transform`, we shouldn't do anything.
+    if (!property) {
+        return 0;
+    }
+    // Get the index of the property that we're interested in and match
+    // it up to the same index in `transition-delay` and `transition-duration`.
+    /** @type {?} */
+    var propertyIndex = transitionedProperties.indexOf(property);
+    /** @type {?} */
+    var rawDurations = parseCssPropertyValue(computedStyle, 'transition-duration');
+    /** @type {?} */
+    var rawDelays = parseCssPropertyValue(computedStyle, 'transition-delay');
+    return parseCssTimeUnitsToMs(rawDurations[propertyIndex]) +
+        parseCssTimeUnitsToMs(rawDelays[propertyIndex]);
+}
+/**
+ * Parses out multiple values from a computed style into an array.
+ * @param {?} computedStyle
+ * @param {?} name
+ * @return {?}
+ */
+function parseCssPropertyValue(computedStyle, name) {
+    /** @type {?} */
+    var value = computedStyle.getPropertyValue(name);
+    return value.split(',').map(function (part) { return part.trim(); });
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * Options that can be used to bind a passive event listener.
+ * @type {?}
+ */
+var passiveEventListenerOptions = Object(_angular_cdk_platform__WEBPACK_IMPORTED_MODULE_0__["normalizePassiveListenerOptions"])({ passive: true });
+/**
+ * Options that can be used to bind an active event listener.
+ * @type {?}
+ */
+var activeEventListenerOptions = Object(_angular_cdk_platform__WEBPACK_IMPORTED_MODULE_0__["normalizePassiveListenerOptions"])({ passive: false });
+/**
+ * Time in milliseconds for which to ignore mouse events, after
+ * receiving a touch event. Used to avoid doing double work for
+ * touch devices where the browser fires fake mouse events, in
+ * addition to touch events.
+ * @type {?}
+ */
+var MOUSE_EVENT_IGNORE_TIME = 800;
+/**
+ * Reference to a draggable item. Used to manipulate or dispose of the item.
+ * \@docs-private
+ * @template T
+ */
+var  /**
+ * Reference to a draggable item. Used to manipulate or dispose of the item.
+ * \@docs-private
+ * @template T
+ */
+DragRef = /** @class */ (function () {
+    function DragRef(element, _config, _document, _ngZone, _viewportRuler, _dragDropRegistry) {
+        var _this = this;
+        this._config = _config;
+        this._document = _document;
+        this._ngZone = _ngZone;
+        this._viewportRuler = _viewportRuler;
+        this._dragDropRegistry = _dragDropRegistry;
+        /**
+         * CSS `transform` applied to the element when it isn't being dragged. We need a
+         * passive transform in order for the dragged element to retain its new position
+         * after the user has stopped dragging and because we need to know the relative
+         * position in case they start dragging again. This corresponds to `element.style.transform`.
+         */
+        this._passiveTransform = { x: 0, y: 0 };
+        /**
+         * CSS `transform` that is applied to the element while it's being dragged.
+         */
+        this._activeTransform = { x: 0, y: 0 };
+        /**
+         * Emits when the item is being moved.
+         */
+        this._moveEvents = new rxjs__WEBPACK_IMPORTED_MODULE_2__["Subject"]();
+        /**
+         * Amount of subscriptions to the move event. Used to avoid
+         * hitting the zone if the consumer didn't subscribe to it.
+         */
+        this._moveEventSubscriptions = 0;
+        /**
+         * Subscription to pointer movement events.
+         */
+        this._pointerMoveSubscription = rxjs__WEBPACK_IMPORTED_MODULE_2__["Subscription"].EMPTY;
+        /**
+         * Subscription to the event that is dispatched when the user lifts their pointer.
+         */
+        this._pointerUpSubscription = rxjs__WEBPACK_IMPORTED_MODULE_2__["Subscription"].EMPTY;
+        /**
+         * Cached reference to the boundary element.
+         */
+        this._boundaryElement = null;
+        /**
+         * Whether the native dragging interactions have been enabled on the root element.
+         */
+        this._nativeInteractionsEnabled = true;
+        /**
+         * Elements that can be used to drag the draggable item.
+         */
+        this._handles = [];
+        /**
+         * Registered handles that are currently disabled.
+         */
+        this._disabledHandles = new Set();
+        /**
+         * Layout direction of the item.
+         */
+        this._direction = 'ltr';
+        this._disabled = false;
+        /**
+         * Emits as the drag sequence is being prepared.
+         */
+        this.beforeStarted = new rxjs__WEBPACK_IMPORTED_MODULE_2__["Subject"]();
+        /**
+         * Emits when the user starts dragging the item.
+         */
+        this.started = new rxjs__WEBPACK_IMPORTED_MODULE_2__["Subject"]();
+        /**
+         * Emits when the user has released a drag item, before any animations have started.
+         */
+        this.released = new rxjs__WEBPACK_IMPORTED_MODULE_2__["Subject"]();
+        /**
+         * Emits when the user stops dragging an item in the container.
+         */
+        this.ended = new rxjs__WEBPACK_IMPORTED_MODULE_2__["Subject"]();
+        /**
+         * Emits when the user has moved the item into a new container.
+         */
+        this.entered = new rxjs__WEBPACK_IMPORTED_MODULE_2__["Subject"]();
+        /**
+         * Emits when the user removes the item its container by dragging it into another container.
+         */
+        this.exited = new rxjs__WEBPACK_IMPORTED_MODULE_2__["Subject"]();
+        /**
+         * Emits when the user drops the item inside a container.
+         */
+        this.dropped = new rxjs__WEBPACK_IMPORTED_MODULE_2__["Subject"]();
+        /**
+         * Emits as the user is dragging the item. Use with caution,
+         * because this event will fire for every pixel that the user has dragged.
+         */
+        this.moved = new rxjs__WEBPACK_IMPORTED_MODULE_2__["Observable"](function (observer) {
+            /** @type {?} */
+            var subscription = _this._moveEvents.subscribe(observer);
+            _this._moveEventSubscriptions++;
+            return function () {
+                subscription.unsubscribe();
+                _this._moveEventSubscriptions--;
+            };
+        });
+        /**
+         * Handler for the `mousedown`/`touchstart` events.
+         */
+        this._pointerDown = function (event) {
+            _this.beforeStarted.next();
+            // Delegate the event based on whether it started from a handle or the element itself.
+            if (_this._handles.length) {
+                /** @type {?} */
+                var targetHandle = _this._handles.find(function (handle) {
+                    /** @type {?} */
+                    var target = event.target;
+                    return !!target && (target === handle || handle.contains((/** @type {?} */ (target))));
+                });
+                if (targetHandle && !_this._disabledHandles.has(targetHandle) && !_this.disabled) {
+                    _this._initializeDragSequence(targetHandle, event);
+                }
+            }
+            else if (!_this.disabled) {
+                _this._initializeDragSequence(_this._rootElement, event);
+            }
+        };
+        /**
+         * Handler that is invoked when the user moves their pointer after they've initiated a drag.
+         */
+        this._pointerMove = function (event) {
+            if (!_this._hasStartedDragging) {
+                /** @type {?} */
+                var pointerPosition = _this._getPointerPositionOnPage(event);
+                /** @type {?} */
+                var distanceX = Math.abs(pointerPosition.x - _this._pickupPositionOnPage.x);
+                /** @type {?} */
+                var distanceY = Math.abs(pointerPosition.y - _this._pickupPositionOnPage.y);
+                // Only start dragging after the user has moved more than the minimum distance in either
+                // direction. Note that this is preferrable over doing something like `skip(minimumDistance)`
+                // in the `pointerMove` subscription, because we're not guaranteed to have one move event
+                // per pixel of movement (e.g. if the user moves their pointer quickly).
+                if (distanceX + distanceY >= _this._config.dragStartThreshold) {
+                    _this._hasStartedDragging = true;
+                    _this._ngZone.run(function () { return _this._startDragSequence(event); });
+                }
+                return;
+            }
+            // We only need the preview dimensions if we have a boundary element.
+            if (_this._boundaryElement) {
+                // Cache the preview element rect if we haven't cached it already or if
+                // we cached it too early before the element dimensions were computed.
+                if (!_this._previewRect || (!_this._previewRect.width && !_this._previewRect.height)) {
+                    _this._previewRect = (_this._preview || _this._rootElement).getBoundingClientRect();
+                }
+            }
+            /** @type {?} */
+            var constrainedPointerPosition = _this._getConstrainedPointerPosition(event);
+            _this._hasMoved = true;
+            event.preventDefault();
+            _this._updatePointerDirectionDelta(constrainedPointerPosition);
+            if (_this._dropContainer) {
+                _this._updateActiveDropContainer(constrainedPointerPosition);
+            }
+            else {
+                /** @type {?} */
+                var activeTransform = _this._activeTransform;
+                activeTransform.x =
+                    constrainedPointerPosition.x - _this._pickupPositionOnPage.x + _this._passiveTransform.x;
+                activeTransform.y =
+                    constrainedPointerPosition.y - _this._pickupPositionOnPage.y + _this._passiveTransform.y;
+                /** @type {?} */
+                var transform = getTransform(activeTransform.x, activeTransform.y);
+                // Preserve the previous `transform` value, if there was one. Note that we apply our own
+                // transform before the user's, because things like rotation can affect which direction
+                // the element will be translated towards.
+                _this._rootElement.style.transform = _this._initialTransform ?
+                    transform + ' ' + _this._initialTransform : transform;
+                // Apply transform as attribute if dragging and svg element to work for IE
+                if (typeof SVGElement !== 'undefined' && _this._rootElement instanceof SVGElement) {
+                    /** @type {?} */
+                    var appliedTransform = "translate(" + activeTransform.x + " " + activeTransform.y + ")";
+                    _this._rootElement.setAttribute('transform', appliedTransform);
+                }
+            }
+            // Since this event gets fired for every pixel while dragging, we only
+            // want to fire it if the consumer opted into it. Also we have to
+            // re-enter the zone because we run all of the events on the outside.
+            if (_this._moveEventSubscriptions > 0) {
+                _this._ngZone.run(function () {
+                    _this._moveEvents.next({
+                        source: _this,
+                        pointerPosition: constrainedPointerPosition,
+                        event: event,
+                        delta: _this._pointerDirectionDelta
+                    });
+                });
+            }
+        };
+        /**
+         * Handler that is invoked when the user lifts their pointer up, after initiating a drag.
+         */
+        this._pointerUp = function (event) {
+            // Note that here we use `isDragging` from the service, rather than from `this`.
+            // The difference is that the one from the service reflects whether a dragging sequence
+            // has been initiated, whereas the one on `this` includes whether the user has passed
+            // the minimum dragging threshold.
+            if (!_this._dragDropRegistry.isDragging(_this)) {
+                return;
+            }
+            _this._removeSubscriptions();
+            _this._dragDropRegistry.stopDragging(_this);
+            if (_this._handles) {
+                _this._rootElement.style.webkitTapHighlightColor = _this._rootElementTapHighlight;
+            }
+            if (!_this._hasStartedDragging) {
+                return;
+            }
+            _this.released.next({ source: _this });
+            if (!_this._dropContainer) {
+                // Convert the active transform into a passive one. This means that next time
+                // the user starts dragging the item, its position will be calculated relatively
+                // to the new passive transform.
+                _this._passiveTransform.x = _this._activeTransform.x;
+                _this._passiveTransform.y = _this._activeTransform.y;
+                _this._ngZone.run(function () { return _this.ended.next({ source: _this }); });
+                _this._dragDropRegistry.stopDragging(_this);
+                return;
+            }
+            _this._animatePreviewToPlaceholder().then(function () {
+                _this._cleanupDragArtifacts(event);
+                _this._dragDropRegistry.stopDragging(_this);
+            });
+        };
+        this.withRootElement(element);
+        _dragDropRegistry.registerDragItem(this);
+    }
+    Object.defineProperty(DragRef.prototype, "disabled", {
+        /** Whether starting to drag this element is disabled. */
+        get: /**
+         * Whether starting to drag this element is disabled.
+         * @return {?}
+         */
+        function () {
+            return this._disabled || !!(this._dropContainer && this._dropContainer.disabled);
+        },
+        set: /**
+         * @param {?} value
+         * @return {?}
+         */
+        function (value) {
+            /** @type {?} */
+            var newValue = Object(_angular_cdk_coercion__WEBPACK_IMPORTED_MODULE_1__["coerceBooleanProperty"])(value);
+            if (newValue !== this._disabled) {
+                this._disabled = newValue;
+                this._toggleNativeDragInteractions();
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    /**
+     * Returns the element that is being used as a placeholder
+     * while the current element is being dragged.
+     */
+    /**
+     * Returns the element that is being used as a placeholder
+     * while the current element is being dragged.
+     * @return {?}
+     */
+    DragRef.prototype.getPlaceholderElement = /**
+     * Returns the element that is being used as a placeholder
+     * while the current element is being dragged.
+     * @return {?}
+     */
+    function () {
+        return this._placeholder;
+    };
+    /** Returns the root draggable element. */
+    /**
+     * Returns the root draggable element.
+     * @return {?}
+     */
+    DragRef.prototype.getRootElement = /**
+     * Returns the root draggable element.
+     * @return {?}
+     */
+    function () {
+        return this._rootElement;
+    };
+    /** Registers the handles that can be used to drag the element. */
+    /**
+     * Registers the handles that can be used to drag the element.
+     * @template THIS
+     * @this {THIS}
+     * @param {?} handles
+     * @return {THIS}
+     */
+    DragRef.prototype.withHandles = /**
+     * Registers the handles that can be used to drag the element.
+     * @template THIS
+     * @this {THIS}
+     * @param {?} handles
+     * @return {THIS}
+     */
+    function (handles) {
+        (/** @type {?} */ (this))._handles = handles.map(function (handle) { return Object(_angular_cdk_coercion__WEBPACK_IMPORTED_MODULE_1__["coerceElement"])(handle); });
+        (/** @type {?} */ (this))._handles.forEach(function (handle) { return toggleNativeDragInteractions(handle, false); });
+        (/** @type {?} */ (this))._toggleNativeDragInteractions();
+        return (/** @type {?} */ (this));
+    };
+    /**
+     * Registers the template that should be used for the drag preview.
+     * @param template Template that from which to stamp out the preview.
+     */
+    /**
+     * Registers the template that should be used for the drag preview.
+     * @template THIS
+     * @this {THIS}
+     * @param {?} template Template that from which to stamp out the preview.
+     * @return {THIS}
+     */
+    DragRef.prototype.withPreviewTemplate = /**
+     * Registers the template that should be used for the drag preview.
+     * @template THIS
+     * @this {THIS}
+     * @param {?} template Template that from which to stamp out the preview.
+     * @return {THIS}
+     */
+    function (template) {
+        (/** @type {?} */ (this))._previewTemplate = template;
+        return (/** @type {?} */ (this));
+    };
+    /**
+     * Registers the template that should be used for the drag placeholder.
+     * @param template Template that from which to stamp out the placeholder.
+     */
+    /**
+     * Registers the template that should be used for the drag placeholder.
+     * @template THIS
+     * @this {THIS}
+     * @param {?} template Template that from which to stamp out the placeholder.
+     * @return {THIS}
+     */
+    DragRef.prototype.withPlaceholderTemplate = /**
+     * Registers the template that should be used for the drag placeholder.
+     * @template THIS
+     * @this {THIS}
+     * @param {?} template Template that from which to stamp out the placeholder.
+     * @return {THIS}
+     */
+    function (template) {
+        (/** @type {?} */ (this))._placeholderTemplate = template;
+        return (/** @type {?} */ (this));
+    };
+    /**
+     * Sets an alternate drag root element. The root element is the element that will be moved as
+     * the user is dragging. Passing an alternate root element is useful when trying to enable
+     * dragging on an element that you might not have access to.
+     */
+    /**
+     * Sets an alternate drag root element. The root element is the element that will be moved as
+     * the user is dragging. Passing an alternate root element is useful when trying to enable
+     * dragging on an element that you might not have access to.
+     * @template THIS
+     * @this {THIS}
+     * @param {?} rootElement
+     * @return {THIS}
+     */
+    DragRef.prototype.withRootElement = /**
+     * Sets an alternate drag root element. The root element is the element that will be moved as
+     * the user is dragging. Passing an alternate root element is useful when trying to enable
+     * dragging on an element that you might not have access to.
+     * @template THIS
+     * @this {THIS}
+     * @param {?} rootElement
+     * @return {THIS}
+     */
+    function (rootElement) {
+        /** @type {?} */
+        var element = Object(_angular_cdk_coercion__WEBPACK_IMPORTED_MODULE_1__["coerceElement"])(rootElement);
+        if (element !== (/** @type {?} */ (this))._rootElement) {
+            if ((/** @type {?} */ (this))._rootElement) {
+                (/** @type {?} */ (this))._removeRootElementListeners((/** @type {?} */ (this))._rootElement);
+            }
+            element.addEventListener('mousedown', (/** @type {?} */ (this))._pointerDown, activeEventListenerOptions);
+            element.addEventListener('touchstart', (/** @type {?} */ (this))._pointerDown, passiveEventListenerOptions);
+            (/** @type {?} */ (this))._initialTransform = undefined;
+            (/** @type {?} */ (this))._rootElement = element;
+        }
+        return (/** @type {?} */ (this));
+    };
+    /**
+     * Element to which the draggable's position will be constrained.
+     */
+    /**
+     * Element to which the draggable's position will be constrained.
+     * @template THIS
+     * @this {THIS}
+     * @param {?} boundaryElement
+     * @return {THIS}
+     */
+    DragRef.prototype.withBoundaryElement = /**
+     * Element to which the draggable's position will be constrained.
+     * @template THIS
+     * @this {THIS}
+     * @param {?} boundaryElement
+     * @return {THIS}
+     */
+    function (boundaryElement) {
+        (/** @type {?} */ (this))._boundaryElement = boundaryElement ? Object(_angular_cdk_coercion__WEBPACK_IMPORTED_MODULE_1__["coerceElement"])(boundaryElement) : null;
+        return (/** @type {?} */ (this));
+    };
+    /** Removes the dragging functionality from the DOM element. */
+    /**
+     * Removes the dragging functionality from the DOM element.
+     * @return {?}
+     */
+    DragRef.prototype.dispose = /**
+     * Removes the dragging functionality from the DOM element.
+     * @return {?}
+     */
+    function () {
+        this._removeRootElementListeners(this._rootElement);
+        // Do this check before removing from the registry since it'll
+        // stop being considered as dragged once it is removed.
+        if (this.isDragging()) {
+            // Since we move out the element to the end of the body while it's being
+            // dragged, we have to make sure that it's removed if it gets destroyed.
+            removeElement(this._rootElement);
+        }
+        this._destroyPreview();
+        this._destroyPlaceholder();
+        this._dragDropRegistry.removeDragItem(this);
+        this._removeSubscriptions();
+        this.beforeStarted.complete();
+        this.started.complete();
+        this.released.complete();
+        this.ended.complete();
+        this.entered.complete();
+        this.exited.complete();
+        this.dropped.complete();
+        this._moveEvents.complete();
+        this._handles = [];
+        this._disabledHandles.clear();
+        this._dropContainer = undefined;
+        this._boundaryElement = this._rootElement = this._placeholderTemplate =
+            this._previewTemplate = this._nextSibling = (/** @type {?} */ (null));
+    };
+    /** Checks whether the element is currently being dragged. */
+    /**
+     * Checks whether the element is currently being dragged.
+     * @return {?}
+     */
+    DragRef.prototype.isDragging = /**
+     * Checks whether the element is currently being dragged.
+     * @return {?}
+     */
+    function () {
+        return this._hasStartedDragging && this._dragDropRegistry.isDragging(this);
+    };
+    /** Resets a standalone drag item to its initial position. */
+    /**
+     * Resets a standalone drag item to its initial position.
+     * @return {?}
+     */
+    DragRef.prototype.reset = /**
+     * Resets a standalone drag item to its initial position.
+     * @return {?}
+     */
+    function () {
+        this._rootElement.style.transform = this._initialTransform || '';
+        this._activeTransform = { x: 0, y: 0 };
+        this._passiveTransform = { x: 0, y: 0 };
+    };
+    /**
+     * Sets a handle as disabled. While a handle is disabled, it'll capture and interrupt dragging.
+     * @param handle Handle element that should be disabled.
+     */
+    /**
+     * Sets a handle as disabled. While a handle is disabled, it'll capture and interrupt dragging.
+     * @param {?} handle Handle element that should be disabled.
+     * @return {?}
+     */
+    DragRef.prototype.disableHandle = /**
+     * Sets a handle as disabled. While a handle is disabled, it'll capture and interrupt dragging.
+     * @param {?} handle Handle element that should be disabled.
+     * @return {?}
+     */
+    function (handle) {
+        if (this._handles.indexOf(handle) > -1) {
+            this._disabledHandles.add(handle);
+        }
+    };
+    /**
+     * Enables a handle, if it has been disabled.
+     * @param handle Handle element to be enabled.
+     */
+    /**
+     * Enables a handle, if it has been disabled.
+     * @param {?} handle Handle element to be enabled.
+     * @return {?}
+     */
+    DragRef.prototype.enableHandle = /**
+     * Enables a handle, if it has been disabled.
+     * @param {?} handle Handle element to be enabled.
+     * @return {?}
+     */
+    function (handle) {
+        this._disabledHandles.delete(handle);
+    };
+    /** Sets the layout direction of the draggable item. */
+    /**
+     * Sets the layout direction of the draggable item.
+     * @template THIS
+     * @this {THIS}
+     * @param {?} direction
+     * @return {THIS}
+     */
+    DragRef.prototype.withDirection = /**
+     * Sets the layout direction of the draggable item.
+     * @template THIS
+     * @this {THIS}
+     * @param {?} direction
+     * @return {THIS}
+     */
+    function (direction) {
+        (/** @type {?} */ (this))._direction = direction;
+        return (/** @type {?} */ (this));
+    };
+    /** Sets the container that the item is part of. */
+    /**
+     * Sets the container that the item is part of.
+     * @param {?} container
+     * @return {?}
+     */
+    DragRef.prototype._withDropContainer = /**
+     * Sets the container that the item is part of.
+     * @param {?} container
+     * @return {?}
+     */
+    function (container) {
+        this._dropContainer = container;
+    };
+    /** Unsubscribes from the global subscriptions. */
+    /**
+     * Unsubscribes from the global subscriptions.
+     * @private
+     * @return {?}
+     */
+    DragRef.prototype._removeSubscriptions = /**
+     * Unsubscribes from the global subscriptions.
+     * @private
+     * @return {?}
+     */
+    function () {
+        this._pointerMoveSubscription.unsubscribe();
+        this._pointerUpSubscription.unsubscribe();
+    };
+    /** Destroys the preview element and its ViewRef. */
+    /**
+     * Destroys the preview element and its ViewRef.
+     * @private
+     * @return {?}
+     */
+    DragRef.prototype._destroyPreview = /**
+     * Destroys the preview element and its ViewRef.
+     * @private
+     * @return {?}
+     */
+    function () {
+        if (this._preview) {
+            removeElement(this._preview);
+        }
+        if (this._previewRef) {
+            this._previewRef.destroy();
+        }
+        this._preview = this._previewRef = (/** @type {?} */ (null));
+    };
+    /** Destroys the placeholder element and its ViewRef. */
+    /**
+     * Destroys the placeholder element and its ViewRef.
+     * @private
+     * @return {?}
+     */
+    DragRef.prototype._destroyPlaceholder = /**
+     * Destroys the placeholder element and its ViewRef.
+     * @private
+     * @return {?}
+     */
+    function () {
+        if (this._placeholder) {
+            removeElement(this._placeholder);
+        }
+        if (this._placeholderRef) {
+            this._placeholderRef.destroy();
+        }
+        this._placeholder = this._placeholderRef = (/** @type {?} */ (null));
+    };
+    /** Starts the dragging sequence. */
+    /**
+     * Starts the dragging sequence.
+     * @private
+     * @param {?} event
+     * @return {?}
+     */
+    DragRef.prototype._startDragSequence = /**
+     * Starts the dragging sequence.
+     * @private
+     * @param {?} event
+     * @return {?}
+     */
+    function (event) {
+        // Emit the event on the item before the one on the container.
+        this.started.next({ source: this });
+        if (isTouchEvent(event)) {
+            this._lastTouchEventTime = Date.now();
+        }
+        if (this._dropContainer) {
+            /** @type {?} */
+            var element = this._rootElement;
+            // Grab the `nextSibling` before the preview and placeholder
+            // have been created so we don't get the preview by accident.
+            this._nextSibling = element.nextSibling;
+            /** @type {?} */
+            var preview = this._preview = this._createPreviewElement();
+            /** @type {?} */
+            var placeholder = this._placeholder = this._createPlaceholderElement();
+            // We move the element out at the end of the body and we make it hidden, because keeping it in
+            // place will throw off the consumer's `:last-child` selectors. We can't remove the element
+            // from the DOM completely, because iOS will stop firing all subsequent events in the chain.
+            element.style.display = 'none';
+            this._document.body.appendChild((/** @type {?} */ (element.parentNode)).replaceChild(placeholder, element));
+            this._document.body.appendChild(preview);
+            this._dropContainer.start();
+        }
+    };
+    /**
+     * Sets up the different variables and subscriptions
+     * that will be necessary for the dragging sequence.
+     * @param referenceElement Element that started the drag sequence.
+     * @param event Browser event object that started the sequence.
+     */
+    /**
+     * Sets up the different variables and subscriptions
+     * that will be necessary for the dragging sequence.
+     * @private
+     * @param {?} referenceElement Element that started the drag sequence.
+     * @param {?} event Browser event object that started the sequence.
+     * @return {?}
+     */
+    DragRef.prototype._initializeDragSequence = /**
+     * Sets up the different variables and subscriptions
+     * that will be necessary for the dragging sequence.
+     * @private
+     * @param {?} referenceElement Element that started the drag sequence.
+     * @param {?} event Browser event object that started the sequence.
+     * @return {?}
+     */
+    function (referenceElement, event) {
+        // Always stop propagation for the event that initializes
+        // the dragging sequence, in order to prevent it from potentially
+        // starting another sequence for a draggable parent somewhere up the DOM tree.
+        event.stopPropagation();
+        /** @type {?} */
+        var isDragging = this.isDragging();
+        /** @type {?} */
+        var isTouchSequence = isTouchEvent(event);
+        /** @type {?} */
+        var isAuxiliaryMouseButton = !isTouchSequence && ((/** @type {?} */ (event))).button !== 0;
+        /** @type {?} */
+        var rootElement = this._rootElement;
+        /** @type {?} */
+        var isSyntheticEvent = !isTouchSequence && this._lastTouchEventTime &&
+            this._lastTouchEventTime + MOUSE_EVENT_IGNORE_TIME > Date.now();
+        // If the event started from an element with the native HTML drag&drop, it'll interfere
+        // with our own dragging (e.g. `img` tags do it by default). Prevent the default action
+        // to stop it from happening. Note that preventing on `dragstart` also seems to work, but
+        // it's flaky and it fails if the user drags it away quickly. Also note that we only want
+        // to do this for `mousedown` since doing the same for `touchstart` will stop any `click`
+        // events from firing on touch devices.
+        if (event.target && ((/** @type {?} */ (event.target))).draggable && event.type === 'mousedown') {
+            event.preventDefault();
+        }
+        // Abort if the user is already dragging or is using a mouse button other than the primary one.
+        if (isDragging || isAuxiliaryMouseButton || isSyntheticEvent) {
+            return;
+        }
+        // Cache the previous transform amount only after the first drag sequence, because
+        // we don't want our own transforms to stack on top of each other.
+        if (this._initialTransform == null) {
+            this._initialTransform = this._rootElement.style.transform || '';
+        }
+        // If we've got handles, we need to disable the tap highlight on the entire root element,
+        // otherwise iOS will still add it, even though all the drag interactions on the handle
+        // are disabled.
+        if (this._handles.length) {
+            this._rootElementTapHighlight = rootElement.style.webkitTapHighlightColor;
+            rootElement.style.webkitTapHighlightColor = 'transparent';
+        }
+        this._toggleNativeDragInteractions();
+        this._hasStartedDragging = this._hasMoved = false;
+        this._initialContainer = (/** @type {?} */ (this._dropContainer));
+        this._pointerMoveSubscription = this._dragDropRegistry.pointerMove.subscribe(this._pointerMove);
+        this._pointerUpSubscription = this._dragDropRegistry.pointerUp.subscribe(this._pointerUp);
+        this._scrollPosition = this._viewportRuler.getViewportScrollPosition();
+        if (this._boundaryElement) {
+            this._boundaryRect = this._boundaryElement.getBoundingClientRect();
+        }
+        // If we have a custom preview template, the element won't be visible anyway so we avoid the
+        // extra `getBoundingClientRect` calls and just move the preview next to the cursor.
+        this._pickupPositionInElement = this._previewTemplate && this._previewTemplate.template ?
+            { x: 0, y: 0 } :
+            this._getPointerPositionInElement(referenceElement, event);
+        /** @type {?} */
+        var pointerPosition = this._pickupPositionOnPage = this._getPointerPositionOnPage(event);
+        this._pointerDirectionDelta = { x: 0, y: 0 };
+        this._pointerPositionAtLastDirectionChange = { x: pointerPosition.x, y: pointerPosition.y };
+        this._dragDropRegistry.startDragging(this, event);
+    };
+    /** Cleans up the DOM artifacts that were added to facilitate the element being dragged. */
+    /**
+     * Cleans up the DOM artifacts that were added to facilitate the element being dragged.
+     * @private
+     * @param {?} event
+     * @return {?}
+     */
+    DragRef.prototype._cleanupDragArtifacts = /**
+     * Cleans up the DOM artifacts that were added to facilitate the element being dragged.
+     * @private
+     * @param {?} event
+     * @return {?}
+     */
+    function (event) {
+        var _this = this;
+        // Restore the element's visibility and insert it at its old position in the DOM.
+        // It's important that we maintain the position, because moving the element around in the DOM
+        // can throw off `NgFor` which does smart diffing and re-creates elements only when necessary,
+        // while moving the existing elements in all other cases.
+        this._rootElement.style.display = '';
+        if (this._nextSibling) {
+            (/** @type {?} */ (this._nextSibling.parentNode)).insertBefore(this._rootElement, this._nextSibling);
+        }
+        else {
+            this._initialContainer.element.appendChild(this._rootElement);
+        }
+        this._destroyPreview();
+        this._destroyPlaceholder();
+        this._boundaryRect = this._previewRect = undefined;
+        // Re-enter the NgZone since we bound `document` events on the outside.
+        this._ngZone.run(function () {
+            /** @type {?} */
+            var container = (/** @type {?} */ (_this._dropContainer));
+            /** @type {?} */
+            var currentIndex = container.getItemIndex(_this);
+            var _a = _this._getPointerPositionOnPage(event), x = _a.x, y = _a.y;
+            /** @type {?} */
+            var isPointerOverContainer = container._isOverContainer(x, y);
+            _this.ended.next({ source: _this });
+            _this.dropped.next({
+                item: _this,
+                currentIndex: currentIndex,
+                previousIndex: _this._initialContainer.getItemIndex(_this),
+                container: container,
+                previousContainer: _this._initialContainer,
+                isPointerOverContainer: isPointerOverContainer
+            });
+            container.drop(_this, currentIndex, _this._initialContainer, isPointerOverContainer);
+            _this._dropContainer = _this._initialContainer;
+        });
+    };
+    /**
+     * Updates the item's position in its drop container, or moves it
+     * into a new one, depending on its current drag position.
+     */
+    /**
+     * Updates the item's position in its drop container, or moves it
+     * into a new one, depending on its current drag position.
+     * @private
+     * @param {?} __0
+     * @return {?}
+     */
+    DragRef.prototype._updateActiveDropContainer = /**
+     * Updates the item's position in its drop container, or moves it
+     * into a new one, depending on its current drag position.
+     * @private
+     * @param {?} __0
+     * @return {?}
+     */
+    function (_a) {
+        var _this = this;
+        var x = _a.x, y = _a.y;
+        // Drop container that draggable has been moved into.
+        /** @type {?} */
+        var newContainer = (/** @type {?} */ (this._dropContainer))._getSiblingContainerFromPosition(this, x, y) ||
+            this._initialContainer._getSiblingContainerFromPosition(this, x, y);
+        // If we couldn't find a new container to move the item into, and the item has left it's
+        // initial container, check whether the it's over the initial container. This handles the
+        // case where two containers are connected one way and the user tries to undo dragging an
+        // item into a new container.
+        if (!newContainer && this._dropContainer !== this._initialContainer &&
+            this._initialContainer._isOverContainer(x, y)) {
+            newContainer = this._initialContainer;
+        }
+        if (newContainer && newContainer !== this._dropContainer) {
+            this._ngZone.run(function () {
+                // Notify the old container that the item has left.
+                _this.exited.next({ item: _this, container: (/** @type {?} */ (_this._dropContainer)) });
+                (/** @type {?} */ (_this._dropContainer)).exit(_this);
+                // Notify the new container that the item has entered.
+                _this.entered.next({ item: _this, container: (/** @type {?} */ (newContainer)) });
+                _this._dropContainer = (/** @type {?} */ (newContainer));
+                _this._dropContainer.enter(_this, x, y);
+            });
+        }
+        (/** @type {?} */ (this._dropContainer))._sortItem(this, x, y, this._pointerDirectionDelta);
+        this._preview.style.transform =
+            getTransform(x - this._pickupPositionInElement.x, y - this._pickupPositionInElement.y);
+    };
+    /**
+     * Creates the element that will be rendered next to the user's pointer
+     * and will be used as a preview of the element that is being dragged.
+     */
+    /**
+     * Creates the element that will be rendered next to the user's pointer
+     * and will be used as a preview of the element that is being dragged.
+     * @private
+     * @return {?}
+     */
+    DragRef.prototype._createPreviewElement = /**
+     * Creates the element that will be rendered next to the user's pointer
+     * and will be used as a preview of the element that is being dragged.
+     * @private
+     * @return {?}
+     */
+    function () {
+        /** @type {?} */
+        var previewConfig = this._previewTemplate;
+        /** @type {?} */
+        var previewTemplate = previewConfig ? previewConfig.template : null;
+        /** @type {?} */
+        var preview;
+        if (previewTemplate) {
+            /** @type {?} */
+            var viewRef = (/** @type {?} */ (previewConfig)).viewContainer.createEmbeddedView(previewTemplate, (/** @type {?} */ (previewConfig)).context);
+            preview = viewRef.rootNodes[0];
+            this._previewRef = viewRef;
+            preview.style.transform =
+                getTransform(this._pickupPositionOnPage.x, this._pickupPositionOnPage.y);
+        }
+        else {
+            /** @type {?} */
+            var element = this._rootElement;
+            /** @type {?} */
+            var elementRect = element.getBoundingClientRect();
+            preview = deepCloneNode(element);
+            preview.style.width = elementRect.width + "px";
+            preview.style.height = elementRect.height + "px";
+            preview.style.transform = getTransform(elementRect.left, elementRect.top);
+        }
+        extendStyles(preview.style, {
+            // It's important that we disable the pointer events on the preview, because
+            // it can throw off the `document.elementFromPoint` calls in the `CdkDropList`.
+            pointerEvents: 'none',
+            position: 'fixed',
+            top: '0',
+            left: '0',
+            zIndex: '1000'
+        });
+        toggleNativeDragInteractions(preview, false);
+        preview.classList.add('cdk-drag-preview');
+        preview.setAttribute('dir', this._direction);
+        return preview;
+    };
+    /**
+     * Animates the preview element from its current position to the location of the drop placeholder.
+     * @returns Promise that resolves when the animation completes.
+     */
+    /**
+     * Animates the preview element from its current position to the location of the drop placeholder.
+     * @private
+     * @return {?} Promise that resolves when the animation completes.
+     */
+    DragRef.prototype._animatePreviewToPlaceholder = /**
+     * Animates the preview element from its current position to the location of the drop placeholder.
+     * @private
+     * @return {?} Promise that resolves when the animation completes.
+     */
+    function () {
+        var _this = this;
+        // If the user hasn't moved yet, the transitionend event won't fire.
+        if (!this._hasMoved) {
+            return Promise.resolve();
+        }
+        /** @type {?} */
+        var placeholderRect = this._placeholder.getBoundingClientRect();
+        // Apply the class that adds a transition to the preview.
+        this._preview.classList.add('cdk-drag-animating');
+        // Move the preview to the placeholder position.
+        this._preview.style.transform = getTransform(placeholderRect.left, placeholderRect.top);
+        // If the element doesn't have a `transition`, the `transitionend` event won't fire. Since
+        // we need to trigger a style recalculation in order for the `cdk-drag-animating` class to
+        // apply its style, we take advantage of the available info to figure out whether we need to
+        // bind the event in the first place.
+        /** @type {?} */
+        var duration = getTransformTransitionDurationInMs(this._preview);
+        if (duration === 0) {
+            return Promise.resolve();
+        }
+        return this._ngZone.runOutsideAngular(function () {
+            return new Promise(function (resolve) {
+                /** @type {?} */
+                var handler = (/** @type {?} */ ((function (event) {
+                    if (!event || (event.target === _this._preview && event.propertyName === 'transform')) {
+                        _this._preview.removeEventListener('transitionend', handler);
+                        resolve();
+                        clearTimeout(timeout);
+                    }
+                })));
+                // If a transition is short enough, the browser might not fire the `transitionend` event.
+                // Since we know how long it's supposed to take, add a timeout with a 50% buffer that'll
+                // fire if the transition hasn't completed when it was supposed to.
+                /** @type {?} */
+                var timeout = setTimeout((/** @type {?} */ (handler)), duration * 1.5);
+                _this._preview.addEventListener('transitionend', handler);
+            });
+        });
+    };
+    /** Creates an element that will be shown instead of the current element while dragging. */
+    /**
+     * Creates an element that will be shown instead of the current element while dragging.
+     * @private
+     * @return {?}
+     */
+    DragRef.prototype._createPlaceholderElement = /**
+     * Creates an element that will be shown instead of the current element while dragging.
+     * @private
+     * @return {?}
+     */
+    function () {
+        /** @type {?} */
+        var placeholderConfig = this._placeholderTemplate;
+        /** @type {?} */
+        var placeholderTemplate = placeholderConfig ? placeholderConfig.template : null;
+        /** @type {?} */
+        var placeholder;
+        if (placeholderTemplate) {
+            this._placeholderRef = (/** @type {?} */ (placeholderConfig)).viewContainer.createEmbeddedView(placeholderTemplate, (/** @type {?} */ (placeholderConfig)).context);
+            placeholder = this._placeholderRef.rootNodes[0];
+        }
+        else {
+            placeholder = deepCloneNode(this._rootElement);
+        }
+        placeholder.classList.add('cdk-drag-placeholder');
+        return placeholder;
+    };
+    /**
+     * Figures out the coordinates at which an element was picked up.
+     * @param referenceElement Element that initiated the dragging.
+     * @param event Event that initiated the dragging.
+     */
+    /**
+     * Figures out the coordinates at which an element was picked up.
+     * @private
+     * @param {?} referenceElement Element that initiated the dragging.
+     * @param {?} event Event that initiated the dragging.
+     * @return {?}
+     */
+    DragRef.prototype._getPointerPositionInElement = /**
+     * Figures out the coordinates at which an element was picked up.
+     * @private
+     * @param {?} referenceElement Element that initiated the dragging.
+     * @param {?} event Event that initiated the dragging.
+     * @return {?}
+     */
+    function (referenceElement, event) {
+        /** @type {?} */
+        var elementRect = this._rootElement.getBoundingClientRect();
+        /** @type {?} */
+        var handleElement = referenceElement === this._rootElement ? null : referenceElement;
+        /** @type {?} */
+        var referenceRect = handleElement ? handleElement.getBoundingClientRect() : elementRect;
+        /** @type {?} */
+        var point = isTouchEvent(event) ? event.targetTouches[0] : event;
+        /** @type {?} */
+        var x = point.pageX - referenceRect.left - this._scrollPosition.left;
+        /** @type {?} */
+        var y = point.pageY - referenceRect.top - this._scrollPosition.top;
+        return {
+            x: referenceRect.left - elementRect.left + x,
+            y: referenceRect.top - elementRect.top + y
+        };
+    };
+    /** Determines the point of the page that was touched by the user. */
+    /**
+     * Determines the point of the page that was touched by the user.
+     * @private
+     * @param {?} event
+     * @return {?}
+     */
+    DragRef.prototype._getPointerPositionOnPage = /**
+     * Determines the point of the page that was touched by the user.
+     * @private
+     * @param {?} event
+     * @return {?}
+     */
+    function (event) {
+        // `touches` will be empty for start/end events so we have to fall back to `changedTouches`.
+        /** @type {?} */
+        var point = isTouchEvent(event) ? (event.touches[0] || event.changedTouches[0]) : event;
+        return {
+            x: point.pageX - this._scrollPosition.left,
+            y: point.pageY - this._scrollPosition.top
+        };
+    };
+    /** Gets the pointer position on the page, accounting for any position constraints. */
+    /**
+     * Gets the pointer position on the page, accounting for any position constraints.
+     * @private
+     * @param {?} event
+     * @return {?}
+     */
+    DragRef.prototype._getConstrainedPointerPosition = /**
+     * Gets the pointer position on the page, accounting for any position constraints.
+     * @private
+     * @param {?} event
+     * @return {?}
+     */
+    function (event) {
+        /** @type {?} */
+        var point = this._getPointerPositionOnPage(event);
+        /** @type {?} */
+        var dropContainerLock = this._dropContainer ? this._dropContainer.lockAxis : null;
+        if (this.lockAxis === 'x' || dropContainerLock === 'x') {
+            point.y = this._pickupPositionOnPage.y;
+        }
+        else if (this.lockAxis === 'y' || dropContainerLock === 'y') {
+            point.x = this._pickupPositionOnPage.x;
+        }
+        if (this._boundaryRect) {
+            var _a = this._pickupPositionInElement, pickupX = _a.x, pickupY = _a.y;
+            /** @type {?} */
+            var boundaryRect = this._boundaryRect;
+            /** @type {?} */
+            var previewRect = (/** @type {?} */ (this._previewRect));
+            /** @type {?} */
+            var minY = boundaryRect.top + pickupY;
+            /** @type {?} */
+            var maxY = boundaryRect.bottom - (previewRect.height - pickupY);
+            /** @type {?} */
+            var minX = boundaryRect.left + pickupX;
+            /** @type {?} */
+            var maxX = boundaryRect.right - (previewRect.width - pickupX);
+            point.x = clamp(point.x, minX, maxX);
+            point.y = clamp(point.y, minY, maxY);
+        }
+        return point;
+    };
+    /** Updates the current drag delta, based on the user's current pointer position on the page. */
+    /**
+     * Updates the current drag delta, based on the user's current pointer position on the page.
+     * @private
+     * @param {?} pointerPositionOnPage
+     * @return {?}
+     */
+    DragRef.prototype._updatePointerDirectionDelta = /**
+     * Updates the current drag delta, based on the user's current pointer position on the page.
+     * @private
+     * @param {?} pointerPositionOnPage
+     * @return {?}
+     */
+    function (pointerPositionOnPage) {
+        var x = pointerPositionOnPage.x, y = pointerPositionOnPage.y;
+        /** @type {?} */
+        var delta = this._pointerDirectionDelta;
+        /** @type {?} */
+        var positionSinceLastChange = this._pointerPositionAtLastDirectionChange;
+        // Amount of pixels the user has dragged since the last time the direction changed.
+        /** @type {?} */
+        var changeX = Math.abs(x - positionSinceLastChange.x);
+        /** @type {?} */
+        var changeY = Math.abs(y - positionSinceLastChange.y);
+        // Because we handle pointer events on a per-pixel basis, we don't want the delta
+        // to change for every pixel, otherwise anything that depends on it can look erratic.
+        // To make the delta more consistent, we track how much the user has moved since the last
+        // delta change and we only update it after it has reached a certain threshold.
+        if (changeX > this._config.pointerDirectionChangeThreshold) {
+            delta.x = x > positionSinceLastChange.x ? 1 : -1;
+            positionSinceLastChange.x = x;
+        }
+        if (changeY > this._config.pointerDirectionChangeThreshold) {
+            delta.y = y > positionSinceLastChange.y ? 1 : -1;
+            positionSinceLastChange.y = y;
+        }
+        return delta;
+    };
+    /** Toggles the native drag interactions, based on how many handles are registered. */
+    /**
+     * Toggles the native drag interactions, based on how many handles are registered.
+     * @private
+     * @return {?}
+     */
+    DragRef.prototype._toggleNativeDragInteractions = /**
+     * Toggles the native drag interactions, based on how many handles are registered.
+     * @private
+     * @return {?}
+     */
+    function () {
+        if (!this._rootElement || !this._handles) {
+            return;
+        }
+        /** @type {?} */
+        var shouldEnable = this.disabled || this._handles.length > 0;
+        if (shouldEnable !== this._nativeInteractionsEnabled) {
+            this._nativeInteractionsEnabled = shouldEnable;
+            toggleNativeDragInteractions(this._rootElement, shouldEnable);
+        }
+    };
+    /** Removes the manually-added event listeners from the root element. */
+    /**
+     * Removes the manually-added event listeners from the root element.
+     * @private
+     * @param {?} element
+     * @return {?}
+     */
+    DragRef.prototype._removeRootElementListeners = /**
+     * Removes the manually-added event listeners from the root element.
+     * @private
+     * @param {?} element
+     * @return {?}
+     */
+    function (element) {
+        element.removeEventListener('mousedown', this._pointerDown, activeEventListenerOptions);
+        element.removeEventListener('touchstart', this._pointerDown, passiveEventListenerOptions);
+    };
+    return DragRef;
+}());
+/**
+ * Gets a 3d `transform` that can be applied to an element.
+ * @param {?} x Desired position of the element along the X axis.
+ * @param {?} y Desired position of the element along the Y axis.
+ * @return {?}
+ */
+function getTransform(x, y) {
+    // Round the transforms since some browsers will
+    // blur the elements for sub-pixel transforms.
+    return "translate3d(" + Math.round(x) + "px, " + Math.round(y) + "px, 0)";
+}
+/**
+ * Creates a deep clone of an element.
+ * @param {?} node
+ * @return {?}
+ */
+function deepCloneNode(node) {
+    /** @type {?} */
+    var clone = (/** @type {?} */ (node.cloneNode(true)));
+    // Remove the `id` to avoid having multiple elements with the same id on the page.
+    clone.removeAttribute('id');
+    return clone;
+}
+/**
+ * Clamps a value between a minimum and a maximum.
+ * @param {?} value
+ * @param {?} min
+ * @param {?} max
+ * @return {?}
+ */
+function clamp(value, min, max) {
+    return Math.max(min, Math.min(max, value));
+}
+/**
+ * Helper to remove an element from the DOM and to do all the necessary null checks.
+ * @param {?} element Element to be removed.
+ * @return {?}
+ */
+function removeElement(element) {
+    if (element && element.parentNode) {
+        element.parentNode.removeChild(element);
+    }
+}
+/**
+ * Determines whether an event is a touch event.
+ * @param {?} event
+ * @return {?}
+ */
+function isTouchEvent(event) {
+    return event.type.startsWith('touch');
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * Moves an item one index in an array to another.
+ * @template T
+ * @param {?} array Array in which to move the item.
+ * @param {?} fromIndex Starting index of the item.
+ * @param {?} toIndex Index to which the item should be moved.
+ * @return {?}
+ */
+function moveItemInArray(array, fromIndex, toIndex) {
+    /** @type {?} */
+    var from = clamp$1(fromIndex, array.length - 1);
+    /** @type {?} */
+    var to = clamp$1(toIndex, array.length - 1);
+    if (from === to) {
+        return;
+    }
+    /** @type {?} */
+    var target = array[from];
+    /** @type {?} */
+    var delta = to < from ? -1 : 1;
+    for (var i = from; i !== to; i += delta) {
+        array[i] = array[i + delta];
+    }
+    array[to] = target;
+}
+/**
+ * Moves an item from one array to another.
+ * @template T
+ * @param {?} currentArray Array from which to transfer the item.
+ * @param {?} targetArray Array into which to put the item.
+ * @param {?} currentIndex Index of the item in its current array.
+ * @param {?} targetIndex Index at which to insert the item.
+ * @return {?}
+ */
+function transferArrayItem(currentArray, targetArray, currentIndex, targetIndex) {
+    /** @type {?} */
+    var from = clamp$1(currentIndex, currentArray.length - 1);
+    /** @type {?} */
+    var to = clamp$1(targetIndex, targetArray.length);
+    if (currentArray.length) {
+        targetArray.splice(to, 0, currentArray.splice(from, 1)[0]);
+    }
+}
+/**
+ * Copies an item from one array to another, leaving it in its
+ * original position in current array.
+ * @template T
+ * @param {?} currentArray Array from which to copy the item.
+ * @param {?} targetArray Array into which is copy the item.
+ * @param {?} currentIndex Index of the item in its current array.
+ * @param {?} targetIndex Index at which to insert the item.
+ *
+ * @return {?}
+ */
+function copyArrayItem(currentArray, targetArray, currentIndex, targetIndex) {
+    /** @type {?} */
+    var to = clamp$1(targetIndex, targetArray.length);
+    if (currentArray.length) {
+        targetArray.splice(to, 0, currentArray[currentIndex]);
+    }
+}
+/**
+ * Clamps a number between zero and a maximum.
+ * @param {?} value
+ * @param {?} max
+ * @return {?}
+ */
+function clamp$1(value, max) {
+    return Math.max(0, Math.min(max, value));
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * Counter used to generate unique ids for drop refs.
+ * @type {?}
+ */
+var _uniqueIdCounter = 0;
+/**
+ * Proximity, as a ratio to width/height, at which a
+ * dragged item will affect the drop container.
+ * @type {?}
+ */
+var DROP_PROXIMITY_THRESHOLD = 0.05;
+/**
+ * Reference to a drop list. Used to manipulate or dispose of the container.
+ * \@docs-private
+ * @template T
+ */
+var  /**
+ * Reference to a drop list. Used to manipulate or dispose of the container.
+ * \@docs-private
+ * @template T
+ */
+DropListRef = /** @class */ (function () {
+    function DropListRef(element, _dragDropRegistry, _document) {
+        this._dragDropRegistry = _dragDropRegistry;
+        /**
+         * Unique ID for the drop list.
+         * @deprecated No longer being used. To be removed.
+         * \@breaking-change 8.0.0
+         */
+        this.id = "cdk-drop-list-ref-" + _uniqueIdCounter++;
+        /**
+         * Whether starting a dragging sequence from this container is disabled.
+         */
+        this.disabled = false;
+        /**
+         * Function that is used to determine whether an item
+         * is allowed to be moved into a drop container.
+         */
+        this.enterPredicate = function () { return true; };
+        /**
+         * Emits right before dragging has started.
+         */
+        this.beforeStarted = new rxjs__WEBPACK_IMPORTED_MODULE_2__["Subject"]();
+        /**
+         * Emits when the user has moved a new drag item into this container.
+         */
+        this.entered = new rxjs__WEBPACK_IMPORTED_MODULE_2__["Subject"]();
+        /**
+         * Emits when the user removes an item from the container
+         * by dragging it into another container.
+         */
+        this.exited = new rxjs__WEBPACK_IMPORTED_MODULE_2__["Subject"]();
+        /**
+         * Emits when the user drops an item inside the container.
+         */
+        this.dropped = new rxjs__WEBPACK_IMPORTED_MODULE_2__["Subject"]();
+        /**
+         * Emits as the user is swapping items while actively dragging.
+         */
+        this.sorted = new rxjs__WEBPACK_IMPORTED_MODULE_2__["Subject"]();
+        /**
+         * Whether an item in the list is being dragged.
+         */
+        this._isDragging = false;
+        /**
+         * Cache of the dimensions of all the items inside the container.
+         */
+        this._itemPositions = [];
+        /**
+         * Keeps track of the item that was last swapped with the dragged item, as
+         * well as what direction the pointer was moving in when the swap occured.
+         */
+        this._previousSwap = { drag: (/** @type {?} */ (null)), delta: 0 };
+        /**
+         * Drop lists that are connected to the current one.
+         */
+        this._siblings = [];
+        /**
+         * Direction in which the list is oriented.
+         */
+        this._orientation = 'vertical';
+        /**
+         * Connected siblings that currently have a dragged item.
+         */
+        this._activeSiblings = new Set();
+        /**
+         * Layout direction of the drop list.
+         */
+        this._direction = 'ltr';
+        _dragDropRegistry.registerDropContainer(this);
+        this._document = _document;
+        this.element = element instanceof _angular_core__WEBPACK_IMPORTED_MODULE_3__["ElementRef"] ? element.nativeElement : element;
+    }
+    /** Removes the drop list functionality from the DOM element. */
+    /**
+     * Removes the drop list functionality from the DOM element.
+     * @return {?}
+     */
+    DropListRef.prototype.dispose = /**
+     * Removes the drop list functionality from the DOM element.
+     * @return {?}
+     */
+    function () {
+        this.beforeStarted.complete();
+        this.entered.complete();
+        this.exited.complete();
+        this.dropped.complete();
+        this.sorted.complete();
+        this._activeSiblings.clear();
+        this._dragDropRegistry.removeDropContainer(this);
+    };
+    /** Whether an item from this list is currently being dragged. */
+    /**
+     * Whether an item from this list is currently being dragged.
+     * @return {?}
+     */
+    DropListRef.prototype.isDragging = /**
+     * Whether an item from this list is currently being dragged.
+     * @return {?}
+     */
+    function () {
+        return this._isDragging;
+    };
+    /** Starts dragging an item. */
+    /**
+     * Starts dragging an item.
+     * @return {?}
+     */
+    DropListRef.prototype.start = /**
+     * Starts dragging an item.
+     * @return {?}
+     */
+    function () {
+        var _this = this;
+        this.beforeStarted.next();
+        this._isDragging = true;
+        this._activeDraggables = this._draggables.slice();
+        this._cacheOwnPosition();
+        this._cacheItemPositions();
+        this._siblings.forEach(function (sibling) { return sibling._startReceiving(_this); });
+    };
+    /**
+     * Emits an event to indicate that the user moved an item into the container.
+     * @param item Item that was moved into the container.
+     * @param pointerX Position of the item along the X axis.
+     * @param pointerY Position of the item along the Y axis.
+     */
+    /**
+     * Emits an event to indicate that the user moved an item into the container.
+     * @param {?} item Item that was moved into the container.
+     * @param {?} pointerX Position of the item along the X axis.
+     * @param {?} pointerY Position of the item along the Y axis.
+     * @return {?}
+     */
+    DropListRef.prototype.enter = /**
+     * Emits an event to indicate that the user moved an item into the container.
+     * @param {?} item Item that was moved into the container.
+     * @param {?} pointerX Position of the item along the X axis.
+     * @param {?} pointerY Position of the item along the Y axis.
+     * @return {?}
+     */
+    function (item, pointerX, pointerY) {
+        this.entered.next({ item: item, container: this });
+        this.start();
+        // We use the coordinates of where the item entered the drop
+        // zone to figure out at which index it should be inserted.
+        /** @type {?} */
+        var newIndex = this._getItemIndexFromPointerPosition(item, pointerX, pointerY);
+        /** @type {?} */
+        var currentIndex = this._activeDraggables.indexOf(item);
+        /** @type {?} */
+        var newPositionReference = this._activeDraggables[newIndex];
+        /** @type {?} */
+        var placeholder = item.getPlaceholderElement();
+        // Since the item may be in the `activeDraggables` already (e.g. if the user dragged it
+        // into another container and back again), we have to ensure that it isn't duplicated.
+        if (currentIndex > -1) {
+            this._activeDraggables.splice(currentIndex, 1);
+        }
+        // Don't use items that are being dragged as a reference, because
+        // their element has been moved down to the bottom of the body.
+        if (newPositionReference && !this._dragDropRegistry.isDragging(newPositionReference)) {
+            /** @type {?} */
+            var element = newPositionReference.getRootElement();
+            (/** @type {?} */ (element.parentElement)).insertBefore(placeholder, element);
+            this._activeDraggables.splice(newIndex, 0, item);
+        }
+        else {
+            this.element.appendChild(placeholder);
+            this._activeDraggables.push(item);
+        }
+        // The transform needs to be cleared so it doesn't throw off the measurements.
+        placeholder.style.transform = '';
+        // Note that the positions were already cached when we called `start` above,
+        // but we need to refresh them since the amount of items has changed.
+        this._cacheItemPositions();
+    };
+    /**
+     * Removes an item from the container after it was dragged into another container by the user.
+     * @param item Item that was dragged out.
+     */
+    /**
+     * Removes an item from the container after it was dragged into another container by the user.
+     * @param {?} item Item that was dragged out.
+     * @return {?}
+     */
+    DropListRef.prototype.exit = /**
+     * Removes an item from the container after it was dragged into another container by the user.
+     * @param {?} item Item that was dragged out.
+     * @return {?}
+     */
+    function (item) {
+        this._reset();
+        this.exited.next({ item: item, container: this });
+    };
+    /**
+     * Drops an item into this container.
+     * @param item Item being dropped into the container.
+     * @param currentIndex Index at which the item should be inserted.
+     * @param previousContainer Container from which the item got dragged in.
+     * @param isPointerOverContainer Whether the user's pointer was over the
+     *    container when the item was dropped.
+     */
+    /**
+     * Drops an item into this container.
+     * @param {?} item Item being dropped into the container.
+     * @param {?} currentIndex Index at which the item should be inserted.
+     * @param {?} previousContainer Container from which the item got dragged in.
+     * @param {?} isPointerOverContainer Whether the user's pointer was over the
+     *    container when the item was dropped.
+     * @return {?}
+     */
+    DropListRef.prototype.drop = /**
+     * Drops an item into this container.
+     * @param {?} item Item being dropped into the container.
+     * @param {?} currentIndex Index at which the item should be inserted.
+     * @param {?} previousContainer Container from which the item got dragged in.
+     * @param {?} isPointerOverContainer Whether the user's pointer was over the
+     *    container when the item was dropped.
+     * @return {?}
+     */
+    function (item, currentIndex, previousContainer, isPointerOverContainer) {
+        this._reset();
+        this.dropped.next({
+            item: item,
+            currentIndex: currentIndex,
+            previousIndex: previousContainer.getItemIndex(item),
+            container: this,
+            previousContainer: previousContainer,
+            isPointerOverContainer: isPointerOverContainer
+        });
+    };
+    /**
+     * Sets the draggable items that are a part of this list.
+     * @param items Items that are a part of this list.
+     */
+    /**
+     * Sets the draggable items that are a part of this list.
+     * @template THIS
+     * @this {THIS}
+     * @param {?} items Items that are a part of this list.
+     * @return {THIS}
+     */
+    DropListRef.prototype.withItems = /**
+     * Sets the draggable items that are a part of this list.
+     * @template THIS
+     * @this {THIS}
+     * @param {?} items Items that are a part of this list.
+     * @return {THIS}
+     */
+    function (items) {
+        var _this = this;
+        (/** @type {?} */ (this))._draggables = items;
+        items.forEach(function (item) { return item._withDropContainer((/** @type {?} */ (_this))); });
+        return (/** @type {?} */ (this));
+    };
+    /** Sets the layout direction of the drop list. */
+    /**
+     * Sets the layout direction of the drop list.
+     * @template THIS
+     * @this {THIS}
+     * @param {?} direction
+     * @return {THIS}
+     */
+    DropListRef.prototype.withDirection = /**
+     * Sets the layout direction of the drop list.
+     * @template THIS
+     * @this {THIS}
+     * @param {?} direction
+     * @return {THIS}
+     */
+    function (direction) {
+        (/** @type {?} */ (this))._direction = direction;
+        return (/** @type {?} */ (this));
+    };
+    /**
+     * Sets the containers that are connected to this one. When two or more containers are
+     * connected, the user will be allowed to transfer items between them.
+     * @param connectedTo Other containers that the current containers should be connected to.
+     */
+    /**
+     * Sets the containers that are connected to this one. When two or more containers are
+     * connected, the user will be allowed to transfer items between them.
+     * @template THIS
+     * @this {THIS}
+     * @param {?} connectedTo Other containers that the current containers should be connected to.
+     * @return {THIS}
+     */
+    DropListRef.prototype.connectedTo = /**
+     * Sets the containers that are connected to this one. When two or more containers are
+     * connected, the user will be allowed to transfer items between them.
+     * @template THIS
+     * @this {THIS}
+     * @param {?} connectedTo Other containers that the current containers should be connected to.
+     * @return {THIS}
+     */
+    function (connectedTo) {
+        (/** @type {?} */ (this))._siblings = connectedTo.slice();
+        return (/** @type {?} */ (this));
+    };
+    /**
+     * Sets the orientation of the container.
+     * @param orientation New orientation for the container.
+     */
+    /**
+     * Sets the orientation of the container.
+     * @template THIS
+     * @this {THIS}
+     * @param {?} orientation New orientation for the container.
+     * @return {THIS}
+     */
+    DropListRef.prototype.withOrientation = /**
+     * Sets the orientation of the container.
+     * @template THIS
+     * @this {THIS}
+     * @param {?} orientation New orientation for the container.
+     * @return {THIS}
+     */
+    function (orientation) {
+        (/** @type {?} */ (this))._orientation = orientation;
+        return (/** @type {?} */ (this));
+    };
+    /**
+     * Figures out the index of an item in the container.
+     * @param item Item whose index should be determined.
+     */
+    /**
+     * Figures out the index of an item in the container.
+     * @param {?} item Item whose index should be determined.
+     * @return {?}
+     */
+    DropListRef.prototype.getItemIndex = /**
+     * Figures out the index of an item in the container.
+     * @param {?} item Item whose index should be determined.
+     * @return {?}
+     */
+    function (item) {
+        if (!this._isDragging) {
+            return this._draggables.indexOf(item);
+        }
+        // Items are sorted always by top/left in the cache, however they flow differently in RTL.
+        // The rest of the logic still stands no matter what orientation we're in, however
+        // we need to invert the array when determining the index.
+        /** @type {?} */
+        var items = this._orientation === 'horizontal' && this._direction === 'rtl' ?
+            this._itemPositions.slice().reverse() : this._itemPositions;
+        return findIndex(items, function (currentItem) { return currentItem.drag === item; });
+    };
+    /**
+     * Whether the list is able to receive the item that
+     * is currently being dragged inside a connected drop list.
+     */
+    /**
+     * Whether the list is able to receive the item that
+     * is currently being dragged inside a connected drop list.
+     * @return {?}
+     */
+    DropListRef.prototype.isReceiving = /**
+     * Whether the list is able to receive the item that
+     * is currently being dragged inside a connected drop list.
+     * @return {?}
+     */
+    function () {
+        return this._activeSiblings.size > 0;
+    };
+    /**
+     * Sorts an item inside the container based on its position.
+     * @param item Item to be sorted.
+     * @param pointerX Position of the item along the X axis.
+     * @param pointerY Position of the item along the Y axis.
+     * @param pointerDelta Direction in which the pointer is moving along each axis.
+     */
+    /**
+     * Sorts an item inside the container based on its position.
+     * @param {?} item Item to be sorted.
+     * @param {?} pointerX Position of the item along the X axis.
+     * @param {?} pointerY Position of the item along the Y axis.
+     * @param {?} pointerDelta Direction in which the pointer is moving along each axis.
+     * @return {?}
+     */
+    DropListRef.prototype._sortItem = /**
+     * Sorts an item inside the container based on its position.
+     * @param {?} item Item to be sorted.
+     * @param {?} pointerX Position of the item along the X axis.
+     * @param {?} pointerY Position of the item along the Y axis.
+     * @param {?} pointerDelta Direction in which the pointer is moving along each axis.
+     * @return {?}
+     */
+    function (item, pointerX, pointerY, pointerDelta) {
+        // Don't sort the item if it's out of range.
+        if (!this._isPointerNearDropContainer(pointerX, pointerY)) {
+            return;
+        }
+        /** @type {?} */
+        var siblings = this._itemPositions;
+        /** @type {?} */
+        var newIndex = this._getItemIndexFromPointerPosition(item, pointerX, pointerY, pointerDelta);
+        if (newIndex === -1 && siblings.length > 0) {
+            return;
+        }
+        /** @type {?} */
+        var isHorizontal = this._orientation === 'horizontal';
+        /** @type {?} */
+        var currentIndex = findIndex(siblings, function (currentItem) { return currentItem.drag === item; });
+        /** @type {?} */
+        var siblingAtNewPosition = siblings[newIndex];
+        /** @type {?} */
+        var currentPosition = siblings[currentIndex].clientRect;
+        /** @type {?} */
+        var newPosition = siblingAtNewPosition.clientRect;
+        /** @type {?} */
+        var delta = currentIndex > newIndex ? 1 : -1;
+        this._previousSwap.drag = siblingAtNewPosition.drag;
+        this._previousSwap.delta = isHorizontal ? pointerDelta.x : pointerDelta.y;
+        // How many pixels the item's placeholder should be offset.
+        /** @type {?} */
+        var itemOffset = this._getItemOffsetPx(currentPosition, newPosition, delta);
+        // How many pixels all the other items should be offset.
+        /** @type {?} */
+        var siblingOffset = this._getSiblingOffsetPx(currentIndex, siblings, delta);
+        // Save the previous order of the items before moving the item to its new index.
+        // We use this to check whether an item has been moved as a result of the sorting.
+        /** @type {?} */
+        var oldOrder = siblings.slice();
+        // Shuffle the array in place.
+        moveItemInArray(siblings, currentIndex, newIndex);
+        this.sorted.next({
+            previousIndex: currentIndex,
+            currentIndex: newIndex,
+            container: this,
+            item: item
+        });
+        siblings.forEach(function (sibling, index) {
+            // Don't do anything if the position hasn't changed.
+            if (oldOrder[index] === sibling) {
+                return;
+            }
+            /** @type {?} */
+            var isDraggedItem = sibling.drag === item;
+            /** @type {?} */
+            var offset = isDraggedItem ? itemOffset : siblingOffset;
+            /** @type {?} */
+            var elementToOffset = isDraggedItem ? item.getPlaceholderElement() :
+                sibling.drag.getRootElement();
+            // Update the offset to reflect the new position.
+            sibling.offset += offset;
+            // Since we're moving the items with a `transform`, we need to adjust their cached
+            // client rects to reflect their new position, as well as swap their positions in the cache.
+            // Note that we shouldn't use `getBoundingClientRect` here to update the cache, because the
+            // elements may be mid-animation which will give us a wrong result.
+            if (isHorizontal) {
+                // Round the transforms since some browsers will
+                // blur the elements, for sub-pixel transforms.
+                elementToOffset.style.transform = "translate3d(" + Math.round(sibling.offset) + "px, 0, 0)";
+                adjustClientRect(sibling.clientRect, 0, offset);
+            }
+            else {
+                elementToOffset.style.transform = "translate3d(0, " + Math.round(sibling.offset) + "px, 0)";
+                adjustClientRect(sibling.clientRect, offset, 0);
+            }
+        });
+    };
+    /** Caches the position of the drop list. */
+    /**
+     * Caches the position of the drop list.
+     * @private
+     * @return {?}
+     */
+    DropListRef.prototype._cacheOwnPosition = /**
+     * Caches the position of the drop list.
+     * @private
+     * @return {?}
+     */
+    function () {
+        this._clientRect = this.element.getBoundingClientRect();
+    };
+    /** Refreshes the position cache of the items and sibling containers. */
+    /**
+     * Refreshes the position cache of the items and sibling containers.
+     * @private
+     * @return {?}
+     */
+    DropListRef.prototype._cacheItemPositions = /**
+     * Refreshes the position cache of the items and sibling containers.
+     * @private
+     * @return {?}
+     */
+    function () {
+        var _this = this;
+        /** @type {?} */
+        var isHorizontal = this._orientation === 'horizontal';
+        this._itemPositions = this._activeDraggables.map(function (drag) {
+            /** @type {?} */
+            var elementToMeasure = _this._dragDropRegistry.isDragging(drag) ?
+                // If the element is being dragged, we have to measure the
+                // placeholder, because the element is hidden.
+                drag.getPlaceholderElement() :
+                drag.getRootElement();
+            /** @type {?} */
+            var clientRect = elementToMeasure.getBoundingClientRect();
+            return {
+                drag: drag,
+                offset: 0,
+                // We need to clone the `clientRect` here, because all the values on it are readonly
+                // and we need to be able to update them. Also we can't use a spread here, because
+                // the values on a `ClientRect` aren't own properties. See:
+                // https://developer.mozilla.org/en-US/docs/Web/API/Element/getBoundingClientRect#Notes
+                clientRect: {
+                    top: clientRect.top,
+                    right: clientRect.right,
+                    bottom: clientRect.bottom,
+                    left: clientRect.left,
+                    width: clientRect.width,
+                    height: clientRect.height
+                }
+            };
+        }).sort(function (a, b) {
+            return isHorizontal ? a.clientRect.left - b.clientRect.left :
+                a.clientRect.top - b.clientRect.top;
+        });
+    };
+    /** Resets the container to its initial state. */
+    /**
+     * Resets the container to its initial state.
+     * @private
+     * @return {?}
+     */
+    DropListRef.prototype._reset = /**
+     * Resets the container to its initial state.
+     * @private
+     * @return {?}
+     */
+    function () {
+        var _this = this;
+        this._isDragging = false;
+        // TODO(crisbeto): may have to wait for the animations to finish.
+        this._activeDraggables.forEach(function (item) { return item.getRootElement().style.transform = ''; });
+        this._siblings.forEach(function (sibling) { return sibling._stopReceiving(_this); });
+        this._activeDraggables = [];
+        this._itemPositions = [];
+        this._previousSwap.drag = null;
+        this._previousSwap.delta = 0;
+    };
+    /**
+     * Gets the offset in pixels by which the items that aren't being dragged should be moved.
+     * @param currentIndex Index of the item currently being dragged.
+     * @param siblings All of the items in the list.
+     * @param delta Direction in which the user is moving.
+     */
+    /**
+     * Gets the offset in pixels by which the items that aren't being dragged should be moved.
+     * @private
+     * @param {?} currentIndex Index of the item currently being dragged.
+     * @param {?} siblings All of the items in the list.
+     * @param {?} delta Direction in which the user is moving.
+     * @return {?}
+     */
+    DropListRef.prototype._getSiblingOffsetPx = /**
+     * Gets the offset in pixels by which the items that aren't being dragged should be moved.
+     * @private
+     * @param {?} currentIndex Index of the item currently being dragged.
+     * @param {?} siblings All of the items in the list.
+     * @param {?} delta Direction in which the user is moving.
+     * @return {?}
+     */
+    function (currentIndex, siblings, delta) {
+        /** @type {?} */
+        var isHorizontal = this._orientation === 'horizontal';
+        /** @type {?} */
+        var currentPosition = siblings[currentIndex].clientRect;
+        /** @type {?} */
+        var immediateSibling = siblings[currentIndex + delta * -1];
+        /** @type {?} */
+        var siblingOffset = currentPosition[isHorizontal ? 'width' : 'height'] * delta;
+        if (immediateSibling) {
+            /** @type {?} */
+            var start = isHorizontal ? 'left' : 'top';
+            /** @type {?} */
+            var end = isHorizontal ? 'right' : 'bottom';
+            // Get the spacing between the start of the current item and the end of the one immediately
+            // after it in the direction in which the user is dragging, or vice versa. We add it to the
+            // offset in order to push the element to where it will be when it's inline and is influenced
+            // by the `margin` of its siblings.
+            if (delta === -1) {
+                siblingOffset -= immediateSibling.clientRect[start] - currentPosition[end];
+            }
+            else {
+                siblingOffset += currentPosition[start] - immediateSibling.clientRect[end];
+            }
+        }
+        return siblingOffset;
+    };
+    /**
+     * Checks whether the pointer coordinates are close to the drop container.
+     * @param pointerX Coordinates along the X axis.
+     * @param pointerY Coordinates along the Y axis.
+     */
+    /**
+     * Checks whether the pointer coordinates are close to the drop container.
+     * @private
+     * @param {?} pointerX Coordinates along the X axis.
+     * @param {?} pointerY Coordinates along the Y axis.
+     * @return {?}
+     */
+    DropListRef.prototype._isPointerNearDropContainer = /**
+     * Checks whether the pointer coordinates are close to the drop container.
+     * @private
+     * @param {?} pointerX Coordinates along the X axis.
+     * @param {?} pointerY Coordinates along the Y axis.
+     * @return {?}
+     */
+    function (pointerX, pointerY) {
+        var _a = this._clientRect, top = _a.top, right = _a.right, bottom = _a.bottom, left = _a.left, width = _a.width, height = _a.height;
+        /** @type {?} */
+        var xThreshold = width * DROP_PROXIMITY_THRESHOLD;
+        /** @type {?} */
+        var yThreshold = height * DROP_PROXIMITY_THRESHOLD;
+        return pointerY > top - yThreshold && pointerY < bottom + yThreshold &&
+            pointerX > left - xThreshold && pointerX < right + xThreshold;
+    };
+    /**
+     * Gets the offset in pixels by which the item that is being dragged should be moved.
+     * @param currentPosition Current position of the item.
+     * @param newPosition Position of the item where the current item should be moved.
+     * @param delta Direction in which the user is moving.
+     */
+    /**
+     * Gets the offset in pixels by which the item that is being dragged should be moved.
+     * @private
+     * @param {?} currentPosition Current position of the item.
+     * @param {?} newPosition Position of the item where the current item should be moved.
+     * @param {?} delta Direction in which the user is moving.
+     * @return {?}
+     */
+    DropListRef.prototype._getItemOffsetPx = /**
+     * Gets the offset in pixels by which the item that is being dragged should be moved.
+     * @private
+     * @param {?} currentPosition Current position of the item.
+     * @param {?} newPosition Position of the item where the current item should be moved.
+     * @param {?} delta Direction in which the user is moving.
+     * @return {?}
+     */
+    function (currentPosition, newPosition, delta) {
+        /** @type {?} */
+        var isHorizontal = this._orientation === 'horizontal';
+        /** @type {?} */
+        var itemOffset = isHorizontal ? newPosition.left - currentPosition.left :
+            newPosition.top - currentPosition.top;
+        // Account for differences in the item width/height.
+        if (delta === -1) {
+            itemOffset += isHorizontal ? newPosition.width - currentPosition.width :
+                newPosition.height - currentPosition.height;
+        }
+        return itemOffset;
+    };
+    /**
+     * Gets the index of an item in the drop container, based on the position of the user's pointer.
+     * @param item Item that is being sorted.
+     * @param pointerX Position of the user's pointer along the X axis.
+     * @param pointerY Position of the user's pointer along the Y axis.
+     * @param delta Direction in which the user is moving their pointer.
+     */
+    /**
+     * Gets the index of an item in the drop container, based on the position of the user's pointer.
+     * @private
+     * @param {?} item Item that is being sorted.
+     * @param {?} pointerX Position of the user's pointer along the X axis.
+     * @param {?} pointerY Position of the user's pointer along the Y axis.
+     * @param {?=} delta Direction in which the user is moving their pointer.
+     * @return {?}
+     */
+    DropListRef.prototype._getItemIndexFromPointerPosition = /**
+     * Gets the index of an item in the drop container, based on the position of the user's pointer.
+     * @private
+     * @param {?} item Item that is being sorted.
+     * @param {?} pointerX Position of the user's pointer along the X axis.
+     * @param {?} pointerY Position of the user's pointer along the Y axis.
+     * @param {?=} delta Direction in which the user is moving their pointer.
+     * @return {?}
+     */
+    function (item, pointerX, pointerY, delta) {
+        var _this = this;
+        /** @type {?} */
+        var isHorizontal = this._orientation === 'horizontal';
+        return findIndex(this._itemPositions, function (_a, _, array) {
+            var drag = _a.drag, clientRect = _a.clientRect;
+            if (drag === item) {
+                // If there's only one item left in the container, it must be
+                // the dragged item itself so we use it as a reference.
+                return array.length < 2;
+            }
+            if (delta) {
+                /** @type {?} */
+                var direction = isHorizontal ? delta.x : delta.y;
+                // If the user is still hovering over the same item as last time, and they didn't change
+                // the direction in which they're dragging, we don't consider it a direction swap.
+                if (drag === _this._previousSwap.drag && direction === _this._previousSwap.delta) {
+                    return false;
+                }
+            }
+            return isHorizontal ?
+                // Round these down since most browsers report client rects with
+                // sub-pixel precision, whereas the pointer coordinates are rounded to pixels.
+                pointerX >= Math.floor(clientRect.left) && pointerX <= Math.floor(clientRect.right) :
+                pointerY >= Math.floor(clientRect.top) && pointerY <= Math.floor(clientRect.bottom);
+        });
+    };
+    /**
+     * Checks whether the user's pointer is positioned over the container.
+     * @param x Pointer position along the X axis.
+     * @param y Pointer position along the Y axis.
+     */
+    /**
+     * Checks whether the user's pointer is positioned over the container.
+     * @param {?} x Pointer position along the X axis.
+     * @param {?} y Pointer position along the Y axis.
+     * @return {?}
+     */
+    DropListRef.prototype._isOverContainer = /**
+     * Checks whether the user's pointer is positioned over the container.
+     * @param {?} x Pointer position along the X axis.
+     * @param {?} y Pointer position along the Y axis.
+     * @return {?}
+     */
+    function (x, y) {
+        return isInsideClientRect(this._clientRect, x, y);
+    };
+    /**
+     * Figures out whether an item should be moved into a sibling
+     * drop container, based on its current position.
+     * @param item Drag item that is being moved.
+     * @param x Position of the item along the X axis.
+     * @param y Position of the item along the Y axis.
+     */
+    /**
+     * Figures out whether an item should be moved into a sibling
+     * drop container, based on its current position.
+     * @param {?} item Drag item that is being moved.
+     * @param {?} x Position of the item along the X axis.
+     * @param {?} y Position of the item along the Y axis.
+     * @return {?}
+     */
+    DropListRef.prototype._getSiblingContainerFromPosition = /**
+     * Figures out whether an item should be moved into a sibling
+     * drop container, based on its current position.
+     * @param {?} item Drag item that is being moved.
+     * @param {?} x Position of the item along the X axis.
+     * @param {?} y Position of the item along the Y axis.
+     * @return {?}
+     */
+    function (item, x, y) {
+        return this._siblings.find(function (sibling) { return sibling._canReceive(item, x, y); });
+    };
+    /**
+     * Checks whether the drop list can receive the passed-in item.
+     * @param item Item that is being dragged into the list.
+     * @param x Position of the item along the X axis.
+     * @param y Position of the item along the Y axis.
+     */
+    /**
+     * Checks whether the drop list can receive the passed-in item.
+     * @param {?} item Item that is being dragged into the list.
+     * @param {?} x Position of the item along the X axis.
+     * @param {?} y Position of the item along the Y axis.
+     * @return {?}
+     */
+    DropListRef.prototype._canReceive = /**
+     * Checks whether the drop list can receive the passed-in item.
+     * @param {?} item Item that is being dragged into the list.
+     * @param {?} x Position of the item along the X axis.
+     * @param {?} y Position of the item along the Y axis.
+     * @return {?}
+     */
+    function (item, x, y) {
+        if (!this.enterPredicate(item, this) || !isInsideClientRect(this._clientRect, x, y)) {
+            return false;
+        }
+        /** @type {?} */
+        var elementFromPoint = this._document.elementFromPoint(x, y);
+        // If there's no element at the pointer position, then
+        // the client rect is probably scrolled out of the view.
+        if (!elementFromPoint) {
+            return false;
+        }
+        // The `ClientRect`, that we're using to find the container over which the user is
+        // hovering, doesn't give us any information on whether the element has been scrolled
+        // out of the view or whether it's overlapping with other containers. This means that
+        // we could end up transferring the item into a container that's invisible or is positioned
+        // below another one. We use the result from `elementFromPoint` to get the top-most element
+        // at the pointer position and to find whether it's one of the intersecting drop containers.
+        return elementFromPoint === this.element || this.element.contains(elementFromPoint);
+    };
+    /**
+     * Called by one of the connected drop lists when a dragging sequence has started.
+     * @param sibling Sibling in which dragging has started.
+     */
+    /**
+     * Called by one of the connected drop lists when a dragging sequence has started.
+     * @param {?} sibling Sibling in which dragging has started.
+     * @return {?}
+     */
+    DropListRef.prototype._startReceiving = /**
+     * Called by one of the connected drop lists when a dragging sequence has started.
+     * @param {?} sibling Sibling in which dragging has started.
+     * @return {?}
+     */
+    function (sibling) {
+        /** @type {?} */
+        var activeSiblings = this._activeSiblings;
+        if (!activeSiblings.has(sibling)) {
+            activeSiblings.add(sibling);
+            this._cacheOwnPosition();
+        }
+    };
+    /**
+     * Called by a connected drop list when dragging has stopped.
+     * @param sibling Sibling whose dragging has stopped.
+     */
+    /**
+     * Called by a connected drop list when dragging has stopped.
+     * @param {?} sibling Sibling whose dragging has stopped.
+     * @return {?}
+     */
+    DropListRef.prototype._stopReceiving = /**
+     * Called by a connected drop list when dragging has stopped.
+     * @param {?} sibling Sibling whose dragging has stopped.
+     * @return {?}
+     */
+    function (sibling) {
+        this._activeSiblings.delete(sibling);
+    };
+    return DropListRef;
+}());
+/**
+ * Updates the top/left positions of a `ClientRect`, as well as their bottom/right counterparts.
+ * @param {?} clientRect `ClientRect` that should be updated.
+ * @param {?} top Amount to add to the `top` position.
+ * @param {?} left Amount to add to the `left` position.
+ * @return {?}
+ */
+function adjustClientRect(clientRect, top, left) {
+    clientRect.top += top;
+    clientRect.bottom = clientRect.top + clientRect.height;
+    clientRect.left += left;
+    clientRect.right = clientRect.left + clientRect.width;
+}
+/**
+ * Finds the index of an item that matches a predicate function. Used as an equivalent
+ * of `Array.prototype.find` which isn't part of the standard Google typings.
+ * @template T
+ * @param {?} array Array in which to look for matches.
+ * @param {?} predicate Function used to determine whether an item is a match.
+ * @return {?}
+ */
+function findIndex(array, predicate) {
+    for (var i = 0; i < array.length; i++) {
+        if (predicate(array[i], i, array)) {
+            return i;
+        }
+    }
+    return -1;
+}
+/**
+ * Checks whether some coordinates are within a `ClientRect`.
+ * @param {?} clientRect ClientRect that is being checked.
+ * @param {?} x Coordinates along the X axis.
+ * @param {?} y Coordinates along the Y axis.
+ * @return {?}
+ */
+function isInsideClientRect(clientRect, x, y) {
+    var top = clientRect.top, bottom = clientRect.bottom, left = clientRect.left, right = clientRect.right;
+    return y >= top && y <= bottom && x >= left && x <= right;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * Event options that can be used to bind an active, capturing event.
+ * @type {?}
+ */
+var activeCapturingEventOptions = Object(_angular_cdk_platform__WEBPACK_IMPORTED_MODULE_0__["normalizePassiveListenerOptions"])({
+    passive: false,
+    capture: true
+});
+/**
+ * Service that keeps track of all the drag item and drop container
+ * instances, and manages global event listeners on the `document`.
+ * \@docs-private
+ * @template I, C
+ */
+// Note: this class is generic, rather than referencing CdkDrag and CdkDropList directly, in order
+// to avoid circular imports. If we were to reference them here, importing the registry into the
+// classes that are registering themselves will introduce a circular import.
+var DragDropRegistry = /** @class */ (function () {
+    function DragDropRegistry(_ngZone, _document) {
+        var _this = this;
+        this._ngZone = _ngZone;
+        /**
+         * Registered drop container instances.
+         */
+        this._dropInstances = new Set();
+        /**
+         * Registered drag item instances.
+         */
+        this._dragInstances = new Set();
+        /**
+         * Drag item instances that are currently being dragged.
+         */
+        this._activeDragInstances = new Set();
+        /**
+         * Keeps track of the event listeners that we've bound to the `document`.
+         */
+        this._globalListeners = new Map();
+        /**
+         * Emits the `touchmove` or `mousemove` events that are dispatched
+         * while the user is dragging a drag item instance.
+         */
+        this.pointerMove = new rxjs__WEBPACK_IMPORTED_MODULE_2__["Subject"]();
+        /**
+         * Emits the `touchend` or `mouseup` events that are dispatched
+         * while the user is dragging a drag item instance.
+         */
+        this.pointerUp = new rxjs__WEBPACK_IMPORTED_MODULE_2__["Subject"]();
+        /**
+         * Event listener that will prevent the default browser action while the user is dragging.
+         * @param event Event whose default action should be prevented.
+         */
+        this._preventDefaultWhileDragging = function (event) {
+            if (_this._activeDragInstances.size) {
+                event.preventDefault();
+            }
+        };
+        this._document = _document;
+    }
+    /** Adds a drop container to the registry. */
+    /**
+     * Adds a drop container to the registry.
+     * @param {?} drop
+     * @return {?}
+     */
+    DragDropRegistry.prototype.registerDropContainer = /**
+     * Adds a drop container to the registry.
+     * @param {?} drop
+     * @return {?}
+     */
+    function (drop) {
+        if (!this._dropInstances.has(drop)) {
+            if (this.getDropContainer(drop.id)) {
+                throw Error("Drop instance with id \"" + drop.id + "\" has already been registered.");
+            }
+            this._dropInstances.add(drop);
+        }
+    };
+    /** Adds a drag item instance to the registry. */
+    /**
+     * Adds a drag item instance to the registry.
+     * @param {?} drag
+     * @return {?}
+     */
+    DragDropRegistry.prototype.registerDragItem = /**
+     * Adds a drag item instance to the registry.
+     * @param {?} drag
+     * @return {?}
+     */
+    function (drag) {
+        var _this = this;
+        this._dragInstances.add(drag);
+        // The `touchmove` event gets bound once, ahead of time, because WebKit
+        // won't preventDefault on a dynamically-added `touchmove` listener.
+        // See https://bugs.webkit.org/show_bug.cgi?id=184250.
+        if (this._dragInstances.size === 1) {
+            this._ngZone.runOutsideAngular(function () {
+                // The event handler has to be explicitly active,
+                // because newer browsers make it passive by default.
+                _this._document.addEventListener('touchmove', _this._preventDefaultWhileDragging, activeCapturingEventOptions);
+            });
+        }
+    };
+    /** Removes a drop container from the registry. */
+    /**
+     * Removes a drop container from the registry.
+     * @param {?} drop
+     * @return {?}
+     */
+    DragDropRegistry.prototype.removeDropContainer = /**
+     * Removes a drop container from the registry.
+     * @param {?} drop
+     * @return {?}
+     */
+    function (drop) {
+        this._dropInstances.delete(drop);
+    };
+    /** Removes a drag item instance from the registry. */
+    /**
+     * Removes a drag item instance from the registry.
+     * @param {?} drag
+     * @return {?}
+     */
+    DragDropRegistry.prototype.removeDragItem = /**
+     * Removes a drag item instance from the registry.
+     * @param {?} drag
+     * @return {?}
+     */
+    function (drag) {
+        this._dragInstances.delete(drag);
+        this.stopDragging(drag);
+        if (this._dragInstances.size === 0) {
+            this._document.removeEventListener('touchmove', this._preventDefaultWhileDragging, activeCapturingEventOptions);
+        }
+    };
+    /**
+     * Starts the dragging sequence for a drag instance.
+     * @param drag Drag instance which is being dragged.
+     * @param event Event that initiated the dragging.
+     */
+    /**
+     * Starts the dragging sequence for a drag instance.
+     * @param {?} drag Drag instance which is being dragged.
+     * @param {?} event Event that initiated the dragging.
+     * @return {?}
+     */
+    DragDropRegistry.prototype.startDragging = /**
+     * Starts the dragging sequence for a drag instance.
+     * @param {?} drag Drag instance which is being dragged.
+     * @param {?} event Event that initiated the dragging.
+     * @return {?}
+     */
+    function (drag, event) {
+        var _this = this;
+        this._activeDragInstances.add(drag);
+        if (this._activeDragInstances.size === 1) {
+            /** @type {?} */
+            var isTouchEvent = event.type.startsWith('touch');
+            /** @type {?} */
+            var moveEvent = isTouchEvent ? 'touchmove' : 'mousemove';
+            /** @type {?} */
+            var upEvent = isTouchEvent ? 'touchend' : 'mouseup';
+            // We explicitly bind __active__ listeners here, because newer browsers will default to
+            // passive ones for `mousemove` and `touchmove`. The events need to be active, because we
+            // use `preventDefault` to prevent the page from scrolling while the user is dragging.
+            this._globalListeners
+                .set(moveEvent, {
+                handler: function (e) { return _this.pointerMove.next((/** @type {?} */ (e))); },
+                options: activeCapturingEventOptions
+            })
+                .set(upEvent, {
+                handler: function (e) { return _this.pointerUp.next((/** @type {?} */ (e))); },
+                options: true
+            })
+                // Preventing the default action on `mousemove` isn't enough to disable text selection
+                // on Safari so we need to prevent the selection event as well. Alternatively this can
+                // be done by setting `user-select: none` on the `body`, however it has causes a style
+                // recalculation which can be expensive on pages with a lot of elements.
+                .set('selectstart', {
+                handler: this._preventDefaultWhileDragging,
+                options: activeCapturingEventOptions
+            });
+            // TODO(crisbeto): prevent mouse wheel scrolling while
+            // dragging until we've set up proper scroll handling.
+            if (!isTouchEvent) {
+                this._globalListeners.set('wheel', {
+                    handler: this._preventDefaultWhileDragging,
+                    options: activeCapturingEventOptions
+                });
+            }
+            this._ngZone.runOutsideAngular(function () {
+                _this._globalListeners.forEach(function (config, name) {
+                    _this._document.addEventListener(name, config.handler, config.options);
+                });
+            });
+        }
+    };
+    /** Stops dragging a drag item instance. */
+    /**
+     * Stops dragging a drag item instance.
+     * @param {?} drag
+     * @return {?}
+     */
+    DragDropRegistry.prototype.stopDragging = /**
+     * Stops dragging a drag item instance.
+     * @param {?} drag
+     * @return {?}
+     */
+    function (drag) {
+        this._activeDragInstances.delete(drag);
+        if (this._activeDragInstances.size === 0) {
+            this._clearGlobalListeners();
+        }
+    };
+    /** Gets whether a drag item instance is currently being dragged. */
+    /**
+     * Gets whether a drag item instance is currently being dragged.
+     * @param {?} drag
+     * @return {?}
+     */
+    DragDropRegistry.prototype.isDragging = /**
+     * Gets whether a drag item instance is currently being dragged.
+     * @param {?} drag
+     * @return {?}
+     */
+    function (drag) {
+        return this._activeDragInstances.has(drag);
+    };
+    /**
+     * Gets a drop container by its id.
+     * @deprecated No longer being used. To be removed.
+     * @breaking-change 8.0.0
+     */
+    /**
+     * Gets a drop container by its id.
+     * @deprecated No longer being used. To be removed.
+     * \@breaking-change 8.0.0
+     * @param {?} id
+     * @return {?}
+     */
+    DragDropRegistry.prototype.getDropContainer = /**
+     * Gets a drop container by its id.
+     * @deprecated No longer being used. To be removed.
+     * \@breaking-change 8.0.0
+     * @param {?} id
+     * @return {?}
+     */
+    function (id) {
+        return Array.from(this._dropInstances).find(function (instance) { return instance.id === id; });
+    };
+    /**
+     * @return {?}
+     */
+    DragDropRegistry.prototype.ngOnDestroy = /**
+     * @return {?}
+     */
+    function () {
+        var _this = this;
+        this._dragInstances.forEach(function (instance) { return _this.removeDragItem(instance); });
+        this._dropInstances.forEach(function (instance) { return _this.removeDropContainer(instance); });
+        this._clearGlobalListeners();
+        this.pointerMove.complete();
+        this.pointerUp.complete();
+    };
+    /** Clears out the global event listeners from the `document`. */
+    /**
+     * Clears out the global event listeners from the `document`.
+     * @private
+     * @return {?}
+     */
+    DragDropRegistry.prototype._clearGlobalListeners = /**
+     * Clears out the global event listeners from the `document`.
+     * @private
+     * @return {?}
+     */
+    function () {
+        var _this = this;
+        this._globalListeners.forEach(function (config, name) {
+            _this._document.removeEventListener(name, config.handler, config.options);
+        });
+        this._globalListeners.clear();
+    };
+    DragDropRegistry.decorators = [
+        { type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["Injectable"], args: [{ providedIn: 'root' },] },
+    ];
+    /** @nocollapse */
+    DragDropRegistry.ctorParameters = function () { return [
+        { type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["NgZone"] },
+        { type: undefined, decorators: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["Inject"], args: [_angular_common__WEBPACK_IMPORTED_MODULE_4__["DOCUMENT"],] }] }
+    ]; };
+    /** @nocollapse */ DragDropRegistry.ngInjectableDef = Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["defineInjectable"])({ factory: function DragDropRegistry_Factory() { return new DragDropRegistry(Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["inject"])(_angular_core__WEBPACK_IMPORTED_MODULE_3__["NgZone"]), Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["inject"])(_angular_common__WEBPACK_IMPORTED_MODULE_4__["DOCUMENT"])); }, token: DragDropRegistry, providedIn: "root" });
+    return DragDropRegistry;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * Default configuration to be used when creating a `DragRef`.
+ * @type {?}
+ */
+var DEFAULT_CONFIG = {
+    dragStartThreshold: 5,
+    pointerDirectionChangeThreshold: 5
+};
+/**
+ * Service that allows for drag-and-drop functionality to be attached to DOM elements.
+ */
+var DragDrop = /** @class */ (function () {
+    function DragDrop(_document, _ngZone, _viewportRuler, _dragDropRegistry) {
+        this._document = _document;
+        this._ngZone = _ngZone;
+        this._viewportRuler = _viewportRuler;
+        this._dragDropRegistry = _dragDropRegistry;
+    }
+    /**
+     * Turns an element into a draggable item.
+     * @param element Element to which to attach the dragging functionality.
+     * @param config Object used to configure the dragging behavior.
+     */
+    /**
+     * Turns an element into a draggable item.
+     * @template T
+     * @param {?} element Element to which to attach the dragging functionality.
+     * @param {?=} config Object used to configure the dragging behavior.
+     * @return {?}
+     */
+    DragDrop.prototype.createDrag = /**
+     * Turns an element into a draggable item.
+     * @template T
+     * @param {?} element Element to which to attach the dragging functionality.
+     * @param {?=} config Object used to configure the dragging behavior.
+     * @return {?}
+     */
+    function (element, config) {
+        if (config === void 0) { config = DEFAULT_CONFIG; }
+        return new DragRef(element, config, this._document, this._ngZone, this._viewportRuler, this._dragDropRegistry);
+    };
+    /**
+     * Turns an element into a drop list.
+     * @param element Element to which to attach the drop list functionality.
+     */
+    /**
+     * Turns an element into a drop list.
+     * @template T
+     * @param {?} element Element to which to attach the drop list functionality.
+     * @return {?}
+     */
+    DragDrop.prototype.createDropList = /**
+     * Turns an element into a drop list.
+     * @template T
+     * @param {?} element Element to which to attach the drop list functionality.
+     * @return {?}
+     */
+    function (element) {
+        return new DropListRef(element, this._dragDropRegistry, this._document);
+    };
+    DragDrop.decorators = [
+        { type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["Injectable"], args: [{ providedIn: 'root' },] },
+    ];
+    /** @nocollapse */
+    DragDrop.ctorParameters = function () { return [
+        { type: undefined, decorators: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["Inject"], args: [_angular_common__WEBPACK_IMPORTED_MODULE_4__["DOCUMENT"],] }] },
+        { type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["NgZone"] },
+        { type: _angular_cdk_scrolling__WEBPACK_IMPORTED_MODULE_5__["ViewportRuler"] },
+        { type: DragDropRegistry }
+    ]; };
+    /** @nocollapse */ DragDrop.ngInjectableDef = Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["defineInjectable"])({ factory: function DragDrop_Factory() { return new DragDrop(Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["inject"])(_angular_common__WEBPACK_IMPORTED_MODULE_4__["DOCUMENT"]), Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["inject"])(_angular_core__WEBPACK_IMPORTED_MODULE_3__["NgZone"]), Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["inject"])(_angular_cdk_scrolling__WEBPACK_IMPORTED_MODULE_5__["ViewportRuler"]), Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["inject"])(DragDropRegistry)); }, token: DragDrop, providedIn: "root" });
+    return DragDrop;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * Injection token that is used to provide a CdkDropList instance to CdkDrag.
+ * Used for avoiding circular imports.
+ * @type {?}
+ */
+var CDK_DROP_LIST = new _angular_core__WEBPACK_IMPORTED_MODULE_3__["InjectionToken"]('CDK_DROP_LIST');
+/**
+ * Injection token that is used to provide a CdkDropList instance to CdkDrag.
+ * Used for avoiding circular imports.
+ * @deprecated Use `CDK_DROP_LIST` instead.
+ * \@breaking-change 8.0.0
+ * @type {?}
+ */
+var CDK_DROP_LIST_CONTAINER = CDK_DROP_LIST;
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * Injection token that can be used for a `CdkDrag` to provide itself as a parent to the
+ * drag-specific child directive (`CdkDragHandle`, `CdkDragPreview` etc.). Used primarily
+ * to avoid circular imports.
+ * \@docs-private
+ * @type {?}
+ */
+var CDK_DRAG_PARENT = new _angular_core__WEBPACK_IMPORTED_MODULE_3__["InjectionToken"]('CDK_DRAG_PARENT');
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * Handle that can be used to drag and CdkDrag instance.
+ */
+var CdkDragHandle = /** @class */ (function () {
+    function CdkDragHandle(element, parentDrag) {
+        this.element = element;
+        /**
+         * Emits when the state of the handle has changed.
+         */
+        this._stateChanges = new rxjs__WEBPACK_IMPORTED_MODULE_2__["Subject"]();
+        this._disabled = false;
+        this._parentDrag = parentDrag;
+        toggleNativeDragInteractions(element.nativeElement, false);
+    }
+    Object.defineProperty(CdkDragHandle.prototype, "disabled", {
+        /** Whether starting to drag through this handle is disabled. */
+        get: /**
+         * Whether starting to drag through this handle is disabled.
+         * @return {?}
+         */
+        function () { return this._disabled; },
+        set: /**
+         * @param {?} value
+         * @return {?}
+         */
+        function (value) {
+            this._disabled = Object(_angular_cdk_coercion__WEBPACK_IMPORTED_MODULE_1__["coerceBooleanProperty"])(value);
+            this._stateChanges.next(this);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    /**
+     * @return {?}
+     */
+    CdkDragHandle.prototype.ngOnDestroy = /**
+     * @return {?}
+     */
+    function () {
+        this._stateChanges.complete();
+    };
+    CdkDragHandle.decorators = [
+        { type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["Directive"], args: [{
+                    selector: '[cdkDragHandle]',
+                    host: {
+                        'class': 'cdk-drag-handle'
+                    }
+                },] },
+    ];
+    /** @nocollapse */
+    CdkDragHandle.ctorParameters = function () { return [
+        { type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["ElementRef"] },
+        { type: undefined, decorators: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["Inject"], args: [CDK_DRAG_PARENT,] }, { type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["Optional"] }] }
+    ]; };
+    CdkDragHandle.propDecorators = {
+        disabled: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["Input"], args: ['cdkDragHandleDisabled',] }]
+    };
+    return CdkDragHandle;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * Element that will be used as a template for the placeholder of a CdkDrag when
+ * it is being dragged. The placeholder is displayed in place of the element being dragged.
+ * @template T
+ */
+var CdkDragPlaceholder = /** @class */ (function () {
+    function CdkDragPlaceholder(templateRef) {
+        this.templateRef = templateRef;
+    }
+    CdkDragPlaceholder.decorators = [
+        { type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["Directive"], args: [{
+                    selector: 'ng-template[cdkDragPlaceholder]'
+                },] },
+    ];
+    /** @nocollapse */
+    CdkDragPlaceholder.ctorParameters = function () { return [
+        { type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["TemplateRef"] }
+    ]; };
+    CdkDragPlaceholder.propDecorators = {
+        data: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["Input"] }]
+    };
+    return CdkDragPlaceholder;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * Element that will be used as a template for the preview
+ * of a CdkDrag when it is being dragged.
+ * @template T
+ */
+var CdkDragPreview = /** @class */ (function () {
+    function CdkDragPreview(templateRef) {
+        this.templateRef = templateRef;
+    }
+    CdkDragPreview.decorators = [
+        { type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["Directive"], args: [{
+                    selector: 'ng-template[cdkDragPreview]'
+                },] },
+    ];
+    /** @nocollapse */
+    CdkDragPreview.ctorParameters = function () { return [
+        { type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["TemplateRef"] }
+    ]; };
+    CdkDragPreview.propDecorators = {
+        data: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["Input"] }]
+    };
+    return CdkDragPreview;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * Injection token that can be used to configure the behavior of `CdkDrag`.
+ * @type {?}
+ */
+var CDK_DRAG_CONFIG = new _angular_core__WEBPACK_IMPORTED_MODULE_3__["InjectionToken"]('CDK_DRAG_CONFIG', {
+    providedIn: 'root',
+    factory: CDK_DRAG_CONFIG_FACTORY
+});
+/**
+ * \@docs-private
+ * @return {?}
+ */
+function CDK_DRAG_CONFIG_FACTORY() {
+    return { dragStartThreshold: 5, pointerDirectionChangeThreshold: 5 };
+}
+/**
+ * Element that can be moved inside a CdkDropList container.
+ * @template T
+ */
+var CdkDrag = /** @class */ (function () {
+    function CdkDrag(element, dropContainer, _document, _ngZone, _viewContainerRef, viewportRuler, dragDropRegistry, config, _dir, 
+    /**
+     * @deprecated `viewportRuler`, `dragDropRegistry` and `_changeDetectorRef` parameters
+     * to be removed. Also `dragDrop` parameter to be made required.
+     * @breaking-change 8.0.0.
+     */
+    dragDrop, _changeDetectorRef) {
+        var _this = this;
+        this.element = element;
+        this.dropContainer = dropContainer;
+        this._document = _document;
+        this._ngZone = _ngZone;
+        this._viewContainerRef = _viewContainerRef;
+        this._dir = _dir;
+        this._changeDetectorRef = _changeDetectorRef;
+        this._destroyed = new rxjs__WEBPACK_IMPORTED_MODULE_2__["Subject"]();
+        this._disabled = false;
+        /**
+         * Emits when the user starts dragging the item.
+         */
+        this.started = new _angular_core__WEBPACK_IMPORTED_MODULE_3__["EventEmitter"]();
+        /**
+         * Emits when the user has released a drag item, before any animations have started.
+         */
+        this.released = new _angular_core__WEBPACK_IMPORTED_MODULE_3__["EventEmitter"]();
+        /**
+         * Emits when the user stops dragging an item in the container.
+         */
+        this.ended = new _angular_core__WEBPACK_IMPORTED_MODULE_3__["EventEmitter"]();
+        /**
+         * Emits when the user has moved the item into a new container.
+         */
+        this.entered = new _angular_core__WEBPACK_IMPORTED_MODULE_3__["EventEmitter"]();
+        /**
+         * Emits when the user removes the item its container by dragging it into another container.
+         */
+        this.exited = new _angular_core__WEBPACK_IMPORTED_MODULE_3__["EventEmitter"]();
+        /**
+         * Emits when the user drops the item inside a container.
+         */
+        this.dropped = new _angular_core__WEBPACK_IMPORTED_MODULE_3__["EventEmitter"]();
+        /**
+         * Emits as the user is dragging the item. Use with caution,
+         * because this event will fire for every pixel that the user has dragged.
+         */
+        this.moved = new rxjs__WEBPACK_IMPORTED_MODULE_2__["Observable"](function (observer) {
+            /** @type {?} */
+            var subscription = _this._dragRef.moved.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["map"])(function (movedEvent) { return ({
+                source: _this,
+                pointerPosition: movedEvent.pointerPosition,
+                event: movedEvent.event,
+                delta: movedEvent.delta
+            }); })).subscribe(observer);
+            return function () {
+                subscription.unsubscribe();
+            };
+        });
+        // @breaking-change 8.0.0 Remove null check once the paramter is made required.
+        if (dragDrop) {
+            this._dragRef = dragDrop.createDrag(element, config);
+        }
+        else {
+            this._dragRef = new DragRef(element, config, _document, _ngZone, viewportRuler, dragDropRegistry);
+        }
+        this._dragRef.data = this;
+        this._syncInputs(this._dragRef);
+        this._handleEvents(this._dragRef);
+    }
+    Object.defineProperty(CdkDrag.prototype, "disabled", {
+        /** Whether starting to drag this element is disabled. */
+        get: /**
+         * Whether starting to drag this element is disabled.
+         * @return {?}
+         */
+        function () {
+            return this._disabled || (this.dropContainer && this.dropContainer.disabled);
+        },
+        set: /**
+         * @param {?} value
+         * @return {?}
+         */
+        function (value) {
+            this._disabled = Object(_angular_cdk_coercion__WEBPACK_IMPORTED_MODULE_1__["coerceBooleanProperty"])(value);
+            this._dragRef.disabled = this._disabled;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    /**
+     * Returns the element that is being used as a placeholder
+     * while the current element is being dragged.
+     */
+    /**
+     * Returns the element that is being used as a placeholder
+     * while the current element is being dragged.
+     * @return {?}
+     */
+    CdkDrag.prototype.getPlaceholderElement = /**
+     * Returns the element that is being used as a placeholder
+     * while the current element is being dragged.
+     * @return {?}
+     */
+    function () {
+        return this._dragRef.getPlaceholderElement();
+    };
+    /** Returns the root draggable element. */
+    /**
+     * Returns the root draggable element.
+     * @return {?}
+     */
+    CdkDrag.prototype.getRootElement = /**
+     * Returns the root draggable element.
+     * @return {?}
+     */
+    function () {
+        return this._dragRef.getRootElement();
+    };
+    /** Resets a standalone drag item to its initial position. */
+    /**
+     * Resets a standalone drag item to its initial position.
+     * @return {?}
+     */
+    CdkDrag.prototype.reset = /**
+     * Resets a standalone drag item to its initial position.
+     * @return {?}
+     */
+    function () {
+        this._dragRef.reset();
+    };
+    /**
+     * @return {?}
+     */
+    CdkDrag.prototype.ngAfterViewInit = /**
+     * @return {?}
+     */
+    function () {
+        var _this = this;
+        // We need to wait for the zone to stabilize, in order for the reference
+        // element to be in the proper place in the DOM. This is mostly relevant
+        // for draggable elements inside portals since they get stamped out in
+        // their original DOM position and then they get transferred to the portal.
+        this._ngZone.onStable.asObservable()
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["take"])(1), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["takeUntil"])(this._destroyed))
+            .subscribe(function () {
+            _this._updateRootElement();
+            // Listen for any newly-added handles.
+            _this._handles.changes.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["startWith"])(_this._handles), 
+            // Sync the new handles with the DragRef.
+            Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["tap"])(function (handles) {
+                /** @type {?} */
+                var childHandleElements = handles
+                    .filter(function (handle) { return handle._parentDrag === _this; })
+                    .map(function (handle) { return handle.element; });
+                _this._dragRef.withHandles(childHandleElements);
+            }), 
+            // Listen if the state of any of the handles changes.
+            Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["switchMap"])(function (handles) {
+                return rxjs__WEBPACK_IMPORTED_MODULE_2__["merge"].apply(void 0, handles.map(function (item) { return item._stateChanges; }));
+            }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["takeUntil"])(_this._destroyed)).subscribe(function (handleInstance) {
+                // Enabled/disable the handle that changed in the DragRef.
+                /** @type {?} */
+                var dragRef = _this._dragRef;
+                /** @type {?} */
+                var handle = handleInstance.element.nativeElement;
+                handleInstance.disabled ? dragRef.disableHandle(handle) : dragRef.enableHandle(handle);
+            });
+        });
+    };
+    /**
+     * @param {?} changes
+     * @return {?}
+     */
+    CdkDrag.prototype.ngOnChanges = /**
+     * @param {?} changes
+     * @return {?}
+     */
+    function (changes) {
+        /** @type {?} */
+        var rootSelectorChange = changes['rootElementSelector'];
+        // We don't have to react to the first change since it's being
+        // handled in `ngAfterViewInit` where it needs to be deferred.
+        if (rootSelectorChange && !rootSelectorChange.firstChange) {
+            this._updateRootElement();
+        }
+    };
+    /**
+     * @return {?}
+     */
+    CdkDrag.prototype.ngOnDestroy = /**
+     * @return {?}
+     */
+    function () {
+        this._destroyed.next();
+        this._destroyed.complete();
+        this._dragRef.dispose();
+    };
+    /** Syncs the root element with the `DragRef`. */
+    /**
+     * Syncs the root element with the `DragRef`.
+     * @private
+     * @return {?}
+     */
+    CdkDrag.prototype._updateRootElement = /**
+     * Syncs the root element with the `DragRef`.
+     * @private
+     * @return {?}
+     */
+    function () {
+        /** @type {?} */
+        var element = this.element.nativeElement;
+        /** @type {?} */
+        var rootElement = this.rootElementSelector ?
+            getClosestMatchingAncestor(element, this.rootElementSelector) : element;
+        if (rootElement && rootElement.nodeType !== this._document.ELEMENT_NODE) {
+            throw Error("cdkDrag must be attached to an element node. " +
+                ("Currently attached to \"" + rootElement.nodeName + "\"."));
+        }
+        this._dragRef.withRootElement(rootElement || element);
+    };
+    /** Gets the boundary element, based on the `boundaryElementSelector`. */
+    /**
+     * Gets the boundary element, based on the `boundaryElementSelector`.
+     * @private
+     * @return {?}
+     */
+    CdkDrag.prototype._getBoundaryElement = /**
+     * Gets the boundary element, based on the `boundaryElementSelector`.
+     * @private
+     * @return {?}
+     */
+    function () {
+        /** @type {?} */
+        var selector = this.boundaryElementSelector;
+        return selector ? getClosestMatchingAncestor(this.element.nativeElement, selector) : null;
+    };
+    /** Syncs the inputs of the CdkDrag with the options of the underlying DragRef. */
+    /**
+     * Syncs the inputs of the CdkDrag with the options of the underlying DragRef.
+     * @private
+     * @param {?} ref
+     * @return {?}
+     */
+    CdkDrag.prototype._syncInputs = /**
+     * Syncs the inputs of the CdkDrag with the options of the underlying DragRef.
+     * @private
+     * @param {?} ref
+     * @return {?}
+     */
+    function (ref) {
+        var _this = this;
+        ref.beforeStarted.subscribe(function () {
+            if (!ref.isDragging()) {
+                /** @type {?} */
+                var dir = _this._dir;
+                /** @type {?} */
+                var placeholder = _this._placeholderTemplate ? {
+                    template: _this._placeholderTemplate.templateRef,
+                    context: _this._placeholderTemplate.data,
+                    viewContainer: _this._viewContainerRef
+                } : null;
+                /** @type {?} */
+                var preview = _this._previewTemplate ? {
+                    template: _this._previewTemplate.templateRef,
+                    context: _this._previewTemplate.data,
+                    viewContainer: _this._viewContainerRef
+                } : null;
+                ref.disabled = _this.disabled;
+                ref.lockAxis = _this.lockAxis;
+                ref
+                    .withBoundaryElement(_this._getBoundaryElement())
+                    .withPlaceholderTemplate(placeholder)
+                    .withPreviewTemplate(preview);
+                if (dir) {
+                    ref.withDirection(dir.value);
+                }
+            }
+        });
+    };
+    /** Handles the events from the underlying `DragRef`. */
+    /**
+     * Handles the events from the underlying `DragRef`.
+     * @private
+     * @param {?} ref
+     * @return {?}
+     */
+    CdkDrag.prototype._handleEvents = /**
+     * Handles the events from the underlying `DragRef`.
+     * @private
+     * @param {?} ref
+     * @return {?}
+     */
+    function (ref) {
+        var _this = this;
+        ref.started.subscribe(function () {
+            _this.started.emit({ source: _this });
+            // Since all of these events run outside of change detection,
+            // we need to ensure that everything is marked correctly.
+            if (_this._changeDetectorRef) {
+                // @breaking-change 8.0.0 Remove null check for _changeDetectorRef
+                _this._changeDetectorRef.markForCheck();
+            }
+        });
+        ref.released.subscribe(function () {
+            _this.released.emit({ source: _this });
+        });
+        ref.ended.subscribe(function () {
+            _this.ended.emit({ source: _this });
+            // Since all of these events run outside of change detection,
+            // we need to ensure that everything is marked correctly.
+            if (_this._changeDetectorRef) {
+                // @breaking-change 8.0.0 Remove null check for _changeDetectorRef
+                _this._changeDetectorRef.markForCheck();
+            }
+        });
+        ref.entered.subscribe(function (event) {
+            _this.entered.emit({
+                container: event.container.data,
+                item: _this
+            });
+        });
+        ref.exited.subscribe(function (event) {
+            _this.exited.emit({
+                container: event.container.data,
+                item: _this
+            });
+        });
+        ref.dropped.subscribe(function (event) {
+            _this.dropped.emit({
+                previousIndex: event.previousIndex,
+                currentIndex: event.currentIndex,
+                previousContainer: event.previousContainer.data,
+                container: event.container.data,
+                isPointerOverContainer: event.isPointerOverContainer,
+                item: _this
+            });
+        });
+    };
+    CdkDrag.decorators = [
+        { type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["Directive"], args: [{
+                    selector: '[cdkDrag]',
+                    exportAs: 'cdkDrag',
+                    host: {
+                        'class': 'cdk-drag',
+                        '[class.cdk-drag-disabled]': 'disabled',
+                        '[class.cdk-drag-dragging]': '_dragRef.isDragging()',
+                    },
+                    providers: [{ provide: CDK_DRAG_PARENT, useExisting: CdkDrag }]
+                },] },
+    ];
+    /** @nocollapse */
+    CdkDrag.ctorParameters = function () { return [
+        { type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["ElementRef"] },
+        { type: undefined, decorators: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["Inject"], args: [CDK_DROP_LIST,] }, { type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["Optional"] }, { type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["SkipSelf"] }] },
+        { type: undefined, decorators: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["Inject"], args: [_angular_common__WEBPACK_IMPORTED_MODULE_4__["DOCUMENT"],] }] },
+        { type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["NgZone"] },
+        { type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["ViewContainerRef"] },
+        { type: _angular_cdk_scrolling__WEBPACK_IMPORTED_MODULE_5__["ViewportRuler"] },
+        { type: DragDropRegistry },
+        { type: undefined, decorators: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["Inject"], args: [CDK_DRAG_CONFIG,] }] },
+        { type: _angular_cdk_bidi__WEBPACK_IMPORTED_MODULE_6__["Directionality"], decorators: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["Optional"] }] },
+        { type: DragDrop },
+        { type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["ChangeDetectorRef"] }
+    ]; };
+    CdkDrag.propDecorators = {
+        _handles: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["ContentChildren"], args: [CdkDragHandle, { descendants: true },] }],
+        _previewTemplate: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["ContentChild"], args: [CdkDragPreview,] }],
+        _placeholderTemplate: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["ContentChild"], args: [CdkDragPlaceholder,] }],
+        data: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["Input"], args: ['cdkDragData',] }],
+        lockAxis: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["Input"], args: ['cdkDragLockAxis',] }],
+        rootElementSelector: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["Input"], args: ['cdkDragRootElement',] }],
+        boundaryElementSelector: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["Input"], args: ['cdkDragBoundary',] }],
+        disabled: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["Input"], args: ['cdkDragDisabled',] }],
+        started: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["Output"], args: ['cdkDragStarted',] }],
+        released: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["Output"], args: ['cdkDragReleased',] }],
+        ended: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["Output"], args: ['cdkDragEnded',] }],
+        entered: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["Output"], args: ['cdkDragEntered',] }],
+        exited: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["Output"], args: ['cdkDragExited',] }],
+        dropped: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["Output"], args: ['cdkDragDropped',] }],
+        moved: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["Output"], args: ['cdkDragMoved',] }]
+    };
+    return CdkDrag;
+}());
+/**
+ * Gets the closest ancestor of an element that matches a selector.
+ * @param {?} element
+ * @param {?} selector
+ * @return {?}
+ */
+function getClosestMatchingAncestor(element, selector) {
+    /** @type {?} */
+    var currentElement = (/** @type {?} */ (element.parentElement));
+    while (currentElement) {
+        // IE doesn't support `matches` so we have to fall back to `msMatchesSelector`.
+        if (currentElement.matches ? currentElement.matches(selector) :
+            ((/** @type {?} */ (currentElement))).msMatchesSelector(selector)) {
+            return currentElement;
+        }
+        currentElement = currentElement.parentElement;
+    }
+    return null;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * Declaratively connects sibling `cdkDropList` instances together. All of the `cdkDropList`
+ * elements that are placed inside a `cdkDropListGroup` will be connected to each other
+ * automatically. Can be used as an alternative to the `cdkDropListConnectedTo` input
+ * from `cdkDropList`.
+ * @template T
+ */
+var CdkDropListGroup = /** @class */ (function () {
+    function CdkDropListGroup() {
+        /**
+         * Drop lists registered inside the group.
+         */
+        this._items = new Set();
+        this._disabled = false;
+    }
+    Object.defineProperty(CdkDropListGroup.prototype, "disabled", {
+        /** Whether starting a dragging sequence from inside this group is disabled. */
+        get: /**
+         * Whether starting a dragging sequence from inside this group is disabled.
+         * @return {?}
+         */
+        function () { return this._disabled; },
+        set: /**
+         * @param {?} value
+         * @return {?}
+         */
+        function (value) {
+            this._disabled = Object(_angular_cdk_coercion__WEBPACK_IMPORTED_MODULE_1__["coerceBooleanProperty"])(value);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    /**
+     * @return {?}
+     */
+    CdkDropListGroup.prototype.ngOnDestroy = /**
+     * @return {?}
+     */
+    function () {
+        this._items.clear();
+    };
+    CdkDropListGroup.decorators = [
+        { type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["Directive"], args: [{
+                    selector: '[cdkDropListGroup]',
+                    exportAs: 'cdkDropListGroup',
+                },] },
+    ];
+    CdkDropListGroup.propDecorators = {
+        disabled: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["Input"], args: ['cdkDropListGroupDisabled',] }]
+    };
+    return CdkDropListGroup;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * Counter used to generate unique ids for drop zones.
+ * @type {?}
+ */
+var _uniqueIdCounter$1 = 0;
+var ɵ0 = undefined;
+// @breaking-change 8.0.0 `CdkDropList` implements `CdkDropListContainer` for backwards
+// compatiblity. The implements clause, as well as all the methods that it enforces can
+// be removed when `CdkDropListContainer` is deleted.
+/**
+ * Container that wraps a set of draggable items.
+ * @template T
+ */
+var CdkDropList = /** @class */ (function () {
+    function CdkDropList(element, dragDropRegistry, _changeDetectorRef, _dir, _group, _document, 
+    /**
+     * @deprecated `dragDropRegistry` and `_document` parameters to be removed.
+     * Also `dragDrop` parameter to be made required.
+     * @breaking-change 8.0.0.
+     */
+    dragDrop) {
+        var _this = this;
+        this.element = element;
+        this._changeDetectorRef = _changeDetectorRef;
+        this._dir = _dir;
+        this._group = _group;
+        /**
+         * Emits when the list has been destroyed.
+         */
+        this._destroyed = new rxjs__WEBPACK_IMPORTED_MODULE_2__["Subject"]();
+        /**
+         * Other draggable containers that this container is connected to and into which the
+         * container's items can be transferred. Can either be references to other drop containers,
+         * or their unique IDs.
+         */
+        this.connectedTo = [];
+        /**
+         * Direction in which the list is oriented.
+         */
+        this.orientation = 'vertical';
+        /**
+         * Unique ID for the drop zone. Can be used as a reference
+         * in the `connectedTo` of another `CdkDropList`.
+         */
+        this.id = "cdk-drop-list-" + _uniqueIdCounter$1++;
+        this._disabled = false;
+        /**
+         * Function that is used to determine whether an item
+         * is allowed to be moved into a drop container.
+         */
+        this.enterPredicate = function () { return true; };
+        /**
+         * Emits when the user drops an item inside the container.
+         */
+        this.dropped = new _angular_core__WEBPACK_IMPORTED_MODULE_3__["EventEmitter"]();
+        /**
+         * Emits when the user has moved a new drag item into this container.
+         */
+        this.entered = new _angular_core__WEBPACK_IMPORTED_MODULE_3__["EventEmitter"]();
+        /**
+         * Emits when the user removes an item from the container
+         * by dragging it into another container.
+         */
+        this.exited = new _angular_core__WEBPACK_IMPORTED_MODULE_3__["EventEmitter"]();
+        /**
+         * Emits as the user is swapping items while actively dragging.
+         */
+        this.sorted = new _angular_core__WEBPACK_IMPORTED_MODULE_3__["EventEmitter"]();
+        // @breaking-change 8.0.0 Remove null check once `dragDrop` parameter is made required.
+        if (dragDrop) {
+            this._dropListRef = dragDrop.createDropList(element);
+        }
+        else {
+            this._dropListRef = new DropListRef(element, dragDropRegistry, _document || document);
+        }
+        this._dropListRef.data = this;
+        this._dropListRef.enterPredicate = function (drag, drop) {
+            return _this.enterPredicate(drag.data, drop.data);
+        };
+        this._syncInputs(this._dropListRef);
+        this._handleEvents(this._dropListRef);
+        CdkDropList._dropLists.push(this);
+        if (_group) {
+            _group._items.add(this);
+        }
+    }
+    Object.defineProperty(CdkDropList.prototype, "disabled", {
+        /** Whether starting a dragging sequence from this container is disabled. */
+        get: /**
+         * Whether starting a dragging sequence from this container is disabled.
+         * @return {?}
+         */
+        function () {
+            return this._disabled || (!!this._group && this._group.disabled);
+        },
+        set: /**
+         * @param {?} value
+         * @return {?}
+         */
+        function (value) {
+            this._disabled = Object(_angular_cdk_coercion__WEBPACK_IMPORTED_MODULE_1__["coerceBooleanProperty"])(value);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    /**
+     * @return {?}
+     */
+    CdkDropList.prototype.ngAfterContentInit = /**
+     * @return {?}
+     */
+    function () {
+        var _this = this;
+        this._draggables.changes
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["startWith"])(this._draggables), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["takeUntil"])(this._destroyed))
+            .subscribe(function (items) {
+            _this._dropListRef.withItems(items.map(function (drag) { return drag._dragRef; }));
+        });
+    };
+    /**
+     * @return {?}
+     */
+    CdkDropList.prototype.ngOnDestroy = /**
+     * @return {?}
+     */
+    function () {
+        /** @type {?} */
+        var index = CdkDropList._dropLists.indexOf(this);
+        if (index > -1) {
+            CdkDropList._dropLists.splice(index, 1);
+        }
+        if (this._group) {
+            this._group._items.delete(this);
+        }
+        this._dropListRef.dispose();
+        this._destroyed.next();
+        this._destroyed.complete();
+    };
+    /** Starts dragging an item. */
+    /**
+     * Starts dragging an item.
+     * @return {?}
+     */
+    CdkDropList.prototype.start = /**
+     * Starts dragging an item.
+     * @return {?}
+     */
+    function () {
+        this._dropListRef.start();
+    };
+    /**
+     * Drops an item into this container.
+     * @param item Item being dropped into the container.
+     * @param currentIndex Index at which the item should be inserted.
+     * @param previousContainer Container from which the item got dragged in.
+     * @param isPointerOverContainer Whether the user's pointer was over the
+     *    container when the item was dropped.
+     */
+    /**
+     * Drops an item into this container.
+     * @param {?} item Item being dropped into the container.
+     * @param {?} currentIndex Index at which the item should be inserted.
+     * @param {?} previousContainer Container from which the item got dragged in.
+     * @param {?} isPointerOverContainer Whether the user's pointer was over the
+     *    container when the item was dropped.
+     * @return {?}
+     */
+    CdkDropList.prototype.drop = /**
+     * Drops an item into this container.
+     * @param {?} item Item being dropped into the container.
+     * @param {?} currentIndex Index at which the item should be inserted.
+     * @param {?} previousContainer Container from which the item got dragged in.
+     * @param {?} isPointerOverContainer Whether the user's pointer was over the
+     *    container when the item was dropped.
+     * @return {?}
+     */
+    function (item, currentIndex, previousContainer, isPointerOverContainer) {
+        this._dropListRef.drop(item._dragRef, currentIndex, ((/** @type {?} */ (previousContainer)))._dropListRef, isPointerOverContainer);
+    };
+    /**
+     * Emits an event to indicate that the user moved an item into the container.
+     * @param item Item that was moved into the container.
+     * @param pointerX Position of the item along the X axis.
+     * @param pointerY Position of the item along the Y axis.
+     */
+    /**
+     * Emits an event to indicate that the user moved an item into the container.
+     * @param {?} item Item that was moved into the container.
+     * @param {?} pointerX Position of the item along the X axis.
+     * @param {?} pointerY Position of the item along the Y axis.
+     * @return {?}
+     */
+    CdkDropList.prototype.enter = /**
+     * Emits an event to indicate that the user moved an item into the container.
+     * @param {?} item Item that was moved into the container.
+     * @param {?} pointerX Position of the item along the X axis.
+     * @param {?} pointerY Position of the item along the Y axis.
+     * @return {?}
+     */
+    function (item, pointerX, pointerY) {
+        this._dropListRef.enter(item._dragRef, pointerX, pointerY);
+    };
+    /**
+     * Removes an item from the container after it was dragged into another container by the user.
+     * @param item Item that was dragged out.
+     */
+    /**
+     * Removes an item from the container after it was dragged into another container by the user.
+     * @param {?} item Item that was dragged out.
+     * @return {?}
+     */
+    CdkDropList.prototype.exit = /**
+     * Removes an item from the container after it was dragged into another container by the user.
+     * @param {?} item Item that was dragged out.
+     * @return {?}
+     */
+    function (item) {
+        this._dropListRef.exit(item._dragRef);
+    };
+    /**
+     * Figures out the index of an item in the container.
+     * @param item Item whose index should be determined.
+     */
+    /**
+     * Figures out the index of an item in the container.
+     * @param {?} item Item whose index should be determined.
+     * @return {?}
+     */
+    CdkDropList.prototype.getItemIndex = /**
+     * Figures out the index of an item in the container.
+     * @param {?} item Item whose index should be determined.
+     * @return {?}
+     */
+    function (item) {
+        return this._dropListRef.getItemIndex(item._dragRef);
+    };
+    /**
+     * Sorts an item inside the container based on its position.
+     * @param item Item to be sorted.
+     * @param pointerX Position of the item along the X axis.
+     * @param pointerY Position of the item along the Y axis.
+     * @param pointerDelta Direction in which the pointer is moving along each axis.
+     */
+    /**
+     * Sorts an item inside the container based on its position.
+     * @param {?} item Item to be sorted.
+     * @param {?} pointerX Position of the item along the X axis.
+     * @param {?} pointerY Position of the item along the Y axis.
+     * @param {?} pointerDelta Direction in which the pointer is moving along each axis.
+     * @return {?}
+     */
+    CdkDropList.prototype._sortItem = /**
+     * Sorts an item inside the container based on its position.
+     * @param {?} item Item to be sorted.
+     * @param {?} pointerX Position of the item along the X axis.
+     * @param {?} pointerY Position of the item along the Y axis.
+     * @param {?} pointerDelta Direction in which the pointer is moving along each axis.
+     * @return {?}
+     */
+    function (item, pointerX, pointerY, pointerDelta) {
+        return this._dropListRef._sortItem(item._dragRef, pointerX, pointerY, pointerDelta);
+    };
+    /**
+     * Figures out whether an item should be moved into a sibling
+     * drop container, based on its current position.
+     * @param item Drag item that is being moved.
+     * @param x Position of the item along the X axis.
+     * @param y Position of the item along the Y axis.
+     */
+    /**
+     * Figures out whether an item should be moved into a sibling
+     * drop container, based on its current position.
+     * @param {?} item Drag item that is being moved.
+     * @param {?} x Position of the item along the X axis.
+     * @param {?} y Position of the item along the Y axis.
+     * @return {?}
+     */
+    CdkDropList.prototype._getSiblingContainerFromPosition = /**
+     * Figures out whether an item should be moved into a sibling
+     * drop container, based on its current position.
+     * @param {?} item Drag item that is being moved.
+     * @param {?} x Position of the item along the X axis.
+     * @param {?} y Position of the item along the Y axis.
+     * @return {?}
+     */
+    function (item, x, y) {
+        /** @type {?} */
+        var result = this._dropListRef._getSiblingContainerFromPosition(item._dragRef, x, y);
+        return result ? result.data : null;
+    };
+    /**
+     * Checks whether the user's pointer is positioned over the container.
+     * @param x Pointer position along the X axis.
+     * @param y Pointer position along the Y axis.
+     */
+    /**
+     * Checks whether the user's pointer is positioned over the container.
+     * @param {?} x Pointer position along the X axis.
+     * @param {?} y Pointer position along the Y axis.
+     * @return {?}
+     */
+    CdkDropList.prototype._isOverContainer = /**
+     * Checks whether the user's pointer is positioned over the container.
+     * @param {?} x Pointer position along the X axis.
+     * @param {?} y Pointer position along the Y axis.
+     * @return {?}
+     */
+    function (x, y) {
+        return this._dropListRef._isOverContainer(x, y);
+    };
+    /** Syncs the inputs of the CdkDropList with the options of the underlying DropListRef. */
+    /**
+     * Syncs the inputs of the CdkDropList with the options of the underlying DropListRef.
+     * @private
+     * @param {?} ref
+     * @return {?}
+     */
+    CdkDropList.prototype._syncInputs = /**
+     * Syncs the inputs of the CdkDropList with the options of the underlying DropListRef.
+     * @private
+     * @param {?} ref
+     * @return {?}
+     */
+    function (ref) {
+        var _this = this;
+        if (this._dir) {
+            this._dir.change
+                .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["startWith"])(this._dir.value), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["takeUntil"])(this._destroyed))
+                .subscribe(function (value) { return ref.withDirection(value); });
+        }
+        ref.beforeStarted.subscribe(function () {
+            /** @type {?} */
+            var siblings = Object(_angular_cdk_coercion__WEBPACK_IMPORTED_MODULE_1__["coerceArray"])(_this.connectedTo).map(function (drop) {
+                return typeof drop === 'string' ?
+                    (/** @type {?} */ (CdkDropList._dropLists.find(function (list) { return list.id === drop; }))) : drop;
+            });
+            if (_this._group) {
+                _this._group._items.forEach(function (drop) {
+                    if (siblings.indexOf(drop) === -1) {
+                        siblings.push(drop);
+                    }
+                });
+            }
+            ref.lockAxis = _this.lockAxis;
+            ref
+                .connectedTo(siblings.filter(function (drop) { return drop && drop !== _this; }).map(function (list) { return list._dropListRef; }))
+                .withOrientation(_this.orientation);
+        });
+    };
+    /** Handles events from the underlying DropListRef. */
+    /**
+     * Handles events from the underlying DropListRef.
+     * @private
+     * @param {?} ref
+     * @return {?}
+     */
+    CdkDropList.prototype._handleEvents = /**
+     * Handles events from the underlying DropListRef.
+     * @private
+     * @param {?} ref
+     * @return {?}
+     */
+    function (ref) {
+        var _this = this;
+        ref.beforeStarted.subscribe(function () {
+            _this._changeDetectorRef.markForCheck();
+        });
+        ref.entered.subscribe(function (event) {
+            _this.entered.emit({
+                container: _this,
+                item: event.item.data
+            });
+        });
+        ref.exited.subscribe(function (event) {
+            _this.exited.emit({
+                container: _this,
+                item: event.item.data
+            });
+        });
+        ref.sorted.subscribe(function (event) {
+            _this.sorted.emit({
+                previousIndex: event.previousIndex,
+                currentIndex: event.currentIndex,
+                container: _this,
+                item: event.item.data
+            });
+        });
+        ref.dropped.subscribe(function (event) {
+            _this.dropped.emit({
+                previousIndex: event.previousIndex,
+                currentIndex: event.currentIndex,
+                previousContainer: event.previousContainer.data,
+                container: event.container.data,
+                item: event.item.data,
+                isPointerOverContainer: event.isPointerOverContainer
+            });
+            // Mark for check since all of these events run outside of change
+            // detection and we're not guaranteed for something else to have triggered it.
+            _this._changeDetectorRef.markForCheck();
+        });
+    };
+    /**
+     * Keeps track of the drop lists that are currently on the page.
+     */
+    CdkDropList._dropLists = [];
+    CdkDropList.decorators = [
+        { type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["Directive"], args: [{
+                    selector: '[cdkDropList], cdk-drop-list',
+                    exportAs: 'cdkDropList',
+                    providers: [
+                        // Prevent child drop lists from picking up the same group as their parent.
+                        { provide: CdkDropListGroup, useValue: ɵ0 },
+                        { provide: CDK_DROP_LIST_CONTAINER, useExisting: CdkDropList },
+                    ],
+                    host: {
+                        'class': 'cdk-drop-list',
+                        '[id]': 'id',
+                        '[class.cdk-drop-list-disabled]': 'disabled',
+                        '[class.cdk-drop-list-dragging]': '_dropListRef.isDragging()',
+                        '[class.cdk-drop-list-receiving]': '_dropListRef.isReceiving()',
+                    }
+                },] },
+    ];
+    /** @nocollapse */
+    CdkDropList.ctorParameters = function () { return [
+        { type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["ElementRef"] },
+        { type: DragDropRegistry },
+        { type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["ChangeDetectorRef"] },
+        { type: _angular_cdk_bidi__WEBPACK_IMPORTED_MODULE_6__["Directionality"], decorators: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["Optional"] }] },
+        { type: CdkDropListGroup, decorators: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["Optional"] }, { type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["SkipSelf"] }] },
+        { type: undefined, decorators: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["Optional"] }, { type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["Inject"], args: [_angular_common__WEBPACK_IMPORTED_MODULE_4__["DOCUMENT"],] }] },
+        { type: DragDrop }
+    ]; };
+    CdkDropList.propDecorators = {
+        _draggables: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["ContentChildren"], args: [Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["forwardRef"])(function () { return CdkDrag; }), {
+                        // Explicitly set to false since some of the logic below makes assumptions about it.
+                        // The `.withItems` call below should be updated if we ever need to switch this to `true`.
+                        descendants: false
+                    },] }],
+        connectedTo: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["Input"], args: ['cdkDropListConnectedTo',] }],
+        data: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["Input"], args: ['cdkDropListData',] }],
+        orientation: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["Input"], args: ['cdkDropListOrientation',] }],
+        id: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["Input"] }],
+        lockAxis: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["Input"], args: ['cdkDropListLockAxis',] }],
+        disabled: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["Input"], args: ['cdkDropListDisabled',] }],
+        enterPredicate: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["Input"], args: ['cdkDropListEnterPredicate',] }],
+        dropped: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["Output"], args: ['cdkDropListDropped',] }],
+        entered: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["Output"], args: ['cdkDropListEntered',] }],
+        exited: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["Output"], args: ['cdkDropListExited',] }],
+        sorted: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["Output"], args: ['cdkDropListSorted',] }]
+    };
+    return CdkDropList;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var DragDropModule = /** @class */ (function () {
+    function DragDropModule() {
+    }
+    DragDropModule.decorators = [
+        { type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["NgModule"], args: [{
+                    declarations: [
+                        CdkDropList,
+                        CdkDropListGroup,
+                        CdkDrag,
+                        CdkDragHandle,
+                        CdkDragPreview,
+                        CdkDragPlaceholder,
+                    ],
+                    exports: [
+                        CdkDropList,
+                        CdkDropListGroup,
+                        CdkDrag,
+                        CdkDragHandle,
+                        CdkDragPreview,
+                        CdkDragPlaceholder,
+                    ],
+                    providers: [
+                        DragDrop,
+                    ]
+                },] },
+    ];
+    return DragDropModule;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+
+//# sourceMappingURL=drag-drop.es5.js.map
+
+
+/***/ }),
+
+/***/ "./node_modules/@angular/cdk/esm5/platform.es5.js":
+/*!********************************************************!*\
+  !*** ./node_modules/@angular/cdk/esm5/platform.es5.js ***!
+  \********************************************************/
+/*! exports provided: Platform, PlatformModule, getSupportedInputTypes, supportsPassiveEventListeners, normalizePassiveListenerOptions, supportsScrollBehavior, getRtlScrollAxisType, RtlScrollAxisType */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Platform", function() { return Platform; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PlatformModule", function() { return PlatformModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getSupportedInputTypes", function() { return getSupportedInputTypes; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "supportsPassiveEventListeners", function() { return supportsPassiveEventListeners; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "normalizePassiveListenerOptions", function() { return normalizePassiveListenerOptions; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "supportsScrollBehavior", function() { return supportsScrollBehavior; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getRtlScrollAxisType", function() { return getRtlScrollAxisType; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RtlScrollAxisType", function() { return RtlScrollAxisType; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
+/**
+ * @license
+ * Copyright Google LLC All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+
+
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+// Whether the current platform supports the V8 Break Iterator. The V8 check
+// is necessary to detect all Blink based browsers.
+/** @type {?} */
+var hasV8BreakIterator;
+// We need a try/catch around the reference to `Intl`, because accessing it in some cases can
+// cause IE to throw. These cases are tied to particular versions of Windows and can happen if
+// the consumer is providing a polyfilled `Map`. See:
+// https://github.com/Microsoft/ChakraCore/issues/3189
+// https://github.com/angular/material2/issues/15687
+try {
+    hasV8BreakIterator = (typeof Intl !== 'undefined' && ((/** @type {?} */ (Intl))).v8BreakIterator);
+}
+catch (_a) {
+    hasV8BreakIterator = false;
+}
+/**
+ * Service to detect the current platform by comparing the userAgent strings and
+ * checking browser-specific global properties.
+ */
+var Platform = /** @class */ (function () {
+    /**
+     * @breaking-change 8.0.0 remove optional decorator
+     */
+    function Platform(_platformId) {
+        this._platformId = _platformId;
+        /**
+         * Whether the Angular application is being rendered in the browser.
+         * We want to use the Angular platform check because if the Document is shimmed
+         * without the navigator, the following checks will fail. This is preferred because
+         * sometimes the Document may be shimmed without the user's knowledge or intention
+         */
+        this.isBrowser = this._platformId ?
+            Object(_angular_common__WEBPACK_IMPORTED_MODULE_1__["isPlatformBrowser"])(this._platformId) : typeof document === 'object' && !!document;
+        /**
+         * Whether the current browser is Microsoft Edge.
+         */
+        this.EDGE = this.isBrowser && /(edge)/i.test(navigator.userAgent);
+        /**
+         * Whether the current rendering engine is Microsoft Trident.
+         */
+        this.TRIDENT = this.isBrowser && /(msie|trident)/i.test(navigator.userAgent);
+        /**
+         * Whether the current rendering engine is Blink.
+         */
+        // EdgeHTML and Trident mock Blink specific things and need to be excluded from this check.
+        this.BLINK = this.isBrowser && (!!(((/** @type {?} */ (window))).chrome || hasV8BreakIterator) &&
+            typeof CSS !== 'undefined' && !this.EDGE && !this.TRIDENT);
+        /**
+         * Whether the current rendering engine is WebKit.
+         */
+        // Webkit is part of the userAgent in EdgeHTML, Blink and Trident. Therefore we need to
+        // ensure that Webkit runs standalone and is not used as another engine's base.
+        this.WEBKIT = this.isBrowser &&
+            /AppleWebKit/i.test(navigator.userAgent) && !this.BLINK && !this.EDGE && !this.TRIDENT;
+        /**
+         * Whether the current platform is Apple iOS.
+         */
+        this.IOS = this.isBrowser && /iPad|iPhone|iPod/.test(navigator.userAgent) &&
+            !('MSStream' in window);
+        /**
+         * Whether the current browser is Firefox.
+         */
+        // It's difficult to detect the plain Gecko engine, because most of the browsers identify
+        // them self as Gecko-like browsers and modify the userAgent's according to that.
+        // Since we only cover one explicit Firefox case, we can simply check for Firefox
+        // instead of having an unstable check for Gecko.
+        this.FIREFOX = this.isBrowser && /(firefox|minefield)/i.test(navigator.userAgent);
+        /**
+         * Whether the current platform is Android.
+         */
+        // Trident on mobile adds the android platform to the userAgent to trick detections.
+        this.ANDROID = this.isBrowser && /android/i.test(navigator.userAgent) && !this.TRIDENT;
+        /**
+         * Whether the current browser is Safari.
+         */
+        // Safari browsers will include the Safari keyword in their userAgent. Some browsers may fake
+        // this and just place the Safari keyword in the userAgent. To be more safe about Safari every
+        // Safari browser should also use Webkit as its layout engine.
+        this.SAFARI = this.isBrowser && /safari/i.test(navigator.userAgent) && this.WEBKIT;
+    }
+    Platform.decorators = [
+        { type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"], args: [{ providedIn: 'root' },] },
+    ];
+    /** @nocollapse */
+    Platform.ctorParameters = function () { return [
+        { type: Object, decorators: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Optional"] }, { type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Inject"], args: [_angular_core__WEBPACK_IMPORTED_MODULE_0__["PLATFORM_ID"],] }] }
+    ]; };
+    /** @nocollapse */ Platform.ngInjectableDef = Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["defineInjectable"])({ factory: function Platform_Factory() { return new Platform(Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["inject"])(_angular_core__WEBPACK_IMPORTED_MODULE_0__["PLATFORM_ID"], 8)); }, token: Platform, providedIn: "root" });
+    return Platform;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var PlatformModule = /** @class */ (function () {
+    function PlatformModule() {
+    }
+    PlatformModule.decorators = [
+        { type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["NgModule"], args: [{},] },
+    ];
+    return PlatformModule;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * Cached result Set of input types support by the current browser.
+ * @type {?}
+ */
+var supportedInputTypes;
+/**
+ * Types of `<input>` that *might* be supported.
+ * @type {?}
+ */
+var candidateInputTypes = [
+    // `color` must come first. Chrome 56 shows a warning if we change the type to `color` after
+    // first changing it to something else:
+    // The specified value "" does not conform to the required format.
+    // The format is "#rrggbb" where rr, gg, bb are two-digit hexadecimal numbers.
+    'color',
+    'button',
+    'checkbox',
+    'date',
+    'datetime-local',
+    'email',
+    'file',
+    'hidden',
+    'image',
+    'month',
+    'number',
+    'password',
+    'radio',
+    'range',
+    'reset',
+    'search',
+    'submit',
+    'tel',
+    'text',
+    'time',
+    'url',
+    'week',
+];
+/**
+ * @return {?} The input types supported by this browser.
+ */
+function getSupportedInputTypes() {
+    // Result is cached.
+    if (supportedInputTypes) {
+        return supportedInputTypes;
+    }
+    // We can't check if an input type is not supported until we're on the browser, so say that
+    // everything is supported when not on the browser. We don't use `Platform` here since it's
+    // just a helper function and can't inject it.
+    if (typeof document !== 'object' || !document) {
+        supportedInputTypes = new Set(candidateInputTypes);
+        return supportedInputTypes;
+    }
+    /** @type {?} */
+    var featureTestInput = document.createElement('input');
+    supportedInputTypes = new Set(candidateInputTypes.filter(function (value) {
+        featureTestInput.setAttribute('type', value);
+        return featureTestInput.type === value;
+    }));
+    return supportedInputTypes;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * Cached result of whether the user's browser supports passive event listeners.
+ * @type {?}
+ */
+var supportsPassiveEvents;
+/**
+ * Checks whether the user's browser supports passive event listeners.
+ * See: https://github.com/WICG/EventListenerOptions/blob/gh-pages/explainer.md
+ * @return {?}
+ */
+function supportsPassiveEventListeners() {
+    if (supportsPassiveEvents == null && typeof window !== 'undefined') {
+        try {
+            window.addEventListener('test', (/** @type {?} */ (null)), Object.defineProperty({}, 'passive', {
+                get: function () { return supportsPassiveEvents = true; }
+            }));
+        }
+        finally {
+            supportsPassiveEvents = supportsPassiveEvents || false;
+        }
+    }
+    return supportsPassiveEvents;
+}
+/**
+ * Normalizes an `AddEventListener` object to something that can be passed
+ * to `addEventListener` on any browser, no matter whether it supports the
+ * `options` parameter.
+ * @param {?} options Object to be normalized.
+ * @return {?}
+ */
+function normalizePassiveListenerOptions(options) {
+    return supportsPassiveEventListeners() ? options : !!options.capture;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/** @enum {number} */
+var RtlScrollAxisType = {
+    /**
+     * scrollLeft is 0 when scrolled all the way left and (scrollWidth - clientWidth) when scrolled
+     * all the way right.
+     */
+    NORMAL: 0,
+    /**
+     * scrollLeft is -(scrollWidth - clientWidth) when scrolled all the way left and 0 when scrolled
+     * all the way right.
+     */
+    NEGATED: 1,
+    /**
+     * scrollLeft is (scrollWidth - clientWidth) when scrolled all the way left and 0 when scrolled
+     * all the way right.
+     */
+    INVERTED: 2,
+};
+RtlScrollAxisType[RtlScrollAxisType.NORMAL] = 'NORMAL';
+RtlScrollAxisType[RtlScrollAxisType.NEGATED] = 'NEGATED';
+RtlScrollAxisType[RtlScrollAxisType.INVERTED] = 'INVERTED';
+/**
+ * Cached result of the way the browser handles the horizontal scroll axis in RTL mode.
+ * @type {?}
+ */
+var rtlScrollAxisType;
+/**
+ * Check whether the browser supports scroll behaviors.
+ * @return {?}
+ */
+function supportsScrollBehavior() {
+    return !!(typeof document == 'object' && 'scrollBehavior' in (/** @type {?} */ (document.documentElement)).style);
+}
+/**
+ * Checks the type of RTL scroll axis used by this browser. As of time of writing, Chrome is NORMAL,
+ * Firefox & Safari are NEGATED, and IE & Edge are INVERTED.
+ * @return {?}
+ */
+function getRtlScrollAxisType() {
+    // We can't check unless we're on the browser. Just assume 'normal' if we're not.
+    if (typeof document !== 'object' || !document) {
+        return RtlScrollAxisType.NORMAL;
+    }
+    if (!rtlScrollAxisType) {
+        // Create a 1px wide scrolling container and a 2px wide content element.
+        /** @type {?} */
+        var scrollContainer = document.createElement('div');
+        /** @type {?} */
+        var containerStyle = scrollContainer.style;
+        scrollContainer.dir = 'rtl';
+        containerStyle.height = '1px';
+        containerStyle.width = '1px';
+        containerStyle.overflow = 'auto';
+        containerStyle.visibility = 'hidden';
+        containerStyle.pointerEvents = 'none';
+        containerStyle.position = 'absolute';
+        /** @type {?} */
+        var content = document.createElement('div');
+        /** @type {?} */
+        var contentStyle = content.style;
+        contentStyle.width = '2px';
+        contentStyle.height = '1px';
+        scrollContainer.appendChild(content);
+        document.body.appendChild(scrollContainer);
+        rtlScrollAxisType = RtlScrollAxisType.NORMAL;
+        // The viewport starts scrolled all the way to the right in RTL mode. If we are in a NORMAL
+        // browser this would mean that the scrollLeft should be 1. If it's zero instead we know we're
+        // dealing with one of the other two types of browsers.
+        if (scrollContainer.scrollLeft === 0) {
+            // In a NEGATED browser the scrollLeft is always somewhere in [-maxScrollAmount, 0]. For an
+            // INVERTED browser it is always somewhere in [0, maxScrollAmount]. We can determine which by
+            // setting to the scrollLeft to 1. This is past the max for a NEGATED browser, so it will
+            // return 0 when we read it again.
+            scrollContainer.scrollLeft = 1;
+            rtlScrollAxisType =
+                scrollContainer.scrollLeft === 0 ? RtlScrollAxisType.NEGATED : RtlScrollAxisType.INVERTED;
+        }
+        (/** @type {?} */ (scrollContainer.parentNode)).removeChild(scrollContainer);
+    }
+    return rtlScrollAxisType;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+
+//# sourceMappingURL=platform.es5.js.map
+
+
+/***/ }),
+
+/***/ "./node_modules/@angular/cdk/esm5/scrolling.es5.js":
+/*!*********************************************************!*\
+  !*** ./node_modules/@angular/cdk/esm5/scrolling.es5.js ***!
+  \*********************************************************/
+/*! exports provided: _fixedSizeVirtualScrollStrategyFactory, FixedSizeVirtualScrollStrategy, CdkFixedSizeVirtualScroll, SCROLL_DISPATCHER_PROVIDER_FACTORY, DEFAULT_SCROLL_TIME, ScrollDispatcher, SCROLL_DISPATCHER_PROVIDER, CdkScrollable, ScrollingModule, ScrollDispatchModule, VIEWPORT_RULER_PROVIDER_FACTORY, DEFAULT_RESIZE_TIME, ViewportRuler, VIEWPORT_RULER_PROVIDER, CdkVirtualForOf, VIRTUAL_SCROLL_STRATEGY, CdkVirtualScrollViewport */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "_fixedSizeVirtualScrollStrategyFactory", function() { return _fixedSizeVirtualScrollStrategyFactory; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FixedSizeVirtualScrollStrategy", function() { return FixedSizeVirtualScrollStrategy; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CdkFixedSizeVirtualScroll", function() { return CdkFixedSizeVirtualScroll; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SCROLL_DISPATCHER_PROVIDER_FACTORY", function() { return SCROLL_DISPATCHER_PROVIDER_FACTORY; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DEFAULT_SCROLL_TIME", function() { return DEFAULT_SCROLL_TIME; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ScrollDispatcher", function() { return ScrollDispatcher; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SCROLL_DISPATCHER_PROVIDER", function() { return SCROLL_DISPATCHER_PROVIDER; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CdkScrollable", function() { return CdkScrollable; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ScrollingModule", function() { return ScrollingModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ScrollDispatchModule", function() { return ScrollDispatchModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "VIEWPORT_RULER_PROVIDER_FACTORY", function() { return VIEWPORT_RULER_PROVIDER_FACTORY; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DEFAULT_RESIZE_TIME", function() { return DEFAULT_RESIZE_TIME; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ViewportRuler", function() { return ViewportRuler; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "VIEWPORT_RULER_PROVIDER", function() { return VIEWPORT_RULER_PROVIDER; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CdkVirtualForOf", function() { return CdkVirtualForOf; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "VIRTUAL_SCROLL_STRATEGY", function() { return VIRTUAL_SCROLL_STRATEGY; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CdkVirtualScrollViewport", function() { return CdkVirtualScrollViewport; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_cdk_coercion__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/cdk/coercion */ "./node_modules/@angular/cdk/esm5/coercion.es5.js");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+/* harmony import */ var _angular_cdk_platform__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/cdk/platform */ "./node_modules/@angular/cdk/esm5/platform.es5.js");
+/* harmony import */ var _angular_cdk_bidi__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/cdk/bidi */ "./node_modules/@angular/cdk/esm5/bidi.es5.js");
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_cdk_collections__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/cdk/collections */ "./node_modules/@angular/cdk/esm5/collections.es5.js");
+/**
+ * @license
+ * Copyright Google LLC All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+
+
+
+
+
+
+
+
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * The injection token used to specify the virtual scrolling strategy.
+ * @type {?}
+ */
+var VIRTUAL_SCROLL_STRATEGY = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["InjectionToken"]('VIRTUAL_SCROLL_STRATEGY');
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * Virtual scrolling strategy for lists with items of known fixed size.
+ */
+var  /**
+ * Virtual scrolling strategy for lists with items of known fixed size.
+ */
+FixedSizeVirtualScrollStrategy = /** @class */ (function () {
+    /**
+     * @param itemSize The size of the items in the virtually scrolling list.
+     * @param minBufferPx The minimum amount of buffer (in pixels) before needing to render more
+     * @param maxBufferPx The amount of buffer (in pixels) to render when rendering more.
+     */
+    function FixedSizeVirtualScrollStrategy(itemSize, minBufferPx, maxBufferPx) {
+        this._scrolledIndexChange = new rxjs__WEBPACK_IMPORTED_MODULE_2__["Subject"]();
+        /**
+         * \@docs-private Implemented as part of VirtualScrollStrategy.
+         */
+        this.scrolledIndexChange = this._scrolledIndexChange.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["distinctUntilChanged"])());
+        /**
+         * The attached viewport.
+         */
+        this._viewport = null;
+        this._itemSize = itemSize;
+        this._minBufferPx = minBufferPx;
+        this._maxBufferPx = maxBufferPx;
+    }
+    /**
+     * Attaches this scroll strategy to a viewport.
+     * @param viewport The viewport to attach this strategy to.
+     */
+    /**
+     * Attaches this scroll strategy to a viewport.
+     * @param {?} viewport The viewport to attach this strategy to.
+     * @return {?}
+     */
+    FixedSizeVirtualScrollStrategy.prototype.attach = /**
+     * Attaches this scroll strategy to a viewport.
+     * @param {?} viewport The viewport to attach this strategy to.
+     * @return {?}
+     */
+    function (viewport) {
+        this._viewport = viewport;
+        this._updateTotalContentSize();
+        this._updateRenderedRange();
+    };
+    /** Detaches this scroll strategy from the currently attached viewport. */
+    /**
+     * Detaches this scroll strategy from the currently attached viewport.
+     * @return {?}
+     */
+    FixedSizeVirtualScrollStrategy.prototype.detach = /**
+     * Detaches this scroll strategy from the currently attached viewport.
+     * @return {?}
+     */
+    function () {
+        this._scrolledIndexChange.complete();
+        this._viewport = null;
+    };
+    /**
+     * Update the item size and buffer size.
+     * @param itemSize The size of the items in the virtually scrolling list.
+     * @param minBufferPx The minimum amount of buffer (in pixels) before needing to render more
+     * @param maxBufferPx The amount of buffer (in pixels) to render when rendering more.
+     */
+    /**
+     * Update the item size and buffer size.
+     * @param {?} itemSize The size of the items in the virtually scrolling list.
+     * @param {?} minBufferPx The minimum amount of buffer (in pixels) before needing to render more
+     * @param {?} maxBufferPx The amount of buffer (in pixels) to render when rendering more.
+     * @return {?}
+     */
+    FixedSizeVirtualScrollStrategy.prototype.updateItemAndBufferSize = /**
+     * Update the item size and buffer size.
+     * @param {?} itemSize The size of the items in the virtually scrolling list.
+     * @param {?} minBufferPx The minimum amount of buffer (in pixels) before needing to render more
+     * @param {?} maxBufferPx The amount of buffer (in pixels) to render when rendering more.
+     * @return {?}
+     */
+    function (itemSize, minBufferPx, maxBufferPx) {
+        if (maxBufferPx < minBufferPx) {
+            throw Error('CDK virtual scroll: maxBufferPx must be greater than or equal to minBufferPx');
+        }
+        this._itemSize = itemSize;
+        this._minBufferPx = minBufferPx;
+        this._maxBufferPx = maxBufferPx;
+        this._updateTotalContentSize();
+        this._updateRenderedRange();
+    };
+    /** @docs-private Implemented as part of VirtualScrollStrategy. */
+    /**
+     * \@docs-private Implemented as part of VirtualScrollStrategy.
+     * @return {?}
+     */
+    FixedSizeVirtualScrollStrategy.prototype.onContentScrolled = /**
+     * \@docs-private Implemented as part of VirtualScrollStrategy.
+     * @return {?}
+     */
+    function () {
+        this._updateRenderedRange();
+    };
+    /** @docs-private Implemented as part of VirtualScrollStrategy. */
+    /**
+     * \@docs-private Implemented as part of VirtualScrollStrategy.
+     * @return {?}
+     */
+    FixedSizeVirtualScrollStrategy.prototype.onDataLengthChanged = /**
+     * \@docs-private Implemented as part of VirtualScrollStrategy.
+     * @return {?}
+     */
+    function () {
+        this._updateTotalContentSize();
+        this._updateRenderedRange();
+    };
+    /** @docs-private Implemented as part of VirtualScrollStrategy. */
+    /**
+     * \@docs-private Implemented as part of VirtualScrollStrategy.
+     * @return {?}
+     */
+    FixedSizeVirtualScrollStrategy.prototype.onContentRendered = /**
+     * \@docs-private Implemented as part of VirtualScrollStrategy.
+     * @return {?}
+     */
+    function () { };
+    /** @docs-private Implemented as part of VirtualScrollStrategy. */
+    /**
+     * \@docs-private Implemented as part of VirtualScrollStrategy.
+     * @return {?}
+     */
+    FixedSizeVirtualScrollStrategy.prototype.onRenderedOffsetChanged = /**
+     * \@docs-private Implemented as part of VirtualScrollStrategy.
+     * @return {?}
+     */
+    function () { };
+    /**
+     * Scroll to the offset for the given index.
+     * @param index The index of the element to scroll to.
+     * @param behavior The ScrollBehavior to use when scrolling.
+     */
+    /**
+     * Scroll to the offset for the given index.
+     * @param {?} index The index of the element to scroll to.
+     * @param {?} behavior The ScrollBehavior to use when scrolling.
+     * @return {?}
+     */
+    FixedSizeVirtualScrollStrategy.prototype.scrollToIndex = /**
+     * Scroll to the offset for the given index.
+     * @param {?} index The index of the element to scroll to.
+     * @param {?} behavior The ScrollBehavior to use when scrolling.
+     * @return {?}
+     */
+    function (index, behavior) {
+        if (this._viewport) {
+            this._viewport.scrollToOffset(index * this._itemSize, behavior);
+        }
+    };
+    /** Update the viewport's total content size. */
+    /**
+     * Update the viewport's total content size.
+     * @private
+     * @return {?}
+     */
+    FixedSizeVirtualScrollStrategy.prototype._updateTotalContentSize = /**
+     * Update the viewport's total content size.
+     * @private
+     * @return {?}
+     */
+    function () {
+        if (!this._viewport) {
+            return;
+        }
+        this._viewport.setTotalContentSize(this._viewport.getDataLength() * this._itemSize);
+    };
+    /** Update the viewport's rendered range. */
+    /**
+     * Update the viewport's rendered range.
+     * @private
+     * @return {?}
+     */
+    FixedSizeVirtualScrollStrategy.prototype._updateRenderedRange = /**
+     * Update the viewport's rendered range.
+     * @private
+     * @return {?}
+     */
+    function () {
+        if (!this._viewport) {
+            return;
+        }
+        /** @type {?} */
+        var scrollOffset = this._viewport.measureScrollOffset();
+        /** @type {?} */
+        var firstVisibleIndex = scrollOffset / this._itemSize;
+        /** @type {?} */
+        var renderedRange = this._viewport.getRenderedRange();
+        /** @type {?} */
+        var newRange = { start: renderedRange.start, end: renderedRange.end };
+        /** @type {?} */
+        var viewportSize = this._viewport.getViewportSize();
+        /** @type {?} */
+        var dataLength = this._viewport.getDataLength();
+        /** @type {?} */
+        var startBuffer = scrollOffset - newRange.start * this._itemSize;
+        if (startBuffer < this._minBufferPx && newRange.start != 0) {
+            /** @type {?} */
+            var expandStart = Math.ceil((this._maxBufferPx - startBuffer) / this._itemSize);
+            newRange.start = Math.max(0, newRange.start - expandStart);
+            newRange.end = Math.min(dataLength, Math.ceil(firstVisibleIndex + (viewportSize + this._minBufferPx) / this._itemSize));
+        }
+        else {
+            /** @type {?} */
+            var endBuffer = newRange.end * this._itemSize - (scrollOffset + viewportSize);
+            if (endBuffer < this._minBufferPx && newRange.end != dataLength) {
+                /** @type {?} */
+                var expandEnd = Math.ceil((this._maxBufferPx - endBuffer) / this._itemSize);
+                if (expandEnd > 0) {
+                    newRange.end = Math.min(dataLength, newRange.end + expandEnd);
+                    newRange.start = Math.max(0, Math.floor(firstVisibleIndex - this._minBufferPx / this._itemSize));
+                }
+            }
+        }
+        this._viewport.setRenderedRange(newRange);
+        this._viewport.setRenderedContentOffset(this._itemSize * newRange.start);
+        this._scrolledIndexChange.next(Math.floor(firstVisibleIndex));
+    };
+    return FixedSizeVirtualScrollStrategy;
+}());
+/**
+ * Provider factory for `FixedSizeVirtualScrollStrategy` that simply extracts the already created
+ * `FixedSizeVirtualScrollStrategy` from the given directive.
+ * @param {?} fixedSizeDir The instance of `CdkFixedSizeVirtualScroll` to extract the
+ *     `FixedSizeVirtualScrollStrategy` from.
+ * @return {?}
+ */
+function _fixedSizeVirtualScrollStrategyFactory(fixedSizeDir) {
+    return fixedSizeDir._scrollStrategy;
+}
+/**
+ * A virtual scroll strategy that supports fixed-size items.
+ */
+var CdkFixedSizeVirtualScroll = /** @class */ (function () {
+    function CdkFixedSizeVirtualScroll() {
+        this._itemSize = 20;
+        this._minBufferPx = 100;
+        this._maxBufferPx = 200;
+        /**
+         * The scroll strategy used by this directive.
+         */
+        this._scrollStrategy = new FixedSizeVirtualScrollStrategy(this.itemSize, this.minBufferPx, this.maxBufferPx);
+    }
+    Object.defineProperty(CdkFixedSizeVirtualScroll.prototype, "itemSize", {
+        /** The size of the items in the list (in pixels). */
+        get: /**
+         * The size of the items in the list (in pixels).
+         * @return {?}
+         */
+        function () { return this._itemSize; },
+        set: /**
+         * @param {?} value
+         * @return {?}
+         */
+        function (value) { this._itemSize = Object(_angular_cdk_coercion__WEBPACK_IMPORTED_MODULE_1__["coerceNumberProperty"])(value); },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(CdkFixedSizeVirtualScroll.prototype, "minBufferPx", {
+        /**
+         * The minimum amount of buffer rendered beyond the viewport (in pixels).
+         * If the amount of buffer dips below this number, more items will be rendered. Defaults to 100px.
+         */
+        get: /**
+         * The minimum amount of buffer rendered beyond the viewport (in pixels).
+         * If the amount of buffer dips below this number, more items will be rendered. Defaults to 100px.
+         * @return {?}
+         */
+        function () { return this._minBufferPx; },
+        set: /**
+         * @param {?} value
+         * @return {?}
+         */
+        function (value) { this._minBufferPx = Object(_angular_cdk_coercion__WEBPACK_IMPORTED_MODULE_1__["coerceNumberProperty"])(value); },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(CdkFixedSizeVirtualScroll.prototype, "maxBufferPx", {
+        /**
+         * The number of pixels worth of buffer to render for when rendering new items. Defaults to 200px.
+         */
+        get: /**
+         * The number of pixels worth of buffer to render for when rendering new items. Defaults to 200px.
+         * @return {?}
+         */
+        function () { return this._maxBufferPx; },
+        set: /**
+         * @param {?} value
+         * @return {?}
+         */
+        function (value) { this._maxBufferPx = Object(_angular_cdk_coercion__WEBPACK_IMPORTED_MODULE_1__["coerceNumberProperty"])(value); },
+        enumerable: true,
+        configurable: true
+    });
+    /**
+     * @return {?}
+     */
+    CdkFixedSizeVirtualScroll.prototype.ngOnChanges = /**
+     * @return {?}
+     */
+    function () {
+        this._scrollStrategy.updateItemAndBufferSize(this.itemSize, this.minBufferPx, this.maxBufferPx);
+    };
+    CdkFixedSizeVirtualScroll.decorators = [
+        { type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Directive"], args: [{
+                    selector: 'cdk-virtual-scroll-viewport[itemSize]',
+                    providers: [{
+                            provide: VIRTUAL_SCROLL_STRATEGY,
+                            useFactory: _fixedSizeVirtualScrollStrategyFactory,
+                            deps: [Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["forwardRef"])(function () { return CdkFixedSizeVirtualScroll; })],
+                        }],
+                },] },
+    ];
+    CdkFixedSizeVirtualScroll.propDecorators = {
+        itemSize: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"] }],
+        minBufferPx: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"] }],
+        maxBufferPx: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"] }]
+    };
+    return CdkFixedSizeVirtualScroll;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * Time in ms to throttle the scrolling events by default.
+ * @type {?}
+ */
+var DEFAULT_SCROLL_TIME = 20;
+/**
+ * Service contained all registered Scrollable references and emits an event when any one of the
+ * Scrollable references emit a scrolled event.
+ */
+var ScrollDispatcher = /** @class */ (function () {
+    function ScrollDispatcher(_ngZone, _platform) {
+        this._ngZone = _ngZone;
+        this._platform = _platform;
+        /**
+         * Subject for notifying that a registered scrollable reference element has been scrolled.
+         */
+        this._scrolled = new rxjs__WEBPACK_IMPORTED_MODULE_2__["Subject"]();
+        /**
+         * Keeps track of the global `scroll` and `resize` subscriptions.
+         */
+        this._globalSubscription = null;
+        /**
+         * Keeps track of the amount of subscriptions to `scrolled`. Used for cleaning up afterwards.
+         */
+        this._scrolledCount = 0;
+        /**
+         * Map of all the scrollable references that are registered with the service and their
+         * scroll event subscriptions.
+         */
+        this.scrollContainers = new Map();
+    }
+    /**
+     * Registers a scrollable instance with the service and listens for its scrolled events. When the
+     * scrollable is scrolled, the service emits the event to its scrolled observable.
+     * @param scrollable Scrollable instance to be registered.
+     */
+    /**
+     * Registers a scrollable instance with the service and listens for its scrolled events. When the
+     * scrollable is scrolled, the service emits the event to its scrolled observable.
+     * @param {?} scrollable Scrollable instance to be registered.
+     * @return {?}
+     */
+    ScrollDispatcher.prototype.register = /**
+     * Registers a scrollable instance with the service and listens for its scrolled events. When the
+     * scrollable is scrolled, the service emits the event to its scrolled observable.
+     * @param {?} scrollable Scrollable instance to be registered.
+     * @return {?}
+     */
+    function (scrollable) {
+        var _this = this;
+        if (!this.scrollContainers.has(scrollable)) {
+            this.scrollContainers.set(scrollable, scrollable.elementScrolled()
+                .subscribe(function () { return _this._scrolled.next(scrollable); }));
+        }
+    };
+    /**
+     * Deregisters a Scrollable reference and unsubscribes from its scroll event observable.
+     * @param scrollable Scrollable instance to be deregistered.
+     */
+    /**
+     * Deregisters a Scrollable reference and unsubscribes from its scroll event observable.
+     * @param {?} scrollable Scrollable instance to be deregistered.
+     * @return {?}
+     */
+    ScrollDispatcher.prototype.deregister = /**
+     * Deregisters a Scrollable reference and unsubscribes from its scroll event observable.
+     * @param {?} scrollable Scrollable instance to be deregistered.
+     * @return {?}
+     */
+    function (scrollable) {
+        /** @type {?} */
+        var scrollableReference = this.scrollContainers.get(scrollable);
+        if (scrollableReference) {
+            scrollableReference.unsubscribe();
+            this.scrollContainers.delete(scrollable);
+        }
+    };
+    /**
+     * Returns an observable that emits an event whenever any of the registered Scrollable
+     * references (or window, document, or body) fire a scrolled event. Can provide a time in ms
+     * to override the default "throttle" time.
+     *
+     * **Note:** in order to avoid hitting change detection for every scroll event,
+     * all of the events emitted from this stream will be run outside the Angular zone.
+     * If you need to update any data bindings as a result of a scroll event, you have
+     * to run the callback using `NgZone.run`.
+     */
+    /**
+     * Returns an observable that emits an event whenever any of the registered Scrollable
+     * references (or window, document, or body) fire a scrolled event. Can provide a time in ms
+     * to override the default "throttle" time.
+     *
+     * **Note:** in order to avoid hitting change detection for every scroll event,
+     * all of the events emitted from this stream will be run outside the Angular zone.
+     * If you need to update any data bindings as a result of a scroll event, you have
+     * to run the callback using `NgZone.run`.
+     * @param {?=} auditTimeInMs
+     * @return {?}
+     */
+    ScrollDispatcher.prototype.scrolled = /**
+     * Returns an observable that emits an event whenever any of the registered Scrollable
+     * references (or window, document, or body) fire a scrolled event. Can provide a time in ms
+     * to override the default "throttle" time.
+     *
+     * **Note:** in order to avoid hitting change detection for every scroll event,
+     * all of the events emitted from this stream will be run outside the Angular zone.
+     * If you need to update any data bindings as a result of a scroll event, you have
+     * to run the callback using `NgZone.run`.
+     * @param {?=} auditTimeInMs
+     * @return {?}
+     */
+    function (auditTimeInMs) {
+        var _this = this;
+        if (auditTimeInMs === void 0) { auditTimeInMs = DEFAULT_SCROLL_TIME; }
+        if (!this._platform.isBrowser) {
+            return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["of"])();
+        }
+        return new rxjs__WEBPACK_IMPORTED_MODULE_2__["Observable"](function (observer) {
+            if (!_this._globalSubscription) {
+                _this._addGlobalListener();
+            }
+            // In the case of a 0ms delay, use an observable without auditTime
+            // since it does add a perceptible delay in processing overhead.
+            /** @type {?} */
+            var subscription = auditTimeInMs > 0 ?
+                _this._scrolled.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["auditTime"])(auditTimeInMs)).subscribe(observer) :
+                _this._scrolled.subscribe(observer);
+            _this._scrolledCount++;
+            return function () {
+                subscription.unsubscribe();
+                _this._scrolledCount--;
+                if (!_this._scrolledCount) {
+                    _this._removeGlobalListener();
+                }
+            };
+        });
+    };
+    /**
+     * @return {?}
+     */
+    ScrollDispatcher.prototype.ngOnDestroy = /**
+     * @return {?}
+     */
+    function () {
+        var _this = this;
+        this._removeGlobalListener();
+        this.scrollContainers.forEach(function (_, container) { return _this.deregister(container); });
+        this._scrolled.complete();
+    };
+    /**
+     * Returns an observable that emits whenever any of the
+     * scrollable ancestors of an element are scrolled.
+     * @param elementRef Element whose ancestors to listen for.
+     * @param auditTimeInMs Time to throttle the scroll events.
+     */
+    /**
+     * Returns an observable that emits whenever any of the
+     * scrollable ancestors of an element are scrolled.
+     * @param {?} elementRef Element whose ancestors to listen for.
+     * @param {?=} auditTimeInMs Time to throttle the scroll events.
+     * @return {?}
+     */
+    ScrollDispatcher.prototype.ancestorScrolled = /**
+     * Returns an observable that emits whenever any of the
+     * scrollable ancestors of an element are scrolled.
+     * @param {?} elementRef Element whose ancestors to listen for.
+     * @param {?=} auditTimeInMs Time to throttle the scroll events.
+     * @return {?}
+     */
+    function (elementRef, auditTimeInMs) {
+        /** @type {?} */
+        var ancestors = this.getAncestorScrollContainers(elementRef);
+        return this.scrolled(auditTimeInMs).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["filter"])(function (target) {
+            return !target || ancestors.indexOf(target) > -1;
+        }));
+    };
+    /** Returns all registered Scrollables that contain the provided element. */
+    /**
+     * Returns all registered Scrollables that contain the provided element.
+     * @param {?} elementRef
+     * @return {?}
+     */
+    ScrollDispatcher.prototype.getAncestorScrollContainers = /**
+     * Returns all registered Scrollables that contain the provided element.
+     * @param {?} elementRef
+     * @return {?}
+     */
+    function (elementRef) {
+        var _this = this;
+        /** @type {?} */
+        var scrollingContainers = [];
+        this.scrollContainers.forEach(function (_subscription, scrollable) {
+            if (_this._scrollableContainsElement(scrollable, elementRef)) {
+                scrollingContainers.push(scrollable);
+            }
+        });
+        return scrollingContainers;
+    };
+    /** Returns true if the element is contained within the provided Scrollable. */
+    /**
+     * Returns true if the element is contained within the provided Scrollable.
+     * @private
+     * @param {?} scrollable
+     * @param {?} elementRef
+     * @return {?}
+     */
+    ScrollDispatcher.prototype._scrollableContainsElement = /**
+     * Returns true if the element is contained within the provided Scrollable.
+     * @private
+     * @param {?} scrollable
+     * @param {?} elementRef
+     * @return {?}
+     */
+    function (scrollable, elementRef) {
+        /** @type {?} */
+        var element = elementRef.nativeElement;
+        /** @type {?} */
+        var scrollableElement = scrollable.getElementRef().nativeElement;
+        // Traverse through the element parents until we reach null, checking if any of the elements
+        // are the scrollable's element.
+        do {
+            if (element == scrollableElement) {
+                return true;
+            }
+        } while (element = (/** @type {?} */ (element)).parentElement);
+        return false;
+    };
+    /** Sets up the global scroll listeners. */
+    /**
+     * Sets up the global scroll listeners.
+     * @private
+     * @return {?}
+     */
+    ScrollDispatcher.prototype._addGlobalListener = /**
+     * Sets up the global scroll listeners.
+     * @private
+     * @return {?}
+     */
+    function () {
+        var _this = this;
+        this._globalSubscription = this._ngZone.runOutsideAngular(function () {
+            return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["fromEvent"])(window.document, 'scroll').subscribe(function () { return _this._scrolled.next(); });
+        });
+    };
+    /** Cleans up the global scroll listener. */
+    /**
+     * Cleans up the global scroll listener.
+     * @private
+     * @return {?}
+     */
+    ScrollDispatcher.prototype._removeGlobalListener = /**
+     * Cleans up the global scroll listener.
+     * @private
+     * @return {?}
+     */
+    function () {
+        if (this._globalSubscription) {
+            this._globalSubscription.unsubscribe();
+            this._globalSubscription = null;
+        }
+    };
+    ScrollDispatcher.decorators = [
+        { type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"], args: [{ providedIn: 'root' },] },
+    ];
+    /** @nocollapse */
+    ScrollDispatcher.ctorParameters = function () { return [
+        { type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["NgZone"] },
+        { type: _angular_cdk_platform__WEBPACK_IMPORTED_MODULE_4__["Platform"] }
+    ]; };
+    /** @nocollapse */ ScrollDispatcher.ngInjectableDef = Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["defineInjectable"])({ factory: function ScrollDispatcher_Factory() { return new ScrollDispatcher(Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["inject"])(_angular_core__WEBPACK_IMPORTED_MODULE_0__["NgZone"]), Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["inject"])(_angular_cdk_platform__WEBPACK_IMPORTED_MODULE_4__["Platform"])); }, token: ScrollDispatcher, providedIn: "root" });
+    return ScrollDispatcher;
+}());
+/**
+ * \@docs-private \@deprecated \@breaking-change 8.0.0
+ * @param {?} parentDispatcher
+ * @param {?} ngZone
+ * @param {?} platform
+ * @return {?}
+ */
+function SCROLL_DISPATCHER_PROVIDER_FACTORY(parentDispatcher, ngZone, platform) {
+    return parentDispatcher || new ScrollDispatcher(ngZone, platform);
+}
+/**
+ * \@docs-private \@deprecated \@breaking-change 8.0.0
+ * @type {?}
+ */
+var SCROLL_DISPATCHER_PROVIDER = {
+    // If there is already a ScrollDispatcher available, use that. Otherwise, provide a new one.
+    provide: ScrollDispatcher,
+    deps: [[new _angular_core__WEBPACK_IMPORTED_MODULE_0__["Optional"](), new _angular_core__WEBPACK_IMPORTED_MODULE_0__["SkipSelf"](), ScrollDispatcher], _angular_core__WEBPACK_IMPORTED_MODULE_0__["NgZone"], _angular_cdk_platform__WEBPACK_IMPORTED_MODULE_4__["Platform"]],
+    useFactory: SCROLL_DISPATCHER_PROVIDER_FACTORY
+};
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * Sends an event when the directive's element is scrolled. Registers itself with the
+ * ScrollDispatcher service to include itself as part of its collection of scrolling events that it
+ * can be listened to through the service.
+ */
+var CdkScrollable = /** @class */ (function () {
+    function CdkScrollable(elementRef, scrollDispatcher, ngZone, dir) {
+        var _this = this;
+        this.elementRef = elementRef;
+        this.scrollDispatcher = scrollDispatcher;
+        this.ngZone = ngZone;
+        this.dir = dir;
+        this._destroyed = new rxjs__WEBPACK_IMPORTED_MODULE_2__["Subject"]();
+        this._elementScrolled = new rxjs__WEBPACK_IMPORTED_MODULE_2__["Observable"](function (observer) {
+            return _this.ngZone.runOutsideAngular(function () {
+                return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["fromEvent"])(_this.elementRef.nativeElement, 'scroll').pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["takeUntil"])(_this._destroyed))
+                    .subscribe(observer);
+            });
+        });
+    }
+    /**
+     * @return {?}
+     */
+    CdkScrollable.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.scrollDispatcher.register(this);
+    };
+    /**
+     * @return {?}
+     */
+    CdkScrollable.prototype.ngOnDestroy = /**
+     * @return {?}
+     */
+    function () {
+        this.scrollDispatcher.deregister(this);
+        this._destroyed.next();
+        this._destroyed.complete();
+    };
+    /** Returns observable that emits when a scroll event is fired on the host element. */
+    /**
+     * Returns observable that emits when a scroll event is fired on the host element.
+     * @return {?}
+     */
+    CdkScrollable.prototype.elementScrolled = /**
+     * Returns observable that emits when a scroll event is fired on the host element.
+     * @return {?}
+     */
+    function () {
+        return this._elementScrolled;
+    };
+    /** Gets the ElementRef for the viewport. */
+    /**
+     * Gets the ElementRef for the viewport.
+     * @return {?}
+     */
+    CdkScrollable.prototype.getElementRef = /**
+     * Gets the ElementRef for the viewport.
+     * @return {?}
+     */
+    function () {
+        return this.elementRef;
+    };
+    /**
+     * Scrolls to the specified offsets. This is a normalized version of the browser's native scrollTo
+     * method, since browsers are not consistent about what scrollLeft means in RTL. For this method
+     * left and right always refer to the left and right side of the scrolling container irrespective
+     * of the layout direction. start and end refer to left and right in an LTR context and vice-versa
+     * in an RTL context.
+     * @param options specified the offsets to scroll to.
+     */
+    /**
+     * Scrolls to the specified offsets. This is a normalized version of the browser's native scrollTo
+     * method, since browsers are not consistent about what scrollLeft means in RTL. For this method
+     * left and right always refer to the left and right side of the scrolling container irrespective
+     * of the layout direction. start and end refer to left and right in an LTR context and vice-versa
+     * in an RTL context.
+     * @param {?} options specified the offsets to scroll to.
+     * @return {?}
+     */
+    CdkScrollable.prototype.scrollTo = /**
+     * Scrolls to the specified offsets. This is a normalized version of the browser's native scrollTo
+     * method, since browsers are not consistent about what scrollLeft means in RTL. For this method
+     * left and right always refer to the left and right side of the scrolling container irrespective
+     * of the layout direction. start and end refer to left and right in an LTR context and vice-versa
+     * in an RTL context.
+     * @param {?} options specified the offsets to scroll to.
+     * @return {?}
+     */
+    function (options) {
+        /** @type {?} */
+        var el = this.elementRef.nativeElement;
+        /** @type {?} */
+        var isRtl = this.dir && this.dir.value == 'rtl';
+        // Rewrite start & end offsets as right or left offsets.
+        options.left = options.left == null ? (isRtl ? options.end : options.start) : options.left;
+        options.right = options.right == null ? (isRtl ? options.start : options.end) : options.right;
+        // Rewrite the bottom offset as a top offset.
+        if (options.bottom != null) {
+            ((/** @type {?} */ (options))).top =
+                el.scrollHeight - el.clientHeight - options.bottom;
+        }
+        // Rewrite the right offset as a left offset.
+        if (isRtl && Object(_angular_cdk_platform__WEBPACK_IMPORTED_MODULE_4__["getRtlScrollAxisType"])() != _angular_cdk_platform__WEBPACK_IMPORTED_MODULE_4__["RtlScrollAxisType"].NORMAL) {
+            if (options.left != null) {
+                ((/** @type {?} */ (options))).right =
+                    el.scrollWidth - el.clientWidth - options.left;
+            }
+            if (Object(_angular_cdk_platform__WEBPACK_IMPORTED_MODULE_4__["getRtlScrollAxisType"])() == _angular_cdk_platform__WEBPACK_IMPORTED_MODULE_4__["RtlScrollAxisType"].INVERTED) {
+                options.left = options.right;
+            }
+            else if (Object(_angular_cdk_platform__WEBPACK_IMPORTED_MODULE_4__["getRtlScrollAxisType"])() == _angular_cdk_platform__WEBPACK_IMPORTED_MODULE_4__["RtlScrollAxisType"].NEGATED) {
+                options.left = options.right ? -options.right : options.right;
+            }
+        }
+        else {
+            if (options.right != null) {
+                ((/** @type {?} */ (options))).left =
+                    el.scrollWidth - el.clientWidth - options.right;
+            }
+        }
+        this._applyScrollToOptions(options);
+    };
+    /**
+     * @private
+     * @param {?} options
+     * @return {?}
+     */
+    CdkScrollable.prototype._applyScrollToOptions = /**
+     * @private
+     * @param {?} options
+     * @return {?}
+     */
+    function (options) {
+        /** @type {?} */
+        var el = this.elementRef.nativeElement;
+        if (Object(_angular_cdk_platform__WEBPACK_IMPORTED_MODULE_4__["supportsScrollBehavior"])()) {
+            el.scrollTo(options);
+        }
+        else {
+            if (options.top != null) {
+                el.scrollTop = options.top;
+            }
+            if (options.left != null) {
+                el.scrollLeft = options.left;
+            }
+        }
+    };
+    /**
+     * Measures the scroll offset relative to the specified edge of the viewport. This method can be
+     * used instead of directly checking scrollLeft or scrollTop, since browsers are not consistent
+     * about what scrollLeft means in RTL. The values returned by this method are normalized such that
+     * left and right always refer to the left and right side of the scrolling container irrespective
+     * of the layout direction. start and end refer to left and right in an LTR context and vice-versa
+     * in an RTL context.
+     * @param from The edge to measure from.
+     */
+    /**
+     * Measures the scroll offset relative to the specified edge of the viewport. This method can be
+     * used instead of directly checking scrollLeft or scrollTop, since browsers are not consistent
+     * about what scrollLeft means in RTL. The values returned by this method are normalized such that
+     * left and right always refer to the left and right side of the scrolling container irrespective
+     * of the layout direction. start and end refer to left and right in an LTR context and vice-versa
+     * in an RTL context.
+     * @param {?} from The edge to measure from.
+     * @return {?}
+     */
+    CdkScrollable.prototype.measureScrollOffset = /**
+     * Measures the scroll offset relative to the specified edge of the viewport. This method can be
+     * used instead of directly checking scrollLeft or scrollTop, since browsers are not consistent
+     * about what scrollLeft means in RTL. The values returned by this method are normalized such that
+     * left and right always refer to the left and right side of the scrolling container irrespective
+     * of the layout direction. start and end refer to left and right in an LTR context and vice-versa
+     * in an RTL context.
+     * @param {?} from The edge to measure from.
+     * @return {?}
+     */
+    function (from) {
+        /** @type {?} */
+        var LEFT = 'left';
+        /** @type {?} */
+        var RIGHT = 'right';
+        /** @type {?} */
+        var el = this.elementRef.nativeElement;
+        if (from == 'top') {
+            return el.scrollTop;
+        }
+        if (from == 'bottom') {
+            return el.scrollHeight - el.clientHeight - el.scrollTop;
+        }
+        // Rewrite start & end as left or right offsets.
+        /** @type {?} */
+        var isRtl = this.dir && this.dir.value == 'rtl';
+        if (from == 'start') {
+            from = isRtl ? RIGHT : LEFT;
+        }
+        else if (from == 'end') {
+            from = isRtl ? LEFT : RIGHT;
+        }
+        if (isRtl && Object(_angular_cdk_platform__WEBPACK_IMPORTED_MODULE_4__["getRtlScrollAxisType"])() == _angular_cdk_platform__WEBPACK_IMPORTED_MODULE_4__["RtlScrollAxisType"].INVERTED) {
+            // For INVERTED, scrollLeft is (scrollWidth - clientWidth) when scrolled all the way left and
+            // 0 when scrolled all the way right.
+            if (from == LEFT) {
+                return el.scrollWidth - el.clientWidth - el.scrollLeft;
+            }
+            else {
+                return el.scrollLeft;
+            }
+        }
+        else if (isRtl && Object(_angular_cdk_platform__WEBPACK_IMPORTED_MODULE_4__["getRtlScrollAxisType"])() == _angular_cdk_platform__WEBPACK_IMPORTED_MODULE_4__["RtlScrollAxisType"].NEGATED) {
+            // For NEGATED, scrollLeft is -(scrollWidth - clientWidth) when scrolled all the way left and
+            // 0 when scrolled all the way right.
+            if (from == LEFT) {
+                return el.scrollLeft + el.scrollWidth - el.clientWidth;
+            }
+            else {
+                return -el.scrollLeft;
+            }
+        }
+        else {
+            // For NORMAL, as well as non-RTL contexts, scrollLeft is 0 when scrolled all the way left and
+            // (scrollWidth - clientWidth) when scrolled all the way right.
+            if (from == LEFT) {
+                return el.scrollLeft;
+            }
+            else {
+                return el.scrollWidth - el.clientWidth - el.scrollLeft;
+            }
+        }
+    };
+    CdkScrollable.decorators = [
+        { type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Directive"], args: [{
+                    selector: '[cdk-scrollable], [cdkScrollable]'
+                },] },
+    ];
+    /** @nocollapse */
+    CdkScrollable.ctorParameters = function () { return [
+        { type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ElementRef"] },
+        { type: ScrollDispatcher },
+        { type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["NgZone"] },
+        { type: _angular_cdk_bidi__WEBPACK_IMPORTED_MODULE_5__["Directionality"], decorators: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Optional"] }] }
+    ]; };
+    return CdkScrollable;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * Checks if the given ranges are equal.
+ * @param {?} r1
+ * @param {?} r2
+ * @return {?}
+ */
+function rangesEqual(r1, r2) {
+    return r1.start == r2.start && r1.end == r2.end;
+}
+/**
+ * Scheduler to be used for scroll events. Needs to fall back to
+ * something that doesn't rely on requestAnimationFrame on environments
+ * that don't support it (e.g. server-side rendering).
+ * @type {?}
+ */
+var SCROLL_SCHEDULER = typeof requestAnimationFrame !== 'undefined' ? rxjs__WEBPACK_IMPORTED_MODULE_2__["animationFrameScheduler"] : rxjs__WEBPACK_IMPORTED_MODULE_2__["asapScheduler"];
+/**
+ * A viewport that virtualizes it's scrolling with the help of `CdkVirtualForOf`.
+ */
+var CdkVirtualScrollViewport = /** @class */ (function (_super) {
+    Object(tslib__WEBPACK_IMPORTED_MODULE_6__["__extends"])(CdkVirtualScrollViewport, _super);
+    function CdkVirtualScrollViewport(elementRef, _changeDetectorRef, ngZone, _scrollStrategy, dir, scrollDispatcher) {
+        var _this = _super.call(this, elementRef, scrollDispatcher, ngZone, dir) || this;
+        _this.elementRef = elementRef;
+        _this._changeDetectorRef = _changeDetectorRef;
+        _this._scrollStrategy = _scrollStrategy;
+        /**
+         * Emits when the viewport is detached from a CdkVirtualForOf.
+         */
+        _this._detachedSubject = new rxjs__WEBPACK_IMPORTED_MODULE_2__["Subject"]();
+        /**
+         * Emits when the rendered range changes.
+         */
+        _this._renderedRangeSubject = new rxjs__WEBPACK_IMPORTED_MODULE_2__["Subject"]();
+        /**
+         * The direction the viewport scrolls.
+         */
+        _this.orientation = 'vertical';
+        // Note: we don't use the typical EventEmitter here because we need to subscribe to the scroll
+        // strategy lazily (i.e. only if the user is actually listening to the events). We do this because
+        // depending on how the strategy calculates the scrolled index, it may come at a cost to
+        // performance.
+        /**
+         * Emits when the index of the first element visible in the viewport changes.
+         */
+        _this.scrolledIndexChange = new rxjs__WEBPACK_IMPORTED_MODULE_2__["Observable"](function (observer) {
+            return _this._scrollStrategy.scrolledIndexChange.subscribe(function (index) {
+                return Promise.resolve().then(function () { return _this.ngZone.run(function () { return observer.next(index); }); });
+            });
+        });
+        /**
+         * A stream that emits whenever the rendered range changes.
+         */
+        _this.renderedRangeStream = _this._renderedRangeSubject.asObservable();
+        /**
+         * The transform used to scale the spacer to the same size as all content, including content that
+         * is not currently rendered.
+         */
+        _this._totalContentSizeTransform = '';
+        /**
+         * The total size of all content (in pixels), including content that is not currently rendered.
+         */
+        _this._totalContentSize = 0;
+        /**
+         * The currently rendered range of indices.
+         */
+        _this._renderedRange = { start: 0, end: 0 };
+        /**
+         * The length of the data bound to this viewport (in number of items).
+         */
+        _this._dataLength = 0;
+        /**
+         * The size of the viewport (in pixels).
+         */
+        _this._viewportSize = 0;
+        /**
+         * The last rendered content offset that was set.
+         */
+        _this._renderedContentOffset = 0;
+        /**
+         * Whether the last rendered content offset was to the end of the content (and therefore needs to
+         * be rewritten as an offset to the start of the content).
+         */
+        _this._renderedContentOffsetNeedsRewrite = false;
+        /**
+         * Whether there is a pending change detection cycle.
+         */
+        _this._isChangeDetectionPending = false;
+        /**
+         * A list of functions to run after the next change detection cycle.
+         */
+        _this._runAfterChangeDetection = [];
+        if (!_scrollStrategy) {
+            throw Error('Error: cdk-virtual-scroll-viewport requires the "itemSize" property to be set.');
+        }
+        return _this;
+    }
+    /**
+     * @return {?}
+     */
+    CdkVirtualScrollViewport.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        var _this = this;
+        _super.prototype.ngOnInit.call(this);
+        // It's still too early to measure the viewport at this point. Deferring with a promise allows
+        // the Viewport to be rendered with the correct size before we measure. We run this outside the
+        // zone to avoid causing more change detection cycles. We handle the change detection loop
+        // ourselves instead.
+        this.ngZone.runOutsideAngular(function () { return Promise.resolve().then(function () {
+            _this._measureViewportSize();
+            _this._scrollStrategy.attach(_this);
+            _this.elementScrolled()
+                .pipe(
+            // Start off with a fake scroll event so we properly detect our initial position.
+            Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["startWith"])((/** @type {?} */ (null))), 
+            // Collect multiple events into one until the next animation frame. This way if
+            // there are multiple scroll events in the same frame we only need to recheck
+            // our layout once.
+            Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["auditTime"])(0, SCROLL_SCHEDULER))
+                .subscribe(function () { return _this._scrollStrategy.onContentScrolled(); });
+            _this._markChangeDetectionNeeded();
+        }); });
+    };
+    /**
+     * @return {?}
+     */
+    CdkVirtualScrollViewport.prototype.ngOnDestroy = /**
+     * @return {?}
+     */
+    function () {
+        this.detach();
+        this._scrollStrategy.detach();
+        // Complete all subjects
+        this._renderedRangeSubject.complete();
+        this._detachedSubject.complete();
+        _super.prototype.ngOnDestroy.call(this);
+    };
+    /** Attaches a `CdkVirtualForOf` to this viewport. */
+    /**
+     * Attaches a `CdkVirtualForOf` to this viewport.
+     * @param {?} forOf
+     * @return {?}
+     */
+    CdkVirtualScrollViewport.prototype.attach = /**
+     * Attaches a `CdkVirtualForOf` to this viewport.
+     * @param {?} forOf
+     * @return {?}
+     */
+    function (forOf) {
+        var _this = this;
+        if (this._forOf) {
+            throw Error('CdkVirtualScrollViewport is already attached.');
+        }
+        // Subscribe to the data stream of the CdkVirtualForOf to keep track of when the data length
+        // changes. Run outside the zone to avoid triggering change detection, since we're managing the
+        // change detection loop ourselves.
+        this.ngZone.runOutsideAngular(function () {
+            _this._forOf = forOf;
+            _this._forOf.dataStream.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["takeUntil"])(_this._detachedSubject)).subscribe(function (data) {
+                /** @type {?} */
+                var newLength = data.length;
+                if (newLength !== _this._dataLength) {
+                    _this._dataLength = newLength;
+                    _this._scrollStrategy.onDataLengthChanged();
+                }
+                _this._doChangeDetection();
+            });
+        });
+    };
+    /** Detaches the current `CdkVirtualForOf`. */
+    /**
+     * Detaches the current `CdkVirtualForOf`.
+     * @return {?}
+     */
+    CdkVirtualScrollViewport.prototype.detach = /**
+     * Detaches the current `CdkVirtualForOf`.
+     * @return {?}
+     */
+    function () {
+        this._forOf = null;
+        this._detachedSubject.next();
+    };
+    /** Gets the length of the data bound to this viewport (in number of items). */
+    /**
+     * Gets the length of the data bound to this viewport (in number of items).
+     * @return {?}
+     */
+    CdkVirtualScrollViewport.prototype.getDataLength = /**
+     * Gets the length of the data bound to this viewport (in number of items).
+     * @return {?}
+     */
+    function () {
+        return this._dataLength;
+    };
+    /** Gets the size of the viewport (in pixels). */
+    /**
+     * Gets the size of the viewport (in pixels).
+     * @return {?}
+     */
+    CdkVirtualScrollViewport.prototype.getViewportSize = /**
+     * Gets the size of the viewport (in pixels).
+     * @return {?}
+     */
+    function () {
+        return this._viewportSize;
+    };
+    // TODO(mmalerba): This is technically out of sync with what's really rendered until a render
+    // cycle happens. I'm being careful to only call it after the render cycle is complete and before
+    // setting it to something else, but its error prone and should probably be split into
+    // `pendingRange` and `renderedRange`, the latter reflecting whats actually in the DOM.
+    /** Get the current rendered range of items. */
+    // TODO(mmalerba): This is technically out of sync with what's really rendered until a render
+    // cycle happens. I'm being careful to only call it after the render cycle is complete and before
+    // setting it to something else, but its error prone and should probably be split into
+    // `pendingRange` and `renderedRange`, the latter reflecting whats actually in the DOM.
+    /**
+     * Get the current rendered range of items.
+     * @return {?}
+     */
+    CdkVirtualScrollViewport.prototype.getRenderedRange = 
+    // TODO(mmalerba): This is technically out of sync with what's really rendered until a render
+    // cycle happens. I'm being careful to only call it after the render cycle is complete and before
+    // setting it to something else, but its error prone and should probably be split into
+    // `pendingRange` and `renderedRange`, the latter reflecting whats actually in the DOM.
+    /**
+     * Get the current rendered range of items.
+     * @return {?}
+     */
+    function () {
+        return this._renderedRange;
+    };
+    /**
+     * Sets the total size of all content (in pixels), including content that is not currently
+     * rendered.
+     */
+    /**
+     * Sets the total size of all content (in pixels), including content that is not currently
+     * rendered.
+     * @param {?} size
+     * @return {?}
+     */
+    CdkVirtualScrollViewport.prototype.setTotalContentSize = /**
+     * Sets the total size of all content (in pixels), including content that is not currently
+     * rendered.
+     * @param {?} size
+     * @return {?}
+     */
+    function (size) {
+        if (this._totalContentSize !== size) {
+            this._totalContentSize = size;
+            /** @type {?} */
+            var axis = this.orientation == 'horizontal' ? 'X' : 'Y';
+            this._totalContentSizeTransform = "scale" + axis + "(" + this._totalContentSize + ")";
+            this._markChangeDetectionNeeded();
+        }
+    };
+    /** Sets the currently rendered range of indices. */
+    /**
+     * Sets the currently rendered range of indices.
+     * @param {?} range
+     * @return {?}
+     */
+    CdkVirtualScrollViewport.prototype.setRenderedRange = /**
+     * Sets the currently rendered range of indices.
+     * @param {?} range
+     * @return {?}
+     */
+    function (range) {
+        var _this = this;
+        if (!rangesEqual(this._renderedRange, range)) {
+            this._renderedRangeSubject.next(this._renderedRange = range);
+            this._markChangeDetectionNeeded(function () { return _this._scrollStrategy.onContentRendered(); });
+        }
+    };
+    /**
+     * Gets the offset from the start of the viewport to the start of the rendered data (in pixels).
+     */
+    /**
+     * Gets the offset from the start of the viewport to the start of the rendered data (in pixels).
+     * @return {?}
+     */
+    CdkVirtualScrollViewport.prototype.getOffsetToRenderedContentStart = /**
+     * Gets the offset from the start of the viewport to the start of the rendered data (in pixels).
+     * @return {?}
+     */
+    function () {
+        return this._renderedContentOffsetNeedsRewrite ? null : this._renderedContentOffset;
+    };
+    /**
+     * Sets the offset from the start of the viewport to either the start or end of the rendered data
+     * (in pixels).
+     */
+    /**
+     * Sets the offset from the start of the viewport to either the start or end of the rendered data
+     * (in pixels).
+     * @param {?} offset
+     * @param {?=} to
+     * @return {?}
+     */
+    CdkVirtualScrollViewport.prototype.setRenderedContentOffset = /**
+     * Sets the offset from the start of the viewport to either the start or end of the rendered data
+     * (in pixels).
+     * @param {?} offset
+     * @param {?=} to
+     * @return {?}
+     */
+    function (offset, to) {
+        var _this = this;
+        if (to === void 0) { to = 'to-start'; }
+        // For a horizontal viewport in a right-to-left language we need to translate along the x-axis
+        // in the negative direction.
+        /** @type {?} */
+        var isRtl = this.dir && this.dir.value == 'rtl';
+        /** @type {?} */
+        var isHorizontal = this.orientation == 'horizontal';
+        /** @type {?} */
+        var axis = isHorizontal ? 'X' : 'Y';
+        /** @type {?} */
+        var axisDirection = isHorizontal && isRtl ? -1 : 1;
+        /** @type {?} */
+        var transform = "translate" + axis + "(" + Number(axisDirection * offset) + "px)";
+        this._renderedContentOffset = offset;
+        if (to === 'to-end') {
+            transform += " translate" + axis + "(-100%)";
+            // The viewport should rewrite this as a `to-start` offset on the next render cycle. Otherwise
+            // elements will appear to expand in the wrong direction (e.g. `mat-expansion-panel` would
+            // expand upward).
+            this._renderedContentOffsetNeedsRewrite = true;
+        }
+        if (this._renderedContentTransform != transform) {
+            // We know this value is safe because we parse `offset` with `Number()` before passing it
+            // into the string.
+            this._renderedContentTransform = transform;
+            this._markChangeDetectionNeeded(function () {
+                if (_this._renderedContentOffsetNeedsRewrite) {
+                    _this._renderedContentOffset -= _this.measureRenderedContentSize();
+                    _this._renderedContentOffsetNeedsRewrite = false;
+                    _this.setRenderedContentOffset(_this._renderedContentOffset);
+                }
+                else {
+                    _this._scrollStrategy.onRenderedOffsetChanged();
+                }
+            });
+        }
+    };
+    /**
+     * Scrolls to the given offset from the start of the viewport. Please note that this is not always
+     * the same as setting `scrollTop` or `scrollLeft`. In a horizontal viewport with right-to-left
+     * direction, this would be the equivalent of setting a fictional `scrollRight` property.
+     * @param offset The offset to scroll to.
+     * @param behavior The ScrollBehavior to use when scrolling. Default is behavior is `auto`.
+     */
+    /**
+     * Scrolls to the given offset from the start of the viewport. Please note that this is not always
+     * the same as setting `scrollTop` or `scrollLeft`. In a horizontal viewport with right-to-left
+     * direction, this would be the equivalent of setting a fictional `scrollRight` property.
+     * @param {?} offset The offset to scroll to.
+     * @param {?=} behavior The ScrollBehavior to use when scrolling. Default is behavior is `auto`.
+     * @return {?}
+     */
+    CdkVirtualScrollViewport.prototype.scrollToOffset = /**
+     * Scrolls to the given offset from the start of the viewport. Please note that this is not always
+     * the same as setting `scrollTop` or `scrollLeft`. In a horizontal viewport with right-to-left
+     * direction, this would be the equivalent of setting a fictional `scrollRight` property.
+     * @param {?} offset The offset to scroll to.
+     * @param {?=} behavior The ScrollBehavior to use when scrolling. Default is behavior is `auto`.
+     * @return {?}
+     */
+    function (offset, behavior) {
+        if (behavior === void 0) { behavior = 'auto'; }
+        /** @type {?} */
+        var options = { behavior: behavior };
+        if (this.orientation === 'horizontal') {
+            options.start = offset;
+        }
+        else {
+            options.top = offset;
+        }
+        this.scrollTo(options);
+    };
+    /**
+     * Scrolls to the offset for the given index.
+     * @param index The index of the element to scroll to.
+     * @param behavior The ScrollBehavior to use when scrolling. Default is behavior is `auto`.
+     */
+    /**
+     * Scrolls to the offset for the given index.
+     * @param {?} index The index of the element to scroll to.
+     * @param {?=} behavior The ScrollBehavior to use when scrolling. Default is behavior is `auto`.
+     * @return {?}
+     */
+    CdkVirtualScrollViewport.prototype.scrollToIndex = /**
+     * Scrolls to the offset for the given index.
+     * @param {?} index The index of the element to scroll to.
+     * @param {?=} behavior The ScrollBehavior to use when scrolling. Default is behavior is `auto`.
+     * @return {?}
+     */
+    function (index, behavior) {
+        if (behavior === void 0) { behavior = 'auto'; }
+        this._scrollStrategy.scrollToIndex(index, behavior);
+    };
+    /**
+     * Gets the current scroll offset from the start of the viewport (in pixels).
+     * @param from The edge to measure the offset from. Defaults to 'top' in vertical mode and 'start'
+     *     in horizontal mode.
+     */
+    /**
+     * Gets the current scroll offset from the start of the viewport (in pixels).
+     * @param {?=} from The edge to measure the offset from. Defaults to 'top' in vertical mode and 'start'
+     *     in horizontal mode.
+     * @return {?}
+     */
+    CdkVirtualScrollViewport.prototype.measureScrollOffset = /**
+     * Gets the current scroll offset from the start of the viewport (in pixels).
+     * @param {?=} from The edge to measure the offset from. Defaults to 'top' in vertical mode and 'start'
+     *     in horizontal mode.
+     * @return {?}
+     */
+    function (from) {
+        return _super.prototype.measureScrollOffset.call(this, from ? from : this.orientation === 'horizontal' ? 'start' : 'top');
+    };
+    /** Measure the combined size of all of the rendered items. */
+    /**
+     * Measure the combined size of all of the rendered items.
+     * @return {?}
+     */
+    CdkVirtualScrollViewport.prototype.measureRenderedContentSize = /**
+     * Measure the combined size of all of the rendered items.
+     * @return {?}
+     */
+    function () {
+        /** @type {?} */
+        var contentEl = this._contentWrapper.nativeElement;
+        return this.orientation === 'horizontal' ? contentEl.offsetWidth : contentEl.offsetHeight;
+    };
+    /**
+     * Measure the total combined size of the given range. Throws if the range includes items that are
+     * not rendered.
+     */
+    /**
+     * Measure the total combined size of the given range. Throws if the range includes items that are
+     * not rendered.
+     * @param {?} range
+     * @return {?}
+     */
+    CdkVirtualScrollViewport.prototype.measureRangeSize = /**
+     * Measure the total combined size of the given range. Throws if the range includes items that are
+     * not rendered.
+     * @param {?} range
+     * @return {?}
+     */
+    function (range) {
+        if (!this._forOf) {
+            return 0;
+        }
+        return this._forOf.measureRangeSize(range, this.orientation);
+    };
+    /** Update the viewport dimensions and re-render. */
+    /**
+     * Update the viewport dimensions and re-render.
+     * @return {?}
+     */
+    CdkVirtualScrollViewport.prototype.checkViewportSize = /**
+     * Update the viewport dimensions and re-render.
+     * @return {?}
+     */
+    function () {
+        // TODO: Cleanup later when add logic for handling content resize
+        this._measureViewportSize();
+        this._scrollStrategy.onDataLengthChanged();
+    };
+    /** Measure the viewport size. */
+    /**
+     * Measure the viewport size.
+     * @private
+     * @return {?}
+     */
+    CdkVirtualScrollViewport.prototype._measureViewportSize = /**
+     * Measure the viewport size.
+     * @private
+     * @return {?}
+     */
+    function () {
+        /** @type {?} */
+        var viewportEl = this.elementRef.nativeElement;
+        this._viewportSize = this.orientation === 'horizontal' ?
+            viewportEl.clientWidth : viewportEl.clientHeight;
+    };
+    /** Queue up change detection to run. */
+    /**
+     * Queue up change detection to run.
+     * @private
+     * @param {?=} runAfter
+     * @return {?}
+     */
+    CdkVirtualScrollViewport.prototype._markChangeDetectionNeeded = /**
+     * Queue up change detection to run.
+     * @private
+     * @param {?=} runAfter
+     * @return {?}
+     */
+    function (runAfter) {
+        var _this = this;
+        if (runAfter) {
+            this._runAfterChangeDetection.push(runAfter);
+        }
+        // Use a Promise to batch together calls to `_doChangeDetection`. This way if we set a bunch of
+        // properties sequentially we only have to run `_doChangeDetection` once at the end.
+        if (!this._isChangeDetectionPending) {
+            this._isChangeDetectionPending = true;
+            this.ngZone.runOutsideAngular(function () { return Promise.resolve().then(function () {
+                _this._doChangeDetection();
+            }); });
+        }
+    };
+    /** Run change detection. */
+    /**
+     * Run change detection.
+     * @private
+     * @return {?}
+     */
+    CdkVirtualScrollViewport.prototype._doChangeDetection = /**
+     * Run change detection.
+     * @private
+     * @return {?}
+     */
+    function () {
+        var _this = this;
+        this._isChangeDetectionPending = false;
+        // Apply changes to Angular bindings. Note: We must call `markForCheck` to run change detection
+        // from the root, since the repeated items are content projected in. Calling `detectChanges`
+        // instead does not properly check the projected content.
+        this.ngZone.run(function () { return _this._changeDetectorRef.markForCheck(); });
+        // Apply the content transform. The transform can't be set via an Angular binding because
+        // bypassSecurityTrustStyle is banned in Google. However the value is safe, it's composed of
+        // string literals, a variable that can only be 'X' or 'Y', and user input that is run through
+        // the `Number` function first to coerce it to a numeric value.
+        this._contentWrapper.nativeElement.style.transform = this._renderedContentTransform;
+        /** @type {?} */
+        var runAfterChangeDetection = this._runAfterChangeDetection;
+        this._runAfterChangeDetection = [];
+        for (var _i = 0, runAfterChangeDetection_1 = runAfterChangeDetection; _i < runAfterChangeDetection_1.length; _i++) {
+            var fn = runAfterChangeDetection_1[_i];
+            fn();
+        }
+    };
+    CdkVirtualScrollViewport.decorators = [
+        { type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"], args: [{selector: 'cdk-virtual-scroll-viewport',
+                    template: "<div #contentWrapper class=\"cdk-virtual-scroll-content-wrapper\"><ng-content></ng-content></div><div class=\"cdk-virtual-scroll-spacer\" [style.transform]=\"_totalContentSizeTransform\"></div>",
+                    styles: ["cdk-virtual-scroll-viewport{display:block;position:relative;overflow:auto;contain:strict;transform:translateZ(0);will-change:scroll-position;-webkit-overflow-scrolling:touch}.cdk-virtual-scroll-content-wrapper{position:absolute;top:0;left:0;contain:content}[dir=rtl] .cdk-virtual-scroll-content-wrapper{right:0;left:auto}.cdk-virtual-scroll-orientation-horizontal .cdk-virtual-scroll-content-wrapper{min-height:100%}.cdk-virtual-scroll-orientation-horizontal .cdk-virtual-scroll-content-wrapper>dl:not([cdkVirtualFor]),.cdk-virtual-scroll-orientation-horizontal .cdk-virtual-scroll-content-wrapper>ol:not([cdkVirtualFor]),.cdk-virtual-scroll-orientation-horizontal .cdk-virtual-scroll-content-wrapper>table:not([cdkVirtualFor]),.cdk-virtual-scroll-orientation-horizontal .cdk-virtual-scroll-content-wrapper>ul:not([cdkVirtualFor]){padding-left:0;padding-right:0;margin-left:0;margin-right:0;border-left-width:0;border-right-width:0;outline:0}.cdk-virtual-scroll-orientation-vertical .cdk-virtual-scroll-content-wrapper{min-width:100%}.cdk-virtual-scroll-orientation-vertical .cdk-virtual-scroll-content-wrapper>dl:not([cdkVirtualFor]),.cdk-virtual-scroll-orientation-vertical .cdk-virtual-scroll-content-wrapper>ol:not([cdkVirtualFor]),.cdk-virtual-scroll-orientation-vertical .cdk-virtual-scroll-content-wrapper>table:not([cdkVirtualFor]),.cdk-virtual-scroll-orientation-vertical .cdk-virtual-scroll-content-wrapper>ul:not([cdkVirtualFor]){padding-top:0;padding-bottom:0;margin-top:0;margin-bottom:0;border-top-width:0;border-bottom-width:0;outline:0}.cdk-virtual-scroll-spacer{position:absolute;top:0;left:0;height:1px;width:1px;transform-origin:0 0}[dir=rtl] .cdk-virtual-scroll-spacer{right:0;left:auto;transform-origin:100% 0}"],
+                    host: {
+                        'class': 'cdk-virtual-scroll-viewport',
+                        '[class.cdk-virtual-scroll-orientation-horizontal]': 'orientation === "horizontal"',
+                        '[class.cdk-virtual-scroll-orientation-vertical]': 'orientation !== "horizontal"',
+                    },
+                    encapsulation: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewEncapsulation"].None,
+                    changeDetection: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ChangeDetectionStrategy"].OnPush,
+                    providers: [{
+                            provide: CdkScrollable,
+                            useExisting: CdkVirtualScrollViewport,
+                        }]
+                },] },
+    ];
+    /** @nocollapse */
+    CdkVirtualScrollViewport.ctorParameters = function () { return [
+        { type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ElementRef"] },
+        { type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ChangeDetectorRef"] },
+        { type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["NgZone"] },
+        { type: undefined, decorators: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Optional"] }, { type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Inject"], args: [VIRTUAL_SCROLL_STRATEGY,] }] },
+        { type: _angular_cdk_bidi__WEBPACK_IMPORTED_MODULE_5__["Directionality"], decorators: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Optional"] }] },
+        { type: ScrollDispatcher }
+    ]; };
+    CdkVirtualScrollViewport.propDecorators = {
+        orientation: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"] }],
+        scrolledIndexChange: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Output"] }],
+        _contentWrapper: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"], args: ['contentWrapper',] }]
+    };
+    return CdkVirtualScrollViewport;
+}(CdkScrollable));
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * Helper to extract size from a DOM Node.
+ * @param {?} orientation
+ * @param {?} node
+ * @return {?}
+ */
+function getSize(orientation, node) {
+    /** @type {?} */
+    var el = (/** @type {?} */ (node));
+    if (!el.getBoundingClientRect) {
+        return 0;
+    }
+    /** @type {?} */
+    var rect = el.getBoundingClientRect();
+    return orientation == 'horizontal' ? rect.width : rect.height;
+}
+/**
+ * A directive similar to `ngForOf` to be used for rendering data inside a virtual scrolling
+ * container.
+ * @template T
+ */
+var CdkVirtualForOf = /** @class */ (function () {
+    function CdkVirtualForOf(_viewContainerRef, _template, _differs, _viewport, ngZone) {
+        var _this = this;
+        this._viewContainerRef = _viewContainerRef;
+        this._template = _template;
+        this._differs = _differs;
+        this._viewport = _viewport;
+        /**
+         * Emits when the rendered view of the data changes.
+         */
+        this.viewChange = new rxjs__WEBPACK_IMPORTED_MODULE_2__["Subject"]();
+        /**
+         * Subject that emits when a new DataSource instance is given.
+         */
+        this._dataSourceChanges = new rxjs__WEBPACK_IMPORTED_MODULE_2__["Subject"]();
+        /**
+         * The size of the cache used to store templates that are not being used for re-use later.
+         * Setting the cache size to `0` will disable caching. Defaults to 20 templates.
+         */
+        this.cdkVirtualForTemplateCacheSize = 20;
+        /**
+         * Emits whenever the data in the current DataSource changes.
+         */
+        this.dataStream = this._dataSourceChanges
+            .pipe(
+        // Start off with null `DataSource`.
+        Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["startWith"])((/** @type {?} */ (null))), 
+        // Bundle up the previous and current data sources so we can work with both.
+        Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["pairwise"])(), 
+        // Use `_changeDataSource` to disconnect from the previous data source and connect to the
+        // new one, passing back a stream of data changes which we run through `switchMap` to give
+        // us a data stream that emits the latest data from whatever the current `DataSource` is.
+        Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["switchMap"])(function (_a) {
+            var prev = _a[0], cur = _a[1];
+            return _this._changeDataSource(prev, cur);
+        }), 
+        // Replay the last emitted data when someone subscribes.
+        Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["shareReplay"])(1));
+        /**
+         * The differ used to calculate changes to the data.
+         */
+        this._differ = null;
+        /**
+         * The template cache used to hold on ot template instancess that have been stamped out, but don't
+         * currently need to be rendered. These instances will be reused in the future rather than
+         * stamping out brand new ones.
+         */
+        this._templateCache = [];
+        /**
+         * Whether the rendered data should be updated during the next ngDoCheck cycle.
+         */
+        this._needsUpdate = false;
+        this._destroyed = new rxjs__WEBPACK_IMPORTED_MODULE_2__["Subject"]();
+        this.dataStream.subscribe(function (data) {
+            _this._data = data;
+            _this._onRenderedDataChange();
+        });
+        this._viewport.renderedRangeStream.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["takeUntil"])(this._destroyed)).subscribe(function (range) {
+            _this._renderedRange = range;
+            ngZone.run(function () { return _this.viewChange.next(_this._renderedRange); });
+            _this._onRenderedDataChange();
+        });
+        this._viewport.attach(this);
+    }
+    Object.defineProperty(CdkVirtualForOf.prototype, "cdkVirtualForOf", {
+        /** The DataSource to display. */
+        get: /**
+         * The DataSource to display.
+         * @return {?}
+         */
+        function () {
+            return this._cdkVirtualForOf;
+        },
+        set: /**
+         * @param {?} value
+         * @return {?}
+         */
+        function (value) {
+            this._cdkVirtualForOf = value;
+            /** @type {?} */
+            var ds = Object(_angular_cdk_collections__WEBPACK_IMPORTED_MODULE_7__["isDataSource"])(value) ? value :
+                // Slice the value if its an NgIterable to ensure we're working with an array.
+                new _angular_cdk_collections__WEBPACK_IMPORTED_MODULE_7__["ArrayDataSource"](value instanceof rxjs__WEBPACK_IMPORTED_MODULE_2__["Observable"] ? value : Array.prototype.slice.call(value || []));
+            this._dataSourceChanges.next(ds);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(CdkVirtualForOf.prototype, "cdkVirtualForTrackBy", {
+        /**
+         * The `TrackByFunction` to use for tracking changes. The `TrackByFunction` takes the index and
+         * the item and produces a value to be used as the item's identity when tracking changes.
+         */
+        get: /**
+         * The `TrackByFunction` to use for tracking changes. The `TrackByFunction` takes the index and
+         * the item and produces a value to be used as the item's identity when tracking changes.
+         * @return {?}
+         */
+        function () {
+            return this._cdkVirtualForTrackBy;
+        },
+        set: /**
+         * @param {?} fn
+         * @return {?}
+         */
+        function (fn) {
+            var _this = this;
+            this._needsUpdate = true;
+            this._cdkVirtualForTrackBy = fn ?
+                function (index, item) { return fn(index + (_this._renderedRange ? _this._renderedRange.start : 0), item); } :
+                undefined;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(CdkVirtualForOf.prototype, "cdkVirtualForTemplate", {
+        /** The template used to stamp out new elements. */
+        set: /**
+         * The template used to stamp out new elements.
+         * @param {?} value
+         * @return {?}
+         */
+        function (value) {
+            if (value) {
+                this._needsUpdate = true;
+                this._template = value;
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    /**
+     * Measures the combined size (width for horizontal orientation, height for vertical) of all items
+     * in the specified range. Throws an error if the range includes items that are not currently
+     * rendered.
+     */
+    /**
+     * Measures the combined size (width for horizontal orientation, height for vertical) of all items
+     * in the specified range. Throws an error if the range includes items that are not currently
+     * rendered.
+     * @param {?} range
+     * @param {?} orientation
+     * @return {?}
+     */
+    CdkVirtualForOf.prototype.measureRangeSize = /**
+     * Measures the combined size (width for horizontal orientation, height for vertical) of all items
+     * in the specified range. Throws an error if the range includes items that are not currently
+     * rendered.
+     * @param {?} range
+     * @param {?} orientation
+     * @return {?}
+     */
+    function (range, orientation) {
+        if (range.start >= range.end) {
+            return 0;
+        }
+        if (range.start < this._renderedRange.start || range.end > this._renderedRange.end) {
+            throw Error("Error: attempted to measure an item that isn't rendered.");
+        }
+        // The index into the list of rendered views for the first item in the range.
+        /** @type {?} */
+        var renderedStartIndex = range.start - this._renderedRange.start;
+        // The length of the range we're measuring.
+        /** @type {?} */
+        var rangeLen = range.end - range.start;
+        // Loop over all root nodes for all items in the range and sum up their size.
+        /** @type {?} */
+        var totalSize = 0;
+        /** @type {?} */
+        var i = rangeLen;
+        while (i--) {
+            /** @type {?} */
+            var view = (/** @type {?} */ (this._viewContainerRef.get(i + renderedStartIndex)));
+            /** @type {?} */
+            var j = view ? view.rootNodes.length : 0;
+            while (j--) {
+                totalSize += getSize(orientation, (/** @type {?} */ (view)).rootNodes[j]);
+            }
+        }
+        return totalSize;
+    };
+    /**
+     * @return {?}
+     */
+    CdkVirtualForOf.prototype.ngDoCheck = /**
+     * @return {?}
+     */
+    function () {
+        if (this._differ && this._needsUpdate) {
+            // TODO(mmalerba): We should differentiate needs update due to scrolling and a new portion of
+            // this list being rendered (can use simpler algorithm) vs needs update due to data actually
+            // changing (need to do this diff).
+            /** @type {?} */
+            var changes = this._differ.diff(this._renderedItems);
+            if (!changes) {
+                this._updateContext();
+            }
+            else {
+                this._applyChanges(changes);
+            }
+            this._needsUpdate = false;
+        }
+    };
+    /**
+     * @return {?}
+     */
+    CdkVirtualForOf.prototype.ngOnDestroy = /**
+     * @return {?}
+     */
+    function () {
+        this._viewport.detach();
+        this._dataSourceChanges.complete();
+        this.viewChange.complete();
+        this._destroyed.next();
+        this._destroyed.complete();
+        for (var _i = 0, _a = this._templateCache; _i < _a.length; _i++) {
+            var view = _a[_i];
+            view.destroy();
+        }
+    };
+    /** React to scroll state changes in the viewport. */
+    /**
+     * React to scroll state changes in the viewport.
+     * @private
+     * @return {?}
+     */
+    CdkVirtualForOf.prototype._onRenderedDataChange = /**
+     * React to scroll state changes in the viewport.
+     * @private
+     * @return {?}
+     */
+    function () {
+        if (!this._renderedRange) {
+            return;
+        }
+        this._renderedItems = this._data.slice(this._renderedRange.start, this._renderedRange.end);
+        if (!this._differ) {
+            this._differ = this._differs.find(this._renderedItems).create(this.cdkVirtualForTrackBy);
+        }
+        this._needsUpdate = true;
+    };
+    /** Swap out one `DataSource` for another. */
+    /**
+     * Swap out one `DataSource` for another.
+     * @private
+     * @param {?} oldDs
+     * @param {?} newDs
+     * @return {?}
+     */
+    CdkVirtualForOf.prototype._changeDataSource = /**
+     * Swap out one `DataSource` for another.
+     * @private
+     * @param {?} oldDs
+     * @param {?} newDs
+     * @return {?}
+     */
+    function (oldDs, newDs) {
+        if (oldDs) {
+            oldDs.disconnect(this);
+        }
+        this._needsUpdate = true;
+        return newDs.connect(this);
+    };
+    /** Update the `CdkVirtualForOfContext` for all views. */
+    /**
+     * Update the `CdkVirtualForOfContext` for all views.
+     * @private
+     * @return {?}
+     */
+    CdkVirtualForOf.prototype._updateContext = /**
+     * Update the `CdkVirtualForOfContext` for all views.
+     * @private
+     * @return {?}
+     */
+    function () {
+        /** @type {?} */
+        var count = this._data.length;
+        /** @type {?} */
+        var i = this._viewContainerRef.length;
+        while (i--) {
+            /** @type {?} */
+            var view = (/** @type {?} */ (this._viewContainerRef.get(i)));
+            view.context.index = this._renderedRange.start + i;
+            view.context.count = count;
+            this._updateComputedContextProperties(view.context);
+            view.detectChanges();
+        }
+    };
+    /** Apply changes to the DOM. */
+    /**
+     * Apply changes to the DOM.
+     * @private
+     * @param {?} changes
+     * @return {?}
+     */
+    CdkVirtualForOf.prototype._applyChanges = /**
+     * Apply changes to the DOM.
+     * @private
+     * @param {?} changes
+     * @return {?}
+     */
+    function (changes) {
+        var _this = this;
+        // Rearrange the views to put them in the right location.
+        changes.forEachOperation(function (record, adjustedPreviousIndex, currentIndex) {
+            if (record.previousIndex == null) { // Item added.
+                // Item added.
+                /** @type {?} */
+                var view = _this._insertViewForNewItem((/** @type {?} */ (currentIndex)));
+                view.context.$implicit = record.item;
+            }
+            else if (currentIndex == null) { // Item removed.
+                _this._cacheView(_this._detachView((/** @type {?} */ (adjustedPreviousIndex))));
+            }
+            else { // Item moved.
+                // Item moved.
+                /** @type {?} */
+                var view = (/** @type {?} */ (_this._viewContainerRef.get((/** @type {?} */ (adjustedPreviousIndex)))));
+                _this._viewContainerRef.move(view, currentIndex);
+                view.context.$implicit = record.item;
+            }
+        });
+        // Update $implicit for any items that had an identity change.
+        changes.forEachIdentityChange(function (record) {
+            /** @type {?} */
+            var view = (/** @type {?} */ (_this._viewContainerRef.get((/** @type {?} */ (record.currentIndex)))));
+            view.context.$implicit = record.item;
+        });
+        // Update the context variables on all items.
+        /** @type {?} */
+        var count = this._data.length;
+        /** @type {?} */
+        var i = this._viewContainerRef.length;
+        while (i--) {
+            /** @type {?} */
+            var view = (/** @type {?} */ (this._viewContainerRef.get(i)));
+            view.context.index = this._renderedRange.start + i;
+            view.context.count = count;
+            this._updateComputedContextProperties(view.context);
+        }
+    };
+    /** Cache the given detached view. */
+    /**
+     * Cache the given detached view.
+     * @private
+     * @param {?} view
+     * @return {?}
+     */
+    CdkVirtualForOf.prototype._cacheView = /**
+     * Cache the given detached view.
+     * @private
+     * @param {?} view
+     * @return {?}
+     */
+    function (view) {
+        if (this._templateCache.length < this.cdkVirtualForTemplateCacheSize) {
+            this._templateCache.push(view);
+        }
+        else {
+            /** @type {?} */
+            var index = this._viewContainerRef.indexOf(view);
+            // It's very unlikely that the index will ever be -1, but just in case,
+            // destroy the view on its own, otherwise destroy it through the
+            // container to ensure that all the references are removed.
+            if (index === -1) {
+                view.destroy();
+            }
+            else {
+                this._viewContainerRef.remove(index);
+            }
+        }
+    };
+    /** Inserts a view for a new item, either from the cache or by creating a new one. */
+    /**
+     * Inserts a view for a new item, either from the cache or by creating a new one.
+     * @private
+     * @param {?} index
+     * @return {?}
+     */
+    CdkVirtualForOf.prototype._insertViewForNewItem = /**
+     * Inserts a view for a new item, either from the cache or by creating a new one.
+     * @private
+     * @param {?} index
+     * @return {?}
+     */
+    function (index) {
+        return this._insertViewFromCache(index) || this._createEmbeddedViewAt(index);
+    };
+    /** Update the computed properties on the `CdkVirtualForOfContext`. */
+    /**
+     * Update the computed properties on the `CdkVirtualForOfContext`.
+     * @private
+     * @param {?} context
+     * @return {?}
+     */
+    CdkVirtualForOf.prototype._updateComputedContextProperties = /**
+     * Update the computed properties on the `CdkVirtualForOfContext`.
+     * @private
+     * @param {?} context
+     * @return {?}
+     */
+    function (context) {
+        context.first = context.index === 0;
+        context.last = context.index === context.count - 1;
+        context.even = context.index % 2 === 0;
+        context.odd = !context.even;
+    };
+    /** Creates a new embedded view and moves it to the given index */
+    /**
+     * Creates a new embedded view and moves it to the given index
+     * @private
+     * @param {?} index
+     * @return {?}
+     */
+    CdkVirtualForOf.prototype._createEmbeddedViewAt = /**
+     * Creates a new embedded view and moves it to the given index
+     * @private
+     * @param {?} index
+     * @return {?}
+     */
+    function (index) {
+        /** @type {?} */
+        var view = this._viewContainerRef.createEmbeddedView(this._template, {
+            $implicit: (/** @type {?} */ (null)),
+            cdkVirtualForOf: this._cdkVirtualForOf,
+            index: -1,
+            count: -1,
+            first: false,
+            last: false,
+            odd: false,
+            even: false
+        });
+        if (index < this._viewContainerRef.length) {
+            this._viewContainerRef.move(view, index);
+        }
+        return view;
+    };
+    /** Inserts a recycled view from the cache at the given index. */
+    /**
+     * Inserts a recycled view from the cache at the given index.
+     * @private
+     * @param {?} index
+     * @return {?}
+     */
+    CdkVirtualForOf.prototype._insertViewFromCache = /**
+     * Inserts a recycled view from the cache at the given index.
+     * @private
+     * @param {?} index
+     * @return {?}
+     */
+    function (index) {
+        /** @type {?} */
+        var cachedView = this._templateCache.pop();
+        if (cachedView) {
+            this._viewContainerRef.insert(cachedView, index);
+        }
+        return cachedView || null;
+    };
+    /** Detaches the embedded view at the given index. */
+    /**
+     * Detaches the embedded view at the given index.
+     * @private
+     * @param {?} index
+     * @return {?}
+     */
+    CdkVirtualForOf.prototype._detachView = /**
+     * Detaches the embedded view at the given index.
+     * @private
+     * @param {?} index
+     * @return {?}
+     */
+    function (index) {
+        return (/** @type {?} */ (this._viewContainerRef.detach(index)));
+    };
+    CdkVirtualForOf.decorators = [
+        { type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Directive"], args: [{
+                    selector: '[cdkVirtualFor][cdkVirtualForOf]',
+                },] },
+    ];
+    /** @nocollapse */
+    CdkVirtualForOf.ctorParameters = function () { return [
+        { type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewContainerRef"] },
+        { type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["TemplateRef"] },
+        { type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["IterableDiffers"] },
+        { type: CdkVirtualScrollViewport, decorators: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["SkipSelf"] }] },
+        { type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["NgZone"] }
+    ]; };
+    CdkVirtualForOf.propDecorators = {
+        cdkVirtualForOf: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"] }],
+        cdkVirtualForTrackBy: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"] }],
+        cdkVirtualForTemplate: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"] }],
+        cdkVirtualForTemplateCacheSize: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"] }]
+    };
+    return CdkVirtualForOf;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var ScrollingModule = /** @class */ (function () {
+    function ScrollingModule() {
+    }
+    ScrollingModule.decorators = [
+        { type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["NgModule"], args: [{
+                    imports: [_angular_cdk_bidi__WEBPACK_IMPORTED_MODULE_5__["BidiModule"], _angular_cdk_platform__WEBPACK_IMPORTED_MODULE_4__["PlatformModule"]],
+                    exports: [
+                        _angular_cdk_bidi__WEBPACK_IMPORTED_MODULE_5__["BidiModule"],
+                        CdkFixedSizeVirtualScroll,
+                        CdkScrollable,
+                        CdkVirtualForOf,
+                        CdkVirtualScrollViewport,
+                    ],
+                    declarations: [
+                        CdkFixedSizeVirtualScroll,
+                        CdkScrollable,
+                        CdkVirtualForOf,
+                        CdkVirtualScrollViewport,
+                    ],
+                },] },
+    ];
+    return ScrollingModule;
+}());
+/**
+ * @deprecated ScrollDispatchModule has been renamed to ScrollingModule.
+ * \@breaking-change 8.0.0 delete this alias
+ */
+var ScrollDispatchModule = /** @class */ (function () {
+    function ScrollDispatchModule() {
+    }
+    ScrollDispatchModule.decorators = [
+        { type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["NgModule"], args: [{
+                    imports: [ScrollingModule],
+                    exports: [ScrollingModule],
+                },] },
+    ];
+    return ScrollDispatchModule;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * Time in ms to throttle the resize events by default.
+ * @type {?}
+ */
+var DEFAULT_RESIZE_TIME = 20;
+/**
+ * Simple utility for getting the bounds of the browser viewport.
+ * \@docs-private
+ */
+var ViewportRuler = /** @class */ (function () {
+    function ViewportRuler(_platform, ngZone) {
+        var _this = this;
+        this._platform = _platform;
+        ngZone.runOutsideAngular(function () {
+            _this._change = _platform.isBrowser ?
+                Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["merge"])(Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["fromEvent"])(window, 'resize'), Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["fromEvent"])(window, 'orientationchange')) :
+                Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["of"])();
+            // Note that we need to do the subscription inside `runOutsideAngular`
+            // since subscribing is what causes the event listener to be added.
+            _this._invalidateCache = _this.change().subscribe(function () { return _this._updateViewportSize(); });
+        });
+    }
+    /**
+     * @return {?}
+     */
+    ViewportRuler.prototype.ngOnDestroy = /**
+     * @return {?}
+     */
+    function () {
+        this._invalidateCache.unsubscribe();
+    };
+    /** Returns the viewport's width and height. */
+    /**
+     * Returns the viewport's width and height.
+     * @return {?}
+     */
+    ViewportRuler.prototype.getViewportSize = /**
+     * Returns the viewport's width and height.
+     * @return {?}
+     */
+    function () {
+        if (!this._viewportSize) {
+            this._updateViewportSize();
+        }
+        /** @type {?} */
+        var output = { width: this._viewportSize.width, height: this._viewportSize.height };
+        // If we're not on a browser, don't cache the size since it'll be mocked out anyway.
+        if (!this._platform.isBrowser) {
+            this._viewportSize = (/** @type {?} */ (null));
+        }
+        return output;
+    };
+    /** Gets a ClientRect for the viewport's bounds. */
+    /**
+     * Gets a ClientRect for the viewport's bounds.
+     * @return {?}
+     */
+    ViewportRuler.prototype.getViewportRect = /**
+     * Gets a ClientRect for the viewport's bounds.
+     * @return {?}
+     */
+    function () {
+        // Use the document element's bounding rect rather than the window scroll properties
+        // (e.g. pageYOffset, scrollY) due to in issue in Chrome and IE where window scroll
+        // properties and client coordinates (boundingClientRect, clientX/Y, etc.) are in different
+        // conceptual viewports. Under most circumstances these viewports are equivalent, but they
+        // can disagree when the page is pinch-zoomed (on devices that support touch).
+        // See https://bugs.chromium.org/p/chromium/issues/detail?id=489206#c4
+        // We use the documentElement instead of the body because, by default (without a css reset)
+        // browsers typically give the document body an 8px margin, which is not included in
+        // getBoundingClientRect().
+        /** @type {?} */
+        var scrollPosition = this.getViewportScrollPosition();
+        var _a = this.getViewportSize(), width = _a.width, height = _a.height;
+        return {
+            top: scrollPosition.top,
+            left: scrollPosition.left,
+            bottom: scrollPosition.top + height,
+            right: scrollPosition.left + width,
+            height: height,
+            width: width,
+        };
+    };
+    /** Gets the (top, left) scroll position of the viewport. */
+    /**
+     * Gets the (top, left) scroll position of the viewport.
+     * @return {?}
+     */
+    ViewportRuler.prototype.getViewportScrollPosition = /**
+     * Gets the (top, left) scroll position of the viewport.
+     * @return {?}
+     */
+    function () {
+        // While we can get a reference to the fake document
+        // during SSR, it doesn't have getBoundingClientRect.
+        if (!this._platform.isBrowser) {
+            return { top: 0, left: 0 };
+        }
+        // The top-left-corner of the viewport is determined by the scroll position of the document
+        // body, normally just (scrollLeft, scrollTop). However, Chrome and Firefox disagree about
+        // whether `document.body` or `document.documentElement` is the scrolled element, so reading
+        // `scrollTop` and `scrollLeft` is inconsistent. However, using the bounding rect of
+        // `document.documentElement` works consistently, where the `top` and `left` values will
+        // equal negative the scroll position.
+        /** @type {?} */
+        var documentElement = (/** @type {?} */ (document.documentElement));
+        /** @type {?} */
+        var documentRect = documentElement.getBoundingClientRect();
+        /** @type {?} */
+        var top = -documentRect.top || document.body.scrollTop || window.scrollY ||
+            documentElement.scrollTop || 0;
+        /** @type {?} */
+        var left = -documentRect.left || document.body.scrollLeft || window.scrollX ||
+            documentElement.scrollLeft || 0;
+        return { top: top, left: left };
+    };
+    /**
+     * Returns a stream that emits whenever the size of the viewport changes.
+     * @param throttleTime Time in milliseconds to throttle the stream.
+     */
+    /**
+     * Returns a stream that emits whenever the size of the viewport changes.
+     * @param {?=} throttleTime Time in milliseconds to throttle the stream.
+     * @return {?}
+     */
+    ViewportRuler.prototype.change = /**
+     * Returns a stream that emits whenever the size of the viewport changes.
+     * @param {?=} throttleTime Time in milliseconds to throttle the stream.
+     * @return {?}
+     */
+    function (throttleTime) {
+        if (throttleTime === void 0) { throttleTime = DEFAULT_RESIZE_TIME; }
+        return throttleTime > 0 ? this._change.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["auditTime"])(throttleTime)) : this._change;
+    };
+    /** Updates the cached viewport size. */
+    /**
+     * Updates the cached viewport size.
+     * @private
+     * @return {?}
+     */
+    ViewportRuler.prototype._updateViewportSize = /**
+     * Updates the cached viewport size.
+     * @private
+     * @return {?}
+     */
+    function () {
+        this._viewportSize = this._platform.isBrowser ?
+            { width: window.innerWidth, height: window.innerHeight } :
+            { width: 0, height: 0 };
+    };
+    ViewportRuler.decorators = [
+        { type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"], args: [{ providedIn: 'root' },] },
+    ];
+    /** @nocollapse */
+    ViewportRuler.ctorParameters = function () { return [
+        { type: _angular_cdk_platform__WEBPACK_IMPORTED_MODULE_4__["Platform"] },
+        { type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["NgZone"] }
+    ]; };
+    /** @nocollapse */ ViewportRuler.ngInjectableDef = Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["defineInjectable"])({ factory: function ViewportRuler_Factory() { return new ViewportRuler(Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["inject"])(_angular_cdk_platform__WEBPACK_IMPORTED_MODULE_4__["Platform"]), Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["inject"])(_angular_core__WEBPACK_IMPORTED_MODULE_0__["NgZone"])); }, token: ViewportRuler, providedIn: "root" });
+    return ViewportRuler;
+}());
+/**
+ * \@docs-private \@deprecated \@breaking-change 8.0.0
+ * @param {?} parentRuler
+ * @param {?} platform
+ * @param {?} ngZone
+ * @return {?}
+ */
+function VIEWPORT_RULER_PROVIDER_FACTORY(parentRuler, platform, ngZone) {
+    return parentRuler || new ViewportRuler(platform, ngZone);
+}
+/**
+ * \@docs-private \@deprecated \@breaking-change 8.0.0
+ * @type {?}
+ */
+var VIEWPORT_RULER_PROVIDER = {
+    // If there is already a ViewportRuler available, use that. Otherwise, provide a new one.
+    provide: ViewportRuler,
+    deps: [[new _angular_core__WEBPACK_IMPORTED_MODULE_0__["Optional"](), new _angular_core__WEBPACK_IMPORTED_MODULE_0__["SkipSelf"](), ViewportRuler], _angular_cdk_platform__WEBPACK_IMPORTED_MODULE_4__["Platform"], _angular_core__WEBPACK_IMPORTED_MODULE_0__["NgZone"]],
+    useFactory: VIEWPORT_RULER_PROVIDER_FACTORY
+};
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+
+//# sourceMappingURL=scrolling.es5.js.map
+
+
+/***/ }),
+
 /***/ "./node_modules/ionic-angular/gestures/gesture.js":
 /*!********************************************************!*\
   !*** ./node_modules/ionic-angular/gestures/gesture.js ***!
@@ -2698,7 +10098,7 @@ var DelayDragDirective = /** @class */ (function () {
             evt.stopPropagation();
             clearTimeout(this.touchTimeout);
         }
-        evt.preventDefault();
+        // evt.preventDefault();
     };
     DelayDragDirective.prototype.onTouchEnd = function (evt) {
         console.log('touchend');
@@ -2760,13 +10160,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var ng2_dragula__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ng2-dragula */ "./node_modules/ng2-dragula/dist/fesm5/ng2-dragula.js");
 /* harmony import */ var _ngx_translate_core__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @ngx-translate/core */ "./node_modules/@ngx-translate/core/fesm5/ngx-translate-core.js");
 /* harmony import */ var src_app_directives_delay_drag_directive__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! src/app/directives/delay-drag.directive */ "./src/app/directives/delay-drag.directive.ts");
-/* harmony import */ var ionic_long_press__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ionic-long-press */ "./node_modules/ionic-long-press/fesm5/ionic-long-press.js");
+/* harmony import */ var _angular_cdk_drag_drop__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/cdk/drag-drop */ "./node_modules/@angular/cdk/esm5/drag-drop.es5.js");
+/* harmony import */ var ionic_long_press__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ionic-long-press */ "./node_modules/ionic-long-press/fesm5/ionic-long-press.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -2793,8 +10195,9 @@ var HomeSettingsPageModule = /** @class */ (function () {
                 _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormsModule"],
                 _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicModule"],
                 ng2_dragula__WEBPACK_IMPORTED_MODULE_6__["DragulaModule"],
+                _angular_cdk_drag_drop__WEBPACK_IMPORTED_MODULE_9__["DragDropModule"],
+                ionic_long_press__WEBPACK_IMPORTED_MODULE_10__["LongPressModule"],
                 _ngx_translate_core__WEBPACK_IMPORTED_MODULE_7__["TranslateModule"],
-                ionic_long_press__WEBPACK_IMPORTED_MODULE_9__["LongPressModule"],
                 _angular_router__WEBPACK_IMPORTED_MODULE_3__["RouterModule"].forChild(routes)
             ],
             schemas: [_angular_core__WEBPACK_IMPORTED_MODULE_0__["CUSTOM_ELEMENTS_SCHEMA"]],
@@ -2815,7 +10218,7 @@ var HomeSettingsPageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header no-border>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <button ion-button icon-only (click)=\"close()\">\n        <ion-icon name=\"close\"></ion-icon>\n      </button> </ion-buttons>\n    <ion-title class=\"title\">{{'title_home_setting'|translate}}</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content padding forceOverscroll=\"false\">\n    <ion-chip outline=true (click)=\"goToSettings()\">\n        <ion-icon name=\"cog\" color=\"primary\"></ion-icon>\n        <ion-label>{{'label_other_settinga'|translate}}</ion-label>\n      </ion-chip>\n  <ion-grid id=\"category-buttons\">\n    <ion-row dragula=\"entries\" [(dragulaModel)]=\"categories\" lines=\"none\">\n      <ion-col size=\"6\"ion-long-press [interval]=\"400\" delayDrag *ngFor=\"let category of categories\">\n        <div class=\"home-button\" (press)=\"doSomething()\">\n          <div>\n            <div>{{category.name[language]}}</div>\n          </div>\n        </div>\n      </ion-col>\n    </ion-row>\n    <div class=\"drag-label\">\n        {{'label_setting_drag'|translate}}\n    </div>\n  </ion-grid>\n  <div class=\"wrapper\">\n    <div class=\"scrolling-wrapper-flexbox loop\" dragula=\"entries\" [(dragulaModel)]=\"allCategories\">\n      <div class=\"card\" ion-long-press [interval]=\"400\" delayDrag *ngFor=\"let category of allCategories\" (press)=\"doSomething()\">\n        <h2>{{category.name[language]}}</h2>\n      </div>\n    </div>\n  </div>\n  <div class=\"horizzontal-arrow\">\n      <div class=\"icon\">\n          <div class=\"arrow-right\"></div>\n          <div class=\"arrow-left\"></div>\n        </div>\n  </div>\n  <ion-fab vertical=\"bottom\" horizontal=\"end\" slot=\"fixed\">\n    <ion-fab-button class=\"save-button\" (click)=\"saveHome()\">\n      <ion-icon name=\"save\"></ion-icon>\n    </ion-fab-button>\n  </ion-fab>\n</ion-content>"
+module.exports = "<ion-header no-border>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <button ion-button icon-only (click)=\"close()\">\n        <ion-icon name=\"close\"></ion-icon>\n      </button> </ion-buttons>\n    <ion-title class=\"title\">{{'title_home_setting'|translate}}</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content padding forceOverscroll=\"false\">\n    <ion-chip outline=true (click)=\"goToSettings()\">\n        <ion-icon name=\"cog\" color=\"primary\"></ion-icon>\n        <ion-label>{{'label_other_settinga'|translate}}</ion-label>\n      </ion-chip>\n  <ion-grid id=\"category-buttons\">\n      <ion-row cdkDropList\n      #todoList=\"cdkDropList\"\n      [cdkDropListData]=\"categories\"\n      [cdkDropListConnectedTo]=\"[doneList]\"\n      (cdkDropListDropped)=\"drop($event)\">\n    <!-- <ion-row dragula=\"entries\" [(dragulaModel)]=\"categories\" lines=\"none\"> -->\n      <ion-col size=\"6\" cdkDrag  *ngFor=\"let category of categories\">\n        <div class=\"home-button\" >\n          <div>\n            <div>{{category.name[language]}}</div>\n          </div>\n        </div>\n      </ion-col>\n    </ion-row>\n    <div class=\"drag-label\">\n        {{'label_setting_drag'|translate}}\n    </div>\n  </ion-grid>\n  <div class=\"wrapper\">\n      <!-- <div class=\"scrolling-wrapper-flexbox loop\" dragula=\"entries\" [(dragulaModel)]=\"allCategories\"> -->\n          <div class=\"scrolling-wrapper-flexbox loop\" cdkDropList\n          #doneList=\"cdkDropList\"\n          [cdkDropListData]=\"allCategories\"\n          [cdkDropListConnectedTo]=\"[todoList]\"\n          (cdkDropListDropped)=\"drop($event)\">\n              <div class=\"card\"  cdkDrag  *ngFor=\"let category of allCategories\" >\n        <h2>{{category.name[language]}}</h2>\n      </div>\n    </div>\n  </div>\n  <div class=\"horizzontal-arrow\">\n      <div class=\"icon\">\n          <div class=\"arrow-right\"></div>\n          <div class=\"arrow-left\"></div>\n        </div>\n  </div>\n  <ion-fab vertical=\"bottom\" horizontal=\"end\" slot=\"fixed\">\n    <ion-fab-button class=\"save-button\" (click)=\"saveHome()\">\n      <ion-icon name=\"save\"></ion-icon>\n    </ion-fab-button>\n  </ion-fab>\n</ion-content>"
 
 /***/ }),
 
@@ -2826,7 +10229,7 @@ module.exports = "<ion-header no-border>\n  <ion-toolbar>\n    <ion-buttons slot
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "html.ios{--ion-default-font: -apple-system, BlinkMacSystemFont, \"Helvetica Neue\", \"Roboto\", sans-serif}html.md{--ion-default-font: \"Roboto\", \"Helvetica Neue\", sans-serif}html{--ion-font-family: var(--ion-default-font)}body{background:var(--ion-background-color)}body.backdrop-no-scroll{overflow:hidden}.ion-color-primary{--ion-color-base: var(--ion-color-primary, #3880ff) !important;--ion-color-base-rgb: var(--ion-color-primary-rgb, 56,128,255) !important;--ion-color-contrast: var(--ion-color-primary-contrast, #fff) !important;--ion-color-contrast-rgb: var(--ion-color-primary-contrast-rgb, 255,255,255) !important;--ion-color-shade: var(--ion-color-primary-shade, #3171e0) !important;--ion-color-tint: var(--ion-color-primary-tint, #4c8dff) !important}.ion-color-secondary{--ion-color-base: var(--ion-color-secondary, #0cd1e8) !important;--ion-color-base-rgb: var(--ion-color-secondary-rgb, 12,209,232) !important;--ion-color-contrast: var(--ion-color-secondary-contrast, #fff) !important;--ion-color-contrast-rgb: var(--ion-color-secondary-contrast-rgb, 255,255,255) !important;--ion-color-shade: var(--ion-color-secondary-shade, #0bb8cc) !important;--ion-color-tint: var(--ion-color-secondary-tint, #24d6ea) !important}.ion-color-tertiary{--ion-color-base: var(--ion-color-tertiary, #7044ff) !important;--ion-color-base-rgb: var(--ion-color-tertiary-rgb, 112,68,255) !important;--ion-color-contrast: var(--ion-color-tertiary-contrast, #fff) !important;--ion-color-contrast-rgb: var(--ion-color-tertiary-contrast-rgb, 255,255,255) !important;--ion-color-shade: var(--ion-color-tertiary-shade, #633ce0) !important;--ion-color-tint: var(--ion-color-tertiary-tint, #7e57ff) !important}.ion-color-success{--ion-color-base: var(--ion-color-success, #10dc60) !important;--ion-color-base-rgb: var(--ion-color-success-rgb, 16,220,96) !important;--ion-color-contrast: var(--ion-color-success-contrast, #fff) !important;--ion-color-contrast-rgb: var(--ion-color-success-contrast-rgb, 255,255,255) !important;--ion-color-shade: var(--ion-color-success-shade, #0ec254) !important;--ion-color-tint: var(--ion-color-success-tint, #28e070) !important}.ion-color-warning{--ion-color-base: var(--ion-color-warning, #ffce00) !important;--ion-color-base-rgb: var(--ion-color-warning-rgb, 255,206,0) !important;--ion-color-contrast: var(--ion-color-warning-contrast, #fff) !important;--ion-color-contrast-rgb: var(--ion-color-warning-contrast-rgb, 255,255,255) !important;--ion-color-shade: var(--ion-color-warning-shade, #e0b500) !important;--ion-color-tint: var(--ion-color-warning-tint, #ffd31a) !important}.ion-color-danger{--ion-color-base: var(--ion-color-danger, #f04141) !important;--ion-color-base-rgb: var(--ion-color-danger-rgb, 240,65,65) !important;--ion-color-contrast: var(--ion-color-danger-contrast, #fff) !important;--ion-color-contrast-rgb: var(--ion-color-danger-contrast-rgb, 255,255,255) !important;--ion-color-shade: var(--ion-color-danger-shade, #d33939) !important;--ion-color-tint: var(--ion-color-danger-tint, #f25454) !important}.ion-color-light{--ion-color-base: var(--ion-color-light, #f4f5f8) !important;--ion-color-base-rgb: var(--ion-color-light-rgb, 244,245,248) !important;--ion-color-contrast: var(--ion-color-light-contrast, #000) !important;--ion-color-contrast-rgb: var(--ion-color-light-contrast-rgb, 0,0,0) !important;--ion-color-shade: var(--ion-color-light-shade, #d7d8da) !important;--ion-color-tint: var(--ion-color-light-tint, #f5f6f9) !important}.ion-color-medium{--ion-color-base: var(--ion-color-medium, #989aa2) !important;--ion-color-base-rgb: var(--ion-color-medium-rgb, 152,154,162) !important;--ion-color-contrast: var(--ion-color-medium-contrast, #fff) !important;--ion-color-contrast-rgb: var(--ion-color-medium-contrast-rgb, 255,255,255) !important;--ion-color-shade: var(--ion-color-medium-shade, #86888f) !important;--ion-color-tint: var(--ion-color-medium-tint, #a2a4ab) !important}.ion-color-dark{--ion-color-base: var(--ion-color-dark, #222428) !important;--ion-color-base-rgb: var(--ion-color-dark-rgb, 34,36,40) !important;--ion-color-contrast: var(--ion-color-dark-contrast, #fff) !important;--ion-color-contrast-rgb: var(--ion-color-dark-contrast-rgb, 255,255,255) !important;--ion-color-shade: var(--ion-color-dark-shade, #1e2023) !important;--ion-color-tint: var(--ion-color-dark-tint, #383a3e) !important}.ion-page{left:0;right:0;top:0;bottom:0;display:flex;position:absolute;flex-direction:column;justify-content:space-between;contain:layout size style;overflow:hidden;z-index:0}ion-route,ion-route-redirect,ion-router,ion-select-option,ion-nav-controller,ion-menu-controller,ion-action-sheet-controller,ion-alert-controller,ion-loading-controller,ion-modal-controller,ion-picker-controller,ion-popover-controller,ion-toast-controller,.ion-page-hidden,[hidden]{display:none !important}.ion-page-invisible{opacity:0}html.plt-ios.plt-hybrid,html.plt-ios.plt-pwa{--ion-statusbar-padding: 20px}@supports (padding-top: 20px){html{--ion-safe-area-top: var(--ion-statusbar-padding)}}@supports (padding-top: constant(safe-area-inset-top)){html{--ion-safe-area-top: constant(safe-area-inset-top);--ion-safe-area-bottom: constant(safe-area-inset-bottom);--ion-safe-area-left: constant(safe-area-inset-left);--ion-safe-area-right: constant(safe-area-inset-right)}}@supports (padding-top: env(safe-area-inset-top)){html{--ion-safe-area-top: env(safe-area-inset-top);--ion-safe-area-bottom: env(safe-area-inset-bottom);--ion-safe-area-left: env(safe-area-inset-left);--ion-safe-area-right: env(safe-area-inset-right)}}audio,canvas,progress,video{vertical-align:baseline}audio:not([controls]){display:none;height:0}b,strong{font-weight:bold}img{max-width:100%;border:0}svg:not(:root){overflow:hidden}figure{margin:1em 40px}hr{height:1px;border-width:0;box-sizing:content-box}pre{overflow:auto}code,kbd,pre,samp{font-family:monospace, monospace;font-size:1em}label,input,select,textarea{font-family:inherit;line-height:normal}textarea{overflow:auto;height:auto;font:inherit;color:inherit}textarea::-webkit-input-placeholder{padding-left:2px}textarea::-moz-placeholder{padding-left:2px}textarea:-ms-input-placeholder{padding-left:2px}textarea::-ms-input-placeholder{padding-left:2px}textarea::placeholder{padding-left:2px}form,input,optgroup,select{margin:0;font:inherit;color:inherit}html input[type=\"button\"],input[type=\"reset\"],input[type=\"submit\"]{cursor:pointer;-webkit-appearance:button}a,a div,a span,a ion-icon,a ion-label,button,button div,button span,button ion-icon,button ion-label,.ion-tappable,[tappable],[tappable] div,[tappable] span,[tappable] ion-icon,[tappable] ion-label,input,textarea{touch-action:manipulation}a ion-label,button ion-label{pointer-events:none}button{border:0;border-radius:0;font-family:inherit;font-style:inherit;font-variant:inherit;line-height:1;text-transform:none;cursor:pointer;-webkit-appearance:button}[tappable]{cursor:pointer}a[disabled],button[disabled],html input[disabled]{cursor:default}button::-moz-focus-inner,input::-moz-focus-inner{padding:0;border:0}input[type=\"checkbox\"],input[type=\"radio\"]{padding:0;box-sizing:border-box}input[type=\"number\"]::-webkit-inner-spin-button,input[type=\"number\"]::-webkit-outer-spin-button{height:auto}input[type=\"search\"]::-webkit-search-cancel-button,input[type=\"search\"]::-webkit-search-decoration{-webkit-appearance:none}table{border-collapse:collapse;border-spacing:0}td,th{padding:0}*{box-sizing:border-box;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-tap-highlight-color:transparent;-webkit-touch-callout:none}html{width:100%;height:100%;-webkit-text-size-adjust:100%;-moz-text-size-adjust:100%;-ms-text-size-adjust:100%;text-size-adjust:100%}html.plt-pwa{height:100vh}body{-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;margin-left:0;margin-right:0;margin-top:0;margin-bottom:0;padding-left:0;padding-right:0;padding-top:0;padding-bottom:0;position:fixed;width:100%;max-width:100%;height:100%;max-height:100%;text-rendering:optimizeLegibility;overflow:hidden;touch-action:manipulation;-webkit-user-drag:none;-ms-content-zooming:none;word-wrap:break-word;overscroll-behavior-y:none;-webkit-text-size-adjust:none;-moz-text-size-adjust:none;-ms-text-size-adjust:none;text-size-adjust:none}html{font-family:var(--ion-font-family)}a{background-color:transparent;color:var(--ion-color-primary, #3880ff)}h1,h2,h3,h4,h5,h6{margin-top:16px;margin-bottom:10px;font-weight:500;line-height:1.2}h1{margin-top:20px;font-size:26px}h2{margin-top:18px;font-size:24px}h3{font-size:22px}h4{font-size:20px}h5{font-size:18px}h6{font-size:16px}small{font-size:75%}sub,sup{position:relative;font-size:75%;line-height:0;vertical-align:baseline}sup{top:-.5em}sub{bottom:-.25em}.ion-no-padding,[no-padding]{--padding-start: 0;--padding-end: 0;--padding-top: 0;--padding-bottom: 0;padding-left:0;padding-right:0;padding-top:0;padding-bottom:0}.ion-padding,[padding]{--padding-start: var(--ion-padding, 16px);--padding-end: var(--ion-padding, 16px);--padding-top: var(--ion-padding, 16px);--padding-bottom: var(--ion-padding, 16px);padding-left:var(--ion-padding, 16px);padding-right:var(--ion-padding, 16px);padding-top:var(--ion-padding, 16px);padding-bottom:var(--ion-padding, 16px)}@supports ((-webkit-margin-start: 0) or (margin-inline-start: 0)) or (-webkit-margin-start: 0){.ion-padding,[padding]{padding-left:unset;padding-right:unset;-webkit-padding-start:var(--ion-padding, 16px);padding-inline-start:var(--ion-padding, 16px);-webkit-padding-end:var(--ion-padding, 16px);padding-inline-end:var(--ion-padding, 16px)}}.ion-padding-top,[padding-top]{--padding-top: var(--ion-padding, 16px);padding-top:var(--ion-padding, 16px)}.ion-padding-start,[padding-start]{--padding-start: var(--ion-padding, 16px);padding-left:var(--ion-padding, 16px)}@supports ((-webkit-margin-start: 0) or (margin-inline-start: 0)) or (-webkit-margin-start: 0){.ion-padding-start,[padding-start]{padding-left:unset;-webkit-padding-start:var(--ion-padding, 16px);padding-inline-start:var(--ion-padding, 16px)}}.ion-padding-end,[padding-end]{--padding-end: var(--ion-padding, 16px);padding-right:var(--ion-padding, 16px)}@supports ((-webkit-margin-start: 0) or (margin-inline-start: 0)) or (-webkit-margin-start: 0){.ion-padding-end,[padding-end]{padding-right:unset;-webkit-padding-end:var(--ion-padding, 16px);padding-inline-end:var(--ion-padding, 16px)}}.ion-padding-bottom,[padding-bottom]{--padding-bottom: var(--ion-padding, 16px);padding-bottom:var(--ion-padding, 16px)}.ion-padding-vertical,[padding-vertical]{--padding-top: var(--ion-padding, 16px);--padding-bottom: var(--ion-padding, 16px);padding-top:var(--ion-padding, 16px);padding-bottom:var(--ion-padding, 16px)}.ion-padding-horizontal,[padding-horizontal]{--padding-start: var(--ion-padding, 16px);--padding-end: var(--ion-padding, 16px);padding-left:var(--ion-padding, 16px);padding-right:var(--ion-padding, 16px)}@supports ((-webkit-margin-start: 0) or (margin-inline-start: 0)) or (-webkit-margin-start: 0){.ion-padding-horizontal,[padding-horizontal]{padding-left:unset;padding-right:unset;-webkit-padding-start:var(--ion-padding, 16px);padding-inline-start:var(--ion-padding, 16px);-webkit-padding-end:var(--ion-padding, 16px);padding-inline-end:var(--ion-padding, 16px)}}.ion-no-margin,[no-margin]{--margin-start: 0;--margin-end: 0;--margin-top: 0;--margin-bottom: 0;margin-left:0;margin-right:0;margin-top:0;margin-bottom:0}.ion-margin,[margin]{--margin-start: var(--ion-margin, 16px);--margin-end: var(--ion-margin, 16px);--margin-top: var(--ion-margin, 16px);--margin-bottom: var(--ion-margin, 16px);margin-left:var(--ion-margin, 16px);margin-right:var(--ion-margin, 16px);margin-top:var(--ion-margin, 16px);margin-bottom:var(--ion-margin, 16px)}@supports ((-webkit-margin-start: 0) or (margin-inline-start: 0)) or (-webkit-margin-start: 0){.ion-margin,[margin]{margin-left:unset;margin-right:unset;-webkit-margin-start:var(--ion-margin, 16px);margin-inline-start:var(--ion-margin, 16px);-webkit-margin-end:var(--ion-margin, 16px);margin-inline-end:var(--ion-margin, 16px)}}.ion-margin-top,[margin-top]{--margin-top: var(--ion-margin, 16px);margin-top:var(--ion-margin, 16px)}.ion-margin-start,[margin-start]{--margin-start: var(--ion-margin, 16px);margin-left:var(--ion-margin, 16px)}@supports ((-webkit-margin-start: 0) or (margin-inline-start: 0)) or (-webkit-margin-start: 0){.ion-margin-start,[margin-start]{margin-left:unset;-webkit-margin-start:var(--ion-margin, 16px);margin-inline-start:var(--ion-margin, 16px)}}.ion-margin-end,[margin-end]{--margin-end: var(--ion-margin, 16px);margin-right:var(--ion-margin, 16px)}@supports ((-webkit-margin-start: 0) or (margin-inline-start: 0)) or (-webkit-margin-start: 0){.ion-margin-end,[margin-end]{margin-right:unset;-webkit-margin-end:var(--ion-margin, 16px);margin-inline-end:var(--ion-margin, 16px)}}.ion-margin-bottom,[margin-bottom]{--margin-bottom: var(--ion-margin, 16px);margin-bottom:var(--ion-margin, 16px)}.ion-margin-vertical,[margin-vertical]{--margin-top: var(--ion-margin, 16px);--margin-bottom: var(--ion-margin, 16px);margin-top:var(--ion-margin, 16px);margin-bottom:var(--ion-margin, 16px)}.ion-margin-horizontal,[margin-horizontal]{--margin-start: var(--ion-margin, 16px);--margin-end: var(--ion-margin, 16px);margin-left:var(--ion-margin, 16px);margin-right:var(--ion-margin, 16px)}@supports ((-webkit-margin-start: 0) or (margin-inline-start: 0)) or (-webkit-margin-start: 0){.ion-margin-horizontal,[margin-horizontal]{margin-left:unset;margin-right:unset;-webkit-margin-start:var(--ion-margin, 16px);margin-inline-start:var(--ion-margin, 16px);-webkit-margin-end:var(--ion-margin, 16px);margin-inline-end:var(--ion-margin, 16px)}}[float-left]{float:left !important}[float-right]{float:right !important}[float-start]{float:left !important}:host-context([dir=rtl]) [float-start]{float:right !important}[float-end]{float:right !important}:host-context([dir=rtl]) [float-end]{float:left !important}@media (min-width: 576px){[float-sm-left]{float:left !important}[float-sm-right]{float:right !important}[float-sm-start]{float:left !important}:host-context([dir=rtl]) [float-sm-start]{float:right !important}[float-sm-end]{float:right !important}:host-context([dir=rtl]) [float-sm-end]{float:left !important}}@media (min-width: 768px){[float-md-left]{float:left !important}[float-md-right]{float:right !important}[float-md-start]{float:left !important}:host-context([dir=rtl]) [float-md-start]{float:right !important}[float-md-end]{float:right !important}:host-context([dir=rtl]) [float-md-end]{float:left !important}}@media (min-width: 992px){[float-lg-left]{float:left !important}[float-lg-right]{float:right !important}[float-lg-start]{float:left !important}:host-context([dir=rtl]) [float-lg-start]{float:right !important}[float-lg-end]{float:right !important}:host-context([dir=rtl]) [float-lg-end]{float:left !important}}@media (min-width: 1200px){[float-xl-left]{float:left !important}[float-xl-right]{float:right !important}[float-xl-start]{float:left !important}:host-context([dir=rtl]) [float-xl-start]{float:right !important}[float-xl-end]{float:right !important}:host-context([dir=rtl]) [float-xl-end]{float:left !important}}.ion-text-center,[text-center]{text-align:center !important}.ion-text-justify,[text-justify]{text-align:justify !important}.ion-text-start,[text-start]{text-align:start !important}.ion-text-end,[text-end]{text-align:end !important}.ion-text-left,[text-left]{text-align:left !important}.ion-text-right,[text-right]{text-align:right !important}.ion-text-nowrap,[text-nowrap]{white-space:nowrap !important}.ion-text-wrap,[text-wrap]{white-space:normal !important}@media (min-width: 576px){.ion-text-sm-center,[text-sm-center]{text-align:center !important}.ion-text-sm-justify,[text-sm-justify]{text-align:justify !important}.ion-text-sm-start,[text-sm-start]{text-align:start !important}.ion-text-sm-end,[text-sm-end]{text-align:end !important}.ion-text-sm-left,[text-sm-left]{text-align:left !important}.ion-text-sm-right,[text-sm-right]{text-align:right !important}.ion-text-sm-nowrap,[text-sm-nowrap]{white-space:nowrap !important}.ion-text-sm-wrap,[text-sm-wrap]{white-space:normal !important}}@media (min-width: 768px){.ion-text-md-center,[text-md-center]{text-align:center !important}.ion-text-md-justify,[text-md-justify]{text-align:justify !important}.ion-text-md-start,[text-md-start]{text-align:start !important}.ion-text-md-end,[text-md-end]{text-align:end !important}.ion-text-md-left,[text-md-left]{text-align:left !important}.ion-text-md-right,[text-md-right]{text-align:right !important}.ion-text-md-nowrap,[text-md-nowrap]{white-space:nowrap !important}.ion-text-md-wrap,[text-md-wrap]{white-space:normal !important}}@media (min-width: 992px){.ion-text-lg-center,[text-lg-center]{text-align:center !important}.ion-text-lg-justify,[text-lg-justify]{text-align:justify !important}.ion-text-lg-start,[text-lg-start]{text-align:start !important}.ion-text-lg-end,[text-lg-end]{text-align:end !important}.ion-text-lg-left,[text-lg-left]{text-align:left !important}.ion-text-lg-right,[text-lg-right]{text-align:right !important}.ion-text-lg-nowrap,[text-lg-nowrap]{white-space:nowrap !important}.ion-text-lg-wrap,[text-lg-wrap]{white-space:normal !important}}@media (min-width: 1200px){.ion-text-xl-center,[text-xl-center]{text-align:center !important}.ion-text-xl-justify,[text-xl-justify]{text-align:justify !important}.ion-text-xl-start,[text-xl-start]{text-align:start !important}.ion-text-xl-end,[text-xl-end]{text-align:end !important}.ion-text-xl-left,[text-xl-left]{text-align:left !important}.ion-text-xl-right,[text-xl-right]{text-align:right !important}.ion-text-xl-nowrap,[text-xl-nowrap]{white-space:nowrap !important}.ion-text-xl-wrap,[text-xl-wrap]{white-space:normal !important}}.ion-text-uppercase,[text-uppercase]{text-transform:uppercase !important}.ion-text-lowercase,[text-lowercase]{text-transform:lowercase !important}.ion-text-capitalize,[text-capitalize]{text-transform:capitalize !important}@media (min-width: 576px){.ion-text-sm-uppercase,[text-sm-uppercase]{text-transform:uppercase !important}.ion-text-sm-lowercase,[text-sm-lowercase]{text-transform:lowercase !important}.ion-text-sm-capitalize,[text-sm-capitalize]{text-transform:capitalize !important}}@media (min-width: 768px){.ion-text-md-uppercase,[text-md-uppercase]{text-transform:uppercase !important}.ion-text-md-lowercase,[text-md-lowercase]{text-transform:lowercase !important}.ion-text-md-capitalize,[text-md-capitalize]{text-transform:capitalize !important}}@media (min-width: 992px){.ion-text-lg-uppercase,[text-lg-uppercase]{text-transform:uppercase !important}.ion-text-lg-lowercase,[text-lg-lowercase]{text-transform:lowercase !important}.ion-text-lg-capitalize,[text-lg-capitalize]{text-transform:capitalize !important}}@media (min-width: 1200px){.ion-text-xl-uppercase,[text-xl-uppercase]{text-transform:uppercase !important}.ion-text-xl-lowercase,[text-xl-lowercase]{text-transform:lowercase !important}.ion-text-xl-capitalize,[text-xl-capitalize]{text-transform:capitalize !important}}[align-self-start]{align-self:flex-start !important}[align-self-end]{align-self:flex-end !important}[align-self-center]{align-self:center !important}[align-self-stretch]{align-self:stretch !important}[align-self-baseline]{align-self:baseline !important}[align-self-auto]{align-self:auto !important}[wrap]{flex-wrap:wrap !important}[nowrap]{flex-wrap:nowrap !important}[wrap-reverse]{flex-wrap:wrap-reverse !important}[justify-content-start]{justify-content:flex-start !important}[justify-content-center]{justify-content:center !important}[justify-content-end]{justify-content:flex-end !important}[justify-content-around]{justify-content:space-around !important}[justify-content-between]{justify-content:space-between !important}[justify-content-evenly]{justify-content:space-evenly !important}[align-items-start]{align-items:flex-start !important}[align-items-center]{align-items:center !important}[align-items-end]{align-items:flex-end !important}[align-items-stretch]{align-items:stretch !important}[align-items-baseline]{align-items:baseline !important}html {\n  font-family: 'Titillium Web', sans-serif !important; }.fixed {\n  position: fixed !important; }.spacing {\n  height: 50px !important; }.category {\n  width: 100%;\n  text-align: center;\n  color: black;\n  font-size: 24px;\n  margin-bottom: 1%;\n  border-bottom: 1px solid black; }.searchbar-input {\n  background: white !important; }.bg {\n  background: lightgrey; }/* in-flight clone */.gu-mirror {\n  position: fixed !important;\n  margin: 0 !important;\n  z-index: 9999 !important;\n  opacity: 0.8;\n  -ms-filter: \"progid:DXImageTransform.Microsoft.Alpha(Opacity=80)\";\n  filter: alpha(opacity=80);\n  pointer-events: none; }/* high-performance display:none; helper */.gu-hide {\n  left: -9999px !important; }/* added to mirrorContainer (default = body) while dragging */.gu-unselectable {\n  -webkit-user-select: none !important;\n  -moz-user-select: none !important;\n  -ms-user-select: none !important;\n  user-select: none !important; }/* added to the source element while its mirror is dragged */.gu-transit {\n  opacity: 0.2;\n  -ms-filter: \"progid:DXImageTransform.Microsoft.Alpha(Opacity=20)\";\n  filter: alpha(opacity=20); }.title {\n  background-color: rgba(255, 255, 255, 0.5);\n  color: #11B3EF;\n  text-align: center;\n  font-weight: bold;\n  font-size: 24px;\n  margin: 8px 0px; }.scrolling-wrapper-flexbox {\n  background-color: rgba(255, 255, 255, 0.5);\n  left: 0px;\n  position: fixed;\n  bottom: 50px;\n  width: 100vw;\n  height: 100px;\n  display: flex;\n  overflow-x: auto;\n  z-index: 999; }.scrolling-wrapper-flexbox .card {\n    flex: 0 0 auto;\n    color: black;\n    border: 2px solid black;\n    background: white;\n    padding: 8px;\n    margin: 4px; }#category-buttons {\n  height: calc(100% - 187px);\n  border: 3px solid #11B3EF;\n  position: relative; }#category-buttons .drag-label {\n    position: absolute;\n    bottom: 0px;\n    text-align: center;\n    width: 100%;\n    opacity: 0.5; }#category-buttons .home-button {\n    color: black;\n    border-radius: 4px;\n    width: 100%;\n    height: 100%;\n    margin-bottom: 5%;\n    background: white;\n    color: #11B3EF;\n    text-align: center;\n    padding: 2%; }#category-buttons .home-button .label-button {\n      padding: 8px 0px;\n      font-size: 16px;\n      font-weight: bold; }.close {\n  font-size: 12px; }.horizzontal-arrow {\n  position: fixed;\n  bottom: 0px;\n  height: 50px;\n  width: 100%; }.icon {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  -webkit-transform: translate(-50%, -50%);\n          transform: translate(-50%, -50%);\n  width: 55%;\n  height: 60px;\n  cursor: pointer; }.arrow-right {\n  position: absolute;\n  top: 25px;\n  width: 90%;\n  height: 2px;\n  background-color: #000000;\n  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);\n  -webkit-animation: arrow 700ms linear infinite;\n          animation: arrow 700ms linear infinite; }.arrow-right::after {\n  content: '';\n  position: absolute;\n  width: 10px;\n  height: 2px;\n  top: -3px;\n  right: -2px;\n  background-color: #000000;\n  -webkit-transform: rotate(45deg);\n          transform: rotate(45deg); }.arrow-right::before {\n  content: '';\n  position: absolute;\n  width: 10px;\n  height: 2px;\n  top: 3px;\n  right: -2px;\n  background-color: #000000;\n  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);\n  -webkit-transform: rotate(-45deg);\n          transform: rotate(-45deg); }.arrow-left {\n  position: absolute;\n  top: 25px;\n  width: 90%;\n  height: 2px;\n  background-color: #000000;\n  -webkit-animation: arrow 700ms linear infinite;\n          animation: arrow 700ms linear infinite; }.arrow-left::after {\n  content: '';\n  position: absolute;\n  width: 10px;\n  height: 2px;\n  top: -3px;\n  left: -2px;\n  background-color: #000000;\n  -webkit-transform: rotate(-45deg);\n          transform: rotate(-45deg); }.arrow-left::before {\n  content: '';\n  position: absolute;\n  width: 10px;\n  height: 2px;\n  top: 3px;\n  left: -2px;\n  background-color: #000000;\n  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);\n  -webkit-transform: rotate(45deg);\n          transform: rotate(45deg); }.gu-mirror {\n  flex: 0 0 auto;\n  border: 2px solid #11B3EF;\n  background: white;\n  margin: 4px;\n  padding: 8px;\n  -webkit-transform-origin: 20% 40%;\n          transform-origin: 20% 40%; }@media screen and (max-width: 768px) {\n  .child {\n    -webkit-touch-callout: none;\n    /* may be useful if your child is an anchor you can otherwise click */\n    -webkit-user-select: none !important;\n    /* Disable selection/copy in UIWebView */\n    -moz-user-select: none !important;\n    -ms-user-select: none !important;\n    user-select: none !important; } }.gu-mirror.child:after {\n  content: \".gu-mirror\"; }.delay-drag-lifted.child:after {\n  content: \".delay-drag-lifted\"; }.gu-mirror.delay-drag-lifted.child:after {\n  content: \".delay-drag-lifted.gu-mirror\"; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIm5vZGVfbW9kdWxlcy9AaW9uaWMvYW5ndWxhci9jc3MvY29yZS5jc3MiLCJub2RlX21vZHVsZXMvQGlvbmljL2FuZ3VsYXIvY3NzL25vcm1hbGl6ZS5jc3MiLCJub2RlX21vZHVsZXMvQGlvbmljL2FuZ3VsYXIvY3NzL3N0cnVjdHVyZS5jc3MiLCJub2RlX21vZHVsZXMvQGlvbmljL2FuZ3VsYXIvY3NzL3R5cG9ncmFwaHkuY3NzIiwibm9kZV9tb2R1bGVzL0Bpb25pYy9hbmd1bGFyL2Nzcy9wYWRkaW5nLmNzcyIsIm5vZGVfbW9kdWxlcy9AaW9uaWMvYW5ndWxhci9jc3MvZmxvYXQtZWxlbWVudHMuY3NzIiwibm9kZV9tb2R1bGVzL0Bpb25pYy9hbmd1bGFyL2Nzcy90ZXh0LWFsaWdubWVudC5jc3MiLCJub2RlX21vZHVsZXMvQGlvbmljL2FuZ3VsYXIvY3NzL3RleHQtdHJhbnNmb3JtYXRpb24uY3NzIiwibm9kZV9tb2R1bGVzL0Bpb25pYy9hbmd1bGFyL2Nzcy9mbGV4LXV0aWxzLmNzcyIsIi9ob21lL2NoaW44L0RvY3VtZW50cy93b3JrL21vZHVsYXJBcHAvbW9kdWxhci1hcHAvc3JjL2dsb2JhbC5zY3NzIiwiL2hvbWUvY2hpbjgvRG9jdW1lbnRzL3dvcmsvbW9kdWxhckFwcC9tb2R1bGFyLWFwcC9zcmMvYXBwL3BhZ2VzL2hvbWUtc2V0dGluZ3MvaG9tZS1zZXR0aW5ncy5wYWdlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsU0FBUyw2RkFBNkYsQ0FBQyxRQUFRLDBEQUEwRCxDQUFDLEtBQUssMENBQTBDLENBQUMsS0FBSyxzQ0FBc0MsQ0FBQyx3QkFBd0IsZUFBZSxDQUFDLG1CQUFtQiwrREFBK0QsMEVBQTBFLHlFQUF5RSx3RkFBd0Ysc0VBQXNFLG1FQUFtRSxDQUFDLHFCQUFxQixpRUFBaUUsNEVBQTRFLDJFQUEyRSwwRkFBMEYsd0VBQXdFLHFFQUFxRSxDQUFDLG9CQUFvQixnRUFBZ0UsMkVBQTJFLDBFQUEwRSx5RkFBeUYsdUVBQXVFLG9FQUFvRSxDQUFDLG1CQUFtQiwrREFBK0QseUVBQXlFLHlFQUF5RSx3RkFBd0Ysc0VBQXNFLG1FQUFtRSxDQUFDLG1CQUFtQiwrREFBK0QseUVBQXlFLHlFQUF5RSx3RkFBd0Ysc0VBQXNFLG1FQUFtRSxDQUFDLGtCQUFrQiw4REFBOEQsd0VBQXdFLHdFQUF3RSx1RkFBdUYscUVBQXFFLGtFQUFrRSxDQUFDLGlCQUFpQiw2REFBNkQseUVBQXlFLHVFQUF1RSxnRkFBZ0Ysb0VBQW9FLGlFQUFpRSxDQUFDLGtCQUFrQiw4REFBOEQsMEVBQTBFLHdFQUF3RSx1RkFBdUYscUVBQXFFLGtFQUFrRSxDQUFDLGdCQUFnQiw0REFBNEQscUVBQXFFLHNFQUFzRSxxRkFBcUYsbUVBQW1FLGdFQUFnRSxDQUFDLFVBQVUsT0FBTyxRQUFRLE1BQU0sU0FBUyxhQUFhLGtCQUFrQixzQkFBc0IsOEJBQThCLDBCQUEwQixnQkFBZ0IsU0FBUyxDQUFDLDBSQUEwUix1QkFBdUIsQ0FBQyxvQkFBb0IsU0FBUyxDQUFDLDZDQUE2Qyw2QkFBNkIsQ0FBQyw4QkFBOEIsS0FBSyxpREFBaUQsQ0FBQyxDQUFDLHVEQUF1RCxLQUFLLG1EQUFtRCx5REFBeUQscURBQXFELHNEQUFzRCxDQUFDLENBQUMsa0RBQWtELEtBQUssOENBQThDLG9EQUFvRCxnREFBZ0QsaURBQWlELENBQUMsQ0FBQyxBQ0F6N0ssNEJBQTRCLHVCQUF1QixDQUFDLHNCQUFzQixhQUFhLFFBQVEsQ0FBQyxTQUFTLGdCQUFnQixDQUFDLElBQUksZUFBZSxRQUFRLENBQUMsZUFBZSxlQUFlLENBQUMsT0FBTyxlQUFlLENBQUMsR0FBRyxXQUFXLGVBQWUsc0JBQXNCLENBQUMsSUFBSSxhQUFhLENBQUMsa0JBQWtCLGlDQUFpQyxhQUFhLENBQUMsNEJBQTRCLG9CQUFvQixrQkFBa0IsQ0FBQyxTQUFTLGNBQWMsWUFBWSxhQUFhLGFBQWEsQ0FBQyxvQ0FBc0IsZ0JBQWdCLENBQUMsQUFBdkMsMkJBQXNCLGdCQUFnQixDQUFDLEFBQXZDLCtCQUFzQixnQkFBZ0IsQ0FBQyxBQUF2QyxnQ0FBc0IsZ0JBQWdCLENBQUMsQUFBdkMsc0JBQXNCLGdCQUFnQixDQUFDLDJCQUEyQixTQUFTLGFBQWEsYUFBYSxDQUFDLG1FQUFtRSxlQUFlLHlCQUF5QixDQUFDLHFOQUFxTix5QkFBeUIsQ0FBQyw2QkFBNkIsbUJBQW1CLENBQUMsT0FBTyxTQUFTLGdCQUFnQixvQkFBb0IsbUJBQW1CLHFCQUFxQixjQUFjLG9CQUFvQixlQUFlLHlCQUF5QixDQUFDLFdBQVcsY0FBYyxDQUFDLGtEQUFrRCxjQUFjLENBQUMsaURBQWlELFVBQVUsUUFBUSxDQUFDLDJDQUEyQyxVQUFVLHFCQUFxQixDQUFDLGdHQUFnRyxXQUFXLENBQUMsbUdBQW1HLHVCQUF1QixDQUFDLE1BQU0seUJBQXlCLGdCQUFnQixDQUFDLE1BQU0sU0FBUyxDQUFDLEFDQTluRCxFQUFFLHNCQUFzQiwwQ0FBMEMsd0NBQXdDLDBCQUEwQixDQUFDLEtBQUssV0FBVyxZQUFZLDhCQUFxQixBQUFyQiwyQkFBcUIsQUFBckIsMEJBQXFCLEFBQXJCLHFCQUFxQixDQUFDLGFBQWEsWUFBWSxDQUFDLEtBQUssa0NBQWtDLG1DQUFtQyxjQUFjLGVBQWUsYUFBYSxnQkFBZ0IsZUFBZSxnQkFBZ0IsY0FBYyxpQkFBaUIsZUFBZSxXQUFXLGVBQWUsWUFBWSxnQkFBZ0Isa0NBQWtDLGdCQUFnQiwwQkFBMEIsdUJBQXVCLHlCQUF5QixxQkFBcUIsMkJBQTJCLDhCQUFxQixBQUFyQiwyQkFBcUIsQUFBckIsMEJBQXFCLEFBQXJCLHFCQUFxQixDQUFDLEFDQTFwQixLQUFLLGtDQUFrQyxDQUFDLEVBQUUsNkJBQTZCLHVDQUF1QyxDQUFDLGtCQUFrQixnQkFBZ0IsbUJBQW1CLGdCQUFnQixlQUFlLENBQUMsR0FBRyxnQkFBZ0IsY0FBYyxDQUFDLEdBQUcsZ0JBQWdCLGNBQWMsQ0FBQyxHQUFHLGNBQWMsQ0FBQyxHQUFHLGNBQWMsQ0FBQyxHQUFHLGNBQWMsQ0FBQyxHQUFHLGNBQWMsQ0FBQyxNQUFNLGFBQWEsQ0FBQyxRQUFRLGtCQUFrQixjQUFjLGNBQWMsdUJBQXVCLENBQUMsSUFBSSxTQUFTLENBQUMsSUFBSSxhQUFhLENBQUMsQUNBbGQsNkJBQTZCLG1CQUFtQixpQkFBaUIsaUJBQWlCLG9CQUFvQixlQUFlLGdCQUFnQixjQUFjLGdCQUFnQixDQUFDLHVCQUF1QiwwQ0FBMEMsd0NBQXdDLHdDQUF3QywyQ0FBMkMsc0NBQXNDLHVDQUF1QyxxQ0FBcUMsdUNBQXVDLENBQUMsK0ZBQWdFLHVCQUF1QixtQkFBbUIsb0JBQW9CLCtDQUErQyw4Q0FBOEMsNkNBQTZDLDJDQUEyQyxDQUFDLENBQUMsK0JBQStCLHdDQUF3QyxvQ0FBb0MsQ0FBQyxtQ0FBbUMsMENBQTBDLHFDQUFxQyxDQUFDLCtGQUFnRSxtQ0FBbUMsbUJBQW1CLCtDQUErQyw2Q0FBNkMsQ0FBQyxDQUFDLCtCQUErQix3Q0FBd0Msc0NBQXNDLENBQUMsK0ZBQWdFLCtCQUErQixvQkFBb0IsNkNBQTZDLDJDQUEyQyxDQUFDLENBQUMscUNBQXFDLDJDQUEyQyx1Q0FBdUMsQ0FBQyx5Q0FBeUMsd0NBQXdDLDJDQUEyQyxxQ0FBcUMsdUNBQXVDLENBQUMsNkNBQTZDLDBDQUEwQyx3Q0FBd0Msc0NBQXNDLHNDQUFzQyxDQUFDLCtGQUFnRSw2Q0FBNkMsbUJBQW1CLG9CQUFvQiwrQ0FBK0MsOENBQThDLDZDQUE2QywyQ0FBMkMsQ0FBQyxDQUFDLDJCQUEyQixrQkFBa0IsZ0JBQWdCLGdCQUFnQixtQkFBbUIsY0FBYyxlQUFlLGFBQWEsZUFBZSxDQUFDLHFCQUFxQix3Q0FBd0Msc0NBQXNDLHNDQUFzQyx5Q0FBeUMsb0NBQW9DLHFDQUFxQyxtQ0FBbUMscUNBQXFDLENBQUMsK0ZBQWdFLHFCQUFxQixrQkFBa0IsbUJBQW1CLDZDQUE2Qyw0Q0FBNEMsMkNBQTJDLHlDQUF5QyxDQUFDLENBQUMsNkJBQTZCLHNDQUFzQyxrQ0FBa0MsQ0FBQyxpQ0FBaUMsd0NBQXdDLG1DQUFtQyxDQUFDLCtGQUFnRSxpQ0FBaUMsa0JBQWtCLDZDQUE2QywyQ0FBMkMsQ0FBQyxDQUFDLDZCQUE2QixzQ0FBc0Msb0NBQW9DLENBQUMsK0ZBQWdFLDZCQUE2QixtQkFBbUIsMkNBQTJDLHlDQUF5QyxDQUFDLENBQUMsbUNBQW1DLHlDQUF5QyxxQ0FBcUMsQ0FBQyx1Q0FBdUMsc0NBQXNDLHlDQUF5QyxtQ0FBbUMscUNBQXFDLENBQUMsMkNBQTJDLHdDQUF3QyxzQ0FBc0Msb0NBQW9DLG9DQUFvQyxDQUFDLCtGQUFnRSwyQ0FBMkMsa0JBQWtCLG1CQUFtQiw2Q0FBNkMsNENBQTRDLDJDQUEyQyx5Q0FBeUMsQ0FBQyxDQUFDLEFDQTVuSixhQUFhLHFCQUFxQixDQUFDLGNBQWMsc0JBQXNCLENBQUMsY0FBYyxxQkFBcUIsQ0FBQyx1Q0FBdUMsc0JBQXNCLENBQUMsWUFBWSxzQkFBc0IsQ0FBQyxxQ0FBcUMscUJBQXFCLENBQUMsMEJBQTBCLGdCQUFnQixxQkFBcUIsQ0FBQyxpQkFBaUIsc0JBQXNCLENBQUMsaUJBQWlCLHFCQUFxQixDQUFDLDBDQUEwQyxzQkFBc0IsQ0FBQyxlQUFlLHNCQUFzQixDQUFDLHdDQUF3QyxxQkFBcUIsQ0FBQyxDQUFDLDBCQUEwQixnQkFBZ0IscUJBQXFCLENBQUMsaUJBQWlCLHNCQUFzQixDQUFDLGlCQUFpQixxQkFBcUIsQ0FBQywwQ0FBMEMsc0JBQXNCLENBQUMsZUFBZSxzQkFBc0IsQ0FBQyx3Q0FBd0MscUJBQXFCLENBQUMsQ0FBQywwQkFBMEIsZ0JBQWdCLHFCQUFxQixDQUFDLGlCQUFpQixzQkFBc0IsQ0FBQyxpQkFBaUIscUJBQXFCLENBQUMsMENBQTBDLHNCQUFzQixDQUFDLGVBQWUsc0JBQXNCLENBQUMsd0NBQXdDLHFCQUFxQixDQUFDLENBQUMsMkJBQTJCLGdCQUFnQixxQkFBcUIsQ0FBQyxpQkFBaUIsc0JBQXNCLENBQUMsaUJBQWlCLHFCQUFxQixDQUFDLDBDQUEwQyxzQkFBc0IsQ0FBQyxlQUFlLHNCQUFzQixDQUFDLHdDQUF3QyxxQkFBcUIsQ0FBQyxDQUFDLEFDQTc5QywrQkFBK0IsNEJBQTRCLENBQUMsaUNBQWlDLDZCQUE2QixDQUFDLDZCQUE2QiwyQkFBMkIsQ0FBQyx5QkFBeUIseUJBQXlCLENBQUMsMkJBQTJCLDBCQUEwQixDQUFDLDZCQUE2QiwyQkFBMkIsQ0FBQywrQkFBK0IsNkJBQTZCLENBQUMsMkJBQTJCLDZCQUE2QixDQUFDLDBCQUEwQixxQ0FBcUMsNEJBQTRCLENBQUMsdUNBQXVDLDZCQUE2QixDQUFDLG1DQUFtQywyQkFBMkIsQ0FBQywrQkFBK0IseUJBQXlCLENBQUMsaUNBQWlDLDBCQUEwQixDQUFDLG1DQUFtQywyQkFBMkIsQ0FBQyxxQ0FBcUMsNkJBQTZCLENBQUMsaUNBQWlDLDZCQUE2QixDQUFDLENBQUMsMEJBQTBCLHFDQUFxQyw0QkFBNEIsQ0FBQyx1Q0FBdUMsNkJBQTZCLENBQUMsbUNBQW1DLDJCQUEyQixDQUFDLCtCQUErQix5QkFBeUIsQ0FBQyxpQ0FBaUMsMEJBQTBCLENBQUMsbUNBQW1DLDJCQUEyQixDQUFDLHFDQUFxQyw2QkFBNkIsQ0FBQyxpQ0FBaUMsNkJBQTZCLENBQUMsQ0FBQywwQkFBMEIscUNBQXFDLDRCQUE0QixDQUFDLHVDQUF1Qyw2QkFBNkIsQ0FBQyxtQ0FBbUMsMkJBQTJCLENBQUMsK0JBQStCLHlCQUF5QixDQUFDLGlDQUFpQywwQkFBMEIsQ0FBQyxtQ0FBbUMsMkJBQTJCLENBQUMscUNBQXFDLDZCQUE2QixDQUFDLGlDQUFpQyw2QkFBNkIsQ0FBQyxDQUFDLDJCQUEyQixxQ0FBcUMsNEJBQTRCLENBQUMsdUNBQXVDLDZCQUE2QixDQUFDLG1DQUFtQywyQkFBMkIsQ0FBQywrQkFBK0IseUJBQXlCLENBQUMsaUNBQWlDLDBCQUEwQixDQUFDLG1DQUFtQywyQkFBMkIsQ0FBQyxxQ0FBcUMsNkJBQTZCLENBQUMsaUNBQWlDLDZCQUE2QixDQUFDLENBQUMsQUNBemlGLHFDQUFxQyxtQ0FBbUMsQ0FBQyxxQ0FBcUMsbUNBQW1DLENBQUMsdUNBQXVDLG9DQUFvQyxDQUFDLDBCQUEwQiwyQ0FBMkMsbUNBQW1DLENBQUMsMkNBQTJDLG1DQUFtQyxDQUFDLDZDQUE2QyxvQ0FBb0MsQ0FBQyxDQUFDLDBCQUEwQiwyQ0FBMkMsbUNBQW1DLENBQUMsMkNBQTJDLG1DQUFtQyxDQUFDLDZDQUE2QyxvQ0FBb0MsQ0FBQyxDQUFDLDBCQUEwQiwyQ0FBMkMsbUNBQW1DLENBQUMsMkNBQTJDLG1DQUFtQyxDQUFDLDZDQUE2QyxvQ0FBb0MsQ0FBQyxDQUFDLDJCQUEyQiwyQ0FBMkMsbUNBQW1DLENBQUMsMkNBQTJDLG1DQUFtQyxDQUFDLDZDQUE2QyxvQ0FBb0MsQ0FBQyxDQUFDLEFDQTN3QyxtQkFBbUIsZ0NBQWdDLENBQUMsaUJBQWlCLDhCQUE4QixDQUFDLG9CQUFvQiw0QkFBNEIsQ0FBQyxxQkFBcUIsNkJBQTZCLENBQUMsc0JBQXNCLDhCQUE4QixDQUFDLGtCQUFrQiwwQkFBMEIsQ0FBQyxPQUFPLHlCQUF5QixDQUFDLFNBQVMsMkJBQTJCLENBQUMsZUFBZSxpQ0FBaUMsQ0FBQyx3QkFBd0IscUNBQXFDLENBQUMseUJBQXlCLGlDQUFpQyxDQUFDLHNCQUFzQixtQ0FBbUMsQ0FBQyx5QkFBeUIsdUNBQXVDLENBQUMsMEJBQTBCLHdDQUF3QyxDQUFDLHlCQUF5Qix1Q0FBdUMsQ0FBQyxvQkFBb0IsaUNBQWlDLENBQUMscUJBQXFCLDZCQUE2QixDQUFDLGtCQUFrQiwrQkFBK0IsQ0FBQyxzQkFBc0IsOEJBQThCLENBQUMsdUJBQXVCLCtCQUErQixDQUFDLEFDYWhpQztFQUNJLG9EQUFtRCxFQUN0RCxBQUNEO0VBQ0ksMkJBQXlCLEVBQzVCLEFBQ0Q7RUFDSSx3QkFBdUIsRUFDMUIsQUFDRDtFQUNJLFlBQVc7RUFDWCxtQkFBa0I7RUFDbEIsYUFBWTtFQUNaLGdCQUFlO0VBQ2Ysa0JBQWlCO0VBQ2pCLCtCQUE4QixFQUNqQyxBQUVEO0VBQ0ksNkJBQTRCLEVBQy9CLEFBQ0Q7RUFDSSxzQkFBcUIsRUFDeEIsQUFDRCxxQkFBcUIsQUFDckI7RUFDSSwyQkFBMEI7RUFDMUIscUJBQW9CO0VBQ3BCLHlCQUF3QjtFQUN4QixhQUFZO0VBQ1osa0VBQWlFO0VBQ2pFLDBCQUF5QjtFQUN6QixxQkFBb0IsRUFDckIsQUFFRCwyQ0FBMkMsQUFDM0M7RUFDRSx5QkFBd0IsRUFDekIsQUFFRCw4REFBOEQsQUFDOUQ7RUFDRSxxQ0FBb0M7RUFDcEMsa0NBQWlDO0VBQ2pDLGlDQUFnQztFQUNoQyw2QkFBNEIsRUFDN0IsQUFFRCw2REFBNkQsQUFDN0Q7RUFDRSxhQUFZO0VBQ1osa0VBQWlFO0VBQ2pFLDBCQUF5QixFQUMxQixBQ2hFSDtFQUNJLDJDQUF5QztFQUN6QyxlRFEyQjtFQ1AzQixtQkFBa0I7RUFDbEIsa0JBQWlCO0VBQ2pCLGdCQUFlO0VBQ2YsZ0JBQWUsRUFDbEIsQUFFRDtFQUNJLDJDQUF5QztFQUN6QyxVQUFTO0VBQ1QsZ0JBQWU7RUFDZixhQUFZO0VBQ1osYUFBWTtFQUNaLGNBQWE7RUFDYixjQUFhO0VBQ2IsaUJBQWdCO0VBQ2hCLGFBQVksRUFVZixBQW5CRDtJQVlRLGVBQWM7SUFDZCxhQUFZO0lBQ1osd0JBQXVCO0lBQ3ZCLGtCQUFpQjtJQUNqQixhQUFZO0lBQ1osWUFBVyxFQUNkLEFBR0w7RUFDSSwyQkFBMEI7RUFDMUIsMEJEdEIyQjtFQ3VCM0IsbUJBQWtCLEVBeUJyQixBQTVCRDtJQUtRLG1CQUFrQjtJQUNsQixZQUFXO0lBQ1gsbUJBQWtCO0lBQ2xCLFlBQVc7SUFDWCxhQUFZLEVBQ2YsQUFWTDtJQVlRLGFBQVk7SUFDWixtQkFBa0I7SUFDbEIsWUFBVztJQUNYLGFBQVk7SUFDWixrQkFBaUI7SUFDakIsa0JBQWlCO0lBQ2pCLGVEdEN1QjtJQ3VDdkIsbUJBQWtCO0lBQ2xCLFlBQVcsRUFPZCxBQTNCTDtNQXVCWSxpQkFBZ0I7TUFDaEIsZ0JBQWU7TUFDZixrQkFBaUIsRUFDcEIsQUFJVDtFQUNJLGdCQUFlLEVBQ2xCLEFBSUQ7RUFDSSxnQkFBZTtFQUNmLFlBQVc7RUFDWCxhQUFZO0VBQ1osWUFBVyxFQUNkLEFBRUQ7RUFDSSxtQkFBa0I7RUFDbEIsU0FBUTtFQUNSLFVBQVM7RUFDVCx5Q0FBZ0M7VUFBaEMsaUNBQWdDO0VBQ2hDLFdBQVU7RUFDVixhQUFZO0VBQ1osZ0JBQWUsRUFDbEIsQUFFRDtFQUNJLG1CQUFrQjtFQUNsQixVQUFTO0VBQ1QsV0FBVTtFQUNWLFlBQVc7RUFDWCwwQkFBeUI7RUFDekIseUNBQXVDO0VBQ3ZDLCtDQUFzQztVQUF0Qyx1Q0FBc0MsRUFDekMsQUFFRDtFQUNJLFlBQVc7RUFDWCxtQkFBa0I7RUFDbEIsWUFBVztFQUNYLFlBQVc7RUFDWCxVQUFTO0VBQ1QsWUFBVztFQUNYLDBCQUF5QjtFQUN6QixpQ0FBd0I7VUFBeEIseUJBQXdCLEVBQzNCLEFBRUQ7RUFDSSxZQUFXO0VBQ1gsbUJBQWtCO0VBQ2xCLFlBQVc7RUFDWCxZQUFXO0VBQ1gsU0FBUTtFQUNSLFlBQVc7RUFDWCwwQkFBeUI7RUFDekIseUNBQXVDO0VBQ3ZDLGtDQUF5QjtVQUF6QiwwQkFBeUIsRUFDNUIsQUFFRDtFQUNJLG1CQUFrQjtFQUNsQixVQUFTO0VBQ1QsV0FBVTtFQUNWLFlBQVc7RUFDWCwwQkFBeUI7RUFDekIsK0NBQXNDO1VBQXRDLHVDQUFzQyxFQUN6QyxBQUVEO0VBQ0ksWUFBVztFQUNYLG1CQUFrQjtFQUNsQixZQUFXO0VBQ1gsWUFBVztFQUNYLFVBQVM7RUFDVCxXQUFVO0VBQ1YsMEJBQXlCO0VBQ3pCLGtDQUF5QjtVQUF6QiwwQkFBeUIsRUFDNUIsQUFFRDtFQUNJLFlBQVc7RUFDWCxtQkFBa0I7RUFDbEIsWUFBVztFQUNYLFlBQVc7RUFDWCxTQUFRO0VBQ1IsV0FBVTtFQUNWLDBCQUF5QjtFQUN6Qix5Q0FBdUM7RUFDdkMsaUNBQXdCO1VBQXhCLHlCQUF3QixFQUMzQixBQUNEO0VBQ0ksZUFBYztFQUNkLDBCRDNJMkI7RUM0STNCLGtCQUFpQjtFQUNqQixZQUFXO0VBQ1gsYUFBWTtFQUNaLGtDQUF5QjtVQUF6QiwwQkFBeUIsRUFDNUIsQUFDRDtFQUNJO0lBQ0UsNEJBQTJCO0lBQUUsc0VBQXNFO0lBQ25HLHFDQUFvQztJQUFFLHlDQUF5QztJQUMvRSxrQ0FBaUM7SUFDakMsaUNBQWdDO0lBQ2hDLDZCQUE0QixFQUM3QixFQUFBLEFBR0g7RUFBeUIsc0JBQXFCLEVBQUksQUFDbEQ7RUFBaUMsOEJBQTZCLEVBQUksQUFDbEU7RUFBMkMsd0NBQXVDLEVBQUkiLCJmaWxlIjoic3JjL2FwcC9wYWdlcy9ob21lLXNldHRpbmdzL2hvbWUtc2V0dGluZ3MucGFnZS5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiaHRtbC5pb3N7LS1pb24tZGVmYXVsdC1mb250OiAtYXBwbGUtc3lzdGVtLCBCbGlua01hY1N5c3RlbUZvbnQsIFwiSGVsdmV0aWNhIE5ldWVcIiwgXCJSb2JvdG9cIiwgc2Fucy1zZXJpZn1odG1sLm1key0taW9uLWRlZmF1bHQtZm9udDogXCJSb2JvdG9cIiwgXCJIZWx2ZXRpY2EgTmV1ZVwiLCBzYW5zLXNlcmlmfWh0bWx7LS1pb24tZm9udC1mYW1pbHk6IHZhcigtLWlvbi1kZWZhdWx0LWZvbnQpfWJvZHl7YmFja2dyb3VuZDp2YXIoLS1pb24tYmFja2dyb3VuZC1jb2xvcil9Ym9keS5iYWNrZHJvcC1uby1zY3JvbGx7b3ZlcmZsb3c6aGlkZGVufS5pb24tY29sb3ItcHJpbWFyeXstLWlvbi1jb2xvci1iYXNlOiB2YXIoLS1pb24tY29sb3ItcHJpbWFyeSwgIzM4ODBmZikgIWltcG9ydGFudDstLWlvbi1jb2xvci1iYXNlLXJnYjogdmFyKC0taW9uLWNvbG9yLXByaW1hcnktcmdiLCA1NiwxMjgsMjU1KSAhaW1wb3J0YW50Oy0taW9uLWNvbG9yLWNvbnRyYXN0OiB2YXIoLS1pb24tY29sb3ItcHJpbWFyeS1jb250cmFzdCwgI2ZmZikgIWltcG9ydGFudDstLWlvbi1jb2xvci1jb250cmFzdC1yZ2I6IHZhcigtLWlvbi1jb2xvci1wcmltYXJ5LWNvbnRyYXN0LXJnYiwgMjU1LDI1NSwyNTUpICFpbXBvcnRhbnQ7LS1pb24tY29sb3Itc2hhZGU6IHZhcigtLWlvbi1jb2xvci1wcmltYXJ5LXNoYWRlLCAjMzE3MWUwKSAhaW1wb3J0YW50Oy0taW9uLWNvbG9yLXRpbnQ6IHZhcigtLWlvbi1jb2xvci1wcmltYXJ5LXRpbnQsICM0YzhkZmYpICFpbXBvcnRhbnR9Lmlvbi1jb2xvci1zZWNvbmRhcnl7LS1pb24tY29sb3ItYmFzZTogdmFyKC0taW9uLWNvbG9yLXNlY29uZGFyeSwgIzBjZDFlOCkgIWltcG9ydGFudDstLWlvbi1jb2xvci1iYXNlLXJnYjogdmFyKC0taW9uLWNvbG9yLXNlY29uZGFyeS1yZ2IsIDEyLDIwOSwyMzIpICFpbXBvcnRhbnQ7LS1pb24tY29sb3ItY29udHJhc3Q6IHZhcigtLWlvbi1jb2xvci1zZWNvbmRhcnktY29udHJhc3QsICNmZmYpICFpbXBvcnRhbnQ7LS1pb24tY29sb3ItY29udHJhc3QtcmdiOiB2YXIoLS1pb24tY29sb3Itc2Vjb25kYXJ5LWNvbnRyYXN0LXJnYiwgMjU1LDI1NSwyNTUpICFpbXBvcnRhbnQ7LS1pb24tY29sb3Itc2hhZGU6IHZhcigtLWlvbi1jb2xvci1zZWNvbmRhcnktc2hhZGUsICMwYmI4Y2MpICFpbXBvcnRhbnQ7LS1pb24tY29sb3ItdGludDogdmFyKC0taW9uLWNvbG9yLXNlY29uZGFyeS10aW50LCAjMjRkNmVhKSAhaW1wb3J0YW50fS5pb24tY29sb3ItdGVydGlhcnl7LS1pb24tY29sb3ItYmFzZTogdmFyKC0taW9uLWNvbG9yLXRlcnRpYXJ5LCAjNzA0NGZmKSAhaW1wb3J0YW50Oy0taW9uLWNvbG9yLWJhc2UtcmdiOiB2YXIoLS1pb24tY29sb3ItdGVydGlhcnktcmdiLCAxMTIsNjgsMjU1KSAhaW1wb3J0YW50Oy0taW9uLWNvbG9yLWNvbnRyYXN0OiB2YXIoLS1pb24tY29sb3ItdGVydGlhcnktY29udHJhc3QsICNmZmYpICFpbXBvcnRhbnQ7LS1pb24tY29sb3ItY29udHJhc3QtcmdiOiB2YXIoLS1pb24tY29sb3ItdGVydGlhcnktY29udHJhc3QtcmdiLCAyNTUsMjU1LDI1NSkgIWltcG9ydGFudDstLWlvbi1jb2xvci1zaGFkZTogdmFyKC0taW9uLWNvbG9yLXRlcnRpYXJ5LXNoYWRlLCAjNjMzY2UwKSAhaW1wb3J0YW50Oy0taW9uLWNvbG9yLXRpbnQ6IHZhcigtLWlvbi1jb2xvci10ZXJ0aWFyeS10aW50LCAjN2U1N2ZmKSAhaW1wb3J0YW50fS5pb24tY29sb3Itc3VjY2Vzc3stLWlvbi1jb2xvci1iYXNlOiB2YXIoLS1pb24tY29sb3Itc3VjY2VzcywgIzEwZGM2MCkgIWltcG9ydGFudDstLWlvbi1jb2xvci1iYXNlLXJnYjogdmFyKC0taW9uLWNvbG9yLXN1Y2Nlc3MtcmdiLCAxNiwyMjAsOTYpICFpbXBvcnRhbnQ7LS1pb24tY29sb3ItY29udHJhc3Q6IHZhcigtLWlvbi1jb2xvci1zdWNjZXNzLWNvbnRyYXN0LCAjZmZmKSAhaW1wb3J0YW50Oy0taW9uLWNvbG9yLWNvbnRyYXN0LXJnYjogdmFyKC0taW9uLWNvbG9yLXN1Y2Nlc3MtY29udHJhc3QtcmdiLCAyNTUsMjU1LDI1NSkgIWltcG9ydGFudDstLWlvbi1jb2xvci1zaGFkZTogdmFyKC0taW9uLWNvbG9yLXN1Y2Nlc3Mtc2hhZGUsICMwZWMyNTQpICFpbXBvcnRhbnQ7LS1pb24tY29sb3ItdGludDogdmFyKC0taW9uLWNvbG9yLXN1Y2Nlc3MtdGludCwgIzI4ZTA3MCkgIWltcG9ydGFudH0uaW9uLWNvbG9yLXdhcm5pbmd7LS1pb24tY29sb3ItYmFzZTogdmFyKC0taW9uLWNvbG9yLXdhcm5pbmcsICNmZmNlMDApICFpbXBvcnRhbnQ7LS1pb24tY29sb3ItYmFzZS1yZ2I6IHZhcigtLWlvbi1jb2xvci13YXJuaW5nLXJnYiwgMjU1LDIwNiwwKSAhaW1wb3J0YW50Oy0taW9uLWNvbG9yLWNvbnRyYXN0OiB2YXIoLS1pb24tY29sb3Itd2FybmluZy1jb250cmFzdCwgI2ZmZikgIWltcG9ydGFudDstLWlvbi1jb2xvci1jb250cmFzdC1yZ2I6IHZhcigtLWlvbi1jb2xvci13YXJuaW5nLWNvbnRyYXN0LXJnYiwgMjU1LDI1NSwyNTUpICFpbXBvcnRhbnQ7LS1pb24tY29sb3Itc2hhZGU6IHZhcigtLWlvbi1jb2xvci13YXJuaW5nLXNoYWRlLCAjZTBiNTAwKSAhaW1wb3J0YW50Oy0taW9uLWNvbG9yLXRpbnQ6IHZhcigtLWlvbi1jb2xvci13YXJuaW5nLXRpbnQsICNmZmQzMWEpICFpbXBvcnRhbnR9Lmlvbi1jb2xvci1kYW5nZXJ7LS1pb24tY29sb3ItYmFzZTogdmFyKC0taW9uLWNvbG9yLWRhbmdlciwgI2YwNDE0MSkgIWltcG9ydGFudDstLWlvbi1jb2xvci1iYXNlLXJnYjogdmFyKC0taW9uLWNvbG9yLWRhbmdlci1yZ2IsIDI0MCw2NSw2NSkgIWltcG9ydGFudDstLWlvbi1jb2xvci1jb250cmFzdDogdmFyKC0taW9uLWNvbG9yLWRhbmdlci1jb250cmFzdCwgI2ZmZikgIWltcG9ydGFudDstLWlvbi1jb2xvci1jb250cmFzdC1yZ2I6IHZhcigtLWlvbi1jb2xvci1kYW5nZXItY29udHJhc3QtcmdiLCAyNTUsMjU1LDI1NSkgIWltcG9ydGFudDstLWlvbi1jb2xvci1zaGFkZTogdmFyKC0taW9uLWNvbG9yLWRhbmdlci1zaGFkZSwgI2QzMzkzOSkgIWltcG9ydGFudDstLWlvbi1jb2xvci10aW50OiB2YXIoLS1pb24tY29sb3ItZGFuZ2VyLXRpbnQsICNmMjU0NTQpICFpbXBvcnRhbnR9Lmlvbi1jb2xvci1saWdodHstLWlvbi1jb2xvci1iYXNlOiB2YXIoLS1pb24tY29sb3ItbGlnaHQsICNmNGY1ZjgpICFpbXBvcnRhbnQ7LS1pb24tY29sb3ItYmFzZS1yZ2I6IHZhcigtLWlvbi1jb2xvci1saWdodC1yZ2IsIDI0NCwyNDUsMjQ4KSAhaW1wb3J0YW50Oy0taW9uLWNvbG9yLWNvbnRyYXN0OiB2YXIoLS1pb24tY29sb3ItbGlnaHQtY29udHJhc3QsICMwMDApICFpbXBvcnRhbnQ7LS1pb24tY29sb3ItY29udHJhc3QtcmdiOiB2YXIoLS1pb24tY29sb3ItbGlnaHQtY29udHJhc3QtcmdiLCAwLDAsMCkgIWltcG9ydGFudDstLWlvbi1jb2xvci1zaGFkZTogdmFyKC0taW9uLWNvbG9yLWxpZ2h0LXNoYWRlLCAjZDdkOGRhKSAhaW1wb3J0YW50Oy0taW9uLWNvbG9yLXRpbnQ6IHZhcigtLWlvbi1jb2xvci1saWdodC10aW50LCAjZjVmNmY5KSAhaW1wb3J0YW50fS5pb24tY29sb3ItbWVkaXVtey0taW9uLWNvbG9yLWJhc2U6IHZhcigtLWlvbi1jb2xvci1tZWRpdW0sICM5ODlhYTIpICFpbXBvcnRhbnQ7LS1pb24tY29sb3ItYmFzZS1yZ2I6IHZhcigtLWlvbi1jb2xvci1tZWRpdW0tcmdiLCAxNTIsMTU0LDE2MikgIWltcG9ydGFudDstLWlvbi1jb2xvci1jb250cmFzdDogdmFyKC0taW9uLWNvbG9yLW1lZGl1bS1jb250cmFzdCwgI2ZmZikgIWltcG9ydGFudDstLWlvbi1jb2xvci1jb250cmFzdC1yZ2I6IHZhcigtLWlvbi1jb2xvci1tZWRpdW0tY29udHJhc3QtcmdiLCAyNTUsMjU1LDI1NSkgIWltcG9ydGFudDstLWlvbi1jb2xvci1zaGFkZTogdmFyKC0taW9uLWNvbG9yLW1lZGl1bS1zaGFkZSwgIzg2ODg4ZikgIWltcG9ydGFudDstLWlvbi1jb2xvci10aW50OiB2YXIoLS1pb24tY29sb3ItbWVkaXVtLXRpbnQsICNhMmE0YWIpICFpbXBvcnRhbnR9Lmlvbi1jb2xvci1kYXJrey0taW9uLWNvbG9yLWJhc2U6IHZhcigtLWlvbi1jb2xvci1kYXJrLCAjMjIyNDI4KSAhaW1wb3J0YW50Oy0taW9uLWNvbG9yLWJhc2UtcmdiOiB2YXIoLS1pb24tY29sb3ItZGFyay1yZ2IsIDM0LDM2LDQwKSAhaW1wb3J0YW50Oy0taW9uLWNvbG9yLWNvbnRyYXN0OiB2YXIoLS1pb24tY29sb3ItZGFyay1jb250cmFzdCwgI2ZmZikgIWltcG9ydGFudDstLWlvbi1jb2xvci1jb250cmFzdC1yZ2I6IHZhcigtLWlvbi1jb2xvci1kYXJrLWNvbnRyYXN0LXJnYiwgMjU1LDI1NSwyNTUpICFpbXBvcnRhbnQ7LS1pb24tY29sb3Itc2hhZGU6IHZhcigtLWlvbi1jb2xvci1kYXJrLXNoYWRlLCAjMWUyMDIzKSAhaW1wb3J0YW50Oy0taW9uLWNvbG9yLXRpbnQ6IHZhcigtLWlvbi1jb2xvci1kYXJrLXRpbnQsICMzODNhM2UpICFpbXBvcnRhbnR9Lmlvbi1wYWdle2xlZnQ6MDtyaWdodDowO3RvcDowO2JvdHRvbTowO2Rpc3BsYXk6ZmxleDtwb3NpdGlvbjphYnNvbHV0ZTtmbGV4LWRpcmVjdGlvbjpjb2x1bW47anVzdGlmeS1jb250ZW50OnNwYWNlLWJldHdlZW47Y29udGFpbjpsYXlvdXQgc2l6ZSBzdHlsZTtvdmVyZmxvdzpoaWRkZW47ei1pbmRleDowfWlvbi1yb3V0ZSxpb24tcm91dGUtcmVkaXJlY3QsaW9uLXJvdXRlcixpb24tc2VsZWN0LW9wdGlvbixpb24tbmF2LWNvbnRyb2xsZXIsaW9uLW1lbnUtY29udHJvbGxlcixpb24tYWN0aW9uLXNoZWV0LWNvbnRyb2xsZXIsaW9uLWFsZXJ0LWNvbnRyb2xsZXIsaW9uLWxvYWRpbmctY29udHJvbGxlcixpb24tbW9kYWwtY29udHJvbGxlcixpb24tcGlja2VyLWNvbnRyb2xsZXIsaW9uLXBvcG92ZXItY29udHJvbGxlcixpb24tdG9hc3QtY29udHJvbGxlciwuaW9uLXBhZ2UtaGlkZGVuLFtoaWRkZW5de2Rpc3BsYXk6bm9uZSAhaW1wb3J0YW50fS5pb24tcGFnZS1pbnZpc2libGV7b3BhY2l0eTowfWh0bWwucGx0LWlvcy5wbHQtaHlicmlkLGh0bWwucGx0LWlvcy5wbHQtcHdhey0taW9uLXN0YXR1c2Jhci1wYWRkaW5nOiAyMHB4fUBzdXBwb3J0cyAocGFkZGluZy10b3A6IDIwcHgpe2h0bWx7LS1pb24tc2FmZS1hcmVhLXRvcDogdmFyKC0taW9uLXN0YXR1c2Jhci1wYWRkaW5nKX19QHN1cHBvcnRzIChwYWRkaW5nLXRvcDogY29uc3RhbnQoc2FmZS1hcmVhLWluc2V0LXRvcCkpe2h0bWx7LS1pb24tc2FmZS1hcmVhLXRvcDogY29uc3RhbnQoc2FmZS1hcmVhLWluc2V0LXRvcCk7LS1pb24tc2FmZS1hcmVhLWJvdHRvbTogY29uc3RhbnQoc2FmZS1hcmVhLWluc2V0LWJvdHRvbSk7LS1pb24tc2FmZS1hcmVhLWxlZnQ6IGNvbnN0YW50KHNhZmUtYXJlYS1pbnNldC1sZWZ0KTstLWlvbi1zYWZlLWFyZWEtcmlnaHQ6IGNvbnN0YW50KHNhZmUtYXJlYS1pbnNldC1yaWdodCl9fUBzdXBwb3J0cyAocGFkZGluZy10b3A6IGVudihzYWZlLWFyZWEtaW5zZXQtdG9wKSl7aHRtbHstLWlvbi1zYWZlLWFyZWEtdG9wOiBlbnYoc2FmZS1hcmVhLWluc2V0LXRvcCk7LS1pb24tc2FmZS1hcmVhLWJvdHRvbTogZW52KHNhZmUtYXJlYS1pbnNldC1ib3R0b20pOy0taW9uLXNhZmUtYXJlYS1sZWZ0OiBlbnYoc2FmZS1hcmVhLWluc2V0LWxlZnQpOy0taW9uLXNhZmUtYXJlYS1yaWdodDogZW52KHNhZmUtYXJlYS1pbnNldC1yaWdodCl9fVxuIiwiYXVkaW8sY2FudmFzLHByb2dyZXNzLHZpZGVve3ZlcnRpY2FsLWFsaWduOmJhc2VsaW5lfWF1ZGlvOm5vdChbY29udHJvbHNdKXtkaXNwbGF5Om5vbmU7aGVpZ2h0OjB9YixzdHJvbmd7Zm9udC13ZWlnaHQ6Ym9sZH1pbWd7bWF4LXdpZHRoOjEwMCU7Ym9yZGVyOjB9c3ZnOm5vdCg6cm9vdCl7b3ZlcmZsb3c6aGlkZGVufWZpZ3VyZXttYXJnaW46MWVtIDQwcHh9aHJ7aGVpZ2h0OjFweDtib3JkZXItd2lkdGg6MDtib3gtc2l6aW5nOmNvbnRlbnQtYm94fXByZXtvdmVyZmxvdzphdXRvfWNvZGUsa2JkLHByZSxzYW1we2ZvbnQtZmFtaWx5Om1vbm9zcGFjZSwgbW9ub3NwYWNlO2ZvbnQtc2l6ZToxZW19bGFiZWwsaW5wdXQsc2VsZWN0LHRleHRhcmVhe2ZvbnQtZmFtaWx5OmluaGVyaXQ7bGluZS1oZWlnaHQ6bm9ybWFsfXRleHRhcmVhe292ZXJmbG93OmF1dG87aGVpZ2h0OmF1dG87Zm9udDppbmhlcml0O2NvbG9yOmluaGVyaXR9dGV4dGFyZWE6OnBsYWNlaG9sZGVye3BhZGRpbmctbGVmdDoycHh9Zm9ybSxpbnB1dCxvcHRncm91cCxzZWxlY3R7bWFyZ2luOjA7Zm9udDppbmhlcml0O2NvbG9yOmluaGVyaXR9aHRtbCBpbnB1dFt0eXBlPVwiYnV0dG9uXCJdLGlucHV0W3R5cGU9XCJyZXNldFwiXSxpbnB1dFt0eXBlPVwic3VibWl0XCJde2N1cnNvcjpwb2ludGVyOy13ZWJraXQtYXBwZWFyYW5jZTpidXR0b259YSxhIGRpdixhIHNwYW4sYSBpb24taWNvbixhIGlvbi1sYWJlbCxidXR0b24sYnV0dG9uIGRpdixidXR0b24gc3BhbixidXR0b24gaW9uLWljb24sYnV0dG9uIGlvbi1sYWJlbCwuaW9uLXRhcHBhYmxlLFt0YXBwYWJsZV0sW3RhcHBhYmxlXSBkaXYsW3RhcHBhYmxlXSBzcGFuLFt0YXBwYWJsZV0gaW9uLWljb24sW3RhcHBhYmxlXSBpb24tbGFiZWwsaW5wdXQsdGV4dGFyZWF7dG91Y2gtYWN0aW9uOm1hbmlwdWxhdGlvbn1hIGlvbi1sYWJlbCxidXR0b24gaW9uLWxhYmVse3BvaW50ZXItZXZlbnRzOm5vbmV9YnV0dG9ue2JvcmRlcjowO2JvcmRlci1yYWRpdXM6MDtmb250LWZhbWlseTppbmhlcml0O2ZvbnQtc3R5bGU6aW5oZXJpdDtmb250LXZhcmlhbnQ6aW5oZXJpdDtsaW5lLWhlaWdodDoxO3RleHQtdHJhbnNmb3JtOm5vbmU7Y3Vyc29yOnBvaW50ZXI7LXdlYmtpdC1hcHBlYXJhbmNlOmJ1dHRvbn1bdGFwcGFibGVde2N1cnNvcjpwb2ludGVyfWFbZGlzYWJsZWRdLGJ1dHRvbltkaXNhYmxlZF0saHRtbCBpbnB1dFtkaXNhYmxlZF17Y3Vyc29yOmRlZmF1bHR9YnV0dG9uOjotbW96LWZvY3VzLWlubmVyLGlucHV0OjotbW96LWZvY3VzLWlubmVye3BhZGRpbmc6MDtib3JkZXI6MH1pbnB1dFt0eXBlPVwiY2hlY2tib3hcIl0saW5wdXRbdHlwZT1cInJhZGlvXCJde3BhZGRpbmc6MDtib3gtc2l6aW5nOmJvcmRlci1ib3h9aW5wdXRbdHlwZT1cIm51bWJlclwiXTo6LXdlYmtpdC1pbm5lci1zcGluLWJ1dHRvbixpbnB1dFt0eXBlPVwibnVtYmVyXCJdOjotd2Via2l0LW91dGVyLXNwaW4tYnV0dG9ue2hlaWdodDphdXRvfWlucHV0W3R5cGU9XCJzZWFyY2hcIl06Oi13ZWJraXQtc2VhcmNoLWNhbmNlbC1idXR0b24saW5wdXRbdHlwZT1cInNlYXJjaFwiXTo6LXdlYmtpdC1zZWFyY2gtZGVjb3JhdGlvbnstd2Via2l0LWFwcGVhcmFuY2U6bm9uZX10YWJsZXtib3JkZXItY29sbGFwc2U6Y29sbGFwc2U7Ym9yZGVyLXNwYWNpbmc6MH10ZCx0aHtwYWRkaW5nOjB9XG4iLCIqe2JveC1zaXppbmc6Ym9yZGVyLWJveDstd2Via2l0LXRhcC1oaWdobGlnaHQtY29sb3I6cmdiYSgwLDAsMCwwKTstd2Via2l0LXRhcC1oaWdobGlnaHQtY29sb3I6dHJhbnNwYXJlbnQ7LXdlYmtpdC10b3VjaC1jYWxsb3V0Om5vbmV9aHRtbHt3aWR0aDoxMDAlO2hlaWdodDoxMDAlO3RleHQtc2l6ZS1hZGp1c3Q6MTAwJX1odG1sLnBsdC1wd2F7aGVpZ2h0OjEwMHZofWJvZHl7LW1vei1vc3gtZm9udC1zbW9vdGhpbmc6Z3JheXNjYWxlOy13ZWJraXQtZm9udC1zbW9vdGhpbmc6YW50aWFsaWFzZWQ7bWFyZ2luLWxlZnQ6MDttYXJnaW4tcmlnaHQ6MDttYXJnaW4tdG9wOjA7bWFyZ2luLWJvdHRvbTowO3BhZGRpbmctbGVmdDowO3BhZGRpbmctcmlnaHQ6MDtwYWRkaW5nLXRvcDowO3BhZGRpbmctYm90dG9tOjA7cG9zaXRpb246Zml4ZWQ7d2lkdGg6MTAwJTttYXgtd2lkdGg6MTAwJTtoZWlnaHQ6MTAwJTttYXgtaGVpZ2h0OjEwMCU7dGV4dC1yZW5kZXJpbmc6b3B0aW1pemVMZWdpYmlsaXR5O292ZXJmbG93OmhpZGRlbjt0b3VjaC1hY3Rpb246bWFuaXB1bGF0aW9uOy13ZWJraXQtdXNlci1kcmFnOm5vbmU7LW1zLWNvbnRlbnQtem9vbWluZzpub25lO3dvcmQtd3JhcDpicmVhay13b3JkO292ZXJzY3JvbGwtYmVoYXZpb3IteTpub25lO3RleHQtc2l6ZS1hZGp1c3Q6bm9uZX1cbiIsImh0bWx7Zm9udC1mYW1pbHk6dmFyKC0taW9uLWZvbnQtZmFtaWx5KX1he2JhY2tncm91bmQtY29sb3I6dHJhbnNwYXJlbnQ7Y29sb3I6dmFyKC0taW9uLWNvbG9yLXByaW1hcnksICMzODgwZmYpfWgxLGgyLGgzLGg0LGg1LGg2e21hcmdpbi10b3A6MTZweDttYXJnaW4tYm90dG9tOjEwcHg7Zm9udC13ZWlnaHQ6NTAwO2xpbmUtaGVpZ2h0OjEuMn1oMXttYXJnaW4tdG9wOjIwcHg7Zm9udC1zaXplOjI2cHh9aDJ7bWFyZ2luLXRvcDoxOHB4O2ZvbnQtc2l6ZToyNHB4fWgze2ZvbnQtc2l6ZToyMnB4fWg0e2ZvbnQtc2l6ZToyMHB4fWg1e2ZvbnQtc2l6ZToxOHB4fWg2e2ZvbnQtc2l6ZToxNnB4fXNtYWxse2ZvbnQtc2l6ZTo3NSV9c3ViLHN1cHtwb3NpdGlvbjpyZWxhdGl2ZTtmb250LXNpemU6NzUlO2xpbmUtaGVpZ2h0OjA7dmVydGljYWwtYWxpZ246YmFzZWxpbmV9c3Vwe3RvcDotLjVlbX1zdWJ7Ym90dG9tOi0uMjVlbX1cbiIsIi5pb24tbm8tcGFkZGluZyxbbm8tcGFkZGluZ117LS1wYWRkaW5nLXN0YXJ0OiAwOy0tcGFkZGluZy1lbmQ6IDA7LS1wYWRkaW5nLXRvcDogMDstLXBhZGRpbmctYm90dG9tOiAwO3BhZGRpbmctbGVmdDowO3BhZGRpbmctcmlnaHQ6MDtwYWRkaW5nLXRvcDowO3BhZGRpbmctYm90dG9tOjB9Lmlvbi1wYWRkaW5nLFtwYWRkaW5nXXstLXBhZGRpbmctc3RhcnQ6IHZhcigtLWlvbi1wYWRkaW5nLCAxNnB4KTstLXBhZGRpbmctZW5kOiB2YXIoLS1pb24tcGFkZGluZywgMTZweCk7LS1wYWRkaW5nLXRvcDogdmFyKC0taW9uLXBhZGRpbmcsIDE2cHgpOy0tcGFkZGluZy1ib3R0b206IHZhcigtLWlvbi1wYWRkaW5nLCAxNnB4KTtwYWRkaW5nLWxlZnQ6dmFyKC0taW9uLXBhZGRpbmcsIDE2cHgpO3BhZGRpbmctcmlnaHQ6dmFyKC0taW9uLXBhZGRpbmcsIDE2cHgpO3BhZGRpbmctdG9wOnZhcigtLWlvbi1wYWRkaW5nLCAxNnB4KTtwYWRkaW5nLWJvdHRvbTp2YXIoLS1pb24tcGFkZGluZywgMTZweCl9QHN1cHBvcnRzIChtYXJnaW4taW5saW5lLXN0YXJ0OiAwKSBvciAoLXdlYmtpdC1tYXJnaW4tc3RhcnQ6IDApey5pb24tcGFkZGluZyxbcGFkZGluZ117cGFkZGluZy1sZWZ0OnVuc2V0O3BhZGRpbmctcmlnaHQ6dW5zZXQ7LXdlYmtpdC1wYWRkaW5nLXN0YXJ0OnZhcigtLWlvbi1wYWRkaW5nLCAxNnB4KTtwYWRkaW5nLWlubGluZS1zdGFydDp2YXIoLS1pb24tcGFkZGluZywgMTZweCk7LXdlYmtpdC1wYWRkaW5nLWVuZDp2YXIoLS1pb24tcGFkZGluZywgMTZweCk7cGFkZGluZy1pbmxpbmUtZW5kOnZhcigtLWlvbi1wYWRkaW5nLCAxNnB4KX19Lmlvbi1wYWRkaW5nLXRvcCxbcGFkZGluZy10b3Bdey0tcGFkZGluZy10b3A6IHZhcigtLWlvbi1wYWRkaW5nLCAxNnB4KTtwYWRkaW5nLXRvcDp2YXIoLS1pb24tcGFkZGluZywgMTZweCl9Lmlvbi1wYWRkaW5nLXN0YXJ0LFtwYWRkaW5nLXN0YXJ0XXstLXBhZGRpbmctc3RhcnQ6IHZhcigtLWlvbi1wYWRkaW5nLCAxNnB4KTtwYWRkaW5nLWxlZnQ6dmFyKC0taW9uLXBhZGRpbmcsIDE2cHgpfUBzdXBwb3J0cyAobWFyZ2luLWlubGluZS1zdGFydDogMCkgb3IgKC13ZWJraXQtbWFyZ2luLXN0YXJ0OiAwKXsuaW9uLXBhZGRpbmctc3RhcnQsW3BhZGRpbmctc3RhcnRde3BhZGRpbmctbGVmdDp1bnNldDstd2Via2l0LXBhZGRpbmctc3RhcnQ6dmFyKC0taW9uLXBhZGRpbmcsIDE2cHgpO3BhZGRpbmctaW5saW5lLXN0YXJ0OnZhcigtLWlvbi1wYWRkaW5nLCAxNnB4KX19Lmlvbi1wYWRkaW5nLWVuZCxbcGFkZGluZy1lbmRdey0tcGFkZGluZy1lbmQ6IHZhcigtLWlvbi1wYWRkaW5nLCAxNnB4KTtwYWRkaW5nLXJpZ2h0OnZhcigtLWlvbi1wYWRkaW5nLCAxNnB4KX1Ac3VwcG9ydHMgKG1hcmdpbi1pbmxpbmUtc3RhcnQ6IDApIG9yICgtd2Via2l0LW1hcmdpbi1zdGFydDogMCl7Lmlvbi1wYWRkaW5nLWVuZCxbcGFkZGluZy1lbmRde3BhZGRpbmctcmlnaHQ6dW5zZXQ7LXdlYmtpdC1wYWRkaW5nLWVuZDp2YXIoLS1pb24tcGFkZGluZywgMTZweCk7cGFkZGluZy1pbmxpbmUtZW5kOnZhcigtLWlvbi1wYWRkaW5nLCAxNnB4KX19Lmlvbi1wYWRkaW5nLWJvdHRvbSxbcGFkZGluZy1ib3R0b21dey0tcGFkZGluZy1ib3R0b206IHZhcigtLWlvbi1wYWRkaW5nLCAxNnB4KTtwYWRkaW5nLWJvdHRvbTp2YXIoLS1pb24tcGFkZGluZywgMTZweCl9Lmlvbi1wYWRkaW5nLXZlcnRpY2FsLFtwYWRkaW5nLXZlcnRpY2FsXXstLXBhZGRpbmctdG9wOiB2YXIoLS1pb24tcGFkZGluZywgMTZweCk7LS1wYWRkaW5nLWJvdHRvbTogdmFyKC0taW9uLXBhZGRpbmcsIDE2cHgpO3BhZGRpbmctdG9wOnZhcigtLWlvbi1wYWRkaW5nLCAxNnB4KTtwYWRkaW5nLWJvdHRvbTp2YXIoLS1pb24tcGFkZGluZywgMTZweCl9Lmlvbi1wYWRkaW5nLWhvcml6b250YWwsW3BhZGRpbmctaG9yaXpvbnRhbF17LS1wYWRkaW5nLXN0YXJ0OiB2YXIoLS1pb24tcGFkZGluZywgMTZweCk7LS1wYWRkaW5nLWVuZDogdmFyKC0taW9uLXBhZGRpbmcsIDE2cHgpO3BhZGRpbmctbGVmdDp2YXIoLS1pb24tcGFkZGluZywgMTZweCk7cGFkZGluZy1yaWdodDp2YXIoLS1pb24tcGFkZGluZywgMTZweCl9QHN1cHBvcnRzIChtYXJnaW4taW5saW5lLXN0YXJ0OiAwKSBvciAoLXdlYmtpdC1tYXJnaW4tc3RhcnQ6IDApey5pb24tcGFkZGluZy1ob3Jpem9udGFsLFtwYWRkaW5nLWhvcml6b250YWxde3BhZGRpbmctbGVmdDp1bnNldDtwYWRkaW5nLXJpZ2h0OnVuc2V0Oy13ZWJraXQtcGFkZGluZy1zdGFydDp2YXIoLS1pb24tcGFkZGluZywgMTZweCk7cGFkZGluZy1pbmxpbmUtc3RhcnQ6dmFyKC0taW9uLXBhZGRpbmcsIDE2cHgpOy13ZWJraXQtcGFkZGluZy1lbmQ6dmFyKC0taW9uLXBhZGRpbmcsIDE2cHgpO3BhZGRpbmctaW5saW5lLWVuZDp2YXIoLS1pb24tcGFkZGluZywgMTZweCl9fS5pb24tbm8tbWFyZ2luLFtuby1tYXJnaW5dey0tbWFyZ2luLXN0YXJ0OiAwOy0tbWFyZ2luLWVuZDogMDstLW1hcmdpbi10b3A6IDA7LS1tYXJnaW4tYm90dG9tOiAwO21hcmdpbi1sZWZ0OjA7bWFyZ2luLXJpZ2h0OjA7bWFyZ2luLXRvcDowO21hcmdpbi1ib3R0b206MH0uaW9uLW1hcmdpbixbbWFyZ2luXXstLW1hcmdpbi1zdGFydDogdmFyKC0taW9uLW1hcmdpbiwgMTZweCk7LS1tYXJnaW4tZW5kOiB2YXIoLS1pb24tbWFyZ2luLCAxNnB4KTstLW1hcmdpbi10b3A6IHZhcigtLWlvbi1tYXJnaW4sIDE2cHgpOy0tbWFyZ2luLWJvdHRvbTogdmFyKC0taW9uLW1hcmdpbiwgMTZweCk7bWFyZ2luLWxlZnQ6dmFyKC0taW9uLW1hcmdpbiwgMTZweCk7bWFyZ2luLXJpZ2h0OnZhcigtLWlvbi1tYXJnaW4sIDE2cHgpO21hcmdpbi10b3A6dmFyKC0taW9uLW1hcmdpbiwgMTZweCk7bWFyZ2luLWJvdHRvbTp2YXIoLS1pb24tbWFyZ2luLCAxNnB4KX1Ac3VwcG9ydHMgKG1hcmdpbi1pbmxpbmUtc3RhcnQ6IDApIG9yICgtd2Via2l0LW1hcmdpbi1zdGFydDogMCl7Lmlvbi1tYXJnaW4sW21hcmdpbl17bWFyZ2luLWxlZnQ6dW5zZXQ7bWFyZ2luLXJpZ2h0OnVuc2V0Oy13ZWJraXQtbWFyZ2luLXN0YXJ0OnZhcigtLWlvbi1tYXJnaW4sIDE2cHgpO21hcmdpbi1pbmxpbmUtc3RhcnQ6dmFyKC0taW9uLW1hcmdpbiwgMTZweCk7LXdlYmtpdC1tYXJnaW4tZW5kOnZhcigtLWlvbi1tYXJnaW4sIDE2cHgpO21hcmdpbi1pbmxpbmUtZW5kOnZhcigtLWlvbi1tYXJnaW4sIDE2cHgpfX0uaW9uLW1hcmdpbi10b3AsW21hcmdpbi10b3Bdey0tbWFyZ2luLXRvcDogdmFyKC0taW9uLW1hcmdpbiwgMTZweCk7bWFyZ2luLXRvcDp2YXIoLS1pb24tbWFyZ2luLCAxNnB4KX0uaW9uLW1hcmdpbi1zdGFydCxbbWFyZ2luLXN0YXJ0XXstLW1hcmdpbi1zdGFydDogdmFyKC0taW9uLW1hcmdpbiwgMTZweCk7bWFyZ2luLWxlZnQ6dmFyKC0taW9uLW1hcmdpbiwgMTZweCl9QHN1cHBvcnRzIChtYXJnaW4taW5saW5lLXN0YXJ0OiAwKSBvciAoLXdlYmtpdC1tYXJnaW4tc3RhcnQ6IDApey5pb24tbWFyZ2luLXN0YXJ0LFttYXJnaW4tc3RhcnRde21hcmdpbi1sZWZ0OnVuc2V0Oy13ZWJraXQtbWFyZ2luLXN0YXJ0OnZhcigtLWlvbi1tYXJnaW4sIDE2cHgpO21hcmdpbi1pbmxpbmUtc3RhcnQ6dmFyKC0taW9uLW1hcmdpbiwgMTZweCl9fS5pb24tbWFyZ2luLWVuZCxbbWFyZ2luLWVuZF17LS1tYXJnaW4tZW5kOiB2YXIoLS1pb24tbWFyZ2luLCAxNnB4KTttYXJnaW4tcmlnaHQ6dmFyKC0taW9uLW1hcmdpbiwgMTZweCl9QHN1cHBvcnRzIChtYXJnaW4taW5saW5lLXN0YXJ0OiAwKSBvciAoLXdlYmtpdC1tYXJnaW4tc3RhcnQ6IDApey5pb24tbWFyZ2luLWVuZCxbbWFyZ2luLWVuZF17bWFyZ2luLXJpZ2h0OnVuc2V0Oy13ZWJraXQtbWFyZ2luLWVuZDp2YXIoLS1pb24tbWFyZ2luLCAxNnB4KTttYXJnaW4taW5saW5lLWVuZDp2YXIoLS1pb24tbWFyZ2luLCAxNnB4KX19Lmlvbi1tYXJnaW4tYm90dG9tLFttYXJnaW4tYm90dG9tXXstLW1hcmdpbi1ib3R0b206IHZhcigtLWlvbi1tYXJnaW4sIDE2cHgpO21hcmdpbi1ib3R0b206dmFyKC0taW9uLW1hcmdpbiwgMTZweCl9Lmlvbi1tYXJnaW4tdmVydGljYWwsW21hcmdpbi12ZXJ0aWNhbF17LS1tYXJnaW4tdG9wOiB2YXIoLS1pb24tbWFyZ2luLCAxNnB4KTstLW1hcmdpbi1ib3R0b206IHZhcigtLWlvbi1tYXJnaW4sIDE2cHgpO21hcmdpbi10b3A6dmFyKC0taW9uLW1hcmdpbiwgMTZweCk7bWFyZ2luLWJvdHRvbTp2YXIoLS1pb24tbWFyZ2luLCAxNnB4KX0uaW9uLW1hcmdpbi1ob3Jpem9udGFsLFttYXJnaW4taG9yaXpvbnRhbF17LS1tYXJnaW4tc3RhcnQ6IHZhcigtLWlvbi1tYXJnaW4sIDE2cHgpOy0tbWFyZ2luLWVuZDogdmFyKC0taW9uLW1hcmdpbiwgMTZweCk7bWFyZ2luLWxlZnQ6dmFyKC0taW9uLW1hcmdpbiwgMTZweCk7bWFyZ2luLXJpZ2h0OnZhcigtLWlvbi1tYXJnaW4sIDE2cHgpfUBzdXBwb3J0cyAobWFyZ2luLWlubGluZS1zdGFydDogMCkgb3IgKC13ZWJraXQtbWFyZ2luLXN0YXJ0OiAwKXsuaW9uLW1hcmdpbi1ob3Jpem9udGFsLFttYXJnaW4taG9yaXpvbnRhbF17bWFyZ2luLWxlZnQ6dW5zZXQ7bWFyZ2luLXJpZ2h0OnVuc2V0Oy13ZWJraXQtbWFyZ2luLXN0YXJ0OnZhcigtLWlvbi1tYXJnaW4sIDE2cHgpO21hcmdpbi1pbmxpbmUtc3RhcnQ6dmFyKC0taW9uLW1hcmdpbiwgMTZweCk7LXdlYmtpdC1tYXJnaW4tZW5kOnZhcigtLWlvbi1tYXJnaW4sIDE2cHgpO21hcmdpbi1pbmxpbmUtZW5kOnZhcigtLWlvbi1tYXJnaW4sIDE2cHgpfX1cbiIsIltmbG9hdC1sZWZ0XXtmbG9hdDpsZWZ0ICFpbXBvcnRhbnR9W2Zsb2F0LXJpZ2h0XXtmbG9hdDpyaWdodCAhaW1wb3J0YW50fVtmbG9hdC1zdGFydF17ZmxvYXQ6bGVmdCAhaW1wb3J0YW50fTpob3N0LWNvbnRleHQoW2Rpcj1ydGxdKSBbZmxvYXQtc3RhcnRde2Zsb2F0OnJpZ2h0ICFpbXBvcnRhbnR9W2Zsb2F0LWVuZF17ZmxvYXQ6cmlnaHQgIWltcG9ydGFudH06aG9zdC1jb250ZXh0KFtkaXI9cnRsXSkgW2Zsb2F0LWVuZF17ZmxvYXQ6bGVmdCAhaW1wb3J0YW50fUBtZWRpYSAobWluLXdpZHRoOiA1NzZweCl7W2Zsb2F0LXNtLWxlZnRde2Zsb2F0OmxlZnQgIWltcG9ydGFudH1bZmxvYXQtc20tcmlnaHRde2Zsb2F0OnJpZ2h0ICFpbXBvcnRhbnR9W2Zsb2F0LXNtLXN0YXJ0XXtmbG9hdDpsZWZ0ICFpbXBvcnRhbnR9Omhvc3QtY29udGV4dChbZGlyPXJ0bF0pIFtmbG9hdC1zbS1zdGFydF17ZmxvYXQ6cmlnaHQgIWltcG9ydGFudH1bZmxvYXQtc20tZW5kXXtmbG9hdDpyaWdodCAhaW1wb3J0YW50fTpob3N0LWNvbnRleHQoW2Rpcj1ydGxdKSBbZmxvYXQtc20tZW5kXXtmbG9hdDpsZWZ0ICFpbXBvcnRhbnR9fUBtZWRpYSAobWluLXdpZHRoOiA3NjhweCl7W2Zsb2F0LW1kLWxlZnRde2Zsb2F0OmxlZnQgIWltcG9ydGFudH1bZmxvYXQtbWQtcmlnaHRde2Zsb2F0OnJpZ2h0ICFpbXBvcnRhbnR9W2Zsb2F0LW1kLXN0YXJ0XXtmbG9hdDpsZWZ0ICFpbXBvcnRhbnR9Omhvc3QtY29udGV4dChbZGlyPXJ0bF0pIFtmbG9hdC1tZC1zdGFydF17ZmxvYXQ6cmlnaHQgIWltcG9ydGFudH1bZmxvYXQtbWQtZW5kXXtmbG9hdDpyaWdodCAhaW1wb3J0YW50fTpob3N0LWNvbnRleHQoW2Rpcj1ydGxdKSBbZmxvYXQtbWQtZW5kXXtmbG9hdDpsZWZ0ICFpbXBvcnRhbnR9fUBtZWRpYSAobWluLXdpZHRoOiA5OTJweCl7W2Zsb2F0LWxnLWxlZnRde2Zsb2F0OmxlZnQgIWltcG9ydGFudH1bZmxvYXQtbGctcmlnaHRde2Zsb2F0OnJpZ2h0ICFpbXBvcnRhbnR9W2Zsb2F0LWxnLXN0YXJ0XXtmbG9hdDpsZWZ0ICFpbXBvcnRhbnR9Omhvc3QtY29udGV4dChbZGlyPXJ0bF0pIFtmbG9hdC1sZy1zdGFydF17ZmxvYXQ6cmlnaHQgIWltcG9ydGFudH1bZmxvYXQtbGctZW5kXXtmbG9hdDpyaWdodCAhaW1wb3J0YW50fTpob3N0LWNvbnRleHQoW2Rpcj1ydGxdKSBbZmxvYXQtbGctZW5kXXtmbG9hdDpsZWZ0ICFpbXBvcnRhbnR9fUBtZWRpYSAobWluLXdpZHRoOiAxMjAwcHgpe1tmbG9hdC14bC1sZWZ0XXtmbG9hdDpsZWZ0ICFpbXBvcnRhbnR9W2Zsb2F0LXhsLXJpZ2h0XXtmbG9hdDpyaWdodCAhaW1wb3J0YW50fVtmbG9hdC14bC1zdGFydF17ZmxvYXQ6bGVmdCAhaW1wb3J0YW50fTpob3N0LWNvbnRleHQoW2Rpcj1ydGxdKSBbZmxvYXQteGwtc3RhcnRde2Zsb2F0OnJpZ2h0ICFpbXBvcnRhbnR9W2Zsb2F0LXhsLWVuZF17ZmxvYXQ6cmlnaHQgIWltcG9ydGFudH06aG9zdC1jb250ZXh0KFtkaXI9cnRsXSkgW2Zsb2F0LXhsLWVuZF17ZmxvYXQ6bGVmdCAhaW1wb3J0YW50fX1cbiIsIi5pb24tdGV4dC1jZW50ZXIsW3RleHQtY2VudGVyXXt0ZXh0LWFsaWduOmNlbnRlciAhaW1wb3J0YW50fS5pb24tdGV4dC1qdXN0aWZ5LFt0ZXh0LWp1c3RpZnlde3RleHQtYWxpZ246anVzdGlmeSAhaW1wb3J0YW50fS5pb24tdGV4dC1zdGFydCxbdGV4dC1zdGFydF17dGV4dC1hbGlnbjpzdGFydCAhaW1wb3J0YW50fS5pb24tdGV4dC1lbmQsW3RleHQtZW5kXXt0ZXh0LWFsaWduOmVuZCAhaW1wb3J0YW50fS5pb24tdGV4dC1sZWZ0LFt0ZXh0LWxlZnRde3RleHQtYWxpZ246bGVmdCAhaW1wb3J0YW50fS5pb24tdGV4dC1yaWdodCxbdGV4dC1yaWdodF17dGV4dC1hbGlnbjpyaWdodCAhaW1wb3J0YW50fS5pb24tdGV4dC1ub3dyYXAsW3RleHQtbm93cmFwXXt3aGl0ZS1zcGFjZTpub3dyYXAgIWltcG9ydGFudH0uaW9uLXRleHQtd3JhcCxbdGV4dC13cmFwXXt3aGl0ZS1zcGFjZTpub3JtYWwgIWltcG9ydGFudH1AbWVkaWEgKG1pbi13aWR0aDogNTc2cHgpey5pb24tdGV4dC1zbS1jZW50ZXIsW3RleHQtc20tY2VudGVyXXt0ZXh0LWFsaWduOmNlbnRlciAhaW1wb3J0YW50fS5pb24tdGV4dC1zbS1qdXN0aWZ5LFt0ZXh0LXNtLWp1c3RpZnlde3RleHQtYWxpZ246anVzdGlmeSAhaW1wb3J0YW50fS5pb24tdGV4dC1zbS1zdGFydCxbdGV4dC1zbS1zdGFydF17dGV4dC1hbGlnbjpzdGFydCAhaW1wb3J0YW50fS5pb24tdGV4dC1zbS1lbmQsW3RleHQtc20tZW5kXXt0ZXh0LWFsaWduOmVuZCAhaW1wb3J0YW50fS5pb24tdGV4dC1zbS1sZWZ0LFt0ZXh0LXNtLWxlZnRde3RleHQtYWxpZ246bGVmdCAhaW1wb3J0YW50fS5pb24tdGV4dC1zbS1yaWdodCxbdGV4dC1zbS1yaWdodF17dGV4dC1hbGlnbjpyaWdodCAhaW1wb3J0YW50fS5pb24tdGV4dC1zbS1ub3dyYXAsW3RleHQtc20tbm93cmFwXXt3aGl0ZS1zcGFjZTpub3dyYXAgIWltcG9ydGFudH0uaW9uLXRleHQtc20td3JhcCxbdGV4dC1zbS13cmFwXXt3aGl0ZS1zcGFjZTpub3JtYWwgIWltcG9ydGFudH19QG1lZGlhIChtaW4td2lkdGg6IDc2OHB4KXsuaW9uLXRleHQtbWQtY2VudGVyLFt0ZXh0LW1kLWNlbnRlcl17dGV4dC1hbGlnbjpjZW50ZXIgIWltcG9ydGFudH0uaW9uLXRleHQtbWQtanVzdGlmeSxbdGV4dC1tZC1qdXN0aWZ5XXt0ZXh0LWFsaWduOmp1c3RpZnkgIWltcG9ydGFudH0uaW9uLXRleHQtbWQtc3RhcnQsW3RleHQtbWQtc3RhcnRde3RleHQtYWxpZ246c3RhcnQgIWltcG9ydGFudH0uaW9uLXRleHQtbWQtZW5kLFt0ZXh0LW1kLWVuZF17dGV4dC1hbGlnbjplbmQgIWltcG9ydGFudH0uaW9uLXRleHQtbWQtbGVmdCxbdGV4dC1tZC1sZWZ0XXt0ZXh0LWFsaWduOmxlZnQgIWltcG9ydGFudH0uaW9uLXRleHQtbWQtcmlnaHQsW3RleHQtbWQtcmlnaHRde3RleHQtYWxpZ246cmlnaHQgIWltcG9ydGFudH0uaW9uLXRleHQtbWQtbm93cmFwLFt0ZXh0LW1kLW5vd3JhcF17d2hpdGUtc3BhY2U6bm93cmFwICFpbXBvcnRhbnR9Lmlvbi10ZXh0LW1kLXdyYXAsW3RleHQtbWQtd3JhcF17d2hpdGUtc3BhY2U6bm9ybWFsICFpbXBvcnRhbnR9fUBtZWRpYSAobWluLXdpZHRoOiA5OTJweCl7Lmlvbi10ZXh0LWxnLWNlbnRlcixbdGV4dC1sZy1jZW50ZXJde3RleHQtYWxpZ246Y2VudGVyICFpbXBvcnRhbnR9Lmlvbi10ZXh0LWxnLWp1c3RpZnksW3RleHQtbGctanVzdGlmeV17dGV4dC1hbGlnbjpqdXN0aWZ5ICFpbXBvcnRhbnR9Lmlvbi10ZXh0LWxnLXN0YXJ0LFt0ZXh0LWxnLXN0YXJ0XXt0ZXh0LWFsaWduOnN0YXJ0ICFpbXBvcnRhbnR9Lmlvbi10ZXh0LWxnLWVuZCxbdGV4dC1sZy1lbmRde3RleHQtYWxpZ246ZW5kICFpbXBvcnRhbnR9Lmlvbi10ZXh0LWxnLWxlZnQsW3RleHQtbGctbGVmdF17dGV4dC1hbGlnbjpsZWZ0ICFpbXBvcnRhbnR9Lmlvbi10ZXh0LWxnLXJpZ2h0LFt0ZXh0LWxnLXJpZ2h0XXt0ZXh0LWFsaWduOnJpZ2h0ICFpbXBvcnRhbnR9Lmlvbi10ZXh0LWxnLW5vd3JhcCxbdGV4dC1sZy1ub3dyYXBde3doaXRlLXNwYWNlOm5vd3JhcCAhaW1wb3J0YW50fS5pb24tdGV4dC1sZy13cmFwLFt0ZXh0LWxnLXdyYXBde3doaXRlLXNwYWNlOm5vcm1hbCAhaW1wb3J0YW50fX1AbWVkaWEgKG1pbi13aWR0aDogMTIwMHB4KXsuaW9uLXRleHQteGwtY2VudGVyLFt0ZXh0LXhsLWNlbnRlcl17dGV4dC1hbGlnbjpjZW50ZXIgIWltcG9ydGFudH0uaW9uLXRleHQteGwtanVzdGlmeSxbdGV4dC14bC1qdXN0aWZ5XXt0ZXh0LWFsaWduOmp1c3RpZnkgIWltcG9ydGFudH0uaW9uLXRleHQteGwtc3RhcnQsW3RleHQteGwtc3RhcnRde3RleHQtYWxpZ246c3RhcnQgIWltcG9ydGFudH0uaW9uLXRleHQteGwtZW5kLFt0ZXh0LXhsLWVuZF17dGV4dC1hbGlnbjplbmQgIWltcG9ydGFudH0uaW9uLXRleHQteGwtbGVmdCxbdGV4dC14bC1sZWZ0XXt0ZXh0LWFsaWduOmxlZnQgIWltcG9ydGFudH0uaW9uLXRleHQteGwtcmlnaHQsW3RleHQteGwtcmlnaHRde3RleHQtYWxpZ246cmlnaHQgIWltcG9ydGFudH0uaW9uLXRleHQteGwtbm93cmFwLFt0ZXh0LXhsLW5vd3JhcF17d2hpdGUtc3BhY2U6bm93cmFwICFpbXBvcnRhbnR9Lmlvbi10ZXh0LXhsLXdyYXAsW3RleHQteGwtd3JhcF17d2hpdGUtc3BhY2U6bm9ybWFsICFpbXBvcnRhbnR9fVxuIiwiLmlvbi10ZXh0LXVwcGVyY2FzZSxbdGV4dC11cHBlcmNhc2Vde3RleHQtdHJhbnNmb3JtOnVwcGVyY2FzZSAhaW1wb3J0YW50fS5pb24tdGV4dC1sb3dlcmNhc2UsW3RleHQtbG93ZXJjYXNlXXt0ZXh0LXRyYW5zZm9ybTpsb3dlcmNhc2UgIWltcG9ydGFudH0uaW9uLXRleHQtY2FwaXRhbGl6ZSxbdGV4dC1jYXBpdGFsaXplXXt0ZXh0LXRyYW5zZm9ybTpjYXBpdGFsaXplICFpbXBvcnRhbnR9QG1lZGlhIChtaW4td2lkdGg6IDU3NnB4KXsuaW9uLXRleHQtc20tdXBwZXJjYXNlLFt0ZXh0LXNtLXVwcGVyY2FzZV17dGV4dC10cmFuc2Zvcm06dXBwZXJjYXNlICFpbXBvcnRhbnR9Lmlvbi10ZXh0LXNtLWxvd2VyY2FzZSxbdGV4dC1zbS1sb3dlcmNhc2Vde3RleHQtdHJhbnNmb3JtOmxvd2VyY2FzZSAhaW1wb3J0YW50fS5pb24tdGV4dC1zbS1jYXBpdGFsaXplLFt0ZXh0LXNtLWNhcGl0YWxpemVde3RleHQtdHJhbnNmb3JtOmNhcGl0YWxpemUgIWltcG9ydGFudH19QG1lZGlhIChtaW4td2lkdGg6IDc2OHB4KXsuaW9uLXRleHQtbWQtdXBwZXJjYXNlLFt0ZXh0LW1kLXVwcGVyY2FzZV17dGV4dC10cmFuc2Zvcm06dXBwZXJjYXNlICFpbXBvcnRhbnR9Lmlvbi10ZXh0LW1kLWxvd2VyY2FzZSxbdGV4dC1tZC1sb3dlcmNhc2Vde3RleHQtdHJhbnNmb3JtOmxvd2VyY2FzZSAhaW1wb3J0YW50fS5pb24tdGV4dC1tZC1jYXBpdGFsaXplLFt0ZXh0LW1kLWNhcGl0YWxpemVde3RleHQtdHJhbnNmb3JtOmNhcGl0YWxpemUgIWltcG9ydGFudH19QG1lZGlhIChtaW4td2lkdGg6IDk5MnB4KXsuaW9uLXRleHQtbGctdXBwZXJjYXNlLFt0ZXh0LWxnLXVwcGVyY2FzZV17dGV4dC10cmFuc2Zvcm06dXBwZXJjYXNlICFpbXBvcnRhbnR9Lmlvbi10ZXh0LWxnLWxvd2VyY2FzZSxbdGV4dC1sZy1sb3dlcmNhc2Vde3RleHQtdHJhbnNmb3JtOmxvd2VyY2FzZSAhaW1wb3J0YW50fS5pb24tdGV4dC1sZy1jYXBpdGFsaXplLFt0ZXh0LWxnLWNhcGl0YWxpemVde3RleHQtdHJhbnNmb3JtOmNhcGl0YWxpemUgIWltcG9ydGFudH19QG1lZGlhIChtaW4td2lkdGg6IDEyMDBweCl7Lmlvbi10ZXh0LXhsLXVwcGVyY2FzZSxbdGV4dC14bC11cHBlcmNhc2Vde3RleHQtdHJhbnNmb3JtOnVwcGVyY2FzZSAhaW1wb3J0YW50fS5pb24tdGV4dC14bC1sb3dlcmNhc2UsW3RleHQteGwtbG93ZXJjYXNlXXt0ZXh0LXRyYW5zZm9ybTpsb3dlcmNhc2UgIWltcG9ydGFudH0uaW9uLXRleHQteGwtY2FwaXRhbGl6ZSxbdGV4dC14bC1jYXBpdGFsaXplXXt0ZXh0LXRyYW5zZm9ybTpjYXBpdGFsaXplICFpbXBvcnRhbnR9fVxuIiwiW2FsaWduLXNlbGYtc3RhcnRde2FsaWduLXNlbGY6ZmxleC1zdGFydCAhaW1wb3J0YW50fVthbGlnbi1zZWxmLWVuZF17YWxpZ24tc2VsZjpmbGV4LWVuZCAhaW1wb3J0YW50fVthbGlnbi1zZWxmLWNlbnRlcl17YWxpZ24tc2VsZjpjZW50ZXIgIWltcG9ydGFudH1bYWxpZ24tc2VsZi1zdHJldGNoXXthbGlnbi1zZWxmOnN0cmV0Y2ggIWltcG9ydGFudH1bYWxpZ24tc2VsZi1iYXNlbGluZV17YWxpZ24tc2VsZjpiYXNlbGluZSAhaW1wb3J0YW50fVthbGlnbi1zZWxmLWF1dG9de2FsaWduLXNlbGY6YXV0byAhaW1wb3J0YW50fVt3cmFwXXtmbGV4LXdyYXA6d3JhcCAhaW1wb3J0YW50fVtub3dyYXBde2ZsZXgtd3JhcDpub3dyYXAgIWltcG9ydGFudH1bd3JhcC1yZXZlcnNlXXtmbGV4LXdyYXA6d3JhcC1yZXZlcnNlICFpbXBvcnRhbnR9W2p1c3RpZnktY29udGVudC1zdGFydF17anVzdGlmeS1jb250ZW50OmZsZXgtc3RhcnQgIWltcG9ydGFudH1banVzdGlmeS1jb250ZW50LWNlbnRlcl17anVzdGlmeS1jb250ZW50OmNlbnRlciAhaW1wb3J0YW50fVtqdXN0aWZ5LWNvbnRlbnQtZW5kXXtqdXN0aWZ5LWNvbnRlbnQ6ZmxleC1lbmQgIWltcG9ydGFudH1banVzdGlmeS1jb250ZW50LWFyb3VuZF17anVzdGlmeS1jb250ZW50OnNwYWNlLWFyb3VuZCAhaW1wb3J0YW50fVtqdXN0aWZ5LWNvbnRlbnQtYmV0d2Vlbl17anVzdGlmeS1jb250ZW50OnNwYWNlLWJldHdlZW4gIWltcG9ydGFudH1banVzdGlmeS1jb250ZW50LWV2ZW5seV17anVzdGlmeS1jb250ZW50OnNwYWNlLWV2ZW5seSAhaW1wb3J0YW50fVthbGlnbi1pdGVtcy1zdGFydF17YWxpZ24taXRlbXM6ZmxleC1zdGFydCAhaW1wb3J0YW50fVthbGlnbi1pdGVtcy1jZW50ZXJde2FsaWduLWl0ZW1zOmNlbnRlciAhaW1wb3J0YW50fVthbGlnbi1pdGVtcy1lbmRde2FsaWduLWl0ZW1zOmZsZXgtZW5kICFpbXBvcnRhbnR9W2FsaWduLWl0ZW1zLXN0cmV0Y2hde2FsaWduLWl0ZW1zOnN0cmV0Y2ggIWltcG9ydGFudH1bYWxpZ24taXRlbXMtYmFzZWxpbmVde2FsaWduLWl0ZW1zOmJhc2VsaW5lICFpbXBvcnRhbnR9XG4iLCIvLyBodHRwOi8vaW9uaWNmcmFtZXdvcmsuY29tL2RvY3MvdGhlbWluZy9cbkBpbXBvcnQgJ35AaW9uaWMvYW5ndWxhci9jc3MvY29yZS5jc3MnO1xuQGltcG9ydCAnfkBpb25pYy9hbmd1bGFyL2Nzcy9ub3JtYWxpemUuY3NzJztcbkBpbXBvcnQgJ35AaW9uaWMvYW5ndWxhci9jc3Mvc3RydWN0dXJlLmNzcyc7XG5AaW1wb3J0ICd+QGlvbmljL2FuZ3VsYXIvY3NzL3R5cG9ncmFwaHkuY3NzJztcblxuQGltcG9ydCAnfkBpb25pYy9hbmd1bGFyL2Nzcy9wYWRkaW5nLmNzcyc7XG5AaW1wb3J0ICd+QGlvbmljL2FuZ3VsYXIvY3NzL2Zsb2F0LWVsZW1lbnRzLmNzcyc7XG5AaW1wb3J0ICd+QGlvbmljL2FuZ3VsYXIvY3NzL3RleHQtYWxpZ25tZW50LmNzcyc7XG5AaW1wb3J0ICd+QGlvbmljL2FuZ3VsYXIvY3NzL3RleHQtdHJhbnNmb3JtYXRpb24uY3NzJztcbkBpbXBvcnQgJ35AaW9uaWMvYW5ndWxhci9jc3MvZmxleC11dGlscy5jc3MnO1xuXG4kYXBwLWludGVyYWN0aW9uLWNvbG9yOiAjMTFCM0VGO1xuaHRtbCB7XG4gICAgZm9udC1mYW1pbHk6ICdUaXRpbGxpdW0gV2ViJywgc2Fucy1zZXJpZiAhaW1wb3J0YW50O1xufVxuLmZpeGVkIHtcbiAgICBwb3NpdGlvbjpmaXhlZCAhaW1wb3J0YW50O1xufVxuLnNwYWNpbmcge1xuICAgIGhlaWdodDogNTBweCAhaW1wb3J0YW50O1xufVxuLmNhdGVnb3J5IHtcbiAgICB3aWR0aDogMTAwJTtcbiAgICB0ZXh0LWFsaWduOiBjZW50ZXI7XG4gICAgY29sb3I6IGJsYWNrO1xuICAgIGZvbnQtc2l6ZTogMjRweDtcbiAgICBtYXJnaW4tYm90dG9tOiAxJTtcbiAgICBib3JkZXItYm90dG9tOiAxcHggc29saWQgYmxhY2s7XG59XG5cbi5zZWFyY2hiYXItaW5wdXQge1xuICAgIGJhY2tncm91bmQ6IHdoaXRlICFpbXBvcnRhbnQ7XG59XG4uYmcge1xuICAgIGJhY2tncm91bmQ6IGxpZ2h0Z3JleTtcbn1cbi8qIGluLWZsaWdodCBjbG9uZSAqL1xuLmd1LW1pcnJvciB7XG4gICAgcG9zaXRpb246IGZpeGVkICFpbXBvcnRhbnQ7XG4gICAgbWFyZ2luOiAwICFpbXBvcnRhbnQ7XG4gICAgei1pbmRleDogOTk5OSAhaW1wb3J0YW50O1xuICAgIG9wYWNpdHk6IDAuODtcbiAgICAtbXMtZmlsdGVyOiBcInByb2dpZDpEWEltYWdlVHJhbnNmb3JtLk1pY3Jvc29mdC5BbHBoYShPcGFjaXR5PTgwKVwiO1xuICAgIGZpbHRlcjogYWxwaGEob3BhY2l0eT04MCk7XG4gICAgcG9pbnRlci1ldmVudHM6IG5vbmU7XG4gIH1cbiAgIFxuICAvKiBoaWdoLXBlcmZvcm1hbmNlIGRpc3BsYXk6bm9uZTsgaGVscGVyICovXG4gIC5ndS1oaWRlIHtcbiAgICBsZWZ0OiAtOTk5OXB4ICFpbXBvcnRhbnQ7XG4gIH1cbiAgIFxuICAvKiBhZGRlZCB0byBtaXJyb3JDb250YWluZXIgKGRlZmF1bHQgPSBib2R5KSB3aGlsZSBkcmFnZ2luZyAqL1xuICAuZ3UtdW5zZWxlY3RhYmxlIHtcbiAgICAtd2Via2l0LXVzZXItc2VsZWN0OiBub25lICFpbXBvcnRhbnQ7XG4gICAgLW1vei11c2VyLXNlbGVjdDogbm9uZSAhaW1wb3J0YW50O1xuICAgIC1tcy11c2VyLXNlbGVjdDogbm9uZSAhaW1wb3J0YW50O1xuICAgIHVzZXItc2VsZWN0OiBub25lICFpbXBvcnRhbnQ7XG4gIH1cbiAgIFxuICAvKiBhZGRlZCB0byB0aGUgc291cmNlIGVsZW1lbnQgd2hpbGUgaXRzIG1pcnJvciBpcyBkcmFnZ2VkICovXG4gIC5ndS10cmFuc2l0IHtcbiAgICBvcGFjaXR5OiAwLjI7XG4gICAgLW1zLWZpbHRlcjogXCJwcm9naWQ6RFhJbWFnZVRyYW5zZm9ybS5NaWNyb3NvZnQuQWxwaGEoT3BhY2l0eT0yMClcIjtcbiAgICBmaWx0ZXI6IGFscGhhKG9wYWNpdHk9MjApO1xuICB9IiwiQGltcG9ydCAnLi4vLi4vLi4vZ2xvYmFsLnNjc3MnO1xuXG4udGl0bGUge1xuICAgIGJhY2tncm91bmQtY29sb3I6IHJnYmEoMjU1LCAyNTUsIDI1NSwgLjUpO1xuICAgIGNvbG9yOiAkYXBwLWludGVyYWN0aW9uLWNvbG9yO1xuICAgIHRleHQtYWxpZ246IGNlbnRlcjtcbiAgICBmb250LXdlaWdodDogYm9sZDtcbiAgICBmb250LXNpemU6IDI0cHg7XG4gICAgbWFyZ2luOiA4cHggMHB4O1xufVxuXG4uc2Nyb2xsaW5nLXdyYXBwZXItZmxleGJveCB7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogcmdiYSgyNTUsIDI1NSwgMjU1LCAuNSk7XG4gICAgbGVmdDogMHB4O1xuICAgIHBvc2l0aW9uOiBmaXhlZDtcbiAgICBib3R0b206IDUwcHg7XG4gICAgd2lkdGg6IDEwMHZ3O1xuICAgIGhlaWdodDogMTAwcHg7XG4gICAgZGlzcGxheTogZmxleDtcbiAgICBvdmVyZmxvdy14OiBhdXRvO1xuICAgIHotaW5kZXg6IDk5OTtcblxuICAgIC5jYXJkIHtcbiAgICAgICAgZmxleDogMCAwIGF1dG87XG4gICAgICAgIGNvbG9yOiBibGFjaztcbiAgICAgICAgYm9yZGVyOiAycHggc29saWQgYmxhY2s7XG4gICAgICAgIGJhY2tncm91bmQ6IHdoaXRlO1xuICAgICAgICBwYWRkaW5nOiA4cHg7XG4gICAgICAgIG1hcmdpbjogNHB4O1xuICAgIH1cbn1cblxuI2NhdGVnb3J5LWJ1dHRvbnMge1xuICAgIGhlaWdodDogY2FsYygxMDAlIC0gMTg3cHgpO1xuICAgIGJvcmRlcjogM3B4IHNvbGlkICRhcHAtaW50ZXJhY3Rpb24tY29sb3I7XG4gICAgcG9zaXRpb246IHJlbGF0aXZlO1xuICAgIC5kcmFnLWxhYmVse1xuICAgICAgICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gICAgICAgIGJvdHRvbTogMHB4O1xuICAgICAgICB0ZXh0LWFsaWduOiBjZW50ZXI7XG4gICAgICAgIHdpZHRoOiAxMDAlO1xuICAgICAgICBvcGFjaXR5OiAwLjU7XG4gICAgfVxuICAgIC5ob21lLWJ1dHRvbiB7XG4gICAgICAgIGNvbG9yOiBibGFjaztcbiAgICAgICAgYm9yZGVyLXJhZGl1czogNHB4O1xuICAgICAgICB3aWR0aDogMTAwJTtcbiAgICAgICAgaGVpZ2h0OiAxMDAlO1xuICAgICAgICBtYXJnaW4tYm90dG9tOiA1JTtcbiAgICAgICAgYmFja2dyb3VuZDogd2hpdGU7XG4gICAgICAgIGNvbG9yOiAkYXBwLWludGVyYWN0aW9uLWNvbG9yO1xuICAgICAgICB0ZXh0LWFsaWduOiBjZW50ZXI7XG4gICAgICAgIHBhZGRpbmc6IDIlO1xuXG4gICAgICAgIC5sYWJlbC1idXR0b24ge1xuICAgICAgICAgICAgcGFkZGluZzogOHB4IDBweDtcbiAgICAgICAgICAgIGZvbnQtc2l6ZTogMTZweDtcbiAgICAgICAgICAgIGZvbnQtd2VpZ2h0OiBib2xkO1xuICAgICAgICB9XG4gICAgfVxufVxuXG4uY2xvc2Uge1xuICAgIGZvbnQtc2l6ZTogMTJweDtcbn1cblxuLnNhdmUtYnV0dG9uIHt9XG5cbi5ob3JpenpvbnRhbC1hcnJvdyB7XG4gICAgcG9zaXRpb246IGZpeGVkO1xuICAgIGJvdHRvbTogMHB4O1xuICAgIGhlaWdodDogNTBweDtcbiAgICB3aWR0aDogMTAwJTtcbn1cblxuLmljb24ge1xuICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgICB0b3A6IDUwJTtcbiAgICBsZWZ0OiA1MCU7XG4gICAgdHJhbnNmb3JtOiB0cmFuc2xhdGUoLTUwJSwgLTUwJSk7XG4gICAgd2lkdGg6IDU1JTtcbiAgICBoZWlnaHQ6IDYwcHg7XG4gICAgY3Vyc29yOiBwb2ludGVyO1xufVxuXG4uYXJyb3ctcmlnaHQge1xuICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgICB0b3A6IDI1cHg7XG4gICAgd2lkdGg6IDkwJTtcbiAgICBoZWlnaHQ6IDJweDtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiAjMDAwMDAwO1xuICAgIGJveC1zaGFkb3c6IDAgM3B4IDVweCByZ2JhKDAsIDAsIDAsIC4yKTtcbiAgICBhbmltYXRpb246IGFycm93IDcwMG1zIGxpbmVhciBpbmZpbml0ZTtcbn1cblxuLmFycm93LXJpZ2h0OjphZnRlciB7XG4gICAgY29udGVudDogJyc7XG4gICAgcG9zaXRpb246IGFic29sdXRlO1xuICAgIHdpZHRoOiAxMHB4O1xuICAgIGhlaWdodDogMnB4O1xuICAgIHRvcDogLTNweDtcbiAgICByaWdodDogLTJweDtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiAjMDAwMDAwO1xuICAgIHRyYW5zZm9ybTogcm90YXRlKDQ1ZGVnKTtcbn1cblxuLmFycm93LXJpZ2h0OjpiZWZvcmUge1xuICAgIGNvbnRlbnQ6ICcnO1xuICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgICB3aWR0aDogMTBweDtcbiAgICBoZWlnaHQ6IDJweDtcbiAgICB0b3A6IDNweDtcbiAgICByaWdodDogLTJweDtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiAjMDAwMDAwO1xuICAgIGJveC1zaGFkb3c6IDAgM3B4IDVweCByZ2JhKDAsIDAsIDAsIC4yKTtcbiAgICB0cmFuc2Zvcm06IHJvdGF0ZSgtNDVkZWcpO1xufVxuXG4uYXJyb3ctbGVmdCB7XG4gICAgcG9zaXRpb246IGFic29sdXRlO1xuICAgIHRvcDogMjVweDtcbiAgICB3aWR0aDogOTAlO1xuICAgIGhlaWdodDogMnB4O1xuICAgIGJhY2tncm91bmQtY29sb3I6ICMwMDAwMDA7XG4gICAgYW5pbWF0aW9uOiBhcnJvdyA3MDBtcyBsaW5lYXIgaW5maW5pdGU7XG59XG5cbi5hcnJvdy1sZWZ0OjphZnRlciB7XG4gICAgY29udGVudDogJyc7XG4gICAgcG9zaXRpb246IGFic29sdXRlO1xuICAgIHdpZHRoOiAxMHB4O1xuICAgIGhlaWdodDogMnB4O1xuICAgIHRvcDogLTNweDtcbiAgICBsZWZ0OiAtMnB4O1xuICAgIGJhY2tncm91bmQtY29sb3I6ICMwMDAwMDA7XG4gICAgdHJhbnNmb3JtOiByb3RhdGUoLTQ1ZGVnKTtcbn1cblxuLmFycm93LWxlZnQ6OmJlZm9yZSB7XG4gICAgY29udGVudDogJyc7XG4gICAgcG9zaXRpb246IGFic29sdXRlO1xuICAgIHdpZHRoOiAxMHB4O1xuICAgIGhlaWdodDogMnB4O1xuICAgIHRvcDogM3B4O1xuICAgIGxlZnQ6IC0ycHg7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogIzAwMDAwMDtcbiAgICBib3gtc2hhZG93OiAwIDNweCA1cHggcmdiYSgwLCAwLCAwLCAuMik7XG4gICAgdHJhbnNmb3JtOiByb3RhdGUoNDVkZWcpO1xufVxuLmd1LW1pcnJvciB7XG4gICAgZmxleDogMCAwIGF1dG87XG4gICAgYm9yZGVyOiAycHggc29saWQgJGFwcC1pbnRlcmFjdGlvbi1jb2xvcjtcbiAgICBiYWNrZ3JvdW5kOiB3aGl0ZTtcbiAgICBtYXJnaW46IDRweDtcbiAgICBwYWRkaW5nOiA4cHg7XG4gICAgdHJhbnNmb3JtLW9yaWdpbjogMjAlIDQwJTtcbn1cbkBtZWRpYSBzY3JlZW4gYW5kIChtYXgtd2lkdGg6IDc2OHB4KSB7XG4gICAgLmNoaWxkIHtcbiAgICAgIC13ZWJraXQtdG91Y2gtY2FsbG91dDogbm9uZTsgLyogbWF5IGJlIHVzZWZ1bCBpZiB5b3VyIGNoaWxkIGlzIGFuIGFuY2hvciB5b3UgY2FuIG90aGVyd2lzZSBjbGljayAqL1xuICAgICAgLXdlYmtpdC11c2VyLXNlbGVjdDogbm9uZSAhaW1wb3J0YW50OyAvKiBEaXNhYmxlIHNlbGVjdGlvbi9jb3B5IGluIFVJV2ViVmlldyAqL1xuICAgICAgLW1vei11c2VyLXNlbGVjdDogbm9uZSAhaW1wb3J0YW50O1xuICAgICAgLW1zLXVzZXItc2VsZWN0OiBub25lICFpbXBvcnRhbnQ7XG4gICAgICB1c2VyLXNlbGVjdDogbm9uZSAhaW1wb3J0YW50O1xuICAgIH1cbiAgfVxuXG4gIC5ndS1taXJyb3IuY2hpbGQ6YWZ0ZXIgeyBjb250ZW50OiBcIi5ndS1taXJyb3JcIjsgfVxuICAuZGVsYXktZHJhZy1saWZ0ZWQuY2hpbGQ6YWZ0ZXIgeyBjb250ZW50OiBcIi5kZWxheS1kcmFnLWxpZnRlZFwiOyB9XG4gIC5ndS1taXJyb3IuZGVsYXktZHJhZy1saWZ0ZWQuY2hpbGQ6YWZ0ZXIgeyBjb250ZW50OiBcIi5kZWxheS1kcmFnLWxpZnRlZC5ndS1taXJyb3JcIjsgfVxuIl19 */"
+module.exports = "html.ios {\n  --ion-default-font: -apple-system, BlinkMacSystemFont, \"Helvetica Neue\", \"Roboto\", sans-serif;\n}\n\nhtml.md {\n  --ion-default-font: \"Roboto\", \"Helvetica Neue\", sans-serif;\n}\n\nhtml {\n  --ion-font-family: var(--ion-default-font);\n}\n\nbody {\n  background: var(--ion-background-color);\n}\n\nbody.backdrop-no-scroll {\n  overflow: hidden;\n}\n\n.ion-color-primary {\n  --ion-color-base: var(--ion-color-primary, #3880ff) !important;\n  --ion-color-base-rgb: var(--ion-color-primary-rgb, 56, 128, 255) !important;\n  --ion-color-contrast: var(--ion-color-primary-contrast, #fff) !important;\n  --ion-color-contrast-rgb: var(--ion-color-primary-contrast-rgb, 255, 255, 255) !important;\n  --ion-color-shade: var(--ion-color-primary-shade, #3171e0) !important;\n  --ion-color-tint: var(--ion-color-primary-tint, #4c8dff) !important;\n}\n\n.ion-color-secondary {\n  --ion-color-base: var(--ion-color-secondary, #0cd1e8) !important;\n  --ion-color-base-rgb: var(--ion-color-secondary-rgb, 12, 209, 232) !important;\n  --ion-color-contrast: var(--ion-color-secondary-contrast, #fff) !important;\n  --ion-color-contrast-rgb: var(--ion-color-secondary-contrast-rgb, 255, 255, 255) !important;\n  --ion-color-shade: var(--ion-color-secondary-shade, #0bb8cc) !important;\n  --ion-color-tint: var(--ion-color-secondary-tint, #24d6ea) !important;\n}\n\n.ion-color-tertiary {\n  --ion-color-base: var(--ion-color-tertiary, #7044ff) !important;\n  --ion-color-base-rgb: var(--ion-color-tertiary-rgb, 112, 68, 255) !important;\n  --ion-color-contrast: var(--ion-color-tertiary-contrast, #fff) !important;\n  --ion-color-contrast-rgb: var(--ion-color-tertiary-contrast-rgb, 255, 255, 255) !important;\n  --ion-color-shade: var(--ion-color-tertiary-shade, #633ce0) !important;\n  --ion-color-tint: var(--ion-color-tertiary-tint, #7e57ff) !important;\n}\n\n.ion-color-success {\n  --ion-color-base: var(--ion-color-success, #10dc60) !important;\n  --ion-color-base-rgb: var(--ion-color-success-rgb, 16, 220, 96) !important;\n  --ion-color-contrast: var(--ion-color-success-contrast, #fff) !important;\n  --ion-color-contrast-rgb: var(--ion-color-success-contrast-rgb, 255, 255, 255) !important;\n  --ion-color-shade: var(--ion-color-success-shade, #0ec254) !important;\n  --ion-color-tint: var(--ion-color-success-tint, #28e070) !important;\n}\n\n.ion-color-warning {\n  --ion-color-base: var(--ion-color-warning, #ffce00) !important;\n  --ion-color-base-rgb: var(--ion-color-warning-rgb, 255, 206, 0) !important;\n  --ion-color-contrast: var(--ion-color-warning-contrast, #fff) !important;\n  --ion-color-contrast-rgb: var(--ion-color-warning-contrast-rgb, 255, 255, 255) !important;\n  --ion-color-shade: var(--ion-color-warning-shade, #e0b500) !important;\n  --ion-color-tint: var(--ion-color-warning-tint, #ffd31a) !important;\n}\n\n.ion-color-danger {\n  --ion-color-base: var(--ion-color-danger, #f04141) !important;\n  --ion-color-base-rgb: var(--ion-color-danger-rgb, 240, 65, 65) !important;\n  --ion-color-contrast: var(--ion-color-danger-contrast, #fff) !important;\n  --ion-color-contrast-rgb: var(--ion-color-danger-contrast-rgb, 255, 255, 255) !important;\n  --ion-color-shade: var(--ion-color-danger-shade, #d33939) !important;\n  --ion-color-tint: var(--ion-color-danger-tint, #f25454) !important;\n}\n\n.ion-color-light {\n  --ion-color-base: var(--ion-color-light, #f4f5f8) !important;\n  --ion-color-base-rgb: var(--ion-color-light-rgb, 244, 245, 248) !important;\n  --ion-color-contrast: var(--ion-color-light-contrast, #000) !important;\n  --ion-color-contrast-rgb: var(--ion-color-light-contrast-rgb, 0, 0, 0) !important;\n  --ion-color-shade: var(--ion-color-light-shade, #d7d8da) !important;\n  --ion-color-tint: var(--ion-color-light-tint, #f5f6f9) !important;\n}\n\n.ion-color-medium {\n  --ion-color-base: var(--ion-color-medium, #989aa2) !important;\n  --ion-color-base-rgb: var(--ion-color-medium-rgb, 152, 154, 162) !important;\n  --ion-color-contrast: var(--ion-color-medium-contrast, #fff) !important;\n  --ion-color-contrast-rgb: var(--ion-color-medium-contrast-rgb, 255, 255, 255) !important;\n  --ion-color-shade: var(--ion-color-medium-shade, #86888f) !important;\n  --ion-color-tint: var(--ion-color-medium-tint, #a2a4ab) !important;\n}\n\n.ion-color-dark {\n  --ion-color-base: var(--ion-color-dark, #222428) !important;\n  --ion-color-base-rgb: var(--ion-color-dark-rgb, 34, 36, 40) !important;\n  --ion-color-contrast: var(--ion-color-dark-contrast, #fff) !important;\n  --ion-color-contrast-rgb: var(--ion-color-dark-contrast-rgb, 255, 255, 255) !important;\n  --ion-color-shade: var(--ion-color-dark-shade, #1e2023) !important;\n  --ion-color-tint: var(--ion-color-dark-tint, #383a3e) !important;\n}\n\n.ion-page {\n  left: 0;\n  right: 0;\n  top: 0;\n  bottom: 0;\n  display: flex;\n  position: absolute;\n  flex-direction: column;\n  justify-content: space-between;\n  contain: layout size style;\n  overflow: hidden;\n  z-index: 0;\n}\n\nion-route,\nion-route-redirect,\nion-router,\nion-select-option,\nion-nav-controller,\nion-menu-controller,\nion-action-sheet-controller,\nion-alert-controller,\nion-loading-controller,\nion-modal-controller,\nion-picker-controller,\nion-popover-controller,\nion-toast-controller,\n.ion-page-hidden,\n[hidden] {\n  /* stylelint-disable-next-line declaration-no-important */\n  display: none !important;\n}\n\n.ion-page-invisible {\n  opacity: 0;\n}\n\nhtml.plt-ios.plt-hybrid, html.plt-ios.plt-pwa {\n  --ion-statusbar-padding: 20px;\n}\n\n@supports (padding-top: 20px) {\n  html {\n    --ion-safe-area-top: var(--ion-statusbar-padding);\n  }\n}\n\n@supports (padding-top: constant(safe-area-inset-top)) {\n  html {\n    --ion-safe-area-top: constant(safe-area-inset-top);\n    --ion-safe-area-bottom: constant(safe-area-inset-bottom);\n    --ion-safe-area-left: constant(safe-area-inset-left);\n    --ion-safe-area-right: constant(safe-area-inset-right);\n  }\n}\n\n@supports (padding-top: env(safe-area-inset-top)) {\n  html {\n    --ion-safe-area-top: env(safe-area-inset-top);\n    --ion-safe-area-bottom: env(safe-area-inset-bottom);\n    --ion-safe-area-left: env(safe-area-inset-left);\n    --ion-safe-area-right: env(safe-area-inset-right);\n  }\n}\n\naudio,\ncanvas,\nprogress,\nvideo {\n  vertical-align: baseline;\n}\n\naudio:not([controls]) {\n  display: none;\n  height: 0;\n}\n\nb,\nstrong {\n  font-weight: bold;\n}\n\nimg {\n  max-width: 100%;\n  border: 0;\n}\n\nsvg:not(:root) {\n  overflow: hidden;\n}\n\nfigure {\n  margin: 1em 40px;\n}\n\nhr {\n  height: 1px;\n  border-width: 0;\n  box-sizing: content-box;\n}\n\npre {\n  overflow: auto;\n}\n\ncode,\nkbd,\npre,\nsamp {\n  font-family: monospace, monospace;\n  font-size: 1em;\n}\n\nlabel,\ninput,\nselect,\ntextarea {\n  font-family: inherit;\n  line-height: normal;\n}\n\ntextarea {\n  overflow: auto;\n  height: auto;\n  font: inherit;\n  color: inherit;\n}\n\ntextarea::-webkit-input-placeholder {\n  padding-left: 2px;\n}\n\ntextarea::-moz-placeholder {\n  padding-left: 2px;\n}\n\ntextarea:-ms-input-placeholder {\n  padding-left: 2px;\n}\n\ntextarea::-ms-input-placeholder {\n  padding-left: 2px;\n}\n\ntextarea::placeholder {\n  padding-left: 2px;\n}\n\nform,\ninput,\noptgroup,\nselect {\n  margin: 0;\n  font: inherit;\n  color: inherit;\n}\n\nhtml input[type=button],\ninput[type=reset],\ninput[type=submit] {\n  cursor: pointer;\n  -webkit-appearance: button;\n}\n\na,\na div,\na span,\na ion-icon,\na ion-label,\nbutton,\nbutton div,\nbutton span,\nbutton ion-icon,\nbutton ion-label,\n.ion-tappable,\n[tappable],\n[tappable] div,\n[tappable] span,\n[tappable] ion-icon,\n[tappable] ion-label,\ninput,\ntextarea {\n  touch-action: manipulation;\n}\n\na ion-label,\nbutton ion-label {\n  pointer-events: none;\n}\n\nbutton {\n  border: 0;\n  border-radius: 0;\n  font-family: inherit;\n  font-style: inherit;\n  font-variant: inherit;\n  line-height: 1;\n  text-transform: none;\n  cursor: pointer;\n  -webkit-appearance: button;\n}\n\n[tappable] {\n  cursor: pointer;\n}\n\na[disabled],\nbutton[disabled],\nhtml input[disabled] {\n  cursor: default;\n}\n\nbutton::-moz-focus-inner,\ninput::-moz-focus-inner {\n  padding: 0;\n  border: 0;\n}\n\ninput[type=checkbox],\ninput[type=radio] {\n  padding: 0;\n  box-sizing: border-box;\n}\n\ninput[type=number]::-webkit-inner-spin-button,\ninput[type=number]::-webkit-outer-spin-button {\n  height: auto;\n}\n\ninput[type=search]::-webkit-search-cancel-button,\ninput[type=search]::-webkit-search-decoration {\n  -webkit-appearance: none;\n}\n\ntable {\n  border-collapse: collapse;\n  border-spacing: 0;\n}\n\ntd,\nth {\n  padding: 0;\n}\n\n* {\n  box-sizing: border-box;\n  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);\n  -webkit-tap-highlight-color: transparent;\n  -webkit-touch-callout: none;\n}\n\nhtml {\n  width: 100%;\n  height: 100%;\n  -webkit-text-size-adjust: 100%;\n      -ms-text-size-adjust: 100%;\n          text-size-adjust: 100%;\n}\n\nhtml:not(.hydrated) body {\n  display: none;\n}\n\nhtml.plt-pwa {\n  height: 100vh;\n}\n\nbody {\n  -moz-osx-font-smoothing: grayscale;\n  -webkit-font-smoothing: antialiased;\n  margin-left: 0;\n  margin-right: 0;\n  margin-top: 0;\n  margin-bottom: 0;\n  padding-left: 0;\n  padding-right: 0;\n  padding-top: 0;\n  padding-bottom: 0;\n  position: fixed;\n  width: 100%;\n  max-width: 100%;\n  height: 100%;\n  max-height: 100%;\n  text-rendering: optimizeLegibility;\n  overflow: hidden;\n  touch-action: manipulation;\n  -webkit-user-drag: none;\n  -ms-content-zooming: none;\n  word-wrap: break-word;\n  overscroll-behavior-y: none;\n  -webkit-text-size-adjust: none;\n      -ms-text-size-adjust: none;\n          text-size-adjust: none;\n}\n\nhtml {\n  font-family: var(--ion-font-family);\n}\n\na {\n  background-color: transparent;\n  color: var(--ion-color-primary, #3880ff);\n}\n\nh1,\nh2,\nh3,\nh4,\nh5,\nh6 {\n  margin-top: 16px;\n  margin-bottom: 10px;\n  font-weight: 500;\n  line-height: 1.2;\n}\n\nh1 {\n  margin-top: 20px;\n  font-size: 26px;\n}\n\nh2 {\n  margin-top: 18px;\n  font-size: 24px;\n}\n\nh3 {\n  font-size: 22px;\n}\n\nh4 {\n  font-size: 20px;\n}\n\nh5 {\n  font-size: 18px;\n}\n\nh6 {\n  font-size: 16px;\n}\n\nsmall {\n  font-size: 75%;\n}\n\nsub,\nsup {\n  position: relative;\n  font-size: 75%;\n  line-height: 0;\n  vertical-align: baseline;\n}\n\nsup {\n  top: -0.5em;\n}\n\nsub {\n  bottom: -0.25em;\n}\n\n.ion-no-padding,\n[no-padding] {\n  --padding-start: 0;\n  --padding-end: 0;\n  --padding-top: 0;\n  --padding-bottom: 0;\n  padding-left: 0;\n  padding-right: 0;\n  padding-top: 0;\n  padding-bottom: 0;\n}\n\n.ion-padding,\n[padding] {\n  --padding-start: var(--ion-padding, 16px);\n  --padding-end: var(--ion-padding, 16px);\n  --padding-top: var(--ion-padding, 16px);\n  --padding-bottom: var(--ion-padding, 16px);\n  padding-left: var(--ion-padding, 16px);\n  padding-right: var(--ion-padding, 16px);\n  padding-top: var(--ion-padding, 16px);\n  padding-bottom: var(--ion-padding, 16px);\n}\n\n@supports ((-webkit-margin-start: 0) or (margin-inline-start: 0)) or (-webkit-margin-start: 0) {\n  .ion-padding,\n[padding] {\n    padding-left: unset;\n    padding-right: unset;\n    -webkit-padding-start: var(--ion-padding, 16px);\n    padding-inline-start: var(--ion-padding, 16px);\n    -webkit-padding-end: var(--ion-padding, 16px);\n    padding-inline-end: var(--ion-padding, 16px);\n  }\n}\n\n.ion-padding-top,\n[padding-top] {\n  --padding-top: var(--ion-padding, 16px);\n  padding-top: var(--ion-padding, 16px);\n}\n\n.ion-padding-start,\n[padding-start] {\n  --padding-start: var(--ion-padding, 16px);\n  padding-left: var(--ion-padding, 16px);\n}\n\n@supports ((-webkit-margin-start: 0) or (margin-inline-start: 0)) or (-webkit-margin-start: 0) {\n  .ion-padding-start,\n[padding-start] {\n    padding-left: unset;\n    -webkit-padding-start: var(--ion-padding, 16px);\n    padding-inline-start: var(--ion-padding, 16px);\n  }\n}\n\n.ion-padding-end,\n[padding-end] {\n  --padding-end: var(--ion-padding, 16px);\n  padding-right: var(--ion-padding, 16px);\n}\n\n@supports ((-webkit-margin-start: 0) or (margin-inline-start: 0)) or (-webkit-margin-start: 0) {\n  .ion-padding-end,\n[padding-end] {\n    padding-right: unset;\n    -webkit-padding-end: var(--ion-padding, 16px);\n    padding-inline-end: var(--ion-padding, 16px);\n  }\n}\n\n.ion-padding-bottom,\n[padding-bottom] {\n  --padding-bottom: var(--ion-padding, 16px);\n  padding-bottom: var(--ion-padding, 16px);\n}\n\n.ion-padding-vertical,\n[padding-vertical] {\n  --padding-top: var(--ion-padding, 16px);\n  --padding-bottom: var(--ion-padding, 16px);\n  padding-top: var(--ion-padding, 16px);\n  padding-bottom: var(--ion-padding, 16px);\n}\n\n.ion-padding-horizontal,\n[padding-horizontal] {\n  --padding-start: var(--ion-padding, 16px);\n  --padding-end: var(--ion-padding, 16px);\n  padding-left: var(--ion-padding, 16px);\n  padding-right: var(--ion-padding, 16px);\n}\n\n@supports ((-webkit-margin-start: 0) or (margin-inline-start: 0)) or (-webkit-margin-start: 0) {\n  .ion-padding-horizontal,\n[padding-horizontal] {\n    padding-left: unset;\n    padding-right: unset;\n    -webkit-padding-start: var(--ion-padding, 16px);\n    padding-inline-start: var(--ion-padding, 16px);\n    -webkit-padding-end: var(--ion-padding, 16px);\n    padding-inline-end: var(--ion-padding, 16px);\n  }\n}\n\n.ion-no-margin,\n[no-margin] {\n  --margin-start: 0;\n  --margin-end: 0;\n  --margin-top: 0;\n  --margin-bottom: 0;\n  margin-left: 0;\n  margin-right: 0;\n  margin-top: 0;\n  margin-bottom: 0;\n}\n\n.ion-margin,\n[margin] {\n  --margin-start: var(--ion-margin, 16px);\n  --margin-end: var(--ion-margin, 16px);\n  --margin-top: var(--ion-margin, 16px);\n  --margin-bottom: var(--ion-margin, 16px);\n  margin-left: var(--ion-margin, 16px);\n  margin-right: var(--ion-margin, 16px);\n  margin-top: var(--ion-margin, 16px);\n  margin-bottom: var(--ion-margin, 16px);\n}\n\n@supports ((-webkit-margin-start: 0) or (margin-inline-start: 0)) or (-webkit-margin-start: 0) {\n  .ion-margin,\n[margin] {\n    margin-left: unset;\n    margin-right: unset;\n    -webkit-margin-start: var(--ion-margin, 16px);\n    margin-inline-start: var(--ion-margin, 16px);\n    -webkit-margin-end: var(--ion-margin, 16px);\n    margin-inline-end: var(--ion-margin, 16px);\n  }\n}\n\n.ion-margin-top,\n[margin-top] {\n  --margin-top: var(--ion-margin, 16px);\n  margin-top: var(--ion-margin, 16px);\n}\n\n.ion-margin-start,\n[margin-start] {\n  --margin-start: var(--ion-margin, 16px);\n  margin-left: var(--ion-margin, 16px);\n}\n\n@supports ((-webkit-margin-start: 0) or (margin-inline-start: 0)) or (-webkit-margin-start: 0) {\n  .ion-margin-start,\n[margin-start] {\n    margin-left: unset;\n    -webkit-margin-start: var(--ion-margin, 16px);\n    margin-inline-start: var(--ion-margin, 16px);\n  }\n}\n\n.ion-margin-end,\n[margin-end] {\n  --margin-end: var(--ion-margin, 16px);\n  margin-right: var(--ion-margin, 16px);\n}\n\n@supports ((-webkit-margin-start: 0) or (margin-inline-start: 0)) or (-webkit-margin-start: 0) {\n  .ion-margin-end,\n[margin-end] {\n    margin-right: unset;\n    -webkit-margin-end: var(--ion-margin, 16px);\n    margin-inline-end: var(--ion-margin, 16px);\n  }\n}\n\n.ion-margin-bottom,\n[margin-bottom] {\n  --margin-bottom: var(--ion-margin, 16px);\n  margin-bottom: var(--ion-margin, 16px);\n}\n\n.ion-margin-vertical,\n[margin-vertical] {\n  --margin-top: var(--ion-margin, 16px);\n  --margin-bottom: var(--ion-margin, 16px);\n  margin-top: var(--ion-margin, 16px);\n  margin-bottom: var(--ion-margin, 16px);\n}\n\n.ion-margin-horizontal,\n[margin-horizontal] {\n  --margin-start: var(--ion-margin, 16px);\n  --margin-end: var(--ion-margin, 16px);\n  margin-left: var(--ion-margin, 16px);\n  margin-right: var(--ion-margin, 16px);\n}\n\n@supports ((-webkit-margin-start: 0) or (margin-inline-start: 0)) or (-webkit-margin-start: 0) {\n  .ion-margin-horizontal,\n[margin-horizontal] {\n    margin-left: unset;\n    margin-right: unset;\n    -webkit-margin-start: var(--ion-margin, 16px);\n    margin-inline-start: var(--ion-margin, 16px);\n    -webkit-margin-end: var(--ion-margin, 16px);\n    margin-inline-end: var(--ion-margin, 16px);\n  }\n}\n\n.ion-float-left,\n[float-left] {\n  float: left !important;\n}\n\n.ion-float-right,\n[float-right] {\n  float: right !important;\n}\n\n.ion-float-start,\n[float-start] {\n  float: left !important;\n}\n\n[dir=rtl] .ion-float-start, :host-context([dir=rtl]) .ion-float-start, [dir=rtl] [float-start], :host-context([dir=rtl]) [float-start] {\n  float: right !important;\n}\n\n.ion-float-end,\n[float-end] {\n  float: right !important;\n}\n\n[dir=rtl] .ion-float-end, :host-context([dir=rtl]) .ion-float-end, [dir=rtl] [float-end], :host-context([dir=rtl]) [float-end] {\n  float: left !important;\n}\n\n@media (min-width: 576px) {\n  .ion-float-sm-left,\n[float-sm-left] {\n    float: left !important;\n  }\n\n  .ion-float-sm-right,\n[float-sm-right] {\n    float: right !important;\n  }\n\n  .ion-float-sm-start,\n[float-sm-start] {\n    float: left !important;\n  }\n  [dir=rtl] .ion-float-sm-start, :host-context([dir=rtl]) .ion-float-sm-start, [dir=rtl] [float-sm-start], :host-context([dir=rtl]) [float-sm-start] {\n    float: right !important;\n  }\n\n  .ion-float-sm-end,\n[float-sm-end] {\n    float: right !important;\n  }\n  [dir=rtl] .ion-float-sm-end, :host-context([dir=rtl]) .ion-float-sm-end, [dir=rtl] [float-sm-end], :host-context([dir=rtl]) [float-sm-end] {\n    float: left !important;\n  }\n}\n\n@media (min-width: 768px) {\n  .ion-float-md-left,\n[float-md-left] {\n    float: left !important;\n  }\n\n  .ion-float-md-right,\n[float-md-right] {\n    float: right !important;\n  }\n\n  .ion-float-md-start,\n[float-md-start] {\n    float: left !important;\n  }\n  [dir=rtl] .ion-float-md-start, :host-context([dir=rtl]) .ion-float-md-start, [dir=rtl] [float-md-start], :host-context([dir=rtl]) [float-md-start] {\n    float: right !important;\n  }\n\n  .ion-float-md-end,\n[float-md-end] {\n    float: right !important;\n  }\n  [dir=rtl] .ion-float-md-end, :host-context([dir=rtl]) .ion-float-md-end, [dir=rtl] [float-md-end], :host-context([dir=rtl]) [float-md-end] {\n    float: left !important;\n  }\n}\n\n@media (min-width: 992px) {\n  .ion-float-lg-left,\n[float-lg-left] {\n    float: left !important;\n  }\n\n  .ion-float-lg-right,\n[float-lg-right] {\n    float: right !important;\n  }\n\n  .ion-float-lg-start,\n[float-lg-start] {\n    float: left !important;\n  }\n  [dir=rtl] .ion-float-lg-start, :host-context([dir=rtl]) .ion-float-lg-start, [dir=rtl] [float-lg-start], :host-context([dir=rtl]) [float-lg-start] {\n    float: right !important;\n  }\n\n  .ion-float-lg-end,\n[float-lg-end] {\n    float: right !important;\n  }\n  [dir=rtl] .ion-float-lg-end, :host-context([dir=rtl]) .ion-float-lg-end, [dir=rtl] [float-lg-end], :host-context([dir=rtl]) [float-lg-end] {\n    float: left !important;\n  }\n}\n\n@media (min-width: 1200px) {\n  .ion-float-xl-left,\n[float-xl-left] {\n    float: left !important;\n  }\n\n  .ion-float-xl-right,\n[float-xl-right] {\n    float: right !important;\n  }\n\n  .ion-float-xl-start,\n[float-xl-start] {\n    float: left !important;\n  }\n  [dir=rtl] .ion-float-xl-start, :host-context([dir=rtl]) .ion-float-xl-start, [dir=rtl] [float-xl-start], :host-context([dir=rtl]) [float-xl-start] {\n    float: right !important;\n  }\n\n  .ion-float-xl-end,\n[float-xl-end] {\n    float: right !important;\n  }\n  [dir=rtl] .ion-float-xl-end, :host-context([dir=rtl]) .ion-float-xl-end, [dir=rtl] [float-xl-end], :host-context([dir=rtl]) [float-xl-end] {\n    float: left !important;\n  }\n}\n\n.ion-text-center,\n[text-center] {\n  text-align: center !important;\n}\n\n.ion-text-justify,\n[text-justify] {\n  text-align: justify !important;\n}\n\n.ion-text-start,\n[text-start] {\n  text-align: start !important;\n}\n\n.ion-text-end,\n[text-end] {\n  text-align: end !important;\n}\n\n.ion-text-left,\n[text-left] {\n  text-align: left !important;\n}\n\n.ion-text-right,\n[text-right] {\n  text-align: right !important;\n}\n\n.ion-text-nowrap,\n[text-nowrap] {\n  white-space: nowrap !important;\n}\n\n.ion-text-wrap,\n[text-wrap] {\n  white-space: normal !important;\n}\n\n@media (min-width: 576px) {\n  .ion-text-sm-center,\n[text-sm-center] {\n    text-align: center !important;\n  }\n\n  .ion-text-sm-justify,\n[text-sm-justify] {\n    text-align: justify !important;\n  }\n\n  .ion-text-sm-start,\n[text-sm-start] {\n    text-align: start !important;\n  }\n\n  .ion-text-sm-end,\n[text-sm-end] {\n    text-align: end !important;\n  }\n\n  .ion-text-sm-left,\n[text-sm-left] {\n    text-align: left !important;\n  }\n\n  .ion-text-sm-right,\n[text-sm-right] {\n    text-align: right !important;\n  }\n\n  .ion-text-sm-nowrap,\n[text-sm-nowrap] {\n    white-space: nowrap !important;\n  }\n\n  .ion-text-sm-wrap,\n[text-sm-wrap] {\n    white-space: normal !important;\n  }\n}\n\n@media (min-width: 768px) {\n  .ion-text-md-center,\n[text-md-center] {\n    text-align: center !important;\n  }\n\n  .ion-text-md-justify,\n[text-md-justify] {\n    text-align: justify !important;\n  }\n\n  .ion-text-md-start,\n[text-md-start] {\n    text-align: start !important;\n  }\n\n  .ion-text-md-end,\n[text-md-end] {\n    text-align: end !important;\n  }\n\n  .ion-text-md-left,\n[text-md-left] {\n    text-align: left !important;\n  }\n\n  .ion-text-md-right,\n[text-md-right] {\n    text-align: right !important;\n  }\n\n  .ion-text-md-nowrap,\n[text-md-nowrap] {\n    white-space: nowrap !important;\n  }\n\n  .ion-text-md-wrap,\n[text-md-wrap] {\n    white-space: normal !important;\n  }\n}\n\n@media (min-width: 992px) {\n  .ion-text-lg-center,\n[text-lg-center] {\n    text-align: center !important;\n  }\n\n  .ion-text-lg-justify,\n[text-lg-justify] {\n    text-align: justify !important;\n  }\n\n  .ion-text-lg-start,\n[text-lg-start] {\n    text-align: start !important;\n  }\n\n  .ion-text-lg-end,\n[text-lg-end] {\n    text-align: end !important;\n  }\n\n  .ion-text-lg-left,\n[text-lg-left] {\n    text-align: left !important;\n  }\n\n  .ion-text-lg-right,\n[text-lg-right] {\n    text-align: right !important;\n  }\n\n  .ion-text-lg-nowrap,\n[text-lg-nowrap] {\n    white-space: nowrap !important;\n  }\n\n  .ion-text-lg-wrap,\n[text-lg-wrap] {\n    white-space: normal !important;\n  }\n}\n\n@media (min-width: 1200px) {\n  .ion-text-xl-center,\n[text-xl-center] {\n    text-align: center !important;\n  }\n\n  .ion-text-xl-justify,\n[text-xl-justify] {\n    text-align: justify !important;\n  }\n\n  .ion-text-xl-start,\n[text-xl-start] {\n    text-align: start !important;\n  }\n\n  .ion-text-xl-end,\n[text-xl-end] {\n    text-align: end !important;\n  }\n\n  .ion-text-xl-left,\n[text-xl-left] {\n    text-align: left !important;\n  }\n\n  .ion-text-xl-right,\n[text-xl-right] {\n    text-align: right !important;\n  }\n\n  .ion-text-xl-nowrap,\n[text-xl-nowrap] {\n    white-space: nowrap !important;\n  }\n\n  .ion-text-xl-wrap,\n[text-xl-wrap] {\n    white-space: normal !important;\n  }\n}\n\n.ion-text-uppercase,\n[text-uppercase] {\n  /* stylelint-disable-next-line declaration-no-important */\n  text-transform: uppercase !important;\n}\n\n.ion-text-lowercase,\n[text-lowercase] {\n  /* stylelint-disable-next-line declaration-no-important */\n  text-transform: lowercase !important;\n}\n\n.ion-text-capitalize,\n[text-capitalize] {\n  /* stylelint-disable-next-line declaration-no-important */\n  text-transform: capitalize !important;\n}\n\n@media (min-width: 576px) {\n  .ion-text-sm-uppercase,\n[text-sm-uppercase] {\n    /* stylelint-disable-next-line declaration-no-important */\n    text-transform: uppercase !important;\n  }\n\n  .ion-text-sm-lowercase,\n[text-sm-lowercase] {\n    /* stylelint-disable-next-line declaration-no-important */\n    text-transform: lowercase !important;\n  }\n\n  .ion-text-sm-capitalize,\n[text-sm-capitalize] {\n    /* stylelint-disable-next-line declaration-no-important */\n    text-transform: capitalize !important;\n  }\n}\n\n@media (min-width: 768px) {\n  .ion-text-md-uppercase,\n[text-md-uppercase] {\n    /* stylelint-disable-next-line declaration-no-important */\n    text-transform: uppercase !important;\n  }\n\n  .ion-text-md-lowercase,\n[text-md-lowercase] {\n    /* stylelint-disable-next-line declaration-no-important */\n    text-transform: lowercase !important;\n  }\n\n  .ion-text-md-capitalize,\n[text-md-capitalize] {\n    /* stylelint-disable-next-line declaration-no-important */\n    text-transform: capitalize !important;\n  }\n}\n\n@media (min-width: 992px) {\n  .ion-text-lg-uppercase,\n[text-lg-uppercase] {\n    /* stylelint-disable-next-line declaration-no-important */\n    text-transform: uppercase !important;\n  }\n\n  .ion-text-lg-lowercase,\n[text-lg-lowercase] {\n    /* stylelint-disable-next-line declaration-no-important */\n    text-transform: lowercase !important;\n  }\n\n  .ion-text-lg-capitalize,\n[text-lg-capitalize] {\n    /* stylelint-disable-next-line declaration-no-important */\n    text-transform: capitalize !important;\n  }\n}\n\n@media (min-width: 1200px) {\n  .ion-text-xl-uppercase,\n[text-xl-uppercase] {\n    /* stylelint-disable-next-line declaration-no-important */\n    text-transform: uppercase !important;\n  }\n\n  .ion-text-xl-lowercase,\n[text-xl-lowercase] {\n    /* stylelint-disable-next-line declaration-no-important */\n    text-transform: lowercase !important;\n  }\n\n  .ion-text-xl-capitalize,\n[text-xl-capitalize] {\n    /* stylelint-disable-next-line declaration-no-important */\n    text-transform: capitalize !important;\n  }\n}\n\n.ion-align-self-start,\n[align-self-start] {\n  align-self: flex-start !important;\n}\n\n.ion-align-self-end,\n[align-self-end] {\n  align-self: flex-end !important;\n}\n\n.ion-align-self-center,\n[align-self-center] {\n  align-self: center !important;\n}\n\n.ion-align-self-stretch,\n[align-self-stretch] {\n  align-self: stretch !important;\n}\n\n.ion-align-self-baseline,\n[align-self-baseline] {\n  align-self: baseline !important;\n}\n\n.ion-align-self-auto,\n[align-self-auto] {\n  align-self: auto !important;\n}\n\n.ion-wrap,\n[wrap] {\n  flex-wrap: wrap !important;\n}\n\n.ion-nowrap,\n[nowrap] {\n  flex-wrap: nowrap !important;\n}\n\n.ion-wrap-reverse,\n[wrap-reverse] {\n  flex-wrap: wrap-reverse !important;\n}\n\n.ion-justify-content-start,\n[justify-content-start] {\n  justify-content: flex-start !important;\n}\n\n.ion-justify-content-center,\n[justify-content-center] {\n  justify-content: center !important;\n}\n\n.ion-justify-content-end,\n[justify-content-end] {\n  justify-content: flex-end !important;\n}\n\n.ion-justify-content-around,\n[justify-content-around] {\n  justify-content: space-around !important;\n}\n\n.ion-justify-content-between,\n[justify-content-between] {\n  justify-content: space-between !important;\n}\n\n.ion-justify-content-evenly,\n[justify-content-evenly] {\n  justify-content: space-evenly !important;\n}\n\n.ion-align-items-start,\n[align-items-start] {\n  align-items: flex-start !important;\n}\n\n.ion-align-items-center,\n[align-items-center] {\n  align-items: center !important;\n}\n\n.ion-align-items-end,\n[align-items-end] {\n  align-items: flex-end !important;\n}\n\n.ion-align-items-stretch,\n[align-items-stretch] {\n  align-items: stretch !important;\n}\n\n.ion-align-items-baseline,\n[align-items-baseline] {\n  align-items: baseline !important;\n}\n\nhtml {\n  font-family: 'Titillium Web', sans-serif !important; }\n\n.fixed {\n  position: fixed !important; }\n\n.spacing {\n  height: 50px !important; }\n\n.category {\n  width: 100%;\n  text-align: center;\n  color: black;\n  font-size: 24px;\n  margin-bottom: 1%;\n  border-bottom: 1px solid black; }\n\n.searchbar-input {\n  background: white !important; }\n\n.bg {\n  background: lightgrey; }\n\n/* in-flight clone */\n\n.gu-mirror {\n  position: fixed !important;\n  margin: 0 !important;\n  z-index: 9999 !important;\n  opacity: 0.8;\n  -ms-filter: \"progid:DXImageTransform.Microsoft.Alpha(Opacity=80)\";\n  filter: alpha(opacity=80);\n  pointer-events: none; }\n\n/* high-performance display:none; helper */\n\n.gu-hide {\n  left: -9999px !important; }\n\n/* added to mirrorContainer (default = body) while dragging */\n\n.gu-unselectable {\n  -webkit-user-select: none !important;\n  -moz-user-select: none !important;\n  -ms-user-select: none !important;\n  user-select: none !important; }\n\n/* added to the source element while its mirror is dragged */\n\n.gu-transit {\n  opacity: 0.2;\n  -ms-filter: \"progid:DXImageTransform.Microsoft.Alpha(Opacity=20)\";\n  filter: alpha(opacity=20); }\n\n.title {\n  background-color: rgba(255, 255, 255, 0.5);\n  color: #11B3EF;\n  text-align: center;\n  font-weight: bold;\n  font-size: 24px;\n  margin: 8px 0px; }\n\n.scrolling-wrapper-flexbox {\n  background-color: rgba(255, 255, 255, 0.5);\n  left: 0px;\n  position: fixed;\n  bottom: 50px;\n  width: 100vw;\n  height: 100px;\n  display: flex;\n  overflow-x: auto;\n  z-index: 999; }\n\n.scrolling-wrapper-flexbox .card {\n    flex: 0 0 auto;\n    color: black;\n    border: 2px solid black;\n    background: white;\n    padding: 8px;\n    margin: 4px; }\n\n#category-buttons {\n  height: calc(100% - 187px);\n  border: 3px solid #11B3EF;\n  position: relative; }\n\n#category-buttons .drag-label {\n    position: absolute;\n    bottom: 0px;\n    text-align: center;\n    width: 100%;\n    opacity: 0.5; }\n\n#category-buttons .home-button {\n    color: black;\n    border-radius: 4px;\n    width: 100%;\n    height: 100%;\n    margin-bottom: 5%;\n    background: white;\n    color: #11B3EF;\n    text-align: center;\n    padding: 2%; }\n\n#category-buttons .home-button .label-button {\n      padding: 8px 0px;\n      font-size: 16px;\n      font-weight: bold; }\n\n.close {\n  font-size: 12px; }\n\n.horizzontal-arrow {\n  position: fixed;\n  bottom: 0px;\n  height: 50px;\n  width: 100%; }\n\n.icon {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n  width: 55%;\n  height: 60px;\n  cursor: pointer; }\n\n.arrow-right {\n  position: absolute;\n  top: 25px;\n  width: 90%;\n  height: 2px;\n  background-color: #000000;\n  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);\n  -webkit-animation: arrow 700ms linear infinite;\n          animation: arrow 700ms linear infinite; }\n\n.arrow-right::after {\n  content: '';\n  position: absolute;\n  width: 10px;\n  height: 2px;\n  top: -3px;\n  right: -2px;\n  background-color: #000000;\n  transform: rotate(45deg); }\n\n.arrow-right::before {\n  content: '';\n  position: absolute;\n  width: 10px;\n  height: 2px;\n  top: 3px;\n  right: -2px;\n  background-color: #000000;\n  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);\n  transform: rotate(-45deg); }\n\n.arrow-left {\n  position: absolute;\n  top: 25px;\n  width: 90%;\n  height: 2px;\n  background-color: #000000;\n  -webkit-animation: arrow 700ms linear infinite;\n          animation: arrow 700ms linear infinite; }\n\n.arrow-left::after {\n  content: '';\n  position: absolute;\n  width: 10px;\n  height: 2px;\n  top: -3px;\n  left: -2px;\n  background-color: #000000;\n  transform: rotate(-45deg); }\n\n.arrow-left::before {\n  content: '';\n  position: absolute;\n  width: 10px;\n  height: 2px;\n  top: 3px;\n  left: -2px;\n  background-color: #000000;\n  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);\n  transform: rotate(45deg); }\n\n.gu-mirror {\n  flex: 0 0 auto;\n  border: 2px solid #11B3EF;\n  background: white;\n  margin: 4px;\n  padding: 8px;\n  transform-origin: 20% 40%; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIm5vZGVfbW9kdWxlcy9AaW9uaWMvYW5ndWxhci9zcmMvY3NzL2NvcmUuc2NzcyIsIm5vZGVfbW9kdWxlcy9AaW9uaWMvYW5ndWxhci9jc3MvY29yZS5jc3MiLCJub2RlX21vZHVsZXMvQGlvbmljL2FuZ3VsYXIvc3JjL3RoZW1lcy9pb25pYy5taXhpbnMuc2NzcyIsIm5vZGVfbW9kdWxlcy9AaW9uaWMvYW5ndWxhci9zcmMvdGhlbWVzL2lvbmljLmdsb2JhbHMuc2NzcyIsIm5vZGVfbW9kdWxlcy9AaW9uaWMvYW5ndWxhci9zcmMvY3NzL25vcm1hbGl6ZS5zY3NzIiwibm9kZV9tb2R1bGVzL0Bpb25pYy9hbmd1bGFyL2Nzcy9ub3JtYWxpemUuY3NzIiwibm9kZV9tb2R1bGVzL0Bpb25pYy9hbmd1bGFyL3NyYy9jc3Mvc3RydWN0dXJlLnNjc3MiLCJub2RlX21vZHVsZXMvQGlvbmljL2FuZ3VsYXIvY3NzL3N0cnVjdHVyZS5jc3MiLCJub2RlX21vZHVsZXMvQGlvbmljL2FuZ3VsYXIvc3JjL2Nzcy90eXBvZ3JhcGh5LnNjc3MiLCJub2RlX21vZHVsZXMvQGlvbmljL2FuZ3VsYXIvY3NzL3R5cG9ncmFwaHkuY3NzIiwibm9kZV9tb2R1bGVzL0Bpb25pYy9hbmd1bGFyL3NyYy9jc3MvcGFkZGluZy5zY3NzIiwibm9kZV9tb2R1bGVzL0Bpb25pYy9hbmd1bGFyL2Nzcy9wYWRkaW5nLmNzcyIsIm5vZGVfbW9kdWxlcy9AaW9uaWMvYW5ndWxhci9zcmMvY3NzL2Zsb2F0LWVsZW1lbnRzLnNjc3MiLCJub2RlX21vZHVsZXMvQGlvbmljL2FuZ3VsYXIvY3NzL2Zsb2F0LWVsZW1lbnRzLmNzcyIsIm5vZGVfbW9kdWxlcy9AaW9uaWMvYW5ndWxhci9zcmMvY3NzL3RleHQtYWxpZ25tZW50LnNjc3MiLCJub2RlX21vZHVsZXMvQGlvbmljL2FuZ3VsYXIvY3NzL3RleHQtYWxpZ25tZW50LmNzcyIsIm5vZGVfbW9kdWxlcy9AaW9uaWMvYW5ndWxhci9zcmMvY3NzL3RleHQtdHJhbnNmb3JtYXRpb24uc2NzcyIsIm5vZGVfbW9kdWxlcy9AaW9uaWMvYW5ndWxhci9jc3MvdGV4dC10cmFuc2Zvcm1hdGlvbi5jc3MiLCJub2RlX21vZHVsZXMvQGlvbmljL2FuZ3VsYXIvc3JjL2Nzcy9mbGV4LXV0aWxzLnNjc3MiLCJub2RlX21vZHVsZXMvQGlvbmljL2FuZ3VsYXIvY3NzL2ZsZXgtdXRpbHMuY3NzIiwiL2hvbWUvY2hpbjgvRG9jdW1lbnRzL3dvcmsvbW9kdWxhckFwcC9tb2R1bGFyLWFwcC9zcmMvZ2xvYmFsLnNjc3MiLCIvaG9tZS9jaGluOC9Eb2N1bWVudHMvd29yay9tb2R1bGFyQXBwL21vZHVsYXItYXBwL3NyYy9hcHAvcGFnZXMvaG9tZS1zZXR0aW5ncy9ob21lLXNldHRpbmdzLnBhZ2Uuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFLQTtFQUNFLDhGQUFBO0NDSkQ7O0FETUQ7RUFDRSwyREFBQTtDQ0hEOztBRE1EO0VBQ0UsMkNBQUE7Q0NIRDs7QURNRDtFQUNFLHdDQUFBO0NDSEQ7O0FETUQ7RUFDRSxpQkFBQTtDQ0hEOztBRGtDQztFQVRBLCtEQUFBO0VBQ0EsNEVBQUE7RUFDQSx5RUFBQTtFQUNBLDBGQUFBO0VBQ0Esc0VBQUE7RUFDQSxvRUFBQTtDQ3JCRDs7QUR5QkM7RUFUQSxpRUFBQTtFQUNBLDhFQUFBO0VBQ0EsMkVBQUE7RUFDQSw0RkFBQTtFQUNBLHdFQUFBO0VBQ0Esc0VBQUE7Q0NaRDs7QURnQkM7RUFUQSxnRUFBQTtFQUNBLDZFQUFBO0VBQ0EsMEVBQUE7RUFDQSwyRkFBQTtFQUNBLHVFQUFBO0VBQ0EscUVBQUE7Q0NIRDs7QURPQztFQVRBLCtEQUFBO0VBQ0EsMkVBQUE7RUFDQSx5RUFBQTtFQUNBLDBGQUFBO0VBQ0Esc0VBQUE7RUFDQSxvRUFBQTtDQ01EOztBREZDO0VBVEEsK0RBQUE7RUFDQSwyRUFBQTtFQUNBLHlFQUFBO0VBQ0EsMEZBQUE7RUFDQSxzRUFBQTtFQUNBLG9FQUFBO0NDZUQ7O0FEWEM7RUFUQSw4REFBQTtFQUNBLDBFQUFBO0VBQ0Esd0VBQUE7RUFDQSx5RkFBQTtFQUNBLHFFQUFBO0VBQ0EsbUVBQUE7Q0N3QkQ7O0FEcEJDO0VBVEEsNkRBQUE7RUFDQSwyRUFBQTtFQUNBLHVFQUFBO0VBQ0Esa0ZBQUE7RUFDQSxvRUFBQTtFQUNBLGtFQUFBO0NDaUNEOztBRDdCQztFQVRBLDhEQUFBO0VBQ0EsNEVBQUE7RUFDQSx3RUFBQTtFQUNBLHlGQUFBO0VBQ0EscUVBQUE7RUFDQSxtRUFBQTtDQzBDRDs7QUR0Q0M7RUFUQSw0REFBQTtFQUNBLHVFQUFBO0VBQ0Esc0VBQUE7RUFDQSx1RkFBQTtFQUNBLG1FQUFBO0VBQ0EsaUVBQUE7Q0NtREQ7O0FEdENEO0VFK05NLFFGOU51QjtFRStOdkIsU0YvTmlCO0VFd1ByQixPRnhQa0I7RUV5UGxCLFVGelB3QjtFQUV4QixjQUFBO0VBQ0EsbUJBQUE7RUFFQSx1QkFBQTtFQUNBLCtCQUFBO0VBRUEsMkJBQUE7RUFDQSxpQkFBQTtFQUNBLFdHdEIrQjtDRitEaEM7O0FEdENEOzs7Ozs7Ozs7Ozs7Ozs7RUFlRSwwREFBQTtFQUNBLHlCQUFBO0NDeUNEOztBRHRDRDtFQUNFLFdBQUE7Q0N5Q0Q7O0FEbkNEO0VBQ0UsOEJBQUE7Q0NzQ0Q7O0FEbkNEO0VBQ0U7SUFDRSxrREFBQTtHQ3NDRDtDQUNGOztBRGxDRDtFQUNFO0lBQ0UsbURBQUE7SUFDQSx5REFBQTtJQUNBLHFEQUFBO0lBQ0EsdURBQUE7R0NvQ0Q7Q0FDRjs7QURqQ0Q7RUFDRTtJQUNFLDhDQUFBO0lBQ0Esb0RBQUE7SUFDQSxnREFBQTtJQUNBLGtEQUFBO0dDbUNEO0NBQ0Y7O0FHM0pEOzs7O0VBSUUseUJBQUE7Q0NORDs7QURXRDtFQUNFLGNBQUE7RUFFQSxVQUFBO0NDVEQ7O0FEaUJEOztFQUVFLGtCQUFBO0NDZEQ7O0FEc0JEO0VBQ0UsZ0JBQUE7RUFFQSxVQUFBO0NDcEJEOztBRHdCRDtFQUNFLGlCQUFBO0NDckJEOztBRDZCRDtFQUNFLGlCQUFBO0NDMUJEOztBRDZCRDtFQUNFLFlBQUE7RUFFQSxnQkFBQTtFQUVBLHdCQUFBO0NDNUJEOztBRGdDRDtFQUNFLGVBQUE7Q0M3QkQ7O0FEaUNEOzs7O0VBSUUsa0NBQUE7RUFDQSxlQUFBO0NDOUJEOztBRDhDRDs7OztFQUlFLHFCQUFBO0VBQ0Esb0JBQUE7Q0MzQ0Q7O0FEOENEO0VBQ0UsZUFBQTtFQUVBLGFBQUE7RUFFQSxjQUFBO0VBQ0EsZUFBQTtDQzdDRDs7QURnREQ7RUFDRSxrQkFBQTtDQzdDRDs7QUQ0Q0Q7RUFDRSxrQkFBQTtDQzdDRDs7QUQ0Q0Q7RUFDRSxrQkFBQTtDQzdDRDs7QUQ0Q0Q7RUFDRSxrQkFBQTtDQzdDRDs7QUQ0Q0Q7RUFDRSxrQkFBQTtDQzdDRDs7QURnREQ7Ozs7RUFJRSxVQUFBO0VBRUEsY0FBQTtFQUNBLGVBQUE7Q0M5Q0Q7O0FEc0REOzs7RUFHRSxnQkFBQTtFQUVBLDJCQUFBO0NDcEREOztBRHdERDs7Ozs7Ozs7Ozs7Ozs7Ozs7O0VBa0JFLDJCQUFBO0NDckREOztBRHdERDs7RUFFRSxxQkFBQTtDQ3JERDs7QUR3REQ7RUFDRSxVQUFBO0VBQ0EsaUJBQUE7RUFDQSxxQkFBQTtFQUNBLG9CQUFBO0VBQ0Esc0JBQUE7RUFDQSxlQUFBO0VBQ0EscUJBQUE7RUFDQSxnQkFBQTtFQUVBLDJCQUFBO0NDdEREOztBRHlERDtFQUNFLGdCQUFBO0NDdEREOztBRDBERDs7O0VBR0UsZ0JBQUE7Q0N2REQ7O0FEMkREOztFQUVFLFdBQUE7RUFFQSxVQUFBO0NDekREOztBRCtERDs7RUFFRSxXQUFBO0VBRUEsdUJBQUE7Q0M3REQ7O0FEbUVEOztFQUVFLGFBQUE7Q0NoRUQ7O0FEc0VEOztFQUVFLHlCQUFBO0NDbkVEOztBRDJFRDtFQUNFLDBCQUFBO0VBQ0Esa0JBQUE7Q0N4RUQ7O0FEMkVEOztFQUVFLFdBQUE7Q0N4RUQ7O0FDekpEO0VBQ0UsdUJBQUE7RUFFQSw4Q0FBQTtFQUNBLHlDQUFBO0VBQ0EsNEJBQUE7Q0NSRDs7QURXRDtFQUNFLFlBQUE7RUFDQSxhQUFBO0VBRUEsK0JBQUE7TUFBQSwyQkFBQTtVQUFBLHVCQUFBO0NDVEQ7O0FEWUQ7RUFDRSxjQUFBO0NDVEQ7O0FEWUQ7RUFDRSxjQUFBO0NDVEQ7O0FEWUQ7RUpTRSxtQ0FBQTtFQUNBLG9DQUFBO0VBK0pFLGVJdktjO0VKd0tkLGdCSXhLYztFSjRNaEIsY0k1TWdCO0VKNk1oQixpQkk3TWdCO0VKdUtkLGdCSXRLZTtFSnVLZixpQkl2S2U7RUoyTWpCLGVJM01pQjtFSjRNakIsa0JJNU1pQjtFQUVqQixnQkFBQTtFQUVBLFlBQUE7RUFDQSxnQkFBQTtFQUNBLGFBQUE7RUFDQSxpQkFBQTtFQUVBLG1DQUFBO0VBRUEsaUJBQUE7RUFFQSwyQkFBQTtFQUVBLHdCQUFBO0VBRUEsMEJBQUE7RUFFQSxzQkFBQTtFQUVBLDRCQUFBO0VBRUEsK0JBQUE7TUFBQSwyQkFBQTtVQUFBLHVCQUFBO0NDWkQ7O0FDZkQ7RUFDRSxvQ0FBQTtDQzdCRDs7QURnQ0Q7RUFDRSw4QkFBQTtFQUNBLHlDQUFBO0NDN0JEOztBRGdDRDs7Ozs7O0VOc01FLGlCTWhNZ0I7RU5pTWhCLG9CTWpNNEI7RUFFNUIsaUJBeEM2QjtFQTBDN0IsaUJBdkM2QjtDQ1M5Qjs7QURpQ0Q7RU55TEUsaUJNeExnQjtFQUVoQixnQkExQzZCO0NDVTlCOztBRG1DRDtFTm1MRSxpQk1sTGdCO0VBRWhCLGdCQTdDNkI7Q0NXOUI7O0FEcUNEO0VBQ0UsZ0JBOUM2QjtDQ1c5Qjs7QURzQ0Q7RUFDRSxnQkEvQzZCO0NDWTlCOztBRHNDRDtFQUNFLGdCQWhENkI7Q0NhOUI7O0FEc0NEO0VBQ0UsZ0JBakQ2QjtDQ2M5Qjs7QURzQ0Q7RUFDRSxlQUFBO0NDbkNEOztBRHNDRDs7RUFFRSxtQkFBQTtFQUVBLGVBQUE7RUFFQSxlQUFBO0VBRUEseUJBQUE7Q0N0Q0Q7O0FEeUNEO0VBQ0UsWUFBQTtDQ3RDRDs7QUR5Q0Q7RUFDRSxnQkFBQTtDQ3RDRDs7QUMvQ0Q7O0VBRUUsbUJBQUE7RUFDQSxpQkFBQTtFQUNBLGlCQUFBO0VBQ0Esb0JBQUE7RVJvTEUsZ0JRbExlO0VSbUxmLGlCUW5MZTtFUnVOakIsZVF2TmlCO0VSd05qQixrQlF4TmlCO0NDWmxCOztBRGVEOztFQUVFLDBDQUFBO0VBQ0Esd0NBQUE7RUFDQSx3Q0FBQTtFQUNBLDJDQUFBO0VSOEtFLHVDUW5NTTtFUm9NTix3Q1FwTU07RVJvT1Isc0NRcE9RO0VScU9SLHlDUXJPUTtDQ2FUOztBVDBMSztFQUNFOztJQUVJLG9CQUFBO0lBR0EscUJBQUE7SUFHRixnRFFoTkE7SVJpTkEsK0NRak5BO0lSa05BLDhDUWxOQTtJUm1OQSw2Q1FuTkE7R0N1QlA7Q0FDRjs7QURFRDs7RUFFRSx3Q0FBQTtFUndNQSxzQ1FwT1E7Q0M4QlQ7O0FER0Q7O0VBRUUsMENBQUE7RVJnS0UsdUNRbk1NO0NDbUNUOztBVG9LSztFQUNFOztJQUVJLG9CQUFBO0lBTUYsZ0RRaE5BO0lSaU5BLCtDUWpOQTtHQzBDUDtDQUNGOztBREhEOztFQUVFLHdDQUFBO0VSMEpFLHdDUXBNTTtDQ2lEVDs7QVRzSks7RUFDRTs7SUFLSSxxQkFBQTtJQUtGLDhDUWxOQTtJUm1OQSw2Q1FuTkE7R0N3RFA7Q0FDRjs7QURWRDs7RUFFRSwyQ0FBQTtFUm9MQSx5Q1FyT1E7Q0MrRFQ7O0FEVEQ7O0VBRUUsd0NBQUE7RUFDQSwyQ0FBQTtFUjJLQSxzQ1FwT1E7RVJxT1IseUNRck9RO0NDc0VUOztBRFJEOztFQUVFLDBDQUFBO0VBQ0Esd0NBQUE7RVJrSUUsdUNRbk1NO0VSb01OLHdDUXBNTTtDQzZFVDs7QVQwSEs7RUFDRTs7SUFFSSxvQkFBQTtJQUdBLHFCQUFBO0lBR0YsZ0RRaE5BO0lSaU5BLCtDUWpOQTtJUmtOQSw4Q1FsTkE7SVJtTkEsNkNRbk5BO0dDdUZQO0NBQ0Y7O0FEZEQ7O0VBRUUsa0JBQUE7RUFDQSxnQkFBQTtFQUNBLGdCQUFBO0VBQ0EsbUJBQUE7RVJnSEUsZVE5R2M7RVIrR2QsZ0JRL0djO0VSbUpoQixjUW5KZ0I7RVJvSmhCLGlCUXBKZ0I7Q0NtQmpCOztBRGhCRDs7RUFFRSx3Q0FBQTtFQUNBLHNDQUFBO0VBQ0Esc0NBQUE7RUFDQSx5Q0FBQTtFUjBHRSxxQ1FsTUs7RVJtTUwsc0NRbk1LO0VSbU9QLG9DUW5PTztFUm9PUCx1Q1FwT087Q0MrR1I7O0FUdUZLO0VBQ0U7O0lBRUksbUJBQUE7SUFHQSxvQkFBQTtJQUdGLDhDUS9NRDtJUmdOQyw2Q1FoTkQ7SVJpTkMsNENRak5EO0lSa05DLDJDUWxORDtHQ3lITjtDQUNGOztBRDdCRDs7RUFFRSxzQ0FBQTtFUm9JQSxvQ1FuT087Q0NnSVI7O0FENUJEOztFQUVFLHdDQUFBO0VSNEZFLHFDUWxNSztDQ3FJUjs7QVRpRUs7RUFDRTs7SUFFSSxtQkFBQTtJQU1GLDhDUS9NRDtJUmdOQyw2Q1FoTkQ7R0M0SU47Q0FDRjs7QURsQ0Q7O0VBRUUsc0NBQUE7RVJzRkUsc0NRbk1LO0NDbUpSOztBVG1ESztFQUNFOztJQUtJLG9CQUFBO0lBS0YsNENRak5EO0lSa05DLDJDUWxORDtHQzBKTjtDQUNGOztBRHpDRDs7RUFFRSx5Q0FBQTtFUmdIQSx1Q1FwT087Q0NpS1I7O0FEeENEOztFQUVFLHNDQUFBO0VBQ0EseUNBQUE7RVJ1R0Esb0NRbk9PO0VSb09QLHVDUXBPTztDQ3dLUjs7QUR2Q0Q7O0VBRUUsd0NBQUE7RUFDQSxzQ0FBQTtFUjhERSxxQ1FsTUs7RVJtTUwsc0NRbk1LO0NDK0tSOztBVHVCSztFQUNFOztJQUVJLG1CQUFBO0lBR0Esb0JBQUE7SUFHRiw4Q1EvTUQ7SVJnTkMsNkNRaE5EO0lSaU5DLDRDUWpORDtJUmtOQywyQ1FsTkQ7R0N5TE47Q0FDRjs7QUN2TEc7O0VWZ1hFLHVCQUFBO0NXMVhMOztBRGVHOztFVjJXRSx3QkFBQTtDV3JYTDs7QURlRzs7RVZ3VkUsdUJBQUE7Q1dsV0w7O0FYK0lVO0VBc05MLHdCQUFBO0NXbFdMOztBRFlHOztFVjBWRSx3QkFBQTtDV2pXTDs7QVh1SVU7RUE2TkwsdUJBQUE7Q1dqV0w7O0FYbUVHO0VVOUVBOztJVmdYRSx1QkFBQTtHVy9WSDs7RURaQzs7SVYyV0Usd0JBQUE7R1cxVkg7O0VEWkM7O0lWd1ZFLHVCQUFBO0dXdlVIO0VYb0hRO0lBc05MLHdCQUFBO0dXdlVIOztFRGZDOztJVjBWRSx3QkFBQTtHV3RVSDtFWDRHUTtJQTZOTCx1QkFBQTtHV3RVSDtDQUNGOztBWHVDRztFVTlFQTs7SVZnWEUsdUJBQUE7R1dwVUg7O0VEdkNDOztJVjJXRSx3QkFBQTtHVy9USDs7RUR2Q0M7O0lWd1ZFLHVCQUFBO0dXNVNIO0VYeUZRO0lBc05MLHdCQUFBO0dXNVNIOztFRDFDQzs7SVYwVkUsd0JBQUE7R1czU0g7RVhpRlE7SUE2TkwsdUJBQUE7R1czU0g7Q0FDRjs7QVhZRztFVTlFQTs7SVZnWEUsdUJBQUE7R1d6U0g7O0VEbEVDOztJVjJXRSx3QkFBQTtHV3BTSDs7RURsRUM7O0lWd1ZFLHVCQUFBO0dXalJIO0VYOERRO0lBc05MLHdCQUFBO0dXalJIOztFRHJFQzs7SVYwVkUsd0JBQUE7R1doUkg7RVhzRFE7SUE2TkwsdUJBQUE7R1doUkg7Q0FDRjs7QVhmRztFVTlFQTs7SVZnWEUsdUJBQUE7R1c5UUg7O0VEN0ZDOztJVjJXRSx3QkFBQTtHV3pRSDs7RUQ3RkM7O0lWd1ZFLHVCQUFBO0dXdFBIO0VYbUNRO0lBc05MLHdCQUFBO0dXdFBIOztFRGhHQzs7SVYwVkUsd0JBQUE7R1dyUEg7RVgyQlE7SUE2TkwsdUJBQUE7R1dyUEg7Q0FDRjs7QUN4SEc7O0VBRUUsOEJBQUE7Q0NaTDs7QURlRzs7RUFFRSwrQkFBQTtDQ1pMOztBRGVHOztFQUVFLDZCQUFBO0NDWkw7O0FEZUc7O0VBRUUsMkJBQUE7Q0NaTDs7QURlRzs7RUFFRSw0QkFBQTtDQ1pMOztBRGVHOztFQUVFLDZCQUFBO0NDWkw7O0FEZUc7O0VBRUUsK0JBQUE7Q0NaTDs7QURlRzs7RUFFRSwrQkFBQTtDQ1pMOztBYnFERztFWTlFQTs7SUFFRSw4QkFBQTtHQzZCSDs7RUQxQkM7O0lBRUUsK0JBQUE7R0M2Qkg7O0VEMUJDOztJQUVFLDZCQUFBO0dDNkJIOztFRDFCQzs7SUFFRSwyQkFBQTtHQzZCSDs7RUQxQkM7O0lBRUUsNEJBQUE7R0M2Qkg7O0VEMUJDOztJQUVFLDZCQUFBO0dDNkJIOztFRDFCQzs7SUFFRSwrQkFBQTtHQzZCSDs7RUQxQkM7O0lBRUUsK0JBQUE7R0M2Qkg7Q0FDRjs7QWJXRztFWTlFQTs7SUFFRSw4QkFBQTtHQ3NFSDs7RURuRUM7O0lBRUUsK0JBQUE7R0NzRUg7O0VEbkVDOztJQUVFLDZCQUFBO0dDc0VIOztFRG5FQzs7SUFFRSwyQkFBQTtHQ3NFSDs7RURuRUM7O0lBRUUsNEJBQUE7R0NzRUg7O0VEbkVDOztJQUVFLDZCQUFBO0dDc0VIOztFRG5FQzs7SUFFRSwrQkFBQTtHQ3NFSDs7RURuRUM7O0lBRUUsK0JBQUE7R0NzRUg7Q0FDRjs7QWI5Qkc7RVk5RUE7O0lBRUUsOEJBQUE7R0MrR0g7O0VENUdDOztJQUVFLCtCQUFBO0dDK0dIOztFRDVHQzs7SUFFRSw2QkFBQTtHQytHSDs7RUQ1R0M7O0lBRUUsMkJBQUE7R0MrR0g7O0VENUdDOztJQUVFLDRCQUFBO0dDK0dIOztFRDVHQzs7SUFFRSw2QkFBQTtHQytHSDs7RUQ1R0M7O0lBRUUsK0JBQUE7R0MrR0g7O0VENUdDOztJQUVFLCtCQUFBO0dDK0dIO0NBQ0Y7O0FidkVHO0VZOUVBOztJQUVFLDhCQUFBO0dDd0pIOztFRHJKQzs7SUFFRSwrQkFBQTtHQ3dKSDs7RURySkM7O0lBRUUsNkJBQUE7R0N3Skg7O0VEckpDOztJQUVFLDJCQUFBO0dDd0pIOztFRHJKQzs7SUFFRSw0QkFBQTtHQ3dKSDs7RURySkM7O0lBRUUsNkJBQUE7R0N3Skg7O0VEckpDOztJQUVFLCtCQUFBO0dDd0pIOztFRHJKQzs7SUFFRSwrQkFBQTtHQ3dKSDtDQUNGOztBQzlMRzs7RUFFRSwwREFBQTtFQUNBLHFDQUFBO0NDWkw7O0FEZUc7O0VBRUUsMERBQUE7RUFDQSxxQ0FBQTtDQ1pMOztBRGVHOztFQUVFLDBEQUFBO0VBQ0Esc0NBQUE7Q0NaTDs7QWYyRUc7RWM5RUE7O0lBRUUsMERBQUE7SUFDQSxxQ0FBQTtHQ09IOztFREpDOztJQUVFLDBEQUFBO0lBQ0EscUNBQUE7R0NPSDs7RURKQzs7SUFFRSwwREFBQTtJQUNBLHNDQUFBO0dDT0g7Q0FDRjs7QWZ1REc7RWM5RUE7O0lBRUUsMERBQUE7SUFDQSxxQ0FBQTtHQzBCSDs7RUR2QkM7O0lBRUUsMERBQUE7SUFDQSxxQ0FBQTtHQzBCSDs7RUR2QkM7O0lBRUUsMERBQUE7SUFDQSxzQ0FBQTtHQzBCSDtDQUNGOztBZm9DRztFYzlFQTs7SUFFRSwwREFBQTtJQUNBLHFDQUFBO0dDNkNIOztFRDFDQzs7SUFFRSwwREFBQTtJQUNBLHFDQUFBO0dDNkNIOztFRDFDQzs7SUFFRSwwREFBQTtJQUNBLHNDQUFBO0dDNkNIO0NBQ0Y7O0FmaUJHO0VjOUVBOztJQUVFLDBEQUFBO0lBQ0EscUNBQUE7R0NnRUg7O0VEN0RDOztJQUVFLDBEQUFBO0lBQ0EscUNBQUE7R0NnRUg7O0VEN0RDOztJQUVFLDBEQUFBO0lBQ0Esc0NBQUE7R0NnRUg7Q0FDRjs7QUNyRkQ7O0VBRUUsa0NBQUE7Q0NQRDs7QURVRDs7RUFFRSxnQ0FBQTtDQ1BEOztBRFVEOztFQUVFLDhCQUFBO0NDUEQ7O0FEVUQ7O0VBRUUsK0JBQUE7Q0NQRDs7QURVRDs7RUFFRSxnQ0FBQTtDQ1BEOztBRFVEOztFQUVFLDRCQUFBO0NDUEQ7O0FEY0Q7O0VBRUUsMkJBQUE7Q0NYRDs7QURjRDs7RUFFRSw2QkFBQTtDQ1hEOztBRGNEOztFQUVFLG1DQUFBO0NDWEQ7O0FEa0JEOztFQUVFLHVDQUFBO0NDZkQ7O0FEa0JEOztFQUVFLG1DQUFBO0NDZkQ7O0FEa0JEOztFQUVFLHFDQUFBO0NDZkQ7O0FEa0JEOztFQUVFLHlDQUFBO0NDZkQ7O0FEa0JEOztFQUVFLDBDQUFBO0NDZkQ7O0FEa0JEOztFQUVFLHlDQUFBO0NDZkQ7O0FEc0JEOztFQUVFLG1DQUFBO0NDbkJEOztBRHNCRDs7RUFFRSwrQkFBQTtDQ25CRDs7QURzQkQ7O0VBRUUsaUNBQUE7Q0NuQkQ7O0FEc0JEOztFQUVFLGdDQUFBO0NDbkJEOztBRHNCRDs7RUFFRSxpQ0FBQTtDQ25CRDs7QUNyRkQ7RUFDSSxvREFBbUQsRUFDdEQ7O0FBQ0Q7RUFDSSwyQkFBeUIsRUFDNUI7O0FBQ0Q7RUFDSSx3QkFBdUIsRUFDMUI7O0FBQ0Q7RUFDSSxZQUFXO0VBQ1gsbUJBQWtCO0VBQ2xCLGFBQVk7RUFDWixnQkFBZTtFQUNmLGtCQUFpQjtFQUNqQiwrQkFBOEIsRUFDakM7O0FBRUQ7RUFDSSw2QkFBNEIsRUFDL0I7O0FBQ0Q7RUFDSSxzQkFBcUIsRUFDeEI7O0FBQ0QscUJBQXFCOztBQUNyQjtFQUNJLDJCQUEwQjtFQUMxQixxQkFBb0I7RUFDcEIseUJBQXdCO0VBQ3hCLGFBQVk7RUFDWixrRUFBaUU7RUFDakUsMEJBQXlCO0VBQ3pCLHFCQUFvQixFQUNyQjs7QUFFRCwyQ0FBMkM7O0FBQzNDO0VBQ0UseUJBQXdCLEVBQ3pCOztBQUVELDhEQUE4RDs7QUFDOUQ7RUFDRSxxQ0FBb0M7RUFDcEMsa0NBQWlDO0VBQ2pDLGlDQUFnQztFQUNoQyw2QkFBNEIsRUFDN0I7O0FBRUQsNkRBQTZEOztBQUM3RDtFQUNFLGFBQVk7RUFDWixrRUFBaUU7RUFDakUsMEJBQXlCLEVBQzFCOztBQ2hFSDtFQUNJLDJDQUF5QztFQUN6QyxlRFEyQjtFQ1AzQixtQkFBa0I7RUFDbEIsa0JBQWlCO0VBQ2pCLGdCQUFlO0VBQ2YsZ0JBQWUsRUFDbEI7O0FBRUQ7RUFDSSwyQ0FBeUM7RUFDekMsVUFBUztFQUNULGdCQUFlO0VBQ2YsYUFBWTtFQUNaLGFBQVk7RUFDWixjQUFhO0VBQ2IsY0FBYTtFQUNiLGlCQUFnQjtFQUNoQixhQUFZLEVBVWY7O0FBbkJEO0lBWVEsZUFBYztJQUNkLGFBQVk7SUFDWix3QkFBdUI7SUFDdkIsa0JBQWlCO0lBQ2pCLGFBQVk7SUFDWixZQUFXLEVBQ2Q7O0FBR0w7RUFDSSwyQkFBMEI7RUFDMUIsMEJEdEIyQjtFQ3VCM0IsbUJBQWtCLEVBeUJyQjs7QUE1QkQ7SUFLUSxtQkFBa0I7SUFDbEIsWUFBVztJQUNYLG1CQUFrQjtJQUNsQixZQUFXO0lBQ1gsYUFBWSxFQUNmOztBQVZMO0lBWVEsYUFBWTtJQUNaLG1CQUFrQjtJQUNsQixZQUFXO0lBQ1gsYUFBWTtJQUNaLGtCQUFpQjtJQUNqQixrQkFBaUI7SUFDakIsZUR0Q3VCO0lDdUN2QixtQkFBa0I7SUFDbEIsWUFBVyxFQU9kOztBQTNCTDtNQXVCWSxpQkFBZ0I7TUFDaEIsZ0JBQWU7TUFDZixrQkFBaUIsRUFDcEI7O0FBSVQ7RUFDSSxnQkFBZSxFQUNsQjs7QUFJRDtFQUNJLGdCQUFlO0VBQ2YsWUFBVztFQUNYLGFBQVk7RUFDWixZQUFXLEVBQ2Q7O0FBRUQ7RUFDSSxtQkFBa0I7RUFDbEIsU0FBUTtFQUNSLFVBQVM7RUFDVCxpQ0FBZ0M7RUFDaEMsV0FBVTtFQUNWLGFBQVk7RUFDWixnQkFBZSxFQUNsQjs7QUFFRDtFQUNJLG1CQUFrQjtFQUNsQixVQUFTO0VBQ1QsV0FBVTtFQUNWLFlBQVc7RUFDWCwwQkFBeUI7RUFDekIseUNBQXVDO0VBQ3ZDLCtDQUFzQztVQUF0Qyx1Q0FBc0MsRUFDekM7O0FBRUQ7RUFDSSxZQUFXO0VBQ1gsbUJBQWtCO0VBQ2xCLFlBQVc7RUFDWCxZQUFXO0VBQ1gsVUFBUztFQUNULFlBQVc7RUFDWCwwQkFBeUI7RUFDekIseUJBQXdCLEVBQzNCOztBQUVEO0VBQ0ksWUFBVztFQUNYLG1CQUFrQjtFQUNsQixZQUFXO0VBQ1gsWUFBVztFQUNYLFNBQVE7RUFDUixZQUFXO0VBQ1gsMEJBQXlCO0VBQ3pCLHlDQUF1QztFQUN2QywwQkFBeUIsRUFDNUI7O0FBRUQ7RUFDSSxtQkFBa0I7RUFDbEIsVUFBUztFQUNULFdBQVU7RUFDVixZQUFXO0VBQ1gsMEJBQXlCO0VBQ3pCLCtDQUFzQztVQUF0Qyx1Q0FBc0MsRUFDekM7O0FBRUQ7RUFDSSxZQUFXO0VBQ1gsbUJBQWtCO0VBQ2xCLFlBQVc7RUFDWCxZQUFXO0VBQ1gsVUFBUztFQUNULFdBQVU7RUFDViwwQkFBeUI7RUFDekIsMEJBQXlCLEVBQzVCOztBQUVEO0VBQ0ksWUFBVztFQUNYLG1CQUFrQjtFQUNsQixZQUFXO0VBQ1gsWUFBVztFQUNYLFNBQVE7RUFDUixXQUFVO0VBQ1YsMEJBQXlCO0VBQ3pCLHlDQUF1QztFQUN2Qyx5QkFBd0IsRUFDM0I7O0FBQ0Q7RUFDSSxlQUFjO0VBQ2QsMEJEM0kyQjtFQzRJM0Isa0JBQWlCO0VBQ2pCLFlBQVc7RUFDWCxhQUFZO0VBQ1osMEJBQXlCLEVBQzVCIiwiZmlsZSI6InNyYy9hcHAvcGFnZXMvaG9tZS1zZXR0aW5ncy9ob21lLXNldHRpbmdzLnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbbnVsbCwiaHRtbC5pb3Mge1xuICAtLWlvbi1kZWZhdWx0LWZvbnQ6IC1hcHBsZS1zeXN0ZW0sIEJsaW5rTWFjU3lzdGVtRm9udCwgXCJIZWx2ZXRpY2EgTmV1ZVwiLCBcIlJvYm90b1wiLCBzYW5zLXNlcmlmO1xufVxuXG5odG1sLm1kIHtcbiAgLS1pb24tZGVmYXVsdC1mb250OiBcIlJvYm90b1wiLCBcIkhlbHZldGljYSBOZXVlXCIsIHNhbnMtc2VyaWY7XG59XG5cbmh0bWwge1xuICAtLWlvbi1mb250LWZhbWlseTogdmFyKC0taW9uLWRlZmF1bHQtZm9udCk7XG59XG5cbmJvZHkge1xuICBiYWNrZ3JvdW5kOiB2YXIoLS1pb24tYmFja2dyb3VuZC1jb2xvcik7XG59XG5cbmJvZHkuYmFja2Ryb3Atbm8tc2Nyb2xsIHtcbiAgb3ZlcmZsb3c6IGhpZGRlbjtcbn1cblxuLmlvbi1jb2xvci1wcmltYXJ5IHtcbiAgLS1pb24tY29sb3ItYmFzZTogdmFyKC0taW9uLWNvbG9yLXByaW1hcnksICMzODgwZmYpICFpbXBvcnRhbnQ7XG4gIC0taW9uLWNvbG9yLWJhc2UtcmdiOiB2YXIoLS1pb24tY29sb3ItcHJpbWFyeS1yZ2IsIDU2LCAxMjgsIDI1NSkgIWltcG9ydGFudDtcbiAgLS1pb24tY29sb3ItY29udHJhc3Q6IHZhcigtLWlvbi1jb2xvci1wcmltYXJ5LWNvbnRyYXN0LCAjZmZmKSAhaW1wb3J0YW50O1xuICAtLWlvbi1jb2xvci1jb250cmFzdC1yZ2I6IHZhcigtLWlvbi1jb2xvci1wcmltYXJ5LWNvbnRyYXN0LXJnYiwgMjU1LCAyNTUsIDI1NSkgIWltcG9ydGFudDtcbiAgLS1pb24tY29sb3Itc2hhZGU6IHZhcigtLWlvbi1jb2xvci1wcmltYXJ5LXNoYWRlLCAjMzE3MWUwKSAhaW1wb3J0YW50O1xuICAtLWlvbi1jb2xvci10aW50OiB2YXIoLS1pb24tY29sb3ItcHJpbWFyeS10aW50LCAjNGM4ZGZmKSAhaW1wb3J0YW50O1xufVxuXG4uaW9uLWNvbG9yLXNlY29uZGFyeSB7XG4gIC0taW9uLWNvbG9yLWJhc2U6IHZhcigtLWlvbi1jb2xvci1zZWNvbmRhcnksICMwY2QxZTgpICFpbXBvcnRhbnQ7XG4gIC0taW9uLWNvbG9yLWJhc2UtcmdiOiB2YXIoLS1pb24tY29sb3Itc2Vjb25kYXJ5LXJnYiwgMTIsIDIwOSwgMjMyKSAhaW1wb3J0YW50O1xuICAtLWlvbi1jb2xvci1jb250cmFzdDogdmFyKC0taW9uLWNvbG9yLXNlY29uZGFyeS1jb250cmFzdCwgI2ZmZikgIWltcG9ydGFudDtcbiAgLS1pb24tY29sb3ItY29udHJhc3QtcmdiOiB2YXIoLS1pb24tY29sb3Itc2Vjb25kYXJ5LWNvbnRyYXN0LXJnYiwgMjU1LCAyNTUsIDI1NSkgIWltcG9ydGFudDtcbiAgLS1pb24tY29sb3Itc2hhZGU6IHZhcigtLWlvbi1jb2xvci1zZWNvbmRhcnktc2hhZGUsICMwYmI4Y2MpICFpbXBvcnRhbnQ7XG4gIC0taW9uLWNvbG9yLXRpbnQ6IHZhcigtLWlvbi1jb2xvci1zZWNvbmRhcnktdGludCwgIzI0ZDZlYSkgIWltcG9ydGFudDtcbn1cblxuLmlvbi1jb2xvci10ZXJ0aWFyeSB7XG4gIC0taW9uLWNvbG9yLWJhc2U6IHZhcigtLWlvbi1jb2xvci10ZXJ0aWFyeSwgIzcwNDRmZikgIWltcG9ydGFudDtcbiAgLS1pb24tY29sb3ItYmFzZS1yZ2I6IHZhcigtLWlvbi1jb2xvci10ZXJ0aWFyeS1yZ2IsIDExMiwgNjgsIDI1NSkgIWltcG9ydGFudDtcbiAgLS1pb24tY29sb3ItY29udHJhc3Q6IHZhcigtLWlvbi1jb2xvci10ZXJ0aWFyeS1jb250cmFzdCwgI2ZmZikgIWltcG9ydGFudDtcbiAgLS1pb24tY29sb3ItY29udHJhc3QtcmdiOiB2YXIoLS1pb24tY29sb3ItdGVydGlhcnktY29udHJhc3QtcmdiLCAyNTUsIDI1NSwgMjU1KSAhaW1wb3J0YW50O1xuICAtLWlvbi1jb2xvci1zaGFkZTogdmFyKC0taW9uLWNvbG9yLXRlcnRpYXJ5LXNoYWRlLCAjNjMzY2UwKSAhaW1wb3J0YW50O1xuICAtLWlvbi1jb2xvci10aW50OiB2YXIoLS1pb24tY29sb3ItdGVydGlhcnktdGludCwgIzdlNTdmZikgIWltcG9ydGFudDtcbn1cblxuLmlvbi1jb2xvci1zdWNjZXNzIHtcbiAgLS1pb24tY29sb3ItYmFzZTogdmFyKC0taW9uLWNvbG9yLXN1Y2Nlc3MsICMxMGRjNjApICFpbXBvcnRhbnQ7XG4gIC0taW9uLWNvbG9yLWJhc2UtcmdiOiB2YXIoLS1pb24tY29sb3Itc3VjY2Vzcy1yZ2IsIDE2LCAyMjAsIDk2KSAhaW1wb3J0YW50O1xuICAtLWlvbi1jb2xvci1jb250cmFzdDogdmFyKC0taW9uLWNvbG9yLXN1Y2Nlc3MtY29udHJhc3QsICNmZmYpICFpbXBvcnRhbnQ7XG4gIC0taW9uLWNvbG9yLWNvbnRyYXN0LXJnYjogdmFyKC0taW9uLWNvbG9yLXN1Y2Nlc3MtY29udHJhc3QtcmdiLCAyNTUsIDI1NSwgMjU1KSAhaW1wb3J0YW50O1xuICAtLWlvbi1jb2xvci1zaGFkZTogdmFyKC0taW9uLWNvbG9yLXN1Y2Nlc3Mtc2hhZGUsICMwZWMyNTQpICFpbXBvcnRhbnQ7XG4gIC0taW9uLWNvbG9yLXRpbnQ6IHZhcigtLWlvbi1jb2xvci1zdWNjZXNzLXRpbnQsICMyOGUwNzApICFpbXBvcnRhbnQ7XG59XG5cbi5pb24tY29sb3Itd2FybmluZyB7XG4gIC0taW9uLWNvbG9yLWJhc2U6IHZhcigtLWlvbi1jb2xvci13YXJuaW5nLCAjZmZjZTAwKSAhaW1wb3J0YW50O1xuICAtLWlvbi1jb2xvci1iYXNlLXJnYjogdmFyKC0taW9uLWNvbG9yLXdhcm5pbmctcmdiLCAyNTUsIDIwNiwgMCkgIWltcG9ydGFudDtcbiAgLS1pb24tY29sb3ItY29udHJhc3Q6IHZhcigtLWlvbi1jb2xvci13YXJuaW5nLWNvbnRyYXN0LCAjZmZmKSAhaW1wb3J0YW50O1xuICAtLWlvbi1jb2xvci1jb250cmFzdC1yZ2I6IHZhcigtLWlvbi1jb2xvci13YXJuaW5nLWNvbnRyYXN0LXJnYiwgMjU1LCAyNTUsIDI1NSkgIWltcG9ydGFudDtcbiAgLS1pb24tY29sb3Itc2hhZGU6IHZhcigtLWlvbi1jb2xvci13YXJuaW5nLXNoYWRlLCAjZTBiNTAwKSAhaW1wb3J0YW50O1xuICAtLWlvbi1jb2xvci10aW50OiB2YXIoLS1pb24tY29sb3Itd2FybmluZy10aW50LCAjZmZkMzFhKSAhaW1wb3J0YW50O1xufVxuXG4uaW9uLWNvbG9yLWRhbmdlciB7XG4gIC0taW9uLWNvbG9yLWJhc2U6IHZhcigtLWlvbi1jb2xvci1kYW5nZXIsICNmMDQxNDEpICFpbXBvcnRhbnQ7XG4gIC0taW9uLWNvbG9yLWJhc2UtcmdiOiB2YXIoLS1pb24tY29sb3ItZGFuZ2VyLXJnYiwgMjQwLCA2NSwgNjUpICFpbXBvcnRhbnQ7XG4gIC0taW9uLWNvbG9yLWNvbnRyYXN0OiB2YXIoLS1pb24tY29sb3ItZGFuZ2VyLWNvbnRyYXN0LCAjZmZmKSAhaW1wb3J0YW50O1xuICAtLWlvbi1jb2xvci1jb250cmFzdC1yZ2I6IHZhcigtLWlvbi1jb2xvci1kYW5nZXItY29udHJhc3QtcmdiLCAyNTUsIDI1NSwgMjU1KSAhaW1wb3J0YW50O1xuICAtLWlvbi1jb2xvci1zaGFkZTogdmFyKC0taW9uLWNvbG9yLWRhbmdlci1zaGFkZSwgI2QzMzkzOSkgIWltcG9ydGFudDtcbiAgLS1pb24tY29sb3ItdGludDogdmFyKC0taW9uLWNvbG9yLWRhbmdlci10aW50LCAjZjI1NDU0KSAhaW1wb3J0YW50O1xufVxuXG4uaW9uLWNvbG9yLWxpZ2h0IHtcbiAgLS1pb24tY29sb3ItYmFzZTogdmFyKC0taW9uLWNvbG9yLWxpZ2h0LCAjZjRmNWY4KSAhaW1wb3J0YW50O1xuICAtLWlvbi1jb2xvci1iYXNlLXJnYjogdmFyKC0taW9uLWNvbG9yLWxpZ2h0LXJnYiwgMjQ0LCAyNDUsIDI0OCkgIWltcG9ydGFudDtcbiAgLS1pb24tY29sb3ItY29udHJhc3Q6IHZhcigtLWlvbi1jb2xvci1saWdodC1jb250cmFzdCwgIzAwMCkgIWltcG9ydGFudDtcbiAgLS1pb24tY29sb3ItY29udHJhc3QtcmdiOiB2YXIoLS1pb24tY29sb3ItbGlnaHQtY29udHJhc3QtcmdiLCAwLCAwLCAwKSAhaW1wb3J0YW50O1xuICAtLWlvbi1jb2xvci1zaGFkZTogdmFyKC0taW9uLWNvbG9yLWxpZ2h0LXNoYWRlLCAjZDdkOGRhKSAhaW1wb3J0YW50O1xuICAtLWlvbi1jb2xvci10aW50OiB2YXIoLS1pb24tY29sb3ItbGlnaHQtdGludCwgI2Y1ZjZmOSkgIWltcG9ydGFudDtcbn1cblxuLmlvbi1jb2xvci1tZWRpdW0ge1xuICAtLWlvbi1jb2xvci1iYXNlOiB2YXIoLS1pb24tY29sb3ItbWVkaXVtLCAjOTg5YWEyKSAhaW1wb3J0YW50O1xuICAtLWlvbi1jb2xvci1iYXNlLXJnYjogdmFyKC0taW9uLWNvbG9yLW1lZGl1bS1yZ2IsIDE1MiwgMTU0LCAxNjIpICFpbXBvcnRhbnQ7XG4gIC0taW9uLWNvbG9yLWNvbnRyYXN0OiB2YXIoLS1pb24tY29sb3ItbWVkaXVtLWNvbnRyYXN0LCAjZmZmKSAhaW1wb3J0YW50O1xuICAtLWlvbi1jb2xvci1jb250cmFzdC1yZ2I6IHZhcigtLWlvbi1jb2xvci1tZWRpdW0tY29udHJhc3QtcmdiLCAyNTUsIDI1NSwgMjU1KSAhaW1wb3J0YW50O1xuICAtLWlvbi1jb2xvci1zaGFkZTogdmFyKC0taW9uLWNvbG9yLW1lZGl1bS1zaGFkZSwgIzg2ODg4ZikgIWltcG9ydGFudDtcbiAgLS1pb24tY29sb3ItdGludDogdmFyKC0taW9uLWNvbG9yLW1lZGl1bS10aW50LCAjYTJhNGFiKSAhaW1wb3J0YW50O1xufVxuXG4uaW9uLWNvbG9yLWRhcmsge1xuICAtLWlvbi1jb2xvci1iYXNlOiB2YXIoLS1pb24tY29sb3ItZGFyaywgIzIyMjQyOCkgIWltcG9ydGFudDtcbiAgLS1pb24tY29sb3ItYmFzZS1yZ2I6IHZhcigtLWlvbi1jb2xvci1kYXJrLXJnYiwgMzQsIDM2LCA0MCkgIWltcG9ydGFudDtcbiAgLS1pb24tY29sb3ItY29udHJhc3Q6IHZhcigtLWlvbi1jb2xvci1kYXJrLWNvbnRyYXN0LCAjZmZmKSAhaW1wb3J0YW50O1xuICAtLWlvbi1jb2xvci1jb250cmFzdC1yZ2I6IHZhcigtLWlvbi1jb2xvci1kYXJrLWNvbnRyYXN0LXJnYiwgMjU1LCAyNTUsIDI1NSkgIWltcG9ydGFudDtcbiAgLS1pb24tY29sb3Itc2hhZGU6IHZhcigtLWlvbi1jb2xvci1kYXJrLXNoYWRlLCAjMWUyMDIzKSAhaW1wb3J0YW50O1xuICAtLWlvbi1jb2xvci10aW50OiB2YXIoLS1pb24tY29sb3ItZGFyay10aW50LCAjMzgzYTNlKSAhaW1wb3J0YW50O1xufVxuXG4uaW9uLXBhZ2Uge1xuICBsZWZ0OiAwO1xuICByaWdodDogMDtcbiAgdG9wOiAwO1xuICBib3R0b206IDA7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgZmxleC1kaXJlY3Rpb246IGNvbHVtbjtcbiAganVzdGlmeS1jb250ZW50OiBzcGFjZS1iZXR3ZWVuO1xuICBjb250YWluOiBsYXlvdXQgc2l6ZSBzdHlsZTtcbiAgb3ZlcmZsb3c6IGhpZGRlbjtcbiAgei1pbmRleDogMDtcbn1cblxuaW9uLXJvdXRlLFxuaW9uLXJvdXRlLXJlZGlyZWN0LFxuaW9uLXJvdXRlcixcbmlvbi1zZWxlY3Qtb3B0aW9uLFxuaW9uLW5hdi1jb250cm9sbGVyLFxuaW9uLW1lbnUtY29udHJvbGxlcixcbmlvbi1hY3Rpb24tc2hlZXQtY29udHJvbGxlcixcbmlvbi1hbGVydC1jb250cm9sbGVyLFxuaW9uLWxvYWRpbmctY29udHJvbGxlcixcbmlvbi1tb2RhbC1jb250cm9sbGVyLFxuaW9uLXBpY2tlci1jb250cm9sbGVyLFxuaW9uLXBvcG92ZXItY29udHJvbGxlcixcbmlvbi10b2FzdC1jb250cm9sbGVyLFxuLmlvbi1wYWdlLWhpZGRlbixcbltoaWRkZW5dIHtcbiAgLyogc3R5bGVsaW50LWRpc2FibGUtbmV4dC1saW5lIGRlY2xhcmF0aW9uLW5vLWltcG9ydGFudCAqL1xuICBkaXNwbGF5OiBub25lICFpbXBvcnRhbnQ7XG59XG5cbi5pb24tcGFnZS1pbnZpc2libGUge1xuICBvcGFjaXR5OiAwO1xufVxuXG5odG1sLnBsdC1pb3MucGx0LWh5YnJpZCwgaHRtbC5wbHQtaW9zLnBsdC1wd2Ege1xuICAtLWlvbi1zdGF0dXNiYXItcGFkZGluZzogMjBweDtcbn1cblxuQHN1cHBvcnRzIChwYWRkaW5nLXRvcDogMjBweCkge1xuICBodG1sIHtcbiAgICAtLWlvbi1zYWZlLWFyZWEtdG9wOiB2YXIoLS1pb24tc3RhdHVzYmFyLXBhZGRpbmcpO1xuICB9XG59XG5Ac3VwcG9ydHMgKHBhZGRpbmctdG9wOiBjb25zdGFudChzYWZlLWFyZWEtaW5zZXQtdG9wKSkge1xuICBodG1sIHtcbiAgICAtLWlvbi1zYWZlLWFyZWEtdG9wOiBjb25zdGFudChzYWZlLWFyZWEtaW5zZXQtdG9wKTtcbiAgICAtLWlvbi1zYWZlLWFyZWEtYm90dG9tOiBjb25zdGFudChzYWZlLWFyZWEtaW5zZXQtYm90dG9tKTtcbiAgICAtLWlvbi1zYWZlLWFyZWEtbGVmdDogY29uc3RhbnQoc2FmZS1hcmVhLWluc2V0LWxlZnQpO1xuICAgIC0taW9uLXNhZmUtYXJlYS1yaWdodDogY29uc3RhbnQoc2FmZS1hcmVhLWluc2V0LXJpZ2h0KTtcbiAgfVxufVxuQHN1cHBvcnRzIChwYWRkaW5nLXRvcDogZW52KHNhZmUtYXJlYS1pbnNldC10b3ApKSB7XG4gIGh0bWwge1xuICAgIC0taW9uLXNhZmUtYXJlYS10b3A6IGVudihzYWZlLWFyZWEtaW5zZXQtdG9wKTtcbiAgICAtLWlvbi1zYWZlLWFyZWEtYm90dG9tOiBlbnYoc2FmZS1hcmVhLWluc2V0LWJvdHRvbSk7XG4gICAgLS1pb24tc2FmZS1hcmVhLWxlZnQ6IGVudihzYWZlLWFyZWEtaW5zZXQtbGVmdCk7XG4gICAgLS1pb24tc2FmZS1hcmVhLXJpZ2h0OiBlbnYoc2FmZS1hcmVhLWluc2V0LXJpZ2h0KTtcbiAgfVxufVxuXG4vKiMgc291cmNlTWFwcGluZ1VSTD1jb3JlLmNzcy5tYXAgKi9cbiIsbnVsbCxudWxsLG51bGwsImF1ZGlvLFxuY2FudmFzLFxucHJvZ3Jlc3MsXG52aWRlbyB7XG4gIHZlcnRpY2FsLWFsaWduOiBiYXNlbGluZTtcbn1cblxuYXVkaW86bm90KFtjb250cm9sc10pIHtcbiAgZGlzcGxheTogbm9uZTtcbiAgaGVpZ2h0OiAwO1xufVxuXG5iLFxuc3Ryb25nIHtcbiAgZm9udC13ZWlnaHQ6IGJvbGQ7XG59XG5cbmltZyB7XG4gIG1heC13aWR0aDogMTAwJTtcbiAgYm9yZGVyOiAwO1xufVxuXG5zdmc6bm90KDpyb290KSB7XG4gIG92ZXJmbG93OiBoaWRkZW47XG59XG5cbmZpZ3VyZSB7XG4gIG1hcmdpbjogMWVtIDQwcHg7XG59XG5cbmhyIHtcbiAgaGVpZ2h0OiAxcHg7XG4gIGJvcmRlci13aWR0aDogMDtcbiAgYm94LXNpemluZzogY29udGVudC1ib3g7XG59XG5cbnByZSB7XG4gIG92ZXJmbG93OiBhdXRvO1xufVxuXG5jb2RlLFxua2JkLFxucHJlLFxuc2FtcCB7XG4gIGZvbnQtZmFtaWx5OiBtb25vc3BhY2UsIG1vbm9zcGFjZTtcbiAgZm9udC1zaXplOiAxZW07XG59XG5cbmxhYmVsLFxuaW5wdXQsXG5zZWxlY3QsXG50ZXh0YXJlYSB7XG4gIGZvbnQtZmFtaWx5OiBpbmhlcml0O1xuICBsaW5lLWhlaWdodDogbm9ybWFsO1xufVxuXG50ZXh0YXJlYSB7XG4gIG92ZXJmbG93OiBhdXRvO1xuICBoZWlnaHQ6IGF1dG87XG4gIGZvbnQ6IGluaGVyaXQ7XG4gIGNvbG9yOiBpbmhlcml0O1xufVxuXG50ZXh0YXJlYTo6cGxhY2Vob2xkZXIge1xuICBwYWRkaW5nLWxlZnQ6IDJweDtcbn1cblxuZm9ybSxcbmlucHV0LFxub3B0Z3JvdXAsXG5zZWxlY3Qge1xuICBtYXJnaW46IDA7XG4gIGZvbnQ6IGluaGVyaXQ7XG4gIGNvbG9yOiBpbmhlcml0O1xufVxuXG5odG1sIGlucHV0W3R5cGU9YnV0dG9uXSxcbmlucHV0W3R5cGU9cmVzZXRdLFxuaW5wdXRbdHlwZT1zdWJtaXRdIHtcbiAgY3Vyc29yOiBwb2ludGVyO1xuICAtd2Via2l0LWFwcGVhcmFuY2U6IGJ1dHRvbjtcbn1cblxuYSxcbmEgZGl2LFxuYSBzcGFuLFxuYSBpb24taWNvbixcbmEgaW9uLWxhYmVsLFxuYnV0dG9uLFxuYnV0dG9uIGRpdixcbmJ1dHRvbiBzcGFuLFxuYnV0dG9uIGlvbi1pY29uLFxuYnV0dG9uIGlvbi1sYWJlbCxcbi5pb24tdGFwcGFibGUsXG5bdGFwcGFibGVdLFxuW3RhcHBhYmxlXSBkaXYsXG5bdGFwcGFibGVdIHNwYW4sXG5bdGFwcGFibGVdIGlvbi1pY29uLFxuW3RhcHBhYmxlXSBpb24tbGFiZWwsXG5pbnB1dCxcbnRleHRhcmVhIHtcbiAgdG91Y2gtYWN0aW9uOiBtYW5pcHVsYXRpb247XG59XG5cbmEgaW9uLWxhYmVsLFxuYnV0dG9uIGlvbi1sYWJlbCB7XG4gIHBvaW50ZXItZXZlbnRzOiBub25lO1xufVxuXG5idXR0b24ge1xuICBib3JkZXI6IDA7XG4gIGJvcmRlci1yYWRpdXM6IDA7XG4gIGZvbnQtZmFtaWx5OiBpbmhlcml0O1xuICBmb250LXN0eWxlOiBpbmhlcml0O1xuICBmb250LXZhcmlhbnQ6IGluaGVyaXQ7XG4gIGxpbmUtaGVpZ2h0OiAxO1xuICB0ZXh0LXRyYW5zZm9ybTogbm9uZTtcbiAgY3Vyc29yOiBwb2ludGVyO1xuICAtd2Via2l0LWFwcGVhcmFuY2U6IGJ1dHRvbjtcbn1cblxuW3RhcHBhYmxlXSB7XG4gIGN1cnNvcjogcG9pbnRlcjtcbn1cblxuYVtkaXNhYmxlZF0sXG5idXR0b25bZGlzYWJsZWRdLFxuaHRtbCBpbnB1dFtkaXNhYmxlZF0ge1xuICBjdXJzb3I6IGRlZmF1bHQ7XG59XG5cbmJ1dHRvbjo6LW1vei1mb2N1cy1pbm5lcixcbmlucHV0OjotbW96LWZvY3VzLWlubmVyIHtcbiAgcGFkZGluZzogMDtcbiAgYm9yZGVyOiAwO1xufVxuXG5pbnB1dFt0eXBlPWNoZWNrYm94XSxcbmlucHV0W3R5cGU9cmFkaW9dIHtcbiAgcGFkZGluZzogMDtcbiAgYm94LXNpemluZzogYm9yZGVyLWJveDtcbn1cblxuaW5wdXRbdHlwZT1udW1iZXJdOjotd2Via2l0LWlubmVyLXNwaW4tYnV0dG9uLFxuaW5wdXRbdHlwZT1udW1iZXJdOjotd2Via2l0LW91dGVyLXNwaW4tYnV0dG9uIHtcbiAgaGVpZ2h0OiBhdXRvO1xufVxuXG5pbnB1dFt0eXBlPXNlYXJjaF06Oi13ZWJraXQtc2VhcmNoLWNhbmNlbC1idXR0b24sXG5pbnB1dFt0eXBlPXNlYXJjaF06Oi13ZWJraXQtc2VhcmNoLWRlY29yYXRpb24ge1xuICAtd2Via2l0LWFwcGVhcmFuY2U6IG5vbmU7XG59XG5cbnRhYmxlIHtcbiAgYm9yZGVyLWNvbGxhcHNlOiBjb2xsYXBzZTtcbiAgYm9yZGVyLXNwYWNpbmc6IDA7XG59XG5cbnRkLFxudGgge1xuICBwYWRkaW5nOiAwO1xufVxuXG4vKiMgc291cmNlTWFwcGluZ1VSTD1ub3JtYWxpemUuY3NzLm1hcCAqL1xuIixudWxsLCIqIHtcbiAgYm94LXNpemluZzogYm9yZGVyLWJveDtcbiAgLXdlYmtpdC10YXAtaGlnaGxpZ2h0LWNvbG9yOiByZ2JhKDAsIDAsIDAsIDApO1xuICAtd2Via2l0LXRhcC1oaWdobGlnaHQtY29sb3I6IHRyYW5zcGFyZW50O1xuICAtd2Via2l0LXRvdWNoLWNhbGxvdXQ6IG5vbmU7XG59XG5cbmh0bWwge1xuICB3aWR0aDogMTAwJTtcbiAgaGVpZ2h0OiAxMDAlO1xuICB0ZXh0LXNpemUtYWRqdXN0OiAxMDAlO1xufVxuXG5odG1sOm5vdCguaHlkcmF0ZWQpIGJvZHkge1xuICBkaXNwbGF5OiBub25lO1xufVxuXG5odG1sLnBsdC1wd2Ege1xuICBoZWlnaHQ6IDEwMHZoO1xufVxuXG5ib2R5IHtcbiAgLW1vei1vc3gtZm9udC1zbW9vdGhpbmc6IGdyYXlzY2FsZTtcbiAgLXdlYmtpdC1mb250LXNtb290aGluZzogYW50aWFsaWFzZWQ7XG4gIG1hcmdpbi1sZWZ0OiAwO1xuICBtYXJnaW4tcmlnaHQ6IDA7XG4gIG1hcmdpbi10b3A6IDA7XG4gIG1hcmdpbi1ib3R0b206IDA7XG4gIHBhZGRpbmctbGVmdDogMDtcbiAgcGFkZGluZy1yaWdodDogMDtcbiAgcGFkZGluZy10b3A6IDA7XG4gIHBhZGRpbmctYm90dG9tOiAwO1xuICBwb3NpdGlvbjogZml4ZWQ7XG4gIHdpZHRoOiAxMDAlO1xuICBtYXgtd2lkdGg6IDEwMCU7XG4gIGhlaWdodDogMTAwJTtcbiAgbWF4LWhlaWdodDogMTAwJTtcbiAgdGV4dC1yZW5kZXJpbmc6IG9wdGltaXplTGVnaWJpbGl0eTtcbiAgb3ZlcmZsb3c6IGhpZGRlbjtcbiAgdG91Y2gtYWN0aW9uOiBtYW5pcHVsYXRpb247XG4gIC13ZWJraXQtdXNlci1kcmFnOiBub25lO1xuICAtbXMtY29udGVudC16b29taW5nOiBub25lO1xuICB3b3JkLXdyYXA6IGJyZWFrLXdvcmQ7XG4gIG92ZXJzY3JvbGwtYmVoYXZpb3IteTogbm9uZTtcbiAgdGV4dC1zaXplLWFkanVzdDogbm9uZTtcbn1cblxuLyojIHNvdXJjZU1hcHBpbmdVUkw9c3RydWN0dXJlLmNzcy5tYXAgKi9cbiIsbnVsbCwiaHRtbCB7XG4gIGZvbnQtZmFtaWx5OiB2YXIoLS1pb24tZm9udC1mYW1pbHkpO1xufVxuXG5hIHtcbiAgYmFja2dyb3VuZC1jb2xvcjogdHJhbnNwYXJlbnQ7XG4gIGNvbG9yOiB2YXIoLS1pb24tY29sb3ItcHJpbWFyeSwgIzM4ODBmZik7XG59XG5cbmgxLFxuaDIsXG5oMyxcbmg0LFxuaDUsXG5oNiB7XG4gIG1hcmdpbi10b3A6IDE2cHg7XG4gIG1hcmdpbi1ib3R0b206IDEwcHg7XG4gIGZvbnQtd2VpZ2h0OiA1MDA7XG4gIGxpbmUtaGVpZ2h0OiAxLjI7XG59XG5oMSB7XG4gIG1hcmdpbi10b3A6IDIwcHg7XG4gIGZvbnQtc2l6ZTogMjZweDtcbn1cbmgyIHtcbiAgbWFyZ2luLXRvcDogMThweDtcbiAgZm9udC1zaXplOiAyNHB4O1xufVxuaDMge1xuICBmb250LXNpemU6IDIycHg7XG59XG5cbmg0IHtcbiAgZm9udC1zaXplOiAyMHB4O1xufVxuXG5oNSB7XG4gIGZvbnQtc2l6ZTogMThweDtcbn1cblxuaDYge1xuICBmb250LXNpemU6IDE2cHg7XG59XG5cbnNtYWxsIHtcbiAgZm9udC1zaXplOiA3NSU7XG59XG5cbnN1YixcbnN1cCB7XG4gIHBvc2l0aW9uOiByZWxhdGl2ZTtcbiAgZm9udC1zaXplOiA3NSU7XG4gIGxpbmUtaGVpZ2h0OiAwO1xuICB2ZXJ0aWNhbC1hbGlnbjogYmFzZWxpbmU7XG59XG5cbnN1cCB7XG4gIHRvcDogLTAuNWVtO1xufVxuXG5zdWIge1xuICBib3R0b206IC0wLjI1ZW07XG59XG5cbi8qIyBzb3VyY2VNYXBwaW5nVVJMPXR5cG9ncmFwaHkuY3NzLm1hcCAqL1xuIixudWxsLCIuaW9uLW5vLXBhZGRpbmcsXG5bbm8tcGFkZGluZ10ge1xuICAtLXBhZGRpbmctc3RhcnQ6IDA7XG4gIC0tcGFkZGluZy1lbmQ6IDA7XG4gIC0tcGFkZGluZy10b3A6IDA7XG4gIC0tcGFkZGluZy1ib3R0b206IDA7XG4gIHBhZGRpbmctbGVmdDogMDtcbiAgcGFkZGluZy1yaWdodDogMDtcbiAgcGFkZGluZy10b3A6IDA7XG4gIHBhZGRpbmctYm90dG9tOiAwO1xufVxuXG4uaW9uLXBhZGRpbmcsXG5bcGFkZGluZ10ge1xuICAtLXBhZGRpbmctc3RhcnQ6IHZhcigtLWlvbi1wYWRkaW5nLCAxNnB4KTtcbiAgLS1wYWRkaW5nLWVuZDogdmFyKC0taW9uLXBhZGRpbmcsIDE2cHgpO1xuICAtLXBhZGRpbmctdG9wOiB2YXIoLS1pb24tcGFkZGluZywgMTZweCk7XG4gIC0tcGFkZGluZy1ib3R0b206IHZhcigtLWlvbi1wYWRkaW5nLCAxNnB4KTtcbiAgcGFkZGluZy1sZWZ0OiB2YXIoLS1pb24tcGFkZGluZywgMTZweCk7XG4gIHBhZGRpbmctcmlnaHQ6IHZhcigtLWlvbi1wYWRkaW5nLCAxNnB4KTtcbiAgcGFkZGluZy10b3A6IHZhcigtLWlvbi1wYWRkaW5nLCAxNnB4KTtcbiAgcGFkZGluZy1ib3R0b206IHZhcigtLWlvbi1wYWRkaW5nLCAxNnB4KTtcbn1cbkBzdXBwb3J0cyAobWFyZ2luLWlubGluZS1zdGFydDogMCkgb3IgKC13ZWJraXQtbWFyZ2luLXN0YXJ0OiAwKSB7XG4gIC5pb24tcGFkZGluZyxcbltwYWRkaW5nXSB7XG4gICAgcGFkZGluZy1sZWZ0OiB1bnNldDtcbiAgICBwYWRkaW5nLXJpZ2h0OiB1bnNldDtcbiAgICAtd2Via2l0LXBhZGRpbmctc3RhcnQ6IHZhcigtLWlvbi1wYWRkaW5nLCAxNnB4KTtcbiAgICBwYWRkaW5nLWlubGluZS1zdGFydDogdmFyKC0taW9uLXBhZGRpbmcsIDE2cHgpO1xuICAgIC13ZWJraXQtcGFkZGluZy1lbmQ6IHZhcigtLWlvbi1wYWRkaW5nLCAxNnB4KTtcbiAgICBwYWRkaW5nLWlubGluZS1lbmQ6IHZhcigtLWlvbi1wYWRkaW5nLCAxNnB4KTtcbiAgfVxufVxuXG4uaW9uLXBhZGRpbmctdG9wLFxuW3BhZGRpbmctdG9wXSB7XG4gIC0tcGFkZGluZy10b3A6IHZhcigtLWlvbi1wYWRkaW5nLCAxNnB4KTtcbiAgcGFkZGluZy10b3A6IHZhcigtLWlvbi1wYWRkaW5nLCAxNnB4KTtcbn1cbi5pb24tcGFkZGluZy1zdGFydCxcbltwYWRkaW5nLXN0YXJ0XSB7XG4gIC0tcGFkZGluZy1zdGFydDogdmFyKC0taW9uLXBhZGRpbmcsIDE2cHgpO1xuICBwYWRkaW5nLWxlZnQ6IHZhcigtLWlvbi1wYWRkaW5nLCAxNnB4KTtcbn1cbkBzdXBwb3J0cyAobWFyZ2luLWlubGluZS1zdGFydDogMCkgb3IgKC13ZWJraXQtbWFyZ2luLXN0YXJ0OiAwKSB7XG4gIC5pb24tcGFkZGluZy1zdGFydCxcbltwYWRkaW5nLXN0YXJ0XSB7XG4gICAgcGFkZGluZy1sZWZ0OiB1bnNldDtcbiAgICAtd2Via2l0LXBhZGRpbmctc3RhcnQ6IHZhcigtLWlvbi1wYWRkaW5nLCAxNnB4KTtcbiAgICBwYWRkaW5nLWlubGluZS1zdGFydDogdmFyKC0taW9uLXBhZGRpbmcsIDE2cHgpO1xuICB9XG59XG5cbi5pb24tcGFkZGluZy1lbmQsXG5bcGFkZGluZy1lbmRdIHtcbiAgLS1wYWRkaW5nLWVuZDogdmFyKC0taW9uLXBhZGRpbmcsIDE2cHgpO1xuICBwYWRkaW5nLXJpZ2h0OiB2YXIoLS1pb24tcGFkZGluZywgMTZweCk7XG59XG5Ac3VwcG9ydHMgKG1hcmdpbi1pbmxpbmUtc3RhcnQ6IDApIG9yICgtd2Via2l0LW1hcmdpbi1zdGFydDogMCkge1xuICAuaW9uLXBhZGRpbmctZW5kLFxuW3BhZGRpbmctZW5kXSB7XG4gICAgcGFkZGluZy1yaWdodDogdW5zZXQ7XG4gICAgLXdlYmtpdC1wYWRkaW5nLWVuZDogdmFyKC0taW9uLXBhZGRpbmcsIDE2cHgpO1xuICAgIHBhZGRpbmctaW5saW5lLWVuZDogdmFyKC0taW9uLXBhZGRpbmcsIDE2cHgpO1xuICB9XG59XG5cbi5pb24tcGFkZGluZy1ib3R0b20sXG5bcGFkZGluZy1ib3R0b21dIHtcbiAgLS1wYWRkaW5nLWJvdHRvbTogdmFyKC0taW9uLXBhZGRpbmcsIDE2cHgpO1xuICBwYWRkaW5nLWJvdHRvbTogdmFyKC0taW9uLXBhZGRpbmcsIDE2cHgpO1xufVxuLmlvbi1wYWRkaW5nLXZlcnRpY2FsLFxuW3BhZGRpbmctdmVydGljYWxdIHtcbiAgLS1wYWRkaW5nLXRvcDogdmFyKC0taW9uLXBhZGRpbmcsIDE2cHgpO1xuICAtLXBhZGRpbmctYm90dG9tOiB2YXIoLS1pb24tcGFkZGluZywgMTZweCk7XG4gIHBhZGRpbmctdG9wOiB2YXIoLS1pb24tcGFkZGluZywgMTZweCk7XG4gIHBhZGRpbmctYm90dG9tOiB2YXIoLS1pb24tcGFkZGluZywgMTZweCk7XG59XG4uaW9uLXBhZGRpbmctaG9yaXpvbnRhbCxcbltwYWRkaW5nLWhvcml6b250YWxdIHtcbiAgLS1wYWRkaW5nLXN0YXJ0OiB2YXIoLS1pb24tcGFkZGluZywgMTZweCk7XG4gIC0tcGFkZGluZy1lbmQ6IHZhcigtLWlvbi1wYWRkaW5nLCAxNnB4KTtcbiAgcGFkZGluZy1sZWZ0OiB2YXIoLS1pb24tcGFkZGluZywgMTZweCk7XG4gIHBhZGRpbmctcmlnaHQ6IHZhcigtLWlvbi1wYWRkaW5nLCAxNnB4KTtcbn1cbkBzdXBwb3J0cyAobWFyZ2luLWlubGluZS1zdGFydDogMCkgb3IgKC13ZWJraXQtbWFyZ2luLXN0YXJ0OiAwKSB7XG4gIC5pb24tcGFkZGluZy1ob3Jpem9udGFsLFxuW3BhZGRpbmctaG9yaXpvbnRhbF0ge1xuICAgIHBhZGRpbmctbGVmdDogdW5zZXQ7XG4gICAgcGFkZGluZy1yaWdodDogdW5zZXQ7XG4gICAgLXdlYmtpdC1wYWRkaW5nLXN0YXJ0OiB2YXIoLS1pb24tcGFkZGluZywgMTZweCk7XG4gICAgcGFkZGluZy1pbmxpbmUtc3RhcnQ6IHZhcigtLWlvbi1wYWRkaW5nLCAxNnB4KTtcbiAgICAtd2Via2l0LXBhZGRpbmctZW5kOiB2YXIoLS1pb24tcGFkZGluZywgMTZweCk7XG4gICAgcGFkZGluZy1pbmxpbmUtZW5kOiB2YXIoLS1pb24tcGFkZGluZywgMTZweCk7XG4gIH1cbn1cblxuLmlvbi1uby1tYXJnaW4sXG5bbm8tbWFyZ2luXSB7XG4gIC0tbWFyZ2luLXN0YXJ0OiAwO1xuICAtLW1hcmdpbi1lbmQ6IDA7XG4gIC0tbWFyZ2luLXRvcDogMDtcbiAgLS1tYXJnaW4tYm90dG9tOiAwO1xuICBtYXJnaW4tbGVmdDogMDtcbiAgbWFyZ2luLXJpZ2h0OiAwO1xuICBtYXJnaW4tdG9wOiAwO1xuICBtYXJnaW4tYm90dG9tOiAwO1xufVxuXG4uaW9uLW1hcmdpbixcblttYXJnaW5dIHtcbiAgLS1tYXJnaW4tc3RhcnQ6IHZhcigtLWlvbi1tYXJnaW4sIDE2cHgpO1xuICAtLW1hcmdpbi1lbmQ6IHZhcigtLWlvbi1tYXJnaW4sIDE2cHgpO1xuICAtLW1hcmdpbi10b3A6IHZhcigtLWlvbi1tYXJnaW4sIDE2cHgpO1xuICAtLW1hcmdpbi1ib3R0b206IHZhcigtLWlvbi1tYXJnaW4sIDE2cHgpO1xuICBtYXJnaW4tbGVmdDogdmFyKC0taW9uLW1hcmdpbiwgMTZweCk7XG4gIG1hcmdpbi1yaWdodDogdmFyKC0taW9uLW1hcmdpbiwgMTZweCk7XG4gIG1hcmdpbi10b3A6IHZhcigtLWlvbi1tYXJnaW4sIDE2cHgpO1xuICBtYXJnaW4tYm90dG9tOiB2YXIoLS1pb24tbWFyZ2luLCAxNnB4KTtcbn1cbkBzdXBwb3J0cyAobWFyZ2luLWlubGluZS1zdGFydDogMCkgb3IgKC13ZWJraXQtbWFyZ2luLXN0YXJ0OiAwKSB7XG4gIC5pb24tbWFyZ2luLFxuW21hcmdpbl0ge1xuICAgIG1hcmdpbi1sZWZ0OiB1bnNldDtcbiAgICBtYXJnaW4tcmlnaHQ6IHVuc2V0O1xuICAgIC13ZWJraXQtbWFyZ2luLXN0YXJ0OiB2YXIoLS1pb24tbWFyZ2luLCAxNnB4KTtcbiAgICBtYXJnaW4taW5saW5lLXN0YXJ0OiB2YXIoLS1pb24tbWFyZ2luLCAxNnB4KTtcbiAgICAtd2Via2l0LW1hcmdpbi1lbmQ6IHZhcigtLWlvbi1tYXJnaW4sIDE2cHgpO1xuICAgIG1hcmdpbi1pbmxpbmUtZW5kOiB2YXIoLS1pb24tbWFyZ2luLCAxNnB4KTtcbiAgfVxufVxuXG4uaW9uLW1hcmdpbi10b3AsXG5bbWFyZ2luLXRvcF0ge1xuICAtLW1hcmdpbi10b3A6IHZhcigtLWlvbi1tYXJnaW4sIDE2cHgpO1xuICBtYXJnaW4tdG9wOiB2YXIoLS1pb24tbWFyZ2luLCAxNnB4KTtcbn1cbi5pb24tbWFyZ2luLXN0YXJ0LFxuW21hcmdpbi1zdGFydF0ge1xuICAtLW1hcmdpbi1zdGFydDogdmFyKC0taW9uLW1hcmdpbiwgMTZweCk7XG4gIG1hcmdpbi1sZWZ0OiB2YXIoLS1pb24tbWFyZ2luLCAxNnB4KTtcbn1cbkBzdXBwb3J0cyAobWFyZ2luLWlubGluZS1zdGFydDogMCkgb3IgKC13ZWJraXQtbWFyZ2luLXN0YXJ0OiAwKSB7XG4gIC5pb24tbWFyZ2luLXN0YXJ0LFxuW21hcmdpbi1zdGFydF0ge1xuICAgIG1hcmdpbi1sZWZ0OiB1bnNldDtcbiAgICAtd2Via2l0LW1hcmdpbi1zdGFydDogdmFyKC0taW9uLW1hcmdpbiwgMTZweCk7XG4gICAgbWFyZ2luLWlubGluZS1zdGFydDogdmFyKC0taW9uLW1hcmdpbiwgMTZweCk7XG4gIH1cbn1cblxuLmlvbi1tYXJnaW4tZW5kLFxuW21hcmdpbi1lbmRdIHtcbiAgLS1tYXJnaW4tZW5kOiB2YXIoLS1pb24tbWFyZ2luLCAxNnB4KTtcbiAgbWFyZ2luLXJpZ2h0OiB2YXIoLS1pb24tbWFyZ2luLCAxNnB4KTtcbn1cbkBzdXBwb3J0cyAobWFyZ2luLWlubGluZS1zdGFydDogMCkgb3IgKC13ZWJraXQtbWFyZ2luLXN0YXJ0OiAwKSB7XG4gIC5pb24tbWFyZ2luLWVuZCxcblttYXJnaW4tZW5kXSB7XG4gICAgbWFyZ2luLXJpZ2h0OiB1bnNldDtcbiAgICAtd2Via2l0LW1hcmdpbi1lbmQ6IHZhcigtLWlvbi1tYXJnaW4sIDE2cHgpO1xuICAgIG1hcmdpbi1pbmxpbmUtZW5kOiB2YXIoLS1pb24tbWFyZ2luLCAxNnB4KTtcbiAgfVxufVxuXG4uaW9uLW1hcmdpbi1ib3R0b20sXG5bbWFyZ2luLWJvdHRvbV0ge1xuICAtLW1hcmdpbi1ib3R0b206IHZhcigtLWlvbi1tYXJnaW4sIDE2cHgpO1xuICBtYXJnaW4tYm90dG9tOiB2YXIoLS1pb24tbWFyZ2luLCAxNnB4KTtcbn1cbi5pb24tbWFyZ2luLXZlcnRpY2FsLFxuW21hcmdpbi12ZXJ0aWNhbF0ge1xuICAtLW1hcmdpbi10b3A6IHZhcigtLWlvbi1tYXJnaW4sIDE2cHgpO1xuICAtLW1hcmdpbi1ib3R0b206IHZhcigtLWlvbi1tYXJnaW4sIDE2cHgpO1xuICBtYXJnaW4tdG9wOiB2YXIoLS1pb24tbWFyZ2luLCAxNnB4KTtcbiAgbWFyZ2luLWJvdHRvbTogdmFyKC0taW9uLW1hcmdpbiwgMTZweCk7XG59XG4uaW9uLW1hcmdpbi1ob3Jpem9udGFsLFxuW21hcmdpbi1ob3Jpem9udGFsXSB7XG4gIC0tbWFyZ2luLXN0YXJ0OiB2YXIoLS1pb24tbWFyZ2luLCAxNnB4KTtcbiAgLS1tYXJnaW4tZW5kOiB2YXIoLS1pb24tbWFyZ2luLCAxNnB4KTtcbiAgbWFyZ2luLWxlZnQ6IHZhcigtLWlvbi1tYXJnaW4sIDE2cHgpO1xuICBtYXJnaW4tcmlnaHQ6IHZhcigtLWlvbi1tYXJnaW4sIDE2cHgpO1xufVxuQHN1cHBvcnRzIChtYXJnaW4taW5saW5lLXN0YXJ0OiAwKSBvciAoLXdlYmtpdC1tYXJnaW4tc3RhcnQ6IDApIHtcbiAgLmlvbi1tYXJnaW4taG9yaXpvbnRhbCxcblttYXJnaW4taG9yaXpvbnRhbF0ge1xuICAgIG1hcmdpbi1sZWZ0OiB1bnNldDtcbiAgICBtYXJnaW4tcmlnaHQ6IHVuc2V0O1xuICAgIC13ZWJraXQtbWFyZ2luLXN0YXJ0OiB2YXIoLS1pb24tbWFyZ2luLCAxNnB4KTtcbiAgICBtYXJnaW4taW5saW5lLXN0YXJ0OiB2YXIoLS1pb24tbWFyZ2luLCAxNnB4KTtcbiAgICAtd2Via2l0LW1hcmdpbi1lbmQ6IHZhcigtLWlvbi1tYXJnaW4sIDE2cHgpO1xuICAgIG1hcmdpbi1pbmxpbmUtZW5kOiB2YXIoLS1pb24tbWFyZ2luLCAxNnB4KTtcbiAgfVxufVxuXG4vKiMgc291cmNlTWFwcGluZ1VSTD1wYWRkaW5nLmNzcy5tYXAgKi9cbiIsbnVsbCwiLmlvbi1mbG9hdC1sZWZ0LFxuW2Zsb2F0LWxlZnRdIHtcbiAgZmxvYXQ6IGxlZnQgIWltcG9ydGFudDtcbn1cblxuLmlvbi1mbG9hdC1yaWdodCxcbltmbG9hdC1yaWdodF0ge1xuICBmbG9hdDogcmlnaHQgIWltcG9ydGFudDtcbn1cblxuLmlvbi1mbG9hdC1zdGFydCxcbltmbG9hdC1zdGFydF0ge1xuICBmbG9hdDogbGVmdCAhaW1wb3J0YW50O1xufVxuW2Rpcj1ydGxdIC5pb24tZmxvYXQtc3RhcnQsIDpob3N0LWNvbnRleHQoW2Rpcj1ydGxdKSAuaW9uLWZsb2F0LXN0YXJ0LCBbZGlyPXJ0bF0gW2Zsb2F0LXN0YXJ0XSwgOmhvc3QtY29udGV4dChbZGlyPXJ0bF0pIFtmbG9hdC1zdGFydF0ge1xuICBmbG9hdDogcmlnaHQgIWltcG9ydGFudDtcbn1cblxuLmlvbi1mbG9hdC1lbmQsXG5bZmxvYXQtZW5kXSB7XG4gIGZsb2F0OiByaWdodCAhaW1wb3J0YW50O1xufVxuW2Rpcj1ydGxdIC5pb24tZmxvYXQtZW5kLCA6aG9zdC1jb250ZXh0KFtkaXI9cnRsXSkgLmlvbi1mbG9hdC1lbmQsIFtkaXI9cnRsXSBbZmxvYXQtZW5kXSwgOmhvc3QtY29udGV4dChbZGlyPXJ0bF0pIFtmbG9hdC1lbmRdIHtcbiAgZmxvYXQ6IGxlZnQgIWltcG9ydGFudDtcbn1cblxuQG1lZGlhIChtaW4td2lkdGg6IDU3NnB4KSB7XG4gIC5pb24tZmxvYXQtc20tbGVmdCxcbltmbG9hdC1zbS1sZWZ0XSB7XG4gICAgZmxvYXQ6IGxlZnQgIWltcG9ydGFudDtcbiAgfVxuXG4gIC5pb24tZmxvYXQtc20tcmlnaHQsXG5bZmxvYXQtc20tcmlnaHRdIHtcbiAgICBmbG9hdDogcmlnaHQgIWltcG9ydGFudDtcbiAgfVxuXG4gIC5pb24tZmxvYXQtc20tc3RhcnQsXG5bZmxvYXQtc20tc3RhcnRdIHtcbiAgICBmbG9hdDogbGVmdCAhaW1wb3J0YW50O1xuICB9XG4gIFtkaXI9cnRsXSAuaW9uLWZsb2F0LXNtLXN0YXJ0LCA6aG9zdC1jb250ZXh0KFtkaXI9cnRsXSkgLmlvbi1mbG9hdC1zbS1zdGFydCwgW2Rpcj1ydGxdIFtmbG9hdC1zbS1zdGFydF0sIDpob3N0LWNvbnRleHQoW2Rpcj1ydGxdKSBbZmxvYXQtc20tc3RhcnRdIHtcbiAgICBmbG9hdDogcmlnaHQgIWltcG9ydGFudDtcbiAgfVxuXG4gIC5pb24tZmxvYXQtc20tZW5kLFxuW2Zsb2F0LXNtLWVuZF0ge1xuICAgIGZsb2F0OiByaWdodCAhaW1wb3J0YW50O1xuICB9XG4gIFtkaXI9cnRsXSAuaW9uLWZsb2F0LXNtLWVuZCwgOmhvc3QtY29udGV4dChbZGlyPXJ0bF0pIC5pb24tZmxvYXQtc20tZW5kLCBbZGlyPXJ0bF0gW2Zsb2F0LXNtLWVuZF0sIDpob3N0LWNvbnRleHQoW2Rpcj1ydGxdKSBbZmxvYXQtc20tZW5kXSB7XG4gICAgZmxvYXQ6IGxlZnQgIWltcG9ydGFudDtcbiAgfVxufVxuQG1lZGlhIChtaW4td2lkdGg6IDc2OHB4KSB7XG4gIC5pb24tZmxvYXQtbWQtbGVmdCxcbltmbG9hdC1tZC1sZWZ0XSB7XG4gICAgZmxvYXQ6IGxlZnQgIWltcG9ydGFudDtcbiAgfVxuXG4gIC5pb24tZmxvYXQtbWQtcmlnaHQsXG5bZmxvYXQtbWQtcmlnaHRdIHtcbiAgICBmbG9hdDogcmlnaHQgIWltcG9ydGFudDtcbiAgfVxuXG4gIC5pb24tZmxvYXQtbWQtc3RhcnQsXG5bZmxvYXQtbWQtc3RhcnRdIHtcbiAgICBmbG9hdDogbGVmdCAhaW1wb3J0YW50O1xuICB9XG4gIFtkaXI9cnRsXSAuaW9uLWZsb2F0LW1kLXN0YXJ0LCA6aG9zdC1jb250ZXh0KFtkaXI9cnRsXSkgLmlvbi1mbG9hdC1tZC1zdGFydCwgW2Rpcj1ydGxdIFtmbG9hdC1tZC1zdGFydF0sIDpob3N0LWNvbnRleHQoW2Rpcj1ydGxdKSBbZmxvYXQtbWQtc3RhcnRdIHtcbiAgICBmbG9hdDogcmlnaHQgIWltcG9ydGFudDtcbiAgfVxuXG4gIC5pb24tZmxvYXQtbWQtZW5kLFxuW2Zsb2F0LW1kLWVuZF0ge1xuICAgIGZsb2F0OiByaWdodCAhaW1wb3J0YW50O1xuICB9XG4gIFtkaXI9cnRsXSAuaW9uLWZsb2F0LW1kLWVuZCwgOmhvc3QtY29udGV4dChbZGlyPXJ0bF0pIC5pb24tZmxvYXQtbWQtZW5kLCBbZGlyPXJ0bF0gW2Zsb2F0LW1kLWVuZF0sIDpob3N0LWNvbnRleHQoW2Rpcj1ydGxdKSBbZmxvYXQtbWQtZW5kXSB7XG4gICAgZmxvYXQ6IGxlZnQgIWltcG9ydGFudDtcbiAgfVxufVxuQG1lZGlhIChtaW4td2lkdGg6IDk5MnB4KSB7XG4gIC5pb24tZmxvYXQtbGctbGVmdCxcbltmbG9hdC1sZy1sZWZ0XSB7XG4gICAgZmxvYXQ6IGxlZnQgIWltcG9ydGFudDtcbiAgfVxuXG4gIC5pb24tZmxvYXQtbGctcmlnaHQsXG5bZmxvYXQtbGctcmlnaHRdIHtcbiAgICBmbG9hdDogcmlnaHQgIWltcG9ydGFudDtcbiAgfVxuXG4gIC5pb24tZmxvYXQtbGctc3RhcnQsXG5bZmxvYXQtbGctc3RhcnRdIHtcbiAgICBmbG9hdDogbGVmdCAhaW1wb3J0YW50O1xuICB9XG4gIFtkaXI9cnRsXSAuaW9uLWZsb2F0LWxnLXN0YXJ0LCA6aG9zdC1jb250ZXh0KFtkaXI9cnRsXSkgLmlvbi1mbG9hdC1sZy1zdGFydCwgW2Rpcj1ydGxdIFtmbG9hdC1sZy1zdGFydF0sIDpob3N0LWNvbnRleHQoW2Rpcj1ydGxdKSBbZmxvYXQtbGctc3RhcnRdIHtcbiAgICBmbG9hdDogcmlnaHQgIWltcG9ydGFudDtcbiAgfVxuXG4gIC5pb24tZmxvYXQtbGctZW5kLFxuW2Zsb2F0LWxnLWVuZF0ge1xuICAgIGZsb2F0OiByaWdodCAhaW1wb3J0YW50O1xuICB9XG4gIFtkaXI9cnRsXSAuaW9uLWZsb2F0LWxnLWVuZCwgOmhvc3QtY29udGV4dChbZGlyPXJ0bF0pIC5pb24tZmxvYXQtbGctZW5kLCBbZGlyPXJ0bF0gW2Zsb2F0LWxnLWVuZF0sIDpob3N0LWNvbnRleHQoW2Rpcj1ydGxdKSBbZmxvYXQtbGctZW5kXSB7XG4gICAgZmxvYXQ6IGxlZnQgIWltcG9ydGFudDtcbiAgfVxufVxuQG1lZGlhIChtaW4td2lkdGg6IDEyMDBweCkge1xuICAuaW9uLWZsb2F0LXhsLWxlZnQsXG5bZmxvYXQteGwtbGVmdF0ge1xuICAgIGZsb2F0OiBsZWZ0ICFpbXBvcnRhbnQ7XG4gIH1cblxuICAuaW9uLWZsb2F0LXhsLXJpZ2h0LFxuW2Zsb2F0LXhsLXJpZ2h0XSB7XG4gICAgZmxvYXQ6IHJpZ2h0ICFpbXBvcnRhbnQ7XG4gIH1cblxuICAuaW9uLWZsb2F0LXhsLXN0YXJ0LFxuW2Zsb2F0LXhsLXN0YXJ0XSB7XG4gICAgZmxvYXQ6IGxlZnQgIWltcG9ydGFudDtcbiAgfVxuICBbZGlyPXJ0bF0gLmlvbi1mbG9hdC14bC1zdGFydCwgOmhvc3QtY29udGV4dChbZGlyPXJ0bF0pIC5pb24tZmxvYXQteGwtc3RhcnQsIFtkaXI9cnRsXSBbZmxvYXQteGwtc3RhcnRdLCA6aG9zdC1jb250ZXh0KFtkaXI9cnRsXSkgW2Zsb2F0LXhsLXN0YXJ0XSB7XG4gICAgZmxvYXQ6IHJpZ2h0ICFpbXBvcnRhbnQ7XG4gIH1cblxuICAuaW9uLWZsb2F0LXhsLWVuZCxcbltmbG9hdC14bC1lbmRdIHtcbiAgICBmbG9hdDogcmlnaHQgIWltcG9ydGFudDtcbiAgfVxuICBbZGlyPXJ0bF0gLmlvbi1mbG9hdC14bC1lbmQsIDpob3N0LWNvbnRleHQoW2Rpcj1ydGxdKSAuaW9uLWZsb2F0LXhsLWVuZCwgW2Rpcj1ydGxdIFtmbG9hdC14bC1lbmRdLCA6aG9zdC1jb250ZXh0KFtkaXI9cnRsXSkgW2Zsb2F0LXhsLWVuZF0ge1xuICAgIGZsb2F0OiBsZWZ0ICFpbXBvcnRhbnQ7XG4gIH1cbn1cblxuLyojIHNvdXJjZU1hcHBpbmdVUkw9ZmxvYXQtZWxlbWVudHMuY3NzLm1hcCAqL1xuIixudWxsLCIuaW9uLXRleHQtY2VudGVyLFxuW3RleHQtY2VudGVyXSB7XG4gIHRleHQtYWxpZ246IGNlbnRlciAhaW1wb3J0YW50O1xufVxuXG4uaW9uLXRleHQtanVzdGlmeSxcblt0ZXh0LWp1c3RpZnldIHtcbiAgdGV4dC1hbGlnbjoganVzdGlmeSAhaW1wb3J0YW50O1xufVxuXG4uaW9uLXRleHQtc3RhcnQsXG5bdGV4dC1zdGFydF0ge1xuICB0ZXh0LWFsaWduOiBzdGFydCAhaW1wb3J0YW50O1xufVxuXG4uaW9uLXRleHQtZW5kLFxuW3RleHQtZW5kXSB7XG4gIHRleHQtYWxpZ246IGVuZCAhaW1wb3J0YW50O1xufVxuXG4uaW9uLXRleHQtbGVmdCxcblt0ZXh0LWxlZnRdIHtcbiAgdGV4dC1hbGlnbjogbGVmdCAhaW1wb3J0YW50O1xufVxuXG4uaW9uLXRleHQtcmlnaHQsXG5bdGV4dC1yaWdodF0ge1xuICB0ZXh0LWFsaWduOiByaWdodCAhaW1wb3J0YW50O1xufVxuXG4uaW9uLXRleHQtbm93cmFwLFxuW3RleHQtbm93cmFwXSB7XG4gIHdoaXRlLXNwYWNlOiBub3dyYXAgIWltcG9ydGFudDtcbn1cblxuLmlvbi10ZXh0LXdyYXAsXG5bdGV4dC13cmFwXSB7XG4gIHdoaXRlLXNwYWNlOiBub3JtYWwgIWltcG9ydGFudDtcbn1cblxuQG1lZGlhIChtaW4td2lkdGg6IDU3NnB4KSB7XG4gIC5pb24tdGV4dC1zbS1jZW50ZXIsXG5bdGV4dC1zbS1jZW50ZXJdIHtcbiAgICB0ZXh0LWFsaWduOiBjZW50ZXIgIWltcG9ydGFudDtcbiAgfVxuXG4gIC5pb24tdGV4dC1zbS1qdXN0aWZ5LFxuW3RleHQtc20tanVzdGlmeV0ge1xuICAgIHRleHQtYWxpZ246IGp1c3RpZnkgIWltcG9ydGFudDtcbiAgfVxuXG4gIC5pb24tdGV4dC1zbS1zdGFydCxcblt0ZXh0LXNtLXN0YXJ0XSB7XG4gICAgdGV4dC1hbGlnbjogc3RhcnQgIWltcG9ydGFudDtcbiAgfVxuXG4gIC5pb24tdGV4dC1zbS1lbmQsXG5bdGV4dC1zbS1lbmRdIHtcbiAgICB0ZXh0LWFsaWduOiBlbmQgIWltcG9ydGFudDtcbiAgfVxuXG4gIC5pb24tdGV4dC1zbS1sZWZ0LFxuW3RleHQtc20tbGVmdF0ge1xuICAgIHRleHQtYWxpZ246IGxlZnQgIWltcG9ydGFudDtcbiAgfVxuXG4gIC5pb24tdGV4dC1zbS1yaWdodCxcblt0ZXh0LXNtLXJpZ2h0XSB7XG4gICAgdGV4dC1hbGlnbjogcmlnaHQgIWltcG9ydGFudDtcbiAgfVxuXG4gIC5pb24tdGV4dC1zbS1ub3dyYXAsXG5bdGV4dC1zbS1ub3dyYXBdIHtcbiAgICB3aGl0ZS1zcGFjZTogbm93cmFwICFpbXBvcnRhbnQ7XG4gIH1cblxuICAuaW9uLXRleHQtc20td3JhcCxcblt0ZXh0LXNtLXdyYXBdIHtcbiAgICB3aGl0ZS1zcGFjZTogbm9ybWFsICFpbXBvcnRhbnQ7XG4gIH1cbn1cbkBtZWRpYSAobWluLXdpZHRoOiA3NjhweCkge1xuICAuaW9uLXRleHQtbWQtY2VudGVyLFxuW3RleHQtbWQtY2VudGVyXSB7XG4gICAgdGV4dC1hbGlnbjogY2VudGVyICFpbXBvcnRhbnQ7XG4gIH1cblxuICAuaW9uLXRleHQtbWQtanVzdGlmeSxcblt0ZXh0LW1kLWp1c3RpZnldIHtcbiAgICB0ZXh0LWFsaWduOiBqdXN0aWZ5ICFpbXBvcnRhbnQ7XG4gIH1cblxuICAuaW9uLXRleHQtbWQtc3RhcnQsXG5bdGV4dC1tZC1zdGFydF0ge1xuICAgIHRleHQtYWxpZ246IHN0YXJ0ICFpbXBvcnRhbnQ7XG4gIH1cblxuICAuaW9uLXRleHQtbWQtZW5kLFxuW3RleHQtbWQtZW5kXSB7XG4gICAgdGV4dC1hbGlnbjogZW5kICFpbXBvcnRhbnQ7XG4gIH1cblxuICAuaW9uLXRleHQtbWQtbGVmdCxcblt0ZXh0LW1kLWxlZnRdIHtcbiAgICB0ZXh0LWFsaWduOiBsZWZ0ICFpbXBvcnRhbnQ7XG4gIH1cblxuICAuaW9uLXRleHQtbWQtcmlnaHQsXG5bdGV4dC1tZC1yaWdodF0ge1xuICAgIHRleHQtYWxpZ246IHJpZ2h0ICFpbXBvcnRhbnQ7XG4gIH1cblxuICAuaW9uLXRleHQtbWQtbm93cmFwLFxuW3RleHQtbWQtbm93cmFwXSB7XG4gICAgd2hpdGUtc3BhY2U6IG5vd3JhcCAhaW1wb3J0YW50O1xuICB9XG5cbiAgLmlvbi10ZXh0LW1kLXdyYXAsXG5bdGV4dC1tZC13cmFwXSB7XG4gICAgd2hpdGUtc3BhY2U6IG5vcm1hbCAhaW1wb3J0YW50O1xuICB9XG59XG5AbWVkaWEgKG1pbi13aWR0aDogOTkycHgpIHtcbiAgLmlvbi10ZXh0LWxnLWNlbnRlcixcblt0ZXh0LWxnLWNlbnRlcl0ge1xuICAgIHRleHQtYWxpZ246IGNlbnRlciAhaW1wb3J0YW50O1xuICB9XG5cbiAgLmlvbi10ZXh0LWxnLWp1c3RpZnksXG5bdGV4dC1sZy1qdXN0aWZ5XSB7XG4gICAgdGV4dC1hbGlnbjoganVzdGlmeSAhaW1wb3J0YW50O1xuICB9XG5cbiAgLmlvbi10ZXh0LWxnLXN0YXJ0LFxuW3RleHQtbGctc3RhcnRdIHtcbiAgICB0ZXh0LWFsaWduOiBzdGFydCAhaW1wb3J0YW50O1xuICB9XG5cbiAgLmlvbi10ZXh0LWxnLWVuZCxcblt0ZXh0LWxnLWVuZF0ge1xuICAgIHRleHQtYWxpZ246IGVuZCAhaW1wb3J0YW50O1xuICB9XG5cbiAgLmlvbi10ZXh0LWxnLWxlZnQsXG5bdGV4dC1sZy1sZWZ0XSB7XG4gICAgdGV4dC1hbGlnbjogbGVmdCAhaW1wb3J0YW50O1xuICB9XG5cbiAgLmlvbi10ZXh0LWxnLXJpZ2h0LFxuW3RleHQtbGctcmlnaHRdIHtcbiAgICB0ZXh0LWFsaWduOiByaWdodCAhaW1wb3J0YW50O1xuICB9XG5cbiAgLmlvbi10ZXh0LWxnLW5vd3JhcCxcblt0ZXh0LWxnLW5vd3JhcF0ge1xuICAgIHdoaXRlLXNwYWNlOiBub3dyYXAgIWltcG9ydGFudDtcbiAgfVxuXG4gIC5pb24tdGV4dC1sZy13cmFwLFxuW3RleHQtbGctd3JhcF0ge1xuICAgIHdoaXRlLXNwYWNlOiBub3JtYWwgIWltcG9ydGFudDtcbiAgfVxufVxuQG1lZGlhIChtaW4td2lkdGg6IDEyMDBweCkge1xuICAuaW9uLXRleHQteGwtY2VudGVyLFxuW3RleHQteGwtY2VudGVyXSB7XG4gICAgdGV4dC1hbGlnbjogY2VudGVyICFpbXBvcnRhbnQ7XG4gIH1cblxuICAuaW9uLXRleHQteGwtanVzdGlmeSxcblt0ZXh0LXhsLWp1c3RpZnldIHtcbiAgICB0ZXh0LWFsaWduOiBqdXN0aWZ5ICFpbXBvcnRhbnQ7XG4gIH1cblxuICAuaW9uLXRleHQteGwtc3RhcnQsXG5bdGV4dC14bC1zdGFydF0ge1xuICAgIHRleHQtYWxpZ246IHN0YXJ0ICFpbXBvcnRhbnQ7XG4gIH1cblxuICAuaW9uLXRleHQteGwtZW5kLFxuW3RleHQteGwtZW5kXSB7XG4gICAgdGV4dC1hbGlnbjogZW5kICFpbXBvcnRhbnQ7XG4gIH1cblxuICAuaW9uLXRleHQteGwtbGVmdCxcblt0ZXh0LXhsLWxlZnRdIHtcbiAgICB0ZXh0LWFsaWduOiBsZWZ0ICFpbXBvcnRhbnQ7XG4gIH1cblxuICAuaW9uLXRleHQteGwtcmlnaHQsXG5bdGV4dC14bC1yaWdodF0ge1xuICAgIHRleHQtYWxpZ246IHJpZ2h0ICFpbXBvcnRhbnQ7XG4gIH1cblxuICAuaW9uLXRleHQteGwtbm93cmFwLFxuW3RleHQteGwtbm93cmFwXSB7XG4gICAgd2hpdGUtc3BhY2U6IG5vd3JhcCAhaW1wb3J0YW50O1xuICB9XG5cbiAgLmlvbi10ZXh0LXhsLXdyYXAsXG5bdGV4dC14bC13cmFwXSB7XG4gICAgd2hpdGUtc3BhY2U6IG5vcm1hbCAhaW1wb3J0YW50O1xuICB9XG59XG5cbi8qIyBzb3VyY2VNYXBwaW5nVVJMPXRleHQtYWxpZ25tZW50LmNzcy5tYXAgKi9cbiIsbnVsbCwiLmlvbi10ZXh0LXVwcGVyY2FzZSxcblt0ZXh0LXVwcGVyY2FzZV0ge1xuICAvKiBzdHlsZWxpbnQtZGlzYWJsZS1uZXh0LWxpbmUgZGVjbGFyYXRpb24tbm8taW1wb3J0YW50ICovXG4gIHRleHQtdHJhbnNmb3JtOiB1cHBlcmNhc2UgIWltcG9ydGFudDtcbn1cblxuLmlvbi10ZXh0LWxvd2VyY2FzZSxcblt0ZXh0LWxvd2VyY2FzZV0ge1xuICAvKiBzdHlsZWxpbnQtZGlzYWJsZS1uZXh0LWxpbmUgZGVjbGFyYXRpb24tbm8taW1wb3J0YW50ICovXG4gIHRleHQtdHJhbnNmb3JtOiBsb3dlcmNhc2UgIWltcG9ydGFudDtcbn1cblxuLmlvbi10ZXh0LWNhcGl0YWxpemUsXG5bdGV4dC1jYXBpdGFsaXplXSB7XG4gIC8qIHN0eWxlbGludC1kaXNhYmxlLW5leHQtbGluZSBkZWNsYXJhdGlvbi1uby1pbXBvcnRhbnQgKi9cbiAgdGV4dC10cmFuc2Zvcm06IGNhcGl0YWxpemUgIWltcG9ydGFudDtcbn1cblxuQG1lZGlhIChtaW4td2lkdGg6IDU3NnB4KSB7XG4gIC5pb24tdGV4dC1zbS11cHBlcmNhc2UsXG5bdGV4dC1zbS11cHBlcmNhc2VdIHtcbiAgICAvKiBzdHlsZWxpbnQtZGlzYWJsZS1uZXh0LWxpbmUgZGVjbGFyYXRpb24tbm8taW1wb3J0YW50ICovXG4gICAgdGV4dC10cmFuc2Zvcm06IHVwcGVyY2FzZSAhaW1wb3J0YW50O1xuICB9XG5cbiAgLmlvbi10ZXh0LXNtLWxvd2VyY2FzZSxcblt0ZXh0LXNtLWxvd2VyY2FzZV0ge1xuICAgIC8qIHN0eWxlbGludC1kaXNhYmxlLW5leHQtbGluZSBkZWNsYXJhdGlvbi1uby1pbXBvcnRhbnQgKi9cbiAgICB0ZXh0LXRyYW5zZm9ybTogbG93ZXJjYXNlICFpbXBvcnRhbnQ7XG4gIH1cblxuICAuaW9uLXRleHQtc20tY2FwaXRhbGl6ZSxcblt0ZXh0LXNtLWNhcGl0YWxpemVdIHtcbiAgICAvKiBzdHlsZWxpbnQtZGlzYWJsZS1uZXh0LWxpbmUgZGVjbGFyYXRpb24tbm8taW1wb3J0YW50ICovXG4gICAgdGV4dC10cmFuc2Zvcm06IGNhcGl0YWxpemUgIWltcG9ydGFudDtcbiAgfVxufVxuQG1lZGlhIChtaW4td2lkdGg6IDc2OHB4KSB7XG4gIC5pb24tdGV4dC1tZC11cHBlcmNhc2UsXG5bdGV4dC1tZC11cHBlcmNhc2VdIHtcbiAgICAvKiBzdHlsZWxpbnQtZGlzYWJsZS1uZXh0LWxpbmUgZGVjbGFyYXRpb24tbm8taW1wb3J0YW50ICovXG4gICAgdGV4dC10cmFuc2Zvcm06IHVwcGVyY2FzZSAhaW1wb3J0YW50O1xuICB9XG5cbiAgLmlvbi10ZXh0LW1kLWxvd2VyY2FzZSxcblt0ZXh0LW1kLWxvd2VyY2FzZV0ge1xuICAgIC8qIHN0eWxlbGludC1kaXNhYmxlLW5leHQtbGluZSBkZWNsYXJhdGlvbi1uby1pbXBvcnRhbnQgKi9cbiAgICB0ZXh0LXRyYW5zZm9ybTogbG93ZXJjYXNlICFpbXBvcnRhbnQ7XG4gIH1cblxuICAuaW9uLXRleHQtbWQtY2FwaXRhbGl6ZSxcblt0ZXh0LW1kLWNhcGl0YWxpemVdIHtcbiAgICAvKiBzdHlsZWxpbnQtZGlzYWJsZS1uZXh0LWxpbmUgZGVjbGFyYXRpb24tbm8taW1wb3J0YW50ICovXG4gICAgdGV4dC10cmFuc2Zvcm06IGNhcGl0YWxpemUgIWltcG9ydGFudDtcbiAgfVxufVxuQG1lZGlhIChtaW4td2lkdGg6IDk5MnB4KSB7XG4gIC5pb24tdGV4dC1sZy11cHBlcmNhc2UsXG5bdGV4dC1sZy11cHBlcmNhc2VdIHtcbiAgICAvKiBzdHlsZWxpbnQtZGlzYWJsZS1uZXh0LWxpbmUgZGVjbGFyYXRpb24tbm8taW1wb3J0YW50ICovXG4gICAgdGV4dC10cmFuc2Zvcm06IHVwcGVyY2FzZSAhaW1wb3J0YW50O1xuICB9XG5cbiAgLmlvbi10ZXh0LWxnLWxvd2VyY2FzZSxcblt0ZXh0LWxnLWxvd2VyY2FzZV0ge1xuICAgIC8qIHN0eWxlbGludC1kaXNhYmxlLW5leHQtbGluZSBkZWNsYXJhdGlvbi1uby1pbXBvcnRhbnQgKi9cbiAgICB0ZXh0LXRyYW5zZm9ybTogbG93ZXJjYXNlICFpbXBvcnRhbnQ7XG4gIH1cblxuICAuaW9uLXRleHQtbGctY2FwaXRhbGl6ZSxcblt0ZXh0LWxnLWNhcGl0YWxpemVdIHtcbiAgICAvKiBzdHlsZWxpbnQtZGlzYWJsZS1uZXh0LWxpbmUgZGVjbGFyYXRpb24tbm8taW1wb3J0YW50ICovXG4gICAgdGV4dC10cmFuc2Zvcm06IGNhcGl0YWxpemUgIWltcG9ydGFudDtcbiAgfVxufVxuQG1lZGlhIChtaW4td2lkdGg6IDEyMDBweCkge1xuICAuaW9uLXRleHQteGwtdXBwZXJjYXNlLFxuW3RleHQteGwtdXBwZXJjYXNlXSB7XG4gICAgLyogc3R5bGVsaW50LWRpc2FibGUtbmV4dC1saW5lIGRlY2xhcmF0aW9uLW5vLWltcG9ydGFudCAqL1xuICAgIHRleHQtdHJhbnNmb3JtOiB1cHBlcmNhc2UgIWltcG9ydGFudDtcbiAgfVxuXG4gIC5pb24tdGV4dC14bC1sb3dlcmNhc2UsXG5bdGV4dC14bC1sb3dlcmNhc2VdIHtcbiAgICAvKiBzdHlsZWxpbnQtZGlzYWJsZS1uZXh0LWxpbmUgZGVjbGFyYXRpb24tbm8taW1wb3J0YW50ICovXG4gICAgdGV4dC10cmFuc2Zvcm06IGxvd2VyY2FzZSAhaW1wb3J0YW50O1xuICB9XG5cbiAgLmlvbi10ZXh0LXhsLWNhcGl0YWxpemUsXG5bdGV4dC14bC1jYXBpdGFsaXplXSB7XG4gICAgLyogc3R5bGVsaW50LWRpc2FibGUtbmV4dC1saW5lIGRlY2xhcmF0aW9uLW5vLWltcG9ydGFudCAqL1xuICAgIHRleHQtdHJhbnNmb3JtOiBjYXBpdGFsaXplICFpbXBvcnRhbnQ7XG4gIH1cbn1cblxuLyojIHNvdXJjZU1hcHBpbmdVUkw9dGV4dC10cmFuc2Zvcm1hdGlvbi5jc3MubWFwICovXG4iLG51bGwsIi5pb24tYWxpZ24tc2VsZi1zdGFydCxcblthbGlnbi1zZWxmLXN0YXJ0XSB7XG4gIGFsaWduLXNlbGY6IGZsZXgtc3RhcnQgIWltcG9ydGFudDtcbn1cblxuLmlvbi1hbGlnbi1zZWxmLWVuZCxcblthbGlnbi1zZWxmLWVuZF0ge1xuICBhbGlnbi1zZWxmOiBmbGV4LWVuZCAhaW1wb3J0YW50O1xufVxuXG4uaW9uLWFsaWduLXNlbGYtY2VudGVyLFxuW2FsaWduLXNlbGYtY2VudGVyXSB7XG4gIGFsaWduLXNlbGY6IGNlbnRlciAhaW1wb3J0YW50O1xufVxuXG4uaW9uLWFsaWduLXNlbGYtc3RyZXRjaCxcblthbGlnbi1zZWxmLXN0cmV0Y2hdIHtcbiAgYWxpZ24tc2VsZjogc3RyZXRjaCAhaW1wb3J0YW50O1xufVxuXG4uaW9uLWFsaWduLXNlbGYtYmFzZWxpbmUsXG5bYWxpZ24tc2VsZi1iYXNlbGluZV0ge1xuICBhbGlnbi1zZWxmOiBiYXNlbGluZSAhaW1wb3J0YW50O1xufVxuXG4uaW9uLWFsaWduLXNlbGYtYXV0byxcblthbGlnbi1zZWxmLWF1dG9dIHtcbiAgYWxpZ24tc2VsZjogYXV0byAhaW1wb3J0YW50O1xufVxuXG4uaW9uLXdyYXAsXG5bd3JhcF0ge1xuICBmbGV4LXdyYXA6IHdyYXAgIWltcG9ydGFudDtcbn1cblxuLmlvbi1ub3dyYXAsXG5bbm93cmFwXSB7XG4gIGZsZXgtd3JhcDogbm93cmFwICFpbXBvcnRhbnQ7XG59XG5cbi5pb24td3JhcC1yZXZlcnNlLFxuW3dyYXAtcmV2ZXJzZV0ge1xuICBmbGV4LXdyYXA6IHdyYXAtcmV2ZXJzZSAhaW1wb3J0YW50O1xufVxuXG4uaW9uLWp1c3RpZnktY29udGVudC1zdGFydCxcbltqdXN0aWZ5LWNvbnRlbnQtc3RhcnRdIHtcbiAganVzdGlmeS1jb250ZW50OiBmbGV4LXN0YXJ0ICFpbXBvcnRhbnQ7XG59XG5cbi5pb24tanVzdGlmeS1jb250ZW50LWNlbnRlcixcbltqdXN0aWZ5LWNvbnRlbnQtY2VudGVyXSB7XG4gIGp1c3RpZnktY29udGVudDogY2VudGVyICFpbXBvcnRhbnQ7XG59XG5cbi5pb24tanVzdGlmeS1jb250ZW50LWVuZCxcbltqdXN0aWZ5LWNvbnRlbnQtZW5kXSB7XG4gIGp1c3RpZnktY29udGVudDogZmxleC1lbmQgIWltcG9ydGFudDtcbn1cblxuLmlvbi1qdXN0aWZ5LWNvbnRlbnQtYXJvdW5kLFxuW2p1c3RpZnktY29udGVudC1hcm91bmRdIHtcbiAganVzdGlmeS1jb250ZW50OiBzcGFjZS1hcm91bmQgIWltcG9ydGFudDtcbn1cblxuLmlvbi1qdXN0aWZ5LWNvbnRlbnQtYmV0d2VlbixcbltqdXN0aWZ5LWNvbnRlbnQtYmV0d2Vlbl0ge1xuICBqdXN0aWZ5LWNvbnRlbnQ6IHNwYWNlLWJldHdlZW4gIWltcG9ydGFudDtcbn1cblxuLmlvbi1qdXN0aWZ5LWNvbnRlbnQtZXZlbmx5LFxuW2p1c3RpZnktY29udGVudC1ldmVubHldIHtcbiAganVzdGlmeS1jb250ZW50OiBzcGFjZS1ldmVubHkgIWltcG9ydGFudDtcbn1cblxuLmlvbi1hbGlnbi1pdGVtcy1zdGFydCxcblthbGlnbi1pdGVtcy1zdGFydF0ge1xuICBhbGlnbi1pdGVtczogZmxleC1zdGFydCAhaW1wb3J0YW50O1xufVxuXG4uaW9uLWFsaWduLWl0ZW1zLWNlbnRlcixcblthbGlnbi1pdGVtcy1jZW50ZXJdIHtcbiAgYWxpZ24taXRlbXM6IGNlbnRlciAhaW1wb3J0YW50O1xufVxuXG4uaW9uLWFsaWduLWl0ZW1zLWVuZCxcblthbGlnbi1pdGVtcy1lbmRdIHtcbiAgYWxpZ24taXRlbXM6IGZsZXgtZW5kICFpbXBvcnRhbnQ7XG59XG5cbi5pb24tYWxpZ24taXRlbXMtc3RyZXRjaCxcblthbGlnbi1pdGVtcy1zdHJldGNoXSB7XG4gIGFsaWduLWl0ZW1zOiBzdHJldGNoICFpbXBvcnRhbnQ7XG59XG5cbi5pb24tYWxpZ24taXRlbXMtYmFzZWxpbmUsXG5bYWxpZ24taXRlbXMtYmFzZWxpbmVdIHtcbiAgYWxpZ24taXRlbXM6IGJhc2VsaW5lICFpbXBvcnRhbnQ7XG59XG5cbi8qIyBzb3VyY2VNYXBwaW5nVVJMPWZsZXgtdXRpbHMuY3NzLm1hcCAqL1xuIiwiLy8gaHR0cDovL2lvbmljZnJhbWV3b3JrLmNvbS9kb2NzL3RoZW1pbmcvXG5AaW1wb3J0ICd+QGlvbmljL2FuZ3VsYXIvY3NzL2NvcmUuY3NzJztcbkBpbXBvcnQgJ35AaW9uaWMvYW5ndWxhci9jc3Mvbm9ybWFsaXplLmNzcyc7XG5AaW1wb3J0ICd+QGlvbmljL2FuZ3VsYXIvY3NzL3N0cnVjdHVyZS5jc3MnO1xuQGltcG9ydCAnfkBpb25pYy9hbmd1bGFyL2Nzcy90eXBvZ3JhcGh5LmNzcyc7XG5cbkBpbXBvcnQgJ35AaW9uaWMvYW5ndWxhci9jc3MvcGFkZGluZy5jc3MnO1xuQGltcG9ydCAnfkBpb25pYy9hbmd1bGFyL2Nzcy9mbG9hdC1lbGVtZW50cy5jc3MnO1xuQGltcG9ydCAnfkBpb25pYy9hbmd1bGFyL2Nzcy90ZXh0LWFsaWdubWVudC5jc3MnO1xuQGltcG9ydCAnfkBpb25pYy9hbmd1bGFyL2Nzcy90ZXh0LXRyYW5zZm9ybWF0aW9uLmNzcyc7XG5AaW1wb3J0ICd+QGlvbmljL2FuZ3VsYXIvY3NzL2ZsZXgtdXRpbHMuY3NzJztcblxuJGFwcC1pbnRlcmFjdGlvbi1jb2xvcjogIzExQjNFRjtcbmh0bWwge1xuICAgIGZvbnQtZmFtaWx5OiAnVGl0aWxsaXVtIFdlYicsIHNhbnMtc2VyaWYgIWltcG9ydGFudDtcbn1cbi5maXhlZCB7XG4gICAgcG9zaXRpb246Zml4ZWQgIWltcG9ydGFudDtcbn1cbi5zcGFjaW5nIHtcbiAgICBoZWlnaHQ6IDUwcHggIWltcG9ydGFudDtcbn1cbi5jYXRlZ29yeSB7XG4gICAgd2lkdGg6IDEwMCU7XG4gICAgdGV4dC1hbGlnbjogY2VudGVyO1xuICAgIGNvbG9yOiBibGFjaztcbiAgICBmb250LXNpemU6IDI0cHg7XG4gICAgbWFyZ2luLWJvdHRvbTogMSU7XG4gICAgYm9yZGVyLWJvdHRvbTogMXB4IHNvbGlkIGJsYWNrO1xufVxuXG4uc2VhcmNoYmFyLWlucHV0IHtcbiAgICBiYWNrZ3JvdW5kOiB3aGl0ZSAhaW1wb3J0YW50O1xufVxuLmJnIHtcbiAgICBiYWNrZ3JvdW5kOiBsaWdodGdyZXk7XG59XG4vKiBpbi1mbGlnaHQgY2xvbmUgKi9cbi5ndS1taXJyb3Ige1xuICAgIHBvc2l0aW9uOiBmaXhlZCAhaW1wb3J0YW50O1xuICAgIG1hcmdpbjogMCAhaW1wb3J0YW50O1xuICAgIHotaW5kZXg6IDk5OTkgIWltcG9ydGFudDtcbiAgICBvcGFjaXR5OiAwLjg7XG4gICAgLW1zLWZpbHRlcjogXCJwcm9naWQ6RFhJbWFnZVRyYW5zZm9ybS5NaWNyb3NvZnQuQWxwaGEoT3BhY2l0eT04MClcIjtcbiAgICBmaWx0ZXI6IGFscGhhKG9wYWNpdHk9ODApO1xuICAgIHBvaW50ZXItZXZlbnRzOiBub25lO1xuICB9XG4gICBcbiAgLyogaGlnaC1wZXJmb3JtYW5jZSBkaXNwbGF5Om5vbmU7IGhlbHBlciAqL1xuICAuZ3UtaGlkZSB7XG4gICAgbGVmdDogLTk5OTlweCAhaW1wb3J0YW50O1xuICB9XG4gICBcbiAgLyogYWRkZWQgdG8gbWlycm9yQ29udGFpbmVyIChkZWZhdWx0ID0gYm9keSkgd2hpbGUgZHJhZ2dpbmcgKi9cbiAgLmd1LXVuc2VsZWN0YWJsZSB7XG4gICAgLXdlYmtpdC11c2VyLXNlbGVjdDogbm9uZSAhaW1wb3J0YW50O1xuICAgIC1tb3otdXNlci1zZWxlY3Q6IG5vbmUgIWltcG9ydGFudDtcbiAgICAtbXMtdXNlci1zZWxlY3Q6IG5vbmUgIWltcG9ydGFudDtcbiAgICB1c2VyLXNlbGVjdDogbm9uZSAhaW1wb3J0YW50O1xuICB9XG4gICBcbiAgLyogYWRkZWQgdG8gdGhlIHNvdXJjZSBlbGVtZW50IHdoaWxlIGl0cyBtaXJyb3IgaXMgZHJhZ2dlZCAqL1xuICAuZ3UtdHJhbnNpdCB7XG4gICAgb3BhY2l0eTogMC4yO1xuICAgIC1tcy1maWx0ZXI6IFwicHJvZ2lkOkRYSW1hZ2VUcmFuc2Zvcm0uTWljcm9zb2Z0LkFscGhhKE9wYWNpdHk9MjApXCI7XG4gICAgZmlsdGVyOiBhbHBoYShvcGFjaXR5PTIwKTtcbiAgfSIsIkBpbXBvcnQgJy4uLy4uLy4uL2dsb2JhbC5zY3NzJztcblxuLnRpdGxlIHtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiByZ2JhKDI1NSwgMjU1LCAyNTUsIC41KTtcbiAgICBjb2xvcjogJGFwcC1pbnRlcmFjdGlvbi1jb2xvcjtcbiAgICB0ZXh0LWFsaWduOiBjZW50ZXI7XG4gICAgZm9udC13ZWlnaHQ6IGJvbGQ7XG4gICAgZm9udC1zaXplOiAyNHB4O1xuICAgIG1hcmdpbjogOHB4IDBweDtcbn1cblxuLnNjcm9sbGluZy13cmFwcGVyLWZsZXhib3gge1xuICAgIGJhY2tncm91bmQtY29sb3I6IHJnYmEoMjU1LCAyNTUsIDI1NSwgLjUpO1xuICAgIGxlZnQ6IDBweDtcbiAgICBwb3NpdGlvbjogZml4ZWQ7XG4gICAgYm90dG9tOiA1MHB4O1xuICAgIHdpZHRoOiAxMDB2dztcbiAgICBoZWlnaHQ6IDEwMHB4O1xuICAgIGRpc3BsYXk6IGZsZXg7XG4gICAgb3ZlcmZsb3cteDogYXV0bztcbiAgICB6LWluZGV4OiA5OTk7XG5cbiAgICAuY2FyZCB7XG4gICAgICAgIGZsZXg6IDAgMCBhdXRvO1xuICAgICAgICBjb2xvcjogYmxhY2s7XG4gICAgICAgIGJvcmRlcjogMnB4IHNvbGlkIGJsYWNrO1xuICAgICAgICBiYWNrZ3JvdW5kOiB3aGl0ZTtcbiAgICAgICAgcGFkZGluZzogOHB4O1xuICAgICAgICBtYXJnaW46IDRweDtcbiAgICB9XG59XG5cbiNjYXRlZ29yeS1idXR0b25zIHtcbiAgICBoZWlnaHQ6IGNhbGMoMTAwJSAtIDE4N3B4KTtcbiAgICBib3JkZXI6IDNweCBzb2xpZCAkYXBwLWludGVyYWN0aW9uLWNvbG9yO1xuICAgIHBvc2l0aW9uOiByZWxhdGl2ZTtcbiAgICAuZHJhZy1sYWJlbHtcbiAgICAgICAgcG9zaXRpb246IGFic29sdXRlO1xuICAgICAgICBib3R0b206IDBweDtcbiAgICAgICAgdGV4dC1hbGlnbjogY2VudGVyO1xuICAgICAgICB3aWR0aDogMTAwJTtcbiAgICAgICAgb3BhY2l0eTogMC41O1xuICAgIH1cbiAgICAuaG9tZS1idXR0b24ge1xuICAgICAgICBjb2xvcjogYmxhY2s7XG4gICAgICAgIGJvcmRlci1yYWRpdXM6IDRweDtcbiAgICAgICAgd2lkdGg6IDEwMCU7XG4gICAgICAgIGhlaWdodDogMTAwJTtcbiAgICAgICAgbWFyZ2luLWJvdHRvbTogNSU7XG4gICAgICAgIGJhY2tncm91bmQ6IHdoaXRlO1xuICAgICAgICBjb2xvcjogJGFwcC1pbnRlcmFjdGlvbi1jb2xvcjtcbiAgICAgICAgdGV4dC1hbGlnbjogY2VudGVyO1xuICAgICAgICBwYWRkaW5nOiAyJTtcblxuICAgICAgICAubGFiZWwtYnV0dG9uIHtcbiAgICAgICAgICAgIHBhZGRpbmc6IDhweCAwcHg7XG4gICAgICAgICAgICBmb250LXNpemU6IDE2cHg7XG4gICAgICAgICAgICBmb250LXdlaWdodDogYm9sZDtcbiAgICAgICAgfVxuICAgIH1cbn1cblxuLmNsb3NlIHtcbiAgICBmb250LXNpemU6IDEycHg7XG59XG5cbi5zYXZlLWJ1dHRvbiB7fVxuXG4uaG9yaXp6b250YWwtYXJyb3cge1xuICAgIHBvc2l0aW9uOiBmaXhlZDtcbiAgICBib3R0b206IDBweDtcbiAgICBoZWlnaHQ6IDUwcHg7XG4gICAgd2lkdGg6IDEwMCU7XG59XG5cbi5pY29uIHtcbiAgICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gICAgdG9wOiA1MCU7XG4gICAgbGVmdDogNTAlO1xuICAgIHRyYW5zZm9ybTogdHJhbnNsYXRlKC01MCUsIC01MCUpO1xuICAgIHdpZHRoOiA1NSU7XG4gICAgaGVpZ2h0OiA2MHB4O1xuICAgIGN1cnNvcjogcG9pbnRlcjtcbn1cblxuLmFycm93LXJpZ2h0IHtcbiAgICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gICAgdG9wOiAyNXB4O1xuICAgIHdpZHRoOiA5MCU7XG4gICAgaGVpZ2h0OiAycHg7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogIzAwMDAwMDtcbiAgICBib3gtc2hhZG93OiAwIDNweCA1cHggcmdiYSgwLCAwLCAwLCAuMik7XG4gICAgYW5pbWF0aW9uOiBhcnJvdyA3MDBtcyBsaW5lYXIgaW5maW5pdGU7XG59XG5cbi5hcnJvdy1yaWdodDo6YWZ0ZXIge1xuICAgIGNvbnRlbnQ6ICcnO1xuICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgICB3aWR0aDogMTBweDtcbiAgICBoZWlnaHQ6IDJweDtcbiAgICB0b3A6IC0zcHg7XG4gICAgcmlnaHQ6IC0ycHg7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogIzAwMDAwMDtcbiAgICB0cmFuc2Zvcm06IHJvdGF0ZSg0NWRlZyk7XG59XG5cbi5hcnJvdy1yaWdodDo6YmVmb3JlIHtcbiAgICBjb250ZW50OiAnJztcbiAgICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gICAgd2lkdGg6IDEwcHg7XG4gICAgaGVpZ2h0OiAycHg7XG4gICAgdG9wOiAzcHg7XG4gICAgcmlnaHQ6IC0ycHg7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogIzAwMDAwMDtcbiAgICBib3gtc2hhZG93OiAwIDNweCA1cHggcmdiYSgwLCAwLCAwLCAuMik7XG4gICAgdHJhbnNmb3JtOiByb3RhdGUoLTQ1ZGVnKTtcbn1cblxuLmFycm93LWxlZnQge1xuICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgICB0b3A6IDI1cHg7XG4gICAgd2lkdGg6IDkwJTtcbiAgICBoZWlnaHQ6IDJweDtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiAjMDAwMDAwO1xuICAgIGFuaW1hdGlvbjogYXJyb3cgNzAwbXMgbGluZWFyIGluZmluaXRlO1xufVxuXG4uYXJyb3ctbGVmdDo6YWZ0ZXIge1xuICAgIGNvbnRlbnQ6ICcnO1xuICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgICB3aWR0aDogMTBweDtcbiAgICBoZWlnaHQ6IDJweDtcbiAgICB0b3A6IC0zcHg7XG4gICAgbGVmdDogLTJweDtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiAjMDAwMDAwO1xuICAgIHRyYW5zZm9ybTogcm90YXRlKC00NWRlZyk7XG59XG5cbi5hcnJvdy1sZWZ0OjpiZWZvcmUge1xuICAgIGNvbnRlbnQ6ICcnO1xuICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgICB3aWR0aDogMTBweDtcbiAgICBoZWlnaHQ6IDJweDtcbiAgICB0b3A6IDNweDtcbiAgICBsZWZ0OiAtMnB4O1xuICAgIGJhY2tncm91bmQtY29sb3I6ICMwMDAwMDA7XG4gICAgYm94LXNoYWRvdzogMCAzcHggNXB4IHJnYmEoMCwgMCwgMCwgLjIpO1xuICAgIHRyYW5zZm9ybTogcm90YXRlKDQ1ZGVnKTtcbn1cbi5ndS1taXJyb3Ige1xuICAgIGZsZXg6IDAgMCBhdXRvO1xuICAgIGJvcmRlcjogMnB4IHNvbGlkICRhcHAtaW50ZXJhY3Rpb24tY29sb3I7XG4gICAgYmFja2dyb3VuZDogd2hpdGU7XG4gICAgbWFyZ2luOiA0cHg7XG4gICAgcGFkZGluZzogOHB4O1xuICAgIHRyYW5zZm9ybS1vcmlnaW46IDIwJSA0MCU7XG59Il19 */"
 
 /***/ }),
 
@@ -2849,6 +10252,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var src_app_services_setting_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! src/app/services/setting.service */ "./src/app/services/setting.service.ts");
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
+/* harmony import */ var _angular_cdk_drag_drop__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/cdk/drag-drop */ "./node_modules/@angular/cdk/esm5/drag-drop.es5.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2858,6 +10262,7 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+
 
 
 
@@ -2903,6 +10308,14 @@ var HomeSettingsPage = /** @class */ (function () {
             console.log(item);
         }));
     }
+    HomeSettingsPage.prototype.drop = function (event) {
+        if (event.previousContainer === event.container) {
+            Object(_angular_cdk_drag_drop__WEBPACK_IMPORTED_MODULE_9__["moveItemInArray"])(event.container.data, event.previousIndex, event.currentIndex);
+        }
+        else {
+            Object(_angular_cdk_drag_drop__WEBPACK_IMPORTED_MODULE_9__["transferArrayItem"])(event.previousContainer.data, event.container.data, event.previousIndex, event.currentIndex);
+        }
+    };
     HomeSettingsPage.prototype.ngOnInit = function () {
     };
     HomeSettingsPage.prototype.doSomething = function () {
@@ -2938,6 +10351,10 @@ var HomeSettingsPage = /** @class */ (function () {
     HomeSettingsPage.prototype.close = function () {
         this.navCtrl.navigateRoot('/home-common');
         // this.location.back()
+    };
+    HomeSettingsPage.prototype.active = function (category) {
+        var element = document.getElementById('id-' + category.name);
+        console.log(element);
     };
     HomeSettingsPage.prototype.convertCategories = function (x) {
         var categoryElement = {};

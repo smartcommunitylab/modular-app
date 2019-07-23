@@ -7,6 +7,8 @@ import { TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router';
 import { SettingService } from 'src/app/services/setting.service';
 import { NavController } from '@ionic/angular';
+import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
+
 @Component({
   selector: 'app-home-settings',
   templateUrl: './home-settings.page.html',
@@ -50,7 +52,16 @@ export class HomeSettingsPage implements OnInit {
       })
     );
   }
-
+  drop(event: CdkDragDrop<string[]>) {
+    if (event.previousContainer === event.container) {
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    } else {
+      transferArrayItem(event.previousContainer.data,
+                        event.container.data,
+                        event.previousIndex,
+                        event.currentIndex);
+    }
+  }
   ngOnInit() {
 
   }
@@ -87,6 +98,10 @@ export class HomeSettingsPage implements OnInit {
     this.navCtrl.navigateRoot('/home-common');
 
     // this.location.back()
+  }
+  active(category) {
+    var element = document.getElementById('id-'+category.name);
+    console.log(element);
   }
   convertCategories(x) {
     const categoryElement: any = {};
