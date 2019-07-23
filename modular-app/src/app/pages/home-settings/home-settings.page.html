@@ -9,47 +9,64 @@
 </ion-header>
 
 <ion-content padding forceOverscroll="false">
-    <ion-chip outline=true (click)="goToSettings()">
-        <ion-icon name="cog" color="primary"></ion-icon>
-        <ion-label>{{'label_other_settinga'|translate}}</ion-label>
-      </ion-chip>
-  <ion-grid id="category-buttons">
-      <ion-row cdkDropList
-      #todoList="cdkDropList"
-      [cdkDropListData]="categories"
-      [cdkDropListConnectedTo]="[doneList]"
-      (cdkDropListDropped)="drop($event)">
-    <!-- <ion-row dragula="entries" [(dragulaModel)]="categories" lines="none"> -->
-      <ion-col size="6" cdkDrag  *ngFor="let category of categories">
-        <div class="home-button" >
-          <div>
-            <div>{{category.name[language]}}</div>
+  <ion-chip outline=true (click)="select('settings')" [ngClass]="{'chip-selected': isSelected('settings')}">
+    <ion-icon name="cog" class="interaction"></ion-icon>
+    <ion-label class="interaction">{{'label_other_settinga'|translate}}</ion-label>
+  </ion-chip>
+  <ion-chip outline=true (click)="select('about')" [ngClass]="{'chip-selected': isSelected('about')}">
+    <ion-label class="interaction">{{'label_about'|translate}}</ion-label>
+  </ion-chip>
+  <div *ngIf="!selection">
+    <ion-grid id="category-buttons">
+      <ion-row cdkDropList #todoList="cdkDropList" [cdkDropListData]="categories" [cdkDropListConnectedTo]="[doneList]"
+        (cdkDropListDropped)="drop($event)">
+        <!-- <ion-row dragula="entries" [(dragulaModel)]="categories" lines="none"> -->
+        <ion-col size="6" cdkDrag *ngFor="let category of categories">
+          <div class="home-button">
+            <div>
+              <div>{{category.name[language]}}</div>
+            </div>
           </div>
-        </div>
-      </ion-col>
-    </ion-row>
-    <div class="drag-label">
+        </ion-col>
+      </ion-row>
+      <div class="drag-label">
         {{'label_setting_drag'|translate}}
-    </div>
-  </ion-grid>
-  <div class="wrapper">
+      </div>
+    </ion-grid>
+    <div class="wrapper">
       <!-- <div class="scrolling-wrapper-flexbox loop" dragula="entries" [(dragulaModel)]="allCategories"> -->
-          <div class="scrolling-wrapper-flexbox loop" cdkDropList
-          #doneList="cdkDropList"
-          [cdkDropListData]="allCategories"
-          [cdkDropListConnectedTo]="[todoList]"
-          (cdkDropListDropped)="drop($event)">
-              <div class="card"  cdkDrag  *ngFor="let category of allCategories" >
-        <h2>{{category.name[language]}}</h2>
+      <div class="scrolling-wrapper-flexbox loop" cdkDropList #doneList="cdkDropList" [cdkDropListData]="allCategories"
+        [cdkDropListConnectedTo]="[todoList]" (cdkDropListDropped)="drop($event)">
+        <div class="card" cdkDrag *ngFor="let category of allCategories">
+          <h2>{{category.name[language]}}</h2>
+        </div>
+      </div>
+    </div>
+    <div class="horizzontal-arrow">
+      <div class="icon">
+        <div class="arrow-right"></div>
+        <div class="arrow-left"></div>
       </div>
     </div>
   </div>
-  <div class="horizzontal-arrow">
-      <div class="icon">
-          <div class="arrow-right"></div>
-          <div class="arrow-left"></div>
-        </div>
+  <div *ngIf="isSelected('settings')">
+      <ion-list>
+          <ion-radio-group (ionChange)="onLanguageChanged($event)" [(ngModel)]="selectedLanguage">
+              <ion-list-header>
+                  <ion-label>{{title}}</ion-label>
+              </ion-list-header>
+  
+              <ion-item *ngFor="let language of languages">
+                  <ion-label>{{language.value}}</ion-label>
+                  <ion-radio slot="start" value="{{language.key}}"></ion-radio>
+              </ion-item>
+  
+          </ion-radio-group>
+      </ion-list>
   </div>
+  <div *ngIf="isSelected('about')">
+      Credits
+    </div>
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button class="save-button" (click)="saveHome()">
       <ion-icon name="save"></ion-icon>

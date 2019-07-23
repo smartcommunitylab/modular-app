@@ -1,5 +1,28 @@
-ion-button{
+ion-button {
     margin: auto;
     text-align: center;
     display: table;
+    width: 50%;
+    font-size: 22px;
+    font-weight: bold;
+    --color: #11b3ef!important;
+--background: #e3e3e3!important;
+}
+
+ion-button:after {
+    content: "";
+    display: block;
+    padding-bottom: 100%;
+  }
+.main-title {
+    font-size: 28px;
+    color: black;
+    font-weight: bold;
+
+}
+
+.second-title {
+    font-size: 22px;
+    color:#707070;
+    font-weight: bold;
 }

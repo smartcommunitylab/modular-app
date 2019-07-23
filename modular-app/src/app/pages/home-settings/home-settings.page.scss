@@ -155,3 +155,25 @@
     padding: 8px;
     transform-origin: 20% 40%;
 }
+.interaction {
+    color: #11b3ef;
+}
+ion-chip {
+    width: 40%;
+    font-weight: bold;
+    ion-label{
+        width: 100%;
+        text-align: center;
+    }
+}
+.chip-selected {
+    background-color: $app-interaction-color;
+    ion-icon{
+        color:white;
+        background-color: $app-interaction-color; 
+    }
+    ion-label{
+       color:white;
+       background-color: $app-interaction-color;
+    }
+}

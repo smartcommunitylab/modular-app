@@ -3,11 +3,11 @@ import { DragulaService } from 'ng2-dragula';
 import { Subscription } from 'rxjs';
 import { Location } from '@angular/common';
 import { ConfigService } from 'src/app/services/config.service';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateService, DefaultLangChangeEvent } from '@ngx-translate/core';
 import { Router } from '@angular/router';
 import { SettingService } from 'src/app/services/setting.service';
 import { NavController } from '@ionic/angular';
-import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
+import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-home-settings',
@@ -19,7 +19,13 @@ export class HomeSettingsPage implements OnInit {
   categories: any = [];
   allCategories: any = [];
   language = 'it';
-
+  selection = null;
+  setting: any;
+  languages: any;
+  myLanguage: any;
+  selectedLanguage: any;
+  form: any;
+  title: string;
   constructor(
     private dragulaService: DragulaService,
     private router: Router,
@@ -27,9 +33,10 @@ export class HomeSettingsPage implements OnInit {
     private navCtrl: NavController,
     private config: ConfigService,
     public translate: TranslateService,
-    private settings:SettingService
+    private settings: SettingService
   ) {
     this.language = window[this.config.getAppModuleName()]['language'];
+    this.setLanguages();
     translate.use(this.language);
     this.subs.add(dragulaService.dropModel('entries')
       .subscribe(({ el, target, source, sourceModel, targetModel, item }) => {
@@ -57,13 +64,20 @@ export class HomeSettingsPage implements OnInit {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
       transferArrayItem(event.previousContainer.data,
-                        event.container.data,
-                        event.previousIndex,
-                        event.currentIndex);
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex);
     }
   }
   ngOnInit() {
+    this.translate.onDefaultLangChange.subscribe((event: DefaultLangChangeEvent) => {
+      this.translate.get('title_app').subscribe(
+        value => {
+          this.title = value;
+        }
+      );
 
+    });
   }
   doSomething() {
     console.log('longpress')
@@ -92,6 +106,7 @@ export class HomeSettingsPage implements OnInit {
   }
   saveHome() {
     this.config.storeModuleEntries(this.categories);
+    this.saveOtherSetting();
     this.close();
   }
   close() {
@@ -100,7 +115,7 @@ export class HomeSettingsPage implements OnInit {
     // this.location.back()
   }
   active(category) {
-    var element = document.getElementById('id-'+category.name);
+    var element = document.getElementById('id-' + category.name);
     console.log(element);
   }
   convertCategories(x) {
@@ -108,8 +123,8 @@ export class HomeSettingsPage implements OnInit {
     if (x.id) {
       categoryElement.id = x.id;
     }
-    if (x.name ) {
-      categoryElement.name = x.name ;
+    if (x.name) {
+      categoryElement.name = x.name;
     }
     if (x.icon) {
       categoryElement.icon = x.icon;
@@ -123,7 +138,48 @@ export class HomeSettingsPage implements OnInit {
 
     return categoryElement;
   }
-  goToSettings() {
-    this.router.navigate(['/setting']);
+  select(sel) {
+    // this.router.navigate(['/setting']);
+    if (this.selection == sel)
+      this.selection = null;
+    else this.selection = sel;
+  }
+  // goToAbout(sel) {
+  //   // this.router.navigate(['/setting']);
+  //   if (this.selection == sel)
+  //     this.selection = null;
+  //   else this.selection = sel;
+  // }
+  isSelected(sel) {
+    return sel == this.selection;
+  }
+  setLanguages(): any {
+    this.setting = this.settings.getUserSetting();
+    this.myLanguage = this.settings.getUserLanguage();
+    if (this.myLanguage) {
+       this.selectedLanguage = this.myLanguage;
+       this.translate.setDefaultLang(this.selectedLanguage);
+
+      }
+    const languages = this.settings.getLanguages();
+    if (languages) {
+      const keys = Array.from(Object.keys(languages));
+
+      this.languages = keys.map(element => {
+        return {
+          'key': element,
+          'value': languages[element]
+        };
+      });
+    }
+  }
+  saveOtherSetting() {
+    this.settings.setUserLanguage(this.selectedLanguage);
+    this.translate.setDefaultLang(this.selectedLanguage);
+    this.location.back()
+
+  }
+  onLanguageChanged(data) {
+    console.log('Lingua = ', this.selectedLanguage);
   }
 }
