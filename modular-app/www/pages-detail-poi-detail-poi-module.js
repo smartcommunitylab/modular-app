@@ -66,7 +66,7 @@ var DetailPoiPageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header no-border>\n    <ion-toolbar color=\"secondary\">\n      <ion-buttons slot=\"start\">\n          <ion-back-button></ion-back-button>\n        </ion-buttons>\n      <ion-title *ngIf=\"poi\">\n        {{poi.title[lang]}}\n        </ion-title>\n    </ion-toolbar>\n  </ion-header>\n\n<ion-content padding>\n    <wc-details *ngIf=\"poi\" [title]=\"poi.title[lang]\" [subtitle]=\"poi.subtitle[lang]\"  [text]=\"poi.description[lang]\" [info]=\"poi.info[lang]\" [contacts]=\"contacts\" [img]=\"poi.image\"></wc-details>\n</ion-content>\n"
+module.exports = "<ion-header no-border>\n    <ion-toolbar>\n      <ion-buttons slot=\"start\">\n          <ion-back-button></ion-back-button>\n        </ion-buttons>\n      <ion-title *ngIf=\"poi\">\n        {{poi.title[lang]}}\n        </ion-title>\n    </ion-toolbar>\n  </ion-header>\n\n<ion-content padding>\n    <wc-details *ngIf=\"poi\" [title]=\"poi.title[lang]\" [subtitle]=\"poi.subtitle[lang]\"  [text]=\"poi.description[lang]\" [info]=\"poi.info[lang]\" [contacts]=\"contacts\" [img]=\"poi.image\"></wc-details>\n</ion-content>\n"
 
 /***/ }),
 

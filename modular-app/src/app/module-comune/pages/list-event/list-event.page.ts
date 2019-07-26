@@ -33,13 +33,13 @@ export class ListEventPage implements OnInit {
     private config: ConfigService,
     public events: Events,
     private translate: TranslateService
-    ) {
-      this.language = window[this.config.getAppModuleName()]['language'];
-     this.translate.use(this.language);
-      events.subscribe('radio:selected', x => {
-        this.changeCategory(x);
-      });
-    }
+  ) {
+    this.language = window[this.config.getAppModuleName()]['language'];
+    this.translate.use(this.language);
+    events.subscribe('radio:selected', x => {
+      this.changeCategory(x);
+    });
+  }
 
   ngOnInit() {
     this.route.queryParams
@@ -119,7 +119,7 @@ export class ListEventPage implements OnInit {
       if (x.eventTiming) {
         poiElement.time = x.eventTiming[this.language];
       }
-      if (x.info)  {
+      if (x.info) {
         poiElement.info = x.info[this.language];
       }
       if (x.address) {
@@ -150,7 +150,8 @@ export class ListEventPage implements OnInit {
   goToDetail(id) {
     this.router.navigate(['/detail-poi'], { queryParams: { id: id, type: this.type } });
   }
-
+  typingTimer;                //timer identifier
+  doneTypingInterval = 500;  //time in ms, 5 second for example
   toggleSearch() {
     this.search = !this.search;
     const searchbar = document.querySelector('ion-searchbar');
@@ -161,19 +162,27 @@ export class ListEventPage implements OnInit {
       searchbar.style.display = 'none';
     }
   }
-
+  oneElement(category) {
+    return (this.showPois[category].length > 0)
+  }
   searchChanged(input: any) {
-    const value = input.detail.target.value;
-    const _this = this;
+    clearTimeout(this.typingTimer);
+    this.typingTimer = setTimeout(() => {
+      const value = input.detail.target.value;
+      const _this = this;
       _this.categories.forEach(c => {
-      this.showPois[c] = this.fullPois.filter(function(el) {
-        return (el.title.toLowerCase().indexOf(value.toLowerCase()) > -1);
+        this.showPois[c] = this.fullPois.filter(function (el) {
+          if (el.title)
+            return (el.title.toLowerCase().indexOf(value.toLowerCase()) > -1);
+          return false
+        });
       });
-    });
+    }, this.doneTypingInterval);
+
   }
 
   filterClicked() {
-    this.buildAlert('filter');
+    // this.buildAlert('filter');
   }
 
   async buildAlert(type: string) {
@@ -241,15 +250,15 @@ export class ListEventPage implements OnInit {
       ]
     });
 
-   await alert.present();
+    await alert.present();
   }
 
   orderArray(condition: string, _this: any) {
     _this.categories.forEach(c => {
       if (condition.indexOf('asc') > -1) {
-        _this.showPois[c] = _this.showPois[c].sort(function(a, b) { return a.title.localeCompare(b.title); });
+        _this.showPois[c] = _this.showPois[c].sort(function (a, b) { return a.title.localeCompare(b.title); });
       } else {
-        _this.showPois[c] = _this.showPois[c].sort(function(a, b) { return b.title.localeCompare(a.title); });
+        _this.showPois[c] = _this.showPois[c].sort(function (a, b) { return b.title.localeCompare(a.title); });
       }
     });
   }

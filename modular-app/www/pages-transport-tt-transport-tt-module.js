@@ -315,7 +315,7 @@ var TransportTtPageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header no-border>\n    <ion-toolbar>\n        <ion-buttons slot=\"start\">\n            <ion-back-button></ion-back-button>\n        </ion-buttons>\n        <ion-title>\n            <div class=\"ion-text-center\">{{groupId}}</div>\n        </ion-title>\n        <ion-buttons slot=\"end\">\n            <ion-icon name=\"body\" class=\"tt-button\" [ngClass]=\"{'filled': accessibility}\"\n                (click)=\"changeAccessibility()\"></ion-icon>\n            <ion-icon name=\"resize\" class=\"tt-button\" [ngClass]=\"{'filled': littletable}\" (click)=\"changeSize()\">\n            </ion-icon>\n        </ion-buttons>\n    </ion-toolbar>\n</ion-header>\n\n<ion-content>\n    <div id=\"table-tt\">\n        <wc-trasporti-table *ngIf=\"data\" [datetable]=\"datetable\" [lang]=\"lang\" [color]=\"color\" [data]=\"data\" [title]=\"title\" [day]=\"day\" [arrows]=\"true\"\n            [littletable]=\"littletable\" [showtrips]=\"showtrips\" [labeldelay]=\"labeldelay\" [labeltrips]=\"labeltrips\"\n            [accessibility]=\"accessibility\" [showtrips]=\"showtrips\" [tripsvalue]=\"tripsvalue\"></wc-trasporti-table>\n    </div>\n\n</ion-content>"
+module.exports = "<ion-header no-border>\n    <ion-toolbar>\n        <ion-buttons slot=\"start\">\n            <ion-back-button></ion-back-button>\n        </ion-buttons>\n        <ion-title>\n            <div class=\"ion-text-center\">{{groupId}}</div>\n        </ion-title>\n        <ion-buttons slot=\"end\">\n            <ion-icon name=\"body\" class=\"tt-button\" [ngClass]=\"{'filled': accessibility}\"\n                (click)=\"changeAccessibility()\"></ion-icon>\n            <ion-icon name=\"resize\" class=\"tt-button\" [ngClass]=\"{'filled': !littletable}\" (click)=\"changeSize()\">\n            </ion-icon>\n        </ion-buttons>\n    </ion-toolbar>\n</ion-header>\n\n<ion-content>\n    <div id=\"table-tt\">\n        <wc-trasporti-table *ngIf=\"data\" [agencyid]=\"agencyId\" [datetable]=\"datetable\" [lang]=\"lang\" [color]=\"color\" [data]=\"data\" [title]=\"title\" [day]=\"day\" [arrows]=\"true\"\n            [littletable]=\"littletable\" [showtrips]=\"showtrips\" [showHeader]=\"showHeader\"  [labeldelay]=\"labeldelay\" [labeltrips]=\"labeltrips\"\n            [accessibility]=\"accessibility\"  [tripsvalue]=\"tripsvalue\"></wc-trasporti-table>\n    </div>\n\n</ion-content>"
 
 /***/ }),
 
@@ -346,13 +346,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
 /* harmony import */ var _ngx_translate_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ngx-translate/core */ "./node_modules/@ngx-translate/core/fesm5/ngx-translate-core.js");
 /* harmony import */ var _services_config_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../services/config.service */ "./src/app/module-trasporti/services/config.service.ts");
-/* harmony import */ var _angular_common_locales_it__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/common/locales/it */ "./node_modules/@angular/common/locales/it.js");
-/* harmony import */ var _angular_common_locales_it__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_angular_common_locales_it__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _angular_common_locales_de__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/common/locales/de */ "./node_modules/@angular/common/locales/de.js");
-/* harmony import */ var _angular_common_locales_de__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_angular_common_locales_de__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var _angular_common_locales_en__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/common/locales/en */ "./node_modules/@angular/common/locales/en.js");
-/* harmony import */ var _angular_common_locales_en__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_angular_common_locales_en__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
+/* harmony import */ var _angular_common_locales_it__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/common/locales/it */ "./node_modules/@angular/common/locales/it.js");
+/* harmony import */ var _angular_common_locales_it__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_angular_common_locales_it__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _angular_common_locales_de__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/common/locales/de */ "./node_modules/@angular/common/locales/de.js");
+/* harmony import */ var _angular_common_locales_de__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_angular_common_locales_de__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _angular_common_locales_en__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/common/locales/en */ "./node_modules/@angular/common/locales/en.js");
+/* harmony import */ var _angular_common_locales_en__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_angular_common_locales_en__WEBPACK_IMPORTED_MODULE_9__);
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -407,12 +407,14 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
 
 
 
+
 var TransportTtPage = /** @class */ (function () {
-    function TransportTtPage(trasportiService, loadingController, translate, config, route) {
+    function TransportTtPage(trasportiService, loadingController, translate, config, toastController, route) {
         this.trasportiService = trasportiService;
         this.loadingController = loadingController;
         this.translate = translate;
         this.config = config;
+        this.toastController = toastController;
         this.route = route;
         this.date = new Date();
         this.color = "#123456";
@@ -424,12 +426,15 @@ var TransportTtPage = /** @class */ (function () {
         this.labeltrips = "TIPO";
         this.accessibility = false; // shows coulumn of accessibility
         this.data = "";
-        var language = window[this.config.getAppModuleName()]['language'];
+        var language = this.config.getLanguage();
+        ;
         this.translate.use(language);
-        Object(_angular_common__WEBPACK_IMPORTED_MODULE_9__["registerLocaleData"])(_angular_common_locales_de__WEBPACK_IMPORTED_MODULE_7___default.a, _angular_common_locales_en__WEBPACK_IMPORTED_MODULE_8___default.a, _angular_common_locales_it__WEBPACK_IMPORTED_MODULE_6___default.a);
-        // this.datePipe= new DatePipe();
+        this.registerlocale(language);
+        this.datePipe = new _angular_common__WEBPACK_IMPORTED_MODULE_6__["DatePipe"](this.translate.currentLang);
     }
     TransportTtPage.prototype.ngOnInit = function () {
+        this.ref = this.route.snapshot.paramMap.get('ref');
+        ;
         this.agencyId = this.route.snapshot.paramMap.get('agencyId');
         ;
         this.routeId = this.route.snapshot.paramMap.get('routeId');
@@ -437,10 +442,27 @@ var TransportTtPage = /** @class */ (function () {
         this.title = this.route.snapshot.paramMap.get('title');
         this.color = this.route.snapshot.paramMap.get('color');
         this.getTT(this.date.getTime());
-        var language = window[this.config.getAppModuleName()]['language'];
-        // this.datetable=this.datePipe.transform(this.date,"EEE dd-MM-yyyy")
+        var language = this.config.getLanguage();
+        ;
+        this.datetable = this.datePipe.transform(this.date, "EEE dd-MM-yyyy");
         this.translate.use(language);
         this.lang = language;
+        this.showHeader = (this.ref == 'trains') ? true : false;
+    };
+    TransportTtPage.prototype.registerlocale = function (lang) {
+        switch (lang) {
+            case "it":
+                Object(_angular_common__WEBPACK_IMPORTED_MODULE_6__["registerLocaleData"])(_angular_common_locales_it__WEBPACK_IMPORTED_MODULE_7___default.a, 'it');
+                break;
+            case "en":
+                Object(_angular_common__WEBPACK_IMPORTED_MODULE_6__["registerLocaleData"])(_angular_common_locales_en__WEBPACK_IMPORTED_MODULE_9___default.a, 'en');
+                break;
+            case "de":
+                Object(_angular_common__WEBPACK_IMPORTED_MODULE_6__["registerLocaleData"])(_angular_common_locales_de__WEBPACK_IMPORTED_MODULE_8___default.a, 'de');
+                break;
+            default:
+                break;
+        }
     };
     TransportTtPage.prototype.changeAccessibility = function () {
         this.accessibility = !this.accessibility;
@@ -460,9 +482,21 @@ var TransportTtPage = /** @class */ (function () {
             _this.datetable = _this.datePipe.transform(_this.date, "EEE dd-MM-yyyy");
             _this.getTT(_this.date.getTime());
         });
-        trasportiTable.addEventListener('showStopEvent', function () {
-            console.log("stop click");
-        });
+        trasportiTable.addEventListener('showStopEvent', function (stop) { return __awaiter(_this, void 0, void 0, function () {
+            var toast;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.toastController.create({
+                            message: stop.detail,
+                            duration: 2000
+                        })];
+                    case 1:
+                        toast = _a.sent();
+                        toast.present();
+                        return [2 /*return*/];
+                }
+            });
+        }); });
     };
     TransportTtPage.prototype.getTT = function (date) {
         return __awaiter(this, void 0, void 0, function () {
@@ -479,13 +513,13 @@ var TransportTtPage = /** @class */ (function () {
                             // get data with delay
                             _this.data = JSON.stringify(data);
                             //get type
-                            var str = "";
-                            for (var i = 0; i < data.tripIds.length; i++) {
-                                str = str + _this.trasportiService.getTripText(_this.agencyId, data.tripIds[0]);
-                            }
-                            console.log(str);
-                            _this.tripsvalue = str;
-                            if (_this.tripsvalue == "") {
+                            // var str = "";
+                            // for (var i = 0; i < data.tripIds.length; i++) {
+                            //   str = str + this.trasportiService.getTripText(this.agencyId, data.tripIds[0]);
+                            // }
+                            // console.log(str);
+                            // this.tripsvalue = str;
+                            if (_this.agencyId == "10") {
                                 _this.showtrips = false;
                             }
                             loading.dismiss();
@@ -510,6 +544,7 @@ var TransportTtPage = /** @class */ (function () {
             _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["LoadingController"],
             _ngx_translate_core__WEBPACK_IMPORTED_MODULE_4__["TranslateService"],
             _services_config_service__WEBPACK_IMPORTED_MODULE_5__["ConfigService"],
+            _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ToastController"],
             _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"]])
     ], TransportTtPage);
     return TransportTtPage;

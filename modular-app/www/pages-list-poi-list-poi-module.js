@@ -66,7 +66,7 @@ var ListPoiPageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header no-border>\n    <ion-toolbar color=\"secondary\">\n      <ion-buttons slot=\"start\">\n          <ion-back-button></ion-back-button>\n        </ion-buttons>\n      <ion-title>\n          {{'title_list_poi'|translate}}\n        </ion-title>\n    </ion-toolbar>\n  </ion-header>\n\n<ion-content padding>\n  <ion-list no-lines id=\"poi-list\">\n    <div *ngFor=\"let poi of pois\">      \n      <wc-path-list-el type=\"POI\" [id]=\"poi.id\" [img]=\"poi.image\" [title]=\"poi.title\" [text]=\"poi.subtitle\" main-color=\"red\"></wc-path-list-el>\n    </div>\n  </ion-list>\n</ion-content>\n"
+module.exports = "<ion-header no-border>\n    <ion-toolbar>\n      <ion-buttons slot=\"start\">\n          <ion-back-button></ion-back-button>\n        </ion-buttons>\n      <ion-title>\n          {{'title_list_poi'|translate}}\n        </ion-title>\n    </ion-toolbar>\n  </ion-header>\n\n<ion-content padding>\n  <ion-list no-lines id=\"poi-list\">\n    <div *ngFor=\"let poi of pois\">      \n      <wc-path-list-el type=\"POI\" [id]=\"poi.id\" [img]=\"poi.image\" [title]=\"poi.title\" [text]=\"poi.subtitle\" main-color=\"red\"></wc-path-list-el>\n    </div>\n  </ion-list>\n</ion-content>\n"
 
 /***/ }),
 

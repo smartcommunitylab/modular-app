@@ -78,7 +78,7 @@ var MapModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header no-border>\n  <ion-toolbar color=\"secondary\">\n    <ion-buttons slot=\"start\">\n        <ion-back-button></ion-back-button>\n      </ion-buttons>\n    <ion-title>\n        {{'MAP'|translate}}\n      </ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <wc-map id=\"wc-map\" [points]=\"mapPoints\" main-marker-icon=\"http://icons.iconarchive.com/icons/paomedia/small-n-flat/256/map-marker-icon.png\" poi-marker-icon=\"https://cdn4.iconfinder.com/data/icons/ios7-active-tab/512/map_marker-512.png\"></wc-map>\n  <wc-modal title=\"DEMO\" text=\"Testo di prova\" btn-text=\"Dettagli\" shown=\"false\" data=\"ciao\"></wc-modal>\n</ion-content>\n"
+module.exports = "<ion-header no-border>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n        <ion-back-button></ion-back-button>\n      </ion-buttons>\n    <ion-title>\n        {{'MAP'|translate}}\n      </ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <wc-map id=\"wc-map\" [points]=\"mapPoints\" main-marker-icon=\"http://icons.iconarchive.com/icons/paomedia/small-n-flat/256/map-marker-icon.png\" poi-marker-icon=\"https://cdn4.iconfinder.com/data/icons/ios7-active-tab/512/map_marker-512.png\"></wc-map>\n  <wc-modal title=\"DEMO\" text=\"Testo di prova\" btn-text=\"Dettagli\" shown=\"false\" data=\"ciao\"></wc-modal>\n</ion-content>\n"
 
 /***/ }),
 

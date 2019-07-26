@@ -134,7 +134,7 @@ var TransportListPage = /** @class */ (function () {
         this.view = 'list';
         this.hasMap = false;
         this.allMarkers = null;
-        var language = window[this.config.getAppModuleName()]['language'];
+        var language = this.config.getLanguage();
         this.translate.use(language);
     }
     TransportListPage.prototype.ngOnInit = function () {

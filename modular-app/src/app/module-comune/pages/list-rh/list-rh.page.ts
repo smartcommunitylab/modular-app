@@ -169,18 +169,24 @@ export class ListRHPage implements OnInit {
     return poiElement;
   }
 
+  typingTimer;                //timer identifier
+  doneTypingInterval = 500;  //time in ms, 5 second for example
   toggleSearch() {
     this.search = !this.search;
-    const searchbar = document.querySelector('ion-searchbar');
-    if (searchbar.style.display === 'none') {
-      searchbar.style.display = 'unset';
-      searchbar.setFocus();
-    } else {
-      searchbar.style.display = 'none';
-    }
+      const searchbar = document.querySelector('ion-searchbar');
+      if (searchbar.style.display === 'none') {
+        searchbar.style.display = 'unset';
+        searchbar.setFocus();
+      } else {
+        searchbar.style.display = 'none';
+      }
   }
-
+  oneElement(category) {
+    return (this.showPois[category].length > 0)
+  }
   searchChanged(input: any) {
+    clearTimeout(this.typingTimer);
+    this.typingTimer = setTimeout(() => {
     const value = input.detail.target.value;
     const _this = this;
     _this.categories.forEach(c => {
@@ -188,11 +194,37 @@ export class ListRHPage implements OnInit {
         return (el.title.toLowerCase().indexOf(value.toLowerCase()) > -1);
       });
     });
+    }, this.doneTypingInterval);
+
   }
 
   filterClicked() {
-    this.buildAlert('filter');
+    // this.buildAlert('filter');
   }
+  // toggleSearch() {
+  //   this.search = !this.search;
+  //   const searchbar = document.querySelector('ion-searchbar');
+  //   if (searchbar.style.display === 'none') {
+  //     searchbar.style.display = 'unset';
+  //     searchbar.setFocus();
+  //   } else {
+  //     searchbar.style.display = 'none';
+  //   }
+  // }
+
+  // searchChanged(input: any) {
+  //   const value = input.detail.target.value;
+  //   const _this = this;
+  //   _this.categories.forEach(c => {
+  //     this.showPois[c] = this.fullPois.filter(function (el) {
+  //       return (el.title.toLowerCase().indexOf(value.toLowerCase()) > -1);
+  //     });
+  //   });
+  // }
+
+  // filterClicked() {
+  //   this.buildAlert('filter');
+  // }
 
   async buildAlert(type: string) {
     const _this = this;

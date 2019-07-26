@@ -78,7 +78,7 @@ var ListRHPageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header no-border>\n  <ion-toolbar color=\"secondary\">\n    <ion-buttons slot=\"start\">\n        <ion-back-button></ion-back-button>\n      </ion-buttons>\n    <ion-title>\n        {{'RH' | translate}}\n      </ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-grid style=\"height: 100%\" *ngIf=\"isLoading\">\n    <ion-row justify-content-center align-items-center style=\"height: 100%\">\n      <ion-spinner name=\"circles\"></ion-spinner>\n    </ion-row>\n</ion-grid>\n\n<ion-content>\n  \n    <ion-searchbar style=\"display: none\" showCancelButton animated (ionInput)=\"searchChanged($event)\" (ionCancel)=\"toggleSearch()\" (search)=\"toggleSearch()\"></ion-searchbar>\n      \n    <!-- FLOATING BUTTON -->\n    <ion-fab *ngIf=\"!isLoading\" class=\"fixed\" vertical=\"bottom\" horizontal=\"start\" slot=\"fixed\">\n      <ion-fab-button color=\"danger\">\n        <ion-icon name=\"arrow-dropup-circle\"></ion-icon>\n      </ion-fab-button>\n      <ion-fab-list side=\"top\">\n          <ion-fab-button (click)=\"toggleSearch()\">\n            <ion-icon name=\"search\"></ion-icon>\n          </ion-fab-button>\n          <ion-fab-button (click)=\"showPopover()\">\n              <ion-icon name=\"funnel\"></ion-icon>\n            </ion-fab-button>\n      </ion-fab-list>\n    </ion-fab>\n    <!-- ---------------------------- -->\n\n    \n    <ion-list no-lines id=\"poi-list\">\n      <div *ngFor=\"let c of categories\">\n        <ion-item-divider class=\"category row\" sticky>\n          <div class=\"column c-icon\" (click)=\"goToMap()\">\n            <ion-icon name=\"map\"></ion-icon>\n          </div>\n          <div class=\"column c-text\">\n            <ion-label>{{c}}</ion-label>\n          </div>\n          <div class=\"column c-btn\">\n            <ion-button *ngIf=\"!search\" class=\"popover-btn\" size=\"small\" color=\"success\" (click)=\"filterClicked()\">Ordina</ion-button>\n          </div>\n        </ion-item-divider>\n        <div class=\"content\">\n          <div *ngFor=\"let poi of showPois[c]; let i = index\">\n            <wc-details [img]=\"poi.image\" [title]=\"poi.title\" [subtitle]=\"poi.subtitle\" [text]=\"poi.text\" [info]=\"poi.info\" [contacts]=\"poi.infos\" heading-color=\"red\"></wc-details>\n            <div class=\"spacing\" *ngIf=\"i == showPois.length - 1\"></div>\n          </div>\n        </div>\n      </div>\n    </ion-list>\n</ion-content>\n"
+module.exports = "<ion-header no-border>\n    <ion-toolbar>\n        <ion-searchbar style=\"display: none\" showCancelButton animated (search)=\"toggleSearch()\"\n      (ionInput)=\"searchChanged($event)\" (ionCancel)=\"toggleSearch()\"></ion-searchbar>\n      <ion-buttons slot=\"start\">\n        <ion-back-button class=\"interaction\"></ion-back-button>\n      </ion-buttons>\n      <ion-buttons slot=\"end\">\n        <ion-button (click)=\"filterClicked()\">\n          <ion-icon name=\"options\" ></ion-icon>\n        </ion-button>\n        <ion-button (click)=\"toggleSearch()\">\n          <ion-icon name=\"search\" ></ion-icon>\n        </ion-button>\n      </ion-buttons>\n      <ion-title>\n        {{'RH' | translate}}\n      </ion-title>\n    </ion-toolbar>\n</ion-header>\n\n<ion-grid style=\"height: 100%\" *ngIf=\"isLoading\">\n    <ion-row justify-content-center align-items-center style=\"height: 100%\">\n      <ion-spinner name=\"circles\"></ion-spinner>\n    </ion-row>\n</ion-grid>\n\n<ion-content>\n  \n    <!-- <ion-searchbar style=\"display: none\" showCancelButton animated (ionInput)=\"searchChanged($event)\" (ionCancel)=\"toggleSearch()\" (search)=\"toggleSearch()\"></ion-searchbar> -->\n      \n    <!-- FLOATING BUTTON -->\n    <!-- <ion-fab *ngIf=\"!isLoading\" class=\"fixed\" vertical=\"bottom\" horizontal=\"start\" slot=\"fixed\">\n      <ion-fab-button color=\"danger\">\n        <ion-icon name=\"arrow-dropup-circle\"></ion-icon>\n      </ion-fab-button>\n      <ion-fab-list side=\"top\">\n          <ion-fab-button (click)=\"toggleSearch()\">\n            <ion-icon name=\"search\"></ion-icon>\n          </ion-fab-button>\n          <ion-fab-button (click)=\"showPopover()\">\n              <ion-icon name=\"funnel\"></ion-icon>\n            </ion-fab-button>\n      </ion-fab-list>\n    </ion-fab> -->\n    <!-- ---------------------------- -->\n\n    \n    <ion-list no-lines id=\"poi-list\">\n      <div *ngFor=\"let c of categories\">\n        <ion-item-divider class=\"category row\" sticky>\n          <div class=\"column c-icon\" (click)=\"goToMap()\">\n            <ion-icon name=\"map\"></ion-icon>\n          </div>\n          <div class=\"column c-text\">\n            <ion-label>{{c}}</ion-label>\n          </div>\n          <div class=\"column c-btn\">\n            <ion-button *ngIf=\"!search\" class=\"popover-btn\" size=\"small\" color=\"success\" (click)=\"filterClicked()\">Ordina</ion-button>\n          </div>\n        </ion-item-divider>\n        <div class=\"content\">\n          <div *ngFor=\"let poi of showPois[c]; let i = index\">\n            <wc-details [img]=\"poi.image\" [title]=\"poi.title\" [subtitle]=\"poi.subtitle\" [text]=\"poi.text\" [info]=\"poi.info\" [contacts]=\"poi.infos\" heading-color=\"red\"></wc-details>\n            <div class=\"spacing\" *ngIf=\"i == showPois.length - 1\"></div>\n          </div>\n        </div>\n      </div>\n    </ion-list>\n</ion-content>\n"
 
 /***/ }),
 
@@ -182,6 +182,7 @@ var ListRHPage = /** @class */ (function () {
         this.isLoading = true;
         this.fullCategories = [];
         this.categories = [];
+        this.doneTypingInterval = 500; //time in ms, 5 second for example
         if (window[this.config.getAppModuleName()]['language'])
             this.language = window[this.config.getAppModuleName()]['language'];
         if (window[this.config.getAppModuleName()]['geolocation'])
@@ -319,19 +320,47 @@ var ListRHPage = /** @class */ (function () {
             searchbar.style.display = 'none';
         }
     };
+    ListRHPage.prototype.oneElement = function (category) {
+        return (this.showPois[category].length > 0);
+    };
     ListRHPage.prototype.searchChanged = function (input) {
         var _this_1 = this;
-        var value = input.detail.target.value;
-        var _this = this;
-        _this.categories.forEach(function (c) {
-            _this_1.showPois[c] = _this_1.fullPois.filter(function (el) {
-                return (el.title.toLowerCase().indexOf(value.toLowerCase()) > -1);
+        clearTimeout(this.typingTimer);
+        this.typingTimer = setTimeout(function () {
+            var value = input.detail.target.value;
+            var _this = _this_1;
+            _this.categories.forEach(function (c) {
+                _this_1.showPois[c] = _this_1.fullPois.filter(function (el) {
+                    return (el.title.toLowerCase().indexOf(value.toLowerCase()) > -1);
+                });
             });
-        });
+        }, this.doneTypingInterval);
     };
     ListRHPage.prototype.filterClicked = function () {
-        this.buildAlert('filter');
+        // this.buildAlert('filter');
     };
+    // toggleSearch() {
+    //   this.search = !this.search;
+    //   const searchbar = document.querySelector('ion-searchbar');
+    //   if (searchbar.style.display === 'none') {
+    //     searchbar.style.display = 'unset';
+    //     searchbar.setFocus();
+    //   } else {
+    //     searchbar.style.display = 'none';
+    //   }
+    // }
+    // searchChanged(input: any) {
+    //   const value = input.detail.target.value;
+    //   const _this = this;
+    //   _this.categories.forEach(c => {
+    //     this.showPois[c] = this.fullPois.filter(function (el) {
+    //       return (el.title.toLowerCase().indexOf(value.toLowerCase()) > -1);
+    //     });
+    //   });
+    // }
+    // filterClicked() {
+    //   this.buildAlert('filter');
+    // }
     ListRHPage.prototype.buildAlert = function (type) {
         return __awaiter(this, void 0, void 0, function () {
             var _this, alInputs, title, handlerFunc, alert;

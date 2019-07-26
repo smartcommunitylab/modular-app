@@ -66,7 +66,7 @@ var DetailInfoPageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header no-border>\n  <ion-toolbar color=\"secondary\">\n    <ion-buttons slot=\"start\">\n        <ion-back-button></ion-back-button>\n      </ion-buttons>\n    <ion-title>\n        {{'title_detail_info'|translate}}\n      </ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content padding>\n  <div *ngFor=\"let info of details\">\n    <wc-detail-info [info]=\"info\">\n    </wc-detail-info>\n  </div>\n</ion-content>"
+module.exports = "<ion-header no-border>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n        <ion-back-button></ion-back-button>\n      </ion-buttons>\n    <ion-title>\n        {{'title_detail_info'|translate}}\n      </ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content padding>\n  <div *ngFor=\"let info of details\">\n    <wc-detail-info [info]=\"info\">\n    </wc-detail-info>\n  </div>\n</ion-content>"
 
 /***/ }),
 

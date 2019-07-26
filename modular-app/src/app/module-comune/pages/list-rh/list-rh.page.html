@@ -1,12 +1,22 @@
 <ion-header no-border>
-  <ion-toolbar color="secondary">
-    <ion-buttons slot="start">
-        <ion-back-button></ion-back-button>
+    <ion-toolbar>
+        <ion-searchbar style="display: none" showCancelButton animated (search)="toggleSearch()"
+      (ionInput)="searchChanged($event)" (ionCancel)="toggleSearch()"></ion-searchbar>
+      <ion-buttons slot="start">
+        <ion-back-button class="interaction"></ion-back-button>
       </ion-buttons>
-    <ion-title>
+      <ion-buttons slot="end">
+        <ion-button (click)="filterClicked()">
+          <ion-icon name="options" ></ion-icon>
+        </ion-button>
+        <ion-button (click)="toggleSearch()">
+          <ion-icon name="search" ></ion-icon>
+        </ion-button>
+      </ion-buttons>
+      <ion-title>
         {{'RH' | translate}}
       </ion-title>
-  </ion-toolbar>
+    </ion-toolbar>
 </ion-header>
 
 <ion-grid style="height: 100%" *ngIf="isLoading">
@@ -17,10 +27,10 @@
 
 <ion-content>
   
-    <ion-searchbar style="display: none" showCancelButton animated (ionInput)="searchChanged($event)" (ionCancel)="toggleSearch()" (search)="toggleSearch()"></ion-searchbar>
+    <!-- <ion-searchbar style="display: none" showCancelButton animated (ionInput)="searchChanged($event)" (ionCancel)="toggleSearch()" (search)="toggleSearch()"></ion-searchbar> -->
       
     <!-- FLOATING BUTTON -->
-    <ion-fab *ngIf="!isLoading" class="fixed" vertical="bottom" horizontal="start" slot="fixed">
+    <!-- <ion-fab *ngIf="!isLoading" class="fixed" vertical="bottom" horizontal="start" slot="fixed">
       <ion-fab-button color="danger">
         <ion-icon name="arrow-dropup-circle"></ion-icon>
       </ion-fab-button>
@@ -32,7 +42,7 @@
               <ion-icon name="funnel"></ion-icon>
             </ion-fab-button>
       </ion-fab-list>
-    </ion-fab>
+    </ion-fab> -->
     <!-- ---------------------------- -->
 
     

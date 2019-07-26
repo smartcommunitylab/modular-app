@@ -11439,7 +11439,7 @@ var TransportService = /** @class */ (function () {
         this.ttStopData = {};
         this.elements = {};
         this.tripTypeExtractor = function (agencyId, tripId) {
-            if (agencyId == '5' || agencyId == '6') {
+            if (agencyId == '5' || agencyId == '6' || agencyId == '10') {
                 return tripId.replace(/\d+.*/g, '').toUpperCase();
             }
             return tripId;
