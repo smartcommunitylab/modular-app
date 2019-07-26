@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header no-border>
   <ion-toolbar>
         <ion-buttons slot="start">
                 <ion-back-button></ion-back-button>
@@ -8,6 +8,10 @@
 </ion-header>
 
 <ion-content padding>
+    <div>
+        <div class="box-line" [ngStyle]="getStyle()">{{line}}</div>
+        <div class="ion-text-center direction">{{'choose_direction_label'|translate}}</div>
+    </div>
     <ion-list class="route-list space-from-top" *ngIf="view == 'list'">
         <ion-item *ngFor="let elem of elements" (click)="selectElement(elem)">
             <div class="card card-tt" >{{elem.title}}</div>

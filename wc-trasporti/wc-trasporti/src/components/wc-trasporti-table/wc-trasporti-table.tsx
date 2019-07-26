@@ -1,6 +1,6 @@
 import { Component, Prop, State, Element, Event, EventEmitter, Watch, Listen } from '@stencil/core';
 import '@ionic/core';
-import moment from 'moment';
+// import moment from 'moment';
 
 
 @Component({
@@ -13,22 +13,37 @@ export class AppHome {
   @Element() element: HTMLElement;
 
   @Prop() data: string;
+  @Watch('data')
+  reloadTable() {
+    this.componentWillLoad();
+  }
   @State() dataTT: any;
   @State() fontsize: number;
+  @Prop() datetable: string;
+  @Watch('datetable')
+  watchHandler(newValue: string, oldValue: string) {
+    console.log('animation from' + newValue + 'to' + oldValue);
+    this.animateData(oldValue, newValue);
+  }
+
   @Prop() numero: string;
-  @Prop() citta: string;
   @Prop() title: string;
+  @Prop() citta: string;
+  @Prop() titolo: string;
   @Prop() day: string;
   @Prop() arrows: boolean;
   @Prop() font: string;
-
+  @Prop() lang: string;
   @Prop() accessibility: boolean;
   @Prop() color: string;
   @Prop() labeldelay: string;
   @Prop() labeltrips: string;
-  @Prop() tripsvalue:string;
-  @Prop() showtrips:boolean;
-  @Prop() littletable:boolean;
+  @Prop() tripsvalue: string;
+  @Prop() showtrips: boolean;
+  @Prop() littletable: boolean;
+  @Prop() showHeader: boolean;
+  @Prop() agencyid: string;
+
   @Watch('littletable')
   changeStyle() {
     this.changeStyleTable();
@@ -81,7 +96,9 @@ export class AppHome {
   scrollWidth: number;
   tableHeaderHeight: number;
   headStr: string[];
-
+  animateData(oldValue: string, newValue: string): any {
+    throw new Error("Method not implemented." + oldValue + newValue);
+  }
 
   //    set the variables for bigger style
   setBiggerStyle() {
@@ -190,7 +207,7 @@ export class AppHome {
     this.tableHeight = data.stops.length * this.rowHeight;
     this.scrollWidth = window.innerWidth + (this.accessibility ? 0 : 25); //plus accessibility
     this.scrollHeight = window.innerHeight - this.headerHeight;
-    this.tableHeaderHeight = this.header_row_number * this.headerRowHeight;
+    this.tableHeaderHeight = this.showHeader ? (this.header_row_number * this.headerRowHeight) : 0;
 
     if (!noscroll) {
       setTimeout(function () {
@@ -292,28 +309,28 @@ export class AppHome {
     }
     return str;
   };
-          // convert delay object to string
-          getDelayValue (delay) {
-            var res = '';
-            //    if (delay && delay.SERVICE && delay.SERVICE > 0) {
-            //      res += '<span>'+delay.SERVICE+'\'</span>';
-            //    }
-            //    if (delay && delay.USER && delay.USER > 0) {
-            //      res += '<span>'+delay.USER+'\'</span>';
-            //    }
-            if (delay && delay.SERVICE && delay.SERVICE > 0) {
-                res += delay.SERVICE + '\'';
-            }
-            if (delay && delay.USER && delay.USER > 0) {
-                if (res.length > 0) res += ' / ';
-                res += delay.USER + '\'';
-            }
-            return res;
-        }
+  // convert delay object to string
+  getDelayValue(delay) {
+    var res = '';
+    //    if (delay && delay.SERVICE && delay.SERVICE > 0) {
+    //      res += '<span>'+delay.SERVICE+'\'</span>';
+    //    }
+    //    if (delay && delay.USER && delay.USER > 0) {
+    //      res += '<span>'+delay.USER+'\'</span>';
+    //    }
+    if (delay && delay.SERVICE && delay.SERVICE > 0) {
+      res += delay.SERVICE + '\'';
+    }
+    if (delay && delay.USER && delay.USER > 0) {
+      if (res.length > 0) res += ' / ';
+      res += delay.USER + '\'';
+    }
+    return res;
+  }
   StampaOrari(data) {
 
-   this.header_row_number = this.showtrips ? 2 : 1;
-   // this.header_row_number = 1;
+    this.header_row_number = this.showtrips ? 2 : 1;
+    // this.header_row_number = 1;
 
     var dataStr = '';
     var headStr = this.header_row_number == 2 ? ['', ''] : [''];
@@ -358,8 +375,9 @@ export class AppHome {
             headStr[0] += str;
             // train lines header row
           } else if (this.header_row_number == 2 && row == 1) {
-            // var str1 = this.getTripText(data.tripIds[col - 1]);
-            var str1:any = this.tripsvalue;
+            var str1 = this.getTripText(this.agencyid, data.tripIds[col - 1]);
+            console.log(str1);
+            // var str1: any = this.tripsvalue;
             rowContent.push(str1);
             str1 = this.expandStr(str1);
             headStr[1] += str1;
@@ -388,12 +406,19 @@ export class AppHome {
 
     this.initMeasures(data, true);
   };
-  getTripText(tripLabel) {
-    // try {
-    //     return this.TRIP_TYPE_EXTRACTOR($stateParams.agencyId, $scope.route.routeSymId, trip);
-    // } catch (e) {
-    return tripLabel;
-    // }
+
+  tripExtractor(agencyId, tripId) {
+    if (agencyId == '5' || agencyId == '6' || agencyId == '10') {
+      return tripId.replace(/\d+.*/g, '').toUpperCase();
+    }
+    return tripId;
+  }
+  getTripText(agencyId, tripLabel) {
+    try {
+      return this.tripExtractor(agencyId, tripLabel);
+    } catch (e) {
+      return tripLabel;
+    }
   }
   // StampaOrari(param) {
   //   try {
@@ -505,8 +530,9 @@ export class AppHome {
 
     return luma < 128;
   };
-  showStop() {
-    this.showStopEvent.emit();
+  showStop(stop) {
+    // console.log(stop);
+    this.showStopEvent.emit(stop);
 
     // showStop($event) {
     // var pos = $ionicScrollDelegate.$getByHandle('list').getScrollPosition().top + $event.clientY - $scope.tableHeaderHeight - headerHeight;
@@ -527,12 +553,12 @@ export class AppHome {
       backgroundSize: `100% ${this.rowHeight * 2}px`,
       fontSize: `${this.fontsize}px`,
       left: `${this.col ? this.col.style.left : 0}px`,
-      top: `${this.col ? this.col.style.top : 25*this.header_row_number}px`,
+      top: `${this.col ? this.col.style.top : 25 * (this.showHeader ? this.header_row_number : 0)}px`,
       // backgroundImage:`-webkit-linear-gradient(90deg,#fff, #fff {{rowHeight}}px, #eee {{rowHeight}}px, #eee {{rowHeight*2}}px`;
       backgroundImage: `linear-gradient(180deg,#fff, #fff ${this.rowHeight}px, #eee ${this.rowHeight}px, #eee ${this.rowHeight * 2}px`
     };
     var styleTableHeader = {
-      left: `${this.header ? this.stopsColWidth : 0}px`,
+      left: `${this.stopsColWidth}px`,
       top: `${this.header ? this.header.style.top : 0}`,
       fontSize: `${this.fontsize}}px`
     }
@@ -559,46 +585,60 @@ export class AppHome {
       <div>
         <div id="header-table">
           <div class="row titleBar">
-            <div class="col tt-subtitle">{this.title}</div>
+            <div class="col tt-subtitle">{this.titolo}</div>
           </div>
+          <ion-row class="line-title">
+            <ion-col size="12"  >
+              {this.title}
+            </ion-col>
+          </ion-row>
           <ion-row class="day-bar">
             <ion-col size="1" class="col col-25 tt-day btn" onClick={() => this.prevDate()}>
               <ion-icon name="arrow-dropleft"></ion-icon>
             </ion-col>
-            <ion-col size="10" class="col col-50 tt-day">{this.formatDate(this.day, 'ddd')} {this.formatDate(this.day, 'D/M/YYYY')}</ion-col>
+            <ion-col size="10" class="col col-50 tt-day ">{this.datetable}</ion-col>
             <ion-col size="1" class="col col-25 tt-day btn" onClick={() => this.nextDate()}><ion-icon name="arrow-dropright"></ion-icon>
             </ion-col>
           </ion-row>
         </div>
         <div class="row table-container" >
-          <div  class= { "tt-table" +  (this.accessibility === true ? ' tt-table-acc' : ' ') }>
-          {this.orari
-            ? <div id="table-corner" style={styleTableCorner} >
-              <div style={styleAccessibility} > <ion-icon class="table-accessibility" name="person"></ion-icon>
-                <span class="corner-delay">{this.tableCornerStr[0]}</span>
+          <div class={"tt-table" + (this.accessibility === true ? ' tt-table-acc' : ' ')}>
+            {this.orari && this.showHeader
+              ? <div id="table-corner" style={styleTableCorner} >
+                <div style={styleAccessibility} > <ion-icon class="table-accessibility" name="person"></ion-icon>
+                  <span class="corner-delay">{this.tableCornerStr[0]}</span>
+                </div>
+                {
+                  this.header_row_number == 2
+                    ? <div class="delay" style={styleSecondRow} >{this.tableCornerStr[1]}</div>
+                    : ""
+                }
               </div>
-              {
-                this.header_row_number == 2
-                  ? <div class="delay" style={styleSecondRow} >{this.tableCornerStr[1]}</div>
-                  : ""
-              }
-            </div>
-           :""
-          }
+              : ""
+            }
             <ion-content scrollX={true} scrollY={true} scrollEvents={true} has-bouncing="false" id="tablescroll" onIonScrollStart={() => { }}
               onIonScroll={(event) => this.scrollOrari(event)}
               onIonScrollEnd={() => { }} style={styleTableScroll} class="overlapDiv"
               delegate-handle="list">
-              <div id="table-col" innerHTML={this.visualizza(this.fermate)} style={styleTableCol} onClick={() => this.showStop()}></div>
-              <div id="table-header" style={styleTableHeader}>
-                <div innerHTML={this.headStr[0]}></div>
-                {
-                  this.header_row_number == 2
-                    ? <div class="header-row-types">{this.tableCornerStr}</div>
-                    : ""
-                }
-              </div>
+              <div id="table-col" style={styleTableCol}>
+                {this.dataTT.stops.map((stop, index) =>
 
+                  parseInt(index) % 2 == 0
+                    ? <div id='grigioFermate' onClick={() => this.showStop(stop)}>{stop}</div>
+                    : <div id='biancoFermate' onClick={() => this.showStop(stop)}>{stop}</div>
+
+                )}
+              </div>
+              {this.showHeader
+                ? <div id="table-header" style={styleTableHeader}>
+                  <div innerHTML={this.headStr[0]}></div>
+                  {this.header_row_number == 2
+                    ? <div innerHTML={this.headStr[1]} class="header-row-types"></div>
+                    : ""
+                  }
+                </div>
+                : ""
+              }
               <div id="table-table" innerHTML={this.visualizza(this.orari)} style={styleTableTable} ></div>
             </ion-content>
           </div>
@@ -606,8 +646,8 @@ export class AppHome {
       </div>
     ];
   }
-  formatDate(day: string, format): any {
-    // console.log(moment(day).format(format))
-    return moment(Number(day)).format(format);
-  }
+  // formatDate(day: string, format): any {
+  //   // console.log(moment(day).format(format))
+  //   return moment(Number(day)).format(format);
+  // }
 }

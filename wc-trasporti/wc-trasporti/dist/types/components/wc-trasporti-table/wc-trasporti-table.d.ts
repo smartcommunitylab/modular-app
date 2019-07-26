@@ -4,14 +4,19 @@ import '@ionic/core';
 export declare class AppHome {
     element: HTMLElement;
     data: string;
+    reloadTable(): void;
     dataTT: any;
     fontsize: number;
+    datetable: string;
+    watchHandler(newValue: string, oldValue: string): void;
     numero: string;
-    citta: string;
     title: string;
+    citta: string;
+    titolo: string;
     day: string;
     arrows: boolean;
     font: string;
+    lang: string;
     accessibility: boolean;
     color: string;
     labeldelay: string;
@@ -19,6 +24,8 @@ export declare class AppHome {
     tripsvalue: string;
     showtrips: boolean;
     littletable: boolean;
+    showHeader: boolean;
+    agencyid: string;
     changeStyle(): void;
     changeDateEvent: EventEmitter;
     showStopEvent: EventEmitter;
@@ -49,6 +56,7 @@ export declare class AppHome {
     scrollWidth: number;
     tableHeaderHeight: number;
     headStr: string[];
+    animateData(oldValue: string, newValue: string): any;
     setBiggerStyle(): void;
     setSmallerStyle(): void;
     changeStyleTable(): void;
@@ -62,7 +70,8 @@ export declare class AppHome {
     expandStr: (str: any) => any;
     getDelayValue(delay: any): string;
     StampaOrari(data: any): void;
-    getTripText(tripLabel: any): any;
+    tripExtractor(agencyId: any, tripId: any): any;
+    getTripText(agencyId: any, tripLabel: any): any;
     Fetch(): void;
     remoteFetch(): any;
     scrollOrari(event?: any): void;
@@ -71,7 +80,6 @@ export declare class AppHome {
     nextDate(): void;
     textColor(color: any): "#fff" | "#000";
     isDarkColor(color: any): boolean;
-    showStop(): void;
+    showStop(stop: any): void;
     render(): JSX.Element[];
-    formatDate(day: string, format: any): any;
 }

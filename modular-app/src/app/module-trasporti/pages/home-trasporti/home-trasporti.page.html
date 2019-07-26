@@ -1,8 +1,8 @@
 <ion-header no-border>
   <ion-toolbar>
-      <ion-buttons slot="start">
-          <ion-back-button></ion-back-button>
-      </ion-buttons>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
     <ion-title>{{'home_trasporto'|translate}}
     </ion-title>
   </ion-toolbar>
@@ -31,10 +31,11 @@
         <ion-item>
           <div class="{{elem.ref}}" (click)="selectElement(elem)">
             <div class="card card-tt" color>
-              <div class="line-tt" [ngStyle]="getStyle(elem)"><span *ngIf="inside(elem.title)">{{elem.title}}</span>
+              <div class="line-tt" [ngStyle]="getStyle(elem)">
+                <span *ngIf="inside(elem.title)">{{elem.title}}</span>
               </div>
-              <span *ngIf="!inside(elem.title)">{{elem.title}}</span>
-              <span *ngIf="titleisPresent(elem)">{{elem.group.routes[0].title}}</span>
+              <span  class="name-line" *ngIf="!inside(elem.title)">{{elem.title}}</span>
+              <span  class="name-line"  *ngIf="titleisPresent(elem)">{{elem.group.routes[0].title}}</span>
             </div>
           </div>
         </ion-item>

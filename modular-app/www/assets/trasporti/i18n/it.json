@@ -11,6 +11,8 @@
     "label_delay":"RITARDO",
     "label_trips":"TIPO",
     "urbano":"Autobus",
-    "trains":"Treni"
+    "trains":"Treni",
+    "timetable_label":"Orari",
+    "choose_direction_label":"Scegli una direzione"
 
 }

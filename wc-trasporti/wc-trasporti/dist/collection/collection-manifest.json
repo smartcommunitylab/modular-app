@@ -219,6 +219,11 @@
           "attr": "accessibility"
         },
         {
+          "name": "agencyid",
+          "type": "String",
+          "attr": "agencyid"
+        },
+        {
           "name": "arrows",
           "type": "Boolean",
           "attr": "arrows"
@@ -236,7 +241,18 @@
         {
           "name": "data",
           "type": "String",
-          "attr": "data"
+          "attr": "data",
+          "watch": [
+            "reloadTable"
+          ]
+        },
+        {
+          "name": "datetable",
+          "type": "String",
+          "attr": "datetable",
+          "watch": [
+            "watchHandler"
+          ]
         },
         {
           "name": "day",
@@ -259,6 +275,11 @@
           "attr": "labeltrips"
         },
         {
+          "name": "lang",
+          "type": "String",
+          "attr": "lang"
+        },
+        {
           "name": "littletable",
           "type": "Boolean",
           "attr": "littletable",
@@ -272,6 +293,11 @@
           "attr": "numero"
         },
         {
+          "name": "showHeader",
+          "type": "Boolean",
+          "attr": "show-header"
+        },
+        {
           "name": "showtrips",
           "type": "Boolean",
           "attr": "showtrips"
@@ -280,6 +306,11 @@
           "name": "title",
           "type": "String",
           "attr": "title"
+        },
+        {
+          "name": "titolo",
+          "type": "String",
+          "attr": "titolo"
         },
         {
           "name": "tripsvalue",

@@ -59,6 +59,22 @@ export class HomeSettingsPage implements OnInit {
       })
     );
   }
+  addElement(element) {
+    this.categories.push(element);
+    //add and remove from all
+    this.allCategories = this.allCategories.filter(function( obj ) {
+      return obj.id !== element.id;
+    });
+  }
+  removeElement(element) {
+    //remove from categories and add to all
+    //add and remove from all
+    this.categories = this.categories.filter(function( obj ) {
+      return obj.id !== element.id;
+    });
+    this.allCategories.push(element);
+
+  }
   drop(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
@@ -157,10 +173,10 @@ export class HomeSettingsPage implements OnInit {
     this.setting = this.settings.getUserSetting();
     this.myLanguage = this.settings.getUserLanguage();
     if (this.myLanguage) {
-       this.selectedLanguage = this.myLanguage;
-       this.translate.setDefaultLang(this.selectedLanguage);
+      this.selectedLanguage = this.myLanguage;
+      this.translate.setDefaultLang(this.selectedLanguage);
 
-      }
+    }
     const languages = this.settings.getLanguages();
     if (languages) {
       const keys = Array.from(Object.keys(languages));

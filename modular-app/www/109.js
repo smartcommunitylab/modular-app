@@ -1,9 +1,9 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[109],{
 
-/***/ "./node_modules/wcs-comune/dist/esm/es5/build/mntoagnx.entry.js":
-/*!**********************************************************************!*\
-  !*** ./node_modules/wcs-comune/dist/esm/es5/build/mntoagnx.entry.js ***!
-  \**********************************************************************/
+/***/ "./node_modules/wcs-comune/dist/esm/es5/build/mntoagnx.sc.entry.js":
+/*!*************************************************************************!*\
+  !*** ./node_modules/wcs-comune/dist/esm/es5/build/mntoagnx.sc.entry.js ***!
+  \*************************************************************************/
 /*! exports provided: WcModal */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 

@@ -26,6 +26,13 @@
 
 .line-container {
     padding-top: 40px;
+    .card-tt{
+        display: table;
+        .name-line{
+            display: table-cell;
+    vertical-align: middle;
+        }
+    }
     .line-tt {
         border-radius: 8px;
         height: 50px;

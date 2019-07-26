@@ -1,9 +1,9 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[33],{
 
-/***/ "./node_modules/@ionic/core/dist/esm/legacy/ion-chip-ios.entry.js":
-/*!************************************************************************!*\
-  !*** ./node_modules/@ionic/core/dist/esm/legacy/ion-chip-ios.entry.js ***!
-  \************************************************************************/
+/***/ "./node_modules/@ionic/core/dist/esm/legacy/ion-chip-md.entry.js":
+/*!***********************************************************************!*\
+  !*** ./node_modules/@ionic/core/dist/esm/legacy/ion-chip-md.entry.js ***!
+  \***********************************************************************/
 /*! exports provided: ion_chip */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 

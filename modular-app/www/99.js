@@ -1,9 +1,9 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[99],{
 
-/***/ "./node_modules/wcs-comune/dist/esm/es5/build/55jrifnu.entry.js":
-/*!**********************************************************************!*\
-  !*** ./node_modules/wcs-comune/dist/esm/es5/build/55jrifnu.entry.js ***!
-  \**********************************************************************/
+/***/ "./node_modules/wcs-comune/dist/esm/es5/build/55jrifnu.sc.entry.js":
+/*!*************************************************************************!*\
+  !*** ./node_modules/wcs-comune/dist/esm/es5/build/55jrifnu.sc.entry.js ***!
+  \*************************************************************************/
 /*! exports provided: WcDetailInfo */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 

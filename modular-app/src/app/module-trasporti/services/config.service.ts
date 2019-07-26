@@ -5,6 +5,19 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class ConfigService {
+  getLanguage(): any {
+    if (localStorage.getItem('comune-setting')) {
+      var setting = JSON.parse(localStorage.getItem('comune-setting'));
+      var language = setting.language;
+      if (language)
+        return language
+    }
+    return 'it';
+  }
+  private appModuleName: string = "app-module";
+  getAppModuleName(): any {
+    return this.appModuleName
+  }
 
 
   appId = 'trento';

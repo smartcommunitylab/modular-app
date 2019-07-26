@@ -79,8 +79,8 @@ var _this = undefined;
 
 
 
-var iosTransitionAnimation = function () { return __webpack_require__.e(/*! import() */ 91).then(__webpack_require__.bind(null, /*! ./ios.transition-3939fd76.js */ "./node_modules/@ionic/core/dist/esm/legacy/ios.transition-3939fd76.js")); };
-var mdTransitionAnimation = function () { return __webpack_require__.e(/*! import() */ 92).then(__webpack_require__.bind(null, /*! ./md.transition-9dfa7bb7.js */ "./node_modules/@ionic/core/dist/esm/legacy/md.transition-9dfa7bb7.js")); };
+var iosTransitionAnimation = function () { return __webpack_require__.e(/*! import() */ 90).then(__webpack_require__.bind(null, /*! ./ios.transition-3939fd76.js */ "./node_modules/@ionic/core/dist/esm/legacy/ios.transition-3939fd76.js")); };
+var mdTransitionAnimation = function () { return __webpack_require__.e(/*! import() */ 91).then(__webpack_require__.bind(null, /*! ./md.transition-9dfa7bb7.js */ "./node_modules/@ionic/core/dist/esm/legacy/md.transition-9dfa7bb7.js")); };
 var transition = function (opts) {
     return new Promise(function (resolve, reject) {
         Object(_chunk_09ec7fc0_js__WEBPACK_IMPORTED_MODULE_1__["w"])(function () {
@@ -168,7 +168,7 @@ var animation = function (animationBuilder, opts) { return tslib__WEBPACK_IMPORT
             case 0: return [4 /*yield*/, waitForReady(opts, true)];
             case 1:
                 _a.sent();
-                return [4 /*yield*/, __webpack_require__.e(/*! import() */ 3).then(__webpack_require__.bind(null, /*! ./index-d9adb105.js */ "./node_modules/@ionic/core/dist/esm/legacy/index-d9adb105.js")).then(function (mod) { return mod.create(animationBuilder, opts.baseEl, opts); })];
+                return [4 /*yield*/, __webpack_require__.e(/*! import() */ 2).then(__webpack_require__.bind(null, /*! ./index-d9adb105.js */ "./node_modules/@ionic/core/dist/esm/legacy/index-d9adb105.js")).then(function (mod) { return mod.create(animationBuilder, opts.baseEl, opts); })];
             case 2:
                 trans = _a.sent();
                 fireWillEvents(opts.enteringEl, opts.leavingEl);

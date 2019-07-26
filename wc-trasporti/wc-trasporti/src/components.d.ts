@@ -91,36 +91,46 @@ export namespace Components {
 
   interface WcTrasportiTable {
     'accessibility': boolean;
+    'agencyid': string;
     'arrows': boolean;
     'citta': string;
     'color': string;
     'data': string;
+    'datetable': string;
     'day': string;
     'font': string;
     'labeldelay': string;
     'labeltrips': string;
+    'lang': string;
     'littletable': boolean;
     'numero': string;
+    'showHeader': boolean;
     'showtrips': boolean;
     'title': string;
+    'titolo': string;
     'tripsvalue': string;
   }
   interface WcTrasportiTableAttributes extends StencilHTMLAttributes {
     'accessibility'?: boolean;
+    'agencyid'?: string;
     'arrows'?: boolean;
     'citta'?: string;
     'color'?: string;
     'data'?: string;
+    'datetable'?: string;
     'day'?: string;
     'font'?: string;
     'labeldelay'?: string;
     'labeltrips'?: string;
+    'lang'?: string;
     'littletable'?: boolean;
     'numero'?: string;
     'onChangeDateEvent'?: (event: CustomEvent) => void;
     'onShowStopEvent'?: (event: CustomEvent) => void;
+    'showHeader'?: boolean;
     'showtrips'?: boolean;
     'title'?: string;
+    'titolo'?: string;
     'tripsvalue'?: string;
   }
 }

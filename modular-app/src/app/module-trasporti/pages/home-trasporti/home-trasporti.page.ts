@@ -132,11 +132,11 @@ export class HomeTrasportiPage extends MainPage implements OnInit {
       // if (!this.groupId) {
       //   this.groupId = "no-group";
       // }
-      this.router.navigate(['/tt', e.ref, e.agencyId, this.groupId, e.route.routeSymId, e.title]);
+      this.router.navigate(['/tt', e.ref, e.agencyId, this.groupId ? this.groupId:e.title, e.route.routeSymId, e.title,e.color]);
 
       // group with single route: go to table
     } else if (e.group.routes != null && e.group.routes.length == 1) {
-      this.router.navigate(['/tt', e.ref, e.agencyId, e.group.label, e.group.routes[0].routeSymId, e.title]);
+      this.router.navigate(['/tt', e.ref, e.agencyId, e.group.label, e.group.routes[0].routeSymId, e.title,e.color]);
 
       // group with multiple elements: go to group
     } else {
@@ -149,23 +149,5 @@ export class HomeTrasportiPage extends MainPage implements OnInit {
   loadList(ref): Promise<any> {
 
     return this.transportService.getTTData(ref.state, this.agencyId, this.groupId)
-    // .then(res => {
-    //   if (res) {
-    //     this.hasMap = (<any>res).hasMap;
-    //     this.markerIcon = (<any>res).markerIcon;
-    //     this.icon = (<any>res).icon;
-
-    //     // var title = $filter('translate')((<any>data).title ? (<any>data).title : (<any>data).label);
-    //     // if (title.length < 5) title = $filter('translate')('lbl_line') + ' ' + title;
-    //     var title = "Todo"
-    //     this.title = title;
-    //     this.elements = this.transport.flattenData(res, this.ref, this.agencyId);
-    //     this.view = (<any>res).view ? (<any>res).view : 'list';
-    //     if (this.view == 'grid') {
-    //       this.prepareGrid();
-    //     }
-
-    //   }
-    // })
   }
 }

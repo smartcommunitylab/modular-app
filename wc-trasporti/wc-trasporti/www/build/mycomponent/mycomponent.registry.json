@@ -3,30 +3,30 @@
   "fsNamespace": "mycomponent",
   "loader": "../mycomponent.js",
   "global": "mycomponent.global.js",
-  "core": "mycomponent.x11ri9ma.js",
-  "corePolyfilled": "mycomponent.zekbgk0c.js",
+  "core": "mycomponent.qbfroikx.js",
+  "corePolyfilled": "mycomponent.kvrhgdnn.js",
   "components": {
     "ion-col": {
       "bundleIds": {
-        "$": "btprpnmn"
+        "$": "ow1he9wh"
       },
       "encapsulation": "shadow"
     },
     "ion-content": {
       "bundleIds": {
-        "$": "qmvww460"
+        "$": "l6tou7bg"
       },
       "encapsulation": "shadow"
     },
     "ion-icon": {
       "bundleIds": {
-        "$": "btprpnmn"
+        "$": "ow1he9wh"
       },
       "encapsulation": "shadow"
     },
     "ion-row": {
       "bundleIds": {
-        "$": "btprpnmn"
+        "$": "ow1he9wh"
       },
       "encapsulation": "shadow"
     },
@@ -38,13 +38,13 @@
     },
     "wc-trasporti-stop": {
       "bundleIds": {
-        "$": "g94hkb4x"
+        "$": "wphuzlpk"
       },
       "encapsulation": "shadow"
     },
     "wc-trasporti-table": {
       "bundleIds": {
-        "$": "qmvww460"
+        "$": "l6tou7bg"
       },
       "encapsulation": "shadow"
     }
