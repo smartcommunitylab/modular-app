@@ -1409,7 +1409,7 @@
   },
   {
     "file": "cordova_plugins.js",
-    "hash": "b4f6819e060a68cc3d2fdd85f3201c2f"
+    "hash": "d258db5bb795ba87cd7b75297452aca4"
   },
   {
     "file": "cordova-js-src/android/nativeapiprovider.js",
@@ -1557,11 +1557,11 @@
   },
   {
     "file": "pages-home-common-home-common-module.js",
-    "hash": "1312f027d9b4f6176f8a5f3168d8a18b"
+    "hash": "16d0dd7e8e49a5274f0cc00871aaaf15"
   },
   {
     "file": "pages-home-common-home-common-module.js.map",
-    "hash": "a025415d7efdb73780009b21ffd9bd7a"
+    "hash": "48f22d00c8f412dfe831f2f9b9c6a618"
   },
   {
     "file": "pages-home-home-module.js",
@@ -1714,6 +1714,10 @@
   {
     "file": "pages-video-video-module.js.map",
     "hash": "aec798b1a69e85a217560329a08cc54e"
+  },
+  {
+    "file": "plugins/cordova-hot-code-push-plugin/www/chcp.js",
+    "hash": "0beaa97dfe7d1183b7c4736ad5f2bbb2"
   },
   {
     "file": "plugins/cordova-plugin-badge/www/badge.js",
