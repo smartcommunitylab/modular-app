@@ -282,14 +282,6 @@ module.exports = [
     "clobbers": [
       "SQLitePlugin"
     ]
-  },
-  {
-    "id": "cordova-hot-code-push-plugin.chcp",
-    "file": "plugins/cordova-hot-code-push-plugin/www/chcp.js",
-    "pluginId": "cordova-hot-code-push-plugin",
-    "clobbers": [
-      "chcp"
-    ]
   }
 ];
 module.exports.metadata = 
@@ -307,8 +299,7 @@ module.exports.metadata =
   "cordova-plugin-whitelist": "1.3.3",
   "es6-promise-plugin": "4.2.2",
   "cordova-plugin-x-socialsharing": "5.4.7",
-  "cordova-sqlite-storage": "3.2.0",
-  "cordova-hot-code-push-plugin": "1.5.3"
+  "cordova-sqlite-storage": "3.2.0"
 };
 // BOTTOM OF METADATA
 });

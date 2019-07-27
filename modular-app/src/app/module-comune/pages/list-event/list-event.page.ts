@@ -182,7 +182,7 @@ export class ListEventPage implements OnInit {
   }
 
   filterClicked() {
-    // this.buildAlert('filter');
+    this.buildAlert('filter');
   }
 
   async buildAlert(type: string) {

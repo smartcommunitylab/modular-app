@@ -10,7 +10,9 @@ const routes: Routes = [
   { path: 'setting', loadChildren: './pages/setting/setting.module#SettingPageModule' },
   { path: 'favourites', loadChildren: './pages/favourites/favourites.module#FavouritesPageModule' },
   { path: 'credits', loadChildren: './credits/credits.module#CreditsPageModule' },
-  { path: 'home-settings', loadChildren: './pages/home-settings/home-settings.module#HomeSettingsPageModule' }];
+  { path: 'home-settings', loadChildren: './pages/home-settings/home-settings.module#HomeSettingsPageModule' }
+]  
+;
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

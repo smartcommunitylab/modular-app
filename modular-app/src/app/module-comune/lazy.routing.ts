@@ -15,6 +15,7 @@ const routes: Routes = [
     { path: 'detail-path', loadChildren: './pages/detail-path/detail-path.module#DetailPathPageModule' },
     { path: 'list-categories', loadChildren: './pages/list-categories/list-categories.module#ListCategoriesPageModule' },
     { path: 'detail-path', loadChildren: './pages/detail-path/detail-path.module#DetailPathPageModule' },
+    { path: 'list-food', loadChildren: './pages/list-food/list-food.module#ListFoodPageModule' },
     { path: 'detail-info', loadChildren: './pages/detail-info/detail-info.module#DetailInfoPageModule' }
 ];
 

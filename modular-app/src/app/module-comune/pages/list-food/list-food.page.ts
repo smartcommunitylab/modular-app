@@ -10,11 +10,11 @@ import { ConfigService } from 'src/app/services/config.service';
 import { AlertInput } from '@ionic/core';
 
 @Component({
-  selector: 'app-list-rh',
-  templateUrl: './list-rh.page.html',
-  styleUrls: ['./list-rh.page.scss'],
+  selector: 'app-list-food',
+  templateUrl: './list-food.page.html',
+  styleUrls: ['./list-food.page.scss'],
 })
-export class ListRHPage implements OnInit {
+export class ListFoodPage implements OnInit {
   showPois: any = [];
   fullPois: any = [];
   language: string;
@@ -70,7 +70,7 @@ export class ListRHPage implements OnInit {
   ionViewDidEnter() {
 
     if (this.category) {
-      let query = { 'selector': { 'element-type': 'hotel-item' } };
+      let query = { 'selector': { 'element-type': 'restaurant-item' } };
       this.dbService.getObjectByQuery(query).then((data) => {
         this.fullPois = data.docs.map(x => this.convertPois(x));
         this.subCategories(this.fullPois);

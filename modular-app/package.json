@@ -40,7 +40,6 @@
     "c-coffee-icon": "0.0.2",
     "cordova-android": "6.3.0",
     "cordova-browser": "5.0.4",
-    "cordova-hot-code-push-plugin": "git+https://github.com/nordnet/cordova-hot-code-push.git",
     "cordova-plugin-badge": "0.8.8",
     "cordova-plugin-dbcopy": "git+https://github.com/an-rahulpandey/cordova-plugin-dbcopy.git",
     "cordova-plugin-device": "^2.0.2",
@@ -128,8 +127,7 @@
       "cordova-plugin-dbcopy": {},
       "cordova-plugin-x-socialsharing": {
         "ANDROID_SUPPORT_V4_VERSION": "24.1.1+"
-      },
-      "cordova-hot-code-push-plugin": {}
+      }
     },
     "platforms": [
       "browser",
