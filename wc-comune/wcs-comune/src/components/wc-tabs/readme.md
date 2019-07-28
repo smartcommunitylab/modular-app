@@ -10,19 +10,10 @@
 | Property     | Attribute     | Description                                                          | Type     | Default     |
 | ------------ | ------------- | -------------------------------------------------------------------- | -------- | ----------- |
 | `bgColor`    | `bg-color`    | Colore sfondo tabs                                                   | `string` | `"white"`   |
-| `content`    | `content`     | Oggeto JSON contenente i dettagli delle tab.                         | `string` | `undefined` |               
+| `content`    | `content`     | Oggeto JSON contenente i dettagli delle tab.                         | `string` | `undefined` |
 | `iconColor`  | `icon-color`  | Colore icona di default (pagina non attiva)                          | `string` | `"black"`   |
 | `tabActived` | `tab-actived` | Identificativo pagina attiva, fare riferimento a proprietà "content" | `string` | `"info"`    |
 
-## Oggetto JSON "content"
-```javascript
-[
-    {                                                                                    
-        target: <string>, --> pagina da visualizzare                                         
-        icon: <string> --> identificativo icona (vedi shared/icons.tsx)                      
-    }
-]
-```
 
 ## Events
 

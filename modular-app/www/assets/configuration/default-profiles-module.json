@@ -66,16 +66,28 @@
   ],
   "citizen": [
     {
-      "id": "profile_cit_csvimport_Mangiare_e_dormire_item_comuneintasca",
+      "id": "profile_cit_csvimport_Mangiare_item_comuneintasca",
       "name": {
-        "it": "Ristoranti & Alberghi",
-        "en": "Restaurants & Hotel",
-        "de": "Restaurants & Hotel"
+        "it": "Ristoranti ",
+        "en": "Restaurants ",
+        "de": "Restaurants "
+      },
+      "url": "/list-food",
+      "icon": "home"
+      
+  
+    },
+    {
+      "id": "profile_cit_csvimport_dormire_item_comuneintasca",
+      "name": {
+        "it": " Alberghi",
+        "en": " Hotel",
+        "de": " Hotel"
       },
       "url": "/list-rh",
       "icon": "home"
-
-
+      
+  
     },
     {
       "id": "profile_cit_csvimport_Eventi_item_comuneintasca",

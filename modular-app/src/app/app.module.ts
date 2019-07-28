@@ -22,6 +22,7 @@ import { DelayDragDirective } from './directives/delay-drag.directive';
 import { InfoModule } from './module-info/web-components.module';
 import { FuneraliModule } from './module-funerali/web-components.module';
 import { HotCodePush } from '@ionic-native/hot-code-push/ngx';
+import { CallNumber } from '@ionic-native/call-number/ngx';
 export function initializeAppSetting(appInitService: SettingService) {
   return (): Promise<any> => {
     return appInitService.Init();
@@ -68,6 +69,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     StatusBar,
     SplashScreen,
     Geolocation,
+    CallNumber,
     HotCodePush,
     SettingService,
     { provide: APP_INITIALIZER, useFactory: initializeAppConfig, deps: [ConfigService], multi: true },

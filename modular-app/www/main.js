@@ -642,59 +642,59 @@ var map = {
 		"common",
 		105
 	],
+	"./hjfj2it6.entry.js": [
+		"./node_modules/wcs-comune/dist/esm/es5/build/hjfj2it6.entry.js",
+		"common",
+		106
+	],
+	"./hjfj2it6.sc.entry.js": [
+		"./node_modules/wcs-comune/dist/esm/es5/build/hjfj2it6.sc.entry.js",
+		"common",
+		107
+	],
 	"./ldobok8w.entry.js": [
 		"./node_modules/wcs-comune/dist/esm/es5/build/ldobok8w.entry.js",
-		106
+		108
 	],
 	"./ldobok8w.sc.entry.js": [
 		"./node_modules/wcs-comune/dist/esm/es5/build/ldobok8w.sc.entry.js",
-		107
+		109
 	],
 	"./mntoagnx.entry.js": [
 		"./node_modules/wcs-comune/dist/esm/es5/build/mntoagnx.entry.js",
 		"common",
-		108
+		110
 	],
 	"./mntoagnx.sc.entry.js": [
 		"./node_modules/wcs-comune/dist/esm/es5/build/mntoagnx.sc.entry.js",
 		"common",
-		109
+		111
 	],
 	"./np47qduy.entry.js": [
 		"./node_modules/wcs-comune/dist/esm/es5/build/np47qduy.entry.js",
 		"common",
-		110
+		112
 	],
 	"./np47qduy.sc.entry.js": [
 		"./node_modules/wcs-comune/dist/esm/es5/build/np47qduy.sc.entry.js",
 		"common",
-		111
+		113
 	],
 	"./oqq34gwq.entry.js": [
 		"./node_modules/wcs-comune/dist/esm/es5/build/oqq34gwq.entry.js",
-		112
+		114
 	],
 	"./oqq34gwq.sc.entry.js": [
 		"./node_modules/wcs-comune/dist/esm/es5/build/oqq34gwq.sc.entry.js",
-		113
+		115
 	],
 	"./q714yko0.entry.js": [
 		"./node_modules/wcs-comune/dist/esm/es5/build/q714yko0.entry.js",
 		"common",
-		114
+		116
 	],
 	"./q714yko0.sc.entry.js": [
 		"./node_modules/wcs-comune/dist/esm/es5/build/q714yko0.sc.entry.js",
-		"common",
-		115
-	],
-	"./tjwniqtb.entry.js": [
-		"./node_modules/wcs-comune/dist/esm/es5/build/tjwniqtb.entry.js",
-		"common",
-		116
-	],
-	"./tjwniqtb.sc.entry.js": [
-		"./node_modules/wcs-comune/dist/esm/es5/build/tjwniqtb.sc.entry.js",
 		"common",
 		117
 	],
@@ -817,19 +817,19 @@ var map = {
 	],
 	"./pages/detail-info/detail-info.module": [
 		"./src/app/module-comune/pages/detail-info/detail-info.module.ts",
-		"default~pages-detail-info-detail-info-module~pages-detail-path-detail-path-module~pages-detail-poi-d~30701aed",
+		"default~pages-detail-info-detail-info-module~pages-detail-path-detail-path-module~pages-detail-poi-d~9f8276b2",
 		"common",
 		"pages-detail-info-detail-info-module"
 	],
 	"./pages/detail-path/detail-path.module": [
 		"./src/app/module-comune/pages/detail-path/detail-path.module.ts",
-		"default~pages-detail-info-detail-info-module~pages-detail-path-detail-path-module~pages-detail-poi-d~30701aed",
+		"default~pages-detail-info-detail-info-module~pages-detail-path-detail-path-module~pages-detail-poi-d~9f8276b2",
 		"common",
 		"pages-detail-path-detail-path-module"
 	],
 	"./pages/detail-poi/detail-poi.module": [
 		"./src/app/module-comune/pages/detail-poi/detail-poi.module.ts",
-		"default~pages-detail-info-detail-info-module~pages-detail-path-detail-path-module~pages-detail-poi-d~30701aed",
+		"default~pages-detail-info-detail-info-module~pages-detail-path-detail-path-module~pages-detail-poi-d~9f8276b2",
 		"common",
 		"pages-detail-poi-detail-poi-module"
 	],
@@ -863,37 +863,43 @@ var map = {
 	],
 	"./pages/home/home.module": [
 		"./src/app/module-comune/pages/home/home.module.ts",
-		"default~pages-detail-info-detail-info-module~pages-detail-path-detail-path-module~pages-detail-poi-d~30701aed",
+		"default~pages-detail-info-detail-info-module~pages-detail-path-detail-path-module~pages-detail-poi-d~9f8276b2",
 		"common",
 		"pages-home-home-module"
 	],
 	"./pages/list-categories/list-categories.module": [
 		"./src/app/module-comune/pages/list-categories/list-categories.module.ts",
-		"default~pages-detail-info-detail-info-module~pages-detail-path-detail-path-module~pages-detail-poi-d~30701aed",
+		"default~pages-detail-info-detail-info-module~pages-detail-path-detail-path-module~pages-detail-poi-d~9f8276b2",
 		"common",
 		"pages-list-categories-list-categories-module"
 	],
 	"./pages/list-event/list-event.module": [
 		"./src/app/module-comune/pages/list-event/list-event.module.ts",
-		"default~pages-detail-info-detail-info-module~pages-detail-path-detail-path-module~pages-detail-poi-d~30701aed",
+		"default~pages-detail-info-detail-info-module~pages-detail-path-detail-path-module~pages-detail-poi-d~9f8276b2",
 		"common",
 		"pages-list-event-list-event-module"
 	],
+	"./pages/list-food/list-food.module": [
+		"./src/app/module-comune/pages/list-food/list-food.module.ts",
+		"default~pages-detail-info-detail-info-module~pages-detail-path-detail-path-module~pages-detail-poi-d~9f8276b2",
+		"common",
+		"pages-list-food-list-food-module"
+	],
 	"./pages/list-path/list-path.module": [
 		"./src/app/module-comune/pages/list-path/list-path.module.ts",
-		"default~pages-detail-info-detail-info-module~pages-detail-path-detail-path-module~pages-detail-poi-d~30701aed",
+		"default~pages-detail-info-detail-info-module~pages-detail-path-detail-path-module~pages-detail-poi-d~9f8276b2",
 		"common",
 		"pages-list-path-list-path-module"
 	],
 	"./pages/list-poi/list-poi.module": [
 		"./src/app/module-comune/pages/list-poi/list-poi.module.ts",
-		"default~pages-detail-info-detail-info-module~pages-detail-path-detail-path-module~pages-detail-poi-d~30701aed",
+		"default~pages-detail-info-detail-info-module~pages-detail-path-detail-path-module~pages-detail-poi-d~9f8276b2",
 		"common",
 		"pages-list-poi-list-poi-module"
 	],
 	"./pages/list-rh/list-rh.module": [
 		"./src/app/module-comune/pages/list-rh/list-rh.module.ts",
-		"default~pages-detail-info-detail-info-module~pages-detail-path-detail-path-module~pages-detail-poi-d~30701aed",
+		"default~pages-detail-info-detail-info-module~pages-detail-path-detail-path-module~pages-detail-poi-d~9f8276b2",
 		"common",
 		"pages-list-rh-list-rh-module"
 	],
@@ -1320,6 +1326,7 @@ var routes = [
     { path: 'detail-path', loadChildren: './pages/detail-path/detail-path.module#DetailPathPageModule' },
     { path: 'list-categories', loadChildren: './pages/list-categories/list-categories.module#ListCategoriesPageModule' },
     { path: 'detail-path', loadChildren: './pages/detail-path/detail-path.module#DetailPathPageModule' },
+    { path: 'list-food', loadChildren: './pages/list-food/list-food.module#ListFoodPageModule' },
     { path: 'detail-info', loadChildren: './pages/detail-info/detail-info.module#DetailInfoPageModule' }
 ];
 var routing = _angular_router__WEBPACK_IMPORTED_MODULE_0__["RouterModule"].forChild(routes);

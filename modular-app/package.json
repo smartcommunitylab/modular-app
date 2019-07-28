@@ -23,6 +23,7 @@
     "@angular/platform-browser": "~7.1.4",
     "@angular/platform-browser-dynamic": "~7.1.4",
     "@angular/router": "~7.1.4",
+    "@ionic-native/call-number": "^5.10.0",
     "@ionic-native/core": "5.0.0-beta.21",
     "@ionic-native/file": "^5.6.1",
     "@ionic-native/geolocation": "^5.5.1",
@@ -38,6 +39,7 @@
     "@types/pouchdb": "6.3.3",
     "add-cors-to-couchdb": "0.0.6",
     "c-coffee-icon": "0.0.2",
+    "call-number": "^1.0.1",
     "cordova-android": "6.3.0",
     "cordova-browser": "5.0.4",
     "cordova-plugin-badge": "0.8.8",
@@ -68,10 +70,11 @@
     "rxjs": "^6.3.3",
     "tslib": "^1.9.3",
     "wc-trasporti": "file:../wc-trasporti/wc-trasporti",
-    "wcs-comune": "~0.0.112",
+    "wcs-comune": "0.0.116",
     "wcs-dettagliofunerale": "0.0.1",
     "wcs-info": "^0.1.0",
-    "zone.js": "~0.8.26"
+    "zone.js": "~0.8.26",
+    "mx.ferreyra.callnumber": "~0.0.2"
   },
   "devDependencies": {
     "@angular-devkit/architect": "~0.11.4",
@@ -127,7 +130,8 @@
       "cordova-plugin-dbcopy": {},
       "cordova-plugin-x-socialsharing": {
         "ANDROID_SUPPORT_V4_VERSION": "24.1.1+"
-      }
+      },
+      "mx.ferreyra.callnumber": {}
     },
     "platforms": [
       "browser",

@@ -1,6 +1,6 @@
 // tslint:disable: no-shadowed-variable
 import { Component, OnInit } from '@angular/core';
-import { NavController, AlertController, PopoverController, Events } from '@ionic/angular';
+import { NavController, AlertController, PopoverController, Events, ModalController } from '@ionic/angular';
 import { DbService } from '../../services/db.service';
 import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
 import { PopoverComponent } from 'src/app/shared/popover/popover.component';
@@ -8,6 +8,8 @@ import { TranslateService } from '@ngx-translate/core';
 import { GeoService } from 'src/app/services/geo.service';
 import { ConfigService } from 'src/app/services/config.service';
 import { AlertInput } from '@ionic/core';
+import { CallNumber } from '@ionic-native/call-number/ngx';
+import { FilterPageFoodPage } from './filter-page-food/filter-page-food.page';
 
 @Component({
   selector: 'app-list-food',
@@ -28,6 +30,7 @@ export class ListFoodPage implements OnInit {
   mypos: { lat: number, long: number };
 
   constructor(
+    private modalController: ModalController,
     private config: ConfigService,
     public navCtrl: NavController,
     public dbService: DbService,
@@ -38,7 +41,8 @@ export class ListFoodPage implements OnInit {
     private popoverController: PopoverController,
     public events: Events,
     private translate: TranslateService,
-    private geoSrv: GeoService
+    private geoSrv: GeoService,
+    private callNumber:CallNumber
   ) {
     if (window[this.config.getAppModuleName()]['language'])
       this.language = window[this.config.getAppModuleName()]['language'];
@@ -47,9 +51,9 @@ export class ListFoodPage implements OnInit {
         lat: window[this.config.getAppModuleName()]['geolocation']['lat'],
         long: window[this.config.getAppModuleName()]['geolocation']['long']
       };
-      else {
-        this.mypos = this.config.getDefaultPosition();
-      }
+    else {
+      this.mypos = this.config.getDefaultPosition();
+    }
     this.translate.use(this.language);
     events.subscribe('radio:selected', x => {
       this.changeCategory(x);
@@ -65,7 +69,22 @@ export class ListFoodPage implements OnInit {
           this.category = cat;
         }
       });
+    const food = document.getElementById('poi-list');
+
+    food.addEventListener('contactClick', async (contact) => {
+      // console.log(contact)
+      var contactParam = JSON.parse((<any>contact).detail)
+      if (contactParam.type == 'phone') {
+        this.callNumber.callNumber(contactParam.value, true)
+          .then(res => console.log('Launched dialer!', res))
+          .catch(err => console.log('Error launching dialer', err));
+      }
+      if (contactParam.type == 'address') {
+        console.log('vai all\'indirizzo'+contactParam.value);
+      }
+    })
   }
+
 
   ionViewDidEnter() {
 
@@ -177,13 +196,13 @@ export class ListFoodPage implements OnInit {
   doneTypingInterval = 500;  //time in ms, 5 second for example
   toggleSearch() {
     this.search = !this.search;
-      const searchbar = document.querySelector('ion-searchbar');
-      if (searchbar.style.display === 'none') {
-        searchbar.style.display = 'unset';
-        searchbar.setFocus();
-      } else {
-        searchbar.style.display = 'none';
-      }
+    const searchbar = document.querySelector('ion-searchbar');
+    if (searchbar.style.display === 'none') {
+      searchbar.style.display = 'unset';
+      searchbar.setFocus();
+    } else {
+      searchbar.style.display = 'none';
+    }
   }
   oneElement(category) {
     return (this.showPois[category].length > 0)
@@ -191,19 +210,23 @@ export class ListFoodPage implements OnInit {
   searchChanged(input: any) {
     clearTimeout(this.typingTimer);
     this.typingTimer = setTimeout(() => {
-    const value = input.detail.target.value;
-    const _this = this;
-    _this.categories.forEach(c => {
-      this.showPois[c] = this.fullPois.filter(function (el) {
-        return (el.title.toLowerCase().indexOf(value.toLowerCase()) > -1);
+      const value = input.detail.target.value;
+      const _this = this;
+      _this.categories.forEach(c => {
+        this.showPois[c] = this.fullPois.filter(function (el) {
+          return (el.title.toLowerCase().indexOf(value.toLowerCase()) > -1);
+        });
       });
-    });
     }, this.doneTypingInterval);
 
   }
 
-  filterClicked() {
-    this.buildAlert('filter');
+  async filterClicked() {
+    const modal = await this.modalController.create({
+      component: FilterPageFoodPage
+    });
+    return await modal.present();
+    //this.buildAlert('filter');
   }
   // toggleSearch() {
   //   this.search = !this.search;
@@ -256,6 +279,7 @@ export class ListFoodPage implements OnInit {
         checked: true
       });
     } else {
+      //filter
       title = 'Ordina Per';
       handlerFunc = this.orderArray;
       alInputs = [

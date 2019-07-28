@@ -1,6 +1,7 @@
 {
     "HOME": "Home",
-    "RH": "Restaurants & Hotels",
+    "RH": "Alberghi",
+    "Ristoranti":"Ristoranti",
     "PATH": "Touristic Itineraries",
     "EVENTS": "Events",
     "MAP": "Map"

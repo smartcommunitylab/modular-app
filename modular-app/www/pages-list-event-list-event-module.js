@@ -323,7 +323,7 @@ var ListEventPage = /** @class */ (function () {
         }, this.doneTypingInterval);
     };
     ListEventPage.prototype.filterClicked = function () {
-        // this.buildAlert('filter');
+        this.buildAlert('filter');
     };
     ListEventPage.prototype.buildAlert = function (type) {
         return __awaiter(this, void 0, void 0, function () {
