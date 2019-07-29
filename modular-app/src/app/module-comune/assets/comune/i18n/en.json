@@ -4,5 +4,8 @@
     "Ristoranti":"Ristoranti",
     "PATH": "Touristic Itineraries",
     "EVENTS": "Events",
-    "MAP": "Map"
+    "MAP": "Map",
+    "alt_image_string":"Image not present",
+    "address_contacts":"Mappa",
+    "phone_contacts":"Telefono"
 }

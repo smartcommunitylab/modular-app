@@ -5,8 +5,12 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class ConfigService {
-
-  menu = [
+  private appModuleName: string = "app-module";
+  private defaultPosition = {
+    lat: 0,
+    long: 0
+  }
+  private menu = [
     {
       title: "Home",
       url: "/home",
@@ -20,5 +24,24 @@ export class ConfigService {
     localStorage.setItem('comune-menu-', JSON.stringify(this.menu));
 
   }
+  getStringContacts(translate,language): Promise<any> {
+    return new Promise<any>((resolve, reject) => {
+      translate.get('phone_contacts').subscribe((phone: string) => {
+        var phone = phone;
 
+        const address = translate.instant('address_contacts');
+        var contacts = JSON.stringify({
+          "phone": phone,
+          "address": address
+        })
+        resolve(contacts)
+      });
+    })
+  }
+  getAppModuleName(): string {
+    return this.appModuleName;
+  }
+  getDefaultPosition() {
+    return this.defaultPosition;
+  }
 }

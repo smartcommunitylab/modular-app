@@ -3,7 +3,7 @@
     <name>modularapp master</name>
     <description>An awesome Ionic/Cordova app.</description>
     <author email="hi@ionicframework.com" href="http://ionicframework.com/">Ionic Framework Team</author>
-    <content original-src="index.html" src="http://192.168.1.196:8100" />
+    <content original-src="index.html" src="http://192.168.1.197:8100" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
@@ -82,7 +82,7 @@
     <chcp>
         <config-file url="https://dev.smartcommunitylab.it/modularapp/chcp.json" />
     </chcp>
-    <allow-navigation href="http://192.168.1.196:8100" sessionid="08403eef" />
+    <allow-navigation href="http://192.168.1.197:8100" sessionid="929c171e" />
     <engine name="browser" spec="5.0.4" />
     <engine name="android" spec="6.3.0" />
     <plugin name="cordova-plugin-geolocation" spec="^4.0.1" />

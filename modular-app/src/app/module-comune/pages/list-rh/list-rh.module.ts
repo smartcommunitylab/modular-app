@@ -10,6 +10,7 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient } from '@angular/common/http';
+import { FilterPageRhPage } from './filter-page-rh/filter-page-rh.page';
 
 const routes: Routes = [
   {
@@ -32,7 +33,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     }}),
     RouterModule.forChild(routes)
   ],
+  entryComponents:[FilterPageRhPage],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
-  declarations: [ListRHPage]
+  declarations: [ListRHPage,FilterPageRhPage]
 })
 export class ListRHPageModule {}

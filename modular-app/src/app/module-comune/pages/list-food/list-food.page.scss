@@ -50,9 +50,19 @@ ion-searchbar {
         overflow-x: auto;
         z-index: 999;
         position: fixed;
-        ion-chip {
+        .container{
             flex: 0 0 auto;
-            background-color: white;
+        .tag{
+            flex: 0 0 auto;
+            margin: 8px;
+            .tag-text{
+                padding: 4px;
+            color: white;
+            background-color:   #11b3ef;
+            }
         }
+            
+        }
+
     }
 }

@@ -9,6 +9,7 @@ import { ListFoodPage } from './list-food.page';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { HttpClient } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { FilterPageFoodPage } from './filter-page-food/filter-page-food.page';
 
 const routes: Routes = [
   {
@@ -31,7 +32,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     }}),
     RouterModule.forChild(routes)
   ],
+  entryComponents:[FilterPageFoodPage],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
-  declarations: [ListFoodPage]
+  declarations: [ListFoodPage,FilterPageFoodPage]
 })
 export class ListFoodPageModule {}

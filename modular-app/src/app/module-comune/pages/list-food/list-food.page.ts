@@ -6,10 +6,11 @@ import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
 import { PopoverComponent } from 'src/app/shared/popover/popover.component';
 import { TranslateService } from '@ngx-translate/core';
 import { GeoService } from 'src/app/services/geo.service';
-import { ConfigService } from 'src/app/services/config.service';
 import { AlertInput } from '@ionic/core';
 import { CallNumber } from '@ionic-native/call-number/ngx';
 import { FilterPageFoodPage } from './filter-page-food/filter-page-food.page';
+import { ConfigService } from '../../services/config.service';
+import { UtilsService } from '../../services/utils.service';
 
 @Component({
   selector: 'app-list-food',
@@ -21,13 +22,17 @@ export class ListFoodPage implements OnInit {
   fullPois: any = [];
   language: string;
   category: any;
+  tags: any = [];
   private type: string;
+  firstAccess=true;
   search = false;
   isLoading = true;
   fullCategories: any = [];
   categories: any = [];
   pageTitle: string;
   mypos: { lat: number, long: number };
+  altImage: string;
+  stringsContact: any;
 
   constructor(
     private modalController: ModalController,
@@ -42,7 +47,8 @@ export class ListFoodPage implements OnInit {
     public events: Events,
     private translate: TranslateService,
     private geoSrv: GeoService,
-    private callNumber:CallNumber
+    private callNumber: CallNumber,
+    private utils: UtilsService
   ) {
     if (window[this.config.getAppModuleName()]['language'])
       this.language = window[this.config.getAppModuleName()]['language'];
@@ -69,9 +75,16 @@ export class ListFoodPage implements OnInit {
           this.category = cat;
         }
       });
-    const food = document.getElementById('poi-list');
-
-    food.addEventListener('contactClick', async (contact) => {
+    const element = document.getElementById('poi-list');
+    this.translate.get('alt_image_string').subscribe(
+      value => {
+        this.altImage = value;
+      }
+    );
+     this.config.getStringContacts(this.translate,this.language).then(strings => {
+      this.stringsContact = strings
+    });
+    element.addEventListener('contactClick', async (contact) => {
       // console.log(contact)
       var contactParam = JSON.parse((<any>contact).detail)
       if (contactParam.type == 'phone') {
@@ -80,7 +93,8 @@ export class ListFoodPage implements OnInit {
           .catch(err => console.log('Error launching dialer', err));
       }
       if (contactParam.type == 'address') {
-        console.log('vai all\'indirizzo'+contactParam.value);
+        this.utils.openAddressMap(contactParam.value);
+        console.log('vai all\'indirizzo' + contactParam.value);
       }
     })
   }
@@ -94,6 +108,8 @@ export class ListFoodPage implements OnInit {
         this.fullPois = data.docs.map(x => this.convertPois(x));
         this.subCategories(this.fullPois);
         this.buildShowPois();
+        this.tags = this.buildFilter();
+        this.orderArray('near', this);
         this.isLoading = false;
       })
       // .then(x => {
@@ -117,13 +133,16 @@ export class ListFoodPage implements OnInit {
     });
   }
 
-  buildShowPois() {
+  buildShowPois(filters?) {
+    this.showPois=[];
     this.fullCategories.forEach(e => {
       this.fullPois.forEach(p => {
         if (!this.showPois[e]) {
           this.showPois[e] = [];
         }
-        if (p.category === e) {
+        if (p.category === e && filters? filters.filter(item=> {
+          return (item.isChecked && p.classification==item.value)
+        }).length>0:true) {
           this.showPois[e].push(p);
         }
       });
@@ -168,6 +187,11 @@ export class ListFoodPage implements OnInit {
       }
       if (x.classification) {
         poiElement.subtitle = x.classification[this.language];
+        // poiElement.cat = [];
+        // poiElement.cat.push(x.classification[this.language]);
+      }
+      if (x.classification) {
+        poiElement.classification = x.classification[this.language];
         // poiElement.cat = [];
         // poiElement.cat.push(x.classification[this.language]);
       }
@@ -223,10 +247,63 @@ export class ListFoodPage implements OnInit {
 
   async filterClicked() {
     const modal = await this.modalController.create({
-      component: FilterPageFoodPage
+      component: FilterPageFoodPage,
+      componentProps: {
+        'filters': this.tags
+      }
+    });
+    modal.onDidDismiss()
+      .then((filters) => {
+
+        this.firstAccess = true;
+        var even = function(element) {
+          // checks whether an element is even
+          return element.isChecked;
+        };
+        this.tags=filters.data;
+
+        if (filters.data.some(even))
+        {
+          this.firstAccess = false;
+          this.buildShowPois(this.tags)
+
+        } else {
+          this.buildShowPois()
+
+        }
     });
     return await modal.present();
     //this.buildAlert('filter');
+  }
+  buildFilter(): any {
+    var array = this.fullPois.map(item => item.classification);
+    var newArray= array.filter((value, index, self) =>{
+     return self.indexOf(value) === index
+
+    })
+    var value = this.firstAccess? false:true;
+    var returnArray = newArray.map(item =>{
+      return {
+        "value":item,
+        "isChecked":value
+      }
+    })
+ return returnArray;
+  }
+  removeTag(tag) {
+    this.tags = this.tags.filter(item => item.value != tag.value )
+    this.firstAccess = true;
+        var even = function(element) {
+          // checks whether an element is even
+          return element.isChecked;
+        };
+        if (this.tags.some(even))
+        {
+          this.firstAccess = false;
+          this.buildShowPois(this.tags);
+
+        } else {
+    this.buildShowPois();}
   }
   // toggleSearch() {
   //   this.search = !this.search;

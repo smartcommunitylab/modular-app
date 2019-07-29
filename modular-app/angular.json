@@ -49,6 +49,10 @@
                 "output": "assets/info"
               }, {
                 "glob": "**/*",
+                "input": "node_modules/wcs-comune/collection/i18n",
+                "output": "assets/wcs-comune/i18n"
+              },  {
+                "glob": "**/*",
                 "input": "src/app/module-trasporti/assets/trasporti",
                 "output": "assets/trasporti"
               }

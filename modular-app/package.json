@@ -64,17 +64,17 @@
     "ionic-long-press": "^1.5.0",
     "jszip": "^2.6.0",
     "jszip-utils": "0.0.2",
+    "mx.ferreyra.callnumber": "~0.0.2",
     "ng2-dragula": "^2.1.1",
     "pouchdb": "^7.0.0",
     "pouchdb-find": "^7.0.0",
     "rxjs": "^6.3.3",
     "tslib": "^1.9.3",
     "wc-trasporti": "file:../wc-trasporti/wc-trasporti",
-    "wcs-comune": "0.0.116",
+    "wcs-comune": "0.0.127",
     "wcs-dettagliofunerale": "0.0.1",
     "wcs-info": "^0.1.0",
-    "zone.js": "~0.8.26",
-    "mx.ferreyra.callnumber": "~0.0.2"
+    "zone.js": "~0.8.26"
   },
   "devDependencies": {
     "@angular-devkit/architect": "~0.11.4",

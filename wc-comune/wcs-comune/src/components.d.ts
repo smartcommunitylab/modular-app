@@ -82,6 +82,10 @@ export namespace Components {
 
   interface WcDetails {
     /**
+    * Scritta alternativa per immagine
+    */
+    'altImage': string;
+    /**
     * Oggetto JSON per contatti e info aggiuntive
     */
     'contacts': string;
@@ -98,6 +102,15 @@ export namespace Components {
     */
     'info': string;
     /**
+    * Lingua da utilizzare
+    */
+    'language': string;
+    /**
+    * Colore tag e puslanti
+    */
+    'secondColor': string;
+    'stringsinput': string;
+    /**
     * Sottotitolo del percorso
     */
     'subtitle': string;
@@ -111,6 +124,10 @@ export namespace Components {
     'title': string;
   }
   interface WcDetailsAttributes extends StencilHTMLAttributes {
+    /**
+    * Scritta alternativa per immagine
+    */
+    'altImage'?: string;
     /**
     * Oggetto JSON per contatti e info aggiuntive
     */
@@ -127,7 +144,16 @@ export namespace Components {
     * Informazioni a fine pagina
     */
     'info'?: string;
+    /**
+    * Lingua da utilizzare
+    */
+    'language'?: string;
     'onContactClick'?: (event: CustomEvent) => void;
+    /**
+    * Colore tag e puslanti
+    */
+    'secondColor'?: string;
+    'stringsinput'?: string;
     /**
     * Sottotitolo del percorso
     */

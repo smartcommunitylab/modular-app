@@ -1,6 +1,7 @@
-import { Component, Prop, Event } from '@stencil/core';
+import { Component, Prop, Event,Element } from '@stencil/core';
 import { Icons } from '../../utils/icons';
 import { DetailsInfo } from '../../utils/utils';
+// import { getLocaleComponentStrings } from "../../utils/locale";
 
 @Component({
   tag: 'wc-details',
@@ -34,17 +35,28 @@ export class WcDetails {
   @Prop() info: string;
   /** Colore titoli */
   @Prop() headingColor: string = "red";
+  /** Colore tag e puslanti */
+  @Prop() secondColor: string = "red";
   /** Oggetto JSON per contatti e info aggiuntive */
   @Prop({ mutable: true }) contacts: string;
-
+  /** Scritta alternativa per immagine */
+  @Prop() altImage: string
+  /** Lingua da utilizzare */
+  @Prop() language: string
+  /*external strings for contacts*/ 
+  @Prop() stringsinput: string;
   @Event() contactClick: EventEmitter;
+  @Element() element: HTMLElement;
 
   private icons = new Icons().iconList;
   private contactsJSON: DetailsInfo;
   private tmptags = [];
   private tmpContacts = [];
+  private strings:any;
+  async componentWillLoad() {
+    this.strings = JSON.parse(this.stringsinput);
+    // this.strings = await getLocaleComponentStrings(this.element,this.language);
 
-  componentWillLoad() {
     if (this.contacts) {
       this.contactsJSON = JSON.parse(this.contacts);
       this.buildTag();
@@ -109,7 +121,7 @@ export class WcDetails {
           <div class="icon">
             {this.icons[k]("black")}
           </div>
-          <div class="contactLabel">{k}</div>
+          <div class="contactLabel">{this.strings[k]}</div>
         </div>
       )
     });
@@ -126,7 +138,7 @@ export class WcDetails {
           <div class="subtitle" innerHTML={this.subtitle} >
           </div>
           <div class="image">
-            <img src={this.img}></img>
+            <img src={this.img} alt={this.altImage}></img>
           </div>
           <div class="contacts">
             {this.tmpContacts}

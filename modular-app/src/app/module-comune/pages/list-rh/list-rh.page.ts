@@ -1,13 +1,16 @@
 // tslint:disable: no-shadowed-variable
 import { Component, OnInit } from '@angular/core';
-import { NavController, AlertController, PopoverController, Events } from '@ionic/angular';
+import { NavController, AlertController, PopoverController, Events, ModalController } from '@ionic/angular';
 import { DbService } from '../../services/db.service';
 import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
 import { PopoverComponent } from 'src/app/shared/popover/popover.component';
 import { TranslateService } from '@ngx-translate/core';
 import { GeoService } from 'src/app/services/geo.service';
-import { ConfigService } from 'src/app/services/config.service';
 import { AlertInput } from '@ionic/core';
+import { UtilsService } from '../../services/utils.service';
+import { CallNumber } from '@ionic-native/call-number/ngx';
+import { ConfigService } from '../../services/config.service';
+import { FilterPageRhPage } from './filter-page-rh/filter-page-rh.page';
 
 @Component({
   selector: 'app-list-rh',
@@ -20,14 +23,19 @@ export class ListRHPage implements OnInit {
   language: string;
   category: any;
   private type: string;
+  firstAccess=true;
   search = false;
   isLoading = true;
   fullCategories: any = [];
   categories: any = [];
   pageTitle: string;
   mypos: { lat: number, long: number };
+  altImage: string;
+  stringsContact: any;
+  tags: any = [];
 
   constructor(
+    private modalController: ModalController,
     private config: ConfigService,
     public navCtrl: NavController,
     public dbService: DbService,
@@ -38,7 +46,9 @@ export class ListRHPage implements OnInit {
     private popoverController: PopoverController,
     public events: Events,
     private translate: TranslateService,
-    private geoSrv: GeoService
+    private geoSrv: GeoService,
+    private callNumber: CallNumber,
+    private utils: UtilsService
   ) {
     if (window[this.config.getAppModuleName()]['language'])
       this.language = window[this.config.getAppModuleName()]['language'];
@@ -65,6 +75,28 @@ export class ListRHPage implements OnInit {
           this.category = cat;
         }
       });
+      const element = document.getElementById('poi-list');
+      this.translate.get('alt_image_string').subscribe(
+        value => {
+          this.altImage = value;
+        }
+      );
+       this.config.getStringContacts(this.translate,this.language).then(strings => {
+        this.stringsContact = strings
+      });
+      element.addEventListener('contactClick', async (contact) => {
+        // console.log(contact)
+        var contactParam = JSON.parse((<any>contact).detail)
+        if (contactParam.type == 'phone') {
+          this.callNumber.callNumber(contactParam.value, true)
+            .then(res => console.log('Launched dialer!', res))
+            .catch(err => console.log('Error launching dialer', err));
+        }
+        if (contactParam.type == 'address') {
+          this.utils.openAddressMap(contactParam.value);
+          console.log('vai all\'indirizzo' + contactParam.value);
+        }
+      })
   }
 
   ionViewDidEnter() {
@@ -75,6 +107,8 @@ export class ListRHPage implements OnInit {
         this.fullPois = data.docs.map(x => this.convertPois(x));
         this.subCategories(this.fullPois);
         this.buildShowPois();
+        this.tags = this.buildFilter();
+        this.orderArray('near', this);
         this.isLoading = false;
       })
       // .then(x => {
@@ -98,13 +132,16 @@ export class ListRHPage implements OnInit {
     });
   }
 
-  buildShowPois() {
+  buildShowPois(filters?) {
+    this.showPois=[];
     this.fullCategories.forEach(e => {
       this.fullPois.forEach(p => {
         if (!this.showPois[e]) {
           this.showPois[e] = [];
         }
-        if (p.category === e) {
+        if (p.category === e && filters? filters.filter(item=> {
+          return (item.isChecked && p.classification==item.value)
+        }).length>0:true) {
           this.showPois[e].push(p);
         }
       });
@@ -202,8 +239,68 @@ export class ListRHPage implements OnInit {
 
   }
 
-  filterClicked() {
-    this.buildAlert('filter');
+
+  async filterClicked() {
+    const modal = await this.modalController.create({
+      component: FilterPageRhPage,
+      componentProps: {
+        'filters': this.tags
+      }
+    });
+    modal.onDidDismiss()
+      .then((filters) => {
+
+        this.firstAccess = true;
+        var even = function(element) {
+          // checks whether an element is even
+          return element.isChecked;
+        };
+        this.tags=filters.data;
+
+        if (filters.data.some(even))
+        {
+          this.firstAccess = false;
+          this.buildShowPois(this.tags)
+
+        } else {
+          this.buildShowPois()
+
+        }
+    });
+    return await modal.present();
+    //this.buildAlert('filter');
+  }
+
+  
+  buildFilter(): any {
+    var array = this.fullPois.map(item => item.classification);
+    var newArray= array.filter((value, index, self) =>{
+     return self.indexOf(value) === index
+
+    })
+    var value = this.firstAccess? false:true;
+    var returnArray = newArray.map(item =>{
+      return {
+        "value":item,
+        "isChecked":value
+      }
+    })
+ return returnArray;
+  }
+  removeTag(tag) {
+    this.tags = this.tags.filter(item => item.value != tag.value )
+    this.firstAccess = true;
+        var even = function(element) {
+          // checks whether an element is even
+          return element.isChecked;
+        };
+        if (this.tags.some(even))
+        {
+          this.firstAccess = false;
+          this.buildShowPois(this.tags);
+
+        } else {
+    this.buildShowPois();}
   }
   // toggleSearch() {
   //   this.search = !this.search;
