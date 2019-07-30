@@ -17114,8 +17114,8 @@ var DbService = /** @class */ (function () {
     function DbService() {
         this.elements = {};
         this.db = new pouchdb__WEBPACK_IMPORTED_MODULE_1__["default"]('comune-in-tasca');
-        this.remote = /*'http://192.168.42.201:5984/comune-in-tasca';*/
-            'http://192.168.1.196:5984/comune-in-tasca';
+        this.remote = 'http://192.168.42.201:5984/comune-in-tasca';
+        // 'http://192.168.1.196:5984/comune-in-tasca'
         // 'http://127.0.0.1:5984/comune-in-tasca';
         this.contentTypes = {
             'content': 'content-item',

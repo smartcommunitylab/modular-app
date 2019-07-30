@@ -290,6 +290,15 @@ module.exports = [
     "clobbers": [
       "call"
     ]
+  },
+  {
+    "id": "cordova-plugin-inappbrowser.inappbrowser",
+    "file": "plugins/cordova-plugin-inappbrowser/www/inappbrowser.js",
+    "pluginId": "cordova-plugin-inappbrowser",
+    "clobbers": [
+      "cordova.InAppBrowser.open",
+      "window.open"
+    ]
   }
 ];
 module.exports.metadata = 
@@ -308,7 +317,8 @@ module.exports.metadata =
   "es6-promise-plugin": "4.2.2",
   "cordova-plugin-x-socialsharing": "5.4.7",
   "cordova-sqlite-storage": "3.2.0",
-  "mx.ferreyra.callnumber": "0.0.2"
+  "mx.ferreyra.callnumber": "0.0.2",
+  "cordova-plugin-inappbrowser": "3.1.0"
 };
 // BOTTOM OF METADATA
 });

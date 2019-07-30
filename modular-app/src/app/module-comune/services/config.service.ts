@@ -30,9 +30,13 @@ export class ConfigService {
         var phone = phone;
 
         const address = translate.instant('address_contacts');
+        const url = translate.instant('url_contacts');
+        const share = translate.instant('share_contacts');
         var contacts = JSON.stringify({
           "phone": phone,
-          "address": address
+          "address": address,
+          "url":url,
+          "share":share
         })
         resolve(contacts)
       });

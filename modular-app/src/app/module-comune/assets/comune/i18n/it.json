@@ -7,5 +7,7 @@
     "MAP": "Mappa",
     "alt_image_string":"Immagine non disponibile",
     "address_contacts":"Mappa",
-    "phone_contacts":"Telefono"
+    "phone_contacts":"Telefono",
+    "url_contacts":"Sito",
+    "share_contacts":"Condividi"
 }

@@ -4,5 +4,10 @@
     "Ristoranti":"Ristoranti",
     "PATH": "Itinerari Turistici",
     "EVENTS": "Eventi",
-    "MAP": "Mappa"
+    "MAP": "Mappa",
+    "alt_image_string":"Immagine non disponibile",
+    "address_contacts":"Mappa",
+    "phone_contacts":"Telefono",
+    "url_contacts":"Sito",
+    "share_contacts":"Condividi"
 }

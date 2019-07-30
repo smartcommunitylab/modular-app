@@ -817,6 +817,288 @@ module.exports = function(originalModule) {
 
 /***/ }),
 
+/***/ "./src/app/module-comune/pages/list-food/filter-page-food/filter-page-food.page.html":
+/*!*******************************************************************************************!*\
+  !*** ./src/app/module-comune/pages/list-food/filter-page-food/filter-page-food.page.html ***!
+  \*******************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-button color=\"dark\" (click)=\"closeModal()\">\n        <ion-icon name=\"arrow-back\"></ion-icon>\n      </ion-button>\n    </ion-buttons>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <ion-list>\n    <ion-item *ngFor=\"let item of filters\">\n      <ion-label>{{item.value}}</ion-label>\n      <ion-checkbox slot=\"end\" [(ngModel)]=\"item.isChecked\"></ion-checkbox>\n    </ion-item>\n  </ion-list>\n\n</ion-content>\n<ion-footer>\n  <ion-grid>\n    <ion-row>\n      <ion-col>\n        <ion-button (click)=\"closeModal()\">cancel</ion-button>\n      </ion-col>\n      <ion-col>\n        <ion-button (click)=\"filter()\">ok</ion-button>\n\n      </ion-col>\n    </ion-row>\n  </ion-grid>\n</ion-footer>"
+
+/***/ }),
+
+/***/ "./src/app/module-comune/pages/list-food/filter-page-food/filter-page-food.page.scss":
+/*!*******************************************************************************************!*\
+  !*** ./src/app/module-comune/pages/list-food/filter-page-food/filter-page-food.page.scss ***!
+  \*******************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL21vZHVsZS1jb211bmUvcGFnZXMvbGlzdC1mb29kL2ZpbHRlci1wYWdlLWZvb2QvZmlsdGVyLXBhZ2UtZm9vZC5wYWdlLnNjc3MifQ== */"
+
+/***/ }),
+
+/***/ "./src/app/module-comune/pages/list-food/filter-page-food/filter-page-food.page.ts":
+/*!*****************************************************************************************!*\
+  !*** ./src/app/module-comune/pages/list-food/filter-page-food/filter-page-food.page.ts ***!
+  \*****************************************************************************************/
+/*! exports provided: FilterPageFoodPage */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FilterPageFoodPage", function() { return FilterPageFoodPage; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var FilterPageFoodPage = /** @class */ (function () {
+    function FilterPageFoodPage(navParams, modalCtrl) {
+        this.modalCtrl = modalCtrl;
+        // componentProps can also be accessed at construction time using NavParams
+        console.log(navParams.get('filters'));
+    }
+    FilterPageFoodPage.prototype.ngOnInit = function () {
+    };
+    FilterPageFoodPage.prototype.closeModal = function () {
+        this.modalCtrl.dismiss();
+    };
+    FilterPageFoodPage.prototype.filter = function () {
+        this.modalCtrl.dismiss(this.filters);
+    };
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
+        __metadata("design:type", Object)
+    ], FilterPageFoodPage.prototype, "filters", void 0);
+    FilterPageFoodPage = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-filter-page-food',
+            template: __webpack_require__(/*! ./filter-page-food.page.html */ "./src/app/module-comune/pages/list-food/filter-page-food/filter-page-food.page.html"),
+            styles: [__webpack_require__(/*! ./filter-page-food.page.scss */ "./src/app/module-comune/pages/list-food/filter-page-food/filter-page-food.page.scss")]
+        }),
+        __metadata("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_1__["NavParams"], _ionic_angular__WEBPACK_IMPORTED_MODULE_1__["ModalController"]])
+    ], FilterPageFoodPage);
+    return FilterPageFoodPage;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/module-comune/pages/list-rh/filter-page-rh/filter-page-rh.page.html":
+/*!*************************************************************************************!*\
+  !*** ./src/app/module-comune/pages/list-rh/filter-page-rh/filter-page-rh.page.html ***!
+  \*************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-button color=\"dark\" (click)=\"closeModal()\">\n        <ion-icon name=\"arrow-back\"></ion-icon>\n      </ion-button>\n    </ion-buttons>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <ion-list>\n    <ion-item *ngFor=\"let item of filters\">\n      <ion-label>{{item.value}}</ion-label>\n      <ion-checkbox slot=\"end\" [(ngModel)]=\"item.isChecked\"></ion-checkbox>\n    </ion-item>\n  </ion-list>\n\n</ion-content>\n<ion-footer>\n  <ion-grid>\n    <ion-row>\n      <ion-col>\n        <ion-button (click)=\"closeModal()\">cancel</ion-button>\n      </ion-col>\n      <ion-col>\n        <ion-button (click)=\"filter()\">ok</ion-button>\n\n      </ion-col>\n    </ion-row>\n  </ion-grid>\n</ion-footer>"
+
+/***/ }),
+
+/***/ "./src/app/module-comune/pages/list-rh/filter-page-rh/filter-page-rh.page.scss":
+/*!*************************************************************************************!*\
+  !*** ./src/app/module-comune/pages/list-rh/filter-page-rh/filter-page-rh.page.scss ***!
+  \*************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL21vZHVsZS1jb211bmUvcGFnZXMvbGlzdC1yaC9maWx0ZXItcGFnZS1yaC9maWx0ZXItcGFnZS1yaC5wYWdlLnNjc3MifQ== */"
+
+/***/ }),
+
+/***/ "./src/app/module-comune/pages/list-rh/filter-page-rh/filter-page-rh.page.ts":
+/*!***********************************************************************************!*\
+  !*** ./src/app/module-comune/pages/list-rh/filter-page-rh/filter-page-rh.page.ts ***!
+  \***********************************************************************************/
+/*! exports provided: FilterPageRhPage */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FilterPageRhPage", function() { return FilterPageRhPage; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var FilterPageRhPage = /** @class */ (function () {
+    function FilterPageRhPage(navParams, modalCtrl) {
+        this.modalCtrl = modalCtrl;
+        // componentProps can also be accessed at construction time using NavParams
+        console.log(navParams.get('filters'));
+    }
+    FilterPageRhPage.prototype.ngOnInit = function () {
+    };
+    FilterPageRhPage.prototype.closeModal = function () {
+        this.modalCtrl.dismiss();
+    };
+    FilterPageRhPage.prototype.filter = function () {
+        this.modalCtrl.dismiss(this.filters);
+    };
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
+        __metadata("design:type", Object)
+    ], FilterPageRhPage.prototype, "filters", void 0);
+    FilterPageRhPage = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-filter-page-rh',
+            template: __webpack_require__(/*! ./filter-page-rh.page.html */ "./src/app/module-comune/pages/list-rh/filter-page-rh/filter-page-rh.page.html"),
+            styles: [__webpack_require__(/*! ./filter-page-rh.page.scss */ "./src/app/module-comune/pages/list-rh/filter-page-rh/filter-page-rh.page.scss")]
+        }),
+        __metadata("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_1__["NavParams"], _ionic_angular__WEBPACK_IMPORTED_MODULE_1__["ModalController"]])
+    ], FilterPageRhPage);
+    return FilterPageRhPage;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/module-comune/services/config.service.ts":
+/*!**********************************************************!*\
+  !*** ./src/app/module-comune/services/config.service.ts ***!
+  \**********************************************************/
+/*! exports provided: ConfigService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ConfigService", function() { return ConfigService; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var ConfigService = /** @class */ (function () {
+    function ConfigService() {
+        this.appModuleName = "app-module";
+        this.defaultPosition = {
+            lat: 0,
+            long: 0
+        };
+        this.menu = [
+            {
+                title: "Home",
+                url: "/home",
+                icon: "home"
+            }
+        ];
+    }
+    ConfigService.prototype.init = function () {
+        localStorage.setItem('comune-menu-', JSON.stringify(this.menu));
+    };
+    ConfigService.prototype.getStringContacts = function (translate, language) {
+        return new Promise(function (resolve, reject) {
+            translate.get('phone_contacts').subscribe(function (phone) {
+                var phone = phone;
+                var address = translate.instant('address_contacts');
+                var url = translate.instant('url_contacts');
+                var share = translate.instant('share_contacts');
+                var contacts = JSON.stringify({
+                    "phone": phone,
+                    "address": address,
+                    "url": url,
+                    "share": share
+                });
+                resolve(contacts);
+            });
+        });
+    };
+    ConfigService.prototype.getAppModuleName = function () {
+        return this.appModuleName;
+    };
+    ConfigService.prototype.getDefaultPosition = function () {
+        return this.defaultPosition;
+    };
+    ConfigService = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
+            providedIn: 'root'
+        }),
+        __metadata("design:paramtypes", [])
+    ], ConfigService);
+    return ConfigService;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/module-comune/services/utils.service.ts":
+/*!*********************************************************!*\
+  !*** ./src/app/module-comune/services/utils.service.ts ***!
+  \*********************************************************/
+/*! exports provided: UtilsService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UtilsService", function() { return UtilsService; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _ionic_native_in_app_browser_ngx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @ionic-native/in-app-browser/ngx */ "./node_modules/@ionic-native/in-app-browser/ngx/index.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var UtilsService = /** @class */ (function () {
+    function UtilsService(iab) {
+        this.iab = iab;
+        this.urlMappa = "https://www.google.com/maps/search/?api=1&query=";
+    }
+    UtilsService.prototype.openAddressMap = function (address) {
+        window.open(encodeURI(this.urlMappa + address), '_system');
+    };
+    UtilsService.prototype.openUrl = function (value) {
+        var browser = this.iab.create(value, '_blank', 'location=yes');
+        browser.show();
+    };
+    UtilsService.prototype.openShare = function (value) {
+        throw new Error("Method not implemented.");
+    };
+    UtilsService = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
+            providedIn: 'root'
+        }),
+        __metadata("design:paramtypes", [_ionic_native_in_app_browser_ngx__WEBPACK_IMPORTED_MODULE_1__["InAppBrowser"]])
+    ], UtilsService);
+    return UtilsService;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/module-info/services/dati-service.service.ts":
 /*!**************************************************************!*\
   !*** ./src/app/module-info/services/dati-service.service.ts ***!

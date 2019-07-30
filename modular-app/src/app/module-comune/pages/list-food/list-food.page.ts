@@ -96,6 +96,14 @@ export class ListFoodPage implements OnInit {
         this.utils.openAddressMap(contactParam.value);
         console.log('vai all\'indirizzo' + contactParam.value);
       }
+      if (contactParam.type == 'url') {
+        this.utils.openUrl(contactParam.value);
+        console.log('vai all\'indirizzo' + contactParam.value);
+      }
+      if (contactParam.type == 'share') {
+        this.utils.openShare(contactParam.value);
+        console.log('vai all\'indirizzo' + contactParam.value);
+      }
     })
   }
 

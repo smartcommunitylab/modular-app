@@ -23,6 +23,7 @@ import { InfoModule } from './module-info/web-components.module';
 import { FuneraliModule } from './module-funerali/web-components.module';
 import { HotCodePush } from '@ionic-native/hot-code-push/ngx';
 import { CallNumber } from '@ionic-native/call-number/ngx';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 export function initializeAppSetting(appInitService: SettingService) {
   return (): Promise<any> => {
     return appInitService.Init();
@@ -70,6 +71,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     SplashScreen,
     Geolocation,
     CallNumber,
+    InAppBrowser,
     HotCodePush,
     SettingService,
     { provide: APP_INITIALIZER, useFactory: initializeAppConfig, deps: [ConfigService], multi: true },

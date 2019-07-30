@@ -1,60 +1,5 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["pages-list-food-list-food-module"],{
 
-/***/ "./node_modules/@ionic-native/call-number/ngx/index.js":
-/*!*************************************************************!*\
-  !*** ./node_modules/@ionic-native/call-number/ngx/index.js ***!
-  \*************************************************************/
-/*! exports provided: CallNumber */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CallNumber", function() { return CallNumber; });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _ionic_native_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @ionic-native/core */ "./node_modules/@ionic-native/core/index.js");
-var __extends = (undefined && undefined.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-
-
-var CallNumber = /** @class */ (function (_super) {
-    __extends(CallNumber, _super);
-    function CallNumber() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    CallNumber.prototype.callNumber = function (numberToCall, bypassAppChooser) { return Object(_ionic_native_core__WEBPACK_IMPORTED_MODULE_1__["cordova"])(this, "callNumber", { "callbackOrder": "reverse" }, arguments); };
-    CallNumber.prototype.isCallSupported = function () { return Object(_ionic_native_core__WEBPACK_IMPORTED_MODULE_1__["cordova"])(this, "isCallSupported", {}, arguments); };
-    CallNumber.pluginName = "CallNumber";
-    CallNumber.plugin = "call-number";
-    CallNumber.pluginRef = "plugins.CallNumber";
-    CallNumber.repo = "https://github.com/Rohfosho/CordovaCallNumberPlugin";
-    CallNumber.platforms = ["Android", "iOS"];
-    CallNumber = __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])()
-    ], CallNumber);
-    return CallNumber;
-}(_ionic_native_core__WEBPACK_IMPORTED_MODULE_1__["IonicNativePlugin"]));
-
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5kZXguanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi8uLi8uLi8uLi8uLi9zcmMvQGlvbmljLW5hdGl2ZS9wbHVnaW5zL2NhbGwtbnVtYmVyL25neC9pbmRleC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBQUEsT0FBTyxFQUFFLFVBQVUsRUFBRSxNQUFNLGVBQWUsQ0FBQztBQUMzQyxPQUFPLDhCQUFzQyxNQUFNLG9CQUFvQixDQUFDOztJQStCeEMsOEJBQWlCOzs7O0lBVS9DLCtCQUFVLGFBQUMsWUFBb0IsRUFBRSxnQkFBeUI7SUFTMUQsb0NBQWU7Ozs7OztJQW5CSixVQUFVO1FBRHRCLFVBQVUsRUFBRTtPQUNBLFVBQVU7cUJBaEN2QjtFQWdDZ0MsaUJBQWlCO1NBQXBDLFVBQVUiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBJbmplY3RhYmxlIH0gZnJvbSAnQGFuZ3VsYXIvY29yZSc7XG5pbXBvcnQgeyBDb3Jkb3ZhLCBJb25pY05hdGl2ZVBsdWdpbiwgUGx1Z2luIH0gZnJvbSAnQGlvbmljLW5hdGl2ZS9jb3JlJztcblxuLyoqXG4gKiBAbmFtZSBDYWxsIE51bWJlclxuICogQGRlc2NyaXB0aW9uXG4gKiBDYWxsIGEgbnVtYmVyIGRpcmVjdGx5IGZyb20geW91ciBDb3Jkb3ZhL0lvbmljIGFwcGxpY2F0aW9uLlxuICogKipOT1RFKio6IFRoZSBpT1MgU2ltdWxhdG9yIChhbmQgbWF5YmUgQW5kcm9pZCBTaW11bGF0b3JzKSBkbyBub3QgcHJvdmlkZSBhY2Nlc3MgdG8gdGhlIHBob25lIHN1YnN5c3RlbS5cbiAqXG4gKiBAdXNhZ2VcbiAqIGBgYHR5cGVzY3JpcHRcbiAqIGltcG9ydCB7IENhbGxOdW1iZXIgfSBmcm9tICdAaW9uaWMtbmF0aXZlL2NhbGwtbnVtYmVyL25neCc7XG4gKlxuICogY29uc3RydWN0b3IocHJpdmF0ZSBjYWxsTnVtYmVyOiBDYWxsTnVtYmVyKSB7IH1cbiAqXG4gKiAuLi5cbiAqXG4gKlxuICogdGhpcy5jYWxsTnVtYmVyLmNhbGxOdW1iZXIoXCIxODAwMTAxMDEwMVwiLCB0cnVlKVxuICogICAudGhlbihyZXMgPT4gY29uc29sZS5sb2coJ0xhdW5jaGVkIGRpYWxlciEnLCByZXMpKVxuICogICAuY2F0Y2goZXJyID0+IGNvbnNvbGUubG9nKCdFcnJvciBsYXVuY2hpbmcgZGlhbGVyJywgZXJyKSk7XG4gKlxuICogYGBgXG4gKi9cbkBQbHVnaW4oe1xuICBwbHVnaW5OYW1lOiAnQ2FsbE51bWJlcicsXG4gIHBsdWdpbjogJ2NhbGwtbnVtYmVyJyxcbiAgcGx1Z2luUmVmOiAncGx1Z2lucy5DYWxsTnVtYmVyJyxcbiAgcmVwbzogJ2h0dHBzOi8vZ2l0aHViLmNvbS9Sb2hmb3Noby9Db3Jkb3ZhQ2FsbE51bWJlclBsdWdpbicsXG4gIHBsYXRmb3JtczogWydBbmRyb2lkJywgJ2lPUyddXG59KVxuQEluamVjdGFibGUoKVxuZXhwb3J0IGNsYXNzIENhbGxOdW1iZXIgZXh0ZW5kcyBJb25pY05hdGl2ZVBsdWdpbiB7XG4gIC8qKlxuICAgKiBDYWxscyBhIHBob25lIG51bWJlclxuICAgKiBAcGFyYW0ge3N0cmluZ30gbnVtYmVyVG9DYWxsIFRoZSBwaG9uZSBudW1iZXIgdG8gY2FsbCBhcyBhIHN0cmluZ1xuICAgKiBAcGFyYW0ge2Jvb2xlYW59IGJ5cGFzc0FwcENob29zZXIgU2V0IHRvIHRydWUgdG8gYnlwYXNzIHRoZSBhcHAgY2hvb3NlciBhbmQgZ28gZGlyZWN0bHkgdG8gZGlhbGVyXG4gICAqIEByZXR1cm4ge1Byb21pc2U8YW55Pn1cbiAgICovXG4gIEBDb3Jkb3ZhKHtcbiAgICBjYWxsYmFja09yZGVyOiAncmV2ZXJzZSdcbiAgfSlcbiAgY2FsbE51bWJlcihudW1iZXJUb0NhbGw6IHN0cmluZywgYnlwYXNzQXBwQ2hvb3NlcjogYm9vbGVhbik6IFByb21pc2U8YW55PiB7XG4gICAgcmV0dXJuO1xuICB9XG5cbiAgLyoqXG4gICAqIENoZWNrIGlmIGNhbGwgZmVhdHVyZSBpcyBhdmFpbGFibGVcbiAgICogQHJldHVybiB7UHJvbWlzZTxhbnk+fVxuICAgKi9cbiAgQENvcmRvdmEoKVxuICBpc0NhbGxTdXBwb3J0ZWQoKTogUHJvbWlzZTxhbnk+IHtcbiAgICByZXR1cm47XG4gIH1cbn1cbiJdfQ==
-
-/***/ }),
-
 /***/ "./src/app/module-comune/pages/list-food/list-food.module.ts":
 /*!*******************************************************************!*\
   !*** ./src/app/module-comune/pages/list-food/list-food.module.ts ***!
@@ -75,12 +20,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ngx_translate_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ngx-translate/core */ "./node_modules/@ngx-translate/core/fesm5/ngx-translate-core.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
 /* harmony import */ var _ngx_translate_http_loader__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @ngx-translate/http-loader */ "./node_modules/@ngx-translate/http-loader/fesm5/ngx-translate-http-loader.js");
+/* harmony import */ var _filter_page_food_filter_page_food_page__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./filter-page-food/filter-page-food.page */ "./src/app/module-comune/pages/list-food/filter-page-food/filter-page-food.page.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -115,8 +62,9 @@ var ListFoodPageModule = /** @class */ (function () {
                     } }),
                 _angular_router__WEBPACK_IMPORTED_MODULE_3__["RouterModule"].forChild(routes)
             ],
+            entryComponents: [_filter_page_food_filter_page_food_page__WEBPACK_IMPORTED_MODULE_9__["FilterPageFoodPage"]],
             schemas: [_angular_core__WEBPACK_IMPORTED_MODULE_0__["CUSTOM_ELEMENTS_SCHEMA"]],
-            declarations: [_list_food_page__WEBPACK_IMPORTED_MODULE_5__["ListFoodPage"]]
+            declarations: [_list_food_page__WEBPACK_IMPORTED_MODULE_5__["ListFoodPage"], _filter_page_food_filter_page_food_page__WEBPACK_IMPORTED_MODULE_9__["FilterPageFoodPage"]]
         })
     ], ListFoodPageModule);
     return ListFoodPageModule;
@@ -133,7 +81,7 @@ var ListFoodPageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header no-border>\n    <ion-toolbar>\n        <ion-searchbar style=\"display: none\" showCancelButton animated (search)=\"toggleSearch()\"\n      (ionInput)=\"searchChanged($event)\" (ionCancel)=\"toggleSearch()\"></ion-searchbar>\n      <ion-buttons slot=\"start\">\n        <ion-back-button class=\"interaction\"></ion-back-button>\n      </ion-buttons>\n      <ion-buttons slot=\"end\">\n        <ion-button (click)=\"filterClicked()\">\n          <ion-icon name=\"options\" ></ion-icon>\n        </ion-button>\n        <ion-button (click)=\"toggleSearch()\">\n          <ion-icon name=\"search\" ></ion-icon>\n        </ion-button>\n      </ion-buttons>\n      <ion-title>\n        {{'Ristoranti' | translate}}\n      </ion-title>\n    </ion-toolbar>\n</ion-header>\n\n<ion-grid style=\"height: 100%\" *ngIf=\"isLoading\">\n    <ion-row justify-content-center align-items-center style=\"height: 100%\">\n      <ion-spinner name=\"circles\"></ion-spinner>\n    </ion-row>\n</ion-grid>\n\n<ion-content>\n  \n    <!-- <ion-searchbar style=\"display: none\" showCancelButton animated (ionInput)=\"searchChanged($event)\" (ionCancel)=\"toggleSearch()\" (search)=\"toggleSearch()\"></ion-searchbar> -->\n      \n    <!-- FLOATING BUTTON -->\n    <!-- <ion-fab *ngIf=\"!isLoading\" class=\"fixed\" vertical=\"bottom\" horizontal=\"start\" slot=\"fixed\">\n      <ion-fab-button color=\"danger\">\n        <ion-icon name=\"arrow-dropup-circle\"></ion-icon>\n      </ion-fab-button>\n      <ion-fab-list side=\"top\">\n          <ion-fab-button (click)=\"toggleSearch()\">\n            <ion-icon name=\"search\"></ion-icon>\n          </ion-fab-button>\n          <ion-fab-button (click)=\"showPopover()\">\n              <ion-icon name=\"funnel\"></ion-icon>\n            </ion-fab-button>\n      </ion-fab-list>\n    </ion-fab> -->\n    <!-- ---------------------------- -->\n    <!-- <div class=\"wrapper\">\n        <div class=\"scrolling-wrapper-flexbox loop\">\n          <ion-chip *ngFor=\"let c of categories\" (click)=\"selectInternalElement(c)\">\n            <ion-label class=\"interaction\">{{c}}</ion-label>\n          </ion-chip>\n        </div>\n      </div> -->\n    \n    <ion-list no-lines id=\"poi-list\">\n      <div *ngFor=\"let c of categories\">\n        <ion-item-divider class=\"category row\" sticky>\n          <div class=\"column c-icon\" (click)=\"goToMap()\">\n            <ion-icon name=\"map\"></ion-icon>\n          </div>\n          <div class=\"column c-text\">\n            <ion-label>{{c}}</ion-label>\n          </div>\n          <div class=\"column c-btn\">\n            <ion-button *ngIf=\"!search\" class=\"popover-btn\" size=\"small\" color=\"success\" (click)=\"filterClicked()\">Ordina</ion-button>\n          </div>\n        </ion-item-divider>\n        <div class=\"content\">\n          <div *ngFor=\"let poi of showPois[c]; let i = index\">\n            <wc-details [img]=\"poi.image\" [title]=\"poi.title\" [subtitle]=\"poi.subtitle\" [text]=\"poi.text\" [info]=\"poi.info\" [contacts]=\"poi.infos\" heading-color=\"red\"></wc-details>\n            <div class=\"spacing\" *ngIf=\"i == showPois.length - 1\"></div>\n          </div>\n        </div>\n      </div>\n    </ion-list>\n</ion-content>\n"
+module.exports = "<ion-header no-border>\n  <ion-toolbar>\n    <ion-searchbar style=\"display: none\" showCancelButton animated (search)=\"toggleSearch()\"\n      (ionInput)=\"searchChanged($event)\" (ionCancel)=\"toggleSearch()\"></ion-searchbar>\n    <ion-buttons slot=\"start\">\n      <ion-back-button class=\"interaction\"></ion-back-button>\n    </ion-buttons>\n    <ion-buttons slot=\"end\">\n      <ion-button (click)=\"filterClicked()\">\n        <ion-icon name=\"options\"></ion-icon>\n      </ion-button>\n      <ion-button (click)=\"toggleSearch()\">\n        <ion-icon name=\"search\"></ion-icon>\n      </ion-button>\n    </ion-buttons>\n    <ion-title>\n      {{'Ristoranti' | translate}}\n    </ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-grid style=\"height: 100%\" *ngIf=\"isLoading\">\n  <ion-row justify-content-center align-items-center style=\"height: 100%\">\n    <ion-spinner name=\"circles\"></ion-spinner>\n  </ion-row>\n</ion-grid>\n\n<ion-content>\n\n  <!-- <ion-searchbar style=\"display: none\" showCancelButton animated (ionInput)=\"searchChanged($event)\" (ionCancel)=\"toggleSearch()\" (search)=\"toggleSearch()\"></ion-searchbar> -->\n\n  <!-- FLOATING BUTTON -->\n  <!-- <ion-fab *ngIf=\"!isLoading\" class=\"fixed\" vertical=\"bottom\" horizontal=\"start\" slot=\"fixed\">\n      <ion-fab-button color=\"danger\">\n        <ion-icon name=\"arrow-dropup-circle\"></ion-icon>\n      </ion-fab-button>\n      <ion-fab-list side=\"top\">\n          <ion-fab-button (click)=\"toggleSearch()\">\n            <ion-icon name=\"search\"></ion-icon>\n          </ion-fab-button>\n          <ion-fab-button (click)=\"showPopover()\">\n              <ion-icon name=\"funnel\"></ion-icon>\n            </ion-fab-button>\n      </ion-fab-list>\n    </ion-fab> -->\n  <!-- ---------------------------- -->\n  <!-- <div class=\"wrapper\">\n        <div class=\"scrolling-wrapper-flexbox loop\">\n          <ion-chip *ngFor=\"let c of categories\" (click)=\"selectInternalElement(c)\">\n            <ion-label class=\"interaction\">{{c}}</ion-label>\n          </ion-chip>\n        </div>\n      </div> -->\n  <div class=\"wrapper\" *ngIf=\"!firstAccess\">\n    <div class=\"scrolling-wrapper-flexbox loop\">\n      <div class=\"container\" *ngFor=\"let tag of tags\">\n      <div class=\"tag\"  *ngIf=\"tag.isChecked\">\n        <div class=\"tag-text\">\n          {{tag.value}}\n          <ion-icon name=\"close-circle\" (click)=\"removeTag(tag)\"></ion-icon>\n        </div>\n        \n      </div>\n    </div>\n    </div>\n  </div>\n\n  <ion-list no-lines id=\"poi-list\">\n    <div *ngFor=\"let c of categories\">\n      <!-- <ion-item-divider class=\"category row\" sticky> -->\n      <!-- <div class=\"column c-icon\" (click)=\"goToMap()\">\n            <ion-icon name=\"map\"></ion-icon>\n          </div> -->\n      <!-- <div class=\"column c-text\">\n            <ion-label>{{c}}</ion-label>\n          </div> -->\n      <!-- <div class=\"column c-btn\">\n            <ion-button *ngIf=\"!search\" class=\"popover-btn\" size=\"small\" color=\"success\" (click)=\"filterClicked()\">Ordina</ion-button>\n          </div> -->\n      <!-- </ion-item-divider> -->\n      <div class=\"content\">\n        <div *ngFor=\"let poi of showPois[c]; let i = index\">\n          <wc-details [img]=\"poi.image\" [stringsinput]=\"stringsContact\" [title]=\"poi.title\" [altImage]=\"altImage\"\n            [subtitle]=\"poi.subtitle\" [text]=\"poi.text\" [info]=\"poi.info\" [contacts]=\"poi.infos\"\n            heading-color=\"#707070\"></wc-details>\n          <div class=\"spacing\" *ngIf=\"i == showPois.length - 1\"></div>\n        </div>\n      </div>\n    </div>\n  </ion-list>\n</ion-content>"
 
 /***/ }),
 
@@ -144,7 +92,7 @@ module.exports = "<ion-header no-border>\n    <ion-toolbar>\n        <ion-search
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".content {\n  padding-left: 2%;\n  padding-right: 2%; }\n\nion-searchbar {\n  position: fixed;\n  top: 58px;\n  z-index: 3; }\n\n.column {\n  float: left; }\n\n.c-text {\n  width: 60%;\n  margin-left: 10%; }\n\n.c-icon {\n  width: 10%;\n  height: 20px;\n  margin-bottom: 2%; }\n\n.c-btn {\n  width: 30%;\n  margin-bottom: 3%; }\n\n.row {\n  text-align: center;\n  vertical-align: middle;\n  height: 40px; }\n\n.row::after {\n  content: \"\";\n  display: table;\n  clear: both; }\n\n.interaction {\n  color: #11b3ef; }\n\n.wrapper .scrolling-wrapper-flexbox {\n  -ms-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);\n  -o-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);\n  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);\n  background-color: white;\n  width: 100%;\n  display: flex;\n  overflow-x: auto;\n  z-index: 999;\n  position: fixed; }\n\n.wrapper .scrolling-wrapper-flexbox ion-chip {\n    flex: 0 0 auto;\n    background-color: white; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL2NoaW44L0RvY3VtZW50cy93b3JrL21vZHVsYXJBcHAvbW9kdWxhci1hcHAvc3JjL2FwcC9tb2R1bGUtY29tdW5lL3BhZ2VzL2xpc3QtZm9vZC9saXN0LWZvb2QucGFnZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksaUJBQWU7RUFDZixrQkFBaUIsRUFDcEI7O0FBQ0Q7RUFDSSxnQkFBZTtFQUNmLFVBQVM7RUFDVCxXQUFVLEVBQ2I7O0FBQ0Q7RUFDSSxZQUFVLEVBQ2I7O0FBQ0Q7RUFDSSxXQUFVO0VBQ1YsaUJBQWdCLEVBQ25COztBQUNEO0VBQ0ksV0FBVTtFQUNWLGFBQVk7RUFDWixrQkFBaUIsRUFDcEI7O0FBQ0Q7RUFDSSxXQUFVO0VBQ1Ysa0JBQWdCLEVBQ25COztBQUNEO0VBQ0ksbUJBQWtCO0VBQ2xCLHVCQUFzQjtFQUN0QixhQUFZLEVBQ2Y7O0FBQ0Q7RUFDSSxZQUFXO0VBQ1gsZUFBYTtFQUNiLFlBQVUsRUFDYjs7QUFDRDtFQUNJLGVBQWMsRUFDakI7O0FBQ0Q7RUFLUSwrRUFBOEU7RUFDOUUsOEVBQTZFO0VBQzdFLDJFQUEwRTtFQUMxRSx3QkFBc0I7RUFDdEIsWUFBVztFQUNYLGNBQWE7RUFDYixpQkFBZ0I7RUFDaEIsYUFBWTtFQUNaLGdCQUFlLEVBS2xCOztBQWxCTDtJQWVZLGVBQWM7SUFDZCx3QkFBdUIsRUFDMUIiLCJmaWxlIjoic3JjL2FwcC9tb2R1bGUtY29tdW5lL3BhZ2VzL2xpc3QtZm9vZC9saXN0LWZvb2QucGFnZS5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmNvbnRlbnQge1xuICAgIHBhZGRpbmctbGVmdDoyJTtcbiAgICBwYWRkaW5nLXJpZ2h0OiAyJTtcbn1cbmlvbi1zZWFyY2hiYXIge1xuICAgIHBvc2l0aW9uOiBmaXhlZDtcbiAgICB0b3A6IDU4cHg7XG4gICAgei1pbmRleDogMztcbn1cbi5jb2x1bW4ge1xuICAgIGZsb2F0OmxlZnQ7XG59XG4uYy10ZXh0e1xuICAgIHdpZHRoOiA2MCU7XG4gICAgbWFyZ2luLWxlZnQ6IDEwJTtcbn1cbi5jLWljb24ge1xuICAgIHdpZHRoOiAxMCU7XG4gICAgaGVpZ2h0OiAyMHB4O1xuICAgIG1hcmdpbi1ib3R0b206IDIlO1xufVxuLmMtYnRuIHtcbiAgICB3aWR0aDogMzAlO1xuICAgIG1hcmdpbi1ib3R0b206MyU7XG59XG4ucm93e1xuICAgIHRleHQtYWxpZ246IGNlbnRlcjtcbiAgICB2ZXJ0aWNhbC1hbGlnbjogbWlkZGxlO1xuICAgIGhlaWdodDogNDBweDtcbn1cbi5yb3c6OmFmdGVyIHtcbiAgICBjb250ZW50OiBcIlwiO1xuICAgIGRpc3BsYXk6dGFibGU7XG4gICAgY2xlYXI6Ym90aDtcbn1cbi5pbnRlcmFjdGlvbiB7XG4gICAgY29sb3I6ICMxMWIzZWY7XG59XG4ud3JhcHBlciB7XG5cbiAgICAuc2Nyb2xsaW5nLXdyYXBwZXItZmxleGJveCB7XG4gICAgICAgIC13ZWJraXQtYm94LXNoYWRvdzogMCAxMHB4IDIwcHggcmdiYSgwLCAwLCAwLCAwLjE5KSwgMCA2cHggNnB4IHJnYmEoMCwgMCwgMCwgMC4yMyk7XG4gICAgICAgIC1tb3otYm94LXNoYWRvdzogMCAxMHB4IDIwcHggcmdiYSgwLCAwLCAwLCAwLjE5KSwgMCA2cHggNnB4IHJnYmEoMCwgMCwgMCwgMC4yMyk7XG4gICAgICAgIC1tcy1ib3gtc2hhZG93OiAwIDEwcHggMjBweCByZ2JhKDAsIDAsIDAsIDAuMTkpLCAwIDZweCA2cHggcmdiYSgwLCAwLCAwLCAwLjIzKTtcbiAgICAgICAgLW8tYm94LXNoYWRvdzogMCAxMHB4IDIwcHggcmdiYSgwLCAwLCAwLCAwLjE5KSwgMCA2cHggNnB4IHJnYmEoMCwgMCwgMCwgMC4yMyk7XG4gICAgICAgIGJveC1zaGFkb3c6IDAgMTBweCAyMHB4IHJnYmEoMCwgMCwgMCwgMC4xOSksIDAgNnB4IDZweCByZ2JhKDAsIDAsIDAsIDAuMjMpO1xuICAgICAgICBiYWNrZ3JvdW5kLWNvbG9yOndoaXRlO1xuICAgICAgICB3aWR0aDogMTAwJTtcbiAgICAgICAgZGlzcGxheTogZmxleDtcbiAgICAgICAgb3ZlcmZsb3cteDogYXV0bztcbiAgICAgICAgei1pbmRleDogOTk5O1xuICAgICAgICBwb3NpdGlvbjogZml4ZWQ7XG4gICAgICAgIGlvbi1jaGlwIHtcbiAgICAgICAgICAgIGZsZXg6IDAgMCBhdXRvO1xuICAgICAgICAgICAgYmFja2dyb3VuZC1jb2xvcjogd2hpdGU7XG4gICAgICAgIH1cbiAgICB9XG59Il19 */"
+module.exports = ".content {\n  padding-left: 2%;\n  padding-right: 2%; }\n\nion-searchbar {\n  position: fixed;\n  top: 58px;\n  z-index: 3; }\n\n.column {\n  float: left; }\n\n.c-text {\n  width: 60%;\n  margin-left: 10%; }\n\n.c-icon {\n  width: 10%;\n  height: 20px;\n  margin-bottom: 2%; }\n\n.c-btn {\n  width: 30%;\n  margin-bottom: 3%; }\n\n.row {\n  text-align: center;\n  vertical-align: middle;\n  height: 40px; }\n\n.row::after {\n  content: \"\";\n  display: table;\n  clear: both; }\n\n.interaction {\n  color: #11b3ef; }\n\n.wrapper .scrolling-wrapper-flexbox {\n  -ms-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);\n  -o-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);\n  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);\n  background-color: white;\n  width: 100%;\n  display: flex;\n  overflow-x: auto;\n  z-index: 999;\n  position: fixed; }\n\n.wrapper .scrolling-wrapper-flexbox .container {\n    flex: 0 0 auto; }\n\n.wrapper .scrolling-wrapper-flexbox .container .tag {\n      flex: 0 0 auto;\n      margin: 8px; }\n\n.wrapper .scrolling-wrapper-flexbox .container .tag .tag-text {\n        padding: 4px;\n        color: white;\n        background-color: #11b3ef; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL2NoaW44L0RvY3VtZW50cy93b3JrL21vZHVsYXJBcHAvbW9kdWxhci1hcHAvc3JjL2FwcC9tb2R1bGUtY29tdW5lL3BhZ2VzL2xpc3QtZm9vZC9saXN0LWZvb2QucGFnZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksaUJBQWU7RUFDZixrQkFBaUIsRUFDcEI7O0FBQ0Q7RUFDSSxnQkFBZTtFQUNmLFVBQVM7RUFDVCxXQUFVLEVBQ2I7O0FBQ0Q7RUFDSSxZQUFVLEVBQ2I7O0FBQ0Q7RUFDSSxXQUFVO0VBQ1YsaUJBQWdCLEVBQ25COztBQUNEO0VBQ0ksV0FBVTtFQUNWLGFBQVk7RUFDWixrQkFBaUIsRUFDcEI7O0FBQ0Q7RUFDSSxXQUFVO0VBQ1Ysa0JBQWdCLEVBQ25COztBQUNEO0VBQ0ksbUJBQWtCO0VBQ2xCLHVCQUFzQjtFQUN0QixhQUFZLEVBQ2Y7O0FBQ0Q7RUFDSSxZQUFXO0VBQ1gsZUFBYTtFQUNiLFlBQVUsRUFDYjs7QUFDRDtFQUNJLGVBQWMsRUFDakI7O0FBQ0Q7RUFLUSwrRUFBOEU7RUFDOUUsOEVBQTZFO0VBQzdFLDJFQUEwRTtFQUMxRSx3QkFBc0I7RUFDdEIsWUFBVztFQUNYLGNBQWE7RUFDYixpQkFBZ0I7RUFDaEIsYUFBWTtFQUNaLGdCQUFlLEVBZWxCOztBQTVCTDtJQWVZLGVBQWMsRUFXakI7O0FBMUJUO01BaUJZLGVBQWM7TUFDZCxZQUFXLEVBTWQ7O0FBeEJUO1FBb0JnQixhQUFZO1FBQ2hCLGFBQVk7UUFDWiwwQkFBMkIsRUFDMUIiLCJmaWxlIjoic3JjL2FwcC9tb2R1bGUtY29tdW5lL3BhZ2VzL2xpc3QtZm9vZC9saXN0LWZvb2QucGFnZS5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmNvbnRlbnQge1xuICAgIHBhZGRpbmctbGVmdDoyJTtcbiAgICBwYWRkaW5nLXJpZ2h0OiAyJTtcbn1cbmlvbi1zZWFyY2hiYXIge1xuICAgIHBvc2l0aW9uOiBmaXhlZDtcbiAgICB0b3A6IDU4cHg7XG4gICAgei1pbmRleDogMztcbn1cbi5jb2x1bW4ge1xuICAgIGZsb2F0OmxlZnQ7XG59XG4uYy10ZXh0e1xuICAgIHdpZHRoOiA2MCU7XG4gICAgbWFyZ2luLWxlZnQ6IDEwJTtcbn1cbi5jLWljb24ge1xuICAgIHdpZHRoOiAxMCU7XG4gICAgaGVpZ2h0OiAyMHB4O1xuICAgIG1hcmdpbi1ib3R0b206IDIlO1xufVxuLmMtYnRuIHtcbiAgICB3aWR0aDogMzAlO1xuICAgIG1hcmdpbi1ib3R0b206MyU7XG59XG4ucm93e1xuICAgIHRleHQtYWxpZ246IGNlbnRlcjtcbiAgICB2ZXJ0aWNhbC1hbGlnbjogbWlkZGxlO1xuICAgIGhlaWdodDogNDBweDtcbn1cbi5yb3c6OmFmdGVyIHtcbiAgICBjb250ZW50OiBcIlwiO1xuICAgIGRpc3BsYXk6dGFibGU7XG4gICAgY2xlYXI6Ym90aDtcbn1cbi5pbnRlcmFjdGlvbiB7XG4gICAgY29sb3I6ICMxMWIzZWY7XG59XG4ud3JhcHBlciB7XG5cbiAgICAuc2Nyb2xsaW5nLXdyYXBwZXItZmxleGJveCB7XG4gICAgICAgIC13ZWJraXQtYm94LXNoYWRvdzogMCAxMHB4IDIwcHggcmdiYSgwLCAwLCAwLCAwLjE5KSwgMCA2cHggNnB4IHJnYmEoMCwgMCwgMCwgMC4yMyk7XG4gICAgICAgIC1tb3otYm94LXNoYWRvdzogMCAxMHB4IDIwcHggcmdiYSgwLCAwLCAwLCAwLjE5KSwgMCA2cHggNnB4IHJnYmEoMCwgMCwgMCwgMC4yMyk7XG4gICAgICAgIC1tcy1ib3gtc2hhZG93OiAwIDEwcHggMjBweCByZ2JhKDAsIDAsIDAsIDAuMTkpLCAwIDZweCA2cHggcmdiYSgwLCAwLCAwLCAwLjIzKTtcbiAgICAgICAgLW8tYm94LXNoYWRvdzogMCAxMHB4IDIwcHggcmdiYSgwLCAwLCAwLCAwLjE5KSwgMCA2cHggNnB4IHJnYmEoMCwgMCwgMCwgMC4yMyk7XG4gICAgICAgIGJveC1zaGFkb3c6IDAgMTBweCAyMHB4IHJnYmEoMCwgMCwgMCwgMC4xOSksIDAgNnB4IDZweCByZ2JhKDAsIDAsIDAsIDAuMjMpO1xuICAgICAgICBiYWNrZ3JvdW5kLWNvbG9yOndoaXRlO1xuICAgICAgICB3aWR0aDogMTAwJTtcbiAgICAgICAgZGlzcGxheTogZmxleDtcbiAgICAgICAgb3ZlcmZsb3cteDogYXV0bztcbiAgICAgICAgei1pbmRleDogOTk5O1xuICAgICAgICBwb3NpdGlvbjogZml4ZWQ7XG4gICAgICAgIC5jb250YWluZXJ7XG4gICAgICAgICAgICBmbGV4OiAwIDAgYXV0bztcbiAgICAgICAgLnRhZ3tcbiAgICAgICAgICAgIGZsZXg6IDAgMCBhdXRvO1xuICAgICAgICAgICAgbWFyZ2luOiA4cHg7XG4gICAgICAgICAgICAudGFnLXRleHR7XG4gICAgICAgICAgICAgICAgcGFkZGluZzogNHB4O1xuICAgICAgICAgICAgY29sb3I6IHdoaXRlO1xuICAgICAgICAgICAgYmFja2dyb3VuZC1jb2xvcjogICAjMTFiM2VmO1xuICAgICAgICAgICAgfVxuICAgICAgICB9XG4gICAgICAgICAgICBcbiAgICAgICAgfVxuXG4gICAgfVxufSJdfQ== */"
 
 /***/ }),
 
@@ -164,8 +112,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var _ngx_translate_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ngx-translate/core */ "./node_modules/@ngx-translate/core/fesm5/ngx-translate-core.js");
 /* harmony import */ var src_app_services_geo_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/services/geo.service */ "./src/app/services/geo.service.ts");
-/* harmony import */ var src_app_services_config_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/app/services/config.service */ "./src/app/services/config.service.ts");
-/* harmony import */ var _ionic_native_call_number_ngx__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @ionic-native/call-number/ngx */ "./node_modules/@ionic-native/call-number/ngx/index.js");
+/* harmony import */ var _ionic_native_call_number_ngx__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ionic-native/call-number/ngx */ "./node_modules/@ionic-native/call-number/ngx/index.js");
+/* harmony import */ var _filter_page_food_filter_page_food_page__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./filter-page-food/filter-page-food.page */ "./src/app/module-comune/pages/list-food/filter-page-food/filter-page-food.page.ts");
+/* harmony import */ var _services_config_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../services/config.service */ "./src/app/module-comune/services/config.service.ts");
+/* harmony import */ var _services_utils_service__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../services/utils.service */ "./src/app/module-comune/services/utils.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -219,9 +169,12 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
 
 
 
+
+
 var ListFoodPage = /** @class */ (function () {
-    function ListFoodPage(config, navCtrl, dbService, alertCtrl, router, route, alert, popoverController, events, translate, geoSrv, callNumber) {
+    function ListFoodPage(modalController, config, navCtrl, dbService, alertCtrl, router, route, alert, popoverController, events, translate, geoSrv, callNumber, utils) {
         var _this_1 = this;
+        this.modalController = modalController;
         this.config = config;
         this.navCtrl = navCtrl;
         this.dbService = dbService;
@@ -234,8 +187,11 @@ var ListFoodPage = /** @class */ (function () {
         this.translate = translate;
         this.geoSrv = geoSrv;
         this.callNumber = callNumber;
+        this.utils = utils;
         this.showPois = [];
         this.fullPois = [];
+        this.tags = [];
+        this.firstAccess = true;
         this.search = false;
         this.isLoading = true;
         this.fullCategories = [];
@@ -266,8 +222,14 @@ var ListFoodPage = /** @class */ (function () {
                 _this_1.category = cat;
             }
         });
-        var food = document.getElementById('poi-list');
-        food.addEventListener('contactClick', function (contact) { return __awaiter(_this_1, void 0, void 0, function () {
+        var element = document.getElementById('poi-list');
+        this.translate.get('alt_image_string').subscribe(function (value) {
+            _this_1.altImage = value;
+        });
+        this.config.getStringContacts(this.translate, this.language).then(function (strings) {
+            _this_1.stringsContact = strings;
+        });
+        element.addEventListener('contactClick', function (contact) { return __awaiter(_this_1, void 0, void 0, function () {
             var contactParam;
             return __generator(this, function (_a) {
                 contactParam = JSON.parse(contact.detail);
@@ -275,6 +237,18 @@ var ListFoodPage = /** @class */ (function () {
                     this.callNumber.callNumber(contactParam.value, true)
                         .then(function (res) { return console.log('Launched dialer!', res); })
                         .catch(function (err) { return console.log('Error launching dialer', err); });
+                }
+                if (contactParam.type == 'address') {
+                    this.utils.openAddressMap(contactParam.value);
+                    console.log('vai all\'indirizzo' + contactParam.value);
+                }
+                if (contactParam.type == 'url') {
+                    this.utils.openUrl(contactParam.value);
+                    console.log('vai all\'indirizzo' + contactParam.value);
+                }
+                if (contactParam.type == 'share') {
+                    this.utils.openShare(contactParam.value);
+                    console.log('vai all\'indirizzo' + contactParam.value);
                 }
                 return [2 /*return*/];
             });
@@ -288,6 +262,8 @@ var ListFoodPage = /** @class */ (function () {
                 _this_1.fullPois = data.docs.map(function (x) { return _this_1.convertPois(x); });
                 _this_1.subCategories(_this_1.fullPois);
                 _this_1.buildShowPois();
+                _this_1.tags = _this_1.buildFilter();
+                _this_1.orderArray('near', _this_1);
                 _this_1.isLoading = false;
             });
             // .then(x => {
@@ -310,14 +286,17 @@ var ListFoodPage = /** @class */ (function () {
             _this_1.categories = _this_1.fullCategories;
         });
     };
-    ListFoodPage.prototype.buildShowPois = function () {
+    ListFoodPage.prototype.buildShowPois = function (filters) {
         var _this_1 = this;
+        this.showPois = [];
         this.fullCategories.forEach(function (e) {
             _this_1.fullPois.forEach(function (p) {
                 if (!_this_1.showPois[e]) {
                     _this_1.showPois[e] = [];
                 }
-                if (p.category === e) {
+                if (p.category === e && filters ? filters.filter(function (item) {
+                    return (item.isChecked && p.classification == item.value);
+                }).length > 0 : true) {
                     _this_1.showPois[e].push(p);
                 }
             });
@@ -361,6 +340,11 @@ var ListFoodPage = /** @class */ (function () {
             }
             if (x.classification) {
                 poiElement.subtitle = x.classification[this.language];
+                // poiElement.cat = [];
+                // poiElement.cat.push(x.classification[this.language]);
+            }
+            if (x.classification) {
+                poiElement.classification = x.classification[this.language];
                 // poiElement.cat = [];
                 // poiElement.cat.push(x.classification[this.language]);
             }
@@ -412,7 +396,69 @@ var ListFoodPage = /** @class */ (function () {
         }, this.doneTypingInterval);
     };
     ListFoodPage.prototype.filterClicked = function () {
-        this.buildAlert('filter');
+        return __awaiter(this, void 0, void 0, function () {
+            var modal;
+            var _this_1 = this;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.modalController.create({
+                            component: _filter_page_food_filter_page_food_page__WEBPACK_IMPORTED_MODULE_7__["FilterPageFoodPage"],
+                            componentProps: {
+                                'filters': this.tags
+                            }
+                        })];
+                    case 1:
+                        modal = _a.sent();
+                        modal.onDidDismiss()
+                            .then(function (filters) {
+                            _this_1.firstAccess = true;
+                            var even = function (element) {
+                                // checks whether an element is even
+                                return element.isChecked;
+                            };
+                            _this_1.tags = filters.data;
+                            if (filters.data.some(even)) {
+                                _this_1.firstAccess = false;
+                                _this_1.buildShowPois(_this_1.tags);
+                            }
+                            else {
+                                _this_1.buildShowPois();
+                            }
+                        });
+                        return [4 /*yield*/, modal.present()];
+                    case 2: return [2 /*return*/, _a.sent()];
+                }
+            });
+        });
+    };
+    ListFoodPage.prototype.buildFilter = function () {
+        var array = this.fullPois.map(function (item) { return item.classification; });
+        var newArray = array.filter(function (value, index, self) {
+            return self.indexOf(value) === index;
+        });
+        var value = this.firstAccess ? false : true;
+        var returnArray = newArray.map(function (item) {
+            return {
+                "value": item,
+                "isChecked": value
+            };
+        });
+        return returnArray;
+    };
+    ListFoodPage.prototype.removeTag = function (tag) {
+        this.tags = this.tags.filter(function (item) { return item.value != tag.value; });
+        this.firstAccess = true;
+        var even = function (element) {
+            // checks whether an element is even
+            return element.isChecked;
+        };
+        if (this.tags.some(even)) {
+            this.firstAccess = false;
+            this.buildShowPois(this.tags);
+        }
+        else {
+            this.buildShowPois();
+        }
     };
     // toggleSearch() {
     //   this.search = !this.search;
@@ -466,6 +512,7 @@ var ListFoodPage = /** @class */ (function () {
                             });
                         }
                         else {
+                            //filter
                             title = 'Ordina Per';
                             handlerFunc = this.orderArray;
                             alInputs = [
@@ -574,7 +621,8 @@ var ListFoodPage = /** @class */ (function () {
             template: __webpack_require__(/*! ./list-food.page.html */ "./src/app/module-comune/pages/list-food/list-food.page.html"),
             styles: [__webpack_require__(/*! ./list-food.page.scss */ "./src/app/module-comune/pages/list-food/list-food.page.scss")]
         }),
-        __metadata("design:paramtypes", [src_app_services_config_service__WEBPACK_IMPORTED_MODULE_6__["ConfigService"],
+        __metadata("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_1__["ModalController"],
+            _services_config_service__WEBPACK_IMPORTED_MODULE_8__["ConfigService"],
             _ionic_angular__WEBPACK_IMPORTED_MODULE_1__["NavController"],
             _services_db_service__WEBPACK_IMPORTED_MODULE_2__["DbService"],
             _ionic_angular__WEBPACK_IMPORTED_MODULE_1__["AlertController"],
@@ -585,7 +633,8 @@ var ListFoodPage = /** @class */ (function () {
             _ionic_angular__WEBPACK_IMPORTED_MODULE_1__["Events"],
             _ngx_translate_core__WEBPACK_IMPORTED_MODULE_4__["TranslateService"],
             src_app_services_geo_service__WEBPACK_IMPORTED_MODULE_5__["GeoService"],
-            _ionic_native_call_number_ngx__WEBPACK_IMPORTED_MODULE_7__["CallNumber"]])
+            _ionic_native_call_number_ngx__WEBPACK_IMPORTED_MODULE_6__["CallNumber"],
+            _services_utils_service__WEBPACK_IMPORTED_MODULE_9__["UtilsService"]])
     ], ListFoodPage);
     return ListFoodPage;
 }());
