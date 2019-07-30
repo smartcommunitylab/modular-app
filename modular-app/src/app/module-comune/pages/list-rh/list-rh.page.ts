@@ -189,6 +189,11 @@ export class ListRHPage implements OnInit {
         // poiElement.cat = [];
         // poiElement.cat.push(x.classification[this.language]);
       }
+      if (x.classification) {
+        poiElement.classification = x.classification[this.language];
+        // poiElement.cat = [];
+        // poiElement.cat.push(x.classification[this.language]);
+      }
       if (x.url) {
         poiElement.url = x.url;
       }

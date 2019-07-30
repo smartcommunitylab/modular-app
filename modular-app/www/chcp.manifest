@@ -73,35 +73,35 @@
   },
   {
     "file": "106.js",
-    "hash": "c26f9adf356cf7db4f2e84c88cdc7910"
+    "hash": "ed66ef5bb1036799107c18647f2f7b9a"
   },
   {
     "file": "106.js.map",
-    "hash": "50918120d10e8703e06dc5da3790cd77"
+    "hash": "69b4ef341dd2d14fe6d3545fba20b4e3"
   },
   {
     "file": "107.js",
-    "hash": "6ded5a64fc82de2761a85a3d60cf18e9"
+    "hash": "9bc425e16e1505a235c742b5b330e2cf"
   },
   {
     "file": "107.js.map",
-    "hash": "6853d334b870e969cf7ee775fd1ee549"
+    "hash": "9f758087f4c235c353d53fe5495a3fb3"
   },
   {
     "file": "108.js",
-    "hash": "7af7cc3d5f12b6ccf76abc830bd48f06"
+    "hash": "c589b882b5c10d908a1c2d4d4e4fe40c"
   },
   {
     "file": "108.js.map",
-    "hash": "a7d4792d3842f93b2c6d0a167aea8854"
+    "hash": "0bcbb5dc2166712520963f417bec61e4"
   },
   {
     "file": "109.js",
-    "hash": "446f1b3acce8ca160d7e9c5589af6225"
+    "hash": "c3700fa5b5035294d54d52218127e89f"
   },
   {
     "file": "109.js.map",
-    "hash": "675cc6ec81c0569cd85ae20b467b5010"
+    "hash": "f1470e0e109aacc675b3d1e7eead9c49"
   },
   {
     "file": "11.js",
@@ -113,67 +113,67 @@
   },
   {
     "file": "110.js",
-    "hash": "a30e663ea1b26837b9c10e4a3c4a458b"
+    "hash": "bf2be58eeabe7f818af0b261be48bfd5"
   },
   {
     "file": "110.js.map",
-    "hash": "0d17a60806410445dea9a5dda80a5524"
+    "hash": "e0900aec85afa5e34f9482158a157814"
   },
   {
     "file": "111.js",
-    "hash": "5b7ceb867f6d63adc4da643af9421eed"
+    "hash": "15b24d09444b0ba8e92b428a74fab87e"
   },
   {
     "file": "111.js.map",
-    "hash": "facc8bdc3a7fb6820add7a1c112ce52c"
+    "hash": "bcace88272588eb8eec3e272858481b6"
   },
   {
     "file": "112.js",
-    "hash": "93f8d0f3e853c18da6abc69959f5409f"
+    "hash": "926a0532474882e9fc4bb94ad54b653a"
   },
   {
     "file": "112.js.map",
-    "hash": "da33b407ea233684fdc8b7ffed41d2da"
+    "hash": "e6098ec40d3edf5244394a8f1f9262cf"
   },
   {
     "file": "113.js",
-    "hash": "5af1b146c6b090e751128cd355c7b683"
+    "hash": "03b6d8551bd354a2fca05a0ebe922f16"
   },
   {
     "file": "113.js.map",
-    "hash": "4484f2bdc7d402c45de3de345874a7ea"
+    "hash": "3066e1a006a43192e18ecb1cb930d358"
   },
   {
     "file": "114.js",
-    "hash": "5ded34c6034c2a902f183794abeb14b4"
+    "hash": "f138cd50bd74fe87446df33438f9b1fc"
   },
   {
     "file": "114.js.map",
-    "hash": "45ac24ea8a14b49dde2ac09c2bf600a0"
+    "hash": "99fc1059eaf3dd2b61be462a39b910a1"
   },
   {
     "file": "115.js",
-    "hash": "7e21d561347bf6341c495bc5708322a9"
+    "hash": "554e45a52cc949ac78a00656fd7125f5"
   },
   {
     "file": "115.js.map",
-    "hash": "9b15af9d6297a2f1771ab2a2aa258410"
+    "hash": "6f9f984fa408d1aae774ab7ea7a732e1"
   },
   {
     "file": "116.js",
-    "hash": "12939d9a8bd13290a24dde4429af876f"
+    "hash": "92312e831c35188c65445bf625a87790"
   },
   {
     "file": "116.js.map",
-    "hash": "8293993d20916679c078a7847ce0c100"
+    "hash": "cd37dd2379303b2ec30bde22be39269d"
   },
   {
     "file": "117.js",
-    "hash": "cc0661296d8d86f9676b580a4b0b573c"
+    "hash": "4e5ee9d2f87cf30b8e6c98076f20a033"
   },
   {
     "file": "117.js.map",
-    "hash": "e3d25e0ea1d668aa345c669318cdfac8"
+    "hash": "8163c00b0a700886f56f2df3f757bdb8"
   },
   {
     "file": "118.js",
@@ -1285,15 +1285,15 @@
   },
   {
     "file": "assets/comune/i18n/de.json",
-    "hash": "2c750fabf8103a51dabd38d5acf44915"
+    "hash": "800bd01accaecc047f25aa938f3a68f4"
   },
   {
     "file": "assets/comune/i18n/en.json",
-    "hash": "0509e7a627ba9a60e3a70a11542fe6dc"
+    "hash": "ea4de098bf3680795ef579ca3da4bf7b"
   },
   {
     "file": "assets/comune/i18n/it.json",
-    "hash": "6dd4e25e8ae915f2a768fb8d1c220f54"
+    "hash": "cce50b3863d1db0d24c8d21490b569f1"
   },
   {
     "file": "assets/configuration/carousel.json",
@@ -1301,11 +1301,11 @@
   },
   {
     "file": "assets/configuration/default-profiles-module.json",
-    "hash": "74b34a436d295e26804c40da19fefdfb"
+    "hash": "9b53cacdc972a8377b16ac0a228c269d"
   },
   {
     "file": "assets/configuration/module-entries.json",
-    "hash": "989b30fd1db2aa295eda4354ffadac70"
+    "hash": "2357a6ccf5dfd5fdba007eaee72fe8a2"
   },
   {
     "file": "assets/configuration/side-menu.json",
@@ -1409,7 +1409,7 @@
   },
   {
     "file": "cordova_plugins.js",
-    "hash": "d258db5bb795ba87cd7b75297452aca4"
+    "hash": "cd6988b0bcab971cd9fcff119efe448a"
   },
   {
     "file": "cordova-js-src/android/nativeapiprovider.js",
@@ -1454,6 +1454,14 @@
   {
     "file": "default~pages-detail-info-detail-info-module~pages-detail-path-detail-path-module~pages-detail-poi-d~30701aed.js.map",
     "hash": "4473c45fac14cb2686060316fa6dde12"
+  },
+  {
+    "file": "default~pages-detail-info-detail-info-module~pages-detail-path-detail-path-module~pages-detail-poi-d~9f8276b2.js",
+    "hash": "1ab55648143595ab39928555e2108473"
+  },
+  {
+    "file": "default~pages-detail-info-detail-info-module~pages-detail-path-detail-path-module~pages-detail-poi-d~9f8276b2.js.map",
+    "hash": "89ae5a69f51f4d5c4abbfaa4bed040d2"
   },
   {
     "file": "default~pages-home-ps-home-ps-module~pages-map-spots-map-spots-module.js",
@@ -1505,11 +1513,11 @@
   },
   {
     "file": "main.js",
-    "hash": "96bb08104178b980bfd104bb5f0421e3"
+    "hash": "ad8dcce4b400a8712c0e69e01d682081"
   },
   {
     "file": "main.js.map",
-    "hash": "5be1f00bdfd8ec3161e612f879ead45b"
+    "hash": "162de625845239bc869ac1d4205c2c0b"
   },
   {
     "file": "marker-icon.png",
@@ -1557,11 +1565,11 @@
   },
   {
     "file": "pages-home-common-home-common-module.js",
-    "hash": "1312f027d9b4f6176f8a5f3168d8a18b"
+    "hash": "7091447f7ad21aa248de705190787f50"
   },
   {
     "file": "pages-home-common-home-common-module.js.map",
-    "hash": "a025415d7efdb73780009b21ffd9bd7a"
+    "hash": "2544c7d0f57e124f66d6128b32208d92"
   },
   {
     "file": "pages-home-home-module.js",
@@ -1605,11 +1613,19 @@
   },
   {
     "file": "pages-list-event-list-event-module.js",
-    "hash": "f4b44b1720108213233a5584db40bfbe"
+    "hash": "55f6df8697d2d74118de5b4e92fbc9c1"
   },
   {
     "file": "pages-list-event-list-event-module.js.map",
-    "hash": "48afb0840bb4f1c5c387dd06dd03ed19"
+    "hash": "32a183ea9085b4bfe60580253e681e22"
+  },
+  {
+    "file": "pages-list-food-list-food-module.js",
+    "hash": "b5d197fafebc5ee59d36124f5b59644c"
+  },
+  {
+    "file": "pages-list-food-list-food-module.js.map",
+    "hash": "bf6eaed584562c04c74a26ef98669a80"
   },
   {
     "file": "pages-list-path-list-path-module.js",
@@ -1629,11 +1645,11 @@
   },
   {
     "file": "pages-list-rh-list-rh-module.js",
-    "hash": "bf560cdcecaa3e0fcd72bf4df8a5324c"
+    "hash": "3c27e9f8c43b89bef74e27277a4ead94"
   },
   {
     "file": "pages-list-rh-list-rh-module.js.map",
-    "hash": "7251d8a5877d458739a00b22cf3249a9"
+    "hash": "6a869b7b81109b9aa2c1b0020fe9bf78"
   },
   {
     "file": "pages-map-map-module.js",
@@ -1864,6 +1880,10 @@
     "hash": "cb864433bfd937b8179568b9947aa88b"
   },
   {
+    "file": "plugins/mx.ferreyra.callnumber/www/CallNumber.js",
+    "hash": "2bbf42896a6d495cd600516e109c37ee"
+  },
+  {
     "file": "polyfills.js",
     "hash": "819f17177d9736b0d64dbe2c99976f4f"
   },
@@ -1873,11 +1893,11 @@
   },
   {
     "file": "runtime.js",
-    "hash": "8aedfc8b4559b54a2e7cd09797f085f4"
+    "hash": "1a7d812a9ef3e885132ed1b960736eca"
   },
   {
     "file": "runtime.js.map",
-    "hash": "026804f499cb46243c75e395c5a34f14"
+    "hash": "4e9e5dda79c83e92757accdfb8826186"
   },
   {
     "file": "styles.js",
@@ -4673,10 +4693,10 @@
   },
   {
     "file": "vendor.js",
-    "hash": "abdb92d0fbd401e8f16f6a4c6e81fb96"
+    "hash": "37d3b5f89f8ba25cf4ecdaba915f1be2"
   },
   {
     "file": "vendor.js.map",
-    "hash": "05296a5a57aac7b87d74fc4925a872cf"
+    "hash": "fa97021dfbd0419f5c3bd144dcf1a695"
   }
 ]
