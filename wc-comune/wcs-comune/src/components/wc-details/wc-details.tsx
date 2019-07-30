@@ -1,4 +1,4 @@
-import { Component, Prop, Event,Element } from '@stencil/core';
+import { Component, Prop, Event, Element } from '@stencil/core';
 import { Icons } from '../../utils/icons';
 import { DetailsInfo } from '../../utils/utils';
 // import { getLocaleComponentStrings } from "../../utils/locale";
@@ -22,7 +22,7 @@ export class WcDetails {
         cat?: Array<string>, --> Categoria Evento
       }
   */
-
+  @Prop() id: string;
   /** Titolo del percorso */
   @Prop() title: string;
   /** Sottotitolo del percorso */
@@ -43,18 +43,24 @@ export class WcDetails {
   @Prop() altImage: string
   /** Lingua da utilizzare */
   @Prop() language: string
-  /*external strings for contacts*/ 
+  /*external strings for contacts*/
   @Prop() stringsinput: string;
+  /*more details or not*/
+  @Prop() expandable: boolean = false;
   @Event() contactClick: EventEmitter;
+  /*Emit when the expandable is clicked*/
+  @Event() expandeClick: EventEmitter;
   @Element() element: HTMLElement;
 
   private icons = new Icons().iconList;
   private contactsJSON: DetailsInfo;
   private tmptags = [];
   private tmpContacts = [];
-  private strings:any;
+  private strings: any;
   async componentWillLoad() {
-    this.strings = JSON.parse(this.stringsinput);
+    if (this.stringsinput) {
+      this.strings = JSON.parse(this.stringsinput);
+    }
     // this.strings = await getLocaleComponentStrings(this.element,this.language);
 
     if (this.contacts) {
@@ -114,32 +120,54 @@ export class WcDetails {
 
     keys.forEach(k => {
       this.tmpContacts.push(
-        <div class="contact-container" onClick={() => k.indexOf('share') > -1 ?
-          this.contactClickHandler(k, this.contactsJSON['url']) :
-          this.contactClickHandler(k, this.contactsJSON[k])
-        }>
-          <div class="icon">
-            {this.icons[k]("black")}
+        <div class="external-container">
+          <div class="contact-container" onClick={() => k.indexOf('share') > -1 ?
+            this.contactClickHandler(k, this.contactsJSON['url']) :
+            this.contactClickHandler(k, this.contactsJSON[k])
+          }>
+            <div class="icon icon-contact">
+              {this.icons[k](this.secondColor)}
+            </div>
+            <div class="contactLabel">{this.strings[k]}</div>
           </div>
-          <div class="contactLabel">{this.strings[k]}</div>
         </div>
       )
     });
   }
+  expande() {
+    console.log("expande");
+    this.expandeClick.emit(this.id);
 
+  }
   render() {
 
     return (
-      <div class="card">
+      <div class={this.expandable?"card":""} onClick={() => this.expandable ?
+        this.expande()
+        : ""
+      }>
+        {!this.expandable
+          ?<div class="image">
+            <img src={this.img} alt={this.altImage}></img>
+          </div>
+          :""
+          }
         <div class="container">
           <div class="info-title" style={{ color: this.headingColor }}>
             {this.title}
           </div>
           <div class="subtitle" innerHTML={this.subtitle} >
           </div>
-          <div class="image">
+          {this.expandable
+            ? <div class="detail-bar"></div>
+            : ""
+          }
+          {this.expandable
+          ?<div class="image">
             <img src={this.img} alt={this.altImage}></img>
           </div>
+          :""
+          }
           <div class="contacts">
             {this.tmpContacts}
           </div>
@@ -151,13 +179,18 @@ export class WcDetails {
             {(this.contactsJSON) ? this.contactsJSON.address : ''}
           </div>
           {this.showTags()}
-          <div class="text" innerHTML={this.text}>
-          </div>
-          <div class="title-2" style={{ color: this.headingColor }}>
-            {(this.info && this.info != '') ? "Informazioni" : ""}
-          </div>
-          <div class="info text" innerHTML={this.info}>
-          </div>
+
+          {!this.expandable
+            ? <div><div class="text" innerHTML={this.text}>
+            </div>
+              <div class="title-2" style={{ color: this.headingColor }}>
+                {(this.info && this.info != '') ? "Informazioni" : ""}
+              </div>
+              <div class="info text" innerHTML={this.info}>
+              </div>
+            </div>
+            : ""
+          }
         </div>
       </div>
     )

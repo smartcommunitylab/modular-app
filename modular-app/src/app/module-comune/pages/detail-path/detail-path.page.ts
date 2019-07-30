@@ -53,8 +53,14 @@ export class DetailPathPage implements OnInit {
   }
 
   ngOnInit() {
-    this.myPos.lat = window[this.config.getAppModuleName()]['geolocation']['lat'];
-    this.myPos.lon = window[this.config.getAppModuleName()]['geolocation']['long'];
+    if (window[this.config.getAppModuleName()]['geolocation'])
+    this.myPos = {
+      lat: window[this.config.getAppModuleName()]['geolocation']['lat'],
+      long: window[this.config.getAppModuleName()]['geolocation']['long']
+    };
+  else {
+    this.myPos = this.config.getDefaultPosition();
+  }
     this.route.queryParams
       .subscribe(params => {
         if (params) {

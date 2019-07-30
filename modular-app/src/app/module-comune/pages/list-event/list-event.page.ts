@@ -4,7 +4,9 @@ import { DbService } from '../../services/db.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { AlertInput } from '@ionic/core';
-import { ConfigService } from 'src/app/services/config.service';
+import { ConfigService } from '../../services/config.service';
+import { CallNumber } from '@ionic-native/call-number/ngx';
+import { UtilsService } from '../../services/utils.service';
 
 @Component({
   selector: 'app-list-event',
@@ -22,6 +24,8 @@ export class ListEventPage implements OnInit {
   fullCategories: any = [];
   categories: any = [];
   pageTitle: string;
+  stringsContact: any;
+  altImage: string;
 
   constructor(
     public navCtrl: NavController,
@@ -32,7 +36,9 @@ export class ListEventPage implements OnInit {
     private alert: AlertController,
     private config: ConfigService,
     public events: Events,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private callNumber: CallNumber,
+    private utils: UtilsService
   ) {
     this.language = window[this.config.getAppModuleName()]['language'];
     this.translate.use(this.language);
@@ -50,6 +56,42 @@ export class ListEventPage implements OnInit {
           this.category = cat;
         }
       });
+      const element = document.getElementById('poi-list');
+    this.translate.get('alt_image_string').subscribe(
+      value => {
+        this.altImage = value;
+      }
+    );
+     this.config.getStringContacts(this.translate,this.language).then(strings => {
+      this.stringsContact = strings
+    });
+    element.addEventListener('expandeClick', async (returnId) => {
+      //go to detail
+      var id = (<any>returnId).detail
+      this.router.navigate(['/detail-event'], { queryParams: { id: id, type: 'EVENT' } });
+    })
+
+    element.addEventListener('contactClick', async (contact) => {
+      // console.log(contact)
+      var contactParam = JSON.parse((<any>contact).detail)
+      if (contactParam.type == 'phone') {
+        this.callNumber.callNumber(contactParam.value, true)
+          .then(res => console.log('Launched dialer!', res))
+          .catch(err => console.log('Error launching dialer', err));
+      }
+      if (contactParam.type == 'address') {
+        this.utils.openAddressMap(contactParam.value);
+        console.log('vai all\'indirizzo' + contactParam.value);
+      }
+      if (contactParam.type == 'url') {
+        this.utils.openUrl(contactParam.value);
+        console.log('vai all\'indirizzo' + contactParam.value);
+      }
+      if (contactParam.type == 'share') {
+        this.utils.openShare(contactParam.value);
+        console.log('vai all\'indirizzo' + contactParam.value);
+      }
+    })
   }
 
   ionViewDidEnter() {
@@ -131,6 +173,9 @@ export class ListEventPage implements OnInit {
       if (x.category) {
         poiElement.category = x.category;
       }
+      if (x.classification) {
+        poiElement.classification = x.classification[this.language];
+      }
       if (x.url) {
         poiElement.url = x.url;
       }
@@ -148,7 +193,7 @@ export class ListEventPage implements OnInit {
   }
 
   goToDetail(id) {
-    this.router.navigate(['/detail-poi'], { queryParams: { id: id, type: this.type } });
+    this.router.navigate(['/detail-event'], { queryParams: { id: id, type: this.type } });
   }
   typingTimer;                //timer identifier
   doneTypingInterval = 500;  //time in ms, 5 second for example

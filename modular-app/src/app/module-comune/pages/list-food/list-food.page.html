@@ -82,7 +82,7 @@
         <div *ngFor="let poi of showPois[c]; let i = index">
           <wc-details [img]="poi.image" [stringsinput]="stringsContact" [title]="poi.title" [altImage]="altImage"
             [subtitle]="poi.subtitle" [text]="poi.text" [info]="poi.info" [contacts]="poi.infos"
-            heading-color="#707070"></wc-details>
+            heading-color="#707070" second-color="#11b3ef" expandable=false ></wc-details>
           <div class="spacing" *ngIf="i == showPois.length - 1"></div>
         </div>
       </div>

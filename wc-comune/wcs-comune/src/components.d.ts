@@ -89,10 +89,15 @@ export namespace Components {
     * Oggetto JSON per contatti e info aggiuntive
     */
     'contacts': string;
+    'expandable': boolean;
     /**
     * Colore titoli
     */
     'headingColor': string;
+    /**
+    * Oggeto JSON contenente i dettagli dei contatti.
+    */
+    'id': string;
     /**
     * Immagine del percorso
     */
@@ -119,7 +124,7 @@ export namespace Components {
     */
     'text': string;
     /**
-    * Oggeto JSON contenente i dettagli dei contatti. Titolo del percorso
+    * Titolo del percorso
     */
     'title': string;
   }
@@ -132,10 +137,15 @@ export namespace Components {
     * Oggetto JSON per contatti e info aggiuntive
     */
     'contacts'?: string;
+    'expandable'?: boolean;
     /**
     * Colore titoli
     */
     'headingColor'?: string;
+    /**
+    * Oggeto JSON contenente i dettagli dei contatti.
+    */
+    'id'?: string;
     /**
     * Immagine del percorso
     */
@@ -149,6 +159,7 @@ export namespace Components {
     */
     'language'?: string;
     'onContactClick'?: (event: CustomEvent) => void;
+    'onExpandeClick'?: (event: CustomEvent) => void;
     /**
     * Colore tag e puslanti
     */
@@ -163,7 +174,7 @@ export namespace Components {
     */
     'text'?: string;
     /**
-    * Oggeto JSON contenente i dettagli dei contatti. Titolo del percorso
+    * Titolo del percorso
     */
     'title'?: string;
   }

@@ -12,7 +12,8 @@ const routes: Routes = [
   { path: 'credits', loadChildren: './credits/credits.module#CreditsPageModule' },
   { path: 'home-settings', loadChildren: './pages/home-settings/home-settings.module#HomeSettingsPageModule' },
   { path: 'filter-page-food', loadChildren: './module-comune/pages/list-food/filter-page-food/filter-page-food.module#FilterPageFoodPageModule' },
-  { path: 'filter-page-rh', loadChildren: './module-comune/pages/list-rh/filter-page-rh/filter-page-rh.module#FilterPageRhPageModule' }
+  { path: 'filter-page-rh', loadChildren: './module-comune/pages/list-rh/filter-page-rh/filter-page-rh.module#FilterPageRhPageModule' },
+  { path: 'detail-event', loadChildren: './module-comune/pages/detail-event/detail-event.module#DetailEventPageModule' }
 ]  
 ;
 

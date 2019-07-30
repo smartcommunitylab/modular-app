@@ -65,8 +65,8 @@
       </ion-item-divider>
       <div class="content">
         <div *ngFor="let poi of showPois[c]; let i = index">
-          <wc-details [img]="poi.image" [title]="poi.title" [subtitle]="poi.subtitle" [text]="poi.text"
-            [info]="poi.info" [contacts]="poi.infos" heading-color="red"></wc-details>
+          <wc-details [id]="poi.id" [img]="poi.image" [stringsinput]="stringsContact" [title]="poi.title" [altImage]="altImage" [stringsinput]="stringsContact" [title]="poi.title" [altImage]="altImage" [subtitle]="poi.subtitle" [text]="poi.text"
+            [info]="poi.info" [contacts]="poi.infos" heading-color="#707070" second-color="#11b3ef"  expandable=true ></wc-details>
           <div class="spacing" *ngIf="i == showPois.length - 1"></div>
         </div>
       </div>
