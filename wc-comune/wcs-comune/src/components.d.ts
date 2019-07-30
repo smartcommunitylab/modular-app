@@ -90,6 +90,7 @@ export namespace Components {
     */
     'contacts': string;
     'expandable': boolean;
+    'expanse': boolean;
     /**
     * Colore titoli
     */
@@ -138,6 +139,7 @@ export namespace Components {
     */
     'contacts'?: string;
     'expandable'?: boolean;
+    'expanse'?: boolean;
     /**
     * Colore titoli
     */

@@ -12,6 +12,7 @@
 | `altImage`     | `alt-image`     | Scritta alternativa per immagine                | `string`  | `undefined` |
 | `contacts`     | `contacts`      | Oggetto JSON per contatti e info aggiuntive     | `string`  | `undefined` |
 | `expandable`   | `expandable`    |                                                 | `boolean` | `false`     |
+| `expanse`      | `expanse`       |                                                 | `boolean` | `false`     |
 | `headingColor` | `heading-color` | Colore titoli                                   | `string`  | `"red"`     |
 | `id`           | `id`            | Oggeto JSON contenente i dettagli dei contatti. | `string`  | `undefined` |
 | `img`          | `img`           | Immagine del percorso                           | `string`  | `undefined` |

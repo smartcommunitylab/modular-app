@@ -47,6 +47,8 @@ export class WcDetails {
   @Prop() stringsinput: string;
   /*more details or not*/
   @Prop() expandable: boolean = false;
+    /*more details or not*/
+    @Prop() expanse: boolean = false;
   @Event() contactClick: EventEmitter;
   /*Emit when the expandable is clicked*/
   @Event() expandeClick: EventEmitter;
@@ -142,11 +144,11 @@ export class WcDetails {
   render() {
 
     return (
-      <div class={this.expandable?"card":""} onClick={() => this.expandable ?
+      <div class={!this.expanse?"card":""} onClick={() => this.expandable ?
         this.expande()
         : ""
       }>
-        {!this.expandable
+        {this.expanse
           ?<div class="image">
             <img src={this.img} alt={this.altImage}></img>
           </div>
@@ -162,7 +164,7 @@ export class WcDetails {
             ? <div class="detail-bar"></div>
             : ""
           }
-          {this.expandable
+          {!this.expanse
           ?<div class="image">
             <img src={this.img} alt={this.altImage}></img>
           </div>
@@ -180,7 +182,7 @@ export class WcDetails {
           </div>
           {this.showTags()}
 
-          {!this.expandable
+          {this.expanse
             ? <div><div class="text" innerHTML={this.text}>
             </div>
               <div class="title-2" style={{ color: this.headingColor }}>

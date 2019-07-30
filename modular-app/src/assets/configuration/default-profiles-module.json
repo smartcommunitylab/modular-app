@@ -1,82 +1,49 @@
 {
-  "turist": [{
-      "id": "profile_cit_2cc4db1674d9e8994658eac954355d31",
-      "name": {
-        "it": "Scopri",
-        "en": "Discover",
-        "de": "Discover"
-      },
-      "url": "/list-categories",
-      "icon": "home"
-
+  "turist": [ {
+    "id": "profile_cit_csvimport_Eventi_item_comuneintasca",
+    "name": {
+      "it": "Eventi",
+      "en": "Events",
+      "de": "Events"
     },
+    "url": "/list-event",
+    "icon": "home",
+    "params": {"selector": {"element-type": "event-item"}}
+  },{
+    "id": "profile_cit_2cc4db1674d9e8994658eac954355d31",
+    "name": {
+      "it": "Servizi Per il turista",
+      "en": "Tourist services",
+      "de": "Tourist services"
+    },
+    "url": "/list-categories",
+    "icon": "home"
+  
+  },
+  {
+    "id": "profile_cit_csvimport_Mangiare_item_comuneintasca",
+    "name": {
+      "it": "Ristoranti ",
+      "en": "Restaurants ",
+      "de": "Restaurants "
+    },
+    "url": "/list-food",
+    "icon": "home"
+    
+  
+  },
     {
       "id": "profile_cit_csvimport_Visitare_item_comuneintasca",
       "name": {
-        "it": "Visitare",
-        "en": "Highlilghts",
-        "de": "Highlilghts"
+        "it": "Visita la Citta'",
+        "en": "Visit the city",
+        "de": "Visit the city"
       },
       "url": "/list-categories",
       "icon": "home"
-
-    }, {
-      "id": "f",
-  
-      "name": {
-        "it": "Video",
-        "en": "Video",
-        "de": "Video"
-      },
-      "url": "/video",
-      "icon": "home"
-  
-    }, {
-      "id": "g",
-  
-      "name": {
-        "it": "Notizie",
-        "en": "Notizie",
-        "de": "Notizie"
-      },
-      "url": "/notizie",
-      "icon": "home"
-  
-    }, {
-      "id": "h",
-  
-      "name": {
-        "it": "Funerali",
-        "en": "Funerali",
-        "de": "Funerali"
-      },
-      "url": "/funerali",
-      "icon": "home"
-  
-    },{
-      "id": "i",
-      "name": {
-        "it": "Pulizia strade",
-        "en": "streets",
-        "de": "strasse"
-      },
-      "url": "/ps",
-      "icon": "information"
-    }
-  ],
-  "citizen": [
-    {
-      "id": "profile_cit_csvimport_Mangiare_item_comuneintasca",
-      "name": {
-        "it": "Ristoranti ",
-        "en": "Restaurants ",
-        "de": "Restaurants "
-      },
-      "url": "/list-food",
-      "icon": "home"
-      
   
     },
+    
     {
       "id": "profile_cit_csvimport_dormire_item_comuneintasca",
       "name": {
@@ -89,21 +56,7 @@
       
   
     },
-    {
-      "id": "profile_cit_csvimport_Eventi_item_comuneintasca",
-      "name": {
-        "it": "Eventi",
-        "en": "Events",
-        "de": "Events"
-      },
-      "url": "/list-event",
-      "icon": "home",
-      "params": {
-        "selector": {
-          "element-type": "event-item"
-        }
-      }
-    },
+   
     {
       "id": "a",
       "name": {
@@ -119,7 +72,6 @@
         },
         "type": "itineraries"
       }
-
     },
     {
       "id": "profile_cit_csvimport_Info_utili_item_comuneintasca",
@@ -130,33 +82,23 @@
       },
       "url": "/list-categories",
       "icon": "home"
-
-    },
- {
-      "id": "f",
   
+    },{
+      "id": "profile_cit_2cc4db1674d9e8994658eac954355d31",
       "name": {
-        "it": "Video",
-        "en": "Video",
-        "de": "Video"
+        "it": "Scopri",
+        "en": "Discover",
+        "de": "Discover"
       },
-      "url": "/video",
+      "url": "/list-categories",
       "icon": "home"
   
-    }, {
-      "id": "g",
-  
-      "name": {
-        "it": "Notizie",
-        "en": "Notizie",
-        "de": "Notizie"
-      },
-      "url": "/notizie",
-      "icon": "home"
-  
-    }, {
+    }
+  ],
+  "citizen": [
+    {
       "id": "h",
-  
+    
       "name": {
         "it": "Funerali",
         "en": "Funerali",
@@ -164,8 +106,39 @@
       },
       "url": "/funerali",
       "icon": "home"
-  
+    
+    }, {
+      "id": "profile_cit_csvimport_Eventi_item_comuneintasca",
+      "name": {
+        "it": "Eventi",
+        "en": "Events",
+        "de": "Events"
+      },
+      "url": "/list-event",
+      "icon": "home",
+      "params": {"selector": {"element-type": "event-item"}}
     },{
+      "id": "profile_cit_csvimport_Mangiare_item_comuneintasca",
+      "name": {
+        "it": "Ristoranti ",
+        "en": "Restaurants ",
+        "de": "Restaurants "
+      },
+      "url": "/list-food",
+      "icon": "home"
+      
+    
+    },{
+      "id": "j",
+      "name": {
+        "it": "Trasporti",
+        "en": "Transport",
+        "de": "Transport"
+      },
+      "url": "home-trasporti",
+      "icon": "home"
+    
+    }, {
       "id": "i",
       "name": {
         "it": "Pulizia strade",
@@ -174,6 +147,39 @@
       },
       "url": "/ps",
       "icon": "information"
-    }
+    },
+    {
+      "id": "Farmacie",
+      "name": {
+        "it": "Farmacie",
+        "en": "Pharmacy",
+        "de": "Pharmacy"
+      },
+      "url": "/farmacie",
+      "icon": "information"
+    },
+    {
+       "id": "f",
+    
+       "name": {
+         "it": "Info&Video",
+         "en": "Info&Video",
+         "de": "Info&Video"
+       },
+       "url": "/video",
+       "icon": "home"
+    
+     }, {
+       "id": "g",
+    
+       "name": {
+         "it": "Oggetti Smarriti",
+         "en": "Lost&Found",
+         "de": "Lost&Found"
+       },
+       "url": "/notizie",
+       "icon": "home"
+    
+     }
   ]
 }
