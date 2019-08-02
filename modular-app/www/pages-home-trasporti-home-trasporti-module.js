@@ -278,11 +278,12 @@ var HomeTrasportiPage = /** @class */ (function (_super) {
     HomeTrasportiPage.prototype.selectInternalElement = function (ref) {
         var elem = document.getElementsByClassName(ref.state);
         if (elem.length > 0) {
-            var scrollheight = elem[0].getBoundingClientRect().top;
-            // if (scrollheight>200){
-            this.content.scrollToPoint(0, scrollheight, 1000);
+            // let yOffset = elem[0].offsetTop;
+            var yOffset = elem[0].getBoundingClientRect().top + window.scrollY;
+            this.content.scrollToPoint(0, yOffset, 1000);
+            // var scrollheight = elem[0].getBoundingClientRect().top;
+            // this.content.scrollToPoint(0, scrollheight, 1000);
         }
-        // }
     };
     HomeTrasportiPage.prototype.compareElements = function (i) {
         if (i == 0)

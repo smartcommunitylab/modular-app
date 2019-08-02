@@ -1,4 +1,4 @@
-<ion-header no-border>
+<!-- <ion-header no-border>
     <ion-toolbar>
       <ion-buttons slot="start">
           <ion-back-button></ion-back-button>
@@ -15,4 +15,81 @@
       <wc-path-list-el type="POI" [id]="poi.id" [img]="poi.image" [title]="poi.title" [text]="poi.subtitle" main-color="red"></wc-path-list-el>
     </div>
   </ion-list>
-</ion-content>
+</ion-content> -->
+
+<ion-header no-border>
+    <ion-toolbar>
+      <ion-searchbar style="display: none" showCancelButton animated (search)="toggleSearch()"
+        (ionInput)="searchChanged($event)" (ionCancel)="toggleSearch()"></ion-searchbar>
+      <ion-buttons slot="start">
+        <ion-back-button class="interaction"></ion-back-button>
+      </ion-buttons>
+      <ion-buttons slot="end">
+        <ion-button (click)="filterClicked()">
+          <ion-icon name="options"></ion-icon>
+        </ion-button>
+        <ion-button (click)="toggleSearch()">
+          <ion-icon name="search"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+      <ion-title>
+        {{'title_list_poi' | translate}}
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-grid style="height: 100%" *ngIf="isLoading">
+    <ion-row justify-content-center align-items-center style="height: 100%">
+      <ion-spinner name="circles"></ion-spinner>
+    </ion-row>
+  </ion-grid>
+  
+  <ion-content [scrollEvents]="true" (ionScroll)="onScroll($event)">
+  
+    <ion-searchbar style="display: none" showCancelButton animated (search)="toggleSearch()"
+      (ionInput)="searchChanged($event)" (ionCancel)="toggleSearch()"></ion-searchbar>
+    <div *ngIf="!emptyList">
+    <div class="wrapper" *ngIf="presentFilter">
+        <div class="scrolling-wrapper-flexbox loop">
+          <div class="container" *ngFor="let tag of tags">
+          <div class="tag"  *ngIf="tag.isChecked">
+            <div class="tag-text">
+              {{tag.value}}
+              <ion-icon name="close-circle" (click)="removeTag(tag)"></ion-icon>
+            </div>
+            
+          </div>
+        </div>
+        </div>
+      </div>
+    <div class="wrapper" *ngIf="!presentFilter">
+      <div class="scrolling-wrapper-flexbox loop">
+        <ion-chip *ngFor="let c of categories" (click)="selectInternalElement(c)" [ngClass]="{'categorySelected': isSelected(c)}">
+          <ion-label class="interaction" [ngClass]="{'categorySelected': c==actualVisualized}">{{c}}</ion-label>
+        </ion-chip>
+      </div>
+    </div>
+    <ion-list no-lines id="poi-list">
+      <div *ngFor="let c of categories">
+        <ion-item class="label-type ion-text-center" sticky *ngIf="oneElement(c) && !presentFilter">
+            <div>{{c}}</div>
+        </ion-item>
+        <div class="content">
+          <div *ngFor="let poi of showPois[c]; let i = index">
+            <div class="{{poi.classification}}"   inViewport
+            [inViewportOptions]="{ threshold: [0] }" (inViewportAction)="onIntersection($event)">
+              <wc-details [id]="poi.id" [img]="poi.image" [stringsinput]="stringsContact" [title]="poi.title"
+                [altImage]="altImage" [stringsinput]="stringsContact" [title]="poi.title" [altImage]="altImage"
+                [subtitle]="poi.subtitle" [text]="poi.text" [info]="poi.info" [contacts]="poi.infos"
+                heading-color="#707070" second-color="#11b3ef" expandable=true expanse=false></wc-details>
+              <div class="spacing" *ngIf="i == showPois.length - 1"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ion-list>
+  </div>
+  <div *ngIf="emptyList">
+      {{'empty_list' | translate}}
+  </div>
+  </ion-content>

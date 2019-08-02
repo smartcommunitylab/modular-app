@@ -10,6 +10,8 @@ import { TranslateModule } from '@ngx-translate/core';
 import { HttpClient } from '@angular/common/http';
 import { TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { InViewportModule } from 'ng-in-viewport';
+import { FilterPageEventPage } from './filter-page-event/filter-page-event.page';
 
 const routes: Routes = [
   {
@@ -24,6 +26,7 @@ export function HttpLoaderFactory(http: HttpClient) {
   imports: [
     CommonModule,
     FormsModule,
+    InViewportModule,
     IonicModule,
     TranslateModule.forRoot({ loader: {
       provide: TranslateLoader,
@@ -32,7 +35,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     }}),
     RouterModule.forChild(routes)
   ],
+  entryComponents:[FilterPageEventPage],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
-  declarations: [ListEventPage]
+  declarations: [ListEventPage,FilterPageEventPage]
 })
 export class ListEventPageModule {}

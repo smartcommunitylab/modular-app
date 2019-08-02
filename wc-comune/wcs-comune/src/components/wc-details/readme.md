@@ -11,6 +11,7 @@
 | -------------- | --------------- | ----------------------------------------------- | --------- | ----------- |
 | `altImage`     | `alt-image`     | Scritta alternativa per immagine                | `string`  | `undefined` |
 | `contacts`     | `contacts`      | Oggetto JSON per contatti e info aggiuntive     | `string`  | `undefined` |
+| `distance`     | `distance`      |                                                 | `string`  | `undefined` |
 | `expandable`   | `expandable`    |                                                 | `boolean` | `false`     |
 | `expanse`      | `expanse`       |                                                 | `boolean` | `false`     |
 | `headingColor` | `heading-color` | Colore titoli                                   | `string`  | `"red"`     |

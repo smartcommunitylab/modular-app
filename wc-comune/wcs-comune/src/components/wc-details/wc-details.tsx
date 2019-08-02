@@ -47,8 +47,10 @@ export class WcDetails {
   @Prop() stringsinput: string;
   /*more details or not*/
   @Prop() expandable: boolean = false;
-    /*more details or not*/
-    @Prop() expanse: boolean = false;
+  /*more details or not*/
+  @Prop() expanse: boolean = false;
+  /*distance  */
+  @Prop() distance: string;
   @Event() contactClick: EventEmitter;
   /*Emit when the expandable is clicked*/
   @Event() expandeClick: EventEmitter;
@@ -144,16 +146,22 @@ export class WcDetails {
   render() {
 
     return (
-      <div class={!this.expanse?"card":""} onClick={() => this.expandable ?
+      <div class={!this.expanse ? "card" : ""} onClick={() => this.expandable ?
         this.expande()
         : ""
       }>
-        {this.expanse
-          ?<div class="image">
-            <img src={this.img} alt={this.altImage}></img>
-          </div>
-          :""
-          }
+        {
+          this.expanse
+            ? <div>
+              {this.img
+                ? <div class="image">
+                  <img src={this.img} alt={this.altImage}></img>
+                </div>
+                : ""
+              }
+            </div>
+            : ""
+        }
         <div class="container">
           <div class="info-title" style={{ color: this.headingColor }}>
             {this.title}
@@ -165,10 +173,15 @@ export class WcDetails {
             : ""
           }
           {!this.expanse
-          ?<div class="image">
-            <img src={this.img} alt={this.altImage}></img>
-          </div>
-          :""
+            ? <div>
+              {this.img
+                ? <div class="image">
+                  <img src={this.img} alt={this.altImage}></img>
+                </div>
+                : ""
+              }
+            </div>
+            : ""
           }
           <div class="contacts">
             {this.tmpContacts}
@@ -179,6 +192,9 @@ export class WcDetails {
           </div>
           <div class="address">
             {(this.contactsJSON) ? this.contactsJSON.address : ''}
+          </div>
+          <div class="distance">
+            {(this.distance) ? this.distance : ''}
           </div>
           {this.showTags()}
 

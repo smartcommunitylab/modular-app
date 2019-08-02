@@ -9,5 +9,7 @@
     "address_contacts":"Mappa",
     "phone_contacts":"Telefono",
     "url_contacts":"Sito",
-    "share_contacts":"Condividi"
+    "share_contacts":"Condividi",
+    "farmacie_label":"Farmacie",
+    "distance_label":"Distanza: "
 }

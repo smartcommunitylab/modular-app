@@ -7,8 +7,8 @@ import { IonicModule } from '@ionic/angular';
 
 import { DetailEventPage } from './detail-event.page';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { HttpLoaderFactory } from '../map/map.module';
 import { HttpClient } from '@angular/common/http';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 const routes: Routes = [
   { 
@@ -16,7 +16,9 @@ const routes: Routes = [
     component: DetailEventPage
   }
 ];
-
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http, './assets/comune/i18n/', '.json');
+}
 @NgModule({
   imports: [
     CommonModule,

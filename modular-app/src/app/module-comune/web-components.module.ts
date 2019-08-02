@@ -10,6 +10,7 @@ import { routing } from './lazy.routing';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+// import { LoadingModalComponent } from '../shared/loading-modal/loading-modal/loading-modal.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/comune/i18n/', '.json');
@@ -30,6 +31,7 @@ export function HttpLoaderFactory(http: HttpClient) {
   ],
   declarations: [
     PoiComponent, // private and public
+    // LoadingModalComponent,
     PathComponent,
     TabsComponent,
     MapComponent

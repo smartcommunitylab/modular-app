@@ -11,11 +11,11 @@
 <!-- <ion-buttons slot="start"> --> 
 <!-- <ion-back-button></ion-back-button> -->
 <!-- </ion-buttons> -->
-<ion-content fullscreen="true" padding>
+<ion-content fullscreen="true" padding id="poi-container">
     <div shape="round" class="back-button" (click)="goBack()">
       <ion-icon slot="icon-only" name="arrow-round-back"></ion-icon>
     </div>
-    <wc-details *ngIf="poi" [img]="poi.image" [stringsinput]="stringsContact" [title]="poi.title" [altImage]="altImage"
+    <wc-details  *ngIf="poi" [img]="poi.image" [stringsinput]="stringsContact" [title]="poi.title" [altImage]="altImage"
       [subtitle]="poi.subtitle" [text]="poi.description" [info]="poi.info" [contacts]="contacts"
       [subtitle]="poi.subtitle" [info]="poi.info" [contacts]="poi.infos" [expandable]=false [expanse]=true heading-color="#707070"
       second-color="#11b3ef"> </wc-details>

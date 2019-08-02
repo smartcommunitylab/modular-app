@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DbService } from '../../services/db.service';
-import { ConfigService } from 'src/app/services/config.service';
+import { UtilsService } from '../../services/utils.service';
+import { CallNumber } from '@ionic-native/call-number/ngx';
+import { TranslateService } from '@ngx-translate/core';
+import { ConfigService } from '../../services/config.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-detail-poi',
@@ -10,11 +14,17 @@ import { ConfigService } from 'src/app/services/config.service';
 })
 export class DetailPoiPage implements OnInit {
   poi: any;
+  poiInput:any;
   contacts: any = {};
   language: string;
   type: string;
-  constructor(private router: Router, private route: ActivatedRoute, private dbService: DbService, private config: ConfigService) {
+  stringsContact: any;
+  altImage: string;
+
+  constructor(private router: Router, private route: ActivatedRoute, private callNumber:CallNumber, private utils: UtilsService,  private location: Location,  private translate: TranslateService,
+    private dbService: DbService, private config: ConfigService) {
     this.language = window[this.config.getAppModuleName()]['language'];
+    this.translate.use(this.language);
    }
 
   ngOnInit() {
@@ -25,12 +35,45 @@ export class DetailPoiPage implements OnInit {
         } else if (params) {
           this.type = params.type;
           this.dbService.getObjectById(params.id).then(data => {
-            this.poi = data.docs[0];
+            this.poiInput = data.docs[0];
             this.buildContacts();
           });
         }
       });
+    this.translate.get('alt_image_string').subscribe(
+      value => { 
+        this.altImage = value;
+      }
+    );
+     this.config.getStringContacts(this.translate,this.language).then(strings => {
+      this.stringsContact = strings
+    });
+    const element = document.getElementById('poi-container');
+
+    element.addEventListener('contactClick', async (contact) => {
+      // console.log(contact)
+      var contactParam = JSON.parse((<any>contact).detail)
+      if (contactParam.type == 'phone') {
+        this.callNumber.callNumber(contactParam.value, true)
+          .then(res => console.log('Launched dialer!', res))
+          .catch(err => console.log('Error launching dialer', err));
+      }
+      if (contactParam.type == 'address') {
+        this.utils.openAddressMap(contactParam.value);
+        console.log('vai all\'indirizzo' + contactParam.value);
+      }
+      if (contactParam.type == 'url') {
+        this.utils.openUrl(contactParam.value);
+        console.log('vai all\'indirizzo' + contactParam.value);
+      }
+      if (contactParam.type == 'share') {
+        this.utils.openShare(contactParam.value);
+        console.log('vai all\'indirizzo' + contactParam.value);
+      }
+    })
   }
+  goBack() {
+    this.location.back();  }
   manageoLcalId(objectIds) {
     if (objectIds.length == 1) {
       this.dbService.getObjectByDataId(objectIds[0]).then(data => {
@@ -40,37 +83,62 @@ export class DetailPoiPage implements OnInit {
       });
     }
   }
+  
   buildContacts() {
-    if (this.contacts) {
-      this.contacts['address'] = this.poi.address[this.language];
+      const poiElement: any = {};
+      if (this.poiInput) {
+        if (this.poiInput.title) {
+          poiElement.title = this.poiInput.title[this.language];
+        }
+        if (this.poiInput.subtitle) {
+          poiElement.subtitle = this.poiInput.subtitle[this.language];
+        }
+        if (this.poiInput.description) {
+          poiElement.description = this.poiInput.description[this.language];
+        }
+        if (this.poiInput.image) {
+          poiElement.image = this.poiInput.image;
+        }
+        if (this.poiInput._id) {
+          poiElement.id = this.poiInput._id;
+        }
+        if (this.poiInput.topics) {
+          poiElement.cat = this.poiInput.topics;
+        }
+        if (this.poiInput.eventPeriod) {
+          poiElement.date = this.poiInput.eventPeriod[this.language];
+        }
+        if (this.poiInput.eventTiming) {
+          poiElement.time = this.poiInput.eventTiming[this.language];
+        }
+        if (this.poiInput.info) {
+          poiElement.info = this.poiInput.info[this.language];
+        }
+        if (this.poiInput.address) {
+          poiElement.address = this.poiInput.address[this.language];
+        }
+        if (this.poiInput.description) {
+          poiElement.text = this.poiInput.description[this.language];
+        }
+        if (this.poiInput.category) {
+          poiElement.category = this.poiInput.category;
+        }
+        if (this.poiInput.classification) {
+          poiElement.classification = this.poiInput.classification[this.language];
+        }
+        if (this.poiInput.url) {
+          poiElement.url = this.poiInput.url;
+        }
+        if (this.poiInput.contacts) {
+          if (this.poiInput.contacts.phone) {
+            poiElement.phone = this.poiInput.contacts.phone;
+          }
+          if (this.poiInput.contacts.email) {
+            poiElement.email = this.poiInput.contacts.email;
+          }
+        }
+        poiElement.infos = JSON.stringify(poiElement);
+      }
+      this.poi=poiElement;
     }
-    if (this.type === 'POI') {
-      if (this.poi.contacts.email && this.poi.contacts.email !== '') {
-        this.contacts['email'] = this.poi.contacts.email;
-      }
-      if (this.poi.contacts.phone && this.poi.contacts.phone !== '') {
-        this.contacts['phone'] = this.poi.contacts.phone;
-      }
-      if (this.poi.url && this.poi.url !== '') {
-        this.contacts['url'] = this.poi.url;
-      }
-      this.contacts['distance'] = 0; // TOFIX
-
-    } else if (this.type === 'EVENT') {
-      if (this.poi.eventPeriod) {
-        this.contacts['date'] = this.poi.eventPeriod[this.language];
-      }
-      if (this.poi.eventTiming) {
-        this.contacts['time'] = this.poi.eventTiming[this.language];
-      }
-      if (this.poi.topics) {
-        this.contacts['cat'] = this.poi.topics[0];
-      }
-      if (this.poi.cost && this.poi.cost[this.language] !== '') {
-        this.contacts['price'] = this.poi.cost[this.language];
-      }
-    }
-
-    this.contacts = JSON.stringify(this.contacts);
-  }
 }

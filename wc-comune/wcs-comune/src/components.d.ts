@@ -89,6 +89,7 @@ export namespace Components {
     * Oggetto JSON per contatti e info aggiuntive
     */
     'contacts': string;
+    'distance': string;
     'expandable': boolean;
     'expanse': boolean;
     /**
@@ -138,6 +139,7 @@ export namespace Components {
     * Oggetto JSON per contatti e info aggiuntive
     */
     'contacts'?: string;
+    'distance'?: string;
     'expandable'?: boolean;
     'expanse'?: boolean;
     /**

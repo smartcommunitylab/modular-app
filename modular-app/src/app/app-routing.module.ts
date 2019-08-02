@@ -11,9 +11,10 @@ const routes: Routes = [
   { path: 'favourites', loadChildren: './pages/favourites/favourites.module#FavouritesPageModule' },
   { path: 'credits', loadChildren: './credits/credits.module#CreditsPageModule' },
   { path: 'home-settings', loadChildren: './pages/home-settings/home-settings.module#HomeSettingsPageModule' },
-  { path: 'filter-page-food', loadChildren: './module-comune/pages/list-food/filter-page-food/filter-page-food.module#FilterPageFoodPageModule' },
-  { path: 'filter-page-rh', loadChildren: './module-comune/pages/list-rh/filter-page-rh/filter-page-rh.module#FilterPageRhPageModule' },
-  { path: 'detail-event', loadChildren: './module-comune/pages/detail-event/detail-event.module#DetailEventPageModule' }
+  // { path: 'filter-page-food', loadChildren: './module-comune/pages/list-food/filter-page-food/filter-page-food.module#FilterPageFoodPageModule' },
+  // { path: 'filter-page-rh', loadChildren: './module-comune/pages/list-rh/filter-page-rh/filter-page-rh.module#FilterPageRhPageModule' },
+  // { path: 'detail-event', loadChildren: './module-comune/pages/detail-event/detail-event.module#DetailEventPageModule' },
+  // { path: 'touris-services', loadChildren: './module-comune/pages/touris-services/touris-services.module#TourisServicesPageModule' }
 ]  
 ;
 

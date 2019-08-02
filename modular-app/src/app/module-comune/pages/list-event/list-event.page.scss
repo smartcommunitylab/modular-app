@@ -47,6 +47,19 @@ ion-searchbar {
         overflow-x: auto;
         z-index: 999;
         position: fixed;
+        .container{
+            flex: 0 0 auto;
+        .tag{
+            flex: 0 0 auto;
+            margin: 8px;
+            .tag-text{
+                padding: 4px;
+            color: white;
+            background-color:   #11b3ef;
+            }
+        }
+            
+        }
         ion-chip {
             flex: 0 0 auto;
             background-color: white;
@@ -55,4 +68,18 @@ ion-searchbar {
 }
 .interaction {
     color: #11b3ef;
+}
+.categorySelected {
+    color: white!important;
+    background-color: #11b3ef!important;
+}
+.label-type{
+    width: 100%;
+    font-weight: bold;
+    --background: #e3e3e3;
+    --color: #707070;
+    font-size: 22px;
+    div{
+        width: 100%;
+    }
 }

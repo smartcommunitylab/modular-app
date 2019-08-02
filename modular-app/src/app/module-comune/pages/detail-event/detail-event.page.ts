@@ -4,6 +4,8 @@ import { DbService } from '../../services/db.service';
 import { ConfigService } from '../../services/config.service';
 import { TranslateService } from '@ngx-translate/core';
 import { Location } from '@angular/common';
+import { CallNumber } from '@ionic-native/call-number/ngx';
+import { UtilsService } from '../../services/utils.service';
 
 @Component({
   selector: 'app-detail-event',
@@ -19,7 +21,7 @@ export class DetailEventPage implements OnInit {
   stringsContact: any;
   altImage: string;
 
-  constructor(private router: Router, private route: ActivatedRoute,   private location: Location,  private translate: TranslateService,
+  constructor(private router: Router, private route: ActivatedRoute, private callNumber:CallNumber, private utils: UtilsService,  private location: Location,  private translate: TranslateService,
     private dbService: DbService, private config: ConfigService) {
     this.language = window[this.config.getAppModuleName()]['language'];
     this.translate.use(this.language);
@@ -38,7 +40,6 @@ export class DetailEventPage implements OnInit {
           });
         }
       });
-      const element = document.getElementById('poi-list');
     this.translate.get('alt_image_string').subscribe(
       value => {
         this.altImage = value;
@@ -47,6 +48,29 @@ export class DetailEventPage implements OnInit {
      this.config.getStringContacts(this.translate,this.language).then(strings => {
       this.stringsContact = strings
     });
+    const element = document.getElementById('poi-container');
+
+    element.addEventListener('contactClick', async (contact) => {
+      // console.log(contact)
+      var contactParam = JSON.parse((<any>contact).detail)
+      if (contactParam.type == 'phone') {
+        this.callNumber.callNumber(contactParam.value, true)
+          .then(res => console.log('Launched dialer!', res))
+          .catch(err => console.log('Error launching dialer', err));
+      }
+      if (contactParam.type == 'address') {
+        this.utils.openAddressMap(contactParam.value);
+        console.log('vai all\'indirizzo' + contactParam.value);
+      }
+      if (contactParam.type == 'url') {
+        this.utils.openUrl(contactParam.value);
+        console.log('vai all\'indirizzo' + contactParam.value);
+      }
+      if (contactParam.type == 'share') {
+        this.utils.openShare(contactParam.value);
+        console.log('vai all\'indirizzo' + contactParam.value);
+      }
+    })
   }
   goBack() {
     this.location.back();  }
@@ -59,36 +83,7 @@ export class DetailEventPage implements OnInit {
       });
     }
   }
-  // buildContacts() {
-  //   if (this.contacts) {
-  //     this.contacts['address'] = this.poi.address[this.language];
-  //   }
-  //   // if (this.type === 'POI') {
-  //     if (this.poi.contacts && this.poi.contacts.email && this.poi.contacts.email !== '') {
-  //       this.contacts['email'] = this.poi.contacts.email;
-  //     }
-  //     if (this.poi.contacts.phone && this.poi.contacts.phone && this.poi.contacts.phone !== '') {
-  //       this.contacts['phone'] = this.poi.contacts.phone;
-  //     }
-  //     if (this.poi.contacts.url && this.poi.url && this.poi.url !== '') {
-  //       this.contacts['url'] = this.poi.url;
-  //     }
-  //     this.contacts['distance'] = 0; // TOFIX
-
-  //    if (this.type === 'EVENT') {
-  //     if (this.poi.eventPeriod) {
-  //       this.contacts['date'] = this.poi.eventPeriod[this.language];
-  //     }
-  //     if (this.poi.eventTiming) {
-  //       this.contacts['time'] = this.poi.eventTiming[this.language];
-  //     }
-  //     if (this.poi.topics) {
-  //       this.contacts['cat'] = this.poi.topics;
-  //     }
-  //     if (this.poi.cost && this.poi.cost[this.language] !== '') {
-  //       this.contacts['price'] = this.poi.cost[this.language];
-  //     }
-  //   }
+  
   buildContacts() {
       const poiElement: any = {};
       if (this.poiInput) {

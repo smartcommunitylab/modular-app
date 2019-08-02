@@ -186,8 +186,14 @@ var DetailPathPage = /** @class */ (function () {
     };
     DetailPathPage.prototype.ngOnInit = function () {
         var _this_1 = this;
-        this.myPos.lat = window[this.config.getAppModuleName()]['geolocation']['lat'];
-        this.myPos.lon = window[this.config.getAppModuleName()]['geolocation']['long'];
+        if (window[this.config.getAppModuleName()]['geolocation'])
+            this.myPos = {
+                lat: window[this.config.getAppModuleName()]['geolocation']['lat'],
+                long: window[this.config.getAppModuleName()]['geolocation']['long']
+            };
+        else {
+            this.myPos = this.config.getDefaultPosition();
+        }
         this.route.queryParams
             .subscribe(function (params) {
             if (params) {

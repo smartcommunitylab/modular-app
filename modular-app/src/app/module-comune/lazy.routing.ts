@@ -16,7 +16,14 @@ const routes: Routes = [
     { path: 'list-categories', loadChildren: './pages/list-categories/list-categories.module#ListCategoriesPageModule' },
     { path: 'detail-path', loadChildren: './pages/detail-path/detail-path.module#DetailPathPageModule' },
     { path: 'list-food', loadChildren: './pages/list-food/list-food.module#ListFoodPageModule' },
-    { path: 'detail-info', loadChildren: './pages/detail-info/detail-info.module#DetailInfoPageModule' }
+    { path: 'farmacie', loadChildren: './pages/list-farmacie/list-farmacie.module#ListFarmaciePageModule' },
+    { path: 'farmacie', loadChildren: './pages/list-farmacie/list-farmacie.module#ListFarmaciePageModule' },
+    { path: 'detail-info', loadChildren: './pages/detail-info/detail-info.module#DetailInfoPageModule' },
+    { path: 'tourist-services', loadChildren: './pages/tourist-services/tourist-services.module#TouristServicesPageModule' },
+    { path: 'filter-page-food', loadChildren: './pages/list-food/filter-page-food/filter-page-food.module#FilterPageFoodPageModule' },
+  { path: 'filter-page-rh', loadChildren: './pages/list-rh/filter-page-rh/filter-page-rh.module#FilterPageRhPageModule' },
+  { path: 'detail-event', loadChildren: './pages/detail-event/detail-event.module#DetailEventPageModule' },
+
 ];
 
 export const routing: ModuleWithProviders = RouterModule.forChild(routes);
