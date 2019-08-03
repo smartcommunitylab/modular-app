@@ -1,9 +1,9 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[136],{
 
-/***/ "./node_modules/wcs-info/dist/esm/legacy/css-shim-229ebf7a-229ebf7a.js":
-/*!*****************************************************************************!*\
-  !*** ./node_modules/wcs-info/dist/esm/legacy/css-shim-229ebf7a-229ebf7a.js ***!
-  \*****************************************************************************/
+/***/ "../wc-info/wc-info/dist/esm/legacy/css-shim-229ebf7a-229ebf7a.js":
+/*!************************************************************************!*\
+  !*** ../wc-info/wc-info/dist/esm/legacy/css-shim-229ebf7a-229ebf7a.js ***!
+  \************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 

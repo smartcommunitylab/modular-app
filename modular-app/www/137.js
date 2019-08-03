@@ -1,9 +1,9 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[137],{
 
-/***/ "./node_modules/wcs-info/dist/esm/legacy/dom-a0c82e31-a0c82e31.js":
-/*!************************************************************************!*\
-  !*** ./node_modules/wcs-info/dist/esm/legacy/dom-a0c82e31-a0c82e31.js ***!
-  \************************************************************************/
+/***/ "../wc-info/wc-info/dist/esm/legacy/dom-a0c82e31-a0c82e31.js":
+/*!*******************************************************************!*\
+  !*** ../wc-info/wc-info/dist/esm/legacy/dom-a0c82e31-a0c82e31.js ***!
+  \*******************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 

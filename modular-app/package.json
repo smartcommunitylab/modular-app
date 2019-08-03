@@ -77,7 +77,7 @@
     "wc-trasporti": "file:../wc-trasporti/wc-trasporti",
     "wcs-comune": "0.0.137",
     "wcs-dettagliofunerale": "0.0.1",
-    "wcs-info": "^0.1.0",
+    "wcs-info": "file:../wc-info/wc-info",
     "zone.js": "~0.8.26"
   },
   "devDependencies": {

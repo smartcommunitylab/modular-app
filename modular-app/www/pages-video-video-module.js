@@ -63,7 +63,7 @@ var VideoPageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\n  <ion-toolbar>\n    <ion-grid>\n      <ion-row justify-content-center align-items-center>\n        <ion-col col-6>\n          <ion-title float-left id=\"TITOLO\">Trento informa</ion-title>\n        </ion-col>\n        <ion-col col-6>\n          <ion-button fill=\"clear\" float-right (click)=\"OpenCloseRicerca()\" id=\"btnImpostazioniRicerca\" color=\"light\">\n            <svg width='24' height='24' viewBox='0 0 24 24'>\n              <path fill='none' d='M0 0h24v24H0V0z' />\n              <path\n                d='M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z' />\n            </svg>\n          </ion-button>\n        </ion-col>\n      </ion-row>\n    </ion-grid>\n  </ion-toolbar>\n  <ion-searchbar (ionChange)=\"Ricerca()\" placeholder=\"Cerca\" id=\"barraDiRicerca\" [(ngModel)]=\"daCercare\"></ion-searchbar>\n\n</ion-header>\n<ion-content>\n  <div class=\"ion-padding\">\n\n\n    <div *ngFor=\"let item of datiRicerca\" id=\"contenitoreAnteprima\">\n      <wc-video (eventMappa)=\"visualizzaMappa(item.coordinates[0], item.coordinates[1])\"\n        (eventShare)=\"visualizzaShare(item.title, item.image, item.videoLink)\" (eventVideo)=\"visualizzaVideo(item.videoLink)\" video={{item.videoLink}} id=\"elemento\" img={{item.image}}\n        titolo={{item.title}} orario={{item.eventStart}} datapubblicazione={{formattaData(item.created)}}\n        dataevento={{item.eventDate}} durata={{item.eventTiming}} [descrizione]=\"item.description\" luogo={{item.address}}>\n      </wc-video>\n    </div>\n\n    <ion-infinite-scroll threshold=\"100px\" (ionInfinite)=\"caricaAltriDati($event)\">\n        <ion-infinite-scroll-content loadingSpinner=\"crescent\" loadingText=\"Sto caricando...\"></ion-infinite-scroll-content>\n      </ion-infinite-scroll>\n  </div>\n</ion-content>"
+module.exports = "<ion-header>\n  <ion-toolbar>\n      <ion-searchbar (ionChange)=\"Ricerca()\" placeholder=\"Cerca\" id=\"barraDiRicerca\" [(ngModel)]=\"daCercare\"></ion-searchbar>\n\n    <ion-grid *ngIf=\"!isRicercaOpen\">\n      <ion-row justify-content-center align-items-center>\n        <ion-col col-6>\n          <ion-title float-left id=\"TITOLO\">{{'trento_informa_label'|template}}</ion-title>\n        </ion-col>\n        <ion-col col-6>\n          <ion-button fill=\"clear\" float-right (click)=\"OpenCloseRicerca()\" id=\"btnImpostazioniRicerca\" color=\"light\">\n            <svg width='24' height='24' viewBox='0 0 24 24'>\n              <path fill='none' d='M0 0h24v24H0V0z' />\n              <path\n                d='M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z' />\n            </svg>\n          </ion-button>\n        </ion-col>\n      </ion-row>\n    </ion-grid>\n  </ion-toolbar>\n\n</ion-header>\n<ion-content>\n  <div class=\"ion-padding\" *ngIf=\"!emptyList; else emptyListTemplate\">\n\n\n    <div *ngFor=\"let item of datiRicerca\" id=\"contenitoreAnteprima\">\n      <wc-video (eventMappa)=\"visualizzaMappa(item.coordinates[0], item.coordinates[1])\"\n        (eventShare)=\"visualizzaShare(item.title, item.image, item.videoLink)\" (eventVideo)=\"visualizzaVideo(item.videoLink)\" video={{item.videoLink}} id=\"elemento\" img={{item.image}}\n        [titolo]=\"item.shortAbstract\" orario={{item.eventStart}} datapubblicazione={{formattaData(item.created)}}\n        dataevento={{item.eventDate}} durata={{item.eventTiming}} [descrizione]=\"item.description\" luogo={{item.address}}>\n      </wc-video>\n    </div>\n\n    <ion-infinite-scroll threshold=\"100px\" (ionInfinite)=\"caricaAltriDati($event)\">\n        <ion-infinite-scroll-content loadingSpinner=\"crescent\" loadingText=\"Sto caricando...\"></ion-infinite-scroll-content>\n      </ion-infinite-scroll>\n  </div>\n  <ng-template #emptyListTemplate>\n      {{'empty_list_label'|template}}\n        </ng-template>\n</ion-content>"
 
 /***/ }),
 
@@ -113,6 +113,7 @@ var VideoPage = /** @class */ (function () {
         this.isRicercaOpen = false;
         this.datiRicerca = [];
         this.start = 0;
+        this.emptyList = false;
         this.parametriPost = {
             "fromDate": null,
             "size": 10,
@@ -139,9 +140,15 @@ var VideoPage = /** @class */ (function () {
         window.open(encodeURI(urlVideo), '_system');
     };
     VideoPage.prototype.ngOnInit = function () {
-        this.DatiEvento = this.datiService.getDati(this.parametriPost);
+        var _this = this;
+        this.datiService.getDati(this.parametriPost).then(function (data) {
+            if (data.length == 0) {
+                _this.emptyList = true;
+            }
+            _this.DatiEvento = data;
+            _this.datiRicerca = _this.DatiEvento;
+        });
         console.log(this.DatiEvento);
-        this.datiRicerca = this.DatiEvento;
     };
     VideoPage.prototype.OpenCloseRicerca = function () {
         if (!this.isRicercaOpen) {
@@ -183,9 +190,12 @@ var VideoPage = /** @class */ (function () {
             "tag": [],
             "themes": []
         };
-        this.vetNuoviDati = this.datiService.getDati(parametriPost);
+        this.datiService.getDati(parametriPost).then(function (dati) {
+            _this.vetNuoviDati = dati;
+            _this.visualizzaDati(_this.vetNuoviDati, event);
+        });
         console.log(this.datiRicerca);
-        setTimeout(function () { _this.visualizzaDati(_this.vetNuoviDati, event); }, 1500);
+        // setTimeout(() => { this.visualizzaDati(this.vetNuoviDati, event) }, 1500);
     };
     VideoPage.prototype.visualizzaDati = function (vet, event) {
         for (var _i = 0, vet_1 = vet; _i < vet_1.length; _i++) {

@@ -45,7 +45,7 @@
                 "output": "leaflet/"
               }, {
                 "glob": "**/*",
-                "input": "src/app/module-info/assets",
+                "input": "src/app/module-info/assets/info",
                 "output": "assets/info"
               }, {
                 "glob": "**/*",

@@ -1,9 +1,9 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[138],{
 
-/***/ "./node_modules/wcs-info/dist/esm/legacy/shadow-css-984bac74-549b16dd.js":
-/*!*******************************************************************************!*\
-  !*** ./node_modules/wcs-info/dist/esm/legacy/shadow-css-984bac74-549b16dd.js ***!
-  \*******************************************************************************/
+/***/ "../wc-info/wc-info/dist/esm/legacy/shadow-css-984bac74-549b16dd.js":
+/*!**************************************************************************!*\
+  !*** ../wc-info/wc-info/dist/esm/legacy/shadow-css-984bac74-549b16dd.js ***!
+  \**************************************************************************/
 /*! exports provided: ShadowCss, scopeCss */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 

@@ -1,9 +1,11 @@
 <ion-header>
   <ion-toolbar>
-    <ion-grid>
+      <ion-searchbar (ionChange)="Ricerca()" placeholder="Cerca" id="barraDiRicerca" [(ngModel)]="daCercare"></ion-searchbar>
+    <ion-grid *ngIf="!isRicercaOpen">
       <ion-row justify-content-center align-items-center>
         <ion-col col-6>
-          <ion-title float-left id="TITOLO">Avvisi</ion-title>
+          <ion-title float-left id="TITOLO">      {{'avvisi_label'|translate}}
+            </ion-title>
         </ion-col>
         <ion-col col-6>
           <ion-button fill="clear" float-right (click)="OpenCloseRicerca()" id="btnImpostazioniRicerca" color="light">
@@ -17,15 +19,14 @@
       </ion-row>
     </ion-grid>
   </ion-toolbar>
-  <ion-searchbar (ionChange)="Ricerca()" placeholder="Cerca" id="barraDiRicerca" [(ngModel)]="daCercare"></ion-searchbar>
 
 </ion-header>
 <ion-content>
-  <div class="ion-padding">
+  <div class="ion-padding" *ngIf="!emptyList; else emptyListTemplate">
     <div *ngFor="let item of datiRicerca" id="contenitoreAnteprima">
       <wc-anteprima (eventMappa)="visualizzaMappa(item.coordinates[0], item.coordinates[1])"
         (eventShare)="visualizzaShare(item.title, item.image ,item.description)" id="elemento" img={{item.image}}
-        titolo={{item.title}} orario={{item.eventStart}} datapubblicazione={{formattaData(item.created)}}
+        [titolo]="item.shortAbstract" orario={{item.eventStart}} datapubblicazione={{formattaData(item.created)}}
         dataevento={{item.eventDate}} durata={{item.eventTiming}} [descrizione]="item.description"
         luogo={{item.address}}>
       </wc-anteprima>
@@ -34,5 +35,7 @@
       <ion-infinite-scroll-content loadingSpinner="crescent" loadingText="Sto caricando..."></ion-infinite-scroll-content>
     </ion-infinite-scroll>
   </div>
-
+  <ng-template #emptyListTemplate>
+      {{'empty_list_label'|translate}}
+    </ng-template>
 </ion-content>

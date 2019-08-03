@@ -1,9 +1,9 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[142],{
 
-/***/ "./node_modules/wcs-info/dist/esm/polyfills/dom.js":
-/*!*********************************************************!*\
-  !*** ./node_modules/wcs-info/dist/esm/polyfills/dom.js ***!
-  \*********************************************************/
+/***/ "../wc-info/wc-info/dist/esm/polyfills/dom.js":
+/*!****************************************************!*\
+  !*** ../wc-info/wc-info/dist/esm/polyfills/dom.js ***!
+  \****************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 

@@ -3,6 +3,8 @@ import { DatiServiceService } from '../../services/dati-service.service';
 import { TipoEvento } from '../../domain/tipo-evento';
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 import { IonInfiniteScroll } from '@ionic/angular';
+import { ConfigService } from '../../services/config.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'notizie-page',
@@ -21,7 +23,7 @@ export class NotiziePage {
   daCercare: string;
   datiRicerca: TipoEvento[] = [];
   vetDate: Date[] = [];
-
+  emptyList: boolean = false;
   start: number = 0;
 
   vetNuoviDati;
@@ -35,8 +37,13 @@ export class NotiziePage {
     "tag": [],
     "themes": []
   }
+  language: any;
 
-  constructor(private datiService: DatiServiceService, private social: SocialSharing) { }
+
+  constructor(private datiService: DatiServiceService, private social: SocialSharing, private config: ConfigService, private translate: TranslateService) {
+    this.language = window[this.config.getAppModuleName()]['language'];
+    this.translate.use(this.language);
+  }
 
   visualizzaMappa(latitudine: string, longitudine: string) {
     window.open(encodeURI(this.urlMappa + latitudine + "," + longitudine), '_system');
@@ -52,9 +59,15 @@ export class NotiziePage {
   }
 
   ngOnInit() {
-    this.DatiEvento = this.datiService.getDati(this.parametriPost);
-    console.log(this.DatiEvento);
-    this.datiRicerca = this.DatiEvento;
+    this.datiService.getDati(this.parametriPost).then(data => {
+      if (data.length == 0) {
+        this.emptyList = true;
+      }
+      this.DatiEvento = data;
+      this.datiRicerca = this.DatiEvento;
+
+    });
+
   }
 
   caricaAltriDati(event) {
@@ -112,6 +125,12 @@ export class NotiziePage {
       }
       this.datiRicerca = vetRisultati;
       vetRisultati = null;
+      if (this.datiRicerca.length == 0) {
+
+        {
+          this.emptyList = true;
+        }
+      }
     }
   }
 

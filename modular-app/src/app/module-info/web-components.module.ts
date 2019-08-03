@@ -8,12 +8,22 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
-
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http, './assets/info/i18n/', '.json');
+}
 @NgModule({
   imports: [
     CommonModule,
     HttpClientModule,
     HttpModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      },
+      isolate: true
+    }),
     routing
   ],
   declarations: [
@@ -29,6 +39,7 @@ export class InfoModule {
   static forRoot(): ModuleWithProviders {
     return {
       ngModule: InfoModule,
+      
       providers: [
         ConfigService,
         SocialSharing,

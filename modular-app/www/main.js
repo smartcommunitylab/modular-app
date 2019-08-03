@@ -1,5 +1,1341 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["main"],{
 
+/***/ "../wc-info/wc-info/dist/esm/legacy lazy recursive ^\\.\\/.*\\.entry\\.js$ include: \\.entry\\.js$ exclude: \\.(system|cjs)\\.entry\\.js$":
+/*!**********************************************************************************************************************************************!*\
+  !*** ../wc-info/wc-info/dist/esm/legacy lazy ^\.\/.*\.entry\.js$ include: \.entry\.js$ exclude: \.(system|cjs)\.entry\.js$ namespace object ***!
+  \**********************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var map = {
+	"./wc-anteprima_2.entry.js": [
+		"../wc-info/wc-info/dist/esm/legacy/wc-anteprima_2.entry.js",
+		139
+	]
+};
+function webpackAsyncContext(req) {
+	var ids = map[req];
+	if(!ids) {
+		return Promise.resolve().then(function() {
+			var e = new Error("Cannot find module '" + req + "'");
+			e.code = 'MODULE_NOT_FOUND';
+			throw e;
+		});
+	}
+	return __webpack_require__.e(ids[1]).then(function() {
+		var id = ids[0];
+		return __webpack_require__(id);
+	});
+}
+webpackAsyncContext.keys = function webpackAsyncContextKeys() {
+	return Object.keys(map);
+};
+webpackAsyncContext.id = "../wc-info/wc-info/dist/esm/legacy lazy recursive ^\\.\\/.*\\.entry\\.js$ include: \\.entry\\.js$ exclude: \\.(system|cjs)\\.entry\\.js$";
+module.exports = webpackAsyncContext;
+
+/***/ }),
+
+/***/ "../wc-info/wc-info/dist/esm/legacy/loader.mjs":
+/*!*****************************************************!*\
+  !*** ../wc-info/wc-info/dist/esm/legacy/loader.mjs ***!
+  \*****************************************************/
+/*! exports provided: defineCustomElements */
+/***/ (function(__webpack_module__, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "defineCustomElements", function() { return defineCustomElements; });
+/* harmony import */ var _wc_video_5effe51c_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./wc-video-5effe51c.js */ "../wc-info/wc-info/dist/esm/legacy/wc-video-5effe51c.js");
+
+var defineCustomElements = function (win, options) {
+    return Object(_wc_video_5effe51c_js__WEBPACK_IMPORTED_MODULE_0__["c"])().then(function () {
+        Object(_wc_video_5effe51c_js__WEBPACK_IMPORTED_MODULE_0__["b"])([["wc-anteprima_2", [[1, "wc-anteprima", { "titolo": [1], "img": [1], "datapubblicazione": [1], "dataevento": [1], "orario": [1], "durata": [1], "luogo": [1], "descrizione": [1], "Component_Height": [32], "Component_Border": [32], "Titolo_Visibility": [32], "Titolo_Colore": [32], "Titolo_Size": [32], "Img_Position": [32], "Img_Larghezza": [32], "Img_Altezza": [32], "Img_MarginLeft": [32], "Descrizione_Color": [32], "Mappa_Display": [32], "Display": [32], "DisplayReverse": [32], "Opacity": [32], "OpacityReverse": [32] }], [1, "wc-video", { "titolo": [1], "img": [1], "video": [1], "datapubblicazione": [1], "dataevento": [1], "orario": [1], "durata": [1], "luogo": [1], "descrizione": [1], "Component_Height": [32], "Component_Border": [32], "Titolo_Visibility": [32], "Titolo_Colore": [32], "Titolo_Size": [32], "Img_Position": [32], "Img_Larghezza": [32], "Img_Altezza": [32], "Img_MarginLeft": [32], "Descrizione_Color": [32], "Mappa_Display": [32], "Display": [32], "DisplayReverse": [32], "Opacity": [32], "OpacityReverse": [32], "ImgTop": [32], "MousePointer": [32], "MarginTitolo": [32] }]]]], options);
+    });
+};
+
+
+
+/***/ }),
+
+/***/ "../wc-info/wc-info/dist/esm/legacy/wc-video-5effe51c.js":
+/*!***************************************************************!*\
+  !*** ../wc-info/wc-info/dist/esm/legacy/wc-video-5effe51c.js ***!
+  \***************************************************************/
+/*! exports provided: a, b, c, d, e, f, g */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return patchBrowser; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return bootstrapLazy; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return patchEsm; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return registerInstance; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return createEvent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return h; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return getElement; });
+var __extends = (undefined && undefined.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __generator = (undefined && undefined.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [op[0] & 2, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+};
+var _this = undefined;
+var NAMESPACE = 'wc-video';
+var win = window;
+var doc = document;
+var plt = {
+    $flags$: 0,
+    $resourcesUrl$: '',
+    raf: function (h) { return requestAnimationFrame(h); },
+    ael: function (el, eventName, listener, opts) { return el.addEventListener(eventName, listener, opts); },
+    rel: function (el, eventName, listener, opts) { return el.removeEventListener(eventName, listener, opts); },
+};
+var supportsShadowDom = !!doc.documentElement.attachShadow;
+var supportsConstructibleStylesheets = (function () {
+    try {
+        new CSSStyleSheet();
+        return true;
+    }
+    catch (e) { }
+    return false;
+})();
+var hostRefs = new WeakMap();
+var getHostRef = function (ref) { return hostRefs.get(ref); };
+var registerInstance = function (lazyInstance, hostRef) { return hostRefs.set(hostRef.$lazyInstance$ = lazyInstance, hostRef); };
+var registerHost = function (elm) {
+    {
+        var hostRef_1 = {
+            $flags$: 0,
+            $hostElement$: elm,
+            $instanceValues$: new Map()
+        };
+        hostRef_1.$onReadyPromise$ = new Promise(function (r) { return hostRef_1.$onReadyResolve$ = r; });
+        return hostRefs.set(elm, hostRef_1);
+    }
+};
+var isMemberInElement = function (elm, memberName) { return memberName in elm; };
+var consoleError = function (e) { return console.error(e); };
+var loadModule = function (cmpMeta, hostRef, hmrVersionId) {
+    // loadModuleImport
+    var bundleId = cmpMeta.$lazyBundleIds$;
+    return __webpack_require__("../wc-info/wc-info/dist/esm/legacy lazy recursive ^\\.\\/.*\\.entry\\.js$ include: \\.entry\\.js$ exclude: \\.(system|cjs)\\.entry\\.js$")("./" + bundleId + ".entry.js" + '').then(function (importedModule) { return importedModule[cmpMeta.$tagName$.replace(/-/g, '_')]; }, consoleError);
+};
+var styles = new Map();
+var cssVarShim = win.__stencil_cssshim;
+var queueCongestion = 0;
+var queuePending = false;
+var queueDomReads = [];
+var queueDomWrites = [];
+var queueDomWritesLow = [];
+var queueTask = function (queue) { return function (cb) {
+    // queue dom reads
+    queue.push(cb);
+    if (!queuePending) {
+        queuePending = true;
+        plt.raf(flush);
+    }
+}; };
+var consume = function (queue) {
+    for (var i = 0; i < queue.length; i++) {
+        try {
+            queue[i](performance.now());
+        }
+        catch (e) {
+            consoleError(e);
+        }
+    }
+    queue.length = 0;
+};
+var consumeTimeout = function (queue, timeout) {
+    var i = 0;
+    var ts = 0;
+    while (i < queue.length && (ts = performance.now()) < timeout) {
+        try {
+            queue[i++](ts);
+        }
+        catch (e) {
+            consoleError(e);
+        }
+    }
+    if (i === queue.length) {
+        queue.length = 0;
+    }
+    else if (i !== 0) {
+        queue.splice(0, i);
+    }
+};
+var flush = function () {
+    queueCongestion++;
+    // always force a bunch of medium callbacks to run, but still have
+    // a throttle on how many can run in a certain time
+    // DOM READS!!!
+    consume(queueDomReads);
+    var timeout = (plt.$flags$ & 6 /* queueMask */) === 2 /* appLoaded */
+        ? performance.now() + (7 * Math.ceil(queueCongestion * (1.0 / 22.0)))
+        : Infinity;
+    // DOM WRITES!!!
+    consumeTimeout(queueDomWrites, timeout);
+    consumeTimeout(queueDomWritesLow, timeout);
+    if (queueDomWrites.length > 0) {
+        queueDomWritesLow.push.apply(queueDomWritesLow, queueDomWrites);
+        queueDomWrites.length = 0;
+    }
+    if (queuePending = ((queueDomReads.length + queueDomWrites.length + queueDomWritesLow.length) > 0)) {
+        // still more to do yet, but we've run out of time
+        // let's let this thing cool off and try again in the next tick
+        plt.raf(flush);
+    }
+    else {
+        queueCongestion = 0;
+    }
+};
+var writeTask = /*@__PURE__*/ queueTask(queueDomWrites);
+/**
+ * Default style mode id
+ */
+/**
+ * Reusable empty obj/array
+ * Don't add values to these!!
+ */
+var EMPTY_OBJ = {};
+/**
+ * Namespaces
+ */
+var SVG_NS = 'http://www.w3.org/2000/svg';
+var isDef = function (v) { return v != null; };
+var toLowerCase = function (str) { return str.toLowerCase(); };
+var isComplexType = function (o) { return ['object', 'function'].includes(typeof o); };
+function getDynamicImportFunction(namespace) {
+    return "__sc_import_" + namespace.replace(/\s|-/g, '_');
+}
+var patchEsm = function () {
+    // @ts-ignore
+    if (!(win.CSS && win.CSS.supports && win.CSS.supports('color', 'var(--c)'))) {
+        // @ts-ignore
+        return __webpack_require__.e(/*! import() */ 136).then(__webpack_require__.t.bind(null, /*! ./css-shim-229ebf7a-229ebf7a.js */ "../wc-info/wc-info/dist/esm/legacy/css-shim-229ebf7a-229ebf7a.js", 7));
+    }
+    return Promise.resolve();
+};
+var patchBrowser = function () { return __awaiter(_this, void 0, void 0, function () {
+    var importMeta, scriptElm, resourcesUrl;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                importMeta = "";
+                if (!(importMeta !== '')) return [3 /*break*/, 1];
+                return [2 /*return*/, Promise.resolve(new URL('.', importMeta).href)];
+            case 1:
+                scriptElm = Array.from(doc.querySelectorAll('script')).find(function (s) { return (s.src.includes("/" + NAMESPACE + ".esm.js") ||
+                    s.getAttribute('data-namespace') === NAMESPACE); });
+                resourcesUrl = new URL('.', new URL(scriptElm.getAttribute('data-resources-url') || scriptElm.src, win.location.href));
+                patchDynamicImport(resourcesUrl.href);
+                if (!!window.customElements) return [3 /*break*/, 3];
+                // @ts-ignore
+                return [4 /*yield*/, __webpack_require__.e(/*! import() */ 137).then(__webpack_require__.t.bind(null, /*! ./dom-a0c82e31-a0c82e31.js */ "../wc-info/wc-info/dist/esm/legacy/dom-a0c82e31-a0c82e31.js", 7))];
+            case 2:
+                // @ts-ignore
+                _a.sent();
+                _a.label = 3;
+            case 3: return [2 /*return*/, resourcesUrl.href];
+        }
+    });
+}); };
+var patchDynamicImport = function (base) {
+    var importFunctionName = getDynamicImportFunction(NAMESPACE);
+    try {
+        win[importFunctionName] = new Function('w', 'return import(w);');
+    }
+    catch (e) {
+        var moduleMap_1 = new Map();
+        win[importFunctionName] = function (src) {
+            var url = new URL(src, base).href;
+            var mod = moduleMap_1.get(url);
+            if (!mod) {
+                var script_1 = doc.createElement('script');
+                script_1.type = 'module';
+                script_1.src = URL.createObjectURL(new Blob(["import * as m from '" + url + "'; window." + importFunctionName + ".m = m;"], { type: 'application/javascript' }));
+                mod = new Promise(function (resolve) {
+                    script_1.onload = function () {
+                        resolve(win[importFunctionName].m);
+                        script_1.remove();
+                    };
+                });
+                moduleMap_1.set(url, mod);
+                doc.head.appendChild(script_1);
+            }
+            return mod;
+        };
+    }
+};
+var HYDRATED_CLASS = 'hydrated';
+var XLINK_NS = 'http://www.w3.org/1999/xlink';
+var rootAppliedStyles = new WeakMap();
+var registerStyle = function (scopeId, cssText) {
+    var style = styles.get(scopeId);
+    if (supportsConstructibleStylesheets) {
+        style = (style || new CSSStyleSheet());
+        style.replace(cssText);
+    }
+    else {
+        style = cssText;
+    }
+    styles.set(scopeId, style);
+};
+var addStyle = function (styleContainerNode, tagName, mode, hostElm) {
+    var scopeId = getScopeId(tagName, mode);
+    var style = styles.get(scopeId);
+    // if an element is NOT connected then getRootNode() will return the wrong root node
+    // so the fallback is to always use the document for the root node in those cases
+    styleContainerNode = (styleContainerNode.nodeType === 11 /* DocumentFragment */ ? styleContainerNode : doc);
+    if (style) {
+        if (typeof style === 'string') {
+            styleContainerNode = styleContainerNode.head || styleContainerNode;
+            var appliedStyles = rootAppliedStyles.get(styleContainerNode);
+            var styleElm = void 0;
+            if (!appliedStyles) {
+                rootAppliedStyles.set(styleContainerNode, appliedStyles = new Set());
+            }
+            if (!appliedStyles.has(scopeId)) {
+                {
+                    if (cssVarShim) {
+                        styleElm = cssVarShim.createHostStyle(hostElm, scopeId, style);
+                        var newScopeId = styleElm['s-sc'];
+                        if (newScopeId) {
+                            scopeId = newScopeId;
+                            // we don't want to add this styleID to the appliedStyles Set
+                            // since the cssVarShim might need to apply several different
+                            // stylesheets for the same component
+                            appliedStyles = null;
+                        }
+                    }
+                    else {
+                        styleElm = doc.createElement('style');
+                        styleElm.innerHTML = style;
+                    }
+                    styleContainerNode.appendChild(styleElm);
+                }
+                if (appliedStyles) {
+                    appliedStyles.add(scopeId);
+                }
+            }
+        }
+        else if (!styleContainerNode.adoptedStyleSheets.includes(style)) {
+            styleContainerNode.adoptedStyleSheets = styleContainerNode.adoptedStyleSheets.concat([
+                style
+            ]);
+        }
+    }
+    return scopeId;
+};
+var attachStyles = function (elm, cmpMeta, mode) {
+    var styleId = addStyle((supportsShadowDom && elm.shadowRoot)
+        ? elm.shadowRoot
+        : elm.getRootNode(), cmpMeta.$tagName$, mode, elm);
+    if (cmpMeta.$flags$ & 10 /* needsScopedEncapsulation */) {
+        // only required when we're NOT using native shadow dom (slot)
+        // or this browser doesn't support native shadow dom
+        // and this host element was NOT created with SSR
+        // let's pick out the inner content for slot projection
+        // create a node to represent where the original
+        // content was first placed, which is useful later on
+        // DOM WRITE!!
+        elm['s-sc'] = styleId;
+        elm.classList.add(styleId + '-h');
+    }
+};
+var getScopeId = function (tagName, mode) { return 'sc-' + (tagName); };
+/**
+ * Production h() function based on Preact by
+ * Jason Miller (@developit)
+ * Licensed under the MIT License
+ * https://github.com/developit/preact/blob/master/LICENSE
+ *
+ * Modified for Stencil's compiler and vdom
+ */
+// const stack: any[] = [];
+// export function h(nodeName: string | d.FunctionalComponent, vnodeData: d.PropsType, child?: d.ChildType): d.VNode;
+// export function h(nodeName: string | d.FunctionalComponent, vnodeData: d.PropsType, ...children: d.ChildType[]): d.VNode;
+var h = function (nodeName, vnodeData) {
+    var children = [];
+    for (var _i = 2; _i < arguments.length; _i++) {
+        children[_i - 2] = arguments[_i];
+    }
+    var child = null;
+    var simple = false;
+    var lastSimple = false;
+    var key;
+    var vNodeChildren = [];
+    var walk = function (c) {
+        for (var i = 0; i < c.length; i++) {
+            child = c[i];
+            if (Array.isArray(child)) {
+                walk(child);
+            }
+            else if (child != null && typeof child !== 'boolean') {
+                if (simple = typeof nodeName !== 'function' && !isComplexType(child)) {
+                    child = String(child);
+                }
+                if (simple && lastSimple) {
+                    // If the previous child was simple (string), we merge both
+                    vNodeChildren[vNodeChildren.length - 1].$text$ += child;
+                }
+                else {
+                    // Append a new vNode, if it's text, we create a text vNode
+                    vNodeChildren.push(simple ? { $flags$: 0, $text$: child } : child);
+                }
+                lastSimple = simple;
+            }
+        }
+    };
+    walk(children);
+    if (vnodeData) {
+        // normalize class / classname attributes
+        {
+            key = vnodeData.key || undefined;
+        }
+        {
+            var classData_1 = vnodeData.className || vnodeData.class;
+            if (classData_1) {
+                vnodeData.class = typeof classData_1 !== 'object'
+                    ? classData_1
+                    : Object.keys(classData_1)
+                        .filter(function (k) { return classData_1[k]; })
+                        .join(' ');
+            }
+        }
+    }
+    if (typeof nodeName === 'function') {
+        // nodeName is a functional component
+        return nodeName(vnodeData, vNodeChildren, vdomFnUtils);
+    }
+    var vnode = {
+        $flags$: 0,
+        $tag$: nodeName,
+        $children$: vNodeChildren.length > 0 ? vNodeChildren : null,
+        $elm$: undefined,
+        $attrs$: vnodeData,
+    };
+    {
+        vnode.$key$ = key;
+    }
+    return vnode;
+};
+var Host = {};
+var vdomFnUtils = {
+    'forEach': function (children, cb) { return children.map(convertToPublic).forEach(cb); },
+    'map': function (children, cb) { return children.map(convertToPublic).map(cb).map(convertToPrivate); }
+};
+var convertToPublic = function (node) {
+    return {
+        vattrs: node.$attrs$,
+        vchildren: node.$children$,
+        vkey: node.$key$,
+        vname: node.$name$,
+        vtag: node.$tag$,
+        vtext: node.$text$
+    };
+};
+var convertToPrivate = function (node) {
+    return {
+        $flags$: 0,
+        $attrs$: node.vattrs,
+        $children$: node.vchildren,
+        $key$: node.vkey,
+        $name$: node.vname,
+        $tag$: node.vtag,
+        $text$: node.vtext
+    };
+};
+/**
+ * Production setAccessor() function based on Preact by
+ * Jason Miller (@developit)
+ * Licensed under the MIT License
+ * https://github.com/developit/preact/blob/master/LICENSE
+ *
+ * Modified for Stencil's compiler and vdom
+ */
+var setAccessor = function (elm, memberName, oldValue, newValue, isSvg, flags) {
+    if (oldValue === newValue) {
+        return;
+    }
+    if (memberName === 'class' && !isSvg) {
+        // Class
+        {
+            var oldList_1 = parseClassList(oldValue);
+            var baseList_1 = parseClassList(elm.className).filter(function (item) { return !oldList_1.includes(item); });
+            elm.className = baseList_1.concat(parseClassList(newValue).filter(function (item) { return !baseList_1.includes(item); })).join(' ');
+        }
+    }
+    else if (memberName === 'style') {
+        // update style attribute, css properties and values
+        {
+            for (var prop in oldValue) {
+                if (!newValue || newValue[prop] == null) {
+                    if (prop.includes('-')) {
+                        elm.style.removeProperty(prop);
+                    }
+                    else {
+                        elm.style[prop] = '';
+                    }
+                }
+            }
+        }
+        for (var prop in newValue) {
+            if (!oldValue || newValue[prop] !== oldValue[prop]) {
+                if (prop.includes('-')) {
+                    elm.style.setProperty(prop, newValue[prop]);
+                }
+                else {
+                    elm.style[prop] = newValue[prop];
+                }
+            }
+        }
+    }
+    else if (memberName === 'key')
+        ;
+    else if (memberName === 'ref') {
+        // minifier will clean this up
+        if (newValue) {
+            newValue(elm);
+        }
+    }
+    else if (memberName.startsWith('on') && !isMemberInElement(elm, memberName)) {
+        // Event Handlers
+        // so if the member name starts with "on" and the 3rd characters is
+        // a capital letter, and it's not already a member on the element,
+        // then we're assuming it's an event listener
+        if (isMemberInElement(elm, toLowerCase(memberName))) {
+            // standard event
+            // the JSX attribute could have been "onMouseOver" and the
+            // member name "onmouseover" is on the element's prototype
+            // so let's add the listener "mouseover", which is all lowercased
+            memberName = toLowerCase(memberName.substring(2));
+        }
+        else {
+            // custom event
+            // the JSX attribute could have been "onMyCustomEvent"
+            // so let's trim off the "on" prefix and lowercase the first character
+            // and add the listener "myCustomEvent"
+            // except for the first character, we keep the event name case
+            memberName = toLowerCase(memberName[2]) + memberName.substring(3);
+        }
+        if (oldValue) {
+            plt.rel(elm, memberName, oldValue, false);
+        }
+        if (newValue) {
+            plt.ael(elm, memberName, newValue, false);
+        }
+    }
+    else {
+        // Set property if it exists and it's not a SVG
+        var isProp = isMemberInElement(elm, memberName);
+        var isComplex = isComplexType(newValue);
+        if ((isProp || (isComplex && newValue !== null)) && !isSvg) {
+            try {
+                elm[memberName] = newValue == null && elm.tagName.indexOf('-') === -1 ? '' : newValue;
+            }
+            catch (e) { }
+        }
+        /**
+         * Need to manually update attribute if:
+         * - memberName is not an attribute
+         * - if we are rendering the host element in order to reflect attribute
+         * - if it's a SVG, since properties might not work in <svg>
+         * - if the newValue is null/undefined or 'false'.
+         */
+        var isXlinkNs = isSvg && (memberName !== (memberName = memberName.replace(/^xlink\:?/, ''))) ? true : false;
+        if (newValue == null || newValue === false) {
+            if (isXlinkNs) {
+                elm.removeAttributeNS(XLINK_NS, toLowerCase(memberName));
+            }
+            else {
+                elm.removeAttribute(memberName);
+            }
+        }
+        else if ((!isProp || (flags & 4 /* isHost */) || isSvg) && !isComplex) {
+            newValue = newValue === true ? '' : newValue.toString();
+            if (isXlinkNs) {
+                elm.setAttributeNS(XLINK_NS, toLowerCase(memberName), newValue);
+            }
+            else {
+                elm.setAttribute(memberName, newValue);
+            }
+        }
+    }
+};
+var parseClassList = function (value) { return (!value) ? [] : value.split(' '); };
+var updateElement = function (oldVnode, newVnode, isSvgMode, memberName) {
+    // if the element passed in is a shadow root, which is a document fragment
+    // then we want to be adding attrs/props to the shadow root's "host" element
+    // if it's not a shadow root, then we add attrs/props to the same element
+    var elm = (newVnode.$elm$.nodeType === 11 /* DocumentFragment */ && newVnode.$elm$.host) ? newVnode.$elm$.host : newVnode.$elm$;
+    var oldVnodeAttrs = (oldVnode && oldVnode.$attrs$) || EMPTY_OBJ;
+    var newVnodeAttrs = newVnode.$attrs$ || EMPTY_OBJ;
+    {
+        // remove attributes no longer present on the vnode by setting them to undefined
+        for (memberName in oldVnodeAttrs) {
+            if (newVnodeAttrs[memberName] == null && oldVnodeAttrs[memberName] != null) {
+                setAccessor(elm, memberName, oldVnodeAttrs[memberName], undefined, isSvgMode, newVnode.$flags$);
+            }
+        }
+    }
+    // add new & update changed attributes
+    for (memberName in newVnodeAttrs) {
+        setAccessor(elm, memberName, oldVnodeAttrs[memberName], newVnodeAttrs[memberName], isSvgMode, newVnode.$flags$);
+    }
+};
+var scopeId;
+var hostTagName;
+var isSvgMode = false;
+var createElm = function (oldParentVNode, newParentVNode, childIndex, parentElm) {
+    // tslint:disable-next-line: prefer-const
+    var newVNode = newParentVNode.$children$[childIndex];
+    var i = 0;
+    var elm;
+    var childNode;
+    if (isDef(newVNode.$text$)) {
+        // create text node
+        newVNode.$elm$ = doc.createTextNode(newVNode.$text$);
+    }
+    else {
+        // create element
+        elm = newVNode.$elm$ = ((isSvgMode || newVNode.$tag$ === 'svg')
+            ? doc.createElementNS(SVG_NS, newVNode.$tag$)
+            : doc.createElement(newVNode.$tag$));
+        {
+            isSvgMode = newVNode.$tag$ === 'svg' ? true : (newVNode.$tag$ === 'foreignObject' ? false : isSvgMode);
+        }
+        // add css classes, attrs, props, listeners, etc.
+        {
+            updateElement(null, newVNode, isSvgMode);
+        }
+        if (isDef(scopeId) && elm['s-si'] !== scopeId) {
+            // if there is a scopeId and this is the initial render
+            // then let's add the scopeId as a css class
+            elm.classList.add((elm['s-si'] = scopeId));
+        }
+        if (newVNode.$children$) {
+            for (i = 0; i < newVNode.$children$.length; ++i) {
+                // create the node
+                childNode = createElm(oldParentVNode, newVNode, i, elm);
+                // return node could have been null
+                if (childNode) {
+                    // append our new node
+                    elm.appendChild(childNode);
+                }
+            }
+        }
+        if (newVNode.$tag$ === 'svg') {
+            // Only reset the SVG context when we're exiting SVG element
+            isSvgMode = false;
+        }
+    }
+    return newVNode.$elm$;
+};
+var addVnodes = function (parentElm, before, parentVNode, vnodes, startIdx, endIdx) {
+    var containerElm = (parentElm);
+    var childNode;
+    if (containerElm.shadowRoot && toLowerCase(containerElm.tagName) === hostTagName) {
+        containerElm = containerElm.shadowRoot;
+    }
+    for (; startIdx <= endIdx; ++startIdx) {
+        if (vnodes[startIdx]) {
+            childNode = createElm(null, parentVNode, startIdx, parentElm);
+            if (childNode) {
+                vnodes[startIdx].$elm$ = childNode;
+                containerElm.insertBefore(childNode, before);
+            }
+        }
+    }
+};
+var removeVnodes = function (vnodes, startIdx, endIdx, elm) {
+    for (; startIdx <= endIdx; ++startIdx) {
+        if (isDef(vnodes[startIdx])) {
+            elm = vnodes[startIdx].$elm$;
+            callNodeRefs(vnodes[startIdx], true);
+            // remove the vnode's element from the dom
+            elm.remove();
+        }
+    }
+};
+var updateChildren = function (parentElm, oldCh, newVNode, newCh) {
+    var oldStartIdx = 0;
+    var newStartIdx = 0;
+    var idxInOld = 0;
+    var i = 0;
+    var oldEndIdx = oldCh.length - 1;
+    var oldStartVnode = oldCh[0];
+    var oldEndVnode = oldCh[oldEndIdx];
+    var newEndIdx = newCh.length - 1;
+    var newStartVnode = newCh[0];
+    var newEndVnode = newCh[newEndIdx];
+    var node;
+    var elmToMove;
+    while (oldStartIdx <= oldEndIdx && newStartIdx <= newEndIdx) {
+        if (oldStartVnode == null) {
+            // Vnode might have been moved left
+            oldStartVnode = oldCh[++oldStartIdx];
+        }
+        else if (oldEndVnode == null) {
+            oldEndVnode = oldCh[--oldEndIdx];
+        }
+        else if (newStartVnode == null) {
+            newStartVnode = newCh[++newStartIdx];
+        }
+        else if (newEndVnode == null) {
+            newEndVnode = newCh[--newEndIdx];
+        }
+        else if (isSameVnode(oldStartVnode, newStartVnode)) {
+            patch(oldStartVnode, newStartVnode);
+            oldStartVnode = oldCh[++oldStartIdx];
+            newStartVnode = newCh[++newStartIdx];
+        }
+        else if (isSameVnode(oldEndVnode, newEndVnode)) {
+            patch(oldEndVnode, newEndVnode);
+            oldEndVnode = oldCh[--oldEndIdx];
+            newEndVnode = newCh[--newEndIdx];
+        }
+        else if (isSameVnode(oldStartVnode, newEndVnode)) {
+            patch(oldStartVnode, newEndVnode);
+            parentElm.insertBefore(oldStartVnode.$elm$, oldEndVnode.$elm$.nextSibling);
+            oldStartVnode = oldCh[++oldStartIdx];
+            newEndVnode = newCh[--newEndIdx];
+        }
+        else if (isSameVnode(oldEndVnode, newStartVnode)) {
+            patch(oldEndVnode, newStartVnode);
+            parentElm.insertBefore(oldEndVnode.$elm$, oldStartVnode.$elm$);
+            oldEndVnode = oldCh[--oldEndIdx];
+            newStartVnode = newCh[++newStartIdx];
+        }
+        else {
+            // createKeyToOldIdx
+            idxInOld = -1;
+            {
+                for (i = oldStartIdx; i <= oldEndIdx; ++i) {
+                    if (oldCh[i] && isDef(oldCh[i].$key$) && oldCh[i].$key$ === newStartVnode.$key$) {
+                        idxInOld = i;
+                        break;
+                    }
+                }
+            }
+            if (idxInOld >= 0) {
+                elmToMove = oldCh[idxInOld];
+                if (elmToMove.$tag$ !== newStartVnode.$tag$) {
+                    node = createElm(oldCh && oldCh[newStartIdx], newVNode, idxInOld, parentElm);
+                }
+                else {
+                    patch(elmToMove, newStartVnode);
+                    oldCh[idxInOld] = undefined;
+                    node = elmToMove.$elm$;
+                }
+                newStartVnode = newCh[++newStartIdx];
+            }
+            else {
+                // new element
+                node = createElm(oldCh && oldCh[newStartIdx], newVNode, newStartIdx, parentElm);
+                newStartVnode = newCh[++newStartIdx];
+            }
+            if (node) {
+                {
+                    oldStartVnode.$elm$.parentNode.insertBefore(node, oldStartVnode.$elm$);
+                }
+            }
+        }
+    }
+    if (oldStartIdx > oldEndIdx) {
+        addVnodes(parentElm, (newCh[newEndIdx + 1] == null ? null : newCh[newEndIdx + 1].$elm$), newVNode, newCh, newStartIdx, newEndIdx);
+    }
+    else if (newStartIdx > newEndIdx) {
+        removeVnodes(oldCh, oldStartIdx, oldEndIdx);
+    }
+};
+var isSameVnode = function (vnode1, vnode2) {
+    // compare if two vnode to see if they're "technically" the same
+    // need to have the same element tag, and same key to be the same
+    if (vnode1.$tag$ === vnode2.$tag$) {
+        {
+            return vnode1.$key$ === vnode2.$key$;
+        }
+        return true;
+    }
+    return false;
+};
+var patch = function (oldVNode, newVNode) {
+    var elm = newVNode.$elm$ = oldVNode.$elm$;
+    var oldChildren = oldVNode.$children$;
+    var newChildren = newVNode.$children$;
+    {
+        // test if we're rendering an svg element, or still rendering nodes inside of one
+        // only add this to the when the compiler sees we're using an svg somewhere
+        isSvgMode = elm &&
+            isDef(elm.parentNode) &&
+            elm.ownerSVGElement !== undefined;
+        isSvgMode = newVNode.$tag$ === 'svg' ? true : (newVNode.$tag$ === 'foreignObject' ? false : isSvgMode);
+    }
+    if (!isDef(newVNode.$text$)) {
+        // element node
+        {
+            {
+                // either this is the first render of an element OR it's an update
+                // AND we already know it's possible it could have changed
+                // this updates the element's css classes, attrs, props, listeners, etc.
+                updateElement(oldVNode, newVNode, isSvgMode);
+            }
+        }
+        if (isDef(oldChildren) && isDef(newChildren)) {
+            // looks like there's child vnodes for both the old and new vnodes
+            updateChildren(elm, oldChildren, newVNode, newChildren);
+        }
+        else if (isDef(newChildren)) {
+            // no old child vnodes, but there are new child vnodes to add
+            if (isDef(oldVNode.$text$)) {
+                // the old vnode was text, so be sure to clear it out
+                elm.textContent = '';
+            }
+            // add the new vnode children
+            addVnodes(elm, null, newVNode, newChildren, 0, newChildren.length - 1);
+        }
+        else if (isDef(oldChildren)) {
+            // no new child vnodes, but there are old child vnodes to remove
+            removeVnodes(oldChildren, 0, oldChildren.length - 1);
+        }
+    }
+    else if (oldVNode.$text$ !== newVNode.$text$) {
+        // update the text content for the text only vnode
+        // and also only if the text is different than before
+        elm.textContent = newVNode.$text$;
+    }
+    if (isSvgMode && newVNode.$tag$ === 'svg') {
+        isSvgMode = false;
+    }
+};
+var callNodeRefs = function (vNode, isDestroy) {
+    if (vNode) {
+        vNode.$attrs$ && vNode.$attrs$.ref && vNode.$attrs$.ref(isDestroy ? null : vNode.$elm$);
+        vNode.$children$ && vNode.$children$.forEach(function (vChild) {
+            callNodeRefs(vChild, isDestroy);
+        });
+    }
+};
+var isHost = function (node) {
+    return node && node.$tag$ === Host;
+};
+var renderVdom = function (hostElm, hostRef, cmpMeta, renderFnResults) {
+    var oldVNode = hostRef.$vnode$ || { $flags$: 0 };
+    hostTagName = toLowerCase(hostElm.tagName);
+    if (isHost(renderFnResults)) {
+        renderFnResults.$tag$ = null;
+    }
+    else {
+        renderFnResults = h(null, null, renderFnResults);
+    }
+    renderFnResults.$flags$ |= 4 /* isHost */;
+    hostRef.$vnode$ = renderFnResults;
+    renderFnResults.$elm$ = oldVNode.$elm$ = (hostElm.shadowRoot || hostElm);
+    {
+        scopeId = hostElm['s-sc'];
+    }
+    // synchronous patch
+    patch(oldVNode, renderFnResults);
+};
+var scheduleUpdate = function (elm, hostRef, cmpMeta, isInitialLoad) { return __awaiter(_this, void 0, void 0, function () {
+    var instance;
+    return __generator(this, function (_a) {
+        {
+            hostRef.$flags$ |= 16 /* isQueuedForUpdate */;
+        }
+        instance = hostRef.$lazyInstance$;
+        // there is no ancestorc omponent or the ancestor component
+        // has already fired off its lifecycle update then
+        // fire off the initial update
+        {
+            writeTask(function () { return updateComponent(elm, hostRef, cmpMeta, instance, isInitialLoad); });
+        }
+        return [2 /*return*/];
+    });
+}); };
+var updateComponent = function (elm, hostRef, cmpMeta, instance, isInitialLoad) {
+    // updateComponent
+    {
+        hostRef.$flags$ &= ~16 /* isQueuedForUpdate */;
+    }
+    if (isInitialLoad) {
+        // DOM WRITE!
+        attachStyles(elm, cmpMeta, hostRef.$modeName$);
+    }
+    {
+        {
+            // tell the platform we're actively rendering
+            // if a value is changed within a render() then
+            // this tells the platform not to queue the change
+            hostRef.$flags$ |= 4 /* isActiveRender */;
+            try {
+                // looks like we've got child nodes to render into this host element
+                // or we need to update the css class/attrs on the host element
+                // DOM WRITE!
+                renderVdom(elm, hostRef, cmpMeta, instance.render());
+            }
+            catch (e) {
+                consoleError(e);
+            }
+            hostRef.$flags$ &= ~4 /* isActiveRender */;
+        }
+    }
+    if (cssVarShim) {
+        cssVarShim.updateHost(elm);
+    }
+    {
+        hostRef.$flags$ |= 2 /* hasRendered */;
+    }
+    postUpdateComponent(elm, hostRef);
+};
+var postUpdateComponent = function (elm, hostRef, ancestorsActivelyLoadingChildren) {
+    if (!elm['s-al']) {
+        var instance = hostRef.$lazyInstance$;
+        var ancestorComponent = hostRef.$ancestorComponent$;
+        if (!(hostRef.$flags$ & 512 /* hasLoadedComponent */)) {
+            hostRef.$flags$ |= 512 /* hasLoadedComponent */;
+            {
+                // DOM WRITE!
+                // add the css class that this element has officially hydrated
+                elm.classList.add(HYDRATED_CLASS);
+            }
+            {
+                hostRef.$onReadyResolve$(elm);
+            }
+            if (!ancestorComponent) {
+                // on appload
+                // we have finish the first big initial render
+                doc.documentElement.classList.add(HYDRATED_CLASS);
+                {
+                    setTimeout(function () { return plt.$flags$ |= 2; } /* appLoaded */, 999);
+                }
+            }
+        }
+        // ( •_•)
+        // ( •_•)>⌐■-■
+        // (⌐■_■)
+    }
+};
+var disconnectedCallback = function (elm) {
+    if ((plt.$flags$ & 1 /* isTmpDisconnected */) === 0) {
+        var hostRef = getHostRef(elm);
+        // clear CSS var-shim tracking
+        if (cssVarShim) {
+            cssVarShim.removeHost(elm);
+        }
+        var instance = hostRef.$lazyInstance$;
+    }
+};
+var parsePropertyValue = function (propValue, propType) {
+    // ensure this value is of the correct prop type
+    if (propValue != null && !isComplexType(propValue)) {
+        if (propType & 1 /* String */) {
+            // could have been passed as a number or boolean
+            // but we still want it as a string
+            return String(propValue);
+        }
+        // redundant return here for better minification
+        return propValue;
+    }
+    // not sure exactly what type we want
+    // so no need to change to a different type
+    return propValue;
+};
+var getValue = function (ref, propName) { return getHostRef(ref).$instanceValues$.get(propName); };
+var setValue = function (ref, propName, newVal, cmpMeta) {
+    // check our new property value against our internal value
+    var hostRef = getHostRef(ref);
+    var elm = hostRef.$hostElement$;
+    var oldVal = hostRef.$instanceValues$.get(propName);
+    var flags = hostRef.$flags$;
+    newVal = parsePropertyValue(newVal, cmpMeta.$members$[propName][0]);
+    if (newVal !== oldVal && (!(flags & 8 /* isConstructingInstance */) || oldVal === undefined)) {
+        // gadzooks! the property's value has changed!!
+        // set our new value!
+        hostRef.$instanceValues$.set(propName, newVal);
+        if (hostRef.$lazyInstance$) {
+            if ((flags & (4 /* isActiveRender */ | 2 /* hasRendered */ | 16 /* isQueuedForUpdate */)) === 2 /* hasRendered */) {
+                // looks like this value actually changed, so we've got work to do!
+                // but only if we've already rendered, otherwise just chill out
+                // queue that we need to do an update, but don't worry about queuing
+                // up millions cuz this function ensures it only runs once
+                scheduleUpdate(elm, hostRef, cmpMeta, false);
+            }
+        }
+    }
+};
+var proxyComponent = function (Cstr, cmpMeta, flags) {
+    if (cmpMeta.$members$) {
+        // It's better to have a const than two Object.entries()
+        var members = Object.entries(cmpMeta.$members$);
+        var prototype_1 = Cstr.prototype;
+        members.forEach(function (_a) {
+            var memberName = _a[0], memberFlags = _a[1][0];
+            if ((memberFlags & 31) || (flags & 2 && (memberFlags & 32 /* State */))) {
+                // proxyComponent - prop
+                Object.defineProperty(prototype_1, memberName, {
+                    get: function () {
+                        // proxyComponent, get value
+                        return getValue(this, memberName);
+                    },
+                    set: function (newValue) {
+                        // proxyComponent, set value
+                        setValue(this, memberName, newValue, cmpMeta);
+                    },
+                    configurable: true,
+                    enumerable: true
+                });
+            }
+        });
+        if (flags & 1) {
+            var attrNameToPropName_1 = new Map();
+            prototype_1.attributeChangedCallback = function (attrName, _oldValue, newValue) {
+                var propName = attrNameToPropName_1.get(attrName);
+                this[propName] = newValue === null && typeof this[propName] === 'boolean'
+                    ? false
+                    : newValue;
+            };
+            // create an array of attributes to observe
+            // and also create a map of html attribute name to js property name
+            Cstr.observedAttributes = members
+                .filter(function (_a) {
+                var _ = _a[0], m = _a[1];
+                return m[0] & 15;
+            } /* HasAttribute */) // filter to only keep props that should match attributes
+                .map(function (_a) {
+                var propName = _a[0], m = _a[1];
+                var attrName = m[1] || propName;
+                attrNameToPropName_1.set(attrName, propName);
+                return attrName;
+            });
+        }
+    }
+    return Cstr;
+};
+var initializeComponent = function (elm, hostRef, cmpMeta, hmrVersionId, Cstr) { return __awaiter(_this, void 0, void 0, function () {
+    var style_1, scopeId_1, ancestorComponent;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                if (!((hostRef.$flags$ & 256 /* hasInitializedComponent */) === 0)) return [3 /*break*/, 4];
+                // we haven't initialized this element yet
+                hostRef.$flags$ |= 256 /* hasInitializedComponent */;
+                return [4 /*yield*/, loadModule(cmpMeta, hostRef, hmrVersionId)];
+            case 1:
+                // lazy loaded components
+                // request the component's implementation to be
+                // wired up with the host element
+                Cstr = _a.sent();
+                if (!Cstr.isProxied) {
+                    proxyComponent(Cstr, cmpMeta, 2 /* proxyState */);
+                    Cstr.isProxied = true;
+                }
+                // ok, time to construct the instance
+                // but let's keep track of when we start and stop
+                // so that the getters/setters don't incorrectly step on data
+                {
+                    hostRef.$flags$ |= 8 /* isConstructingInstance */;
+                }
+                // construct the lazy-loaded component implementation
+                // passing the hostRef is very important during
+                // construction in order to directly wire together the
+                // host element and the lazy-loaded instance
+                try {
+                    new Cstr(hostRef);
+                }
+                catch (e) {
+                    consoleError(e);
+                }
+                {
+                    hostRef.$flags$ &= ~8 /* isConstructingInstance */;
+                }
+                fireConnectedCallback(hostRef.$lazyInstance$);
+                if (!(!Cstr.isStyleRegistered && Cstr.style)) return [3 /*break*/, 4];
+                style_1 = Cstr.style;
+                scopeId_1 = getScopeId(cmpMeta.$tagName$, hostRef.$modeName$);
+                if (!(cmpMeta.$flags$ & 8) /* needsShadowDomShim */) return [3 /*break*/, 3]; /* needsShadowDomShim */
+                return [4 /*yield*/, __webpack_require__.e(/*! import() */ 138).then(__webpack_require__.bind(null, /*! ./shadow-css-984bac74-549b16dd.js */ "../wc-info/wc-info/dist/esm/legacy/shadow-css-984bac74-549b16dd.js")).then(function (m) { return m.scopeCss(style_1, scopeId_1, false); })];
+            case 2:
+                style_1 = _a.sent();
+                _a.label = 3;
+            case 3:
+                registerStyle(scopeId_1, style_1);
+                Cstr.isStyleRegistered = true;
+                _a.label = 4;
+            case 4:
+                ancestorComponent = hostRef.$ancestorComponent$;
+                {
+                    scheduleUpdate(elm, hostRef, cmpMeta, true);
+                }
+                return [2 /*return*/];
+        }
+    });
+}); };
+var fireConnectedCallback = function (instance) {
+};
+var connectedCallback = function (elm, cmpMeta) {
+    if ((plt.$flags$ & 1 /* isTmpDisconnected */) === 0) {
+        // connectedCallback
+        var hostRef = getHostRef(elm);
+        if (!(hostRef.$flags$ & 1 /* hasConnected */)) {
+            // first time this component has connected
+            hostRef.$flags$ |= 1 /* hasConnected */;
+            // Lazy properties
+            // https://developers.google.com/web/fundamentals/web-components/best-practices#lazy-properties
+            if (cmpMeta.$members$) {
+                Object.entries(cmpMeta.$members$).forEach(function (_a) {
+                    var memberName = _a[0], memberFlags = _a[1][0];
+                    if (memberFlags & 31 /* Prop */ && elm.hasOwnProperty(memberName)) {
+                        var value = elm[memberName];
+                        delete elm[memberName];
+                        elm[memberName] = value;
+                    }
+                });
+            }
+            {
+                initializeComponent(elm, hostRef, cmpMeta);
+            }
+        }
+        fireConnectedCallback(hostRef.$lazyInstance$);
+    }
+};
+var bootstrapLazy = function (lazyBundles, options) {
+    if (options === void 0) { options = {}; }
+    var cmpTags = [];
+    var exclude = options.exclude || [];
+    var head = doc.head;
+    var customElements = win.customElements;
+    var y = /*@__PURE__*/ head.querySelector('meta[charset]');
+    var visibilityStyle = /*@__PURE__*/ doc.createElement('style');
+    Object.assign(plt, options);
+    plt.$resourcesUrl$ = new URL(options.resourcesUrl || '/', win.location.href).href;
+    if (options.syncQueue) {
+        plt.$flags$ |= 4 /* queueSync */;
+    }
+    lazyBundles.forEach(function (lazyBundle) { return lazyBundle[1].forEach(function (compactMeta) {
+        var cmpMeta = {
+            $flags$: compactMeta[0],
+            $tagName$: compactMeta[1],
+            $members$: compactMeta[2],
+            $listeners$: compactMeta[3],
+        };
+        if (!supportsShadowDom && cmpMeta.$flags$ & 1 /* shadowDomEncapsulation */) {
+            cmpMeta.$flags$ |= 8 /* needsShadowDomShim */;
+        }
+        var tagName = cmpMeta.$tagName$;
+        var HostElement = /** @class */ (function (_super) {
+            __extends(class_1, _super);
+            // StencilLazyHost
+            function class_1(self) {
+                var _this = 
+                // @ts-ignore
+                _super.call(this, self) || this;
+                self = _this;
+                registerHost(self);
+                if (cmpMeta.$flags$ & 1 /* shadowDomEncapsulation */) {
+                    // this component is using shadow dom
+                    // and this browser supports shadow dom
+                    // add the read-only property "shadowRoot" to the host element
+                    if (supportsShadowDom) {
+                        self.attachShadow({ 'mode': 'open' });
+                    }
+                    else if (!('shadowRoot' in self)) {
+                        self.shadowRoot = self;
+                    }
+                }
+                return _this;
+            }
+            class_1.prototype.connectedCallback = function () {
+                connectedCallback(this, cmpMeta);
+            };
+            class_1.prototype.disconnectedCallback = function () {
+                disconnectedCallback(this);
+            };
+            class_1.prototype['s-init'] = function () {
+                var hostRef = getHostRef(this);
+                if (hostRef.$lazyInstance$) {
+                    postUpdateComponent(this, hostRef);
+                }
+            };
+            class_1.prototype['s-hmr'] = function (hmrVersionId) {
+            };
+            class_1.prototype.forceUpdate = function () {
+                {
+                    var hostRef = getHostRef(this);
+                    scheduleUpdate(this, hostRef, cmpMeta, false);
+                }
+            };
+            class_1.prototype.componentOnReady = function () {
+                return getHostRef(this).$onReadyPromise$;
+            };
+            return class_1;
+        }(HTMLElement));
+        cmpMeta.$lazyBundleIds$ = lazyBundle[0];
+        if (!exclude.includes(tagName) && !customElements.get(tagName)) {
+            cmpTags.push(tagName);
+            customElements.define(tagName, proxyComponent(HostElement, cmpMeta, 1 /* isElementConstructor */));
+        }
+    }); });
+    // visibilityStyle.innerHTML = cmpTags.map(t => `${t}:not(.hydrated)`) + '{display:none}';
+    visibilityStyle.innerHTML = cmpTags + '{visibility:hidden}.hydrated{visibility:inherit}';
+    visibilityStyle.setAttribute('data-styles', '');
+    head.insertBefore(visibilityStyle, y ? y.nextSibling : head.firstChild);
+};
+var createEvent = function (ref, name, flags) {
+    var elm = getElement(ref);
+    return {
+        emit: function (detail) { return elm.dispatchEvent(new (CustomEvent)(name, {
+            bubbles: !!(flags & 4 /* Bubbles */),
+            composed: !!(flags & 2 /* Composed */),
+            cancelable: !!(flags & 1 /* Cancellable */),
+            detail: detail
+        })); }
+    };
+};
+var getElement = function (ref) { return getHostRef(ref).$hostElement$; };
+
+
+
+/***/ }),
+
+/***/ "../wc-info/wc-info/dist/esm/polyfills/index.js":
+/*!******************************************************!*\
+  !*** ../wc-info/wc-info/dist/esm/polyfills/index.js ***!
+  \******************************************************/
+/*! exports provided: applyPolyfills */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "applyPolyfills", function() { return applyPolyfills; });
+function applyPolyfills() {
+  var win = window;
+  /*!
+  es6-promise - a tiny implementation of Promises/A+.
+  Copyright (c) 2014 Yehuda Katz, Tom Dale, Stefan Penner and contributors (Conversion to ES6 API by Jake Archibald)
+  Licensed under MIT license
+  See https://raw.githubusercontent.com/stefanpenner/es6-promise/master/LICENSE
+  v4.2.4+314e4831
+  */
+  (win.ES6Promise=function(){function t(){var t=setTimeout;return function(){return t(r,1)}}function r(){for(var t=0;t<y;t+=2)(0,C[t])(C[t+1]),C[t]=void 0,C[t+1]=void 0;y=0}function e(t,r){var e=this,n=new this.constructor(o);void 0===n[O]&&_(n);var i=e._state;if(i){var s=arguments[i-1];g(function(){return v(i,n,s,e._result)})}else l(e,n,t,r);return n}function n(t){if(t&&"object"==typeof t&&t.constructor===this)return t;var r=new this(o);return u(r,t),r}function o(){}function i(t){try{return t.then}catch(t){return q.error=t,q}}function s(t,r,o){r.constructor===t.constructor&&o===e&&r.constructor.resolve===n?function(t,r){r._state===x?a(t,r._result):r._state===F?f(t,r._result):l(r,void 0,function(r){return u(t,r)},function(r){return f(t,r)})}(t,r):o===q?(f(t,q.error),q.error=null):void 0===o?a(t,r):"function"==typeof o?function(t,r,e){g(function(t){var n=!1,o=function(t,r,e,n){try{t.call(r,e,n)}catch(t){return t}}(e,r,function(e){n||(n=!0,r!==e?u(t,e):a(t,e))},function(r){n||(n=!0,f(t,r))},t._label);!n&&o&&(n=!0,f(t,o))},t)}(t,r,o):a(t,r)}function u(t,r){if(t===r)f(t,new TypeError("cannot resolve promise w/ itself"));else{var e=typeof r;null===r||"object"!==e&&"function"!==e?a(t,r):s(t,r,i(r))}}function c(t){t._onerror&&t._onerror(t._result),h(t)}function a(t,r){t._state===P&&(t._result=r,t._state=x,0!==t._subscribers.length&&g(h,t))}function f(t,r){t._state===P&&(t._state=F,t._result=r,g(c,t))}function l(t,r,e,n){var o=t._subscribers,i=o.length;t._onerror=null,o[i]=r,o[i+x]=e,o[i+F]=n,0===i&&t._state&&g(h,t)}function h(t){var r=t._subscribers,e=t._state;if(0!==r.length){for(var n,o,i=t._result,s=0;s<r.length;s+=3)n=r[s],o=r[s+e],n?v(e,n,o,i):o(i);t._subscribers.length=0}}function v(t,r,e,n){var o="function"==typeof e,i=void 0,s=void 0,c=void 0,l=void 0;if(o){try{i=e(n)}catch(t){q.error=t,i=q}if(i===q?(l=!0,s=i.error,i.error=null):c=!0,r===i)return void f(r,new TypeError("Cannot return same promise"))}else i=n,c=!0;r._state===P&&(o&&c?u(r,i):l?f(r,s):t===x?a(r,i):t===F&&f(r,i))}function _(t){t[O]=U++,t._state=void 0,t._result=void 0,t._subscribers=[]}var p,d=Array.isArray?Array.isArray:function(t){return"[object Array]"===Object.prototype.toString.call(t)},y=0,w=void 0,m=void 0,g=function(t,e){C[y]=t,C[y+1]=e,2===(y+=2)&&(m?m(r):T())},b=(p="undefined"!=typeof window?window:void 0)||{},A=b.MutationObserver||b.WebKitMutationObserver;b="undefined"==typeof self;var E,S,M,j="undefined"!=typeof Uint8ClampedArray&&"undefined"!=typeof importScripts&&"undefined"!=typeof MessageChannel,C=Array(1e3),T=void 0;T=A?(E=0,S=new A(r),M=document.createTextNode(""),S.observe(M,{characterData:!0}),function(){M.data=E=++E%2}):j?function(){var t=new MessageChannel;return t.port1.onmessage=r,function(){return t.port2.postMessage(0)}}():void 0===p&&"function"=="function"?function(){try{var e=Function("return this")().require("vertx");return void 0!==(w=e.runOnLoop||e.runOnContext)?function(){w(r)}:t()}catch(r){return t()}}():t();var O=Math.random().toString(36).substring(2),P=void 0,x=1,F=2,q={error:null},U=0,D=function(){function t(t,r){this._instanceConstructor=t,this.promise=new t(o),this.promise[O]||_(this.promise),d(r)?(this._remaining=this.length=r.length,this._result=Array(this.length),0===this.length?a(this.promise,this._result):(this.length=this.length||0,this._enumerate(r),0===this._remaining&&a(this.promise,this._result))):f(this.promise,Error("Array Methods must be provided an Array"))}return t.prototype._enumerate=function(t){for(var r=0;this._state===P&&r<t.length;r++)this._eachEntry(t[r],r)},t.prototype._eachEntry=function(t,r){var u=this._instanceConstructor,c=u.resolve;c===n?(c=i(t))===e&&t._state!==P?this._settledAt(t._state,r,t._result):"function"!=typeof c?(this._remaining--,this._result[r]=t):u===K?(s(u=new u(o),t,c),this._willSettleAt(u,r)):this._willSettleAt(new u(function(r){return r(t)}),r):this._willSettleAt(c(t),r)},t.prototype._settledAt=function(t,r,e){var n=this.promise;n._state===P&&(this._remaining--,t===F?f(n,e):this._result[r]=e),0===this._remaining&&a(n,this._result)},t.prototype._willSettleAt=function(t,r){var e=this;l(t,void 0,function(t){return e._settledAt(x,r,t)},function(t){return e._settledAt(F,r,t)})},t}(),K=function(){function t(r){if(this[O]=U++,this._result=this._state=void 0,this._subscribers=[],o!==r){if("function"!=typeof r)throw new TypeError("Must pass a resolver fn as 1st arg");if(!(this instanceof t))throw new TypeError("Failed to construct 'Promise': Use the 'new' operator.");!function(t,r){try{r(function(r){u(t,r)},function(r){f(t,r)})}catch(r){f(t,r)}}(this,r)}}return t.prototype.catch=function(t){return this.then(null,t)},t.prototype.finally=function(t){var r=this.constructor;return this.then(function(e){return r.resolve(t()).then(function(){return e})},function(e){return r.resolve(t()).then(function(){throw e})})},t}();return K.prototype.then=e,K.all=function(t){return new D(this,t).promise},K.race=function(t){var r=this;return d(t)?new r(function(e,n){for(var o=t.length,i=0;i<o;i++)r.resolve(t[i]).then(e,n)}):new r(function(t,r){return r(new TypeError("Must pass array to race"))})},K.resolve=n,K.reject=function(t){var r=new this(o);return f(r,t),r},K._setScheduler=function(t){m=t},K._setAsap=function(t){g=t},K._asap=g,K.polyfill=function(){var t=void 0;if("undefined"!=typeof global)t=global;else if("undefined"!=typeof self)t=self;else try{t=Function("return this")()}catch(t){throw Error("polyfill failed")}var r=t.Promise;if(r){var e=null;try{e=Object.prototype.toString.call(r.resolve())}catch(t){}if("[object Promise]"===e&&!r.cast)return}t.Promise=K},K.Promise=K,K.polyfill(),K}());
+
+  var promises = [];
+
+  if (!win.customElements || (win.Element && (!win.Element.prototype.closest || !win.Element.prototype.matches || !win.Element.prototype.remove))) {
+    promises.push(__webpack_require__.e(/*! import() */ 142).then(__webpack_require__.t.bind(null, /*! ./dom.js */ "../wc-info/wc-info/dist/esm/polyfills/dom.js", 7)));
+  }
+
+  function checkIfURLIsSupported() {
+    try {
+      var u = new URL('b', 'http://a');
+      u.pathname = 'c%20d';
+      return (u.href === 'http://a/c%20d') && u.searchParams;
+    } catch(e) {
+      return false;
+    }
+  }
+
+  if (
+    'function' !== typeof Object.assign || !Object.entries ||
+    !Array.prototype.find || !Array.prototype.includes ||
+    !String.prototype.startsWith || !String.prototype.endsWith ||
+    !win.fetch ||
+    !checkIfURLIsSupported() ||
+    typeof WeakMap == 'undefined'
+  ) {
+    promises.push(__webpack_require__.e(/*! import() */ 140).then(__webpack_require__.t.bind(null, /*! ./core-js.js */ "../wc-info/wc-info/dist/esm/polyfills/core-js.js", 7)));
+  }
+  if (!(win.CSS && win.CSS.supports && win.CSS.supports('color', 'var(--c)'))) {
+    promises.push(__webpack_require__.e(/*! import() */ 141).then(__webpack_require__.t.bind(null, /*! ./css-shim.js */ "../wc-info/wc-info/dist/esm/polyfills/css-shim.js", 7)));
+  }
+  return Promise.all(promises);
+}
+
+
+/***/ }),
+
+/***/ "../wc-info/wc-info/loader/index.mjs":
+/*!*******************************************!*\
+  !*** ../wc-info/wc-info/loader/index.mjs ***!
+  \*******************************************/
+/*! exports provided: applyPolyfills, defineCustomElements */
+/***/ (function(__webpack_module__, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _dist_esm_polyfills_index_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../dist/esm/polyfills/index.js */ "../wc-info/wc-info/dist/esm/polyfills/index.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "applyPolyfills", function() { return _dist_esm_polyfills_index_js__WEBPACK_IMPORTED_MODULE_0__["applyPolyfills"]; });
+
+/* harmony import */ var _dist_esm_legacy_loader_mjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../dist/esm/legacy/loader.mjs */ "../wc-info/wc-info/dist/esm/legacy/loader.mjs");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "defineCustomElements", function() { return _dist_esm_legacy_loader_mjs__WEBPACK_IMPORTED_MODULE_1__["defineCustomElements"]; });
+
+(function() {
+  if (
+    // No Reflect, no classes, no need for shim because native custom elements
+    // require ES2015 classes or Reflect.
+    window.Reflect === undefined ||
+    window.customElements === undefined
+  ) {
+    return;
+  }
+  const BuiltInHTMLElement = HTMLElement;
+  window.HTMLElement = /** @this {!Object} */ function HTMLElement() {
+    return Reflect.construct(
+        BuiltInHTMLElement, [], /** @type {!Function} */ (this.constructor));
+  };
+  HTMLElement.prototype = BuiltInHTMLElement.prototype;
+  HTMLElement.prototype.constructor = HTMLElement;
+  Object.setPrototypeOf(HTMLElement, BuiltInHTMLElement);
+})();
+
+
+
+
+/***/ }),
+
 /***/ "../wc-trasporti/wc-trasporti/dist/esm/es5/build lazy recursive ^\\.\\/.*\\.entry\\.js$":
 /*!*************************************************************************************************!*\
   !*** ../wc-trasporti/wc-trasporti/dist/esm/es5/build lazy ^\.\/.*\.entry\.js$ namespace object ***!
@@ -632,13 +1968,13 @@ var map = {
 		"common",
 		103
 	],
-	"./etmrgqmt.entry.js": [
-		"./node_modules/wcs-comune/dist/esm/es5/build/etmrgqmt.entry.js",
+	"./bg7saeu9.entry.js": [
+		"./node_modules/wcs-comune/dist/esm/es5/build/bg7saeu9.entry.js",
 		"common",
 		104
 	],
-	"./etmrgqmt.sc.entry.js": [
-		"./node_modules/wcs-comune/dist/esm/es5/build/etmrgqmt.sc.entry.js",
+	"./bg7saeu9.sc.entry.js": [
+		"./node_modules/wcs-comune/dist/esm/es5/build/bg7saeu9.sc.entry.js",
 		"common",
 		105
 	],
@@ -768,41 +2104,6 @@ module.exports = webpackAsyncContext;
 
 /***/ }),
 
-/***/ "./node_modules/wcs-info/dist/esm/legacy lazy recursive ^\\.\\/.*\\.entry\\.js$ include: \\.entry\\.js$ exclude: \\.(system|cjs)\\.entry\\.js$":
-/*!***************************************************************************************************************************************************!*\
-  !*** ./node_modules/wcs-info/dist/esm/legacy lazy ^\.\/.*\.entry\.js$ include: \.entry\.js$ exclude: \.(system|cjs)\.entry\.js$ namespace object ***!
-  \***************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var map = {
-	"./wc-anteprima_2.entry.js": [
-		"./node_modules/wcs-info/dist/esm/legacy/wc-anteprima_2.entry.js",
-		139
-	]
-};
-function webpackAsyncContext(req) {
-	var ids = map[req];
-	if(!ids) {
-		return Promise.resolve().then(function() {
-			var e = new Error("Cannot find module '" + req + "'");
-			e.code = 'MODULE_NOT_FOUND';
-			throw e;
-		});
-	}
-	return __webpack_require__.e(ids[1]).then(function() {
-		var id = ids[0];
-		return __webpack_require__(id);
-	});
-}
-webpackAsyncContext.keys = function webpackAsyncContextKeys() {
-	return Object.keys(map);
-};
-webpackAsyncContext.id = "./node_modules/wcs-info/dist/esm/legacy lazy recursive ^\\.\\/.*\\.entry\\.js$ include: \\.entry\\.js$ exclude: \\.(system|cjs)\\.entry\\.js$";
-module.exports = webpackAsyncContext;
-
-/***/ }),
-
 /***/ "./src/$$_lazy_route_resource lazy recursive":
 /*!**********************************************************!*\
   !*** ./src/$$_lazy_route_resource lazy namespace object ***!
@@ -815,37 +2116,27 @@ var map = {
 		"./src/app/credits/credits.module.ts",
 		"credits-credits-module"
 	],
-	"./module-comune/pages/detail-event/detail-event.module": [
+	"./pages/detail-event/detail-event.module": [
 		"./src/app/module-comune/pages/detail-event/detail-event.module.ts",
-		"default~module-comune-pages-detail-event-detail-event-module~pages-detail-info-detail-info-module~pa~8d818793",
+		"default~pages-detail-event-detail-event-module~pages-detail-info-detail-info-module~pages-detail-pat~3194840c",
 		"common",
-		"module-comune-pages-detail-event-detail-event-module"
-	],
-	"./module-comune/pages/list-food/filter-page-food/filter-page-food.module": [
-		"./src/app/module-comune/pages/list-food/filter-page-food/filter-page-food.module.ts",
-		"common",
-		"module-comune-pages-list-food-filter-page-food-filter-page-food-module"
-	],
-	"./module-comune/pages/list-rh/filter-page-rh/filter-page-rh.module": [
-		"./src/app/module-comune/pages/list-rh/filter-page-rh/filter-page-rh.module.ts",
-		"common",
-		"module-comune-pages-list-rh-filter-page-rh-filter-page-rh-module"
+		"pages-detail-event-detail-event-module"
 	],
 	"./pages/detail-info/detail-info.module": [
 		"./src/app/module-comune/pages/detail-info/detail-info.module.ts",
-		"default~module-comune-pages-detail-event-detail-event-module~pages-detail-info-detail-info-module~pa~8d818793",
+		"default~pages-detail-event-detail-event-module~pages-detail-info-detail-info-module~pages-detail-pat~3194840c",
 		"common",
 		"pages-detail-info-detail-info-module"
 	],
 	"./pages/detail-path/detail-path.module": [
 		"./src/app/module-comune/pages/detail-path/detail-path.module.ts",
-		"default~module-comune-pages-detail-event-detail-event-module~pages-detail-info-detail-info-module~pa~8d818793",
+		"default~pages-detail-event-detail-event-module~pages-detail-info-detail-info-module~pages-detail-pat~3194840c",
 		"common",
 		"pages-detail-path-detail-path-module"
 	],
 	"./pages/detail-poi/detail-poi.module": [
 		"./src/app/module-comune/pages/detail-poi/detail-poi.module.ts",
-		"default~module-comune-pages-detail-event-detail-event-module~pages-detail-info-detail-info-module~pa~8d818793",
+		"default~pages-detail-event-detail-event-module~pages-detail-info-detail-info-module~pages-detail-pat~3194840c",
 		"common",
 		"pages-detail-poi-detail-poi-module"
 	],
@@ -859,6 +2150,7 @@ var map = {
 	],
 	"./pages/home-common/home-common.module": [
 		"./src/app/pages/home-common/home-common.module.ts",
+		"common",
 		"pages-home-common-home-common-module"
 	],
 	"./pages/home-ps/home-ps.module": [
@@ -879,43 +2171,61 @@ var map = {
 	],
 	"./pages/home/home.module": [
 		"./src/app/module-comune/pages/home/home.module.ts",
-		"default~module-comune-pages-detail-event-detail-event-module~pages-detail-info-detail-info-module~pa~8d818793",
+		"default~pages-detail-event-detail-event-module~pages-detail-info-detail-info-module~pages-detail-pat~3194840c",
 		"common",
 		"pages-home-home-module"
 	],
 	"./pages/list-categories/list-categories.module": [
 		"./src/app/module-comune/pages/list-categories/list-categories.module.ts",
-		"default~module-comune-pages-detail-event-detail-event-module~pages-detail-info-detail-info-module~pa~8d818793",
+		"default~pages-detail-event-detail-event-module~pages-detail-info-detail-info-module~pages-detail-pat~3194840c",
 		"common",
 		"pages-list-categories-list-categories-module"
 	],
 	"./pages/list-event/list-event.module": [
 		"./src/app/module-comune/pages/list-event/list-event.module.ts",
-		"default~module-comune-pages-detail-event-detail-event-module~pages-detail-info-detail-info-module~pa~8d818793",
+		"default~pages-detail-event-detail-event-module~pages-detail-info-detail-info-module~pages-detail-pat~3194840c",
+		"default~pages-list-event-list-event-module~pages-list-poi-list-poi-module",
 		"common",
 		"pages-list-event-list-event-module"
 	],
+	"./pages/list-farmacie/list-farmacie.module": [
+		"./src/app/module-comune/pages/list-farmacie/list-farmacie.module.ts",
+		"default~pages-detail-event-detail-event-module~pages-detail-info-detail-info-module~pages-detail-pat~3194840c",
+		"common",
+		"pages-list-farmacie-list-farmacie-module"
+	],
+	"./pages/list-food/filter-page-food/filter-page-food.module": [
+		"./src/app/module-comune/pages/list-food/filter-page-food/filter-page-food.module.ts",
+		"common",
+		"pages-list-food-filter-page-food-filter-page-food-module"
+	],
 	"./pages/list-food/list-food.module": [
 		"./src/app/module-comune/pages/list-food/list-food.module.ts",
-		"default~module-comune-pages-detail-event-detail-event-module~pages-detail-info-detail-info-module~pa~8d818793",
+		"default~pages-detail-event-detail-event-module~pages-detail-info-detail-info-module~pages-detail-pat~3194840c",
 		"common",
 		"pages-list-food-list-food-module"
 	],
 	"./pages/list-path/list-path.module": [
 		"./src/app/module-comune/pages/list-path/list-path.module.ts",
-		"default~module-comune-pages-detail-event-detail-event-module~pages-detail-info-detail-info-module~pa~8d818793",
+		"default~pages-detail-event-detail-event-module~pages-detail-info-detail-info-module~pages-detail-pat~3194840c",
 		"common",
 		"pages-list-path-list-path-module"
 	],
 	"./pages/list-poi/list-poi.module": [
 		"./src/app/module-comune/pages/list-poi/list-poi.module.ts",
-		"default~module-comune-pages-detail-event-detail-event-module~pages-detail-info-detail-info-module~pa~8d818793",
+		"default~pages-detail-event-detail-event-module~pages-detail-info-detail-info-module~pages-detail-pat~3194840c",
+		"default~pages-list-event-list-event-module~pages-list-poi-list-poi-module",
 		"common",
 		"pages-list-poi-list-poi-module"
 	],
+	"./pages/list-rh/filter-page-rh/filter-page-rh.module": [
+		"./src/app/module-comune/pages/list-rh/filter-page-rh/filter-page-rh.module.ts",
+		"common",
+		"pages-list-rh-filter-page-rh-filter-page-rh-module"
+	],
 	"./pages/list-rh/list-rh.module": [
 		"./src/app/module-comune/pages/list-rh/list-rh.module.ts",
-		"default~module-comune-pages-detail-event-detail-event-module~pages-detail-info-detail-info-module~pa~8d818793",
+		"default~pages-detail-event-detail-event-module~pages-detail-info-detail-info-module~pages-detail-pat~3194840c",
 		"common",
 		"pages-list-rh-list-rh-module"
 	],
@@ -928,7 +2238,7 @@ var map = {
 	],
 	"./pages/map/map.module": [
 		"./src/app/module-comune/pages/map/map.module.ts",
-		"common"
+		"pages-map-map-module"
 	],
 	"./pages/notification/notification.module": [
 		"./src/app/module-pulstrade/pages/notification/notification.module.ts",
@@ -950,6 +2260,12 @@ var map = {
 	"./pages/setting/setting.module": [
 		"./src/app/pages/setting/setting.module.ts",
 		"pages-setting-setting-module"
+	],
+	"./pages/tourist-services/tourist-services.module": [
+		"./src/app/module-comune/pages/tourist-services/tourist-services.module.ts",
+		"default~pages-detail-event-detail-event-module~pages-detail-info-detail-info-module~pages-detail-pat~3194840c",
+		"common",
+		"pages-tourist-services-tourist-services-module"
 	],
 	"./pages/transport-list/transport-list.module": [
 		"./src/app/module-trasporti/pages/transport-list/transport-list.module.ts",
@@ -1020,9 +2336,6 @@ var routes = [
     { path: 'favourites', loadChildren: './pages/favourites/favourites.module#FavouritesPageModule' },
     { path: 'credits', loadChildren: './credits/credits.module#CreditsPageModule' },
     { path: 'home-settings', loadChildren: './pages/home-settings/home-settings.module#HomeSettingsPageModule' },
-    { path: 'filter-page-food', loadChildren: './module-comune/pages/list-food/filter-page-food/filter-page-food.module#FilterPageFoodPageModule' },
-    { path: 'filter-page-rh', loadChildren: './module-comune/pages/list-rh/filter-page-rh/filter-page-rh.module#FilterPageRhPageModule' },
-    { path: 'detail-event', loadChildren: './module-comune/pages/detail-event/detail-event.module#DetailEventPageModule' }
 ];
 var AppRoutingModule = /** @class */ (function () {
     function AppRoutingModule() {
@@ -1352,7 +2665,13 @@ var routes = [
     { path: 'list-categories', loadChildren: './pages/list-categories/list-categories.module#ListCategoriesPageModule' },
     { path: 'detail-path', loadChildren: './pages/detail-path/detail-path.module#DetailPathPageModule' },
     { path: 'list-food', loadChildren: './pages/list-food/list-food.module#ListFoodPageModule' },
-    { path: 'detail-info', loadChildren: './pages/detail-info/detail-info.module#DetailInfoPageModule' }
+    { path: 'farmacie', loadChildren: './pages/list-farmacie/list-farmacie.module#ListFarmaciePageModule' },
+    { path: 'farmacie', loadChildren: './pages/list-farmacie/list-farmacie.module#ListFarmaciePageModule' },
+    { path: 'detail-info', loadChildren: './pages/detail-info/detail-info.module#DetailInfoPageModule' },
+    { path: 'tourist-services', loadChildren: './pages/tourist-services/tourist-services.module#TouristServicesPageModule' },
+    { path: 'filter-page-food', loadChildren: './pages/list-food/filter-page-food/filter-page-food.module#FilterPageFoodPageModule' },
+    { path: 'filter-page-rh', loadChildren: './pages/list-rh/filter-page-rh/filter-page-rh.module#FilterPageRhPageModule' },
+    { path: 'detail-event', loadChildren: './pages/detail-event/detail-event.module#DetailEventPageModule' },
 ];
 var routing = _angular_router__WEBPACK_IMPORTED_MODULE_0__["RouterModule"].forChild(routes);
 
@@ -1582,6 +2901,7 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 
 
+// import { LoadingModalComponent } from '../shared/loading-modal/loading-modal/loading-modal.component';
 function HttpLoaderFactory(http) {
     return new _ngx_translate_http_loader__WEBPACK_IMPORTED_MODULE_10__["TranslateHttpLoader"](http, './assets/comune/i18n/', '.json');
 }
@@ -1620,6 +2940,7 @@ var ComuneModule = /** @class */ (function () {
             ],
             declarations: [
                 _wc_poi_wc_poi_component__WEBPACK_IMPORTED_MODULE_4__["PoiComponent"],
+                // LoadingModalComponent,
                 _wc_path_wc_path_component__WEBPACK_IMPORTED_MODULE_3__["PathComponent"],
                 _wc_tabs_wc_tabs_component__WEBPACK_IMPORTED_MODULE_5__["TabsComponent"],
                 _wc_map_wc_map_component__WEBPACK_IMPORTED_MODULE_6__["MapComponent"]
@@ -1769,7 +3090,7 @@ var FuneraliModule = /** @class */ (function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "appInitialize", function() { return appInitialize; });
-/* harmony import */ var wcs_info_loader__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! wcs-info/loader */ "./node_modules/wcs-info/loader/index.mjs");
+/* harmony import */ var wcs_info_loader__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! wcs-info/loader */ "../wc-info/wc-info/loader/index.mjs");
 
 function appInitialize() {
     return function () {
@@ -1809,11 +3130,12 @@ var routing = _angular_router__WEBPACK_IMPORTED_MODULE_0__["RouterModule"].forCh
 /*!******************************************************!*\
   !*** ./src/app/module-info/web-components.module.ts ***!
   \******************************************************/
-/*! exports provided: InfoModule */
+/*! exports provided: HttpLoaderFactory, InfoModule */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HttpLoaderFactory", function() { return HttpLoaderFactory; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "InfoModule", function() { return InfoModule; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
@@ -1821,8 +3143,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _services_config_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../services/config.service */ "./src/app/services/config.service.ts");
 /* harmony import */ var _lazy_routing__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./lazy.routing */ "./src/app/module-info/lazy.routing.ts");
 /* harmony import */ var _ionic_native_social_sharing_ngx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic-native/social-sharing/ngx */ "./node_modules/@ionic-native/social-sharing/ngx/index.js");
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
-/* harmony import */ var _angular_http__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/http */ "./node_modules/@angular/http/fesm5/http.js");
+/* harmony import */ var _ngx_translate_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ngx-translate/core */ "./node_modules/@ngx-translate/core/fesm5/ngx-translate-core.js");
+/* harmony import */ var _ngx_translate_http_loader__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @ngx-translate/http-loader */ "./node_modules/@ngx-translate/http-loader/fesm5/ngx-translate-http-loader.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var _angular_http__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/http */ "./node_modules/@angular/http/fesm5/http.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1837,6 +3161,11 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 
 
+
+
+function HttpLoaderFactory(http) {
+    return new _ngx_translate_http_loader__WEBPACK_IMPORTED_MODULE_7__["TranslateHttpLoader"](http, './assets/info/i18n/', '.json');
+}
 var InfoModule = /** @class */ (function () {
     function InfoModule() {
     }
@@ -1860,8 +3189,16 @@ var InfoModule = /** @class */ (function () {
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["NgModule"])({
             imports: [
                 _angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"],
-                _angular_common_http__WEBPACK_IMPORTED_MODULE_6__["HttpClientModule"],
-                _angular_http__WEBPACK_IMPORTED_MODULE_7__["HttpModule"],
+                _angular_common_http__WEBPACK_IMPORTED_MODULE_8__["HttpClientModule"],
+                _angular_http__WEBPACK_IMPORTED_MODULE_9__["HttpModule"],
+                _ngx_translate_core__WEBPACK_IMPORTED_MODULE_6__["TranslateModule"].forRoot({
+                    loader: {
+                        provide: _ngx_translate_core__WEBPACK_IMPORTED_MODULE_6__["TranslateLoader"],
+                        useFactory: HttpLoaderFactory,
+                        deps: [_angular_common_http__WEBPACK_IMPORTED_MODULE_8__["HttpClient"]]
+                    },
+                    isolate: true
+                }),
                 _lazy_routing__WEBPACK_IMPORTED_MODULE_4__["routing"]
             ],
             declarations: [],
