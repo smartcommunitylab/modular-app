@@ -1940,22 +1940,20 @@ var map = {
 		"./node_modules/wcs-comune/dist/esm/es5/build/3jigjkiu.sc.entry.js",
 		97
 	],
+	"./3xjsggco.entry.js": [
+		"./node_modules/wcs-comune/dist/esm/es5/build/3xjsggco.entry.js",
+		98
+	],
+	"./3xjsggco.sc.entry.js": [
+		"./node_modules/wcs-comune/dist/esm/es5/build/3xjsggco.sc.entry.js",
+		99
+	],
 	"./55jrifnu.entry.js": [
 		"./node_modules/wcs-comune/dist/esm/es5/build/55jrifnu.entry.js",
-		98
+		100
 	],
 	"./55jrifnu.sc.entry.js": [
 		"./node_modules/wcs-comune/dist/esm/es5/build/55jrifnu.sc.entry.js",
-		99
-	],
-	"./6hphc4u1.entry.js": [
-		"./node_modules/wcs-comune/dist/esm/es5/build/6hphc4u1.entry.js",
-		"common",
-		100
-	],
-	"./6hphc4u1.sc.entry.js": [
-		"./node_modules/wcs-comune/dist/esm/es5/build/6hphc4u1.sc.entry.js",
-		"common",
 		101
 	],
 	"./a9ze2jpq.entry.js": [
@@ -2034,12 +2032,14 @@ var map = {
 		"common",
 		117
 	],
-	"./uogo5u0e.entry.js": [
-		"./node_modules/wcs-comune/dist/esm/es5/build/uogo5u0e.entry.js",
+	"./u0eusqkj.entry.js": [
+		"./node_modules/wcs-comune/dist/esm/es5/build/u0eusqkj.entry.js",
+		"common",
 		118
 	],
-	"./uogo5u0e.sc.entry.js": [
-		"./node_modules/wcs-comune/dist/esm/es5/build/uogo5u0e.sc.entry.js",
+	"./u0eusqkj.sc.entry.js": [
+		"./node_modules/wcs-comune/dist/esm/es5/build/u0eusqkj.sc.entry.js",
+		"common",
 		119
 	]
 };
@@ -2228,6 +2228,11 @@ var map = {
 		"default~pages-detail-event-detail-event-module~pages-detail-info-detail-info-module~pages-detail-pat~3194840c",
 		"common",
 		"pages-list-rh-list-rh-module"
+	],
+	"./pages/map-path/map-path.module": [
+		"./src/app/module-comune/pages/map-path/map-path.module.ts",
+		"common",
+		"pages-map-path-map-path-module"
 	],
 	"./pages/map-spots/map-spots.module": [
 		"./src/app/module-trasporti/pages/map-spots/map-spots.module.ts",
@@ -2664,6 +2669,7 @@ var routes = [
     { path: 'detail-path', loadChildren: './pages/detail-path/detail-path.module#DetailPathPageModule' },
     { path: 'list-categories', loadChildren: './pages/list-categories/list-categories.module#ListCategoriesPageModule' },
     { path: 'detail-path', loadChildren: './pages/detail-path/detail-path.module#DetailPathPageModule' },
+    { path: 'map-path', loadChildren: './pages/map-path/map-path.module#MapPathPageModule' },
     { path: 'list-food', loadChildren: './pages/list-food/list-food.module#ListFoodPageModule' },
     { path: 'farmacie', loadChildren: './pages/list-farmacie/list-farmacie.module#ListFarmaciePageModule' },
     { path: 'farmacie', loadChildren: './pages/list-farmacie/list-farmacie.module#ListFarmaciePageModule' },

@@ -78,7 +78,7 @@ var NotiziePageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\n  <ion-toolbar>\n      <ion-searchbar (ionChange)=\"Ricerca()\" placeholder=\"Cerca\" id=\"barraDiRicerca\" [(ngModel)]=\"daCercare\"></ion-searchbar>\n    <ion-grid>\n      <ion-row justify-content-center align-items-center>\n        <ion-col col-6>\n          <ion-title float-left id=\"TITOLO\">      {{'avvisi_label'|template}}\n            </ion-title>\n        </ion-col>\n        <ion-col col-6>\n          <ion-button fill=\"clear\" float-right (click)=\"OpenCloseRicerca()\" id=\"btnImpostazioniRicerca\" color=\"light\">\n            <svg width='24' height='24' viewBox='0 0 24 24'>\n              <path fill='none' d='M0 0h24v24H0V0z' />\n              <path\n                d='M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z' />\n            </svg>\n          </ion-button>\n        </ion-col>\n      </ion-row>\n    </ion-grid>\n  </ion-toolbar>\n\n</ion-header>\n<ion-content>\n  <div class=\"ion-padding\" *ngIf=\"!emptyList; else emptyListTemplate\">\n    <div *ngFor=\"let item of datiRicerca\" id=\"contenitoreAnteprima\">\n      <wc-anteprima (eventMappa)=\"visualizzaMappa(item.coordinates[0], item.coordinates[1])\"\n        (eventShare)=\"visualizzaShare(item.title, item.image ,item.description)\" id=\"elemento\" img={{item.image}}\n        [titolo]=\"item.shortAbstract\" orario={{item.eventStart}} datapubblicazione={{formattaData(item.created)}}\n        dataevento={{item.eventDate}} durata={{item.eventTiming}} [descrizione]=\"item.description\"\n        luogo={{item.address}}>\n      </wc-anteprima>\n    </div>\n    <ion-infinite-scroll threshold=\"100px\" (ionInfinite)=\"caricaAltriDati($event)\">\n      <ion-infinite-scroll-content loadingSpinner=\"crescent\" loadingText=\"Sto caricando...\"></ion-infinite-scroll-content>\n    </ion-infinite-scroll>\n  </div>\n  <ng-template #emptyListTemplate>\n      {{'empty_list_label'|template}}\n    </ng-template>\n</ion-content>"
+module.exports = "<ion-header>\n  <ion-toolbar>\n      <ion-searchbar (ionChange)=\"Ricerca()\" placeholder=\"Cerca\" id=\"barraDiRicerca\" [(ngModel)]=\"daCercare\"></ion-searchbar>\n    <ion-grid *ngIf=\"!isRicercaOpen\">\n      <ion-row justify-content-center align-items-center>\n        <ion-col col-6>\n          <ion-title float-left id=\"TITOLO\">      {{'avvisi_label'|translate}}\n            </ion-title>\n        </ion-col>\n        <ion-col col-6>\n          <ion-button fill=\"clear\" float-right (click)=\"OpenCloseRicerca()\" id=\"btnImpostazioniRicerca\" color=\"light\">\n            <svg width='24' height='24' viewBox='0 0 24 24'>\n              <path fill='none' d='M0 0h24v24H0V0z' />\n              <path\n                d='M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z' />\n            </svg>\n          </ion-button>\n        </ion-col>\n      </ion-row>\n    </ion-grid>\n  </ion-toolbar>\n\n</ion-header>\n<ion-content>\n  <div class=\"ion-padding\" *ngIf=\"!emptyList; else emptyListTemplate\">\n    <div *ngFor=\"let item of datiRicerca\" id=\"contenitoreAnteprima\">\n      <wc-anteprima (eventMappa)=\"visualizzaMappa(item.coordinates[0], item.coordinates[1])\"\n        (eventShare)=\"visualizzaShare(item.title, item.image ,item.description)\" id=\"elemento\" img={{item.image}}\n        [titolo]=\"item.shortAbstract\" orario={{item.eventStart}} datapubblicazione={{formattaData(item.created)}}\n        dataevento={{item.eventDate}} durata={{item.eventTiming}} [descrizione]=\"item.description\"\n        luogo={{item.address}}>\n      </wc-anteprima>\n    </div>\n    <ion-infinite-scroll threshold=\"100px\" (ionInfinite)=\"caricaAltriDati($event)\">\n      <ion-infinite-scroll-content loadingSpinner=\"crescent\" loadingText=\"Sto caricando...\"></ion-infinite-scroll-content>\n    </ion-infinite-scroll>\n  </div>\n  <ng-template #emptyListTemplate>\n      {{'empty_list_label'|translate}}\n    </ng-template>\n</ion-content>"
 
 /***/ }),
 
@@ -223,6 +223,11 @@ var NotiziePage = /** @class */ (function () {
             }
             this.datiRicerca = vetRisultati;
             vetRisultati = null;
+            if (this.datiRicerca.length == 0) {
+                {
+                    this.emptyList = true;
+                }
+            }
         }
     };
     NotiziePage.prototype.formattaData = function (data) {
@@ -244,64 +249,6 @@ var NotiziePage = /** @class */ (function () {
         __metadata("design:paramtypes", [_services_dati_service_service__WEBPACK_IMPORTED_MODULE_1__["DatiServiceService"], _ionic_native_social_sharing_ngx__WEBPACK_IMPORTED_MODULE_2__["SocialSharing"], _services_config_service__WEBPACK_IMPORTED_MODULE_4__["ConfigService"], _ngx_translate_core__WEBPACK_IMPORTED_MODULE_5__["TranslateService"]])
     ], NotiziePage);
     return NotiziePage;
-}());
-
-
-
-/***/ }),
-
-/***/ "./src/app/module-info/services/config.service.ts":
-/*!********************************************************!*\
-  !*** ./src/app/module-info/services/config.service.ts ***!
-  \********************************************************/
-/*! exports provided: ConfigService */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ConfigService", function() { return ConfigService; });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (undefined && undefined.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-var ConfigService = /** @class */ (function () {
-    function ConfigService() {
-        this.appModuleName = "app-module";
-        this.defaultPosition = {
-            lat: 0,
-            long: 0
-        };
-        this.menu = [
-            {
-                title: "Home",
-                url: "/home",
-                icon: "home"
-            }
-        ];
-    }
-    ConfigService.prototype.init = function () {
-        localStorage.setItem('info-menu-', JSON.stringify(this.menu));
-    };
-    ConfigService.prototype.getAppModuleName = function () {
-        return this.appModuleName;
-    };
-    ConfigService.prototype.getDefaultPosition = function () {
-        return this.defaultPosition;
-    };
-    ConfigService = __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
-            providedIn: 'root'
-        }),
-        __metadata("design:paramtypes", [])
-    ], ConfigService);
-    return ConfigService;
 }());
 
 

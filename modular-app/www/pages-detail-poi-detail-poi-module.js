@@ -223,6 +223,14 @@ var DetailPoiPage = /** @class */ (function () {
             });
         }); });
     };
+    DetailPoiPage.prototype.ionViewWillLeave = function () {
+        var element = document.getElementById('poi-container');
+        if (element) {
+            element.removeEventListener('contactClick', function (e) {
+                console.log(e);
+            }, false);
+        }
+    };
     DetailPoiPage.prototype.goBack = function () {
         this.location.back();
     };

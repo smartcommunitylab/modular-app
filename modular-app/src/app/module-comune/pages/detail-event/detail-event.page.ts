@@ -20,6 +20,7 @@ export class DetailEventPage implements OnInit {
   type: string;
   stringsContact: any;
   altImage: string;
+  paramsSubscription: any;
 
   constructor(private router: Router, private route: ActivatedRoute, private callNumber:CallNumber, private utils: UtilsService,  private location: Location,  private translate: TranslateService,
     private dbService: DbService, private config: ConfigService) {
@@ -28,7 +29,7 @@ export class DetailEventPage implements OnInit {
    }
 
   ngOnInit() {
-    this.route.queryParams
+    this.paramsSubscription=this.route.queryParams
       .subscribe(params => {
         if (params.objectIds) {
           this.manageoLcalId(params.objectIds);
@@ -72,11 +73,15 @@ export class DetailEventPage implements OnInit {
       }
     })
   }
+  ngOnDestroy(): void {
+    this.paramsSubscription.unsubscribe();
+  }
   goBack() {
     this.location.back();  }
   manageoLcalId(objectIds) {
     if (objectIds.length == 1) {
       this.dbService.getObjectByDataId(objectIds[0]).then(data => {
+        this.poiInput = data.docs[0];
         this.poi = data.docs[0];
         this.type = data.docs[0].fromTime ? 'EVENT' : 'POI';
         this.buildContacts();

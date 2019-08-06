@@ -1,8 +1,10 @@
 .container {
     text-align:center;
     margin: 1%;
-    border: 1px black solid;
+    /* border: 1px black solid; */
     margin-bottom: 3%;
+    background: #e3e3e3 !important;
+    font-weight: bold;
 }
 .title > h3 {
     margin-top: 2%;
@@ -24,3 +26,14 @@
 .image > img {
     max-width: 100%;
 }
+.detail-bar {
+    height: 2px;
+    background: #ff6c00;
+    background: -moz-linear-gradient(left, #ff6c00 0%, #ff6c00 25%, #f2c60b 25%, #f2c60b 50%, #6c82ff 50%, #6c82ff 75%, #2d981f 75%, #2d981f 100%);
+    background: -webkit-gradient(linear, left top, right top, color-stop(0%, #ff6c00), color-stop(25%, #ff6c00), color-stop(25%, #f2c60b), color-stop(50%, #f2c60b), color-stop(50%, #6c82ff), color-stop(75%, #6c82ff), color-stop(50%, #2d981f), color-stop(75%, #2d981f));
+    background: -webkit-linear-gradient(left, #ff6c00 0%, #ff6c00 25%, #f2c60b 25%, #f2c60b 50%, #6c82ff 50%, #6c82ff 75%, #2d981f 50%, #2d981f 75%);
+    background: -o-linear-gradient(left, #ff6c00 0%, #ff6c00 25%, #f2c60b 25%, #f2c60b 50%, #6c82ff 50%, #6c82ff 75%, #2d981f 50%, #2d981f 75%);
+    background: -ms-linear-gradient(left, #ff6c00 0%, #ff6c00 25%, #f2c60b 25%, #f2c60b 50%, #6c82ff 50%, #6c82ff 75%, #2d981f 50%, #2d981f 75%);
+    background: linear-gradient(to right, #ff6c00 0%, #ff6c00 25%, #f2c60b 25%, #f2c60b 50%, #6c82ff 50%, #6c82ff 75%, #2d981f 50%, #2d981f 75%);
+    margin: 10px 0px;
+  }

@@ -47,7 +47,7 @@ export class ListPoiPage implements OnInit {
 
 
   ngOnInit() {
-    this.utils.presentLoading();
+    // this.utils.presentLoading();
     this.route.queryParams
       .subscribe(params => {
         console.log(params);
@@ -84,7 +84,7 @@ export class ListPoiPage implements OnInit {
           this.subCategories(this.fullPois);
           this.buildShowPois();
           this.tags = this.buildFilter();
-          this.utils.hideLoading();
+          // this.utils.hideLoading();
         }
         else {
           this.emptyList = true;
@@ -93,11 +93,11 @@ export class ListPoiPage implements OnInit {
         console.log(this.showPois);
 
       }, (err)=> {
-        this.utils.hideLoading();
+        // this.utils.hideLoading();
       });
     }
     else {
-      this.utils.hideLoading();
+      // this.utils.hideLoading();
     }
     const element = document.getElementById('poi-list');
     this.translate.get('alt_image_string').subscribe(

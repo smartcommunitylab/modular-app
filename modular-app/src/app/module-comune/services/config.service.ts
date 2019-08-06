@@ -7,8 +7,8 @@ import { HttpClient } from '@angular/common/http';
 export class ConfigService {
   private appModuleName: string = "app-module";
   private defaultPosition = {
-    lat: 0,
-    long: 0
+    lat: 46.0748,
+    long: 11.1217
   }
   private menu = [
     {

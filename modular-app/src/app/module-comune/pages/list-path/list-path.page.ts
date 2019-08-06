@@ -11,11 +11,16 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class ListPathPage implements OnInit {
   pois: any = [];
+  fullPois: any = [];
   language = 'it';
   category: any;
+  typingTimer;
+  doneTypingInterval = 500;
+  search = false;
+
   constructor(public navCtrl: NavController, public dbService: DbService, public alertCtrl: AlertController,
     private router: Router, private route: ActivatedRoute, private translate: TranslateService) {
-      this.translate.use(this.language);
+    this.translate.use(this.language);
   }
   ngOnInit() {
     this.route.queryParams
@@ -24,21 +29,29 @@ export class ListPathPage implements OnInit {
         if (params) {
           const cat = JSON.parse(params.category);
           this.category = cat;
-       }
+        }
       });
   }
   ionViewDidEnter() {
     if (this.category && this.category.query) {
-      this.dbService.getObjectByQuery( this.category.query).then((data) => {
-          this.pois = data.docs.map(x => this.convertPois(x));
-        });
+      this.dbService.getObjectByQuery(this.category.query).then((data) => {
+        this.pois = data.docs.map(x => this.convertPois(x));
+        this.fullPois = this.pois;
+      });
     }
     const el = document.getElementById('path-list');
     el.addEventListener('pathSelected', path => {
-       this.goToDetail((<any>path).detail);
+      this.goToDetail((<any>path).detail);
     });
   }
-
+  ionViewWillLeave() {
+    const el = document.getElementById('path-list');
+    if (el) {
+      el.removeEventListener('pathSelected', function (e) {
+        console.log(e);
+      }, false);
+    }
+  }
   convertPois(x) {
     const poiElement: any = {};
     if (x) {
@@ -52,13 +65,37 @@ export class ListPathPage implements OnInit {
         poiElement.description = x.description[this.language];
       }
       if (x.image) {
-         poiElement.image = x.image;
+        poiElement.image = x.image;
       }
       if (x._id) {
         poiElement.id = x._id;
       }
     }
     return poiElement;
+  }
+
+
+  toggleSearch() {
+    this.search = !this.search;
+    const searchbar = document.querySelector('ion-searchbar');
+    if (searchbar.style.display === 'none') {
+      searchbar.style.display = 'unset';
+      searchbar.setFocus();
+    } else {
+      searchbar.style.display = 'none';
+      this.pois = this.fullPois;
+    }
+  }
+
+  searchChanged(input: any) {
+    clearTimeout(this.typingTimer);
+    this.typingTimer = setTimeout(() => {
+      const value = input.detail.target.value;
+      const _this = this;
+      this.pois = this.fullPois.filter(function (el) {
+        return (el.title.toLowerCase().indexOf(value.toLowerCase()) > -1);
+      });
+    }, this.doneTypingInterval);
   }
 
   goToDetail(id) {

@@ -973,6 +973,64 @@ var FilterPageRhPage = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/module-info/services/config.service.ts":
+/*!********************************************************!*\
+  !*** ./src/app/module-info/services/config.service.ts ***!
+  \********************************************************/
+/*! exports provided: ConfigService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ConfigService", function() { return ConfigService; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var ConfigService = /** @class */ (function () {
+    function ConfigService() {
+        this.appModuleName = "app-module";
+        this.defaultPosition = {
+            lat: 0,
+            long: 0
+        };
+        this.menu = [
+            {
+                title: "Home",
+                url: "/home",
+                icon: "home"
+            }
+        ];
+    }
+    ConfigService.prototype.init = function () {
+        localStorage.setItem('info-menu-', JSON.stringify(this.menu));
+    };
+    ConfigService.prototype.getAppModuleName = function () {
+        return this.appModuleName;
+    };
+    ConfigService.prototype.getDefaultPosition = function () {
+        return this.defaultPosition;
+    };
+    ConfigService = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
+            providedIn: 'root'
+        }),
+        __metadata("design:paramtypes", [])
+    ], ConfigService);
+    return ConfigService;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/module-info/services/dati-service.service.ts":
 /*!**************************************************************!*\
   !*** ./src/app/module-info/services/dati-service.service.ts ***!

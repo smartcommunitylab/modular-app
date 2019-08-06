@@ -11,5 +11,7 @@
     "url_contacts":"Sito",
     "share_contacts":"Condividi",
     "farmacie_label":"Farmacie",
-    "distance_label":"Distanza: "
+    "distance_label":"Distanza: ",
+    "poi_list":"Tappe",
+    "service_label":"Servizi per il turista"
 }

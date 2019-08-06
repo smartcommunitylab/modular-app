@@ -11,6 +11,7 @@ PouchDB.plugin(PouchDBFind);
 export class DbService {
 
 
+
   elements: any = {};
 
   pois: any;
@@ -25,7 +26,7 @@ export class DbService {
     this.db = new PouchDB('comune-in-tasca');
 
     this.remote = 'http://192.168.42.201:5984/comune-in-tasca';
-                  // 'http://192.168.1.196:5984/comune-in-tasca'
+                  // 'http://192.168.1.197:5984/comune-in-tasca'
                   // 'http://127.0.0.1:5984/comune-in-tasca';
 
     this.contentTypes = {
@@ -43,8 +44,28 @@ export class DbService {
       retry: true,
       continuous: true
     };
-    this.db.sync(this.remote, options);
+    var url = 'http://192.168.42.201:5984/comune-in-tasca';
+var opts = { live: true, retry: true };
 
+// do one way, one-off sync from the server until completion
+this.db.replicate.from(url).on('complete', info => {
+  // then two-way, continuous, retriable sync
+  console.log('finished synch')
+  this.db.sync(url, opts)
+    .on('change', this.onSyncChange)
+    .on('paused', this.onSyncPaused)
+    .on('error', this.onSyncError);
+}).on('error', this.onSyncError);
+    // this.db.sync(this.remote, options);
+  }
+  onSyncChange(arg0: string, onSyncChange: any): any {
+    throw new Error("Method not implemented.");
+  }
+  onSyncPaused(arg0: string, onSyncPaused: any): any {
+    throw new Error("Method not implemented.");
+  }
+  onSyncError(arg0: string, onSyncError: any): any {
+    throw new Error("Method not implemented.");
   }
   getObjectByType(type, id) {
     return this.getObjectById(id);

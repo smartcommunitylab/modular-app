@@ -1,0 +1,18 @@
+{
+    "HOME": "Home",
+    "RH": "Alberghi",
+    "Ristoranti":"Ristoranti",
+    "PATH": "Touristic Itineraries",
+    "EVENTS": "Events",
+    "MAP": "Map",
+    "alt_image_string":"Image not present",
+    "address_contacts":"Mappa",
+    "phone_contacts":"Telefono",
+    "url_contacts":"Sito",
+    "share_contacts":"Condividi",
+    "farmacie_label":"Farmacie",
+    "distance_label":"Distanza: ",
+    "trento_informa_label":"Informazioni dal Comune",
+    "avvisi_label":"Avvisi",
+    "empty_list_label":"Nessun elemento presente nella list"
+}

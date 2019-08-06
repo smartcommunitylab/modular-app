@@ -1,9 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DbService } from '../../services/db.service';
-import { ConfigService } from 'src/app/services/config.service';
 import { AlertController } from '@ionic/angular';
 import { GeoService } from 'src/app/services/geo.service';
+import { TranslateService } from '@ngx-translate/core';
+import { UtilsService } from '../../services/utils.service';
+import { CallNumber } from '@ionic-native/call-number/ngx';
+import { ConfigService } from '../../services/config.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-detail-path',
@@ -21,6 +25,9 @@ export class DetailPathPage implements OnInit {
   mapPoints: any = [];
   search = false;
   myPos: any = {};
+  altImage: any;
+  stringsContact: any;
+  paramsSubscription: any;
 
   constructor(
     private router: Router,
@@ -28,10 +35,15 @@ export class DetailPathPage implements OnInit {
     private dbService: DbService,
     private config: ConfigService,
     private alert: AlertController,
-    private geoSrv: GeoService
-    ) {
-      this.language = window[this.config.getAppModuleName()]['language'];
-    }
+    private geoSrv: GeoService,
+    private translate: TranslateService,
+    private utils: UtilsService,
+    private location: Location,
+    private callNumber: CallNumber
+  ) {
+    this.language = window[this.config.getAppModuleName()]['language'];
+    this.translate.use(this.language);
+  }
 
   private getPois(path: any) {
     path.steps.forEach(element => {
@@ -43,7 +55,7 @@ export class DetailPathPage implements OnInit {
       };
       this.dbService.getObjectByQuery(query).then(data => {
         if (data.docs[0]) {
-          this.fullPois.push(data.docs[0]);
+          this.fullPois.push(this.convertPois(data.docs[0]));
         }
       }).then(() => {
         this.showPois = this.fullPois;
@@ -54,14 +66,14 @@ export class DetailPathPage implements OnInit {
 
   ngOnInit() {
     if (window[this.config.getAppModuleName()]['geolocation'])
-    this.myPos = {
-      lat: window[this.config.getAppModuleName()]['geolocation']['lat'],
-      long: window[this.config.getAppModuleName()]['geolocation']['long']
-    };
-  else {
-    this.myPos = this.config.getDefaultPosition();
-  }
-    this.route.queryParams
+      this.myPos = {
+        lat: window[this.config.getAppModuleName()]['geolocation']['lat'],
+        long: window[this.config.getAppModuleName()]['geolocation']['long']
+      };
+    else {
+      this.myPos = this.config.getDefaultPosition();
+    }
+    this.paramsSubscription = this.route.queryParams
       .subscribe(params => {
         if (params) {
           const id = params.id.split(';')[0];
@@ -74,23 +86,92 @@ export class DetailPathPage implements OnInit {
         }
       });
   }
-
+  
+  ngOnDestroy(): void {
+    this.paramsSubscription.unsubscribe();
+  }
   ionViewDidEnter() {
-    const el = document.getElementById('tabs');
-    el.addEventListener('tabSelected', path => {
-      this.tabActived = (<any>path).detail;
-      if (this.tabActived === 'map') {
-        this.buildMapPoints();
-      }
-    });
-    window.addEventListener('pathSelected', target => {
-      this.goToPoi((<any>target).detail);
-    });
+    const element = document.getElementById('path');
+
+    // // const el = document.getElementById('tabs');
+    // element.addEventListener('tabSelected', path => {
+    //   this.tabActived = (<any>path).detail;
+    //   if (this.tabActived === 'map') {
+    //     this.buildMapPoints();
+    //   }
+    // });
+    // window.addEventListener('pathSelected', target => {
+    //   this.goToPoi((<any>target).detail);
+    // });
     window.addEventListener('actionSelected', target => {
       this.goToPoi((<any>target).detail);
     });
-  }
+    this.translate.get('alt_image_string').subscribe(
+      value => {
+        this.altImage = value;
+      }
+    );
+    this.config.getStringContacts(this.translate, this.language).then(strings => {
+      this.stringsContact = strings
+    });
+    if (element) {
+      element.addEventListener('expandeClick', async (returnId) => {
+        //go to detail
+        var id = (<any>returnId).detail
+        this.router.navigate(['/detail-poi'], { queryParams: { id: id, type: 'POI' } });
+        this.paramsSubscription.unsubscribe();
 
+      })
+
+      element.addEventListener('contactClick', async (contact) => {
+        // console.log(contact)
+        var contactParam = JSON.parse((<any>contact).detail)
+        if (contactParam.type == 'phone') {
+          this.callNumber.callNumber(contactParam.value, true)
+            .then(res => console.log('Launched dialer!', res))
+            .catch(err => console.log('Error launching dialer', err));
+        }
+        if (contactParam.type == 'address') {
+          this.utils.openAddressMap(contactParam.value);
+          console.log('vai all\'indirizzo' + contactParam.value);
+        }
+        if (contactParam.type == 'url') {
+          this.utils.openUrl(contactParam.value);
+          console.log('vai all\'indirizzo' + contactParam.value);
+        }
+        if (contactParam.type == 'share') {
+          this.utils.openShare(contactParam.value);
+          console.log('vai all\'indirizzo' + contactParam.value);
+        }
+      })
+    }
+  }
+  ionViewWillLeave() {
+    const element = document.getElementById('path');
+    if (element) {
+      //   element.removeEventListener('pathSelected',function(e) {
+      //     console.log(e);
+      // }, false);
+      element.removeEventListener('actionSelected', function (e) {
+        console.log(e);
+      }, false);
+      element.removeEventListener('expandeClick', function (e) {
+        console.log(e);
+      }, false);
+
+      element.removeEventListener('contactClick', function (e) {
+        console.log(e);
+      }, false);
+    }
+  }
+  goMap() {
+    localStorage.setItem('path', JSON.stringify(this.fullPois));
+    this.paramsSubscription.unsubscribe();
+    this.router.navigate(['/map-path'], { queryParams: { id: this.paths.id } });
+  }
+  goBack() {
+    this.location.back();
+  }
   buildLangPaths() {
     this.paths.description = this.paths.description[this.language];
     this.paths.info = this.paths.info[this.language];
@@ -98,28 +179,28 @@ export class DetailPathPage implements OnInit {
     this.paths.title = this.paths.title[this.language];
     this.paths.difficulty = this.paths.difficulty[this.language];
     console.log(this.paths)
-   // this.paths.contacts = {address: this.paths.address}
+    // this.paths.contacts = {address: this.paths.address}
   }
 
-  buildMapPoints() {
-    this.fullPois.forEach(element => {
-      this.mapPoints.push({
-        id: element._id,
-        lat: element.location[0],
-        lon: element.location[1],
-        name: element.title[this.language],
-        address: element.address[this.language],
-        distance: this.geoSrv.getDistanceKM(this.myPos, {lat: element.location[0], lon: element.location[1]})
-      });
-    });
-    this.mapPoints.push({
-      lat: this.myPos.lat,
-      lon: this.myPos.lon,
-      name: 'myPos',
-      distance: 0
-    });
-    this.mapPoints = JSON.stringify(this.mapPoints);
-  }
+  // buildMapPoints() {
+  //   this.fullPois.forEach(element => {
+  //     this.mapPoints.push({
+  //       id: element._id,
+  //       lat: element.location[0],
+  //       lon: element.location[1],
+  //       name: element.title[this.language],
+  //       address: element.address[this.language],
+  //       distance: this.geoSrv.getDistanceKM(this.myPos, {lat: element.location[0], lon: element.location[1]})
+  //     });
+  //   });
+  //   this.mapPoints.push({
+  //     lat: this.myPos.lat,
+  //     lon: this.myPos.lon,
+  //     name: 'myPos',
+  //     distance: 0
+  //   });
+  //   this.mapPoints = JSON.stringify(this.mapPoints);
+  // }
 
   goToPoi(id) {
     this.router.navigate(['/detail-poi'], { queryParams: { id: id } });
@@ -131,7 +212,7 @@ export class DetailPathPage implements OnInit {
   searchChanged(input: any) {
     const value = input.detail.target.value;
     const _this = this;
-    this.showPois = this.fullPois.filter(function(el) {
+    this.showPois = this.fullPois.filter(function (el) {
       return (el.title[_this.language].toLowerCase().indexOf(value.toLowerCase()) > -1);
     });
   }
@@ -171,20 +252,65 @@ export class DetailPathPage implements OnInit {
         {
           text: 'OK',
           handler: data => {
-             this.orderArray(data, _this);
+            this.orderArray(data, _this);
           }
         }
       ]
     });
 
-   await alert.present();
+    await alert.present();
+  }
+
+  convertPois(x) {
+    let tmp = '';
+    const poiElement: any = {};
+    if (x) {
+      if (x.title) {
+        poiElement.title = x.title[this.language];
+      }
+      if (x.classification) {
+        poiElement.classification = x.classification[this.language];
+      }
+      if (x.subtitle) {
+        poiElement.subtitle = x.subtitle[this.language];
+      }
+      if (x.description) {
+        poiElement.description = x.description[this.language];
+      }
+      if (x.image) {
+        poiElement.image = x.image;
+      }
+      if (x.id) {
+        poiElement.id = x.id;
+      }
+      if (x._id) {
+        poiElement.id = x._id;
+      }
+      if (x.url) {
+        poiElement.url = x.url;
+      }
+      if (x.contacts) {
+        if (x.contacts.phone) {
+          poiElement.phone = x.contacts.phone;
+        }
+        if (x.contacts.email) {
+          tmp += '<p>' + x.contacts.email + '</p>';
+          poiElement.email = x.contacts.email;
+        }
+      }
+      if (x.location) {
+        poiElement.location = x.location;
+      }
+      poiElement.infos = JSON.stringify(poiElement);
+    }
+    return poiElement;
   }
   orderArray(condition: string, _this: any) {
     if (condition.indexOf('asc') > -1) {
-      _this.showPois = this.fullPois.sort(function(a, b) { return a.title[_this.lang].localeCompare(b.title[_this.lang]); });
+      _this.showPois = this.fullPois.sort(function (a, b) { return a.title[_this.lang].localeCompare(b.title[_this.lang]); });
     } else {
-      _this.showPois = this.fullPois.sort(function(a, b) { return b.title[_this.lang].localeCompare(a.title[_this.lang]); });
+      _this.showPois = this.fullPois.sort(function (a, b) { return b.title[_this.lang].localeCompare(a.title[_this.lang]); });
     }
-     console.log(_this.showPois);
+    console.log(_this.showPois);
   }
 }

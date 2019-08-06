@@ -14,8 +14,8 @@ export class ConfigService {
   private moduleEntries: any;
   private allModuleEntries: any;
   private defaultPosition= {
-    lat:0,
-    long:0
+    lat:46.0748,
+    long:11.1217
   }
   constructor(private http: HttpClient) { }
 

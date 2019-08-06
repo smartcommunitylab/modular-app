@@ -231,6 +231,7 @@ export namespace Components {
     * Icona marker per "posizione attuale"
     */
     'mainMarkerIcon': string;
+    'mypos': string;
     /**
     * Icona marker POI
     */
@@ -245,6 +246,7 @@ export namespace Components {
     * Icona marker per "posizione attuale"
     */
     'mainMarkerIcon'?: string;
+    'mypos'?: string;
     'onPoiSelected'?: (event: CustomEvent) => void;
     /**
     * Icona marker POI

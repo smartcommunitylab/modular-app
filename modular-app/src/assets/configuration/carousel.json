@@ -10,7 +10,7 @@
       "en": "http://www.comune.trento.it/var/comunetn/storage/images/aree-tematiche/turismo/eventi/tutti-gli-eventi/festival-dell-economia-2018-lavoro-e-tecnologia/11107625-2-ita-IT/Festival-dell-Economia-2018-Lavoro-e-tecnologia.jpg",
       "de": "http://www.comune.trento.it/var/comunetn/storage/images/aree-tematiche/turismo/eventi/tutti-gli-eventi/festival-dell-economia-2018-lavoro-e-tecnologia/11107625-2-ita-IT/Festival-dell-Economia-2018-Lavoro-e-tecnologia.jpg"
     },
-    "url": "/detail-poi",
+    "url": "/detail-event",
     "objectIds":["5e9cbb1a9e52b8a93bc2cbca1d063d22"]
   },
   {
@@ -25,7 +25,7 @@
       "en": "http://www.comune.trento.it/var/comunetn/storage/images/applicazioni/comune-in-tasca/turista/in-evidenza/livetrento/9867529-1-ita-IT/Livetrento.jpg",
       "de": "http://www.comune.trento.it/var/comunetn/storage/images/applicazioni/comune-in-tasca/turista/in-evidenza/livetrento/9867529-1-ita-IT/Livetrento.jpg"
     },
-    "url": "/detail-poi",
+    "url": "/detail-event",
     "objectIds": [
       "48b624c0fc02e87c43728ca839ae50f5"
      ]
@@ -33,9 +33,9 @@
   {
     "id": "8cc43799380fcd360be1219b9fa6b152",
     "name": {
-      "it": "Highlilghts",
-      "en": "Highlilghts",
-      "de": "Highlilghts"
+      "it": "Museum Pass",
+      "en": "Museum Pass",
+      "de": "Museum Pass"
     },
     "image": {
       "it": "http://www.comune.trento.it/var/comunetn/storage/images/applicazioni/comune-in-tasca/turista/in-evidenza/museum-pass/8622743-10-ita-IT/Museum-Pass.jpg",
@@ -44,37 +44,43 @@
     },
     "url": "/detail-poi",
     "objectIds": [
-     "48b624c0fc02e87c43728ca839ae50f5"
+      "text.3005"
     ]
   },
   {
     "name": {
-      "it": "Restaurants & Hotel",
-      "en": "Restaurants & Hotel",
-      "de": "Restaurants & Hotel"
+      "it": "Muse",
+      "en": "Muse",
+      "de": "Muse"
     },
     "image": {
       "it": "http://www.comune.trento.it/var/comunetn/storage/images-versioned/8554673/1-ita-IT/Muse1.jpg",
       "en": "http://www.comune.trento.it/var/comunetn/storage/images-versioned/8554673/1-ita-IT/Muse1.jpg",
       "de": "http://www.comune.trento.it/var/comunetn/storage/images-versioned/8554673/1-ita-IT/Muse1.jpg"
     },
-    "url": "/home",
-    "icon": "home"
+    "url": "/detail-poi",
+    "objectIds": [
+      "cultura.72"
+    ]
+
 
   },
   {
     "name": {
-      "it": "Events",
-      "en": "Events",
-      "de": "Events"
+      "it": "Come arrivatre a Trento",
+      "en": "Come arrivatre a Trento",
+      "de": "Come arrivatre a Trento"
     },
     "image": {
       "it": "http://www.comune.trento.it/var/comunetn/storage/images/applicazioni/comune-in-tasca/turista/in-evidenza/come-arrivare-a-trento/8622728-36-ita-IT/Come-arrivare-a-Trento.jpg",
       "en": "http://www.comune.trento.it/var/comunetn/storage/images/applicazioni/comune-in-tasca/turista/in-evidenza/come-arrivare-a-trento/8622728-36-ita-IT/Come-arrivare-a-Trento.jpg",
       "de": "http://www.comune.trento.it/var/comunetn/storage/images/applicazioni/comune-in-tasca/turista/in-evidenza/come-arrivare-a-trento/8622728-36-ita-IT/Come-arrivare-a-Trento.jpg"
     },
-    "url": "/home",
-    "icon": "home"
+    "url": "/detail-poi",
+    "objectIds": [
+      "4b8834e1c27b237c07faebc96d8dab37"
+    ]
+
 
   }
 ]

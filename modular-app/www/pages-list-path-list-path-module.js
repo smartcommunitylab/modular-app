@@ -79,7 +79,7 @@ var ListPathPageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header no-border>\n    <ion-toolbar>\n      <ion-buttons slot=\"start\">\n          <ion-back-button></ion-back-button>\n        </ion-buttons>\n      <ion-title>\n          {{'PATH'|translate}}\n        </ion-title>\n    </ion-toolbar>\n  </ion-header>\n\n<ion-content padding>\n  <ion-list no-lines id=\"path-list\">\n    <div *ngFor=\"let poi of pois\">      \n      <wc-path-list-el type=\"PATH\" [id]=\"poi.id\" [img]=\"poi.image\" [title]=\"poi.title\" [text]=\"poi.subtitle\" main-color=\"red\"></wc-path-list-el>\n    </div>\n  </ion-list>\n</ion-content>\n"
+module.exports = "<ion-header>\n    <ion-toolbar>\n        <ion-searchbar style=\"display: none\" showCancelButton animated (search)=\"toggleSearch()\"\n        (ionInput)=\"searchChanged($event)\" (ionCancel)=\"toggleSearch()\"></ion-searchbar>\n      <ion-buttons slot=\"start\">\n          <ion-back-button></ion-back-button>\n        </ion-buttons>\n        <ion-buttons slot=\"end\">\n            <ion-button (click)=\"toggleSearch()\">\n              <ion-icon name=\"search\"></ion-icon>\n            </ion-button>\n          </ion-buttons>\n      <ion-title>\n          {{'PATH'|translate}}\n        </ion-title>\n    </ion-toolbar>\n  </ion-header>\n\n<ion-content padding>\n  <ion-list no-lines id=\"path-list\">\n    <div *ngFor=\"let poi of pois\">      \n      <wc-path-list-el type=\"PATH\" [id]=\"poi.id\" [img]=\"poi.image\" [title]=\"poi.title\" [text]=\"poi.subtitle\" main-color=\"#11b3ef\" desc-color=\"#707070\"></wc-path-list-el>\n    </div>\n  </ion-list>\n</ion-content>\n"
 
 /***/ }),
 
@@ -90,7 +90,7 @@ module.exports = "<ion-header no-border>\n    <ion-toolbar>\n      <ion-buttons 
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL21vZHVsZS1jb211bmUvcGFnZXMvbGlzdC1wYXRoL2xpc3QtcGF0aC5wYWdlLnNjc3MifQ== */"
+module.exports = "ion-searchbar {\n  position: fixed;\n  top: 58px;\n  z-index: 3; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL2NoaW44L0RvY3VtZW50cy93b3JrL21vZHVsYXJBcHAvbW9kdWxhci1hcHAvc3JjL2FwcC9tb2R1bGUtY29tdW5lL3BhZ2VzL2xpc3QtcGF0aC9saXN0LXBhdGgucGFnZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksZ0JBQWU7RUFDZixVQUFTO0VBQ1QsV0FBVSxFQUNiIiwiZmlsZSI6InNyYy9hcHAvbW9kdWxlLWNvbXVuZS9wYWdlcy9saXN0LXBhdGgvbGlzdC1wYXRoLnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbImlvbi1zZWFyY2hiYXIge1xuICAgIHBvc2l0aW9uOiBmaXhlZDtcbiAgICB0b3A6IDU4cHg7XG4gICAgei1pbmRleDogMztcbn0iXX0= */"
 
 /***/ }),
 
@@ -132,31 +132,43 @@ var ListPathPage = /** @class */ (function () {
         this.route = route;
         this.translate = translate;
         this.pois = [];
+        this.fullPois = [];
         this.language = 'it';
+        this.doneTypingInterval = 500;
+        this.search = false;
         this.translate.use(this.language);
     }
     ListPathPage.prototype.ngOnInit = function () {
-        var _this = this;
+        var _this_1 = this;
         this.route.queryParams
             .subscribe(function (params) {
             console.log(params);
             if (params) {
                 var cat = JSON.parse(params.category);
-                _this.category = cat;
+                _this_1.category = cat;
             }
         });
     };
     ListPathPage.prototype.ionViewDidEnter = function () {
-        var _this = this;
+        var _this_1 = this;
         if (this.category && this.category.query) {
             this.dbService.getObjectByQuery(this.category.query).then(function (data) {
-                _this.pois = data.docs.map(function (x) { return _this.convertPois(x); });
+                _this_1.pois = data.docs.map(function (x) { return _this_1.convertPois(x); });
+                _this_1.fullPois = _this_1.pois;
             });
         }
         var el = document.getElementById('path-list');
         el.addEventListener('pathSelected', function (path) {
-            _this.goToDetail(path.detail);
+            _this_1.goToDetail(path.detail);
         });
+    };
+    ListPathPage.prototype.ionViewWillLeave = function () {
+        var el = document.getElementById('path-list');
+        if (el) {
+            el.removeEventListener('pathSelected', function (e) {
+                console.log(e);
+            }, false);
+        }
     };
     ListPathPage.prototype.convertPois = function (x) {
         var poiElement = {};
@@ -178,6 +190,29 @@ var ListPathPage = /** @class */ (function () {
             }
         }
         return poiElement;
+    };
+    ListPathPage.prototype.toggleSearch = function () {
+        this.search = !this.search;
+        var searchbar = document.querySelector('ion-searchbar');
+        if (searchbar.style.display === 'none') {
+            searchbar.style.display = 'unset';
+            searchbar.setFocus();
+        }
+        else {
+            searchbar.style.display = 'none';
+            this.pois = this.fullPois;
+        }
+    };
+    ListPathPage.prototype.searchChanged = function (input) {
+        var _this_1 = this;
+        clearTimeout(this.typingTimer);
+        this.typingTimer = setTimeout(function () {
+            var value = input.detail.target.value;
+            var _this = _this_1;
+            _this_1.pois = _this_1.fullPois.filter(function (el) {
+                return (el.title.toLowerCase().indexOf(value.toLowerCase()) > -1);
+            });
+        }, this.doneTypingInterval);
     };
     ListPathPage.prototype.goToDetail = function (id) {
         this.router.navigate(['/detail-path'], { queryParams: { id: id } });
