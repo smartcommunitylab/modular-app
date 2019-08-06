@@ -27,6 +27,7 @@ export class HomeTrasportiPage extends MainPage implements OnInit {
   elements: any = [];
   gridRows: any[];
   @ViewChild(IonContent) content: IonContent;
+  actualVisualized: string;
 
   constructor(private router: Router, private transportService: TransportService, private loadingController: LoadingController, public translate: TranslateService, private dbService: DbService, private config: ConfigService) {
     super(translate);
@@ -67,17 +68,26 @@ export class HomeTrasportiPage extends MainPage implements OnInit {
       row.push({});
     }
     this.gridRows = gridRows;
+    this.actualVisualized = this.elements[0]
+
   }
   selectInternalElement(ref) {
     var elem: any = document.getElementsByClassName(ref.state);
     if (elem.length > 0) {
-      // let yOffset = elem[0].offsetTop;
-      let yOffset=elem[0].getBoundingClientRect().top + window.scrollY
-      this.content.scrollToPoint(0, yOffset, 1000)
-      // var scrollheight = elem[0].getBoundingClientRect().top;
-      // this.content.scrollToPoint(0, scrollheight, 1000);
+      let yOffset = elem[0].offsetTop;
+      this.content.scrollToPoint(0, yOffset, 0)
     }
   }
+
+  public onIntersection({ target, visible }: { target: Element; visible: boolean }): void {
+    if (visible && this.actualVisualized != target.className)
+      this.actualVisualized = target.className;
+    console.log(target + "" + visible);
+  }
+  isSelected(category) {
+    return category.state == this.actualVisualized;
+  }
+
   compareElements(i) {
     if (i == 0)
       return true

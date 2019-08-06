@@ -16,39 +16,33 @@
       </ion-fab> -->
   <div class="wrapper">
     <div class="scrolling-wrapper-flexbox loop" ng-if="primaryLinks.length>0">
-      <ion-chip *ngFor="let m of primaryLinks" (click)="selectInternalElement(m)">
-        <ion-icon class="interaction" name="{{m.icon}}"></ion-icon>
-        <ion-label class="interaction">{{m.label|translate}}</ion-label>
+      <ion-chip *ngFor="let m of primaryLinks" (click)="selectInternalElement(m)" [ngClass]="{'categorySelected': isSelected(m)}">
+        <ion-icon class="interaction" name="{{m.icon}}" [ngClass]="{'categorySelected': isSelected(m)}"></ion-icon>
+        <ion-label class="interaction" [ngClass]="{'categorySelected': isSelected(m)}">{{m.label|translate}}</ion-label>
       </ion-chip>
     </div>
   </div>
   <div class="line-container">
     <ion-list class="route-list space-from-top">
       <div *ngFor="let elem of elements; let i = index">
-        <ion-item *ngIf="compareElements(i)" class="label-type ion-text-center">
-          <div>{{getLabel(i)|translate}}</div>
-        </ion-item>
-        <ion-item>
-          <div class="{{elem.ref}}" (click)="selectElement(elem)">
-            <div class="card card-tt" color>
-              <div class="line-tt" [ngStyle]="getStyle(elem)">
-                <span *ngIf="inside(elem.title)">{{elem.title}}</span>
+        <div class="{{elem.ref}}" inViewport [inViewportOptions]="{ threshold: [0] }"
+          (inViewportAction)="onIntersection($event)">
+          <ion-item *ngIf="compareElements(i)" class="label-type ion-text-center">
+            <div>{{getLabel(i)|translate}}</div>
+          </ion-item>
+          <ion-item>
+            <div class="{{elem.ref}}" (click)="selectElement(elem)">
+              <div class="card card-tt" color>
+                <div class="line-tt" [ngStyle]="getStyle(elem)">
+                  <span *ngIf="inside(elem.title)">{{elem.title}}</span>
+                </div>
+                <span class="name-line" *ngIf="!inside(elem.title)">{{elem.title}}</span>
+                <span class="name-line" *ngIf="titleisPresent(elem)">{{elem.group.routes[0].title}}</span>
               </div>
-              <span  class="name-line" *ngIf="!inside(elem.title)">{{elem.title}}</span>
-              <span  class="name-line"  *ngIf="titleisPresent(elem)">{{elem.group.routes[0].title}}</span>
             </div>
-          </div>
-        </ion-item>
+          </ion-item>
+        </div>
       </div>
     </ion-list>
   </div>
-
-  <!-- <ion-list class="home-list" ng-if="primaryLinks.length>0">
-    <ion-item *ngFor="let m of primaryLinks"  routerLink="{{m.state}}">
-        <ion-label>
-          <h3>{{m.label|translate}}</h3>
-        </ion-label>
-        <ion-icon slot="start" name="{{m.icon}}"></ion-icon>
-      </ion-item>
-  </ion-list> -->
 </ion-content>
