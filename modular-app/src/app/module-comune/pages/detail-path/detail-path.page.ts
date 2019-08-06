@@ -53,13 +53,15 @@ export class DetailPathPage implements OnInit {
           'localId': element
         }
       };
-      this.dbService.getObjectByQuery(query).then(data => {
-        if (data.docs[0]) {
-          this.fullPois.push(this.convertPois(data.docs[0]));
-        }
-      }).then(() => {
-        this.showPois = this.fullPois;
-        this.isLoading = false;
+      this.dbService.synch().then(() => {
+        this.dbService.getObjectByQuery(query).then(data => {
+          if (data.docs[0]) {
+            this.fullPois.push(this.convertPois(data.docs[0]));
+          }
+        }).then(() => {
+          this.showPois = this.fullPois;
+          this.isLoading = false;
+        });
       });
     });
   }
@@ -78,15 +80,17 @@ export class DetailPathPage implements OnInit {
         if (params) {
           const id = params.id.split(';')[0];
           this.isLoading = true;
-          this.dbService.getObjectById(id).then(data => {
-            this.paths = data.docs[0];
-            this.buildLangPaths();
-            this.getPois(this.paths);
-          });
+          this.dbService.synch().then(() => {
+            this.dbService.getObjectById(id).then(data => {
+              this.paths = data.docs[0];
+              this.buildLangPaths();
+              this.getPois(this.paths);
+            });
+          })
         }
       });
   }
-  
+
   ngOnDestroy(): void {
     this.paramsSubscription.unsubscribe();
   }

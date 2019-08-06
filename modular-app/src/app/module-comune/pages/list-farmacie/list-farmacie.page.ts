@@ -34,7 +34,7 @@ export class ListFarmaciePage implements OnInit {
   stringsContact: any;
   distanceLabel: string;
   farmacieTurno: string;
-  turno:boolean=true;
+  turno: boolean = true;
   constructor(
     private modalController: ModalController,
     private config: ConfigService,
@@ -119,29 +119,22 @@ export class ListFarmaciePage implements OnInit {
 
         }
       };
-      this.dbService.getObjectByQuery(query).then((data) => {
-        this.fullPois = data.docs.map(x => this.convertPois(x));
-        this.addDistance();
-        this.addFarmacieTurno();
-        this.subCategories(this.fullPois);
-        this.buildShowPois();
-        this.tags = this.buildFilter();
-        this.orderArray('near', this);
-        this.isLoading = false;
-      })
-      // .then(x => {
-      //   query = { 'selector': { 'element-type': 'restaurant-item' } };
-      //   this.dbService.getObjectByQuery(query).then((data) => {
-      //     this.fullPois = this.fullPois.concat(data.docs.map(x => this.convertPois(x)));
-      //     this.subCategories(this.fullPois);
-      //     this.buildShowPois();
-      //     this.isLoading = false;
-      //   });
-      // });
+      this.dbService.synch().then(() => {
+        this.dbService.getObjectByQuery(query).then((data) => {
+          this.fullPois = data.docs.map(x => this.convertPois(x));
+          this.addDistance();
+          this.addFarmacieTurno();
+          this.subCategories(this.fullPois);
+          this.buildShowPois();
+          this.tags = this.buildFilter();
+          this.orderArray('near', this);
+          this.isLoading = false;
+        })
+      });
     }
   }
   closeTurno() {
-    this.turno=false;
+    this.turno = false;
   }
   addFarmacieTurno(): any {
     if (this.fullPois.length > 0)

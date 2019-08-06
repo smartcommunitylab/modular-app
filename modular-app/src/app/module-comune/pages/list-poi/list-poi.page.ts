@@ -78,23 +78,25 @@ export class ListPoiPage implements OnInit {
 
   ionViewDidEnter() {
     if (this.category && this.category.query) {
-      this.dbService.getObjectByQuery(this.category.query).then((data) => {
-        if (data.docs.length > 0) {
-          this.fullPois = data.docs.map(x => this.convertPois(x));
-          this.subCategories(this.fullPois);
-          this.buildShowPois();
-          this.tags = this.buildFilter();
-          // this.utils.hideLoading();
-        }
-        else {
-          this.emptyList = true;
-        }
-        this.isLoading = false;
-        console.log(this.showPois);
+      this.dbService.synch().then(() => {
+        this.dbService.getObjectByQuery(this.category.query).then((data) => {
+          if (data.docs.length > 0) {
+            this.fullPois = data.docs.map(x => this.convertPois(x));
+            this.subCategories(this.fullPois);
+            this.buildShowPois();
+            this.tags = this.buildFilter();
+            // this.utils.hideLoading();
+          }
+          else {
+            this.emptyList = true;
+          }
+          this.isLoading = false;
+          console.log(this.showPois);
 
-      }, (err)=> {
-        // this.utils.hideLoading();
-      });
+        }, (err) => {
+          // this.utils.hideLoading();
+        });
+      })
     }
     else {
       // this.utils.hideLoading();

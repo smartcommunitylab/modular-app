@@ -23,7 +23,7 @@ export class ListRHPage implements OnInit {
   language: string;
   category: any;
   private type: string;
-  firstAccess=true;
+  firstAccess = true;
   search = false;
   isLoading = true;
   fullCategories: any = [];
@@ -57,9 +57,9 @@ export class ListRHPage implements OnInit {
         lat: window[this.config.getAppModuleName()]['geolocation']['lat'],
         long: window[this.config.getAppModuleName()]['geolocation']['long']
       };
-      else {
-        this.mypos = this.config.getDefaultPosition();
-      }
+    else {
+      this.mypos = this.config.getDefaultPosition();
+    }
     this.translate.use(this.language);
     events.subscribe('radio:selected', x => {
       this.changeCategory(x);
@@ -75,59 +75,52 @@ export class ListRHPage implements OnInit {
           this.category = cat;
         }
       });
-      const element = document.getElementById('poi-list');
-      this.translate.get('alt_image_string').subscribe(
-        value => {
-          this.altImage = value;
-        }
-      );
-       this.config.getStringContacts(this.translate,this.language).then(strings => {
-        this.stringsContact = strings
-      });
-      element.addEventListener('contactClick', async (contact) => {
-        // console.log(contact)
-        var contactParam = JSON.parse((<any>contact).detail)
-        if (contactParam.type == 'phone') {
-          this.callNumber.callNumber(contactParam.value, true)
-            .then(res => console.log('Launched dialer!', res))
-            .catch(err => console.log('Error launching dialer', err));
-        }
-        if (contactParam.type == 'address') {
-          this.utils.openAddressMap(contactParam.value);
-          console.log('vai all\'indirizzo' + contactParam.value);
-        }
-        if (contactParam.type == 'url') {
-          this.utils.openUrl(contactParam.value);
-          console.log('vai all\'indirizzo' + contactParam.value);
-        }
-        if (contactParam.type == 'share') {
-          this.utils.openShare(contactParam.value);
-          console.log('vai all\'indirizzo' + contactParam.value);
-        }
-      })
+    const element = document.getElementById('poi-list');
+    this.translate.get('alt_image_string').subscribe(
+      value => {
+        this.altImage = value;
+      }
+    );
+    this.config.getStringContacts(this.translate, this.language).then(strings => {
+      this.stringsContact = strings
+    });
+    element.addEventListener('contactClick', async (contact) => {
+      // console.log(contact)
+      var contactParam = JSON.parse((<any>contact).detail)
+      if (contactParam.type == 'phone') {
+        this.callNumber.callNumber(contactParam.value, true)
+          .then(res => console.log('Launched dialer!', res))
+          .catch(err => console.log('Error launching dialer', err));
+      }
+      if (contactParam.type == 'address') {
+        this.utils.openAddressMap(contactParam.value);
+        console.log('vai all\'indirizzo' + contactParam.value);
+      }
+      if (contactParam.type == 'url') {
+        this.utils.openUrl(contactParam.value);
+        console.log('vai all\'indirizzo' + contactParam.value);
+      }
+      if (contactParam.type == 'share') {
+        this.utils.openShare(contactParam.value);
+        console.log('vai all\'indirizzo' + contactParam.value);
+      }
+    })
   }
 
   ionViewDidEnter() {
 
     if (this.category) {
       let query = { 'selector': { 'element-type': 'hotel-item' } };
-      this.dbService.getObjectByQuery(query).then((data) => {
-        this.fullPois = data.docs.map(x => this.convertPois(x));
-        this.subCategories(this.fullPois);
-        this.buildShowPois();
-        this.tags = this.buildFilter();
-        this.orderArray('near', this);
-        this.isLoading = false;
-      })
-      // .then(x => {
-      //   query = { 'selector': { 'element-type': 'restaurant-item' } };
-      //   this.dbService.getObjectByQuery(query).then((data) => {
-      //     this.fullPois = this.fullPois.concat(data.docs.map(x => this.convertPois(x)));
-      //     this.subCategories(this.fullPois);
-      //     this.buildShowPois();
-      //     this.isLoading = false;
-      //   });
-      // });
+      this.dbService.synch().then(() => {
+        this.dbService.getObjectByQuery(query).then((data) => {
+          this.fullPois = data.docs.map(x => this.convertPois(x));
+          this.subCategories(this.fullPois);
+          this.buildShowPois();
+          this.tags = this.buildFilter();
+          this.orderArray('near', this);
+          this.isLoading = false;
+        })
+      });
     }
   }
 
@@ -141,15 +134,15 @@ export class ListRHPage implements OnInit {
   }
 
   buildShowPois(filters?) {
-    this.showPois=[];
+    this.showPois = [];
     this.fullCategories.forEach(e => {
       this.fullPois.forEach(p => {
         if (!this.showPois[e]) {
           this.showPois[e] = [];
         }
-        if (p.category === e && filters? filters.filter(item=> {
-          return (item.isChecked && p.classification==item.value)
-        }).length>0:true) {
+        if (p.category === e && filters ? filters.filter(item => {
+          return (item.isChecked && p.classification == item.value)
+        }).length > 0 : true) {
           this.showPois[e].push(p);
         }
       });
@@ -227,13 +220,13 @@ export class ListRHPage implements OnInit {
   doneTypingInterval = 500;  //time in ms, 5 second for example
   toggleSearch() {
     this.search = !this.search;
-      const searchbar = document.querySelector('ion-searchbar');
-      if (searchbar.style.display === 'none') {
-        searchbar.style.display = 'unset';
-        searchbar.setFocus();
-      } else {
-        searchbar.style.display = 'none';
-      }
+    const searchbar = document.querySelector('ion-searchbar');
+    if (searchbar.style.display === 'none') {
+      searchbar.style.display = 'unset';
+      searchbar.setFocus();
+    } else {
+      searchbar.style.display = 'none';
+    }
   }
   oneElement(category) {
     return (this.showPois[category].length > 0)
@@ -241,13 +234,13 @@ export class ListRHPage implements OnInit {
   searchChanged(input: any) {
     clearTimeout(this.typingTimer);
     this.typingTimer = setTimeout(() => {
-    const value = input.detail.target.value;
-    const _this = this;
-    _this.categories.forEach(c => {
-      this.showPois[c] = this.fullPois.filter(function (el) {
-        return (el.title.toLowerCase().indexOf(value.toLowerCase()) > -1);
+      const value = input.detail.target.value;
+      const _this = this;
+      _this.categories.forEach(c => {
+        this.showPois[c] = this.fullPois.filter(function (el) {
+          return (el.title.toLowerCase().indexOf(value.toLowerCase()) > -1);
+        });
       });
-    });
     }, this.doneTypingInterval);
 
   }
@@ -264,14 +257,13 @@ export class ListRHPage implements OnInit {
       .then((filters) => {
 
         this.firstAccess = true;
-        var even = function(element) {
+        var even = function (element) {
           // checks whether an element is even
           return element.isChecked;
         };
-        this.tags=filters.data;
+        this.tags = filters.data;
 
-        if (filters.data.some(even))
-        {
+        if (filters.data.some(even)) {
           this.firstAccess = false;
           this.buildShowPois(this.tags)
 
@@ -279,41 +271,41 @@ export class ListRHPage implements OnInit {
           this.buildShowPois()
 
         }
-    });
+      });
     return await modal.present();
     //this.buildAlert('filter');
   }
 
-  
+
   buildFilter(): any {
     var array = this.fullPois.map(item => item.classification);
-    var newArray= array.filter((value, index, self) =>{
-     return self.indexOf(value) === index
+    var newArray = array.filter((value, index, self) => {
+      return self.indexOf(value) === index
 
     })
-    var value = this.firstAccess? false:true;
-    var returnArray = newArray.map(item =>{
+    var value = this.firstAccess ? false : true;
+    var returnArray = newArray.map(item => {
       return {
-        "value":item,
-        "isChecked":value
+        "value": item,
+        "isChecked": value
       }
     })
- return returnArray;
+    return returnArray;
   }
   removeTag(tag) {
-    this.tags = this.tags.filter(item => item.value != tag.value )
+    this.tags = this.tags.filter(item => item.value != tag.value)
     this.firstAccess = true;
-        var even = function(element) {
-          // checks whether an element is even
-          return element.isChecked;
-        };
-        if (this.tags.some(even))
-        {
-          this.firstAccess = false;
-          this.buildShowPois(this.tags);
+    var even = function (element) {
+      // checks whether an element is even
+      return element.isChecked;
+    };
+    if (this.tags.some(even)) {
+      this.firstAccess = false;
+      this.buildShowPois(this.tags);
 
-        } else {
-    this.buildShowPois();}
+    } else {
+      this.buildShowPois();
+    }
   }
   // toggleSearch() {
   //   this.search = !this.search;

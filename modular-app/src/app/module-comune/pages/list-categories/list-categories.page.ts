@@ -40,12 +40,14 @@ export class ListCategoriesPage implements OnInit {
                 this.categories = this.categories.map(x => this.convertCategories(x));
                 this.categories.forEach(element => {
                   if (element && element.query) {
-                    this.dbService.getObjectByQuery(element.query).then((data) => {
-                      this.fullPois = data.docs.map(x => this.convertPois(x));
-                      this.subCategories(this.fullPois);
-                      this.buildShowPois();
-                      this.isLoading = false;
-                      console.log(this.showPois);
+                    this.dbService.synch().then(() => {
+                      this.dbService.getObjectByQuery(element.query).then((data) => {
+                        this.fullPois = data.docs.map(x => this.convertPois(x));
+                        this.subCategories(this.fullPois);
+                        this.buildShowPois();
+                        this.isLoading = false;
+                        console.log(this.showPois);
+                      });
                     });
                   }
                   const el = document.getElementById('poi-list');
@@ -58,10 +60,10 @@ export class ListCategoriesPage implements OnInit {
               }
             });
           } else {
-            const tmp = {query: {'selector': {'element-type': 'itinerary-item'}, type: 'itineraries'}};
+            const tmp = { query: { 'selector': { 'element-type': 'itinerary-item' }, type: 'itineraries' } };
             this.goToCategory(tmp);
           }
-      }
+        }
       });
 
   }
@@ -104,7 +106,7 @@ export class ListCategoriesPage implements OnInit {
       if (x.eventTiming) {
         poiElement.time = x.eventTiming[this.language];
       }
-      if (x.info)  {
+      if (x.info) {
         poiElement.info = x.info[this.language];
       }
       if (x.address) {

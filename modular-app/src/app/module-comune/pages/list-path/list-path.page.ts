@@ -34,10 +34,12 @@ export class ListPathPage implements OnInit {
   }
   ionViewDidEnter() {
     if (this.category && this.category.query) {
-      this.dbService.getObjectByQuery(this.category.query).then((data) => {
-        this.pois = data.docs.map(x => this.convertPois(x));
-        this.fullPois = this.pois;
-      });
+      this.dbService.synch().then(() => {
+        this.dbService.getObjectByQuery(this.category.query).then((data) => {
+          this.pois = data.docs.map(x => this.convertPois(x));
+          this.fullPois = this.pois;
+        });
+      })
     }
     const el = document.getElementById('path-list');
     el.addEventListener('pathSelected', path => {

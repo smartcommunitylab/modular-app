@@ -9,25 +9,22 @@ PouchDB.plugin(PouchDBFind);
   providedIn: 'root'
 })
 export class DbService {
-
-
-
   elements: any = {};
-
   pois: any;
   gallery: any;
   categories: any;
   menu: any;
   db: any;
   remote: any;
+  opts = { live: true, retry: true };
   contentTypes: any;
   constructor() {
 
     this.db = new PouchDB('comune-in-tasca');
 
     this.remote = 'http://192.168.42.201:5984/comune-in-tasca';
-                  // 'http://192.168.1.197:5984/comune-in-tasca'
-                  // 'http://127.0.0.1:5984/comune-in-tasca';
+    // 'http://192.168.1.197:5984/comune-in-tasca'
+    // 'http://127.0.0.1:5984/comune-in-tasca';
 
     this.contentTypes = {
       'content': 'content-item',
@@ -44,19 +41,10 @@ export class DbService {
       retry: true,
       continuous: true
     };
-    var url = 'http://192.168.42.201:5984/comune-in-tasca';
-var opts = { live: true, retry: true };
+    // var url = 'http://192.168.42.201:5984/comune-in-tasca';
+    // var opts = { live: true, retry: true };
 
-// do one way, one-off sync from the server until completion
-this.db.replicate.from(url).on('complete', info => {
-  // then two-way, continuous, retriable sync
-  console.log('finished synch')
-  this.db.sync(url, opts)
-    .on('change', this.onSyncChange)
-    .on('paused', this.onSyncPaused)
-    .on('error', this.onSyncError);
-}).on('error', this.onSyncError);
-    // this.db.sync(this.remote, options);
+
   }
   onSyncChange(arg0: string, onSyncChange: any): any {
     throw new Error("Method not implemented.");
@@ -69,22 +57,24 @@ this.db.replicate.from(url).on('complete', info => {
   }
   getObjectByType(type, id) {
     return this.getObjectById(id);
-    // let view = '';
-    // let classification = '';
-    // if (type) {
-    //   // set view
-    //   view = this.contentTypes[type];
-    // }
-    // if (view) {
-
-    //   return this.db.find({
-    //     selector: {
-    //       'element-type': view
-    //     }
-    //   });
-    // } else return Promise.reject();
   }
 
+  synch(): Promise<any> {
+    return new Promise((resolve, reject) => {
+      // do one way, one-off sync from the server until completion
+      this.db.replicate.from(this.remote).on('complete', info => {
+        // then two-way, continuous, retriable sync
+        resolve();
+        console.log('finished synch')
+        this.db.sync(this.remote, this.opts)
+          .on('change', this.onSyncChange)
+          .on('paused', this.onSyncPaused)
+          .on('error', this.onSyncError);
+      }).on('error', this.onSyncError);
+      // this.db.sync(this.remote, options);
+    })
+
+  }
   getMenuById(identificator) {
     return this.db.find({
       selector: {
@@ -147,15 +137,14 @@ this.db.replicate.from(url).on('complete', info => {
         });
       }
     }
-    if (query.selector){
-      if (query.selector['element-type']=='event-item')
-      {
+    if (query.selector) {
+      if (query.selector['element-type'] == 'event-item') {
         return this.db.find({
           selector: {
             'element-type': 'event-item'
-          // ,  "fromTime": {
-          //     "$gte": new Date().getTime()
-          //  }
+            // ,  "fromTime": {
+            //     "$gte": new Date().getTime()
+            //  }
           }
         });
       }

@@ -91,36 +91,29 @@ export class TouristServicesPage implements OnInit {
         this.router.navigate(['/detail-event'], { queryParams: { id: id, type: 'EVENT' } });
       })
 
+    }
   }
-}
 
- 
+
   ionViewDidEnter() {
 
     if (this.category) {
       let query = {
         'selector': {
           "classification.it": "Servizi"
-         
+
         }
       };
-      this.dbService.getObjectByQuery(query).then((data) => {
-        this.fullPois = data.docs.map(x => this.convertPois(x));
-        this.subCategories(this.fullPois);
-        this.buildShowPois();
-        this.tags = this.buildFilter();
-        this.orderArray('near', this);
-        this.isLoading = false;
+      this.dbService.synch().then(() => {
+        this.dbService.getObjectByQuery(query).then((data) => {
+          this.fullPois = data.docs.map(x => this.convertPois(x));
+          this.subCategories(this.fullPois);
+          this.buildShowPois();
+          this.tags = this.buildFilter();
+          this.orderArray('near', this);
+          this.isLoading = false;
+        })
       })
-      // .then(x => {
-      //   query = { 'selector': { 'element-type': 'restaurant-item' } };
-      //   this.dbService.getObjectByQuery(query).then((data) => {
-      //     this.fullPois = this.fullPois.concat(data.docs.map(x => this.convertPois(x)));
-      //     this.subCategories(this.fullPois);
-      //     this.buildShowPois();
-      //     this.isLoading = false;
-      //   });
-      // });
     }
   }
 
