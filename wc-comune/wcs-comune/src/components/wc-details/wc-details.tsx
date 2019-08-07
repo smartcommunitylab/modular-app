@@ -54,6 +54,8 @@ export class WcDetails {
   @Event() contactClick: EventEmitter;
   /*Emit when the expandable is clicked*/
   @Event() expandeClick: EventEmitter;
+  /*Emit when the tag is clicked*/
+  @Event() tagClicked: EventEmitter;
   @Element() element: HTMLElement;
 
   private icons = new Icons().iconList;
@@ -74,7 +76,8 @@ export class WcDetails {
     }
   }
 
-  contactClickHandler(type: string, value: string) {
+  contactClickHandler(type: string, value: string, event: UIEvent) {
+    event.stopPropagation();
     var returnValue = {
       type: type,
       value: value
@@ -82,12 +85,15 @@ export class WcDetails {
     this.contactClick.emit(JSON.stringify(returnValue));
     console.log("Cliccato: ", type, value);
   }
-
+  clickTag(tag,event:UIEvent) {
+    this.tagClicked.emit(tag)
+    event.stopPropagation();;
+  }
   buildTag() {
     if (this.contactsJSON.cat) {
       this.contactsJSON.cat.forEach(c => {
         this.tmptags.push(
-          <div class="tag"><p>{c}</p></div>
+          <div class="tag" onClick={(event: UIEvent) => this.clickTag(c,event)}><p>{c}</p></div>
         )
       });
     }
@@ -125,9 +131,9 @@ export class WcDetails {
     keys.forEach(k => {
       this.tmpContacts.push(
         <div class="external-container">
-          <div class="contact-container" onClick={() => k.indexOf('share') > -1 ?
-            this.contactClickHandler(k, this.contactsJSON['url']) :
-            this.contactClickHandler(k, this.contactsJSON[k])
+          <div class="contact-container" onClick={(event: UIEvent) => k.indexOf('share') > -1 ?
+            this.contactClickHandler(k, this.contactsJSON['url'],event) :
+            this.contactClickHandler(k, this.contactsJSON[k],event)
           }>
             <div class="icon icon-contact">
               {this.icons[k](this.secondColor)}
@@ -138,16 +144,17 @@ export class WcDetails {
       )
     });
   }
-  expande() {
+  expande(event: UIEvent) {
     console.log("expande");
     this.expandeClick.emit(this.id);
+    event.stopPropagation();
 
   }
   render() {
 
     return (
-      <div class={!this.expanse ? "card" : ""} onClick={() => this.expandable ?
-        this.expande()
+      <div class={!this.expanse ? "card" : ""} onClick={(event: UIEvent) => this.expandable ?
+        this.expande(event)
         : ""
       }>
         {
@@ -155,7 +162,7 @@ export class WcDetails {
             ? <div>
               {this.img
                 ? <div class="image">
-                  <img src={this.img} alt={this.altImage}></img>
+                  <img src={this.img}  alt={this.altImage}></img>
                 </div>
                 : ""
               }

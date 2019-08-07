@@ -164,6 +164,7 @@ export namespace Components {
     'language'?: string;
     'onContactClick'?: (event: CustomEvent) => void;
     'onExpandeClick'?: (event: CustomEvent) => void;
+    'onTagClicked'?: (event: CustomEvent) => void;
     /**
     * Colore tag e puslanti
     */

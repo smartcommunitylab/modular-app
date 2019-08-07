@@ -57,7 +57,7 @@ export class ListEventPage implements OnInit {
   }
 
   ngOnInit() {
-    // this.utils.presentLoading();
+    this.utils.presentLoading();
     this.route.queryParams
       .subscribe(params => {
         console.log(params);
@@ -97,7 +97,7 @@ export class ListEventPage implements OnInit {
             this.subCategories(this.fullPois);
             this.buildShowPois();
             this.tags = this.buildFilter();
-            // this.utils.hideLoading();
+            this.utils.hideLoading();
 
           }
           else {
@@ -106,11 +106,11 @@ export class ListEventPage implements OnInit {
           this.isLoading = false;
           console.log(this.showPois);
         }, (err) => {
-          // this.utils.hideLoading();
+          this.utils.hideLoading();
         });
       });
     } else {
-      // this.utils.hideLoading();
+      this.utils.hideLoading();
     }
     const element = document.getElementById('poi-list');
     this.translate.get('alt_image_string').subscribe(
@@ -128,6 +128,27 @@ export class ListEventPage implements OnInit {
         this.router.navigate(['/detail-event'], { queryParams: { id: id, type: 'EVENT' } });
       })
 
+      element.addEventListener('tagClicked', async (tag) => {
+        // console.log(contact)
+        var tagSelected = (<any>tag).detail;
+        this.tags = this.tags.map(item => {
+          if (item.value == tagSelected)
+            return {
+              "value": tagSelected,
+              "isChecked": true
+            }
+          else {
+            return {
+              "value": item.value,
+              "isChecked": item.isChecked
+            }
+          }
+        })
+        this.presentFilter = true;
+        this.firstAccess = false;
+        this.buildShowPois(this.tags)
+        console.log(tagSelected);
+      })
       element.addEventListener('contactClick', async (contact) => {
         // console.log(contact)
         var contactParam = JSON.parse((<any>contact).detail)
@@ -273,11 +294,11 @@ export class ListEventPage implements OnInit {
   doneTypingInterval = 500;  //time in ms, 5 second for example
   toggleSearch() {
     this.search = !this.search;
-    const searchbar = document.querySelector('ion-searchbar');
+    const searchbar = <HTMLElement>document.querySelector('.search-event');
     if (searchbar.style.display === 'none') {
       searchbar.style.display = 'unset';
       this.presentFilter = true;
-      searchbar.setFocus();
+      searchbar.focus();
     } else {
       searchbar.style.display = 'none';
       this.presentFilter = false;

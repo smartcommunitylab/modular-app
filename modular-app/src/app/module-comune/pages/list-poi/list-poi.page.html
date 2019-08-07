@@ -18,9 +18,10 @@
 </ion-content> -->
 
 <ion-header no-border>
+    <ion-searchbar class="search-poi" style="display: none" showCancelButton animated (search)="toggleSearch()"
+    (ionInput)="searchChanged($event)" (ionCancel)="toggleSearch()"></ion-searchbar>
     <ion-toolbar>
-      <ion-searchbar style="display: none" showCancelButton animated (search)="toggleSearch()"
-        (ionInput)="searchChanged($event)" (ionCancel)="toggleSearch()"></ion-searchbar>
+
       <ion-buttons slot="start">
         <ion-back-button class="interaction"></ion-back-button>
       </ion-buttons>
@@ -38,11 +39,11 @@
     </ion-toolbar>
   </ion-header>
   
-  <ion-grid style="height: 100%" *ngIf="isLoading">
+  <!-- <ion-grid style="height: 100%" *ngIf="isLoading">
     <ion-row justify-content-center align-items-center style="height: 100%">
       <ion-spinner name="circles"></ion-spinner>
     </ion-row>
-  </ion-grid>
+  </ion-grid> -->
   
   <ion-content [scrollEvents]="true" (ionScroll)="onScroll($event)">
   

@@ -21,7 +21,7 @@ export class UtilsService {
       // spinner: null,
       // message: `<img src="assets/animation/loading.gif" />`,
       // cssClass: 'custom-loading',
-      // duration: 2000
+      duration: 10000
     });
     return await loading.present();
   }

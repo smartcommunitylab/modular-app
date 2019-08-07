@@ -3,6 +3,7 @@ import { NavController, AlertController } from '@ionic/angular';
 import { DbService } from '../../services/db.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { UtilsService } from '../../services/utils.service';
 
 @Component({
   selector: 'app-list-path',
@@ -18,11 +19,12 @@ export class ListPathPage implements OnInit {
   doneTypingInterval = 500;
   search = false;
 
-  constructor(public navCtrl: NavController, public dbService: DbService, public alertCtrl: AlertController,
+  constructor(public navCtrl: NavController, private utils: UtilsService, public dbService: DbService, public alertCtrl: AlertController,
     private router: Router, private route: ActivatedRoute, private translate: TranslateService) {
     this.translate.use(this.language);
   }
   ngOnInit() {
+    this.utils.presentLoading();
     this.route.queryParams
       .subscribe(params => {
         console.log(params);
@@ -38,7 +40,14 @@ export class ListPathPage implements OnInit {
         this.dbService.getObjectByQuery(this.category.query).then((data) => {
           this.pois = data.docs.map(x => this.convertPois(x));
           this.fullPois = this.pois;
+          this.utils.hideLoading();
+
+        },err=> {
+          this.utils.hideLoading();
+
         });
+      }, err=> {
+        this.utils.hideLoading();
       })
     }
     const el = document.getElementById('path-list');
@@ -79,10 +88,10 @@ export class ListPathPage implements OnInit {
 
   toggleSearch() {
     this.search = !this.search;
-    const searchbar = document.querySelector('ion-searchbar');
+    const searchbar = <HTMLElement>document.querySelector('.search-path');
     if (searchbar.style.display === 'none') {
       searchbar.style.display = 'unset';
-      searchbar.setFocus();
+      searchbar.focus();
     } else {
       searchbar.style.display = 'none';
       this.pois = this.fullPois;

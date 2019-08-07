@@ -18,6 +18,7 @@ export class DbService {
   remote: any;
   opts = { live: true, retry: true };
   contentTypes: any;
+  MIN_SYNCH_TIME: number=60000;
   constructor() {
 
     this.db = new PouchDB('comune-in-tasca');
@@ -58,22 +59,43 @@ export class DbService {
   getObjectByType(type, id) {
     return this.getObjectById(id);
   }
-
+  lastTimeSynch() {
+    var date = new Date().getTime();
+    var last = parseInt(localStorage.getItem('UPDATE_SYNCH')|| '0');
+    return date-last
+  }
+  updateLastTimeSynch() {
+    localStorage.setItem('UPDATE_SYNCH',new Date().getTime().toString());
+  }
   synch(): Promise<any> {
     return new Promise((resolve, reject) => {
+      if (this.lastTimeSynch()>this.MIN_SYNCH_TIME){
       // do one way, one-off sync from the server until completion
-      this.db.replicate.from(this.remote).on('complete', info => {
-        // then two-way, continuous, retriable sync
+      this.db.sync(this.remote).on('complete',  ()=> {
+        this.updateLastTimeSynch();
         resolve();
-        console.log('finished synch')
-        this.db.sync(this.remote, this.opts)
-          .on('change', this.onSyncChange)
-          .on('paused', this.onSyncPaused)
-          .on('error', this.onSyncError);
-      }).on('error', this.onSyncError);
-      // this.db.sync(this.remote, options);
-    })
-
+      }).on('error', function (err) {
+        // boo, we hit an error!
+        resolve();
+      });
+    }
+      
+    //   this.db.replicate.from(this.remote).on('complete', info => {
+    //     // then two-way, continuous, retriable sync
+    //     this.updateLastTimeSynch();
+    //     resolve();
+    //     console.log('finished synch')
+    //   //   this.db.sync(this.remote, this.opts)
+    //   //     .on('change', this.onSyncChange)
+    //   //     .on('paused', this.onSyncPaused)
+    //   //     .on('error', this.onSyncError);
+    //   // }).on('error', this.onSyncError);
+    //   // // this.db.sync(this.remote, options);
+    // })
+    else {
+      resolve();
+    }
+  })
   }
   getMenuById(identificator) {
     return this.db.find({

@@ -68,6 +68,7 @@ export class ListFarmaciePage implements OnInit {
   }
 
   ngOnInit() {
+    this.utils.presentLoading();
     this.route.queryParams
       .subscribe(params => {
         console.log(params);
@@ -129,7 +130,13 @@ export class ListFarmaciePage implements OnInit {
           this.tags = this.buildFilter();
           this.orderArray('near', this);
           this.isLoading = false;
+          this.utils.hideLoading();
+
+        },err=> {
+          this.utils.hideLoading();
         })
+      }, err => {
+        this.utils.hideLoading();
       });
     }
   }
@@ -243,12 +250,17 @@ export class ListFarmaciePage implements OnInit {
   doneTypingInterval = 500;  //time in ms, 5 second for example
   toggleSearch() {
     this.search = !this.search;
-    const searchbar = document.querySelector('ion-searchbar');
+    const searchbar = <HTMLElement>document.querySelector('.search-farmacie');
     if (searchbar.style.display === 'none') {
       searchbar.style.display = 'unset';
-      searchbar.setFocus();
+      searchbar.focus();
     } else {
       searchbar.style.display = 'none';
+      this.categories.forEach(c => {
+        this.showPois[c] = this.fullPois.filter(function (el) {
+          return (el.category == c);
+        });
+      });
     }
   }
   oneElement(category) {

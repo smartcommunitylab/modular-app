@@ -32,6 +32,7 @@
 | -------------- | ----------- | ------------------- |
 | `contactClick` |             | `CustomEvent<void>` |
 | `expandeClick` |             | `CustomEvent<void>` |
+| `tagClicked`   |             | `CustomEvent<void>` |
 
 
 ----------------------------------------------

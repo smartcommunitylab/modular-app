@@ -53,7 +53,7 @@ export class DetailPathPage implements OnInit {
           'localId': element
         }
       };
-      this.dbService.synch().then(() => {
+      // this.dbService.synch().then(() => {
         this.dbService.getObjectByQuery(query).then(data => {
           if (data.docs[0]) {
             this.fullPois.push(this.convertPois(data.docs[0]));
@@ -61,12 +61,15 @@ export class DetailPathPage implements OnInit {
         }).then(() => {
           this.showPois = this.fullPois;
           this.isLoading = false;
+          this.utils.hideLoading();
+
         });
       });
-    });
+    // });
   }
 
   ngOnInit() {
+    this.utils.presentLoading();
     if (window[this.config.getAppModuleName()]['geolocation'])
       this.myPos = {
         lat: window[this.config.getAppModuleName()]['geolocation']['lat'],
@@ -86,8 +89,12 @@ export class DetailPathPage implements OnInit {
               this.buildLangPaths();
               this.getPois(this.paths);
             });
+          },err => {
+            this.utils.hideLoading();
           })
         }
+      }, err => {
+        this.utils.hideLoading();
       });
   }
 
