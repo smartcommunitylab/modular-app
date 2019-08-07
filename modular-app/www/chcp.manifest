@@ -25,19 +25,19 @@
   },
   {
     "file": "100.js",
-    "hash": "e12c6385b4fdcea51bc2a063aee34920"
+    "hash": "dc68566f922ec53c40b59d4f70a95cc1"
   },
   {
     "file": "100.js.map",
-    "hash": "21c7ef49e604d538b1c3d89ee5b1894d"
+    "hash": "81fa0af5f502098f1d53939352883e9e"
   },
   {
     "file": "101.js",
-    "hash": "2d7e139086e6683c3c4a3915d56f458b"
+    "hash": "3ce7857b9f1deb0b692aae95c239001f"
   },
   {
     "file": "101.js.map",
-    "hash": "e9576281317f22f6ef67afec354548ed"
+    "hash": "e65efaf047cd7d68c3ce57306702b9e5"
   },
   {
     "file": "102.js",
@@ -57,35 +57,35 @@
   },
   {
     "file": "104.js",
-    "hash": "5ccbbacbfb3b83de4bf51e389efea27c"
+    "hash": "06aa3cb94da5d00a889dd341e20634ba"
   },
   {
     "file": "104.js.map",
-    "hash": "22ad5a60f5a2927ad0ac9b1678e70fa8"
+    "hash": "af15ff3469634d37c1c1ad7ba86cd448"
   },
   {
     "file": "105.js",
-    "hash": "4af0c4b46e8960740f228dc802846633"
+    "hash": "e6cf10cfe1c196004a4527abfe445026"
   },
   {
     "file": "105.js.map",
-    "hash": "816f42808ab32b448847c6717b30b474"
+    "hash": "f2813939c4c5a682f2f0fad82c563652"
   },
   {
     "file": "106.js",
-    "hash": "ed66ef5bb1036799107c18647f2f7b9a"
+    "hash": "9e75b7f5263599157f985abfa7eab443"
   },
   {
     "file": "106.js.map",
-    "hash": "69b4ef341dd2d14fe6d3545fba20b4e3"
+    "hash": "f3cdf92c4109e2f478ed1658492be8a6"
   },
   {
     "file": "107.js",
-    "hash": "9bc425e16e1505a235c742b5b330e2cf"
+    "hash": "e682d7903d148bf361acc9f11acaaa9a"
   },
   {
     "file": "107.js.map",
-    "hash": "9f758087f4c235c353d53fe5495a3fb3"
+    "hash": "d281eb890e00ad6921bd4a1507ecd333"
   },
   {
     "file": "108.js",
@@ -177,19 +177,19 @@
   },
   {
     "file": "118.js",
-    "hash": "69f0697f3127623d073ab0c575f03c44"
+    "hash": "b9200ba89d88edb58a4a4df00f0e0fb4"
   },
   {
     "file": "118.js.map",
-    "hash": "a5db2db5fe1fef480987ac688cd5b293"
+    "hash": "8f604c1d2c5cea388153d8e13c0b62e5"
   },
   {
     "file": "119.js",
-    "hash": "57bcf15bbca1a035868f50c90624b65f"
+    "hash": "c5369d6af17bbaf1db0e6731747a59f4"
   },
   {
     "file": "119.js.map",
-    "hash": "597d8b860036813451f2a19989e7cbe9"
+    "hash": "d3298de3f955e8fcb7a4ed26a6978d8b"
   },
   {
     "file": "12.js",
@@ -337,35 +337,35 @@
   },
   {
     "file": "136.js",
-    "hash": "606fc5a85e4a4ef8ae9828479a04a8e9"
+    "hash": "3a7ff66632ad0bd909caa345ce047b97"
   },
   {
     "file": "136.js.map",
-    "hash": "e3ab1c698863cf028b868ee3c63a280f"
+    "hash": "965070d73b7c17cb091de2f2d01c657a"
   },
   {
     "file": "137.js",
-    "hash": "bb9d0b1e1c8112e34756e1c3f5ff0d14"
+    "hash": "051bf40755daa9d5825e49b1180e9db3"
   },
   {
     "file": "137.js.map",
-    "hash": "192500c9e406c6f97f7585d75821a913"
+    "hash": "b3e9213c1867bba4629ef83defe7298a"
   },
   {
     "file": "138.js",
-    "hash": "4261683597ea37d5da4f690937b4a0ca"
+    "hash": "ac804ecf233de1eae025d5c387390d80"
   },
   {
     "file": "138.js.map",
-    "hash": "8bcd70b77ac0463ec651580b7ac6bdbc"
+    "hash": "1317563fa062860f6c64008f44049708"
   },
   {
     "file": "139.js",
-    "hash": "e1a10b0c64f6e2172d5a30319ee0511f"
+    "hash": "0cee1aed1d2076f942915e54b40d83a0"
   },
   {
     "file": "139.js.map",
-    "hash": "cdfb67d363a35f80016d8ca4beca7aa5"
+    "hash": "bf24cba62e8ecf161e27ea2d25193fd7"
   },
   {
     "file": "14.js",
@@ -377,27 +377,27 @@
   },
   {
     "file": "140.js",
-    "hash": "52bb68283e76abc692c201dae64611e5"
+    "hash": "d6298a0ee7fc336543072751cd7e8891"
   },
   {
     "file": "140.js.map",
-    "hash": "97c4a6f64e4a9a0744c6c3f70c4b49d0"
+    "hash": "cecba507688db1c31530a32264eb6c85"
   },
   {
     "file": "141.js",
-    "hash": "72e091af823e28a2e423a931a9619617"
+    "hash": "1ce0b7bf472fd6f90fbc8e0ae87a53bf"
   },
   {
     "file": "141.js.map",
-    "hash": "f8d2c906f6de536269f2dfb1eb2223a3"
+    "hash": "1d0ad8df1d5a8b020a96a8b738da3fbc"
   },
   {
     "file": "142.js",
-    "hash": "9c430674455a238da70eb3556d52e8a8"
+    "hash": "5e0317690c0925cc3eb49c5c84b00e6d"
   },
   {
     "file": "142.js.map",
-    "hash": "62481ae16c105915fdfe4d7a21442125"
+    "hash": "d55d3f1ccdd0cdd72cf9f8a0f788bae6"
   },
   {
     "file": "143.js",
@@ -1257,19 +1257,23 @@
   },
   {
     "file": "98.js",
-    "hash": "cdf2116062dd83a67a317636df45e2aa"
+    "hash": "955d6d47fbc61da985ae05a373bafa36"
   },
   {
     "file": "98.js.map",
-    "hash": "790e0d0644a020266949206c64a9fd06"
+    "hash": "9cfd8e4f2e00c1c668c0f0bcd61301ab"
   },
   {
     "file": "99.js",
-    "hash": "0fc0f3d0a82ced50b5759dbd13580ee2"
+    "hash": "e27140be502eb507c1b4457506973b83"
   },
   {
     "file": "99.js.map",
-    "hash": "b2e5960cda0031347b293f8727dd0c9c"
+    "hash": "009deed400f1cfb5feb95c92ff77aeb1"
+  },
+  {
+    "file": "assets/animation/loading.gif",
+    "hash": "584b607f5c2ff075429dc0e7b8d142ef"
   },
   {
     "file": "assets/common/i18n/de.json",
@@ -1285,15 +1289,23 @@
   },
   {
     "file": "assets/comune/i18n/de.json",
-    "hash": "800bd01accaecc047f25aa938f3a68f4"
+    "hash": "92cab8c07693dcee4d92bbb42ab87067"
   },
   {
     "file": "assets/comune/i18n/en.json",
-    "hash": "ea4de098bf3680795ef579ca3da4bf7b"
+    "hash": "ddb7379530835814f6870d53f3764c4b"
   },
   {
     "file": "assets/comune/i18n/it.json",
-    "hash": "cce50b3863d1db0d24c8d21490b569f1"
+    "hash": "08e95f1bcc604ef5568af671435ecbd0"
+  },
+  {
+    "file": "assets/comune/img/download.svg",
+    "hash": "7d09c786cacc0fd65af608cd450099ea"
+  },
+  {
+    "file": "assets/comune/img/marker.png",
+    "hash": "a643766194316cc294f505a9036e30eb"
   },
   {
     "file": "assets/configuration/carousel.json",
@@ -1301,11 +1313,11 @@
   },
   {
     "file": "assets/configuration/default-profiles-module.json",
-    "hash": "9b53cacdc972a8377b16ac0a228c269d"
+    "hash": "9f16501e35197782dc15da89c967ac1d"
   },
   {
     "file": "assets/configuration/module-entries.json",
-    "hash": "2357a6ccf5dfd5fdba007eaee72fe8a2"
+    "hash": "25fbf144ce272245ff6e359e8ad24eb2"
   },
   {
     "file": "assets/configuration/side-menu.json",
@@ -1330,6 +1342,30 @@
   {
     "file": "assets/icon1.svg",
     "hash": "44764a28f0eed02682fa37111b2feb23"
+  },
+  {
+    "file": "assets/info/i18n/de.json",
+    "hash": "67d6facbecb161ea46d9adc69c90ff46"
+  },
+  {
+    "file": "assets/info/i18n/en.json",
+    "hash": "dccf981bf4819669fc0de791f82769bb"
+  },
+  {
+    "file": "assets/info/i18n/it.json",
+    "hash": "2fb209a478677e6ca2b2b33166d424da"
+  },
+  {
+    "file": "assets/info/info/i18n/de.json",
+    "hash": "da1dbd553f713f3eb96a9676e9a9b014"
+  },
+  {
+    "file": "assets/info/info/i18n/en.json",
+    "hash": "7c41b1ee7388721e6debe8ee7a8b8209"
+  },
+  {
+    "file": "assets/info/info/i18n/it.json",
+    "hash": "6e3fbc9afcc082026f85bcf342fc8418"
   },
   {
     "file": "assets/module-comune/i18n/de.json",
@@ -1401,15 +1437,15 @@
   },
   {
     "file": "common.js",
-    "hash": "ce74dbe110ea5d7e0ef252b6f6c9780e"
+    "hash": "3bec1b49343d886ce27c6cf727f4db0e"
   },
   {
     "file": "common.js.map",
-    "hash": "610a9f35bd4fd4dd81f3264b5a05f76b"
+    "hash": "2ef4df0fb454b9c8e9e1c47e8b14f1b0"
   },
   {
     "file": "cordova_plugins.js",
-    "hash": "cd6988b0bcab971cd9fcff119efe448a"
+    "hash": "5b25c1d2945a7b246bcfb996294059ad"
   },
   {
     "file": "cordova-js-src/android/nativeapiprovider.js",
@@ -1448,6 +1484,22 @@
     "hash": "0875944065c96773cfd76db7850657cd"
   },
   {
+    "file": "default~module-comune-pages-detail-event-detail-event-module~pages-detail-info-detail-info-module~pa~8d818793.js",
+    "hash": "f30fded2012b8d31f2ea8588e96d93e9"
+  },
+  {
+    "file": "default~module-comune-pages-detail-event-detail-event-module~pages-detail-info-detail-info-module~pa~8d818793.js.map",
+    "hash": "c60b3d2da2ebba44b4e0dc3d99763c87"
+  },
+  {
+    "file": "default~pages-detail-event-detail-event-module~pages-detail-info-detail-info-module~pages-detail-pat~3194840c.js",
+    "hash": "140e0cdb3709faecc248cc7745c5a556"
+  },
+  {
+    "file": "default~pages-detail-event-detail-event-module~pages-detail-info-detail-info-module~pages-detail-pat~3194840c.js.map",
+    "hash": "6f96ab46529e6d6b5c2ff7b27ded6940"
+  },
+  {
     "file": "default~pages-detail-info-detail-info-module~pages-detail-path-detail-path-module~pages-detail-poi-d~30701aed.js",
     "hash": "78ab79aaf740eed23f83662047dfac2e"
   },
@@ -1457,11 +1509,11 @@
   },
   {
     "file": "default~pages-detail-info-detail-info-module~pages-detail-path-detail-path-module~pages-detail-poi-d~9f8276b2.js",
-    "hash": "1ab55648143595ab39928555e2108473"
+    "hash": "4e45d96216813fd417e6474e357e8b20"
   },
   {
     "file": "default~pages-detail-info-detail-info-module~pages-detail-path-detail-path-module~pages-detail-poi-d~9f8276b2.js.map",
-    "hash": "89ae5a69f51f4d5c4abbfaa4bed040d2"
+    "hash": "8e7b302bbfa456817eba1dcc0e905c47"
   },
   {
     "file": "default~pages-home-ps-home-ps-module~pages-map-spots-map-spots-module.js",
@@ -1480,8 +1532,16 @@
     "hash": "2f8a7fbc73b811a5ce07672f5045fbc4"
   },
   {
+    "file": "default~pages-list-event-list-event-module~pages-list-poi-list-poi-module.js",
+    "hash": "4551a17ce0c40cd6ea4a7e4001227ce1"
+  },
+  {
+    "file": "default~pages-list-event-list-event-module~pages-list-poi-list-poi-module.js.map",
+    "hash": "0253638d01f6da61b16b497af0db54f2"
+  },
+  {
     "file": "index.html",
-    "hash": "4b26f0a030139e6902de7835deb43d10"
+    "hash": "0ae76f439b406b2a8236dc3f4135762d"
   },
   {
     "file": "layers-2x.png",
@@ -1513,15 +1573,47 @@
   },
   {
     "file": "main.js",
-    "hash": "ad8dcce4b400a8712c0e69e01d682081"
+    "hash": "d42e1a06543ce06de0347408887b1377"
   },
   {
     "file": "main.js.map",
-    "hash": "162de625845239bc869ac1d4205c2c0b"
+    "hash": "42d60d542f811895f17de7e4ac998715"
   },
   {
     "file": "marker-icon.png",
     "hash": "2273e3d8ad9264b7daa5bdbf8e6b47f8"
+  },
+  {
+    "file": "module-comune-pages-detail-event-detail-event-module.js",
+    "hash": "8576f3cc1c83a9e95848bf1354e2eb8c"
+  },
+  {
+    "file": "module-comune-pages-detail-event-detail-event-module.js.map",
+    "hash": "d8c5e3946207b93bdfa163f4da24d6ae"
+  },
+  {
+    "file": "module-comune-pages-list-food-filter-page-food-filter-page-food-module.js",
+    "hash": "b0e1d9564fd86803b20b20a07e8496d6"
+  },
+  {
+    "file": "module-comune-pages-list-food-filter-page-food-filter-page-food-module.js.map",
+    "hash": "78f5d06aaf4f8a42ea7f2c446ef05de2"
+  },
+  {
+    "file": "module-comune-pages-list-rh-filter-page-rh-filter-page-rh-module.js",
+    "hash": "00198b55a0675bee04c184351ef4d37e"
+  },
+  {
+    "file": "module-comune-pages-list-rh-filter-page-rh-filter-page-rh-module.js.map",
+    "hash": "ef7ed257af28691c86b6736bb6b6172a"
+  },
+  {
+    "file": "pages-detail-event-detail-event-module.js",
+    "hash": "b2fefc19c23b43d446c076d3bfb60a48"
+  },
+  {
+    "file": "pages-detail-event-detail-event-module.js.map",
+    "hash": "5e614f77c19b20d934316e9d36bc4b24"
   },
   {
     "file": "pages-detail-info-detail-info-module.js",
@@ -1533,19 +1625,19 @@
   },
   {
     "file": "pages-detail-path-detail-path-module.js",
-    "hash": "0020114c5a70ac88e39a45ca55e74a6b"
+    "hash": "a8a36f04d176e37ebb648050e0396d1a"
   },
   {
     "file": "pages-detail-path-detail-path-module.js.map",
-    "hash": "14694d8a153141ca526a72d94a7a6b45"
+    "hash": "a779ba1d6c19d278620f7ca1a4d46aa4"
   },
   {
     "file": "pages-detail-poi-detail-poi-module.js",
-    "hash": "c22db7d03eb0dd6c7309b179ce1cf00b"
+    "hash": "aa15a38ed9114768740a1c59cb200c9b"
   },
   {
     "file": "pages-detail-poi-detail-poi-module.js.map",
-    "hash": "d83025f78099477d7cf1bceb2833f21b"
+    "hash": "701e4bbe36a9f5dbc0955379a33843e8"
   },
   {
     "file": "pages-favourites-favourites-module.js",
@@ -1565,19 +1657,19 @@
   },
   {
     "file": "pages-home-common-home-common-module.js",
-    "hash": "7091447f7ad21aa248de705190787f50"
+    "hash": "80bdee70037f2aa3765ad637547d82e8"
   },
   {
     "file": "pages-home-common-home-common-module.js.map",
-    "hash": "2544c7d0f57e124f66d6128b32208d92"
+    "hash": "412530f1c059afb16d4965408e80170d"
   },
   {
     "file": "pages-home-home-module.js",
-    "hash": "18fe46bc6fd0237e9fc3aa4d6bbc9ead"
+    "hash": "bca38b8d22f55a19188e9045b9835926"
   },
   {
     "file": "pages-home-home-module.js.map",
-    "hash": "e0b5e001d092d2e256de0f973b961563"
+    "hash": "c43e84f4d73280db5d5a0cf07d980276"
   },
   {
     "file": "pages-home-ps-home-ps-module.js",
@@ -1589,19 +1681,19 @@
   },
   {
     "file": "pages-home-settings-home-settings-module.js",
-    "hash": "436dac2e283d95b295b270107d53c8e2"
+    "hash": "2c11bad9e2e65d89c77589a879775ebc"
   },
   {
     "file": "pages-home-settings-home-settings-module.js.map",
-    "hash": "20165295164a9bf1db65f592c77f19b1"
+    "hash": "7d4e8337d46dbf8120702ceef5bfa60c"
   },
   {
     "file": "pages-home-trasporti-home-trasporti-module.js",
-    "hash": "15521be315beb21b60458317f6b33700"
+    "hash": "4fc2031ac0d907f2ecad84c8c5952f99"
   },
   {
     "file": "pages-home-trasporti-home-trasporti-module.js.map",
-    "hash": "845b5754108f76591569729bf1ea596a"
+    "hash": "4a7cb1439974dbe561a033c03069bfbb"
   },
   {
     "file": "pages-list-categories-list-categories-module.js",
@@ -1613,43 +1705,67 @@
   },
   {
     "file": "pages-list-event-list-event-module.js",
-    "hash": "55f6df8697d2d74118de5b4e92fbc9c1"
+    "hash": "5fb3e753cee809c1714f48e7f00a4fce"
   },
   {
     "file": "pages-list-event-list-event-module.js.map",
-    "hash": "32a183ea9085b4bfe60580253e681e22"
+    "hash": "43663d6980d24ab7c98a3f6302e0e71f"
+  },
+  {
+    "file": "pages-list-farmacie-list-farmacie-module.js",
+    "hash": "be7abbbb0f5a0c59df22f4ca87e2f2ac"
+  },
+  {
+    "file": "pages-list-farmacie-list-farmacie-module.js.map",
+    "hash": "25d38f597c3d90c32a7e97d637fb01e3"
+  },
+  {
+    "file": "pages-list-food-filter-page-food-filter-page-food-module.js",
+    "hash": "1d36333d5888024af6928219f4704d89"
+  },
+  {
+    "file": "pages-list-food-filter-page-food-filter-page-food-module.js.map",
+    "hash": "24d5e1eb0a0f6588ca69b04253f51733"
   },
   {
     "file": "pages-list-food-list-food-module.js",
-    "hash": "b5d197fafebc5ee59d36124f5b59644c"
+    "hash": "de6087aee9078ecec39e3d3e6bc20cf7"
   },
   {
     "file": "pages-list-food-list-food-module.js.map",
-    "hash": "bf6eaed584562c04c74a26ef98669a80"
+    "hash": "498eaced7a76970c653f64f15e9d0cc1"
   },
   {
     "file": "pages-list-path-list-path-module.js",
-    "hash": "6a0e674848755e79e9b016db7f371b7f"
+    "hash": "a540cfe8c3ff3476a7c4e895455e4aaf"
   },
   {
     "file": "pages-list-path-list-path-module.js.map",
-    "hash": "8c273494efa745453c2fcc386a9e178f"
+    "hash": "c8a9f89ca4c5ea757859aef98ecf90aa"
   },
   {
     "file": "pages-list-poi-list-poi-module.js",
-    "hash": "c55a96644c4cd2d3bbe90c95c796d779"
+    "hash": "0340b7dafa4165123863b24f5bd1b6c0"
   },
   {
     "file": "pages-list-poi-list-poi-module.js.map",
-    "hash": "f7bbeb3be1fd0f7d7763fafd48e56243"
+    "hash": "627992a03392373f8c528498e1648209"
+  },
+  {
+    "file": "pages-list-rh-filter-page-rh-filter-page-rh-module.js",
+    "hash": "6a1252313bfb9528d5b8aed770fe4d2d"
+  },
+  {
+    "file": "pages-list-rh-filter-page-rh-filter-page-rh-module.js.map",
+    "hash": "7b28dc10ec159d7888135a6e10008357"
   },
   {
     "file": "pages-list-rh-list-rh-module.js",
-    "hash": "3c27e9f8c43b89bef74e27277a4ead94"
+    "hash": "64a10d11fc0019725d04cc60b588c19e"
   },
   {
     "file": "pages-list-rh-list-rh-module.js.map",
-    "hash": "6a869b7b81109b9aa2c1b0020fe9bf78"
+    "hash": "80d96953bd96f90983d7993892a765a8"
   },
   {
     "file": "pages-map-map-module.js",
@@ -1658,6 +1774,14 @@
   {
     "file": "pages-map-map-module.js.map",
     "hash": "2839ba1b02acd877e16ed43ca2e58746"
+  },
+  {
+    "file": "pages-map-path-map-path-module.js",
+    "hash": "f0f18452eef3b170f12e79f9f20ce236"
+  },
+  {
+    "file": "pages-map-path-map-path-module.js.map",
+    "hash": "d4269415c649e3279a710e56c7d2af1a"
   },
   {
     "file": "pages-map-spots-map-spots-module.js",
@@ -1677,11 +1801,11 @@
   },
   {
     "file": "pages-notizie-notizie-module.js",
-    "hash": "1a8db5b722f881b4a9ca30ef9b7d961a"
+    "hash": "ffaec2298ff420b88ae8713c3a2ed59b"
   },
   {
     "file": "pages-notizie-notizie-module.js.map",
-    "hash": "82fcf25c12b5eff39be47151ef6c4d2f"
+    "hash": "baf5ea489e491d63ecb964f02e48dfdf"
   },
   {
     "file": "pages-profile-profile-module.js",
@@ -1708,6 +1832,14 @@
     "hash": "af8c26451a4902e11d7a6225d41f7b6f"
   },
   {
+    "file": "pages-tourist-services-tourist-services-module.js",
+    "hash": "fde38ae16ce1d52296e4b42a25b8eb10"
+  },
+  {
+    "file": "pages-tourist-services-tourist-services-module.js.map",
+    "hash": "79cbb7f750454b005103a95a2ee96731"
+  },
+  {
     "file": "pages-transport-list-transport-list-module.js",
     "hash": "63958f3984ee04e6f1f793e99b19398d"
   },
@@ -1725,11 +1857,11 @@
   },
   {
     "file": "pages-video-video-module.js",
-    "hash": "fb4ff4a65b0a6c85e15f4fd9303d54cb"
+    "hash": "62ca5b9a3ca840b63e40b3c33394ba05"
   },
   {
     "file": "pages-video-video-module.js.map",
-    "hash": "aec798b1a69e85a217560329a08cc54e"
+    "hash": "03459fb32815638932b82da6b28a1604"
   },
   {
     "file": "plugins/cordova-hot-code-push-plugin/www/chcp.js",
@@ -1844,6 +1976,10 @@
     "hash": "7e2f541acc18dd797f5b799e3ca02200"
   },
   {
+    "file": "plugins/cordova-plugin-inappbrowser/www/inappbrowser.js",
+    "hash": "3395bef9caabdffc642bee6090d7df1a"
+  },
+  {
     "file": "plugins/cordova-plugin-ionic-keyboard/www/android/keyboard.js",
     "hash": "118aca3aa113039447a60cb2eb074b13"
   },
@@ -1893,19 +2029,19 @@
   },
   {
     "file": "runtime.js",
-    "hash": "1a7d812a9ef3e885132ed1b960736eca"
+    "hash": "c081e3cf93ea0ca065d54b92b9a97a70"
   },
   {
     "file": "runtime.js.map",
-    "hash": "4e9e5dda79c83e92757accdfb8826186"
+    "hash": "fd9a4f219cc15a206829f6d56fe3ab73"
   },
   {
     "file": "styles.js",
-    "hash": "4d2e8ee283ad57728b8702756a45224c"
+    "hash": "833df95b75eb53afdf364b28a56c483a"
   },
   {
     "file": "styles.js.map",
-    "hash": "0b9689b9c168e08d814f57784d9a8e24"
+    "hash": "c74d0b852062e504b58e202d2b07e165"
   },
   {
     "file": "svg/ios-add-circle-outline.svg",
@@ -4693,10 +4829,10 @@
   },
   {
     "file": "vendor.js",
-    "hash": "37d3b5f89f8ba25cf4ecdaba915f1be2"
+    "hash": "52c8ced81b9285915dcf05997d5acb5f"
   },
   {
     "file": "vendor.js.map",
-    "hash": "fa97021dfbd0419f5c3bd144dcf1a695"
+    "hash": "e405bb4e5c11121726cc94940e66fa4d"
   }
 ]
