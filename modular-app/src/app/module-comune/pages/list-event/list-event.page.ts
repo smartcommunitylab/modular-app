@@ -227,6 +227,8 @@ export class ListEventPage implements OnInit {
         this.showPois[p.category].push(p);
       }
     });
+    //orderArray
+    this.orderArray('asc',this);
   }
 
   convertPois(x) {
@@ -450,9 +452,9 @@ export class ListEventPage implements OnInit {
   orderArray(condition: string, _this: any) {
     _this.categories.forEach(c => {
       if (condition.indexOf('asc') > -1) {
-        _this.showPois[c] = _this.showPois[c].sort(function (a, b) { return a.title.localeCompare(b.title); });
+        _this.showPois[c] = _this.showPois[c].sort( (a, b) => (a.fromTime > b.fromTime) ? 1 : -1);
       } else {
-        _this.showPois[c] = _this.showPois[c].sort(function (a, b) { return b.title.localeCompare(a.title); });
+        _this.showPois[c] = _this.showPois[c].sort( (a, b) => (a.fromTime < b.fromTime) ? 1 : -1);
       }
     });
   }

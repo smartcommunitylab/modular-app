@@ -86,11 +86,13 @@ export class DetailPoiPage implements OnInit {
 
   manageoLcalId(objectIds) {
     if (objectIds.length == 1) {
-      this.dbService.getObjectByDataId(objectIds[0]).then(data => {
-        this.poiInput = data.docs[0];
-        this.poi = data.docs[0];
-        this.type = data.docs[0].fromTime ? 'EVENT' : 'POI';
-        this.buildContacts();
+      this.dbService.synch().then(() => {
+        this.dbService.getObjectByDataId(objectIds[0]).then(data => {
+          this.poiInput = data.docs[0];
+          this.poi = data.docs[0];
+          this.type = data.docs[0].fromTime ? 'EVENT' : 'POI';
+          this.buildContacts();
+        });
       });
     }
   }

@@ -53,7 +53,7 @@ export class DetailPathPage implements OnInit {
           'localId': element
         }
       };
-      // this.dbService.synch().then(() => {
+      this.dbService.synch().then(() => {
         this.dbService.getObjectByQuery(query).then(data => {
           if (data.docs[0]) {
             this.fullPois.push(this.convertPois(data.docs[0]));
@@ -65,7 +65,7 @@ export class DetailPathPage implements OnInit {
 
         });
       });
-    // });
+    });
   }
 
   ngOnInit() {
@@ -89,7 +89,7 @@ export class DetailPathPage implements OnInit {
               this.buildLangPaths();
               this.getPois(this.paths);
             });
-          },err => {
+          }, err => {
             this.utils.hideLoading();
           })
         }

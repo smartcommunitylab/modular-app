@@ -163,10 +163,16 @@ export class DbService {
       if (query.selector['element-type'] == 'event-item') {
         return this.db.find({
           selector: {
-            'element-type': 'event-item'
-            // ,  "fromTime": {
-            //     "$gte": new Date().getTime()
-            //  }
+            'element-type': 'event-item',
+          //   ,
+          //   "$nor": [
+          //     { "fromTime": {
+          //       "$lte": new Date().getTime()
+          //    }
+          //   },{ "toTime": {
+          //     "$lte": new Date().getTime()
+          //  }
+          // }]
           }
         });
       }
