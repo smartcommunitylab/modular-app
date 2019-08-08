@@ -71,7 +71,7 @@ var MapPathPageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-content>\n    <div shape=\"round\" class=\"back-button\" (click)=\"goBack()\">\n        <ion-icon slot=\"icon-only\" name=\"arrow-round-back\"></ion-icon>\n      </div>\n    <wc-map id=\"wc-map\" [my-pos]=\"myPosParam\" [points]=\"mapPoints\" main-marker-icon=\"assets/img/marker.svg\" poi-marker-icon=\"assets/img/download.svg\"></wc-map>\n</ion-content>\n"
+module.exports = "<ion-content>\n    <div shape=\"round\" class=\"back-button\" (click)=\"goBack()\">\n        <ion-icon slot=\"icon-only\" name=\"arrow-round-back\"></ion-icon>\n      </div>\n    <wc-map id=\"wc-map\" [mypos]=\"myPosParam\" [points]=\"mapPoints\" main-marker-icon=\"assets/comune/img/marker.svg\" poi-marker-icon=\"assets/comune/img/download.svg\"></wc-map>\n</ion-content>\n"
 
 /***/ }),
 
@@ -82,7 +82,7 @@ module.exports = "<ion-content>\n    <div shape=\"round\" class=\"back-button\" 
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".back-button {\n  position: fixed;\n  color: #11b3ef;\n  --background: white;\n  border-radius: 24px;\n  border: 1px solid #11b3ef;\n  width: 48px;\n  height: 48px;\n  line-height: 48px;\n  text-align: center;\n  background-color: white; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL2NoaW44L0RvY3VtZW50cy93b3JrL21vZHVsYXJBcHAvbW9kdWxhci1hcHAvc3JjL2FwcC9tb2R1bGUtY29tdW5lL3BhZ2VzL21hcC1wYXRoL21hcC1wYXRoLnBhZ2Uuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLGdCQUFlO0VBQ2YsZUFBYztFQUNkLG9CQUFhO0VBQ2Isb0JBQW1CO0VBQ25CLDBCQUF5QjtFQUN6QixZQUFXO0VBQ1gsYUFBWTtFQUNaLGtCQUFpQjtFQUNqQixtQkFBa0I7RUFDbEIsd0JBQXVCLEVBRTFCIiwiZmlsZSI6InNyYy9hcHAvbW9kdWxlLWNvbXVuZS9wYWdlcy9tYXAtcGF0aC9tYXAtcGF0aC5wYWdlLnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuYmFjay1idXR0b257XG4gICAgcG9zaXRpb246IGZpeGVkO1xuICAgIGNvbG9yOiAjMTFiM2VmO1xuICAgIC0tYmFja2dyb3VuZDogd2hpdGU7XG4gICAgYm9yZGVyLXJhZGl1czogMjRweDtcbiAgICBib3JkZXI6IDFweCBzb2xpZCAjMTFiM2VmO1xuICAgIHdpZHRoOiA0OHB4O1xuICAgIGhlaWdodDogNDhweDtcbiAgICBsaW5lLWhlaWdodDogNDhweDtcbiAgICB0ZXh0LWFsaWduOiBjZW50ZXI7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogd2hpdGU7XG4gICAgLy8gYm9yZGVyLXJhZGl1czogMThweDtcbn0iXX0= */"
+module.exports = ".back-button {\n  position: fixed;\n  color: #11b3ef;\n  --background: white;\n  border-radius: 24px;\n  border: 1px solid #11b3ef;\n  width: 48px;\n  height: 48px;\n  line-height: 48px;\n  text-align: center;\n  background-color: white;\n  z-index: 9999;\n  top: 16px;\n  left: 16px; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL2NoaW44L0RvY3VtZW50cy93b3JrL21vZHVsYXJBcHAvbW9kdWxhci1hcHAvc3JjL2FwcC9tb2R1bGUtY29tdW5lL3BhZ2VzL21hcC1wYXRoL21hcC1wYXRoLnBhZ2Uuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLGdCQUFlO0VBQ2YsZUFBYztFQUNkLG9CQUFhO0VBQ2Isb0JBQW1CO0VBQ25CLDBCQUF5QjtFQUN6QixZQUFXO0VBQ1gsYUFBWTtFQUNaLGtCQUFpQjtFQUNqQixtQkFBa0I7RUFDbEIsd0JBQXVCO0VBQ3ZCLGNBQWE7RUFDYixVQUFTO0VBQ1QsV0FBVSxFQUViIiwiZmlsZSI6InNyYy9hcHAvbW9kdWxlLWNvbXVuZS9wYWdlcy9tYXAtcGF0aC9tYXAtcGF0aC5wYWdlLnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuYmFjay1idXR0b257XG4gICAgcG9zaXRpb246IGZpeGVkO1xuICAgIGNvbG9yOiAjMTFiM2VmO1xuICAgIC0tYmFja2dyb3VuZDogd2hpdGU7XG4gICAgYm9yZGVyLXJhZGl1czogMjRweDtcbiAgICBib3JkZXI6IDFweCBzb2xpZCAjMTFiM2VmO1xuICAgIHdpZHRoOiA0OHB4O1xuICAgIGhlaWdodDogNDhweDtcbiAgICBsaW5lLWhlaWdodDogNDhweDtcbiAgICB0ZXh0LWFsaWduOiBjZW50ZXI7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogd2hpdGU7XG4gICAgei1pbmRleDogOTk5OTtcbiAgICB0b3A6IDE2cHg7XG4gICAgbGVmdDogMTZweDtcbiAgICAvLyBib3JkZXItcmFkaXVzOiAxOHB4O1xufSJdfQ== */"
 
 /***/ }),
 
@@ -155,10 +155,11 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
 
 
 var MapPathPage = /** @class */ (function () {
-    function MapPathPage(route, utils, geoSrv, translate, location, config) {
+    function MapPathPage(route, utils, geoSrv, router, translate, location, config) {
         this.route = route;
         this.utils = utils;
         this.geoSrv = geoSrv;
+        this.router = router;
         this.translate = translate;
         this.location = location;
         this.config = config;
@@ -183,13 +184,14 @@ var MapPathPage = /** @class */ (function () {
             return __generator(this, function (_a) {
                 poiId = poiParam.detail;
                 console.log(poiId);
+                this.router.navigate(['/detail-poi'], { queryParams: { id: poiId, type: 'POI' } });
                 return [2 /*return*/];
             });
         }); });
         this.myPosParam = JSON.stringify(this.myPos);
+        this.buildMapPoints();
     };
     MapPathPage.prototype.ionViewDidEnter = function () {
-        this.buildMapPoints();
     };
     MapPathPage.prototype.goBack = function () {
         this.location.back();
@@ -217,6 +219,7 @@ var MapPathPage = /** @class */ (function () {
         __metadata("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_1__["ActivatedRoute"],
             src_app_services_utils_service__WEBPACK_IMPORTED_MODULE_2__["UtilsService"],
             src_app_services_geo_service__WEBPACK_IMPORTED_MODULE_5__["GeoService"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"],
             _ngx_translate_core__WEBPACK_IMPORTED_MODULE_3__["TranslateService"],
             _angular_common__WEBPACK_IMPORTED_MODULE_6__["Location"],
             _services_config_service__WEBPACK_IMPORTED_MODULE_4__["ConfigService"]])

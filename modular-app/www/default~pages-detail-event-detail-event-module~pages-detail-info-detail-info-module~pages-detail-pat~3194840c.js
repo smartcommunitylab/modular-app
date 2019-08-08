@@ -17113,6 +17113,8 @@ pouchdb__WEBPACK_IMPORTED_MODULE_1__["default"].plugin(pouchdb_find__WEBPACK_IMP
 var DbService = /** @class */ (function () {
     function DbService() {
         this.elements = {};
+        this.opts = { live: true, retry: true };
+        this.MIN_SYNCH_TIME = 60000;
         this.db = new pouchdb__WEBPACK_IMPORTED_MODULE_1__["default"]('comune-in-tasca');
         this.remote = 'http://192.168.42.201:5984/comune-in-tasca';
         // 'http://192.168.1.197:5984/comune-in-tasca'
@@ -17132,23 +17134,58 @@ var DbService = /** @class */ (function () {
             retry: true,
             continuous: true
         };
-        this.db.sync(this.remote, options);
+        // var url = 'http://192.168.42.201:5984/comune-in-tasca';
+        // var opts = { live: true, retry: true };
     }
+    DbService.prototype.onSyncChange = function (arg0, onSyncChange) {
+        throw new Error("Method not implemented.");
+    };
+    DbService.prototype.onSyncPaused = function (arg0, onSyncPaused) {
+        throw new Error("Method not implemented.");
+    };
+    DbService.prototype.onSyncError = function (arg0, onSyncError) {
+        throw new Error("Method not implemented.");
+    };
     DbService.prototype.getObjectByType = function (type, id) {
         return this.getObjectById(id);
-        // let view = '';
-        // let classification = '';
-        // if (type) {
-        //   // set view
-        //   view = this.contentTypes[type];
-        // }
-        // if (view) {
-        //   return this.db.find({
-        //     selector: {
-        //       'element-type': view
-        //     }
-        //   });
-        // } else return Promise.reject();
+    };
+    DbService.prototype.lastTimeSynch = function () {
+        var date = new Date().getTime();
+        var last = parseInt(localStorage.getItem('UPDATE_SYNCH') || '0');
+        return date - last;
+    };
+    DbService.prototype.updateLastTimeSynch = function () {
+        localStorage.setItem('UPDATE_SYNCH', new Date().getTime().toString());
+    };
+    DbService.prototype.synch = function () {
+        var _this = this;
+        return new Promise(function (resolve, reject) {
+            if (_this.lastTimeSynch() > _this.MIN_SYNCH_TIME) {
+                // do one way, one-off sync from the server until completion
+                _this.db.sync(_this.remote).on('complete', function () {
+                    _this.updateLastTimeSynch();
+                    resolve();
+                }).on('error', function (err) {
+                    // boo, we hit an error!
+                    resolve();
+                });
+            }
+            //   this.db.replicate.from(this.remote).on('complete', info => {
+            //     // then two-way, continuous, retriable sync
+            //     this.updateLastTimeSynch();
+            //     resolve();
+            //     console.log('finished synch')
+            //   //   this.db.sync(this.remote, this.opts)
+            //   //     .on('change', this.onSyncChange)
+            //   //     .on('paused', this.onSyncPaused)
+            //   //     .on('error', this.onSyncError);
+            //   // }).on('error', this.onSyncError);
+            //   // // this.db.sync(this.remote, options);
+            // })
+            else {
+                resolve();
+            }
+        });
     };
     DbService.prototype.getMenuById = function (identificator) {
         return this.db.find({
@@ -17211,10 +17248,7 @@ var DbService = /** @class */ (function () {
             if (query.selector['element-type'] == 'event-item') {
                 return this.db.find({
                     selector: {
-                        'element-type': 'event-item'
-                        // ,  "fromTime": {
-                        //     "$gte": new Date().getTime()
-                        //  }
+                        'element-type': 'event-item',
                     }
                 });
             }

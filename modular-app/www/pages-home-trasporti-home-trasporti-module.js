@@ -52,10 +52,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
-/* harmony import */ var _home_trasporti_page__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./home-trasporti.page */ "./src/app/module-trasporti/pages/home-trasporti/home-trasporti.page.ts");
-/* harmony import */ var _ngx_translate_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ngx-translate/core */ "./node_modules/@ngx-translate/core/fesm5/ngx-translate-core.js");
-/* harmony import */ var _ngx_translate_http_loader__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @ngx-translate/http-loader */ "./node_modules/@ngx-translate/http-loader/fesm5/ngx-translate-http-loader.js");
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var ng_in_viewport__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ng-in-viewport */ "./node_modules/ng-in-viewport/fesm5/ng-in-viewport.js");
+/* harmony import */ var _home_trasporti_page__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./home-trasporti.page */ "./src/app/module-trasporti/pages/home-trasporti/home-trasporti.page.ts");
+/* harmony import */ var _ngx_translate_core__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @ngx-translate/core */ "./node_modules/@ngx-translate/core/fesm5/ngx-translate-core.js");
+/* harmony import */ var _ngx_translate_http_loader__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @ngx-translate/http-loader */ "./node_modules/@ngx-translate/http-loader/fesm5/ngx-translate-http-loader.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -71,14 +72,15 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 
 
+
 var routes = [
     {
         path: '',
-        component: _home_trasporti_page__WEBPACK_IMPORTED_MODULE_5__["HomeTrasportiPage"]
+        component: _home_trasporti_page__WEBPACK_IMPORTED_MODULE_6__["HomeTrasportiPage"]
     }
 ];
 function HttpLoaderFactory(http) {
-    return new _ngx_translate_http_loader__WEBPACK_IMPORTED_MODULE_7__["TranslateHttpLoader"](http, "./assets/trasporti/i18n/", ".json");
+    return new _ngx_translate_http_loader__WEBPACK_IMPORTED_MODULE_8__["TranslateHttpLoader"](http, "./assets/trasporti/i18n/", ".json");
 }
 var HomeTrasportiPageModule = /** @class */ (function () {
     function HomeTrasportiPageModule() {
@@ -89,15 +91,16 @@ var HomeTrasportiPageModule = /** @class */ (function () {
                 _angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"],
                 _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormsModule"],
                 _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicModule"],
-                _ngx_translate_core__WEBPACK_IMPORTED_MODULE_6__["TranslateModule"].forChild({
+                ng_in_viewport__WEBPACK_IMPORTED_MODULE_5__["InViewportModule"],
+                _ngx_translate_core__WEBPACK_IMPORTED_MODULE_7__["TranslateModule"].forChild({
                     loader: {
-                        provide: _ngx_translate_core__WEBPACK_IMPORTED_MODULE_6__["TranslateLoader"],
+                        provide: _ngx_translate_core__WEBPACK_IMPORTED_MODULE_7__["TranslateLoader"],
                         useFactory: HttpLoaderFactory,
-                        deps: [_angular_common_http__WEBPACK_IMPORTED_MODULE_8__["HttpClient"]]
+                        deps: [_angular_common_http__WEBPACK_IMPORTED_MODULE_9__["HttpClient"]]
                     }, isolate: true
                 }), _angular_router__WEBPACK_IMPORTED_MODULE_3__["RouterModule"].forChild(routes)
             ],
-            declarations: [_home_trasporti_page__WEBPACK_IMPORTED_MODULE_5__["HomeTrasportiPage"]]
+            declarations: [_home_trasporti_page__WEBPACK_IMPORTED_MODULE_6__["HomeTrasportiPage"]]
         })
     ], HomeTrasportiPageModule);
     return HomeTrasportiPageModule;
@@ -114,7 +117,7 @@ var HomeTrasportiPageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header no-border>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-back-button></ion-back-button>\n    </ion-buttons>\n    <ion-title>{{'home_trasporto'|translate}}\n    </ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <!-- <ion-fab vertical=\"top\" horizontal=\"end\" slot=\"fixed\">\n        <ion-fab-button routerLink=\"/map-spots\">\n          <ion-icon name=\"map\" ></ion-icon>\n        </ion-fab-button>\n      </ion-fab> -->\n  <div class=\"wrapper\">\n    <div class=\"scrolling-wrapper-flexbox loop\" ng-if=\"primaryLinks.length>0\">\n      <ion-chip *ngFor=\"let m of primaryLinks\" (click)=\"selectInternalElement(m)\">\n        <ion-icon class=\"interaction\" name=\"{{m.icon}}\"></ion-icon>\n        <ion-label class=\"interaction\">{{m.label|translate}}</ion-label>\n      </ion-chip>\n    </div>\n  </div>\n  <div class=\"line-container\">\n    <ion-list class=\"route-list space-from-top\">\n      <div *ngFor=\"let elem of elements; let i = index\">\n        <ion-item *ngIf=\"compareElements(i)\" class=\"label-type ion-text-center\">\n          <div>{{getLabel(i)|translate}}</div>\n        </ion-item>\n        <ion-item>\n          <div class=\"{{elem.ref}}\" (click)=\"selectElement(elem)\">\n            <div class=\"card card-tt\" color>\n              <div class=\"line-tt\" [ngStyle]=\"getStyle(elem)\">\n                <span *ngIf=\"inside(elem.title)\">{{elem.title}}</span>\n              </div>\n              <span  class=\"name-line\" *ngIf=\"!inside(elem.title)\">{{elem.title}}</span>\n              <span  class=\"name-line\"  *ngIf=\"titleisPresent(elem)\">{{elem.group.routes[0].title}}</span>\n            </div>\n          </div>\n        </ion-item>\n      </div>\n    </ion-list>\n  </div>\n\n  <!-- <ion-list class=\"home-list\" ng-if=\"primaryLinks.length>0\">\n    <ion-item *ngFor=\"let m of primaryLinks\"  routerLink=\"{{m.state}}\">\n        <ion-label>\n          <h3>{{m.label|translate}}</h3>\n        </ion-label>\n        <ion-icon slot=\"start\" name=\"{{m.icon}}\"></ion-icon>\n      </ion-item>\n  </ion-list> -->\n</ion-content>"
+module.exports = "<ion-header no-border>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-back-button></ion-back-button>\n    </ion-buttons>\n    <ion-title>{{'home_trasporto'|translate}}\n    </ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <!-- <ion-fab vertical=\"top\" horizontal=\"end\" slot=\"fixed\">\n        <ion-fab-button routerLink=\"/map-spots\">\n          <ion-icon name=\"map\" ></ion-icon>\n        </ion-fab-button>\n      </ion-fab> -->\n  <div class=\"wrapper\">\n    <div class=\"scrolling-wrapper-flexbox loop\" ng-if=\"primaryLinks.length>0\">\n      <ion-chip *ngFor=\"let m of primaryLinks\" (click)=\"selectInternalElement(m)\" [ngClass]=\"{'categorySelected': isSelected(m)}\">\n        <ion-icon class=\"interaction\" name=\"{{m.icon}}\" [ngClass]=\"{'categorySelected': isSelected(m)}\"></ion-icon>\n        <ion-label class=\"interaction\" [ngClass]=\"{'categorySelected': isSelected(m)}\">{{m.label|translate}}</ion-label>\n      </ion-chip>\n    </div>\n  </div>\n  <div class=\"line-container\">\n    <ion-list class=\"route-list space-from-top\">\n      <div *ngFor=\"let elem of elements; let i = index\">\n        <div class=\"{{elem.ref}}\" inViewport [inViewportOptions]=\"{ threshold: [0] }\"\n          (inViewportAction)=\"onIntersection($event)\">\n          <ion-item *ngIf=\"compareElements(i)\" class=\"label-type ion-text-center\">\n            <div>{{getLabel(i)|translate}}</div>\n          </ion-item>\n          <ion-item>\n            <div class=\"{{elem.ref}}\" (click)=\"selectElement(elem)\">\n              <div class=\"card card-tt\" color>\n                <div class=\"line-tt\" [ngStyle]=\"getStyle(elem)\">\n                  <span *ngIf=\"inside(elem.title)\">{{elem.title}}</span>\n                </div>\n                <span class=\"name-line\" *ngIf=\"!inside(elem.title)\">{{elem.title}}</span>\n                <span class=\"name-line\" *ngIf=\"titleisPresent(elem)\">{{elem.group.routes[0].title}}</span>\n              </div>\n            </div>\n          </ion-item>\n        </div>\n      </div>\n    </ion-list>\n  </div>\n</ion-content>"
 
 /***/ }),
 
@@ -125,7 +128,7 @@ module.exports = "<ion-header no-border>\n  <ion-toolbar>\n    <ion-buttons slot
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".wrapper .scrolling-wrapper-flexbox {\n  -ms-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);\n  -o-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);\n  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);\n  background-color: white;\n  width: 100%;\n  display: flex;\n  overflow-x: auto;\n  z-index: 999;\n  position: fixed; }\n  .wrapper .scrolling-wrapper-flexbox ion-chip {\n    flex: 0 0 auto;\n    background-color: white; }\n  .line-container {\n  padding-top: 40px; }\n  .line-container .card-tt {\n    display: table; }\n  .line-container .card-tt .name-line {\n      display: table-cell;\n      vertical-align: middle; }\n  .line-container .line-tt {\n    border-radius: 8px;\n    height: 50px;\n    width: 50px;\n    text-align: center;\n    line-height: 50px;\n    display: inline-block; }\n  .line-container .label-type {\n    width: 100%;\n    font-weight: bold;\n    --background: #e3e3e3;\n    --color: #707070;\n    font-size: 22px; }\n  .line-container .label-type div {\n      width: 100%; }\n  .interaction {\n  color: #11b3ef; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL2NoaW44L0RvY3VtZW50cy93b3JrL21vZHVsYXJBcHAvbW9kdWxhci1hcHAvc3JjL2FwcC9tb2R1bGUtdHJhc3BvcnRpL3BhZ2VzL2hvbWUtdHJhc3BvcnRpL2hvbWUtdHJhc3BvcnRpLnBhZ2Uuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUtRLCtFQUE4RTtFQUM5RSw4RUFBNkU7RUFDN0UsMkVBQTBFO0VBQzFFLHdCQUFzQjtFQUN0QixZQUFXO0VBQ1gsY0FBYTtFQUNiLGlCQUFnQjtFQUNoQixhQUFZO0VBQ1osZ0JBQWUsRUFLbEI7RUFsQkw7SUFlWSxlQUFjO0lBQ2Qsd0JBQXVCLEVBQzFCO0VBSVQ7RUFDSSxrQkFBaUIsRUEwQnBCO0VBM0JEO0lBR1EsZUFBYyxFQUtqQjtFQVJMO01BS1ksb0JBQW1CO01BQzNCLHVCQUFzQixFQUNqQjtFQVBUO0lBVVEsbUJBQWtCO0lBQ2xCLGFBQVk7SUFDWixZQUFXO0lBQ1gsbUJBQWtCO0lBQ2xCLGtCQUFpQjtJQUNqQixzQkFBcUIsRUFDeEI7RUFoQkw7SUFrQlEsWUFBVztJQUNYLGtCQUFpQjtJQUNqQixzQkFBYTtJQUNiLGlCQUFRO0lBQ1IsZ0JBQWUsRUFJbEI7RUExQkw7TUF3QlksWUFBVyxFQUNkO0VBR1Q7RUFDSSxlQUFjLEVBQ2pCIiwiZmlsZSI6InNyYy9hcHAvbW9kdWxlLXRyYXNwb3J0aS9wYWdlcy9ob21lLXRyYXNwb3J0aS9ob21lLXRyYXNwb3J0aS5wYWdlLnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIud3JhcHBlciB7XG5cbiAgICAuc2Nyb2xsaW5nLXdyYXBwZXItZmxleGJveCB7XG4gICAgICAgIC13ZWJraXQtYm94LXNoYWRvdzogMCAxMHB4IDIwcHggcmdiYSgwLCAwLCAwLCAwLjE5KSwgMCA2cHggNnB4IHJnYmEoMCwgMCwgMCwgMC4yMyk7XG4gICAgICAgIC1tb3otYm94LXNoYWRvdzogMCAxMHB4IDIwcHggcmdiYSgwLCAwLCAwLCAwLjE5KSwgMCA2cHggNnB4IHJnYmEoMCwgMCwgMCwgMC4yMyk7XG4gICAgICAgIC1tcy1ib3gtc2hhZG93OiAwIDEwcHggMjBweCByZ2JhKDAsIDAsIDAsIDAuMTkpLCAwIDZweCA2cHggcmdiYSgwLCAwLCAwLCAwLjIzKTtcbiAgICAgICAgLW8tYm94LXNoYWRvdzogMCAxMHB4IDIwcHggcmdiYSgwLCAwLCAwLCAwLjE5KSwgMCA2cHggNnB4IHJnYmEoMCwgMCwgMCwgMC4yMyk7XG4gICAgICAgIGJveC1zaGFkb3c6IDAgMTBweCAyMHB4IHJnYmEoMCwgMCwgMCwgMC4xOSksIDAgNnB4IDZweCByZ2JhKDAsIDAsIDAsIDAuMjMpO1xuICAgICAgICBiYWNrZ3JvdW5kLWNvbG9yOndoaXRlO1xuICAgICAgICB3aWR0aDogMTAwJTtcbiAgICAgICAgZGlzcGxheTogZmxleDtcbiAgICAgICAgb3ZlcmZsb3cteDogYXV0bztcbiAgICAgICAgei1pbmRleDogOTk5O1xuICAgICAgICBwb3NpdGlvbjogZml4ZWQ7XG4gICAgICAgIGlvbi1jaGlwIHtcbiAgICAgICAgICAgIGZsZXg6IDAgMCBhdXRvO1xuICAgICAgICAgICAgYmFja2dyb3VuZC1jb2xvcjogd2hpdGU7XG4gICAgICAgIH1cbiAgICB9XG59XG5cbi5saW5lLWNvbnRhaW5lciB7XG4gICAgcGFkZGluZy10b3A6IDQwcHg7XG4gICAgLmNhcmQtdHR7XG4gICAgICAgIGRpc3BsYXk6IHRhYmxlO1xuICAgICAgICAubmFtZS1saW5le1xuICAgICAgICAgICAgZGlzcGxheTogdGFibGUtY2VsbDtcbiAgICB2ZXJ0aWNhbC1hbGlnbjogbWlkZGxlO1xuICAgICAgICB9XG4gICAgfVxuICAgIC5saW5lLXR0IHtcbiAgICAgICAgYm9yZGVyLXJhZGl1czogOHB4O1xuICAgICAgICBoZWlnaHQ6IDUwcHg7XG4gICAgICAgIHdpZHRoOiA1MHB4O1xuICAgICAgICB0ZXh0LWFsaWduOiBjZW50ZXI7XG4gICAgICAgIGxpbmUtaGVpZ2h0OiA1MHB4O1xuICAgICAgICBkaXNwbGF5OiBpbmxpbmUtYmxvY2s7XG4gICAgfVxuICAgIC5sYWJlbC10eXBle1xuICAgICAgICB3aWR0aDogMTAwJTtcbiAgICAgICAgZm9udC13ZWlnaHQ6IGJvbGQ7XG4gICAgICAgIC0tYmFja2dyb3VuZDogI2UzZTNlMztcbiAgICAgICAgLS1jb2xvcjogIzcwNzA3MDtcbiAgICAgICAgZm9udC1zaXplOiAyMnB4O1xuICAgICAgICBkaXZ7XG4gICAgICAgICAgICB3aWR0aDogMTAwJTtcbiAgICAgICAgfVxuICAgIH1cbn1cbi5pbnRlcmFjdGlvbiB7XG4gICAgY29sb3I6ICMxMWIzZWY7XG59Il19 */"
+module.exports = ".wrapper .scrolling-wrapper-flexbox {\n  -ms-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);\n  -o-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);\n  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);\n  background-color: white;\n  width: 100%;\n  display: flex;\n  overflow-x: auto;\n  z-index: 999;\n  position: fixed; }\n  .wrapper .scrolling-wrapper-flexbox ion-chip {\n    flex: 0 0 auto;\n    background-color: white; }\n  .line-container {\n  padding-top: 40px; }\n  .line-container .card-tt {\n    display: table; }\n  .line-container .card-tt .name-line {\n      display: table-cell;\n      vertical-align: middle; }\n  .line-container .line-tt {\n    border-radius: 8px;\n    height: 50px;\n    width: 50px;\n    text-align: center;\n    line-height: 50px;\n    display: inline-block; }\n  .line-container .label-type {\n    width: 100%;\n    font-weight: bold;\n    --background: #e3e3e3;\n    --color: #707070;\n    font-size: 22px; }\n  .line-container .label-type div {\n      width: 100%; }\n  .interaction {\n  color: #11b3ef; }\n  .categorySelected {\n  color: white !important;\n  background-color: #11b3ef !important; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL2NoaW44L0RvY3VtZW50cy93b3JrL21vZHVsYXJBcHAvbW9kdWxhci1hcHAvc3JjL2FwcC9tb2R1bGUtdHJhc3BvcnRpL3BhZ2VzL2hvbWUtdHJhc3BvcnRpL2hvbWUtdHJhc3BvcnRpLnBhZ2Uuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUtRLCtFQUE4RTtFQUM5RSw4RUFBNkU7RUFDN0UsMkVBQTBFO0VBQzFFLHdCQUFzQjtFQUN0QixZQUFXO0VBQ1gsY0FBYTtFQUNiLGlCQUFnQjtFQUNoQixhQUFZO0VBQ1osZ0JBQWUsRUFLbEI7RUFsQkw7SUFlWSxlQUFjO0lBQ2Qsd0JBQXVCLEVBQzFCO0VBSVQ7RUFDSSxrQkFBaUIsRUEwQnBCO0VBM0JEO0lBR1EsZUFBYyxFQUtqQjtFQVJMO01BS1ksb0JBQW1CO01BQzNCLHVCQUFzQixFQUNqQjtFQVBUO0lBVVEsbUJBQWtCO0lBQ2xCLGFBQVk7SUFDWixZQUFXO0lBQ1gsbUJBQWtCO0lBQ2xCLGtCQUFpQjtJQUNqQixzQkFBcUIsRUFDeEI7RUFoQkw7SUFrQlEsWUFBVztJQUNYLGtCQUFpQjtJQUNqQixzQkFBYTtJQUNiLGlCQUFRO0lBQ1IsZ0JBQWUsRUFJbEI7RUExQkw7TUF3QlksWUFBVyxFQUNkO0VBR1Q7RUFDSSxlQUFjLEVBQ2pCO0VBQ0Q7RUFDSSx3QkFBc0I7RUFDdEIscUNBQW1DLEVBQ3RDIiwiZmlsZSI6InNyYy9hcHAvbW9kdWxlLXRyYXNwb3J0aS9wYWdlcy9ob21lLXRyYXNwb3J0aS9ob21lLXRyYXNwb3J0aS5wYWdlLnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIud3JhcHBlciB7XG5cbiAgICAuc2Nyb2xsaW5nLXdyYXBwZXItZmxleGJveCB7XG4gICAgICAgIC13ZWJraXQtYm94LXNoYWRvdzogMCAxMHB4IDIwcHggcmdiYSgwLCAwLCAwLCAwLjE5KSwgMCA2cHggNnB4IHJnYmEoMCwgMCwgMCwgMC4yMyk7XG4gICAgICAgIC1tb3otYm94LXNoYWRvdzogMCAxMHB4IDIwcHggcmdiYSgwLCAwLCAwLCAwLjE5KSwgMCA2cHggNnB4IHJnYmEoMCwgMCwgMCwgMC4yMyk7XG4gICAgICAgIC1tcy1ib3gtc2hhZG93OiAwIDEwcHggMjBweCByZ2JhKDAsIDAsIDAsIDAuMTkpLCAwIDZweCA2cHggcmdiYSgwLCAwLCAwLCAwLjIzKTtcbiAgICAgICAgLW8tYm94LXNoYWRvdzogMCAxMHB4IDIwcHggcmdiYSgwLCAwLCAwLCAwLjE5KSwgMCA2cHggNnB4IHJnYmEoMCwgMCwgMCwgMC4yMyk7XG4gICAgICAgIGJveC1zaGFkb3c6IDAgMTBweCAyMHB4IHJnYmEoMCwgMCwgMCwgMC4xOSksIDAgNnB4IDZweCByZ2JhKDAsIDAsIDAsIDAuMjMpO1xuICAgICAgICBiYWNrZ3JvdW5kLWNvbG9yOndoaXRlO1xuICAgICAgICB3aWR0aDogMTAwJTtcbiAgICAgICAgZGlzcGxheTogZmxleDtcbiAgICAgICAgb3ZlcmZsb3cteDogYXV0bztcbiAgICAgICAgei1pbmRleDogOTk5O1xuICAgICAgICBwb3NpdGlvbjogZml4ZWQ7XG4gICAgICAgIGlvbi1jaGlwIHtcbiAgICAgICAgICAgIGZsZXg6IDAgMCBhdXRvO1xuICAgICAgICAgICAgYmFja2dyb3VuZC1jb2xvcjogd2hpdGU7XG4gICAgICAgIH1cbiAgICB9XG59XG5cbi5saW5lLWNvbnRhaW5lciB7XG4gICAgcGFkZGluZy10b3A6IDQwcHg7XG4gICAgLmNhcmQtdHR7XG4gICAgICAgIGRpc3BsYXk6IHRhYmxlO1xuICAgICAgICAubmFtZS1saW5le1xuICAgICAgICAgICAgZGlzcGxheTogdGFibGUtY2VsbDtcbiAgICB2ZXJ0aWNhbC1hbGlnbjogbWlkZGxlO1xuICAgICAgICB9XG4gICAgfVxuICAgIC5saW5lLXR0IHtcbiAgICAgICAgYm9yZGVyLXJhZGl1czogOHB4O1xuICAgICAgICBoZWlnaHQ6IDUwcHg7XG4gICAgICAgIHdpZHRoOiA1MHB4O1xuICAgICAgICB0ZXh0LWFsaWduOiBjZW50ZXI7XG4gICAgICAgIGxpbmUtaGVpZ2h0OiA1MHB4O1xuICAgICAgICBkaXNwbGF5OiBpbmxpbmUtYmxvY2s7XG4gICAgfVxuICAgIC5sYWJlbC10eXBle1xuICAgICAgICB3aWR0aDogMTAwJTtcbiAgICAgICAgZm9udC13ZWlnaHQ6IGJvbGQ7XG4gICAgICAgIC0tYmFja2dyb3VuZDogI2UzZTNlMztcbiAgICAgICAgLS1jb2xvcjogIzcwNzA3MDtcbiAgICAgICAgZm9udC1zaXplOiAyMnB4O1xuICAgICAgICBkaXZ7XG4gICAgICAgICAgICB3aWR0aDogMTAwJTtcbiAgICAgICAgfVxuICAgIH1cbn1cbi5pbnRlcmFjdGlvbiB7XG4gICAgY29sb3I6ICMxMWIzZWY7XG59XG4uY2F0ZWdvcnlTZWxlY3RlZCB7XG4gICAgY29sb3I6IHdoaXRlIWltcG9ydGFudDtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiAjMTFiM2VmIWltcG9ydGFudDtcbn0iXX0= */"
 
 /***/ }),
 
@@ -274,16 +277,23 @@ var HomeTrasportiPage = /** @class */ (function (_super) {
             row.push({});
         }
         this.gridRows = gridRows;
+        this.actualVisualized = this.elements[0];
     };
     HomeTrasportiPage.prototype.selectInternalElement = function (ref) {
         var elem = document.getElementsByClassName(ref.state);
         if (elem.length > 0) {
-            // let yOffset = elem[0].offsetTop;
-            var yOffset = elem[0].getBoundingClientRect().top + window.scrollY;
-            this.content.scrollToPoint(0, yOffset, 1000);
-            // var scrollheight = elem[0].getBoundingClientRect().top;
-            // this.content.scrollToPoint(0, scrollheight, 1000);
+            var yOffset = elem[0].offsetTop;
+            this.content.scrollToPoint(0, yOffset, 0);
         }
+    };
+    HomeTrasportiPage.prototype.onIntersection = function (_a) {
+        var target = _a.target, visible = _a.visible;
+        if (visible && this.actualVisualized != target.className)
+            this.actualVisualized = target.className;
+        console.log(target + "" + visible);
+    };
+    HomeTrasportiPage.prototype.isSelected = function (category) {
+        return category.state == this.actualVisualized;
     };
     HomeTrasportiPage.prototype.compareElements = function (i) {
         if (i == 0)

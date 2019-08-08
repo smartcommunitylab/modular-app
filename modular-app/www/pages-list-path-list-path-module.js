@@ -79,7 +79,7 @@ var ListPathPageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\n    <ion-toolbar>\n        <ion-searchbar style=\"display: none\" showCancelButton animated (search)=\"toggleSearch()\"\n        (ionInput)=\"searchChanged($event)\" (ionCancel)=\"toggleSearch()\"></ion-searchbar>\n      <ion-buttons slot=\"start\">\n          <ion-back-button></ion-back-button>\n        </ion-buttons>\n        <ion-buttons slot=\"end\">\n            <ion-button (click)=\"toggleSearch()\">\n              <ion-icon name=\"search\"></ion-icon>\n            </ion-button>\n          </ion-buttons>\n      <ion-title>\n          {{'PATH'|translate}}\n        </ion-title>\n    </ion-toolbar>\n  </ion-header>\n\n<ion-content padding>\n  <ion-list no-lines id=\"path-list\">\n    <div *ngFor=\"let poi of pois\">      \n      <wc-path-list-el type=\"PATH\" [id]=\"poi.id\" [img]=\"poi.image\" [title]=\"poi.title\" [text]=\"poi.subtitle\" main-color=\"#11b3ef\" desc-color=\"#707070\"></wc-path-list-el>\n    </div>\n  </ion-list>\n</ion-content>\n"
+module.exports = "<ion-header>\n    <ion-searchbar class=\"search-path\" style=\"display: none\" showCancelButton animated (search)=\"toggleSearch()\"\n    (ionInput)=\"searchChanged($event)\" (ionCancel)=\"toggleSearch()\"></ion-searchbar>\n    <ion-toolbar>\n\n      <ion-buttons slot=\"start\">\n          <ion-back-button></ion-back-button>\n        </ion-buttons>\n        <ion-buttons slot=\"end\">\n            <ion-button (click)=\"toggleSearch()\">\n              <ion-icon name=\"search\"></ion-icon>\n            </ion-button>\n          </ion-buttons>\n      <ion-title>\n          {{'PATH'|translate}}\n        </ion-title>\n    </ion-toolbar>\n  </ion-header>\n\n<ion-content padding>\n  <ion-list no-lines id=\"path-list\">\n    <div *ngFor=\"let poi of pois\">      \n      <wc-path-list-el type=\"PATH\" [id]=\"poi.id\" [img]=\"poi.image\" [title]=\"poi.title\" [text]=\"poi.subtitle\" main-color=\"#11b3ef\" desc-color=\"#707070\"></wc-path-list-el>\n    </div>\n  </ion-list>\n</ion-content>\n"
 
 /***/ }),
 
@@ -90,7 +90,7 @@ module.exports = "<ion-header>\n    <ion-toolbar>\n        <ion-searchbar style=
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "ion-searchbar {\n  position: fixed;\n  top: 58px;\n  z-index: 3; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL2NoaW44L0RvY3VtZW50cy93b3JrL21vZHVsYXJBcHAvbW9kdWxhci1hcHAvc3JjL2FwcC9tb2R1bGUtY29tdW5lL3BhZ2VzL2xpc3QtcGF0aC9saXN0LXBhdGgucGFnZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksZ0JBQWU7RUFDZixVQUFTO0VBQ1QsV0FBVSxFQUNiIiwiZmlsZSI6InNyYy9hcHAvbW9kdWxlLWNvbXVuZS9wYWdlcy9saXN0LXBhdGgvbGlzdC1wYXRoLnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbImlvbi1zZWFyY2hiYXIge1xuICAgIHBvc2l0aW9uOiBmaXhlZDtcbiAgICB0b3A6IDU4cHg7XG4gICAgei1pbmRleDogMztcbn0iXX0= */"
+module.exports = "ion-searchbar {\n  position: fixed;\n  z-index: 999; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL2NoaW44L0RvY3VtZW50cy93b3JrL21vZHVsYXJBcHAvbW9kdWxhci1hcHAvc3JjL2FwcC9tb2R1bGUtY29tdW5lL3BhZ2VzL2xpc3QtcGF0aC9saXN0LXBhdGgucGFnZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksZ0JBQWU7RUFFZixhQUFZLEVBQ2YiLCJmaWxlIjoic3JjL2FwcC9tb2R1bGUtY29tdW5lL3BhZ2VzL2xpc3QtcGF0aC9saXN0LXBhdGgucGFnZS5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiaW9uLXNlYXJjaGJhciB7XG4gICAgcG9zaXRpb246IGZpeGVkO1xuICAgIC8vIHRvcDogNThweDtcbiAgICB6LWluZGV4OiA5OTk7XG59Il19 */"
 
 /***/ }),
 
@@ -109,6 +109,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _services_db_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/db.service */ "./src/app/module-comune/services/db.service.ts");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var _ngx_translate_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ngx-translate/core */ "./node_modules/@ngx-translate/core/fesm5/ngx-translate-core.js");
+/* harmony import */ var _services_utils_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../services/utils.service */ "./src/app/module-comune/services/utils.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -123,9 +124,11 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var ListPathPage = /** @class */ (function () {
-    function ListPathPage(navCtrl, dbService, alertCtrl, router, route, translate) {
+    function ListPathPage(navCtrl, utils, dbService, alertCtrl, router, route, translate) {
         this.navCtrl = navCtrl;
+        this.utils = utils;
         this.dbService = dbService;
         this.alertCtrl = alertCtrl;
         this.router = router;
@@ -140,6 +143,7 @@ var ListPathPage = /** @class */ (function () {
     }
     ListPathPage.prototype.ngOnInit = function () {
         var _this_1 = this;
+        this.utils.presentLoading();
         this.route.queryParams
             .subscribe(function (params) {
             console.log(params);
@@ -152,9 +156,16 @@ var ListPathPage = /** @class */ (function () {
     ListPathPage.prototype.ionViewDidEnter = function () {
         var _this_1 = this;
         if (this.category && this.category.query) {
-            this.dbService.getObjectByQuery(this.category.query).then(function (data) {
-                _this_1.pois = data.docs.map(function (x) { return _this_1.convertPois(x); });
-                _this_1.fullPois = _this_1.pois;
+            this.dbService.synch().then(function () {
+                _this_1.dbService.getObjectByQuery(_this_1.category.query).then(function (data) {
+                    _this_1.pois = data.docs.map(function (x) { return _this_1.convertPois(x); });
+                    _this_1.fullPois = _this_1.pois;
+                    _this_1.utils.hideLoading();
+                }, function (err) {
+                    _this_1.utils.hideLoading();
+                });
+            }, function (err) {
+                _this_1.utils.hideLoading();
             });
         }
         var el = document.getElementById('path-list');
@@ -193,10 +204,10 @@ var ListPathPage = /** @class */ (function () {
     };
     ListPathPage.prototype.toggleSearch = function () {
         this.search = !this.search;
-        var searchbar = document.querySelector('ion-searchbar');
+        var searchbar = document.querySelector('.search-path');
         if (searchbar.style.display === 'none') {
             searchbar.style.display = 'unset';
-            searchbar.setFocus();
+            searchbar.focus();
         }
         else {
             searchbar.style.display = 'none';
@@ -223,7 +234,7 @@ var ListPathPage = /** @class */ (function () {
             template: __webpack_require__(/*! ./list-path.page.html */ "./src/app/module-comune/pages/list-path/list-path.page.html"),
             styles: [__webpack_require__(/*! ./list-path.page.scss */ "./src/app/module-comune/pages/list-path/list-path.page.scss")]
         }),
-        __metadata("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_1__["NavController"], _services_db_service__WEBPACK_IMPORTED_MODULE_2__["DbService"], _ionic_angular__WEBPACK_IMPORTED_MODULE_1__["AlertController"],
+        __metadata("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_1__["NavController"], _services_utils_service__WEBPACK_IMPORTED_MODULE_5__["UtilsService"], _services_db_service__WEBPACK_IMPORTED_MODULE_2__["DbService"], _ionic_angular__WEBPACK_IMPORTED_MODULE_1__["AlertController"],
             _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"], _ngx_translate_core__WEBPACK_IMPORTED_MODULE_4__["TranslateService"]])
     ], ListPathPage);
     return ListPathPage;

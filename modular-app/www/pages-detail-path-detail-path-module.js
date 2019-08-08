@@ -77,7 +77,7 @@ var DetailPathPageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!-- <ion-header no-border>\n    <ion-toolbar>\n      <ion-buttons slot=\"start\">\n          <ion-back-button></ion-back-button>\n        </ion-buttons>\n      <ion-title>\n          Dettaglio Percorso\n        </ion-title>\n    </ion-toolbar>\n  </ion-header> -->\n\n   <!-- <wc-tabs id=\"tabs\" [content]=\"jsonTabs\" icon-color=\"red\" bg-color=\"lightgrey\" [tab-actived]=\"tabActived\"></wc-tabs> -->\n\n   <ion-grid style=\"height: 100%\" *ngIf=\"isLoading\">\n    <ion-row justify-content-center align-items-center style=\"height: 100%\">\n      <ion-spinner name=\"circles\"></ion-spinner>\n    </ion-row>\n  </ion-grid>\n  \n  \n\n   <ion-content padding id=\"path\">\n      <div shape=\"round\" class=\"back-button\" (click)=\"goBack()\">\n          <ion-icon slot=\"icon-only\" name=\"arrow-round-back\"></ion-icon>\n        </div>\n        <div shape=\"round\" class=\"map-button\" (click)=\"goMap()\">\n            <ion-icon slot=\"icon-only\" name=\"map\"></ion-icon>\n          </div>\n     <div *ngIf=\"!isLoading\" >\n      <!-- <wc-details *ngIf=\"(paths) && (tabActived == 'info')\" [title]=\"paths.title\" [subtitle]=\"paths.subtitle\" [text]=\"paths.description\" [info]=\"paths.info\" [img]=\"paths.image\"></wc-details> -->\n      <!-- <wc-details *ngIf=\"(paths) \" [title]=\"paths.title\" [subtitle]=\"paths.subtitle\" [text]=\"paths.description\" [info]=\"paths.info\" [img]=\"paths.image\"></wc-details> -->\n      <wc-details  *ngIf=\"paths\" [img]=\"paths.image\"   [title]=\"paths.title\" [altImage]=\"altImage\"\n      [subtitle]=\"paths.subtitle\" [text]=\"paths.description\"  \n      [expandable]=false [expanse]=true heading-color=\"#707070\"\n      second-color=\"#11b3ef\"> </wc-details>\n      <div id=\"poi-list\">\n          <!-- <div *ngIf=\"tabActived == 'place'\"> -->\n              <div >\n                  <ion-searchbar *ngIf=\"search\" showCancelButton animated (ionInput)=\"searchChanged($event)\" (ionCancel)=\"toggleSearch()\"></ion-searchbar>\n            <!-- ------------------------------- -->\n            <div class=\"poi-list\">{{'poi_list'|translate}}</div>\n            <div class=\"poi-container\" *ngFor=\"let poi of showPois; let i = index\">    \n              <div class=\"index-poi\">{{i+1}}</div> \n            <!-- <div *ngFor=\"let poi of showPois\"> -->\n                <wc-details [id]=\"poi.id\" [img]=\"poi.image\" [stringsinput]=\"stringsContact\" [title]=\"poi.title \" [altImage]=\"altImage\"\n                [subtitle]=\"poi.subtitle \" [text]=\"poi.description \" [info]=\"poi.info\" [contacts]=\"poi.infos\"\n                heading-color=\"#707070\" second-color=\"#11b3ef\" expandable=true expanse=false></wc-details>\n                <!-- <wc-path-list-el type=\"POI\" [id]=\"poi._id\" [img]=\"poi.image\" [title]=\"poi.title[language]\" [text]=\"poi.subtitle[language]\" main-color=\"red\"></wc-path-list-el> -->\n            </div>\n        </div>\n      </div>\n    </div>\n      <!-- <div ion-fixed *ngIf=\"tabActived == 'map'\">\n        <wc-map id=\"wc-map\" [points]=\"mapPoints\" main-marker-icon=\"http://icons.iconarchive.com/icons/paomedia/small-n-flat/256/map-marker-icon.png\" poi-marker-icon=\"https://cdn4.iconfinder.com/data/icons/ios7-active-tab/512/map_marker-512.png\"></wc-map>\n        <wc-modal title=\"DEMO\" text=\"Testo di prova\" btn-text=\"Dettagli\" shown=\"false\" data=\"ciao\"></wc-modal>\n      </div> -->\n  </ion-content>\n"
+module.exports = "<!-- <ion-header no-border>\n    <ion-toolbar>\n      <ion-buttons slot=\"start\">\n          <ion-back-button></ion-back-button>\n        </ion-buttons>\n      <ion-title>\n          Dettaglio Percorso\n        </ion-title>\n    </ion-toolbar>\n  </ion-header> -->\n\n   <!-- <wc-tabs id=\"tabs\" [content]=\"jsonTabs\" icon-color=\"red\" bg-color=\"lightgrey\" [tab-actived]=\"tabActived\"></wc-tabs> -->\n\n   <!-- <ion-grid style=\"height: 100%\" *ngIf=\"isLoading\">\n    <ion-row justify-content-center align-items-center style=\"height: 100%\">\n      <ion-spinner name=\"circles\"></ion-spinner>\n    </ion-row>\n  </ion-grid> -->\n  \n  \n\n   <ion-content padding id=\"path\">\n      <div shape=\"round\" class=\"back-button\" (click)=\"goBack()\">\n          <ion-icon slot=\"icon-only\" name=\"arrow-round-back\"></ion-icon>\n        </div>\n        <div shape=\"round\" class=\"map-button\" (click)=\"goMap()\">\n            <ion-icon slot=\"icon-only\" name=\"map\"></ion-icon>\n          </div>\n     <div *ngIf=\"!isLoading\" >\n      <!-- <wc-details *ngIf=\"(paths) && (tabActived == 'info')\" [title]=\"paths.title\" [subtitle]=\"paths.subtitle\" [text]=\"paths.description\" [info]=\"paths.info\" [img]=\"paths.image\"></wc-details> -->\n      <!-- <wc-details *ngIf=\"(paths) \" [title]=\"paths.title\" [subtitle]=\"paths.subtitle\" [text]=\"paths.description\" [info]=\"paths.info\" [img]=\"paths.image\"></wc-details> -->\n      <wc-details  *ngIf=\"paths\" [img]=\"paths.image\"   [title]=\"paths.title\" [altImage]=\"altImage\"\n      [subtitle]=\"paths.subtitle\" [text]=\"paths.description\"  \n      [expandable]=false [expanse]=true heading-color=\"#707070\"\n      second-color=\"#11b3ef\"> </wc-details>\n      <div id=\"poi-list\">\n          <!-- <div *ngIf=\"tabActived == 'place'\"> -->\n              <div >\n                  <ion-searchbar *ngIf=\"search\" showCancelButton animated (ionInput)=\"searchChanged($event)\" (ionCancel)=\"toggleSearch()\"></ion-searchbar>\n            <!-- ------------------------------- -->\n            <div class=\"poi-list\">{{'poi_list'|translate}}</div>\n            <div class=\"poi-container\" *ngFor=\"let poi of showPois; let i = index\">    \n              <div class=\"index-poi\">{{i+1}}</div> \n            <!-- <div *ngFor=\"let poi of showPois\"> -->\n                <wc-details [id]=\"poi.id\" [img]=\"poi.image\" [stringsinput]=\"stringsContact\" [title]=\"poi.title \" [altImage]=\"altImage\"\n                [subtitle]=\"poi.subtitle \" [text]=\"poi.description \" [info]=\"poi.info\" [contacts]=\"poi.infos\"\n                heading-color=\"#707070\" second-color=\"#11b3ef\" expandable=true expanse=false></wc-details>\n                <!-- <wc-path-list-el type=\"POI\" [id]=\"poi._id\" [img]=\"poi.image\" [title]=\"poi.title[language]\" [text]=\"poi.subtitle[language]\" main-color=\"red\"></wc-path-list-el> -->\n            </div>\n        </div>\n      </div>\n    </div>\n      <!-- <div ion-fixed *ngIf=\"tabActived == 'map'\">\n        <wc-map id=\"wc-map\" [points]=\"mapPoints\" main-marker-icon=\"http://icons.iconarchive.com/icons/paomedia/small-n-flat/256/map-marker-icon.png\" poi-marker-icon=\"https://cdn4.iconfinder.com/data/icons/ios7-active-tab/512/map_marker-512.png\"></wc-map>\n        <wc-modal title=\"DEMO\" text=\"Testo di prova\" btn-text=\"Dettagli\" shown=\"false\" data=\"ciao\"></wc-modal>\n      </div> -->\n  </ion-content>\n"
 
 /***/ }),
 
@@ -88,7 +88,7 @@ module.exports = "<!-- <ion-header no-border>\n    <ion-toolbar>\n      <ion-but
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".back-button {\n  position: fixed;\n  color: #11b3ef;\n  --background: white;\n  border-radius: 24px;\n  border: 1px solid #11b3ef;\n  width: 48px;\n  height: 48px;\n  line-height: 48px;\n  text-align: center;\n  background-color: white;\n  z-index: 999; }\n\n.map-button {\n  position: fixed;\n  color: #11b3ef;\n  --background: white;\n  border-radius: 24px;\n  left: 50%;\n  border: 1px solid #11b3ef;\n  width: 48px;\n  height: 48px;\n  line-height: 48px;\n  text-align: center;\n  background-color: white;\n  z-index: 999; }\n\n.poi-list {\n  width: 100%;\n  font-weight: bold;\n  background-color: #e3e3e3;\n  color: #707070;\n  font-size: 22px;\n  text-align: center;\n  margin: 25px 0px; }\n\n.poi-container {\n  position: relative; }\n\n.poi-container .index-poi {\n    position: absolute;\n    left: 10px;\n    top: -15px;\n    background-color: #707070;\n    color: white;\n    border-radius: 15px;\n    width: 30px;\n    height: 30px;\n    line-height: 30px;\n    text-align: center; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL2NoaW44L0RvY3VtZW50cy93b3JrL21vZHVsYXJBcHAvbW9kdWxhci1hcHAvc3JjL2FwcC9tb2R1bGUtY29tdW5lL3BhZ2VzL2RldGFpbC1wYXRoL2RldGFpbC1wYXRoLnBhZ2Uuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLGdCQUFlO0VBQ2YsZUFBYztFQUNkLG9CQUFhO0VBQ2Isb0JBQW1CO0VBQ25CLDBCQUF5QjtFQUN6QixZQUFXO0VBQ1gsYUFBWTtFQUNaLGtCQUFpQjtFQUNqQixtQkFBa0I7RUFDbEIsd0JBQXVCO0VBQ3ZCLGFBQVksRUFFZjs7QUFFRDtFQUNJLGdCQUFlO0VBQ2YsZUFBYztFQUNkLG9CQUFhO0VBQ2Isb0JBQW1CO0VBQ25CLFVBQVM7RUFDVCwwQkFBeUI7RUFDekIsWUFBVztFQUNYLGFBQVk7RUFDWixrQkFBaUI7RUFDakIsbUJBQWtCO0VBQ2xCLHdCQUF1QjtFQUV2QixhQUFZLEVBQ2Y7O0FBQ0Q7RUFDSSxZQUFXO0VBQ1gsa0JBQWlCO0VBQ2pCLDBCQUF5QjtFQUN6QixlQUFjO0VBQ2QsZ0JBQWU7RUFDZixtQkFBa0I7RUFDbEIsaUJBQWdCLEVBQ25COztBQUNEO0VBQ0ksbUJBQWtCLEVBZXJCOztBQWhCRDtJQUlRLG1CQUFrQjtJQUNsQixXQUFVO0lBQ1YsV0FBVTtJQUNWLDBCQUF5QjtJQUN6QixhQUFZO0lBQ1osb0JBQW1CO0lBQ25CLFlBQVc7SUFDWCxhQUFZO0lBQ1osa0JBQWlCO0lBQ2pCLG1CQUFrQixFQUNyQiIsImZpbGUiOiJzcmMvYXBwL21vZHVsZS1jb211bmUvcGFnZXMvZGV0YWlsLXBhdGgvZGV0YWlsLXBhdGgucGFnZS5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmJhY2stYnV0dG9uIHtcbiAgICBwb3NpdGlvbjogZml4ZWQ7XG4gICAgY29sb3I6ICMxMWIzZWY7XG4gICAgLS1iYWNrZ3JvdW5kOiB3aGl0ZTtcbiAgICBib3JkZXItcmFkaXVzOiAyNHB4O1xuICAgIGJvcmRlcjogMXB4IHNvbGlkICMxMWIzZWY7XG4gICAgd2lkdGg6IDQ4cHg7XG4gICAgaGVpZ2h0OiA0OHB4O1xuICAgIGxpbmUtaGVpZ2h0OiA0OHB4O1xuICAgIHRleHQtYWxpZ246IGNlbnRlcjtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiB3aGl0ZTtcbiAgICB6LWluZGV4OiA5OTk7XG4gICAgLy8gYm9yZGVyLXJhZGl1czogMThweDtcbn1cblxuLm1hcC1idXR0b24ge1xuICAgIHBvc2l0aW9uOiBmaXhlZDtcbiAgICBjb2xvcjogIzExYjNlZjtcbiAgICAtLWJhY2tncm91bmQ6IHdoaXRlO1xuICAgIGJvcmRlci1yYWRpdXM6IDI0cHg7XG4gICAgbGVmdDogNTAlO1xuICAgIGJvcmRlcjogMXB4IHNvbGlkICMxMWIzZWY7XG4gICAgd2lkdGg6IDQ4cHg7XG4gICAgaGVpZ2h0OiA0OHB4O1xuICAgIGxpbmUtaGVpZ2h0OiA0OHB4O1xuICAgIHRleHQtYWxpZ246IGNlbnRlcjtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiB3aGl0ZTtcbiAgICAvLyBib3JkZXItcmFkaXVzOiAxOHB4O1xuICAgIHotaW5kZXg6IDk5OTtcbn1cbi5wb2ktbGlzdCB7XG4gICAgd2lkdGg6IDEwMCU7XG4gICAgZm9udC13ZWlnaHQ6IGJvbGQ7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogI2UzZTNlMztcbiAgICBjb2xvcjogIzcwNzA3MDtcbiAgICBmb250LXNpemU6IDIycHg7XG4gICAgdGV4dC1hbGlnbjogY2VudGVyO1xuICAgIG1hcmdpbjogMjVweCAwcHg7XG59XG4ucG9pLWNvbnRhaW5lciB7XG4gICAgcG9zaXRpb246IHJlbGF0aXZlO1xuXG4gICAgLmluZGV4LXBvaSB7XG4gICAgICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgICAgICAgbGVmdDogMTBweDtcbiAgICAgICAgdG9wOiAtMTVweDtcbiAgICAgICAgYmFja2dyb3VuZC1jb2xvcjogIzcwNzA3MDtcbiAgICAgICAgY29sb3I6IHdoaXRlO1xuICAgICAgICBib3JkZXItcmFkaXVzOiAxNXB4O1xuICAgICAgICB3aWR0aDogMzBweDtcbiAgICAgICAgaGVpZ2h0OiAzMHB4O1xuICAgICAgICBsaW5lLWhlaWdodDogMzBweDtcbiAgICAgICAgdGV4dC1hbGlnbjogY2VudGVyO1xuICAgIH1cblxufSJdfQ== */"
+module.exports = ".back-button {\n  position: fixed;\n  color: #11b3ef;\n  --background: white;\n  border-radius: 24px;\n  border: 1px solid #11b3ef;\n  width: 48px;\n  height: 48px;\n  line-height: 48px;\n  text-align: center;\n  background-color: white;\n  z-index: 999;\n  left: 16px;\n  top: 16px; }\n\n.map-button {\n  position: fixed;\n  color: #11b3ef;\n  --background: white;\n  border-radius: 24px;\n  left: 50%;\n  border: 1px solid #11b3ef;\n  width: 48px;\n  height: 48px;\n  line-height: 48px;\n  text-align: center;\n  background-color: white;\n  top: 16px;\n  z-index: 999; }\n\n.poi-list {\n  width: 100%;\n  font-weight: bold;\n  background-color: #e3e3e3;\n  color: #707070;\n  font-size: 22px;\n  text-align: center;\n  margin: 25px 0px; }\n\n.poi-container {\n  position: relative; }\n\n.poi-container .index-poi {\n    position: absolute;\n    left: 10px;\n    top: -15px;\n    background-color: #707070;\n    color: white;\n    border-radius: 15px;\n    width: 30px;\n    height: 30px;\n    line-height: 30px;\n    text-align: center; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL2NoaW44L0RvY3VtZW50cy93b3JrL21vZHVsYXJBcHAvbW9kdWxhci1hcHAvc3JjL2FwcC9tb2R1bGUtY29tdW5lL3BhZ2VzL2RldGFpbC1wYXRoL2RldGFpbC1wYXRoLnBhZ2Uuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLGdCQUFlO0VBQ2YsZUFBYztFQUNkLG9CQUFhO0VBQ2Isb0JBQW1CO0VBQ25CLDBCQUF5QjtFQUN6QixZQUFXO0VBQ1gsYUFBWTtFQUNaLGtCQUFpQjtFQUNqQixtQkFBa0I7RUFDbEIsd0JBQXVCO0VBQ3ZCLGFBQVk7RUFFWixXQUFVO0VBQ2QsVUFBUyxFQUNSOztBQUVEO0VBQ0ksZ0JBQWU7RUFDZixlQUFjO0VBQ2Qsb0JBQWE7RUFDYixvQkFBbUI7RUFDbkIsVUFBUztFQUNULDBCQUF5QjtFQUN6QixZQUFXO0VBQ1gsYUFBWTtFQUNaLGtCQUFpQjtFQUNqQixtQkFBa0I7RUFDbEIsd0JBQXVCO0VBQ3ZCLFVBQVM7RUFFVCxhQUFZLEVBQ2Y7O0FBQ0Q7RUFDSSxZQUFXO0VBQ1gsa0JBQWlCO0VBQ2pCLDBCQUF5QjtFQUN6QixlQUFjO0VBQ2QsZ0JBQWU7RUFDZixtQkFBa0I7RUFDbEIsaUJBQWdCLEVBQ25COztBQUNEO0VBQ0ksbUJBQWtCLEVBZXJCOztBQWhCRDtJQUlRLG1CQUFrQjtJQUNsQixXQUFVO0lBQ1YsV0FBVTtJQUNWLDBCQUF5QjtJQUN6QixhQUFZO0lBQ1osb0JBQW1CO0lBQ25CLFlBQVc7SUFDWCxhQUFZO0lBQ1osa0JBQWlCO0lBQ2pCLG1CQUFrQixFQUNyQiIsImZpbGUiOiJzcmMvYXBwL21vZHVsZS1jb211bmUvcGFnZXMvZGV0YWlsLXBhdGgvZGV0YWlsLXBhdGgucGFnZS5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmJhY2stYnV0dG9uIHtcbiAgICBwb3NpdGlvbjogZml4ZWQ7XG4gICAgY29sb3I6ICMxMWIzZWY7XG4gICAgLS1iYWNrZ3JvdW5kOiB3aGl0ZTtcbiAgICBib3JkZXItcmFkaXVzOiAyNHB4O1xuICAgIGJvcmRlcjogMXB4IHNvbGlkICMxMWIzZWY7XG4gICAgd2lkdGg6IDQ4cHg7XG4gICAgaGVpZ2h0OiA0OHB4O1xuICAgIGxpbmUtaGVpZ2h0OiA0OHB4O1xuICAgIHRleHQtYWxpZ246IGNlbnRlcjtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiB3aGl0ZTtcbiAgICB6LWluZGV4OiA5OTk7XG4gICAgLy8gYm9yZGVyLXJhZGl1czogMThweDtcbiAgICBsZWZ0OiAxNnB4O1xudG9wOiAxNnB4O1xufVxuXG4ubWFwLWJ1dHRvbiB7XG4gICAgcG9zaXRpb246IGZpeGVkO1xuICAgIGNvbG9yOiAjMTFiM2VmO1xuICAgIC0tYmFja2dyb3VuZDogd2hpdGU7XG4gICAgYm9yZGVyLXJhZGl1czogMjRweDtcbiAgICBsZWZ0OiA1MCU7XG4gICAgYm9yZGVyOiAxcHggc29saWQgIzExYjNlZjtcbiAgICB3aWR0aDogNDhweDtcbiAgICBoZWlnaHQ6IDQ4cHg7XG4gICAgbGluZS1oZWlnaHQ6IDQ4cHg7XG4gICAgdGV4dC1hbGlnbjogY2VudGVyO1xuICAgIGJhY2tncm91bmQtY29sb3I6IHdoaXRlO1xuICAgIHRvcDogMTZweDtcbiAgICAvLyBib3JkZXItcmFkaXVzOiAxOHB4O1xuICAgIHotaW5kZXg6IDk5OTtcbn1cbi5wb2ktbGlzdCB7XG4gICAgd2lkdGg6IDEwMCU7XG4gICAgZm9udC13ZWlnaHQ6IGJvbGQ7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogI2UzZTNlMztcbiAgICBjb2xvcjogIzcwNzA3MDtcbiAgICBmb250LXNpemU6IDIycHg7XG4gICAgdGV4dC1hbGlnbjogY2VudGVyO1xuICAgIG1hcmdpbjogMjVweCAwcHg7XG59XG4ucG9pLWNvbnRhaW5lciB7XG4gICAgcG9zaXRpb246IHJlbGF0aXZlO1xuXG4gICAgLmluZGV4LXBvaSB7XG4gICAgICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgICAgICAgbGVmdDogMTBweDtcbiAgICAgICAgdG9wOiAtMTVweDtcbiAgICAgICAgYmFja2dyb3VuZC1jb2xvcjogIzcwNzA3MDtcbiAgICAgICAgY29sb3I6IHdoaXRlO1xuICAgICAgICBib3JkZXItcmFkaXVzOiAxNXB4O1xuICAgICAgICB3aWR0aDogMzBweDtcbiAgICAgICAgaGVpZ2h0OiAzMHB4O1xuICAgICAgICBsaW5lLWhlaWdodDogMzBweDtcbiAgICAgICAgdGV4dC1hbGlnbjogY2VudGVyO1xuICAgIH1cblxufSJdfQ== */"
 
 /***/ }),
 
@@ -198,18 +198,22 @@ var DetailPathPage = /** @class */ (function () {
                     'localId': element
                 }
             };
-            _this_1.dbService.getObjectByQuery(query).then(function (data) {
-                if (data.docs[0]) {
-                    _this_1.fullPois.push(_this_1.convertPois(data.docs[0]));
-                }
-            }).then(function () {
-                _this_1.showPois = _this_1.fullPois;
-                _this_1.isLoading = false;
+            _this_1.dbService.synch().then(function () {
+                _this_1.dbService.getObjectByQuery(query).then(function (data) {
+                    if (data.docs[0]) {
+                        _this_1.fullPois.push(_this_1.convertPois(data.docs[0]));
+                    }
+                }).then(function () {
+                    _this_1.showPois = _this_1.fullPois;
+                    _this_1.isLoading = false;
+                    _this_1.utils.hideLoading();
+                });
             });
         });
     };
     DetailPathPage.prototype.ngOnInit = function () {
         var _this_1 = this;
+        this.utils.presentLoading();
         if (window[this.config.getAppModuleName()]['geolocation'])
             this.myPos = {
                 lat: window[this.config.getAppModuleName()]['geolocation']['lat'],
@@ -218,18 +222,27 @@ var DetailPathPage = /** @class */ (function () {
         else {
             this.myPos = this.config.getDefaultPosition();
         }
-        this.route.queryParams
+        this.paramsSubscription = this.route.queryParams
             .subscribe(function (params) {
             if (params) {
-                var id = params.id.split(';')[0];
+                var id_1 = params.id.split(';')[0];
                 _this_1.isLoading = true;
-                _this_1.dbService.getObjectById(id).then(function (data) {
-                    _this_1.paths = data.docs[0];
-                    _this_1.buildLangPaths();
-                    _this_1.getPois(_this_1.paths);
+                _this_1.dbService.synch().then(function () {
+                    _this_1.dbService.getObjectById(id_1).then(function (data) {
+                        _this_1.paths = data.docs[0];
+                        _this_1.buildLangPaths();
+                        _this_1.getPois(_this_1.paths);
+                    });
+                }, function (err) {
+                    _this_1.utils.hideLoading();
                 });
             }
+        }, function (err) {
+            _this_1.utils.hideLoading();
         });
+    };
+    DetailPathPage.prototype.ngOnDestroy = function () {
+        this.paramsSubscription.unsubscribe();
     };
     DetailPathPage.prototype.ionViewDidEnter = function () {
         var _this_1 = this;
@@ -259,6 +272,7 @@ var DetailPathPage = /** @class */ (function () {
                 return __generator(this, function (_a) {
                     id = returnId.detail;
                     this.router.navigate(['/detail-poi'], { queryParams: { id: id, type: 'POI' } });
+                    this.paramsSubscription.unsubscribe();
                     return [2 /*return*/];
                 });
             }); });
@@ -307,6 +321,7 @@ var DetailPathPage = /** @class */ (function () {
     };
     DetailPathPage.prototype.goMap = function () {
         localStorage.setItem('path', JSON.stringify(this.fullPois));
+        this.paramsSubscription.unsubscribe();
         this.router.navigate(['/map-path'], { queryParams: { id: this.paths.id } });
     };
     DetailPathPage.prototype.goBack = function () {
@@ -481,196 +496,6 @@ var DetailPathPage = /** @class */ (function () {
             _ionic_native_call_number_ngx__WEBPACK_IMPORTED_MODULE_7__["CallNumber"]])
     ], DetailPathPage);
     return DetailPathPage;
-}());
-
-
-
-/***/ }),
-
-/***/ "./src/app/module-comune/services/config.service.ts":
-/*!**********************************************************!*\
-  !*** ./src/app/module-comune/services/config.service.ts ***!
-  \**********************************************************/
-/*! exports provided: ConfigService */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ConfigService", function() { return ConfigService; });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (undefined && undefined.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-var ConfigService = /** @class */ (function () {
-    function ConfigService() {
-        this.appModuleName = "app-module";
-        this.defaultPosition = {
-            lat: 0,
-            long: 0
-        };
-        this.menu = [
-            {
-                title: "Home",
-                url: "/home",
-                icon: "home"
-            }
-        ];
-    }
-    ConfigService.prototype.init = function () {
-        localStorage.setItem('comune-menu-', JSON.stringify(this.menu));
-    };
-    ConfigService.prototype.getStringContacts = function (translate, language) {
-        return new Promise(function (resolve, reject) {
-            translate.get('phone_contacts').subscribe(function (phone) {
-                var phone = phone;
-                var address = translate.instant('address_contacts');
-                var url = translate.instant('url_contacts');
-                var share = translate.instant('share_contacts');
-                var contacts = JSON.stringify({
-                    "phone": phone,
-                    "address": address,
-                    "url": url,
-                    "share": share
-                });
-                resolve(contacts);
-            });
-        });
-    };
-    ConfigService.prototype.getAppModuleName = function () {
-        return this.appModuleName;
-    };
-    ConfigService.prototype.getDefaultPosition = function () {
-        return this.defaultPosition;
-    };
-    ConfigService = __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
-            providedIn: 'root'
-        }),
-        __metadata("design:paramtypes", [])
-    ], ConfigService);
-    return ConfigService;
-}());
-
-
-
-/***/ }),
-
-/***/ "./src/app/module-comune/services/utils.service.ts":
-/*!*********************************************************!*\
-  !*** ./src/app/module-comune/services/utils.service.ts ***!
-  \*********************************************************/
-/*! exports provided: UtilsService */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UtilsService", function() { return UtilsService; });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _ionic_native_in_app_browser_ngx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @ionic-native/in-app-browser/ngx */ "./node_modules/@ionic-native/in-app-browser/ngx/index.js");
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
-var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (undefined && undefined.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-var __generator = (undefined && undefined.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
-    function verb(n) { return function (v) { return step([n, v]); }; }
-    function step(op) {
-        if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
-            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
-            if (y = 0, t) op = [op[0] & 2, t.value];
-            switch (op[0]) {
-                case 0: case 1: t = op; break;
-                case 4: _.label++; return { value: op[1], done: false };
-                case 5: _.label++; y = op[1]; op = [0]; continue;
-                case 7: op = _.ops.pop(); _.trys.pop(); continue;
-                default:
-                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
-                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
-                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
-                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
-                    if (t[2]) _.ops.pop();
-                    _.trys.pop(); continue;
-            }
-            op = body.call(thisArg, _);
-        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
-        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
-    }
-};
-
-
-
-var UtilsService = /** @class */ (function () {
-    function UtilsService(theInAppBrowser, loadingController) {
-        this.theInAppBrowser = theInAppBrowser;
-        this.loadingController = loadingController;
-        this.urlMappa = "https://www.google.com/maps/search/?api=1&query=";
-        this.pattern = /^((http|https|ftp):\/\/)/;
-    }
-    UtilsService.prototype.openAddressMap = function (address) {
-        window.open(encodeURI(this.urlMappa + address), '_system');
-    };
-    UtilsService.prototype.presentLoading = function () {
-        return __awaiter(this, void 0, void 0, function () {
-            var loading;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.loadingController.create({
-                        // spinner: null,
-                        // message: `<img src="assets/animation/loading.gif" />`,
-                        // cssClass: 'custom-loading',
-                        // duration: 2000
-                        })];
-                    case 1:
-                        loading = _a.sent();
-                        return [4 /*yield*/, loading.present()];
-                    case 2: return [2 /*return*/, _a.sent()];
-                }
-            });
-        });
-    };
-    UtilsService.prototype.hideLoading = function () {
-        this.loadingController.dismiss();
-    };
-    UtilsService.prototype.openUrl = function (value) {
-        var target = "_system";
-        if (!this.pattern.test(value)) {
-            value = "http://" + value;
-        }
-        this.theInAppBrowser.create(value, "_system");
-    };
-    UtilsService.prototype.openShare = function (value) {
-        throw new Error("Method not implemented.");
-    };
-    UtilsService = __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
-            providedIn: 'root'
-        }),
-        __metadata("design:paramtypes", [_ionic_native_in_app_browser_ngx__WEBPACK_IMPORTED_MODULE_1__["InAppBrowser"], _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["LoadingController"]])
-    ], UtilsService);
-    return UtilsService;
 }());
 
 

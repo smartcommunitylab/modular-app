@@ -163,7 +163,7 @@ var ListEventPageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header no-border>\n  <ion-toolbar>\n    <ion-searchbar style=\"display: none\" showCancelButton animated (search)=\"toggleSearch()\"\n      (ionInput)=\"searchChanged($event)\" (ionCancel)=\"toggleSearch()\"></ion-searchbar>\n    <ion-buttons slot=\"start\">\n      <ion-back-button class=\"interaction\"></ion-back-button>\n    </ion-buttons>\n    <ion-buttons slot=\"end\">\n      <ion-button (click)=\"filterClicked()\">\n        <ion-icon name=\"options\"></ion-icon>\n      </ion-button>\n      <ion-button (click)=\"toggleSearch()\">\n        <ion-icon name=\"search\"></ion-icon>\n      </ion-button>\n    </ion-buttons>\n    <ion-title>\n      {{'EVENTS' | translate}}\n    </ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-grid style=\"height: 100%\" *ngIf=\"isLoading\">\n  <ion-row justify-content-center align-items-center style=\"height: 100%\">\n    <ion-spinner name=\"circles\"></ion-spinner>\n  </ion-row>\n</ion-grid>\n\n<ion-content [scrollEvents]=\"true\" (ionScroll)=\"onScroll($event)\">\n\n  <ion-searchbar style=\"display: none\" showCancelButton animated (search)=\"toggleSearch()\"\n    (ionInput)=\"searchChanged($event)\" (ionCancel)=\"toggleSearch()\"></ion-searchbar>\n  <div *ngIf=\"!emptyList\">\n  <div class=\"wrapper\" *ngIf=\"presentFilter\">\n      <div class=\"scrolling-wrapper-flexbox loop\">\n        <div class=\"container\" *ngFor=\"let tag of tags\">\n        <div class=\"tag\"  *ngIf=\"tag.isChecked\">\n          <div class=\"tag-text\">\n            {{tag.value}}\n            <ion-icon name=\"close-circle\" (click)=\"removeTag(tag)\"></ion-icon>\n          </div>\n          \n        </div>\n      </div>\n      </div>\n    </div>\n  <div class=\"wrapper\" *ngIf=\"!presentFilter\">\n    <div class=\"scrolling-wrapper-flexbox loop\">\n      <ion-chip *ngFor=\"let c of categories\" (click)=\"selectInternalElement(c)\" [ngClass]=\"{'categorySelected': isSelected(c)}\">\n        <ion-label class=\"interaction\" [ngClass]=\"{'categorySelected': c==actualVisualized}\">{{c}}</ion-label>\n      </ion-chip>\n    </div>\n  </div>\n  <ion-list no-lines id=\"poi-list\">\n    <div *ngFor=\"let c of categories\">\n      <ion-item class=\"label-type ion-text-center\" sticky *ngIf=\"oneElement(c) && !presentFilter\">\n          <div>{{c}}</div>\n      </ion-item>\n      <div class=\"content\">\n        <div *ngFor=\"let poi of showPois[c]; let i = index\">\n          <div class=\"{{poi.category}}\"   inViewport\n          [inViewportOptions]=\"{ threshold: [0] }\" (inViewportAction)=\"onIntersection($event)\">\n            <wc-details [id]=\"poi.id\" [img]=\"poi.image\" [stringsinput]=\"stringsContact\" [title]=\"poi.title\"\n              [altImage]=\"altImage\" [stringsinput]=\"stringsContact\" [title]=\"poi.title\" [altImage]=\"altImage\"\n              [subtitle]=\"poi.subtitle\" [text]=\"poi.text\" [info]=\"poi.info\" [contacts]=\"poi.infos\"\n              heading-color=\"#707070\" second-color=\"#11b3ef\" expandable=true expanse=false></wc-details>\n            <div class=\"spacing\" *ngIf=\"i == showPois.length - 1\"></div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </ion-list>\n</div>\n<div *ngIf=\"emptyList\">\n    {{'empty_list' | translate}}\n</div>\n</ion-content>"
+module.exports = "<ion-header no-border>\n    <ion-searchbar class=\"search-event\" style=\"display: none\" showCancelButton animated (search)=\"toggleSearch()\"\n    (ionInput)=\"searchChanged($event)\" (ionCancel)=\"toggleSearch()\"></ion-searchbar>\n  <ion-toolbar>\n\n    <ion-buttons slot=\"start\">\n      <ion-back-button class=\"interaction\"></ion-back-button>\n    </ion-buttons>\n    <ion-buttons slot=\"end\">\n      <ion-button (click)=\"filterClicked()\">\n        <ion-icon name=\"options\"></ion-icon>\n      </ion-button>\n      <ion-button (click)=\"toggleSearch()\">\n        <ion-icon name=\"search\"></ion-icon>\n      </ion-button>\n    </ion-buttons>\n    <ion-title>\n      {{'EVENTS' | translate}}\n    </ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<!-- <ion-grid style=\"height: 100%\" *ngIf=\"isLoading\">\n  <ion-row justify-content-center align-items-center style=\"height: 100%\">\n    <ion-spinner name=\"circles\"></ion-spinner>\n  </ion-row>\n</ion-grid> -->\n\n<ion-content [scrollEvents]=\"true\" (ionScroll)=\"onScroll($event)\">\n\n  <ion-searchbar style=\"display: none\" showCancelButton animated (search)=\"toggleSearch()\"\n    (ionInput)=\"searchChanged($event)\" (ionCancel)=\"toggleSearch()\"></ion-searchbar>\n  <div *ngIf=\"!emptyList\">\n  <div class=\"wrapper\" *ngIf=\"presentFilter\">\n      <div class=\"scrolling-wrapper-flexbox loop\">\n        <div class=\"container\" *ngFor=\"let tag of tags\">\n        <div class=\"tag\"  *ngIf=\"tag.isChecked\">\n          <div class=\"tag-text\">\n            {{tag.value}}\n            <ion-icon name=\"close-circle\" (click)=\"removeTag(tag)\"></ion-icon>\n          </div>\n          \n        </div>\n      </div>\n      </div>\n    </div>\n  <div class=\"wrapper\" *ngIf=\"!presentFilter\">\n    <div class=\"scrolling-wrapper-flexbox loop\">\n      <ion-chip *ngFor=\"let c of categories\" (click)=\"selectInternalElement(c)\" [ngClass]=\"{'categorySelected': isSelected(c)}\">\n        <ion-label class=\"interaction\" [ngClass]=\"{'categorySelected': c==actualVisualized}\">{{c}}</ion-label>\n      </ion-chip>\n    </div>\n  </div>\n  <ion-list no-lines id=\"poi-list\">\n    <div *ngFor=\"let c of categories\">\n      <ion-item class=\"label-type ion-text-center\" sticky *ngIf=\"oneElement(c) && !presentFilter\">\n          <div>{{c}}</div>\n      </ion-item>\n      <div class=\"content\">\n        <div *ngFor=\"let poi of showPois[c]; let i = index\">\n          <div class=\"{{poi.category}}\"   inViewport\n          [inViewportOptions]=\"{ threshold: [0] }\" (inViewportAction)=\"onIntersection($event)\">\n            <wc-details [id]=\"poi.id\" [img]=\"poi.image\" [stringsinput]=\"stringsContact\" [title]=\"poi.title\"\n              [altImage]=\"altImage\" [stringsinput]=\"stringsContact\" [title]=\"poi.title\" [altImage]=\"altImage\"\n              [subtitle]=\"poi.subtitle\" [text]=\"poi.text\" [info]=\"poi.info\" [contacts]=\"poi.infos\"\n              heading-color=\"#707070\" second-color=\"#11b3ef\" expandable=true expanse=false></wc-details>\n            <div class=\"spacing\" *ngIf=\"i == showPois.length - 1\"></div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </ion-list>\n</div>\n<div class=\"empty-list\" *ngIf=\"emptyList\">\n    {{'empty_list' | translate}}\n</div>\n</ion-content>"
 
 /***/ }),
 
@@ -174,7 +174,7 @@ module.exports = "<ion-header no-border>\n  <ion-toolbar>\n    <ion-searchbar st
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".content {\n  padding-left: 2%;\n  padding-right: 2%; }\n\nion-searchbar {\n  position: fixed;\n  top: 58px;\n  z-index: 3; }\n\n.column {\n  float: left; }\n\n.c-text {\n  width: 60%;\n  margin-left: 20%; }\n\n.c-btn {\n  width: 40%;\n  margin-bottom: 3%; }\n\n.row {\n  text-align: center;\n  vertical-align: middle;\n  height: 40px; }\n\n.row::after {\n  content: \"\";\n  display: table;\n  clear: both; }\n\n.order-icon {\n  transform: rotate(90deg); }\n\n.wrapper .scrolling-wrapper-flexbox {\n  -ms-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);\n  -o-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);\n  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);\n  background-color: white;\n  width: 100%;\n  display: flex;\n  overflow-x: auto;\n  z-index: 999;\n  position: fixed; }\n\n.wrapper .scrolling-wrapper-flexbox .container {\n    flex: 0 0 auto; }\n\n.wrapper .scrolling-wrapper-flexbox .container .tag {\n      flex: 0 0 auto;\n      margin: 8px; }\n\n.wrapper .scrolling-wrapper-flexbox .container .tag .tag-text {\n        padding: 4px;\n        color: white;\n        background-color: #11b3ef; }\n\n.wrapper .scrolling-wrapper-flexbox ion-chip {\n    flex: 0 0 auto;\n    background-color: white; }\n\n.interaction {\n  color: #11b3ef; }\n\n.categorySelected {\n  color: white !important;\n  background-color: #11b3ef !important; }\n\n.label-type {\n  width: 100%;\n  font-weight: bold;\n  --background: #e3e3e3;\n  --color: #707070;\n  font-size: 22px; }\n\n.label-type div {\n    width: 100%; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL2NoaW44L0RvY3VtZW50cy93b3JrL21vZHVsYXJBcHAvbW9kdWxhci1hcHAvc3JjL2FwcC9tb2R1bGUtY29tdW5lL3BhZ2VzL2xpc3QtZXZlbnQvbGlzdC1ldmVudC5wYWdlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDSSxpQkFBZTtFQUNmLGtCQUFpQixFQUNwQjs7QUFDRDtFQUNJLGdCQUFlO0VBQ2YsVUFBUztFQUNULFdBQVUsRUFDYjs7QUFDRDtFQUNJLFlBQVUsRUFDYjs7QUFDRDtFQUNJLFdBQVU7RUFDVixpQkFBZ0IsRUFDbkI7O0FBRUQ7RUFDSSxXQUFVO0VBQ1Ysa0JBQWdCLEVBQ25COztBQUNEO0VBQ0ksbUJBQWtCO0VBQ2xCLHVCQUFzQjtFQUN0QixhQUFZLEVBQ2Y7O0FBQ0Q7RUFDSSxZQUFXO0VBQ1gsZUFBYTtFQUNiLFlBQVUsRUFDYjs7QUFDRDtFQUNJLHlCQUF3QixFQUMzQjs7QUFFRDtFQUtRLCtFQUE4RTtFQUM5RSw4RUFBNkU7RUFDN0UsMkVBQTBFO0VBQzFFLHdCQUFzQjtFQUN0QixZQUFXO0VBQ1gsY0FBYTtFQUNiLGlCQUFnQjtFQUNoQixhQUFZO0VBQ1osZ0JBQWUsRUFrQmxCOztBQS9CTDtJQWVZLGVBQWMsRUFXakI7O0FBMUJUO01BaUJZLGVBQWM7TUFDZCxZQUFXLEVBTWQ7O0FBeEJUO1FBb0JnQixhQUFZO1FBQ2hCLGFBQVk7UUFDWiwwQkFBMkIsRUFDMUI7O0FBdkJiO0lBNEJZLGVBQWM7SUFDZCx3QkFBdUIsRUFDMUI7O0FBR1Q7RUFDSSxlQUFjLEVBQ2pCOztBQUNEO0VBQ0ksd0JBQXNCO0VBQ3RCLHFDQUFtQyxFQUN0Qzs7QUFDRDtFQUNJLFlBQVc7RUFDWCxrQkFBaUI7RUFDakIsc0JBQWE7RUFDYixpQkFBUTtFQUNSLGdCQUFlLEVBSWxCOztBQVREO0lBT1EsWUFBVyxFQUNkIiwiZmlsZSI6InNyYy9hcHAvbW9kdWxlLWNvbXVuZS9wYWdlcy9saXN0LWV2ZW50L2xpc3QtZXZlbnQucGFnZS5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmNvbnRlbnQge1xuICAgIHBhZGRpbmctbGVmdDoyJTtcbiAgICBwYWRkaW5nLXJpZ2h0OiAyJTtcbn1cbmlvbi1zZWFyY2hiYXIge1xuICAgIHBvc2l0aW9uOiBmaXhlZDtcbiAgICB0b3A6IDU4cHg7XG4gICAgei1pbmRleDogMztcbn1cbi5jb2x1bW4ge1xuICAgIGZsb2F0OmxlZnQ7XG59XG4uYy10ZXh0e1xuICAgIHdpZHRoOiA2MCU7XG4gICAgbWFyZ2luLWxlZnQ6IDIwJTtcbn1cblxuLmMtYnRuIHtcbiAgICB3aWR0aDogNDAlO1xuICAgIG1hcmdpbi1ib3R0b206MyU7XG59XG4ucm93e1xuICAgIHRleHQtYWxpZ246IGNlbnRlcjtcbiAgICB2ZXJ0aWNhbC1hbGlnbjogbWlkZGxlO1xuICAgIGhlaWdodDogNDBweDtcbn1cbi5yb3c6OmFmdGVyIHtcbiAgICBjb250ZW50OiBcIlwiO1xuICAgIGRpc3BsYXk6dGFibGU7XG4gICAgY2xlYXI6Ym90aDtcbn1cbi5vcmRlci1pY29uIHtcbiAgICB0cmFuc2Zvcm06IHJvdGF0ZSg5MGRlZylcbn1cblxuLndyYXBwZXIge1xuXG4gICAgLnNjcm9sbGluZy13cmFwcGVyLWZsZXhib3gge1xuICAgICAgICAtd2Via2l0LWJveC1zaGFkb3c6IDAgMTBweCAyMHB4IHJnYmEoMCwgMCwgMCwgMC4xOSksIDAgNnB4IDZweCByZ2JhKDAsIDAsIDAsIDAuMjMpO1xuICAgICAgICAtbW96LWJveC1zaGFkb3c6IDAgMTBweCAyMHB4IHJnYmEoMCwgMCwgMCwgMC4xOSksIDAgNnB4IDZweCByZ2JhKDAsIDAsIDAsIDAuMjMpO1xuICAgICAgICAtbXMtYm94LXNoYWRvdzogMCAxMHB4IDIwcHggcmdiYSgwLCAwLCAwLCAwLjE5KSwgMCA2cHggNnB4IHJnYmEoMCwgMCwgMCwgMC4yMyk7XG4gICAgICAgIC1vLWJveC1zaGFkb3c6IDAgMTBweCAyMHB4IHJnYmEoMCwgMCwgMCwgMC4xOSksIDAgNnB4IDZweCByZ2JhKDAsIDAsIDAsIDAuMjMpO1xuICAgICAgICBib3gtc2hhZG93OiAwIDEwcHggMjBweCByZ2JhKDAsIDAsIDAsIDAuMTkpLCAwIDZweCA2cHggcmdiYSgwLCAwLCAwLCAwLjIzKTtcbiAgICAgICAgYmFja2dyb3VuZC1jb2xvcjp3aGl0ZTtcbiAgICAgICAgd2lkdGg6IDEwMCU7XG4gICAgICAgIGRpc3BsYXk6IGZsZXg7XG4gICAgICAgIG92ZXJmbG93LXg6IGF1dG87XG4gICAgICAgIHotaW5kZXg6IDk5OTtcbiAgICAgICAgcG9zaXRpb246IGZpeGVkO1xuICAgICAgICAuY29udGFpbmVye1xuICAgICAgICAgICAgZmxleDogMCAwIGF1dG87XG4gICAgICAgIC50YWd7XG4gICAgICAgICAgICBmbGV4OiAwIDAgYXV0bztcbiAgICAgICAgICAgIG1hcmdpbjogOHB4O1xuICAgICAgICAgICAgLnRhZy10ZXh0e1xuICAgICAgICAgICAgICAgIHBhZGRpbmc6IDRweDtcbiAgICAgICAgICAgIGNvbG9yOiB3aGl0ZTtcbiAgICAgICAgICAgIGJhY2tncm91bmQtY29sb3I6ICAgIzExYjNlZjtcbiAgICAgICAgICAgIH1cbiAgICAgICAgfVxuICAgICAgICAgICAgXG4gICAgICAgIH1cbiAgICAgICAgaW9uLWNoaXAge1xuICAgICAgICAgICAgZmxleDogMCAwIGF1dG87XG4gICAgICAgICAgICBiYWNrZ3JvdW5kLWNvbG9yOiB3aGl0ZTtcbiAgICAgICAgfVxuICAgIH1cbn1cbi5pbnRlcmFjdGlvbiB7XG4gICAgY29sb3I6ICMxMWIzZWY7XG59XG4uY2F0ZWdvcnlTZWxlY3RlZCB7XG4gICAgY29sb3I6IHdoaXRlIWltcG9ydGFudDtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiAjMTFiM2VmIWltcG9ydGFudDtcbn1cbi5sYWJlbC10eXBle1xuICAgIHdpZHRoOiAxMDAlO1xuICAgIGZvbnQtd2VpZ2h0OiBib2xkO1xuICAgIC0tYmFja2dyb3VuZDogI2UzZTNlMztcbiAgICAtLWNvbG9yOiAjNzA3MDcwO1xuICAgIGZvbnQtc2l6ZTogMjJweDtcbiAgICBkaXZ7XG4gICAgICAgIHdpZHRoOiAxMDAlO1xuICAgIH1cbn0iXX0= */"
+module.exports = ".content {\n  padding-left: 2%;\n  padding-right: 2%; }\n\nion-searchbar {\n  position: fixed;\n  z-index: 999; }\n\n.column {\n  float: left; }\n\n.c-text {\n  width: 60%;\n  margin-left: 20%; }\n\n.c-btn {\n  width: 40%;\n  margin-bottom: 3%; }\n\n.row {\n  text-align: center;\n  vertical-align: middle;\n  height: 40px; }\n\n.row::after {\n  content: \"\";\n  display: table;\n  clear: both; }\n\n.order-icon {\n  transform: rotate(90deg); }\n\n.wrapper .scrolling-wrapper-flexbox {\n  -ms-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);\n  -o-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);\n  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);\n  background-color: white;\n  width: 100%;\n  display: flex;\n  overflow-x: auto;\n  z-index: 999;\n  position: fixed; }\n\n.wrapper .scrolling-wrapper-flexbox .container {\n    flex: 0 0 auto; }\n\n.wrapper .scrolling-wrapper-flexbox .container .tag {\n      flex: 0 0 auto;\n      margin: 8px; }\n\n.wrapper .scrolling-wrapper-flexbox .container .tag .tag-text {\n        padding: 4px;\n        color: white;\n        background-color: #11b3ef; }\n\n.wrapper .scrolling-wrapper-flexbox ion-chip {\n    flex: 0 0 auto;\n    background-color: white; }\n\n.interaction {\n  color: #11b3ef; }\n\n.categorySelected {\n  color: white !important;\n  background-color: #11b3ef !important; }\n\n.label-type {\n  width: 100%;\n  font-weight: bold;\n  --background: #e3e3e3;\n  --color: #707070;\n  font-size: 22px; }\n\n.label-type div {\n    width: 100%; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL2NoaW44L0RvY3VtZW50cy93b3JrL21vZHVsYXJBcHAvbW9kdWxhci1hcHAvc3JjL2FwcC9tb2R1bGUtY29tdW5lL3BhZ2VzL2xpc3QtZXZlbnQvbGlzdC1ldmVudC5wYWdlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDSSxpQkFBZTtFQUNmLGtCQUFpQixFQUNwQjs7QUFDRDtFQUNJLGdCQUFlO0VBRWYsYUFBWSxFQUNmOztBQUNEO0VBQ0ksWUFBVSxFQUNiOztBQUNEO0VBQ0ksV0FBVTtFQUNWLGlCQUFnQixFQUNuQjs7QUFFRDtFQUNJLFdBQVU7RUFDVixrQkFBZ0IsRUFDbkI7O0FBQ0Q7RUFDSSxtQkFBa0I7RUFDbEIsdUJBQXNCO0VBQ3RCLGFBQVksRUFDZjs7QUFDRDtFQUNJLFlBQVc7RUFDWCxlQUFhO0VBQ2IsWUFBVSxFQUNiOztBQUNEO0VBQ0kseUJBQXdCLEVBQzNCOztBQUVEO0VBS1EsK0VBQThFO0VBQzlFLDhFQUE2RTtFQUM3RSwyRUFBMEU7RUFDMUUsd0JBQXNCO0VBQ3RCLFlBQVc7RUFDWCxjQUFhO0VBQ2IsaUJBQWdCO0VBQ2hCLGFBQVk7RUFDWixnQkFBZSxFQWtCbEI7O0FBL0JMO0lBZVksZUFBYyxFQVdqQjs7QUExQlQ7TUFpQlksZUFBYztNQUNkLFlBQVcsRUFNZDs7QUF4QlQ7UUFvQmdCLGFBQVk7UUFDaEIsYUFBWTtRQUNaLDBCQUEyQixFQUMxQjs7QUF2QmI7SUE0QlksZUFBYztJQUNkLHdCQUF1QixFQUMxQjs7QUFHVDtFQUNJLGVBQWMsRUFDakI7O0FBQ0Q7RUFDSSx3QkFBc0I7RUFDdEIscUNBQW1DLEVBQ3RDOztBQUNEO0VBQ0ksWUFBVztFQUNYLGtCQUFpQjtFQUNqQixzQkFBYTtFQUNiLGlCQUFRO0VBQ1IsZ0JBQWUsRUFJbEI7O0FBVEQ7SUFPUSxZQUFXLEVBQ2QiLCJmaWxlIjoic3JjL2FwcC9tb2R1bGUtY29tdW5lL3BhZ2VzL2xpc3QtZXZlbnQvbGlzdC1ldmVudC5wYWdlLnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuY29udGVudCB7XG4gICAgcGFkZGluZy1sZWZ0OjIlO1xuICAgIHBhZGRpbmctcmlnaHQ6IDIlO1xufVxuaW9uLXNlYXJjaGJhciB7XG4gICAgcG9zaXRpb246IGZpeGVkO1xuICAgIC8vIHRvcDogNThweDtcbiAgICB6LWluZGV4OiA5OTk7XG59XG4uY29sdW1uIHtcbiAgICBmbG9hdDpsZWZ0O1xufVxuLmMtdGV4dHtcbiAgICB3aWR0aDogNjAlO1xuICAgIG1hcmdpbi1sZWZ0OiAyMCU7XG59XG5cbi5jLWJ0biB7XG4gICAgd2lkdGg6IDQwJTtcbiAgICBtYXJnaW4tYm90dG9tOjMlO1xufVxuLnJvd3tcbiAgICB0ZXh0LWFsaWduOiBjZW50ZXI7XG4gICAgdmVydGljYWwtYWxpZ246IG1pZGRsZTtcbiAgICBoZWlnaHQ6IDQwcHg7XG59XG4ucm93OjphZnRlciB7XG4gICAgY29udGVudDogXCJcIjtcbiAgICBkaXNwbGF5OnRhYmxlO1xuICAgIGNsZWFyOmJvdGg7XG59XG4ub3JkZXItaWNvbiB7XG4gICAgdHJhbnNmb3JtOiByb3RhdGUoOTBkZWcpXG59XG5cbi53cmFwcGVyIHtcblxuICAgIC5zY3JvbGxpbmctd3JhcHBlci1mbGV4Ym94IHtcbiAgICAgICAgLXdlYmtpdC1ib3gtc2hhZG93OiAwIDEwcHggMjBweCByZ2JhKDAsIDAsIDAsIDAuMTkpLCAwIDZweCA2cHggcmdiYSgwLCAwLCAwLCAwLjIzKTtcbiAgICAgICAgLW1vei1ib3gtc2hhZG93OiAwIDEwcHggMjBweCByZ2JhKDAsIDAsIDAsIDAuMTkpLCAwIDZweCA2cHggcmdiYSgwLCAwLCAwLCAwLjIzKTtcbiAgICAgICAgLW1zLWJveC1zaGFkb3c6IDAgMTBweCAyMHB4IHJnYmEoMCwgMCwgMCwgMC4xOSksIDAgNnB4IDZweCByZ2JhKDAsIDAsIDAsIDAuMjMpO1xuICAgICAgICAtby1ib3gtc2hhZG93OiAwIDEwcHggMjBweCByZ2JhKDAsIDAsIDAsIDAuMTkpLCAwIDZweCA2cHggcmdiYSgwLCAwLCAwLCAwLjIzKTtcbiAgICAgICAgYm94LXNoYWRvdzogMCAxMHB4IDIwcHggcmdiYSgwLCAwLCAwLCAwLjE5KSwgMCA2cHggNnB4IHJnYmEoMCwgMCwgMCwgMC4yMyk7XG4gICAgICAgIGJhY2tncm91bmQtY29sb3I6d2hpdGU7XG4gICAgICAgIHdpZHRoOiAxMDAlO1xuICAgICAgICBkaXNwbGF5OiBmbGV4O1xuICAgICAgICBvdmVyZmxvdy14OiBhdXRvO1xuICAgICAgICB6LWluZGV4OiA5OTk7XG4gICAgICAgIHBvc2l0aW9uOiBmaXhlZDtcbiAgICAgICAgLmNvbnRhaW5lcntcbiAgICAgICAgICAgIGZsZXg6IDAgMCBhdXRvO1xuICAgICAgICAudGFne1xuICAgICAgICAgICAgZmxleDogMCAwIGF1dG87XG4gICAgICAgICAgICBtYXJnaW46IDhweDtcbiAgICAgICAgICAgIC50YWctdGV4dHtcbiAgICAgICAgICAgICAgICBwYWRkaW5nOiA0cHg7XG4gICAgICAgICAgICBjb2xvcjogd2hpdGU7XG4gICAgICAgICAgICBiYWNrZ3JvdW5kLWNvbG9yOiAgICMxMWIzZWY7XG4gICAgICAgICAgICB9XG4gICAgICAgIH1cbiAgICAgICAgICAgIFxuICAgICAgICB9XG4gICAgICAgIGlvbi1jaGlwIHtcbiAgICAgICAgICAgIGZsZXg6IDAgMCBhdXRvO1xuICAgICAgICAgICAgYmFja2dyb3VuZC1jb2xvcjogd2hpdGU7XG4gICAgICAgIH1cbiAgICB9XG59XG4uaW50ZXJhY3Rpb24ge1xuICAgIGNvbG9yOiAjMTFiM2VmO1xufVxuLmNhdGVnb3J5U2VsZWN0ZWQge1xuICAgIGNvbG9yOiB3aGl0ZSFpbXBvcnRhbnQ7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogIzExYjNlZiFpbXBvcnRhbnQ7XG59XG4ubGFiZWwtdHlwZXtcbiAgICB3aWR0aDogMTAwJTtcbiAgICBmb250LXdlaWdodDogYm9sZDtcbiAgICAtLWJhY2tncm91bmQ6ICNlM2UzZTM7XG4gICAgLS1jb2xvcjogIzcwNzA3MDtcbiAgICBmb250LXNpemU6IDIycHg7XG4gICAgZGl2e1xuICAgICAgICB3aWR0aDogMTAwJTtcbiAgICB9XG59Il19 */"
 
 /***/ }),
 
@@ -319,21 +319,23 @@ var ListEventPage = /** @class */ (function () {
     ListEventPage.prototype.ionViewDidEnter = function () {
         var _this_1 = this;
         if (this.category && this.category.query) {
-            this.dbService.getObjectByQuery(this.category.query).then(function (data) {
-                if (data.docs.length > 0) {
-                    _this_1.fullPois = data.docs.map(function (x) { return _this_1.convertPois(x); });
-                    _this_1.subCategories(_this_1.fullPois);
-                    _this_1.buildShowPois();
-                    _this_1.tags = _this_1.buildFilter();
+            this.dbService.synch().then(function () {
+                _this_1.dbService.getObjectByQuery(_this_1.category.query).then(function (data) {
+                    if (data.docs.length > 0) {
+                        _this_1.fullPois = data.docs.map(function (x) { return _this_1.convertPois(x); });
+                        _this_1.subCategories(_this_1.fullPois);
+                        _this_1.buildShowPois();
+                        _this_1.tags = _this_1.buildFilter();
+                        _this_1.utils.hideLoading();
+                    }
+                    else {
+                        _this_1.emptyList = true;
+                    }
+                    _this_1.isLoading = false;
+                    console.log(_this_1.showPois);
+                }, function (err) {
                     _this_1.utils.hideLoading();
-                }
-                else {
-                    _this_1.emptyList = true;
-                }
-                _this_1.isLoading = false;
-                console.log(_this_1.showPois);
-            }, function (err) {
-                _this_1.utils.hideLoading();
+                });
             });
         }
         else {
@@ -352,6 +354,30 @@ var ListEventPage = /** @class */ (function () {
                 return __generator(this, function (_a) {
                     id = returnId.detail;
                     this.router.navigate(['/detail-event'], { queryParams: { id: id, type: 'EVENT' } });
+                    return [2 /*return*/];
+                });
+            }); });
+            element.addEventListener('tagClicked', function (tag) { return __awaiter(_this_1, void 0, void 0, function () {
+                var tagSelected;
+                return __generator(this, function (_a) {
+                    tagSelected = tag.detail;
+                    this.tags = this.tags.map(function (item) {
+                        if (item.value == tagSelected)
+                            return {
+                                "value": tagSelected,
+                                "isChecked": true
+                            };
+                        else {
+                            return {
+                                "value": item.value,
+                                "isChecked": item.isChecked
+                            };
+                        }
+                    });
+                    this.presentFilter = true;
+                    this.firstAccess = false;
+                    this.buildShowPois(this.tags);
+                    console.log(tagSelected);
                     return [2 /*return*/];
                 });
             }); });
@@ -435,6 +461,8 @@ var ListEventPage = /** @class */ (function () {
                 _this_1.showPois[p.category].push(p);
             }
         });
+        //orderArray
+        this.orderArray('asc', this);
     };
     ListEventPage.prototype.convertPois = function (x) {
         var poiElement = {};
@@ -499,11 +527,11 @@ var ListEventPage = /** @class */ (function () {
     ListEventPage.prototype.toggleSearch = function () {
         var _this_1 = this;
         this.search = !this.search;
-        var searchbar = document.querySelector('ion-searchbar');
+        var searchbar = document.querySelector('.search-event');
         if (searchbar.style.display === 'none') {
             searchbar.style.display = 'unset';
             this.presentFilter = true;
-            searchbar.setFocus();
+            searchbar.focus();
         }
         else {
             searchbar.style.display = 'none';
@@ -671,10 +699,10 @@ var ListEventPage = /** @class */ (function () {
     ListEventPage.prototype.orderArray = function (condition, _this) {
         _this.categories.forEach(function (c) {
             if (condition.indexOf('asc') > -1) {
-                _this.showPois[c] = _this.showPois[c].sort(function (a, b) { return a.title.localeCompare(b.title); });
+                _this.showPois[c] = _this.showPois[c].sort(function (a, b) { return (a.fromTime > b.fromTime) ? 1 : -1; });
             }
             else {
-                _this.showPois[c] = _this.showPois[c].sort(function (a, b) { return b.title.localeCompare(a.title); });
+                _this.showPois[c] = _this.showPois[c].sort(function (a, b) { return (a.fromTime < b.fromTime) ? 1 : -1; });
             }
         });
     };

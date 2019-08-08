@@ -228,7 +228,7 @@ export class ListEventPage implements OnInit {
       }
     });
     //orderArray
-    this.orderArray('asc',this);
+    this.orderArray('asc', this);
   }
 
   convertPois(x) {
@@ -267,8 +267,12 @@ export class ListEventPage implements OnInit {
       if (x.description) {
         poiElement.text = x.description[this.language];
       }
+      //TO DO
       if (x.category) {
-        poiElement.category = x.category;
+        if (x.category == 'event')
+          poiElement.category = 'Eventi Principali';
+        else
+          poiElement.category = x.category;
       }
       if (x.classification) {
         poiElement.classification = x.classification[this.language];
@@ -452,9 +456,9 @@ export class ListEventPage implements OnInit {
   orderArray(condition: string, _this: any) {
     _this.categories.forEach(c => {
       if (condition.indexOf('asc') > -1) {
-        _this.showPois[c] = _this.showPois[c].sort( (a, b) => (a.fromTime > b.fromTime) ? 1 : -1);
+        _this.showPois[c] = _this.showPois[c].sort((a, b) => (a.fromTime > b.fromTime) ? 1 : -1);
       } else {
-        _this.showPois[c] = _this.showPois[c].sort( (a, b) => (a.fromTime < b.fromTime) ? 1 : -1);
+        _this.showPois[c] = _this.showPois[c].sort((a, b) => (a.fromTime < b.fromTime) ? 1 : -1);
       }
     });
   }

@@ -1932,47 +1932,47 @@ module.exports = webpackAsyncContext;
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
+	"./05ayvada.entry.js": [
+		"./node_modules/wcs-comune/dist/esm/es5/build/05ayvada.entry.js",
+		"common",
+		96
+	],
+	"./05ayvada.sc.entry.js": [
+		"./node_modules/wcs-comune/dist/esm/es5/build/05ayvada.sc.entry.js",
+		"common",
+		97
+	],
 	"./3jigjkiu.entry.js": [
 		"./node_modules/wcs-comune/dist/esm/es5/build/3jigjkiu.entry.js",
-		96
+		98
 	],
 	"./3jigjkiu.sc.entry.js": [
 		"./node_modules/wcs-comune/dist/esm/es5/build/3jigjkiu.sc.entry.js",
-		97
+		99
 	],
 	"./3xjsggco.entry.js": [
 		"./node_modules/wcs-comune/dist/esm/es5/build/3xjsggco.entry.js",
-		98
+		100
 	],
 	"./3xjsggco.sc.entry.js": [
 		"./node_modules/wcs-comune/dist/esm/es5/build/3xjsggco.sc.entry.js",
-		99
+		101
 	],
 	"./55jrifnu.entry.js": [
 		"./node_modules/wcs-comune/dist/esm/es5/build/55jrifnu.entry.js",
-		100
+		102
 	],
 	"./55jrifnu.sc.entry.js": [
 		"./node_modules/wcs-comune/dist/esm/es5/build/55jrifnu.sc.entry.js",
-		101
+		103
 	],
 	"./a9ze2jpq.entry.js": [
 		"./node_modules/wcs-comune/dist/esm/es5/build/a9ze2jpq.entry.js",
 		"common",
-		102
+		104
 	],
 	"./a9ze2jpq.sc.entry.js": [
 		"./node_modules/wcs-comune/dist/esm/es5/build/a9ze2jpq.sc.entry.js",
-		"common",
-		103
-	],
-	"./bg7saeu9.entry.js": [
-		"./node_modules/wcs-comune/dist/esm/es5/build/bg7saeu9.entry.js",
-		"common",
-		104
-	],
-	"./bg7saeu9.sc.entry.js": [
-		"./node_modules/wcs-comune/dist/esm/es5/build/bg7saeu9.sc.entry.js",
 		"common",
 		105
 	],
@@ -2032,13 +2032,13 @@ var map = {
 		"common",
 		117
 	],
-	"./u0eusqkj.entry.js": [
-		"./node_modules/wcs-comune/dist/esm/es5/build/u0eusqkj.entry.js",
+	"./rfltytyj.entry.js": [
+		"./node_modules/wcs-comune/dist/esm/es5/build/rfltytyj.entry.js",
 		"common",
 		118
 	],
-	"./u0eusqkj.sc.entry.js": [
-		"./node_modules/wcs-comune/dist/esm/es5/build/u0eusqkj.sc.entry.js",
+	"./rfltytyj.sc.entry.js": [
+		"./node_modules/wcs-comune/dist/esm/es5/build/rfltytyj.sc.entry.js",
 		"common",
 		119
 	]
@@ -2166,6 +2166,7 @@ var map = {
 	"./pages/home-trasporti/home-trasporti.module": [
 		"./src/app/module-trasporti/pages/home-trasporti/home-trasporti.module.ts",
 		"default~pages-home-trasporti-home-trasporti-module~pages-map-spots-map-spots-module~pages-transport-~936e53eb",
+		"default~pages-home-trasporti-home-trasporti-module~pages-list-event-list-event-module~pages-list-poi~75a08768",
 		"common",
 		"pages-home-trasporti-home-trasporti-module"
 	],
@@ -2184,7 +2185,7 @@ var map = {
 	"./pages/list-event/list-event.module": [
 		"./src/app/module-comune/pages/list-event/list-event.module.ts",
 		"default~pages-detail-event-detail-event-module~pages-detail-info-detail-info-module~pages-detail-pat~3194840c",
-		"default~pages-list-event-list-event-module~pages-list-poi-list-poi-module",
+		"default~pages-home-trasporti-home-trasporti-module~pages-list-event-list-event-module~pages-list-poi~75a08768",
 		"common",
 		"pages-list-event-list-event-module"
 	],
@@ -2214,7 +2215,7 @@ var map = {
 	"./pages/list-poi/list-poi.module": [
 		"./src/app/module-comune/pages/list-poi/list-poi.module.ts",
 		"default~pages-detail-event-detail-event-module~pages-detail-info-detail-info-module~pages-detail-pat~3194840c",
-		"default~pages-list-event-list-event-module~pages-list-poi-list-poi-module",
+		"default~pages-home-trasporti-home-trasporti-module~pages-list-event-list-event-module~pages-list-poi~75a08768",
 		"common",
 		"pages-list-poi-list-poi-module"
 	],
@@ -4016,8 +4017,8 @@ var ConfigService = /** @class */ (function () {
         this.http = http;
         this.appModuleName = "app-module";
         this.defaultPosition = {
-            lat: 0,
-            long: 0
+            lat: 46.0748,
+            long: 11.1217
         };
     }
     ConfigService.prototype.Init = function () {

@@ -163,7 +163,15 @@ export class DbService {
       if (query.selector['element-type'] == 'event-item') {
         return this.db.find({
           selector: {
-            'element-type': 'event-item',
+            "$or": [
+
+              {
+                 "element-type": "event-item"
+              },
+              {
+                "element-type": "main-event-item"
+             }
+           ]
           //   ,
           //   "$nor": [
           //     { "fromTime": {
