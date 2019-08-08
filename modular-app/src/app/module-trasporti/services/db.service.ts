@@ -69,7 +69,7 @@ export class DbService {
       if (local) {
         local = JSON.parse(local);
         if (local && local.length > 0) {
-          local.forEach((s) =>{
+          local.forEach((s) => {
             s.agencyId = a;
             res.push(s);
           });
@@ -91,7 +91,7 @@ export class DbService {
     return promise;
   };
 
-  
+
 
   doWithDB(successcallback, errorcallback) {
     var that = this;
@@ -195,26 +195,26 @@ export class DbService {
           that.file.createFile(that.getDBPath(), that.getDBFileShortName(), true)
             .then(function (success) {
               var f = jszipobj.file(key);
-              that.file.removeFile(that.getDBPath(), that.getDBFileShortName()).then(function () {
-                that.file.writeFile(that.getDBPath(), that.getDBFileShortName(), jszipobj.file(key).asArrayBuffer())
-                  .then(function (success) {
-                    console.log('success copy');
-                    // that.db = null;
-                    resolve(true);
+              // that.file.removeFile(that.getDBPath(), that.getDBFileShortName()).then(function () {
+              that.file.writeFile(that.getDBPath(), that.getDBFileShortName(), jszipobj.file(key).asArrayBuffer(), { replace: true })
+                .then(function (success) {
+                  console.log('success copy');
+                  // that.db = null;
+                  resolve(true);
 
-                  }, function (error) {
-                    console.log('error copy');
-                    reject(error);
+                }, function (error) {
+                  console.log('error copy');
+                  reject(error);
 
-                  });
-              })
+                });
+            })
 
-            }, function (error) {
-              console.log('error creation');
-              reject(error);
-            });
+        }, function (error) {
+          console.log('error creation');
+          reject(error);
         });
       });
+      // });
     })
     // })
     return promise;
