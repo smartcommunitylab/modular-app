@@ -3301,13 +3301,12 @@ var ModulePulstradeRoutingModule = /** @class */ (function () {
 /*!*************************************************************!*\
   !*** ./src/app/module-pulstrade/module-pulstrade.module.ts ***!
   \*************************************************************/
-/*! exports provided: HttpLoaderFactory, initializeAppMap, ModulePulstradeModule */
+/*! exports provided: HttpLoaderFactory, ModulePulstradeModule */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HttpLoaderFactory", function() { return HttpLoaderFactory; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "initializeAppMap", function() { return initializeAppMap; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ModulePulstradeModule", function() { return ModulePulstradeModule; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
@@ -3340,11 +3339,11 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 function HttpLoaderFactory(http) {
     return new _ngx_translate_http_loader__WEBPACK_IMPORTED_MODULE_5__["TranslateHttpLoader"](http, './assets/strade/i18n/', '.json');
 }
-function initializeAppMap(mapSrv) {
-    return function () {
-        return mapSrv.Init();
-    };
-}
+// export function initializeAppMap(mapSrv: MapService) {
+//   return (): Promise<any> => {
+//     return mapSrv.Init();
+//   };
+// }
 var ModulePulstradeModule = /** @class */ (function () {
     function ModulePulstradeModule() {
     }
@@ -3381,8 +3380,9 @@ var ModulePulstradeModule = /** @class */ (function () {
             providers: [
                 _services_map_service__WEBPACK_IMPORTED_MODULE_8__["MapService"],
                 _services_notification_service__WEBPACK_IMPORTED_MODULE_9__["NotificationService"],
-                _ionic_native_local_notifications_ngx__WEBPACK_IMPORTED_MODULE_10__["LocalNotifications"],
-                { provide: _angular_core__WEBPACK_IMPORTED_MODULE_0__["APP_INITIALIZER"], useFactory: initializeAppMap, deps: [_services_map_service__WEBPACK_IMPORTED_MODULE_8__["MapService"]], multi: true },
+                _ionic_native_local_notifications_ngx__WEBPACK_IMPORTED_MODULE_10__["LocalNotifications"]
+                // ,
+                // { provide: APP_INITIALIZER, useFactory: initializeAppMap, deps: [MapService], multi: true },
             ],
             entryComponents: [],
             schemas: [_angular_core__WEBPACK_IMPORTED_MODULE_0__["CUSTOM_ELEMENTS_SCHEMA"]]
@@ -3429,15 +3429,25 @@ var MapService = /** @class */ (function () {
         this.http = http;
         this.geoSrv = geoSrv;
         this.platform = platform;
+        this.defaultCenter = {
+            lat: 46.0748,
+            long: 11.1217
+        };
     }
     MapService.prototype.Init = function () {
         var _this = this;
         return this.platform.ready().then(function () {
             return new Promise(function (resolve, reject) {
-                _this.loadData();
-                resolve();
+                _this.loadData().then(function () {
+                    resolve();
+                }, function (err) {
+                    reject();
+                });
             });
         });
+    };
+    MapService.prototype.getDefaultCenter = function () {
+        return [this.defaultCenter.lat, this.defaultCenter.long];
     };
     /**
      * Download streets data from API
@@ -3445,12 +3455,19 @@ var MapService = /** @class */ (function () {
      */
     MapService.prototype.loadData = function () {
         var _this = this;
-        if (this.data) {
-            return Promise.resolve(this.data);
-        }
-        this.http.get('https://tn.smartcommunitylab.it/streetcleaning/rest/street').toPromise().then(function (response) {
-            _this.data = _this.buildFinalData(response);
+        var deferred = new Promise(function (resolve, reject) {
+            if (_this.data) {
+                return Promise.resolve(_this.data);
+            }
+            // this.http.get('https://tn.smartcommunitylab.it/streetcleaning/rest/street').toPromise().then(response => {
+            _this.http.get('assets/strade/data/spazzolamento.json').toPromise().then(function (response) {
+                _this.data = _this.buildFinalData(response);
+                resolve();
+            }, function (err) {
+                reject();
+            });
         });
+        return deferred;
     };
     /**
      * @return Streets array

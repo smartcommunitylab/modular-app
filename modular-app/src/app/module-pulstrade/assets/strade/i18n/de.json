@@ -13,5 +13,6 @@
     "NOTIFY-ENA": "Aktivierte Benachrichtigungen",
     "NOTIFY-DIS": "Deaktivierte Benachrichtigungen",
     "DETAILS": "Details",
-    "IN-CLEANING": "Straße in Sauberkeit"
+    "IN-CLEANING": "Straße in Sauberkeit",
+    "error_init":"Errore inizializzazione dati"
 }

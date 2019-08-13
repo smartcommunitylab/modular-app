@@ -7,6 +7,7 @@ const routes: Routes = [
  // { path: 'ps/home-common', redirectTo: 'home-common', pathMatch: 'full'},
   { path: 'ps-search', loadChildren: './pages/search/search.module#SearchPageModule' },
   { path: 'ps-notification', loadChildren: './pages/notification/notification.module#NotificationPageModule' },
+  { path: 'street-detail', loadChildren: './pages/street-detail/street-detail.module#StreetDetailPageModule' },
 
 
 ];

@@ -390,8 +390,28 @@ export class AppHome {
                             : "",
                         h("ion-content", { scrollX: true, scrollY: true, scrollEvents: true, "has-bouncing": "false", id: "tablescroll", onIonScrollStart: () => { }, onIonScroll: (event) => this.scrollOrari(event), onIonScrollEnd: () => { }, style: styleTableScroll, class: "overlapDiv", "delegate-handle": "list" },
                             h("div", { id: "table-col", style: styleTableCol }, this.dataTT.stops.map((stop, index) => parseInt(index) % 2 == 0
-                                ? h("div", { id: 'grigioFermate', onClick: () => this.showStop(stop) }, stop)
-                                : h("div", { id: 'biancoFermate', onClick: () => this.showStop(stop) }, stop))),
+                                ? h("div", { id: 'grigioFermate', onClick: () => this.showStop(stop) }, this.accessibility
+                                    ? h("div", null, !!this.dataTT.wheelChairBoarding && this.dataTT.wheelChairBoarding[index] == 1
+                                        ? h("div", null,
+                                            h("div", { class: "accessibilityBullet" },
+                                                h("ion-icon", { name: "radio-button-on" })),
+                                            stop)
+                                        : h("div", null,
+                                            h("div", { class: "accessibilityBullet" }),
+                                            "  ",
+                                            h("span", null, stop)))
+                                    : h("div", null, stop))
+                                : h("div", { id: 'biancoFermate', onClick: () => this.showStop(stop) }, this.accessibility
+                                    ? h("div", null, !!this.dataTT.wheelChairBoarding && this.dataTT.wheelChairBoarding[index] == 1
+                                        ? h("div", null,
+                                            h("div", { class: "accessibilityBullet" },
+                                                h("ion-icon", { name: "radio-button-on" })),
+                                            stop)
+                                        : h("div", null,
+                                            h("div", { class: "accessibilityBullet" }),
+                                            " ",
+                                            h("span", null, stop)))
+                                    : h("div", null, stop)))),
                             this.showHeader
                                 ? h("div", { id: "table-header", style: styleTableHeader },
                                     h("div", { innerHTML: this.headStr[0] }),

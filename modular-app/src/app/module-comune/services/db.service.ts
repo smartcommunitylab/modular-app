@@ -18,13 +18,13 @@ export class DbService {
   remote: any;
   opts = { live: true, retry: true };
   contentTypes: any;
-  MIN_SYNCH_TIME: number=60000;
+  MIN_SYNCH_TIME: number=600000;
   constructor() {
 
     this.db = new PouchDB('comune-in-tasca');
 
     this.remote = 'http://192.168.42.201:5984/comune-in-tasca';
-    // 'http://192.168.1.197:5984/comune-in-tasca'
+    //'http://192.168.1.197:5984/comune-in-tasca'
     // 'http://127.0.0.1:5984/comune-in-tasca';
 
     this.contentTypes = {
@@ -68,31 +68,27 @@ export class DbService {
     localStorage.setItem('UPDATE_SYNCH',new Date().getTime().toString());
   }
   synch(): Promise<any> {
+    console.log('enter in synch')
     return new Promise((resolve, reject) => {
       if (this.lastTimeSynch()>this.MIN_SYNCH_TIME){
       // do one way, one-off sync from the server until completion
+      console.log('this.lastTimeSynch()>this.MIN_SYNCH_TIME')
+
       this.db.sync(this.remote).on('complete',  ()=> {
+        console.log('synch done')
+
         this.updateLastTimeSynch();
         resolve();
       }).on('error', function (err) {
+        console.log('error in sync'+err)
+
         // boo, we hit an error!
         resolve();
       });
     }
-      
-    //   this.db.replicate.from(this.remote).on('complete', info => {
-    //     // then two-way, continuous, retriable sync
-    //     this.updateLastTimeSynch();
-    //     resolve();
-    //     console.log('finished synch')
-    //   //   this.db.sync(this.remote, this.opts)
-    //   //     .on('change', this.onSyncChange)
-    //   //     .on('paused', this.onSyncPaused)
-    //   //     .on('error', this.onSyncError);
-    //   // }).on('error', this.onSyncError);
-    //   // // this.db.sync(this.remote, options);
-    // })
     else {
+      console.log('this.lastTimeSynch()<this.MIN_SYNCH_TIME')
+
       resolve();
     }
   })
@@ -181,7 +177,8 @@ export class DbService {
           //     "$lte": new Date().getTime()
           //  }
           // }]
-          }
+          },
+          "limit": 100
         });
       }
     }

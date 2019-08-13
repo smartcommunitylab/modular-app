@@ -19,7 +19,8 @@ export class DatiServiceService {
     .then( res => { // Success
       let parser = new DOMParser();
       for (let item of JSON.parse(res['_body']).content) {
-        item.description = parser.parseFromString(item.description, 'text/html').body.textContent; //rende il contenuto del testo interpreteabile da HTML
+        // item.description = parser.parseFromString(item.description, 'text/html').body.textContent.replace(/&quot;/g,'"'); //rende il contenuto del testo interpreteabile da HTML
+        item.shortAbstract = item.shortAbstract.replace(/&quot;/g,'"');
         vetDati.push(item);
       }
       resolve(vetDati);

@@ -22,20 +22,18 @@ export class VideoPage {
   datiRicerca: TipoEvento[] = [];
   start: number = 0;
   vetNuoviDati;
-  emptyList: boolean=false;
+  emptyList: boolean = false;
   parametriPost = {
     "fromDate": null,
     "size": 10,
-    "sortForList": 0,
-    "source": ["Video di TrentoInforma"],
-    "start": 0,
-    "tag": [],
-    "themes": []
+    "sortForList": 1,
+    "source": ["Avvisi del Comune di Trento", "Video di TrentoInforma"],
+    "start": 0
   }
   language: any;
-  
 
-  constructor(private datiService: DatiServiceService, private social: SocialSharing,private config: ConfigService, private translate: TranslateService) { 
+
+  constructor(private datiService: DatiServiceService, private social: SocialSharing, private config: ConfigService, private translate: TranslateService) {
     this.language = window[this.config.getAppModuleName()]['language'];
     this.translate.use(this.language);
   }
@@ -56,15 +54,20 @@ export class VideoPage {
   visualizzaVideo(urlVideo: string) {
     window.open(encodeURI(urlVideo), '_system');
   }
+  isVideo(s) {
+    return s.source == 'Video di TrentoInforma'
+  }
+  isNews(s) {
+    return s.source == 'Avvisi del Comune di Trento'
 
+  }
   ngOnInit() {
-   this.datiService.getDati(this.parametriPost).then(data => {
-     if (data.length==0)
-     {
-       this.emptyList =true;
+    this.datiService.getDati(this.parametriPost).then(data => {
+      if (data.length == 0) {
+        this.emptyList = true;
       }
-    this.DatiEvento =data;
-    this.datiRicerca = this.DatiEvento;
+      this.DatiEvento = data;
+      this.datiRicerca = this.DatiEvento;
     });
     console.log(this.DatiEvento);
   }
@@ -73,35 +76,44 @@ export class VideoPage {
     if (!this.isRicercaOpen) {
       document.getElementById("barraDiRicerca").style.display = "inherit";
       document.getElementById("btnImpostazioniRicerca").innerHTML = "<svg width='24' height='24' viewBox='0 0 24 24'><path fill='none' d='M0 0h24v24H0V0z'/><path d='M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z'/></svg>";
-      this.infiniteScroll.disabled = true;
-      this.Ricerca();
+      this.daCercare="";
     }
     else {
       document.getElementById("barraDiRicerca").style.display = "none";
       document.getElementById("btnImpostazioniRicerca").innerHTML = "<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'><path fill='none' d='M0 0h24v24H0V0z'/><path d='M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z'/></svg>";
       this.datiRicerca = this.DatiEvento;
-      this.infiniteScroll.disabled = false;
     }
     this.isRicercaOpen = !this.isRicercaOpen;
   }
 
+  typingTimer;                //timer identifier
+  doneTypingInterval = 500;  //time in ms, 5 second for example
   Ricerca() {
-    let vetRisultati: any[] = [];
-    if (this.daCercare != null) {
-      for (let item of this.DatiEvento) {
-        if ((item.description.toUpperCase().includes(this.daCercare.toUpperCase())) || (item.title.toUpperCase().includes(this.daCercare.toUpperCase()))) {
-          vetRisultati.push(item);
+    clearTimeout(this.typingTimer);
+    this.typingTimer = setTimeout(() => {
+      if (this.daCercare!=null) {
+          let parametriPost = {
+            "fromDate": null,
+            "size": 10,
+            "sortForList": 1,
+            "source": ["Avvisi del Comune di Trento", "Video di TrentoInforma"],
+            "start": 0,
+            "filter":this.daCercare
+          }
+          this.datiService.getDati(parametriPost).then(data => {
+            if (data.length == 0) {
+              this.emptyList = true;
+            }
+             else {
+               this.emptyList = false;
+               this.DatiEvento = data;
+               this.datiRicerca = this.DatiEvento;
+             }
+
+          });
         }
-      }
-      this.datiRicerca = vetRisultati;
-      vetRisultati = null;
-      if (this.datiRicerca.length==0){
-       
-     {
-       this.emptyList =true;
-      }
-      }
-    }
+    }, this.doneTypingInterval);
+
   }
 
   caricaAltriDati(event) {
@@ -109,11 +121,10 @@ export class VideoPage {
     let parametriPost = {
       "fromDate": null,
       "size": 10,
-      "sortForList": 0,
-      "source": ["Video di TrentoInforma"],
+      "sortForList": 1,
+      "source": ["Avvisi del Comune di Trento", "Video di TrentoInforma"],
       "start": this.start,
-      "tag": [],
-      "themes": []
+      "filter":this.daCercare
     }
     this.datiService.getDati(parametriPost).then(dati => {
       this.vetNuoviDati = dati;
@@ -121,7 +132,6 @@ export class VideoPage {
     });
     console.log(this.datiRicerca);
 
-    // setTimeout(() => { this.visualizzaDati(this.vetNuoviDati, event) }, 1500);
   }
 
   visualizzaDati(vet, event) {
@@ -129,7 +139,7 @@ export class VideoPage {
       this.datiRicerca.push(item);
     }
     console.log(this.datiRicerca);
-    
+
     if (vet.length < 10) {
       event.target.disabled = true;
     }

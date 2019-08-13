@@ -10,7 +10,12 @@ import { Platform } from '@ionic/angular';
 })
 export class MapService {
 
+
   private data: any;
+  private defaultCenter = {
+    lat: 46.0748,
+    long: 11.1217
+  };
 
   constructor(private http: HttpClient, private geoSrv: GeoService, private platform: Platform) {
   }
@@ -18,22 +23,36 @@ export class MapService {
   Init(): Promise<any> {
     return this.platform.ready().then(() => {
       return new Promise<void>((resolve, reject) => {
-        this.loadData();
-        resolve();
+        this.loadData().then(()=> {
+          resolve();
+        },err => {
+          reject();
+        });
+        
       });
     })
+  }
+  getDefaultCenter(): any {
+    return [this.defaultCenter.lat, this.defaultCenter.long];
   }
   /**
    * Download streets data from API
    * @return an `Array` of streets
    */
-  loadData(): any {
-    if (this.data) {
-      return Promise.resolve(this.data);
-    }
-    this.http.get('https://tn.smartcommunitylab.it/streetcleaning/rest/street').toPromise().then(response => {
-      this.data = this.buildFinalData(response);
-    });
+  loadData(): Promise<any> {
+    var deferred =  new Promise((resolve,reject)=>{
+      if (this.data) {
+        return resolve(this.data);
+      }
+       //this.http.get('https://tn.smartcommunitylab.it/streetcleaning/rest/street').toPromise().then(response => {
+       this.http.get('./assets/strade/data/spazzamento.json').toPromise().then(response => {
+          this.data = this.buildFinalData(response);
+        resolve()
+      }, err => {
+        reject();
+      });
+    })
+    return deferred;
   }
   /**
    * @return Streets array

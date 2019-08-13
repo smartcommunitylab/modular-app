@@ -73,9 +73,14 @@ export class ListEventPage implements OnInit {
   }
   buildFilter(): any {
     var array = this.fullPois.map(item => item.cat);
+    // var arrayMultipleEvent = this.fullPois.filter(item => item.parentObjectName !=null);
+    // var arrayMultipleEventTags = arrayMultipleEvent.map(item => {
+    //   return item.parentObjectName
+    //  });
+    // array=array.concat(arrayMultipleEventTags);
     var newArray1 = array.flat();
     var newArray = newArray1.filter((value, index, self) => {
-      return self.indexOf(value) === index
+      return self.indexOf(value) === index && value!=undefined
 
     })
     var value = this.firstAccess ? false : true;
@@ -85,7 +90,8 @@ export class ListEventPage implements OnInit {
         "isChecked": value
       }
     })
-    return returnArray;
+    //addmultipleEventTag
+    return returnArray; 
 
   }
   ionViewDidEnter() {
@@ -97,13 +103,13 @@ export class ListEventPage implements OnInit {
             this.subCategories(this.fullPois);
             this.buildShowPois();
             this.tags = this.buildFilter();
-            this.utils.hideLoading();
 
           }
           else {
             this.emptyList = true;
           }
           this.isLoading = false;
+          this.utils.hideLoading();
           console.log(this.showPois);
         }, (err) => {
           this.utils.hideLoading();
@@ -217,15 +223,18 @@ export class ListEventPage implements OnInit {
 
   buildShowPois(filters?) {
     this.showPois = [];
-    this.fullPois.forEach(p => {
+    this.fullPois.forEach(p => { 
       if (!this.showPois[p.category]) {
         this.showPois[p.category] = [];
       }
       if (filters ? filters.filter(item => {
         return (item.isChecked && p.cat.filter(cat => cat == item.value).length > 0)
+        // if (p.cat)
+        // return (item.isChecked && (p.cat.filter(cat => cat == item.value).length > 0 || p.parentObjectName == item.value))
+        // else (item.isChecked &&   p.parentObjectName == item.value)
       }).length > 0 : true) {
         this.showPois[p.category].push(p);
-      }
+      } 
     });
     //orderArray
     this.orderArray('asc', this);
@@ -252,6 +261,7 @@ export class ListEventPage implements OnInit {
       if (x.topics) {
         poiElement.cat = x.topics;
       }
+      else poiElement["cat"]=[];
       if (x.eventPeriod) {
         poiElement.date = x.eventPeriod[this.language];
       }
@@ -266,6 +276,12 @@ export class ListEventPage implements OnInit {
       }
       if (x.description) {
         poiElement.text = x.description[this.language];
+      }
+      if (x.parentEventId){ 
+        if (poiElement.cat)
+        poiElement.cat.push( JSON.parse(x.parentEventId).objectName);
+        else poiElement["cat"]=[ JSON.parse(x.parentEventId).objectName];
+        // poiElement.parentObjectName = JSON.parse(x.parentEventId).objectName;
       }
       //TO DO
       if (x.category) {

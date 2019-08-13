@@ -624,9 +624,28 @@ export class AppHome {
                 {this.dataTT.stops.map((stop, index) =>
 
                   parseInt(index) % 2 == 0
-                    ? <div id='grigioFermate' onClick={() => this.showStop(stop)}>{stop}</div>
-                    : <div id='biancoFermate' onClick={() => this.showStop(stop)}>{stop}</div>
-
+                    ? <div id='grigioFermate' onClick={() => this.showStop(stop)}>
+                    { this.accessibility
+                    ? <div>
+                      {!!this.dataTT.wheelChairBoarding && this.dataTT.wheelChairBoarding[index] == 1
+                        ? <div><div class="accessibilityBullet"><ion-icon name="radio-button-on"></ion-icon></div>{stop}</div>
+                        : <div><div class="accessibilityBullet"></div>  <span>{stop}</span></div>
+                      }
+                      </div>
+                      :<div>{stop}</div>
+                    }
+                    </div>
+                    : <div id='biancoFermate' onClick={() => this.showStop(stop)}>
+                     { this.accessibility
+                      ? <div>
+                      {!!this.dataTT.wheelChairBoarding && this.dataTT.wheelChairBoarding[index] == 1
+                        ? <div><div class="accessibilityBullet"><ion-icon name="radio-button-on"></ion-icon></div>{stop}</div>
+                        : <div><div class="accessibilityBullet"></div> <span>{stop}</span></div>
+                      }
+                                            </div>
+                      :<div>{stop}</div>
+                    }
+                    </div>
                 )}
               </div>
               {this.showHeader

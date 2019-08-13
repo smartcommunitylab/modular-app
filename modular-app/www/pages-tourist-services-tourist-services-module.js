@@ -79,7 +79,7 @@ var TouristServicesPageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header no-border>\n    <ion-searchbar class=\"search-services\" style=\"display: none\" showCancelButton animated (search)=\"toggleSearch()\"\n    (ionInput)=\"searchChanged($event)\" (ionCancel)=\"toggleSearch()\"></ion-searchbar>\n    <ion-toolbar>\n      <ion-buttons slot=\"start\">\n        <ion-back-button class=\"interaction\"></ion-back-button>\n      </ion-buttons>\n      <ion-buttons slot=\"end\">\n        <ion-button (click)=\"toggleSearch()\">\n          <ion-icon name=\"search\"></ion-icon>\n        </ion-button>\n      </ion-buttons>\n      <ion-title>\n        {{'service_label' | translate}}\n      </ion-title>\n    </ion-toolbar>\n  </ion-header>\n  \n  <!-- <ion-grid style=\"height: 100%\" *ngIf=\"isLoading\">\n    <ion-row justify-content-center align-items-center style=\"height: 100%\">\n      <ion-spinner name=\"circles\"></ion-spinner>\n    </ion-row>\n  </ion-grid> -->\n  \n  <ion-content>\n  \n   \n    <div class=\"wrapper\" *ngIf=\"!firstAccess\">\n      <div class=\"scrolling-wrapper-flexbox loop\">\n        <div class=\"container\" *ngFor=\"let tag of tags\">\n        <div class=\"tag\"  *ngIf=\"tag.isChecked\">\n          <div class=\"tag-text\">\n            {{tag.value}}\n            <ion-icon name=\"close-circle\" (click)=\"removeTag(tag)\"></ion-icon>\n          </div>\n          \n        </div>\n      </div>\n      </div>\n    </div>\n  \n    <ion-list no-lines id=\"poi-list\">\n      <div *ngFor=\"let c of categories\">\n        <!-- <ion-item-divider class=\"category row\" sticky> -->\n        <!-- <div class=\"column c-icon\" (click)=\"goToMap()\">\n              <ion-icon name=\"map\"></ion-icon>\n            </div> -->\n        <!-- <div class=\"column c-text\">\n              <ion-label>{{c}}</ion-label>\n            </div> -->\n        <!-- <div class=\"column c-btn\">\n              <ion-button *ngIf=\"!search\" class=\"popover-btn\" size=\"small\" color=\"success\" (click)=\"filterClicked()\">Ordina</ion-button>\n            </div> -->\n        <!-- </ion-item-divider> -->\n        <div class=\"content\">\n          <div *ngFor=\"let poi of showPois[c]; let i = index\">\n            <wc-details [id]=\"poi.id\" [img]=\"poi.image\" [stringsinput]=\"stringsContact\" [title]=\"poi.title\" [altImage]=\"altImage\"\n              [subtitle]=\"poi.subtitle\" [text]=\"poi.text\" [info]=\"poi.info\" [contacts]=\"poi.infos\"\n              heading-color=\"#707070\" second-color=\"#11b3ef\" expandable=true expanse=false ></wc-details>\n            <div class=\"spacing\" *ngIf=\"i == showPois.length - 1\"></div>\n          </div>\n        </div>\n      </div>\n    </ion-list>\n  </ion-content>"
+module.exports = "<ion-header no-border>\n  <ion-searchbar class=\"search-services\" style=\"display: none\" showCancelButton animated (search)=\"toggleSearch()\"\n    (ionInput)=\"searchChanged($event)\" (ionCancel)=\"toggleSearch()\"></ion-searchbar>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-back-button class=\"interaction\"></ion-back-button>\n    </ion-buttons>\n    <ion-buttons slot=\"end\">\n      <ion-button (click)=\"toggleSearch()\">\n        <ion-icon name=\"search\"></ion-icon>\n      </ion-button>\n    </ion-buttons>\n    <ion-title>\n      {{'service_label' | translate}}\n    </ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<!-- <ion-grid style=\"height: 100%\" *ngIf=\"isLoading\">\n    <ion-row justify-content-center align-items-center style=\"height: 100%\">\n      <ion-spinner name=\"circles\"></ion-spinner>\n    </ion-row>\n  </ion-grid> -->\n\n<ion-content>\n\n\n  <div class=\"wrapper\" *ngIf=\"!firstAccess\">\n    <div class=\"scrolling-wrapper-flexbox loop\">\n      <div class=\"container\" *ngFor=\"let tag of tags\">\n        <div class=\"tag\" *ngIf=\"tag.isChecked\">\n          <div class=\"tag-text\">\n            {{tag.value}}\n            <ion-icon name=\"close-circle\" (click)=\"removeTag(tag)\"></ion-icon>\n          </div>\n\n        </div>\n      </div>\n    </div>\n  </div>\n\n  <ion-list no-lines id=\"poi-list\">\n    <div *ngIf=\"!emptyList\">\n\n      <div *ngFor=\"let c of categories\">\n        <div class=\"content\">\n          <div *ngFor=\"let poi of showPois[c]; let i = index\">\n            <wc-details [id]=\"poi.id\" [img]=\"poi.image\" [stringsinput]=\"stringsContact\" [title]=\"poi.title\"\n              [altImage]=\"altImage\" [subtitle]=\"poi.subtitle\" [text]=\"poi.text\" [info]=\"poi.info\" [contacts]=\"poi.infos\"\n              heading-color=\"#707070\" second-color=\"#11b3ef\" expandable=true expanse=false></wc-details>\n            <div class=\"spacing\" *ngIf=\"i == showPois.length - 1\"></div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </ion-list>\n  <div class=\"empty-list\" *ngIf=\"emptyList\">\n    {{'empty_list' | translate}}\n  </div>\n</ion-content>"
 
 /***/ }),
 
@@ -192,6 +192,7 @@ var TouristServicesPage = /** @class */ (function () {
         this.isLoading = true;
         this.fullCategories = [];
         this.categories = [];
+        this.emptyList = false;
         this.doneTypingInterval = 500; //time in ms, 5 second for example
         if (window[this.config.getAppModuleName()]['language'])
             this.language = window[this.config.getAppModuleName()]['language'];
@@ -248,13 +249,19 @@ var TouristServicesPage = /** @class */ (function () {
             };
             this.dbService.synch().then(function () {
                 _this_1.dbService.getObjectByQuery(query_1).then(function (data) {
-                    _this_1.fullPois = data.docs.map(function (x) { return _this_1.convertPois(x); });
-                    _this_1.subCategories(_this_1.fullPois);
-                    _this_1.buildShowPois();
-                    _this_1.tags = _this_1.buildFilter();
-                    _this_1.orderArray('near', _this_1);
-                    _this_1.isLoading = false;
-                    _this_1.utils.hideLoading();
+                    if (data.docs.length > 0) {
+                        _this_1.fullPois = data.docs.map(function (x) { return _this_1.convertPois(x); });
+                        _this_1.subCategories(_this_1.fullPois);
+                        _this_1.buildShowPois();
+                        _this_1.tags = _this_1.buildFilter();
+                        _this_1.orderArray('near', _this_1);
+                        _this_1.isLoading = false;
+                        _this_1.utils.hideLoading();
+                    }
+                    else {
+                        _this_1.emptyList = true;
+                        _this_1.utils.hideLoading();
+                    }
                 }, function (err) {
                     _this_1.utils.hideLoading();
                 });
@@ -363,6 +370,7 @@ var TouristServicesPage = /** @class */ (function () {
             searchbar.focus();
         }
         else {
+            this.emptyList = false;
             searchbar.style.display = 'none';
             this.categories.forEach(function (c) {
                 _this_1.showPois[c] = _this_1.fullPois.filter(function (el) {
@@ -376,15 +384,29 @@ var TouristServicesPage = /** @class */ (function () {
     };
     TouristServicesPage.prototype.searchChanged = function (input) {
         var _this_1 = this;
+        var emptyList = true;
         clearTimeout(this.typingTimer);
         this.typingTimer = setTimeout(function () {
-            var value = input.detail.target.value;
-            var _this = _this_1;
-            _this.categories.forEach(function (c) {
-                _this_1.showPois[c] = _this_1.fullPois.filter(function (el) {
-                    return (el.title.toLowerCase().indexOf(value.toLowerCase()) > -1);
+            if (!input.detail) {
+                _this_1.categories.forEach(function (c) {
+                    _this_1.showPois[c] = _this_1.fullPois.filter(function (el) {
+                        return (el.category == c);
+                    });
                 });
-            });
+                emptyList = false;
+            }
+            else {
+                var value_1 = input.detail.target.value;
+                var _this = _this_1;
+                _this.categories.forEach(function (c) {
+                    _this_1.showPois[c] = _this_1.fullPois.filter(function (el) {
+                        return (el.title.toLowerCase().indexOf(value_1.toLowerCase()) > -1);
+                    });
+                    if (_this_1.showPois[c].length > 0)
+                        emptyList = false;
+                });
+            }
+            _this_1.emptyList = emptyList;
         }, this.doneTypingInterval);
     };
     TouristServicesPage.prototype.buildFilter = function () {

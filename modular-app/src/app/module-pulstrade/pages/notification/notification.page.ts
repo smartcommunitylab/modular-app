@@ -16,6 +16,7 @@ export class NotificationPage implements OnInit {
   language: string; /** Actived language */
   notif: any; /** Notified streets */
   showStreets: any = []; /** Streets object for page view */
+  notifMap: any;
   constructor(
     private notSrv: NotificationService,
     private translate: TranslateService,
@@ -28,22 +29,48 @@ export class NotificationPage implements OnInit {
   }
 
   ngOnInit() {
+    
+  }
+  ionViewDidEnter() {
     this.notif = this.notSrv.getNotStreets();
+    this.notifMap = this.convertToMapId(this.notSrv.getNotStreets());
     this.streets = this.mapSrv.getData();
     this.buildShowNot();
   }
-
   /**
    * Build unique streets elements, and put them in `showStreets`
    */
   buildShowNot() {
     let tmp = [];
-    this.notif.forEach(s => {
-      if (tmp.filter(t => t.streetName === s.streetName ).length === 0) {
-        tmp.push(s);
-      }
-    });
+    if (this.notif) {
+      this.notif.forEach(s => {
+        if (tmp.filter(t => t.streetName === s.streetName).length === 0) {
+          tmp.push(s);
+        }
+      });
+    }
     this.showStreets = tmp;
+  }
+  toggleNotification(street) {
+    if (this.notifMap[street.streetName] != undefined) {
+      this.notSrv.disableNotification(street);
+    } else {
+      this.notSrv.setNotification(street);
+    }
+    this.notifMap = this.convertToMapId(this.notSrv.getNotStreets());
+  }
+
+  convertToMapId(array: any[]): any {
+    var map = {}
+    if (array)
+      array.forEach(el => {
+        map[el.streetName] = el;
+      })
+    return map;
+  }
+
+  isEnabled(street) {
+    return this.notifMap[street.streetName] != undefined
   }
   /**
    * Enable or disable notifications for the choosen street.

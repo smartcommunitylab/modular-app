@@ -1,6 +1,11 @@
 <ion-header>
   <ion-toolbar>
-      <ion-searchbar (ionChange)="Ricerca()" placeholder="Cerca" id="barraDiRicerca" [(ngModel)]="daCercare"></ion-searchbar>
+    <ion-searchbar showCancelButton="never" animated  (ionChange)="Ricerca()"
+      placeholder="Cerca" id="barraDiRicerca" [(ngModel)]="daCercare">
+    </ion-searchbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
     <ion-grid *ngIf="!isRicercaOpen">
       <ion-row justify-content-center align-items-center>
         <ion-col col-6>
@@ -24,19 +29,33 @@
   <div class="ion-padding" *ngIf="!emptyList;else other_content">
 
 
-    <div *ngFor="let item of datiRicerca" id="contenitoreAnteprima">
-      <wc-video (eventMappa)="visualizzaMappa(item.coordinates[0], item.coordinates[1])"
-        (eventShare)="visualizzaShare(item.title, item.image, item.videoLink)" (eventVideo)="visualizzaVideo(item.videoLink)" video={{item.videoLink}} id="elemento" img={{item.image}}
-        [titolo]="item.shortAbstract" orario={{item.eventStart}} datapubblicazione={{formattaData(item.created)}}
-        dataevento={{item.eventDate}} durata={{item.eventTiming}} [descrizione]="item.description" luogo={{item.address}}>
-      </wc-video>
-    </div>
-
+    <ion-list>
+      <div *ngFor="let item of datiRicerca" id="contenitoreAnteprima">
+        <div *ngIf="isVideo(item)">
+          <wc-video (eventMappa)="visualizzaMappa(item.coordinates[0], item.coordinates[1])"
+            (eventShare)="visualizzaShare(item.title, item.image, item.videoLink)"
+            (eventVideo)="visualizzaVideo(item.videoLink)" video={{item.videoLink}} id="elemento" img={{item.image}}
+            [titolo]="item.shortAbstract" orario={{item.eventStart}} datapubblicazione={{formattaData(item.created)}}
+            dataevento={{item.eventDate}} durata={{item.eventTiming}} [descrizione]="item.description"
+            luogo={{item.address}}>
+          </wc-video>
+        </div>
+        <div *ngIf="isNews(item)">
+          <wc-anteprima (eventMappa)="visualizzaMappa(item.coordinates[0], item.coordinates[1])"
+            (eventShare)="visualizzaShare(item.title, item.image ,item.description)" id="elemento" img={{item.image}}
+            [titolo]="item.shortAbstract" orario={{item.eventStart}} datapubblicazione={{formattaData(item.created)}}
+            dataevento={{item.eventDate}} durata={{item.eventTiming}} [descrizione]="item.description"
+            luogo={{item.address}}>
+          </wc-anteprima>
+        </div>
+      </div>
+    </ion-list>
     <ion-infinite-scroll threshold="100px" (ionInfinite)="caricaAltriDati($event)">
-        <ion-infinite-scroll-content loadingSpinner="crescent" loadingText="Sto caricando..."></ion-infinite-scroll-content>
-      </ion-infinite-scroll>
+      <ion-infinite-scroll-content loadingSpinner="crescent" loadingText="Sto caricando...">
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
   </div>
   <ng-template #other_content>
-      {{'empty_list_label'|translate}}
-        </ng-template>
+    {{'empty_list_label'|translate}}
+  </ng-template>
 </ion-content>

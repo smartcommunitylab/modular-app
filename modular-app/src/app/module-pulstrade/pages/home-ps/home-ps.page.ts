@@ -7,6 +7,7 @@ import { GeoService } from 'src/app/services/geo.service';
 import { MapService } from '../../services/map.service';
 import { DatePipe } from '@angular/common';
 import { ToastController } from '@ionic/angular';
+import { UtilService } from '../../services/util.service';
 
 @Component({
   selector: 'app-home-ps',
@@ -17,12 +18,17 @@ import { ToastController } from '@ionic/angular';
 export class HomePage implements OnInit {
 
   language: string; /** Actived language */
-  myPos: any = {}; /** Current GPS location */
+  myPos: any = this.util.getDefaultPos();
+  ; /** Current GPS location */
   streets: any; /** Main street object */
   map: any; /** Leaflet map object */
   selectedDate: Date; /** Selected date */
   showDate: string; /** String based on "selected Date" */
   mapCenter: any = []; /** Coordinates of map center */
+  noCleaning: string;
+  labelResult: number = 0;
+  forStr: string; to: string; inDateStr: string; noPark: string; inZone: string; details: string;
+
   private toast: any;
   constructor(private translate: TranslateService,
     private config: ConfigService,
@@ -31,10 +37,33 @@ export class HomePage implements OnInit {
     private mapSrv: MapService,
     private datePipe: DatePipe,
     private route: ActivatedRoute,
+    private util: UtilService,
     private toastCtrl: ToastController
   ) {
     this.language = window[this.config.getAppModuleName()]['language'];
     this.translate.use(this.language);
+    /** Get translations for popup */
+    this.translate.get('NO-CLEANING').subscribe(s => {
+      this.noCleaning = s;
+    });
+    this.translate.get('FOR').subscribe(s => {
+      this.forStr = s;
+    });
+    this.translate.get('TO').subscribe(s => {
+      this.to = s;
+    });
+    this.translate.get('IN-DATE').subscribe(s => {
+      this.inDateStr = s;
+    });
+    this.translate.get('NO-PARKING-FROM').subscribe(s => {
+      this.noPark = s;
+    });
+    this.translate.get('IN-ZONE').subscribe(s => {
+      this.inZone = s;
+    });
+    this.translate.get('DETAILS').subscribe(s => {
+      this.details = s;
+    });
   }
   /**
    * Build center coordinates object `myPos` based on URL params, else use the GPS location
@@ -48,33 +77,64 @@ export class HomePage implements OnInit {
       this.myPos.lat = coord[0].lat;
       this.myPos.long = coord[0].lng;
 
-    } else {
-      this.myPos = window[this.config.getAppModuleName()]['geolocation'];
-    }
+    } else
+      if (window[this.config.getAppModuleName()]['geolocation']) {
+        this.myPos = window[this.config.getAppModuleName()]['geolocation'];
+      } else this.myPos = this.util.getDefaultPos()
   }
 
   /**
    * Set current date, get streets ordered by `cleaningDay` property, build map
    */
   ngOnInit() {
-    this.route.queryParams
-      .subscribe(params => {
-        this.parseUrlParams(params);
-        this.selectedDate = new Date();
-        this.showDate = this.selectedDate.toISOString();
-        this.mapCenter = [this.myPos.lat?this.myPos.lat:0, this.myPos.long?this.myPos.long:0];
-        this.streets = this.mapSrv.getData().sort(function (a, b) {
-          return a.cleaningDay - b.cleaningDay;
+    this.mapSrv.Init().then(() => {
+      this.route.queryParams
+        .subscribe(params => {
+          this.parseUrlParams(params);
+          this.selectedDate = new Date();
+          this.showDate = this.selectedDate.toISOString();
+          if (this.myPos)
+            this.mapCenter = [this.myPos.lat ? this.myPos.lat : 0, this.myPos.long ? this.myPos.long : 0];
+          else this.mapCenter = this.mapSrv.getDefaultCenter()
+          this.streets = this.mapSrv.getData().sort(function (a, b) {
+            return a.cleaningDay - b.cleaningDay;
+          });
+          this.buildMap();
         });
-        this.buildMap();
+    }, err => {
+      this.translate.get('error_init').subscribe(s => {
+        this.util.showErrorConnectionMessage(s);
       });
-  }
+    })
 
+  }
+  afterFirstDayForward() {
+    return true
+  }
   /**
    * Reset center map coordinates
    */
   ionViewWillLeave() {
     this.myPos = {};
+    this.mapSrv.Init().then(() => {
+      this.route.queryParams
+        .subscribe(params => {
+          this.parseUrlParams(params);
+          this.selectedDate = new Date();
+          this.showDate = this.selectedDate.toISOString();
+          if (this.myPos)
+            this.mapCenter = [this.myPos.lat ? this.myPos.lat : 0, this.myPos.long ? this.myPos.long : 0];
+          else this.mapCenter = this.mapSrv.getDefaultCenter()
+          this.streets = this.mapSrv.getData().sort(function (a, b) {
+            return a.cleaningDay - b.cleaningDay;
+          });
+          this.buildMap();
+        });
+    }, err => {
+      this.translate.get('error_init').subscribe(s => {
+        this.util.showErrorConnectionMessage(s);
+      });
+    })
   }
 
   /**
@@ -96,23 +156,23 @@ export class HomePage implements OnInit {
     try { this.map.remove(); } catch { } /** Reset map */
     const _this = this;
     /** Build custom "search" button and add it to map */
-    const searchControl = leaflet.Control.extend({
-      options: {
-        position: 'topright'
-      },
-      onAdd: function (map) {
-        const container = leaflet.DomUtil.create('div', 'leaflet-bar leaflet-control leaflet-control-custom');
-        container.style.backgroundColor = 'white';
-        container.style.width = '30px';
-        container.style.height = '30px';
-        container.style.borderRadius = '50%';
-        container.innerHTML = '<ion-icon style="width: 25px; height: 25px;" name="search"></ion-icon>';
-        container.onclick = function () {
-          _this.router.navigate(['/ps-search']);
-        };
-        return container;
-      }
-    });
+    // const searchControl = leaflet.Control.extend({
+    //   options: {
+    //     position: 'topright'
+    //   },
+    //   onAdd: function (map) {
+    //     const container = leaflet.DomUtil.create('div', 'leaflet-bar leaflet-control leaflet-control-custom');
+    //     container.style.backgroundColor = 'white';
+    //     container.style.width = '30px';
+    //     container.style.height = '30px';
+    //     container.style.borderRadius = '50%';
+    //     container.innerHTML = '<ion-icon style="width: 25px; height: 25px;" name="search"></ion-icon>';
+    //     container.onclick = function () {
+    //       _this.router.navigate(['/ps-search']);
+    //     };
+    //     return container;
+    //   }
+    // });
 
     this.map = new leaflet.Map('home-map', { zoomControl: false, attributionControl: false }).setView(this.mapCenter, 15);
 
@@ -144,7 +204,7 @@ export class HomePage implements OnInit {
     }).addTo(this.map);
 
     /** Add search button to map */
-    this.map.addControl(new searchControl());
+    // this.map.addControl(new searchControl());
 
     /** Build polylines */
     this.buildPolyline(this.mapCenter);
@@ -156,77 +216,57 @@ export class HomePage implements OnInit {
    */
   async buildPolyline(center) {
     let counter = 0;
-    let noCleaning, forStr, to, inDateStr, noPark, inZone, details;
-    /** Get translations for popup */
-    this.translate.get('NO-CLEANING').subscribe(s => {
-      noCleaning = s;
-    });
-    this.translate.get('FOR').subscribe(s => {
-      forStr = s;
-    });
-    this.translate.get('TO').subscribe(s => {
-      to = s;
-    });
-    this.translate.get('IN-DATE').subscribe(s => {
-      inDateStr = s;
-    });
-    this.translate.get('NO-PARKING-FROM').subscribe(s => {
-      noPark = s;
-    });
-    this.translate.get('IN-ZONE').subscribe(s => {
-      inZone = s;
-    });
-    this.translate.get('DETAILS').subscribe(s => {
-      details = s;
-    });
+
 
     /** Reset polyline */
     if (this.map) {
       this.clearPolyline(this.map);
     }
+    if (this.streets) {
+      /** Check distance from center map and street */
+      this.streets.forEach(s => {
+        const dist = this.geo.getDistanceKM(
+          { lat: center[0], lon: center[1] },
+          { lat: s.centralCoords[0]['lat'], lon: s.centralCoords[0]['lng'] }
+        );
 
-    /** Check distance from center map and street */
-    this.streets.forEach(s => {
-      const dist = this.geo.getDistanceKM(
-        { lat: center[0], lon: center[1] },
-        { lat: s.centralCoords[0]['lat'], lon: s.centralCoords[0]['lng'] }
-      );
+        /** Check if is a 'cleaning day' */
+        const inDate = (new Date(this.selectedDate).setHours(0, 0, 0, 0) === new Date(s.cleaningDay).setHours(0, 0, 0, 0));
+        const color = (inDate) ? 'red' : 'green';
 
-      /** Check if is a 'cleaning day' */
-      const inDate = (new Date(this.selectedDate).setHours(0, 0, 0, 0) === new Date(s.cleaningDay).setHours(0, 0, 0, 0));
-      const color = (inDate) ? 'red' : 'green';
-
-      /** Build popup content */
-      const freeStreetContent =
-        `${noCleaning} <br/><b>${this.datePipe.transform(this.selectedDate, 'dd/MM/yyyy')}</b> ${forStr}<br/>
+        /** Build popup content */
+        const freeStreetContent =
+          `${this.noCleaning} <br/><b>${this.datePipe.transform(this.selectedDate, 'dd/MM/yyyy')}</b> ${this.forStr}<br/>
         <b> ${s.streetName}</b>`;
-      const closedStreetContent = `<b>${s.streetName}</b><br/>${noPark} <b>${new Date(s.stopStartingTime).getHours()}</b> ${to}
-        <b> ${new Date(s.stopEndingTime).getHours()}</b> ${inDateStr} <br/>
+        const closedStreetContent = `<b>${s.streetName}</b><br/>${this.noPark} <b>${new Date(s.stopStartingTime).getHours()}</b> ${this.to}
+        <b> ${new Date(s.stopEndingTime).getHours()}</b> ${this.inDateStr} <br/>
         <b>${this.datePipe.transform(this.selectedDate, 'dd/MM/yyyy')}</b><br/>
-        <a style="float:right; margin-top: -5%">${details}</a>`;
+        <a style="float:right; margin-top: -5%">${this.details}</a>`;
 
-      /**
-       * Build polyline based on: current day, current zoom, map center
-       */
-      if (inDate && ((dist < ((18 % this.map.getZoom()) - 1) || dist < 0.3))) {
-        const popupContent = (inDate) ? closedStreetContent : freeStreetContent;
+        /**
+         * Build polyline based on: current day, current zoom, map center
+         */
+        if (inDate && ((dist < ((18 % this.map.getZoom()) - 1) || dist < 0.3))) {
+          this.labelResult++;
+          const popupContent = (inDate) ? closedStreetContent : freeStreetContent;
 
-        const polyline = leaflet.polyline(s.polylines, { color: color }).addTo(this.map);
-        const popup = leaflet.popup({ className: `pop-${s.streetName.replace(/\s/g, '')}` }).setContent(popupContent);
-        polyline.bindPopup(popup).on('popupopen', (e) => {
-          const el = document.getElementsByClassName(`pop-${s.streetName.replace(/\s/g, '')}`)[0].addEventListener('click', () => {
-            this.goToSearch(s.streetName);
+          const polyline = leaflet.polyline(s.polylines, { color: color }).addTo(this.map);
+          const popup = leaflet.popup({ className: `pop-${s.streetName.replace(/\s/g, '')}` }).setContent(popupContent);
+          polyline.bindPopup(popup).on('popupopen', (e) => {
+            const el = document.getElementsByClassName(`pop-${s.streetName.replace(/\s/g, '')}`)[0].addEventListener('click', () => {
+              this.goToDetail(s.streetName);
+            });
           });
-        });
-        counter++;
-      }
-    });
+          counter++;
+        }
+      });
+    }
     /**
      * If no polylines built in map, show 'toast' element
      */
-    if (counter === 0 && inZone && noCleaning) {
+    if (counter === 0 && this.inZone && this.noCleaning) {
       this.toast = await this.toastCtrl.create({
-        message: `${noCleaning} ${this.datePipe.transform(this.selectedDate, 'dd/MM/yyyy')} ${inZone}`,
+        message: `${this.noCleaning} ${this.datePipe.transform(this.selectedDate, 'dd/MM/yyyy')} ${this.inZone}`,
         duration: 3000,
         showCloseButton: true
       });
@@ -268,40 +308,89 @@ export class HomePage implements OnInit {
   /**
    * Get last cleaning day and build polylines
    */
-  firstDayFwd() {
+  async firstDayFwd() {
+    this.labelResult=0;
     const center = this.mapCenter;
-    this.streets.forEach(s => {
-      const dist = this.geo.getDistanceKM(
-        { lat: center[0], lon: center[1] },
-        { lat: s.centralCoords[0]['lat'], lon: s.centralCoords[0]['lng'] }
-      );
-      if (s.cleaningDay > this.selectedDate) {
-        if ((dist < ((18 % this.map.getZoom()) - 1) || dist < 0.3)) {
-          this.selectedDate = new Date(s.cleaningDay);
-          this.showDate = this.selectedDate.toISOString();
-          this.buildPolyline(center);
+    let nextDay = null;
+    let today = new Date().getTime();
+    if (this.streets)
+      this.streets.forEach(s => {
+        if (!nextDay && s.cleaningDay && s.cleaningDay > new Date(this.selectedDate).getTime()) {
+          nextDay = s.cleaningDay;
         }
-      }
-    });
+        const dist = this.geo.getDistanceKM(
+          { lat: center[0], lon: center[1] },
+          { lat: s.centralCoords[0]['lat'], lon: s.centralCoords[0]['lng'] }
+        );
+        //select first next day of cleaning inside
+        if ((dist < ((18 % this.map.getZoom()) - 1) || dist < 0.3)) {
+          if (s.cleaningDay > this.selectedDate && s.cleaningDay <= nextDay && s.cleaningDay > today) {
+            nextDay = new Date(s.cleaningDay);
+          }
+        }
+      });
+    if (nextDay > this.selectedDate) {
+      this.selectedDate= new Date(nextDay.getTime());
+      this.showDate = this.selectedDate.toISOString();
+      this.buildPolyline(center);
+    } else {
+      this.toast = await this.toastCtrl.create({
+        message: `no_street_future`,
+        duration: 3000,
+        showCloseButton: true
+      });
+      await this.toast.present();
+    }
   }
   /**
    * Get first cleaning day and build polylines
    */
-  firstDayBck() {
+  async firstDayBck() {
+    this.labelResult=0;
     const center = this.mapCenter;
+    let prevDay = null;
+    let today = new Date().getTime();
+    // this.streets.forEach(s => {
+    //   const dist = this.geo.getDistanceKM(
+    //     { lat: center[0], lon: center[1] },
+    //     { lat: s.centralCoords[0]['lat'], lon: s.centralCoords[0]['lng'] }
+    //   );
+    //   if (s.cleaningDay < this.selectedDate) {
+    //     if ((dist < ((18 % this.map.getZoom()) - 1) || dist < 0.3)) {
+    //       this.selectedDate = new Date(s.cleaningDay);
+    //       this.showDate = this.selectedDate.toISOString();
+    //       this.buildPolyline(center);
+    //     }
+    //   }
+    // });
+    if (this.streets)
     this.streets.forEach(s => {
+      if (!prevDay && s.cleaningDay && s.cleaningDay < new Date(this.selectedDate).getTime()) {
+        prevDay = s.cleaningDay;
+      }
       const dist = this.geo.getDistanceKM(
         { lat: center[0], lon: center[1] },
         { lat: s.centralCoords[0]['lat'], lon: s.centralCoords[0]['lng'] }
       );
-      if (s.cleaningDay < this.selectedDate) {
-        if ((dist < ((18 % this.map.getZoom()) - 1) || dist < 0.3)) {
-          this.selectedDate = new Date(s.cleaningDay);
-          this.showDate = this.selectedDate.toISOString();
-          this.buildPolyline(center);
+      //select first next day of cleaning inside
+      if ((dist < ((18 % this.map.getZoom()) - 1) || dist < 0.3)) {
+        if (s.cleaningDay < this.selectedDate && s.cleaningDay >= prevDay && s.cleaningDay > today) {
+          prevDay = new Date(s.cleaningDay);
         }
       }
     });
+  if (prevDay < this.selectedDate) {
+    this.selectedDate= new Date(prevDay.getTime());
+    this.showDate = this.selectedDate.toISOString();
+    this.buildPolyline(center);
+  } else {
+    this.toast = await this.toastCtrl.create({
+      message: `no_street_future`,
+      duration: 3000,
+      showCloseButton: true
+    });
+    await this.toast.present();
+  }
   }
   /**
    * Set date based on Ionic Datetime Picker
@@ -316,7 +405,7 @@ export class HomePage implements OnInit {
    * Go to search page with defined searching value
    * @param name Street's name for automatic search
    */
-  goToSearch(name: string) {
-    this.router.navigate(['ps-search'], { queryParams: { street: name } });
+  goToDetail(name: string) {
+    this.router.navigate(['street-detail'], { queryParams: { street: name } });
   }
 }

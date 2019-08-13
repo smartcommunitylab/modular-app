@@ -34,24 +34,35 @@ export class NotificationService {
    * @param street `Array` of street objects, it could be also one single element
    */
   public setNotification(street) {
-    street.forEach(s => this.notifiedStreets.push(s));
+    // street.forEach(s => this.notifiedStreets.push(s));
+    this.notifiedStreets.push(street);
     localStorage.setItem('ps-st-not', JSON.stringify(this.notifiedStreets));
     this.platform.ready().then(() => {
       /** Get translations */
       this.translate.get('IN-CLEANING').subscribe(tr => {
         const tmp = new Date(new Date().getTime() + 20000).getTime(); // SOLO PER DEBUG; DA TOGLIERE
+        
         const noti = [];
-        street.forEach(s => {
-          if (!this.checkIfNotify(s.idNumber, s.cleaningDay)) {
-            noti.push({
-              id: s.idNumber,
-              text: `${tr} ${s.streetName}`,
-              data: s.streetName,
-              vibrate: true,
-              trigger: { at: tmp } // new Date(s.cleaningDay).getTime() }
-            });
-          }
-        });
+        if (!this.checkIfNotify(street.idNumber, street.cleaningDay)) {
+          noti.push({
+            id: street.idNumber,
+            text: `${tr} ${street.streetName}`,
+            data: street.streetName,
+            vibrate: true,
+            trigger: { at: tmp } // new Date(s.cleaningDay).getTime() }
+          });
+        }
+        // street.forEach(s => {
+        //   if (!this.checkIfNotify(s.idNumber, s.cleaningDay)) {
+        //     noti.push({
+        //       id: s.idNumber,
+        //       text: `${tr} ${s.streetName}`,
+        //       data: s.streetName,
+        //       vibrate: true,
+        //       trigger: { at: tmp } // new Date(s.cleaningDay).getTime() }
+        //     });
+        //   }
+        // });
         /** Schedule notifications */
         this.notify.schedule(noti);
         /** Build array for localstorage */
@@ -65,19 +76,15 @@ export class NotificationService {
    * @param street streets object
    */
   public disableNotification(street) {
-    street.forEach(s => {
-      let id = this.notifiedStreets.findIndex(n => n.streetName === s.streetName);
-      if (id) {
+    // street.forEach(s => {
+      let id = this.notifiedStreets.findIndex(n => n.streetName === street.streetName);
+      if (id>=0) {
         this.notifiedStreets.splice(id, 1);
       }
-    });
+    // });
 
     localStorage.setItem('ps-st-not', JSON.stringify(this.notifiedStreets));
-    this.platform.ready().then(() => {
-      street.forEach(s => {
-        this.notify.clear(s.idNumber);
-      });
-    });
+    this.notify.clear(street.idNumber);
   }
   /**
    * Build the internal variable `activedNots` made by scheduled notifications

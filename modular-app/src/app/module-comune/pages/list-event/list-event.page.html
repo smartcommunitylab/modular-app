@@ -53,9 +53,9 @@
   </div>
   <ion-list no-lines id="poi-list">
     <div *ngFor="let c of categories">
-      <ion-item class="label-type ion-text-center" sticky *ngIf="oneElement(c) && !presentFilter">
+      <!-- <ion-item class="label-type ion-text-center" sticky *ngIf="oneElement(c) && !presentFilter">
           <div>{{c}}</div>
-      </ion-item>
+      </ion-item> -->
       <div class="content">
         <div *ngFor="let poi of showPois[c]; let i = index">
           <div class="{{poi.category}}"   inViewport

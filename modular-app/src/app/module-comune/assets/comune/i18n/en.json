@@ -13,5 +13,6 @@
     "farmacie_label":"Farmacie",
     "distance_label":"Distanza: ",
     "poi_list":"Tappe",
-    "service_label":"Servizi per il turista"
+    "service_label":"Servizi per il turista",
+    "empty_list":"Nessun elemento presente"
 }

@@ -17114,7 +17114,7 @@ var DbService = /** @class */ (function () {
     function DbService() {
         this.elements = {};
         this.opts = { live: true, retry: true };
-        this.MIN_SYNCH_TIME = 60000;
+        this.MIN_SYNCH_TIME = 600000;
         this.db = new pouchdb__WEBPACK_IMPORTED_MODULE_1__["default"]('comune-in-tasca');
         this.remote = 'http://192.168.42.201:5984/comune-in-tasca';
         // 'http://192.168.1.197:5984/comune-in-tasca'
@@ -17159,30 +17159,23 @@ var DbService = /** @class */ (function () {
     };
     DbService.prototype.synch = function () {
         var _this = this;
+        console.log('enter in synch');
         return new Promise(function (resolve, reject) {
             if (_this.lastTimeSynch() > _this.MIN_SYNCH_TIME) {
                 // do one way, one-off sync from the server until completion
+                console.log('this.lastTimeSynch()>this.MIN_SYNCH_TIME');
                 _this.db.sync(_this.remote).on('complete', function () {
+                    console.log('synch done');
                     _this.updateLastTimeSynch();
                     resolve();
                 }).on('error', function (err) {
+                    console.log('error in sync' + err);
                     // boo, we hit an error!
                     resolve();
                 });
             }
-            //   this.db.replicate.from(this.remote).on('complete', info => {
-            //     // then two-way, continuous, retriable sync
-            //     this.updateLastTimeSynch();
-            //     resolve();
-            //     console.log('finished synch')
-            //   //   this.db.sync(this.remote, this.opts)
-            //   //     .on('change', this.onSyncChange)
-            //   //     .on('paused', this.onSyncPaused)
-            //   //     .on('error', this.onSyncError);
-            //   // }).on('error', this.onSyncError);
-            //   // // this.db.sync(this.remote, options);
-            // })
             else {
+                console.log('this.lastTimeSynch()<this.MIN_SYNCH_TIME');
                 resolve();
             }
         });
@@ -17248,7 +17241,23 @@ var DbService = /** @class */ (function () {
             if (query.selector['element-type'] == 'event-item') {
                 return this.db.find({
                     selector: {
-                        'element-type': 'event-item',
+                        "$or": [
+                            {
+                                "element-type": "event-item"
+                            },
+                            {
+                                "element-type": "main-event-item"
+                            }
+                        ]
+                        //   ,
+                        //   "$nor": [
+                        //     { "fromTime": {
+                        //       "$lte": new Date().getTime()
+                        //    }
+                        //   },{ "toTime": {
+                        //     "$lte": new Date().getTime()
+                        //  }
+                        // }]
                     }
                 });
             }

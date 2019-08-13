@@ -14,11 +14,11 @@ import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/strade/i18n/', '.json');
 }
-export function initializeAppMap(mapSrv: MapService) {
-  return (): Promise<any> => {
-    return mapSrv.Init();
-  };
-}
+// export function initializeAppMap(mapSrv: MapService) {
+//   return (): Promise<any> => {
+//     return mapSrv.Init();
+//   };
+// }
 
 @NgModule({
   declarations: [],
@@ -37,8 +37,9 @@ export function initializeAppMap(mapSrv: MapService) {
   providers: [
     MapService,
     NotificationService,
-    LocalNotifications,
-    { provide: APP_INITIALIZER, useFactory: initializeAppMap, deps: [MapService], multi: true },
+    LocalNotifications
+    // ,
+    // { provide: APP_INITIALIZER, useFactory: initializeAppMap, deps: [MapService], multi: true },
   ],
   entryComponents: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

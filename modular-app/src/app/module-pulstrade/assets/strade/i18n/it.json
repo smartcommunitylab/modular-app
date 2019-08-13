@@ -13,5 +13,6 @@
     "NOTIFY-ENA": "Notifiche Abilitate",
     "NOTIFY-DIS": "Notifiche Disabilitate",
     "DETAILS": "Dettagli",
-    "IN-CLEANING": "Strada in Pulizia"
+    "IN-CLEANING": "Strada in Pulizia",
+    "error_init":"Errore inizializzazione dati"
 }

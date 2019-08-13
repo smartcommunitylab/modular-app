@@ -35,6 +35,8 @@ export class ListFarmaciePage implements OnInit {
   distanceLabel: string;
   farmacieTurno: string;
   turno: boolean = true;
+  emptyList: boolean = false;
+
   constructor(
     private modalController: ModalController,
     private config: ConfigService,
@@ -122,17 +124,21 @@ export class ListFarmaciePage implements OnInit {
       };
       this.dbService.synch().then(() => {
         this.dbService.getObjectByQuery(query).then((data) => {
-          this.fullPois = data.docs.map(x => this.convertPois(x));
-          this.addDistance();
-          this.addFarmacieTurno();
-          this.subCategories(this.fullPois);
-          this.buildShowPois();
-          this.tags = this.buildFilter();
-          this.orderArray('near', this);
-          this.isLoading = false;
-          this.utils.hideLoading();
-
-        },err=> {
+          if (data.docs.length > 0) {
+            this.fullPois = data.docs.map(x => this.convertPois(x));
+            this.addDistance();
+            this.addFarmacieTurno();
+            this.subCategories(this.fullPois);
+            this.buildShowPois();
+            this.tags = this.buildFilter();
+            this.orderArray('near', this);
+            this.isLoading = false;
+            this.utils.hideLoading();
+          } else {
+            this.emptyList = true;
+            this.utils.hideLoading();
+          }
+        }, err => {
           this.utils.hideLoading();
         })
       }, err => {
@@ -255,6 +261,7 @@ export class ListFarmaciePage implements OnInit {
       searchbar.style.display = 'unset';
       searchbar.focus();
     } else {
+      this.emptyList = false;
       searchbar.style.display = 'none';
       this.categories.forEach(c => {
         this.showPois[c] = this.fullPois.filter(function (el) {
@@ -267,17 +274,31 @@ export class ListFarmaciePage implements OnInit {
     return (this.showPois[category].length > 0)
   }
   searchChanged(input: any) {
+    var emptyList = true;
     clearTimeout(this.typingTimer);
     this.typingTimer = setTimeout(() => {
-      const value = input.detail.target.value;
-      const _this = this;
-      _this.categories.forEach(c => {
-        this.showPois[c] = this.fullPois.filter(function (el) {
-          return (el.title.toLowerCase().indexOf(value.toLowerCase()) > -1);
+      if (!input.detail) {
+        this.categories.forEach(c => {
+          this.showPois[c] = this.fullPois.filter(function (el) {
+            return (el.category == c);
+          });
         });
-      });
-    }, this.doneTypingInterval);
+        emptyList = false;
+      }
+      else {
+        const value = input.detail.target.value;
+        const _this = this;
+        _this.categories.forEach(c => {
+          this.showPois[c] = this.fullPois.filter(function (el) {
+            return (el.title.toLowerCase().indexOf(value.toLowerCase()) > -1);
+          });
+          if (this.showPois[c].length > 0)
+            emptyList = false;
+        });
+      }
+      this.emptyList = emptyList;
 
+    }, this.doneTypingInterval);
   }
 
 
