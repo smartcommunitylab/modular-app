@@ -19,17 +19,18 @@
   <ion-list no-lines *ngIf="showStreets">
     <div *ngFor="let s of showStreets">
       <div [id]="s.id">
-        <ion-card-content>
+        <div>
           <div class="left" (click)="openStreetDetail(s)">
-            <div class="interaction result">{{s.streetName}}</div>
-          </div>
+              <div class="interaction result">{{s.streetName}}</div>
+              <div class="interaction result">{{s.notes}}</div>
+            </div>
           <div class="right" (click)="toggleNotification(s)">
               <ion-icon class="interaction icon-notification" name="notifications" *ngIf="isEnabled(s); else disabled"></ion-icon>
               <ng-template #disabled>
                 <ion-icon class="interaction icon-notification" name="notifications-outline"></ion-icon>
               </ng-template>
             </div>
-        </ion-card-content>
+          </div>
       </div>
     </div>
   </ion-list>

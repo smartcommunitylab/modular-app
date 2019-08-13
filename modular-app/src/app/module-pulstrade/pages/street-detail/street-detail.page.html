@@ -1,33 +1,34 @@
-<ion-header no-border>
+<ion-header >
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
+      <ion-back-button class="interaction"></ion-back-button>
     </ion-buttons>
     <ion-buttons slot="end">
-        <div (click)="toggleNotification(s)">
-            <ion-icon name="notifications" *ngIf="isEnabled(s); else disabled"></ion-icon>
+        <div (click)="toggleNotification()">
+            <ion-icon class="interaction icon-bar" name="notifications" *ngIf="isEnabled(); else disabled"></ion-icon>
             <ng-template #disabled>
-              <ion-icon name="notifications-outline"></ion-icon>
+              <ion-icon class="interaction icon-bar" name="notifications-outline"></ion-icon>
             </ng-template>
           </div>
               </ion-buttons>
 
     <ion-title>
-      {{'street_detail' | translate}}
+      {{streetName}}
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 
 <ion-content padding>
-  <ion-list no-lines *ngIf="streetDetails">
-    <div *ngFor="let s of streetDetails">
+  <ion-list  *ngIf="streetDetails">
+    <div class="clean-container" *ngFor="let s of streetDetails">
       <div [id]="s.id">
         <div>
           <div class="left">
             <b>{{s.cleaningDayStr}}</b>
             <!-- <h1>{{s.streetName}}</h1> -->
             <p>{{'CLOSED' | translate}} <b>{{s.stopStartingTimeStr}}</b> - <b>{{s.stopEndingTimeStr}}</b></p>
+            <div>{{s.notes}}</div>
           </div>
         </div>
       </div>

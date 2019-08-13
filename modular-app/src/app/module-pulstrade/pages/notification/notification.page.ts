@@ -31,7 +31,7 @@ export class NotificationPage implements OnInit {
   }
 
   ngOnInit() {
-    
+
   }
   ionViewDidEnter() {
     this.notif = this.notSrv.getNotStreets();
@@ -46,7 +46,7 @@ export class NotificationPage implements OnInit {
     let tmp = [];
     if (this.notif) {
       this.notif.forEach(s => {
-        if (tmp.filter(t => t.streetName === s.streetName).length === 0) {
+        if (tmp.filter(t => t.idNumber === s.idNumber).length === 0) {
           tmp.push(s);
         }
       });
@@ -54,7 +54,7 @@ export class NotificationPage implements OnInit {
     this.showStreets = tmp;
   }
   toggleNotification(street) {
-    if (this.notifMap[street.streetName] != undefined) {
+    if (this.notifMap[street.idNumber] != undefined) {
       this.notSrv.disableNotification(street);
     } else {
       this.notSrv.setNotification(street);
@@ -66,13 +66,15 @@ export class NotificationPage implements OnInit {
     var map = {}
     if (array)
       array.forEach(el => {
-        map[el.streetName] = el;
+        map[el.idNumber] = el;
       })
     return map;
   }
 
   isEnabled(street) {
-    return this.notifMap[street.streetName] != undefined
+    if (street)
+      return this.notifMap[street.idNumber] != undefined
+    return false
   }
   /**
    * Enable or disable notifications for the choosen street.
@@ -111,7 +113,6 @@ export class NotificationPage implements OnInit {
     });
   }
   openStreetDetail(s) {
-    this.router.navigate(['street-detail'], { queryParams: { street: s.streetName } });
-
+    this.router.navigate(['street-detail'], { queryParams: { street: s.idNumber } });
   }
 }

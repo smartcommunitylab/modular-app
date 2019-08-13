@@ -4,6 +4,7 @@ import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 import { TranslateService } from '@ngx-translate/core';
 import { ConfigService } from 'src/app/services/config.service';
 import { MapService } from './map.service';
+import { start } from 'repl';
 @Injectable({
   providedIn: 'root'
 })
@@ -22,6 +23,9 @@ export class NotificationService {
   ) {
     this.language = window[this.config.getAppModuleName()]['language'];
     this.translate.use(this.language);
+    var startingNot = this.getNotStreets()
+    if (startingNot)
+      this.notifiedStreets = startingNot;
     this.streets = this.map.getData();
     this.buildActived();
     this.checkIfFurtherCleanings();
@@ -41,7 +45,7 @@ export class NotificationService {
       /** Get translations */
       this.translate.get('IN-CLEANING').subscribe(tr => {
         const tmp = new Date(new Date().getTime() + 20000).getTime(); // SOLO PER DEBUG; DA TOGLIERE
-        
+
         const noti = [];
         if (!this.checkIfNotify(street.idNumber, street.cleaningDay)) {
           noti.push({
@@ -77,10 +81,10 @@ export class NotificationService {
    */
   public disableNotification(street) {
     // street.forEach(s => {
-      let id = this.notifiedStreets.findIndex(n => n.streetName === street.streetName);
-      if (id>=0) {
-        this.notifiedStreets.splice(id, 1);
-      }
+    let id = this.notifiedStreets.findIndex(n => n.idNumber === street.idNumber);
+    if (id >= 0) {
+      this.notifiedStreets.splice(id, 1);
+    }
     // });
 
     localStorage.setItem('ps-st-not', JSON.stringify(this.notifiedStreets));
@@ -135,7 +139,7 @@ export class NotificationService {
     if (this.streets && this.streets.lenth > 0)
       this.streets.forEach(s => {
         this.getNotStreets().forEach(n => {
-          if (s.streetName === n.streetName) {
+          if (s.idNumber === n.idNumber) {
             if (n.cleaningDay > (new Date().getTime())) {
               this.setNotification(s);
             }

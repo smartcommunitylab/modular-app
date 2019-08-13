@@ -19,6 +19,8 @@ export class HomePage implements OnInit {
 
   language: string; /** Actived language */
   myPos: any = this.util.getDefaultPos();
+  past: boolean = true;
+  future: boolean = true;
   ; /** Current GPS location */
   streets: any; /** Main street object */
   map: any; /** Leaflet map object */
@@ -26,7 +28,11 @@ export class HomePage implements OnInit {
   showDate: string; /** String based on "selected Date" */
   mapCenter: any = []; /** Coordinates of map center */
   noCleaning: string;
+  noStreetFuture: string;
+  noStreetPast: string;
   labelResult: number = 0;
+  today: number = new Date().setHours(0, 0, 0, 0);
+
   forStr: string; to: string; inDateStr: string; noPark: string; inZone: string; details: string;
 
   private toast: any;
@@ -63,6 +69,10 @@ export class HomePage implements OnInit {
     });
     this.translate.get('DETAILS').subscribe(s => {
       this.details = s;
+    }); this.translate.get('no_street_future').subscribe(s => {
+      this.noStreetFuture = s;
+    }); this.translate.get('no_street_past').subscribe(s => {
+      this.noStreetPast = s;
     });
   }
   /**
@@ -92,6 +102,7 @@ export class HomePage implements OnInit {
         .subscribe(params => {
           this.parseUrlParams(params);
           this.selectedDate = new Date();
+          this.selectedDate.setHours(0, 0, 0, 0);
           this.showDate = this.selectedDate.toISOString();
           if (this.myPos)
             this.mapCenter = [this.myPos.lat ? this.myPos.lat : 0, this.myPos.long ? this.myPos.long : 0];
@@ -109,7 +120,9 @@ export class HomePage implements OnInit {
 
   }
   afterFirstDayForward() {
-    return true
+    if (this.selectedDate)
+      return this.selectedDate.getTime() > this.today;
+    return false
   }
   /**
    * Reset center map coordinates
@@ -174,7 +187,7 @@ export class HomePage implements OnInit {
     //   }
     // });
 
-    this.map = new leaflet.Map('home-map', { zoomControl: true, attributionControl: false ,dragging: true,tap:false}).setView(this.mapCenter, 15);
+    this.map = new leaflet.Map('home-map', { zoomControl: true, attributionControl: false, dragging: true, tap: false }).setView(this.mapCenter, 15);
 
     /** Build polyline after drag */
     this.map.on('dragend', function (e) {
@@ -216,7 +229,7 @@ export class HomePage implements OnInit {
    */
   async buildPolyline(center) {
     let counter = 0;
-    this.labelResult=0;
+    this.labelResult = 0;
 
     /** Reset polyline */
     if (this.map) {
@@ -250,11 +263,11 @@ export class HomePage implements OnInit {
           this.labelResult++;
           const popupContent = (inDate) ? closedStreetContent : freeStreetContent;
 
-          const polyline = leaflet.polyline(s.polylines, { color: color,weight:7 }).addTo(this.map);
+          const polyline = leaflet.polyline(s.polylines, { color: color, weight: 7 }).addTo(this.map);
           const popup = leaflet.popup({ className: `pop-${s.streetName.replace(/\s/g, '')}` }).setContent(popupContent);
           polyline.bindPopup(popup).on('popupopen', (e) => {
             const el = document.getElementsByClassName(`pop-${s.streetName.replace(/\s/g, '')}`)[0].addEventListener('click', () => {
-              this.goToDetail(s.streetName);
+              this.goToDetail(s.idNumber);
             });
           });
           counter++;
@@ -309,88 +322,87 @@ export class HomePage implements OnInit {
    * Get last cleaning day and build polylines
    */
   async firstDayFwd() {
-    this.labelResult=0;
+    this.past = true;
+    this.labelResult = 0;
     const center = this.mapCenter;
     let nextDay = null;
-    let today = new Date().getTime();
     if (this.streets)
       this.streets.forEach(s => {
-        if (!nextDay && s.cleaningDay && s.cleaningDay > new Date(this.selectedDate).getTime()) {
-          nextDay = s.cleaningDay;
-        }
         const dist = this.geo.getDistanceKM(
           { lat: center[0], lon: center[1] },
           { lat: s.centralCoords[0]['lat'], lon: s.centralCoords[0]['lng'] }
         );
+        if ((dist < ((17 % this.map.getZoom()) - 1) || dist < 0.3)) {
+          if (!nextDay && s.cleaningDay && s.cleaningDay > new Date(this.selectedDate).getTime()) {
+            nextDay = s.cleaningDay;
+          }
+        }
+
         //select first next day of cleaning inside
-        if ((dist < ((18 % this.map.getZoom()) - 1) || dist < 0.3)) {
-          if (s.cleaningDay > this.selectedDate && s.cleaningDay <= nextDay && s.cleaningDay > today) {
-            nextDay = new Date(s.cleaningDay);
+        if ((dist < ((17 % this.map.getZoom()) - 1) || dist < 0.3)) {
+          if (nextDay && s.cleaningDay > this.selectedDate.getTime() && s.cleaningDay <= nextDay && s.cleaningDay > this.today) {
+            nextDay = s.cleaningDay;
           }
         }
       });
-    if (nextDay > this.selectedDate) {
-      this.selectedDate= new Date(nextDay.getTime());
+    if (nextDay != null && nextDay > this.selectedDate.getTime()) {
+      this.selectedDate = new Date(nextDay);
       this.showDate = this.selectedDate.toISOString();
-      this.buildPolyline(center);
+      this.future = true;
+
     } else {
       this.toast = await this.toastCtrl.create({
-        message: `no_street_future`,
+        message: this.noStreetFuture,
         duration: 3000,
         showCloseButton: true
       });
+      this.future = false;
       await this.toast.present();
     }
+    this.buildPolyline(center);
+
   }
   /**
    * Get first cleaning day and build polylines
    */
   async firstDayBck() {
-    this.labelResult=0;
+    this.future = true;
+    this.labelResult = 0;
     const center = this.mapCenter;
     let prevDay = null;
-    let today = new Date().getTime();
-    // this.streets.forEach(s => {
-    //   const dist = this.geo.getDistanceKM(
-    //     { lat: center[0], lon: center[1] },
-    //     { lat: s.centralCoords[0]['lat'], lon: s.centralCoords[0]['lng'] }
-    //   );
-    //   if (s.cleaningDay < this.selectedDate) {
-    //     if ((dist < ((18 % this.map.getZoom()) - 1) || dist < 0.3)) {
-    //       this.selectedDate = new Date(s.cleaningDay);
-    //       this.showDate = this.selectedDate.toISOString();
-    //       this.buildPolyline(center);
-    //     }
-    //   }
-    // });
     if (this.streets)
-    this.streets.forEach(s => {
-      if (!prevDay && s.cleaningDay && s.cleaningDay < new Date(this.selectedDate).getTime()) {
-        prevDay = s.cleaningDay;
-      }
-      const dist = this.geo.getDistanceKM(
-        { lat: center[0], lon: center[1] },
-        { lat: s.centralCoords[0]['lat'], lon: s.centralCoords[0]['lng'] }
-      );
-      //select first next day of cleaning inside
-      if ((dist < ((18 % this.map.getZoom()) - 1) || dist < 0.3)) {
-        if (s.cleaningDay < this.selectedDate && s.cleaningDay >= prevDay && s.cleaningDay > today) {
-          prevDay = new Date(s.cleaningDay);
+      this.streets.forEach(s => {
+        const dist = this.geo.getDistanceKM(
+          { lat: center[0], lon: center[1] },
+          { lat: s.centralCoords[0]['lat'], lon: s.centralCoords[0]['lng'] }
+        );
+        if ((dist < ((17 % this.map.getZoom()) - 1) || dist < 0.3)) {
+          if (!prevDay && s.cleaningDay && s.cleaningDay < new Date(this.selectedDate).getTime()) {
+            prevDay = s.cleaningDay;
+          }
         }
-      }
-    });
-  if (prevDay < this.selectedDate) {
-    this.selectedDate= new Date(prevDay.getTime());
-    this.showDate = this.selectedDate.toISOString();
+        //select first next day of cleaning inside
+        if ((dist < ((17 % this.map.getZoom()) - 1) || dist < 0.3)) {
+          if (prevDay && s.cleaningDay < this.selectedDate.getTime() && s.cleaningDay >= prevDay && s.cleaningDay > this.today) {
+            prevDay = s.cleaningDay;
+          }
+        }
+      });
+    if (prevDay != null && prevDay < this.selectedDate.getTime()) {
+      this.selectedDate = new Date(prevDay);
+      this.showDate = this.selectedDate.toISOString();
+      this.past = true;
+    } else {
+      this.toast = await this.toastCtrl.create({
+        message: this.noStreetPast,
+        duration: 3000,
+        showCloseButton: true
+      });
+      this.past = false;
+      await this.toast.present();
+    }
     this.buildPolyline(center);
-  } else {
-    this.toast = await this.toastCtrl.create({
-      message: `no_street_future`,
-      duration: 3000,
-      showCloseButton: true
-    });
-    await this.toast.present();
-  }
+
   }
   /**
    * Set date based on Ionic Datetime Picker

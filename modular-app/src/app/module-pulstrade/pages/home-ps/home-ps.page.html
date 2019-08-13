@@ -18,27 +18,8 @@
       {{'HOME' | translate}}
     </ion-title>
   </ion-toolbar>
-  <!--   
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
-    </ion-buttons>
-    <ion-title>
-      {{'HOME' | translate}}
-    </ion-title>
-  </ion-toolbar> -->
+
 </ion-header>
-
-
-<!-- FLOATING BUTTON -->
-<!-- <ion-fab class="fixed" vertical="bottom" horizontal="end" slot="fixed">
-  <ion-fab-button color="danger" [routerLink]="['/ps-notification']" routerDirection="forward">
-    <ion-icon name="notifications"></ion-icon>
-  </ion-fab-button>
-</ion-fab> -->
-<!-- ---------------------------- -->
-
-
 <ion-row>
   <ion-col  class="ion-text-start interaction " size="2">
     <ion-icon  name="arrow-back" class="icon-home" (click)="dayBack()"></ion-icon>
@@ -53,13 +34,13 @@
 </ion-row>
 <ion-row>
   <ion-col class="ion-text-start interaction" size="2">
-    <ion-icon class="icon-home"  name="rewind" (click)="firstDayBck()" *ngIf="afterFirstDayForward()"></ion-icon>
+    <ion-icon class="icon-home"  name="rewind" (click)="firstDayBck()" *ngIf="afterFirstDayForward() && past"></ion-icon>
   </ion-col>
   <ion-col class="ion-text-center interaction" size="8">
     {{labelResult}} {{'clean_label' | translate}}
   </ion-col>
   <ion-col class="ion-text-end interaction" size="2">
-    <ion-icon  class="icon-home"  name="fastforward" (click)="firstDayFwd()"></ion-icon>
+    <ion-icon  class="icon-home"  name="fastforward" (click)="firstDayFwd()" *ngIf="future"></ion-icon>
   </ion-col>
 </ion-row>
 

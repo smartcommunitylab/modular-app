@@ -17,8 +17,9 @@
     <div *ngFor="let s of showStreets">
       <div [id]="s.id">
         <div>
-          <div class="left" [routerLink]="['/street-detail']" [queryParams]="{street: s.streetName }" routerDirection="forward">
+          <div class="left" [routerLink]="['/street-detail']" [queryParams]="{street: s.idNumber }" routerDirection="forward">
             <div class="result interaction" >{{s.streetName}}</div>
+            <div class="sub-result interaction" >{{s.tratto}}</div>
           </div>
           <div class="right" (click)="toggleNotification(s)">
             <ion-icon class="interaction icon-notification" name="notifications" *ngIf="isEnabled(s); else disabled"></ion-icon>

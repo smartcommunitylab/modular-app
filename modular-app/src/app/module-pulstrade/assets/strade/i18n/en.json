@@ -15,5 +15,7 @@
     "DETAILS": "Details",
     "IN-CLEANING": "Street in Cleanliness",
     "error_init":"Errore inizializzazione dati",
-    "clean_label":"pulizie programmate"
+    "clean_label":"pulizie programmate",
+    "no_street_future":"Non ci sono pulizie programmate per questa zona dopo la data selezionata",
+    "no_street_past":"Non ci sono pulizie programmate per questa zona prima della data selezionata"
 }

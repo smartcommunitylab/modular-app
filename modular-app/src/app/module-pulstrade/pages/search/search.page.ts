@@ -43,7 +43,7 @@ export class SearchPage implements OnInit {
     var map = {}
     if (array)
       array.forEach(el => {
-        map[el.streetName] = el;
+        map[el.idNumber] = el;
       })
     return map;
   }
@@ -124,7 +124,7 @@ export class SearchPage implements OnInit {
   }
 
   toggleNotification(street) {
-    if (this.notif[street.streetName]!=undefined) {
+    if (this.notif[street.idNumber]!=undefined) {
       this.notificationSrv.disableNotification(street);
     } else {
       this.notSrv.setNotification(street);
@@ -132,7 +132,9 @@ export class SearchPage implements OnInit {
     this.notif = this.convertToMapId(this.notSrv.getNotStreets());
   }
   isEnabled(street) {
-    return this.notif[street.streetName]!=undefined
+    if (street)
+    return this.notif[street.idNumber]!=undefined
+    return false;
   }
   /**
    * Go to map page with specified coordinates
@@ -151,7 +153,7 @@ export class SearchPage implements OnInit {
       let element, toggle: any;
       if (this.streets) {
         const street = this.streets.filter(function (val) {
-          return val.streetName === event.detail.value;
+          return val.idNumber === event.detail.value;
         });
         if (event.detail.checked) {
           street.forEach(s => {

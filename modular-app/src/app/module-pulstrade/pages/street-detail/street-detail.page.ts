@@ -18,6 +18,7 @@ export class StreetDetailPage implements OnInit {
   streets: any;
   streetDetails: any = [];
   notif: any;
+  streetName: any;
   
   constructor(private translate: TranslateService,
     private config: ConfigService,
@@ -53,6 +54,7 @@ export class StreetDetailPage implements OnInit {
     try {
       this.route.queryParams
         .subscribe(params => {
+          this.streetName = params.street;
            this.search(params.street);
         });
     } catch { }
@@ -100,16 +102,18 @@ export class StreetDetailPage implements OnInit {
 
     return unique;
   }
-  toggleNotification(street) {
-    if (this.notif[street.streetName] != undefined) {
+  toggleNotification() {
+    var street = this.notif[this.streetName];
+    if (this.notif[this.streetName] != undefined) {
       this.notSrv.disableNotification(street);
     } else {
       this.notSrv.setNotification(street);
     }
     this.notif = this.convertToMapId(this.notSrv.getNotStreets());
   }
-  isEnabled(street) {
-    return this.notif[street.streetName] != undefined
+  isEnabled() {
+    if (this.streetName)
+    return this.notif[this.streetName] != undefined
   }
   /**
    * Go to map page with specified coordinates
