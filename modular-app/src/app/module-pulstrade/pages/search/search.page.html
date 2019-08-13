@@ -1,9 +1,9 @@
-<ion-header no-border>
+<ion-header >
   <ion-toolbar>
     <ion-searchbar showCancelButton="never" animated (ionInput)="search($event)" placeholder="{{'SEARCH' | translate}}">
     </ion-searchbar>
     <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
+      <ion-back-button class="interaction"></ion-back-button>
     </ion-buttons>
     <!-- <ion-title>
       {{'SEARCH' | translate}}
@@ -17,19 +17,15 @@
     <div *ngFor="let s of showStreets">
       <div [id]="s.id">
         <div>
-          <div class="left" [routerLink]="['/street-detail']" [queryParams]="{detail: s}" routerDirection="forward">
-            <!-- <b>{{s.cleaningDayStr}}</b> -->
-            <h1>{{s.streetName}}</h1>
-            <!-- <p>{{'CLOSED' | translate}} <b>{{s.stopStartingTimeStr}}</b> - <b>{{s.stopEndingTimeStr}}</b></p> -->
+          <div class="left" [routerLink]="['/street-detail']" [queryParams]="{street: s.streetName }" routerDirection="forward">
+            <div class="result interaction" >{{s.streetName}}</div>
           </div>
           <div class="right" (click)="toggleNotification(s)">
-            <!-- <ion-toggle [id]="'tog-' + s.idNumber" (ionChange)="toggle($event)" [value]="s.streetName"></ion-toggle> -->
-            <ion-icon name="notifications" *ngIf="isEnabled(s); else disabled"></ion-icon>
+            <ion-icon class="interaction icon-notification" name="notifications" *ngIf="isEnabled(s); else disabled"></ion-icon>
             <ng-template #disabled>
-              <ion-icon name="notifications-outline"></ion-icon>
+              <ion-icon  class="interaction icon-notification" name="notifications-outline"></ion-icon>
             </ng-template>
           </div>
-          <!-- <p [id]="'not-' + s.idNumber" class="notification">{{'NOTIFY-DIS' | translate}}</p> -->
         </div>
       </div>
     </div>

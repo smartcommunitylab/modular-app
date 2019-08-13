@@ -174,7 +174,7 @@ export class HomePage implements OnInit {
     //   }
     // });
 
-    this.map = new leaflet.Map('home-map', { zoomControl: false, attributionControl: false }).setView(this.mapCenter, 15);
+    this.map = new leaflet.Map('home-map', { zoomControl: true, attributionControl: false ,dragging: true,tap:false}).setView(this.mapCenter, 15);
 
     /** Build polyline after drag */
     this.map.on('dragend', function (e) {
@@ -216,7 +216,7 @@ export class HomePage implements OnInit {
    */
   async buildPolyline(center) {
     let counter = 0;
-
+    this.labelResult=0;
 
     /** Reset polyline */
     if (this.map) {
@@ -246,11 +246,11 @@ export class HomePage implements OnInit {
         /**
          * Build polyline based on: current day, current zoom, map center
          */
-        if (inDate && ((dist < ((18 % this.map.getZoom()) - 1) || dist < 0.3))) {
+        if (inDate && ((dist < ((17 % this.map.getZoom()) - 1) || dist < 0.3))) {
           this.labelResult++;
           const popupContent = (inDate) ? closedStreetContent : freeStreetContent;
 
-          const polyline = leaflet.polyline(s.polylines, { color: color }).addTo(this.map);
+          const polyline = leaflet.polyline(s.polylines, { color: color,weight:7 }).addTo(this.map);
           const popup = leaflet.popup({ className: `pop-${s.streetName.replace(/\s/g, '')}` }).setContent(popupContent);
           polyline.bindPopup(popup).on('popupopen', (e) => {
             const el = document.getElementsByClassName(`pop-${s.streetName.replace(/\s/g, '')}`)[0].addEventListener('click', () => {

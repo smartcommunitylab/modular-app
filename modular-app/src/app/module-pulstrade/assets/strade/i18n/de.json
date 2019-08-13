@@ -14,5 +14,6 @@
     "NOTIFY-DIS": "Deaktivierte Benachrichtigungen",
     "DETAILS": "Details",
     "IN-CLEANING": "Straße in Sauberkeit",
-    "error_init":"Errore inizializzazione dati"
+    "error_init":"Errore inizializzazione dati",
+    "clean_label":"pulizie programmate"
 }

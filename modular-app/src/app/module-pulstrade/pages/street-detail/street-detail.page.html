@@ -3,6 +3,15 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
+    <ion-buttons slot="end">
+        <div (click)="toggleNotification(s)">
+            <ion-icon name="notifications" *ngIf="isEnabled(s); else disabled"></ion-icon>
+            <ng-template #disabled>
+              <ion-icon name="notifications-outline"></ion-icon>
+            </ng-template>
+          </div>
+              </ion-buttons>
+
     <ion-title>
       {{'street_detail' | translate}}
     </ion-title>

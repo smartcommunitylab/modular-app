@@ -4,6 +4,7 @@ import { NotificationService } from '../../services/notification.service';
 import { TranslateService } from '@ngx-translate/core';
 import { ConfigService } from 'src/app/services/config.service';
 import { Platform } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-notification',
@@ -22,7 +23,8 @@ export class NotificationPage implements OnInit {
     private translate: TranslateService,
     private config: ConfigService,
     private mapSrv: MapService,
-    private platform: Platform
+    private platform: Platform,
+    private router: Router
   ) {
     this.language = window[this.config.getAppModuleName()]['language'];
     this.translate.use(this.language);
@@ -107,5 +109,9 @@ export class NotificationPage implements OnInit {
         });
       }
     });
+  }
+  openStreetDetail(s) {
+    this.router.navigate(['street-detail'], { queryParams: { street: s.streetName } });
+
   }
 }

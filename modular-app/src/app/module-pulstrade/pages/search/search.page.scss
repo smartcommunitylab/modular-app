@@ -4,7 +4,7 @@ ion-card {
 .left {
     float: left;
     width: 75%;
-    padding-bottom: 5%;
+    // padding-bottom: 5%;
 }
 .right {
     float: right;
@@ -12,4 +12,14 @@ ion-card {
 }
 .notification {
     text-align: center;
+}
+.interaction {
+    color: #11B3EF!important;
+}
+
+.icon-notification{
+    font-size: 30px;
+}
+.result{
+    font-size: 30px;
 }

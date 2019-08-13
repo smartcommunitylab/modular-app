@@ -14,5 +14,6 @@
     "NOTIFY-DIS": "Notification Disabled",
     "DETAILS": "Details",
     "IN-CLEANING": "Street in Cleanliness",
-    "error_init":"Errore inizializzazione dati"
+    "error_init":"Errore inizializzazione dati",
+    "clean_label":"pulizie programmate"
 }

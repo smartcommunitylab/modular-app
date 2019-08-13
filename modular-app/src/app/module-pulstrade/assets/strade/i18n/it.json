@@ -2,7 +2,7 @@
     "HOME": "Pulizia Strade",
     "SEARCH": "Cerca",
     "CALENDAR": "Calendario",
-    "NOTIFY": "Gestione Notifiche",
+    "NOTIFY": "Notifiche",
     "NO-CLEANING": "Nessuna pulizia prevista in data",
     "IN-ZONE": "in questa zona",
     "NO-PARKING-FROM": "Divieto di sosta dalle",
@@ -14,5 +14,6 @@
     "NOTIFY-DIS": "Notifiche Disabilitate",
     "DETAILS": "Dettagli",
     "IN-CLEANING": "Strada in Pulizia",
-    "error_init":"Errore inizializzazione dati"
+    "error_init":"Errore inizializzazione dati",
+    "clean_label":"pulizie programmate"
 }

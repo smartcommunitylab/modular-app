@@ -16,13 +16,15 @@ export class StreetDetailPage implements OnInit {
   language: string;
   myPos: any;
   streets: any;
-  showStreets: any = [];
+  streetDetails: any = [];
+  notif: any;
+  
   constructor(private translate: TranslateService,
     private config: ConfigService,
     private router: Router,
     private mapSrv: MapService,
     private datePipe: DatePipe,
-    private notificationSrv: NotificationService,
+    private notSrv: NotificationService,
     private route: ActivatedRoute,
     private platform: Platform
   ) {
@@ -33,6 +35,8 @@ export class StreetDetailPage implements OnInit {
 
   ngOnInit() {
     this.streets = this.mapSrv.getData();
+    this.notif = this.convertToMapId(this.notSrv.getNotStreets());
+
     /** Add DateTimes in string format */
     if (this.streets)
       this.streets.forEach(s => {
@@ -49,18 +53,63 @@ export class StreetDetailPage implements OnInit {
     try {
       this.route.queryParams
         .subscribe(params => {
-          // this.search(params.street);
+           this.search(params.street);
         });
     } catch { }
   }
 
+  convertToMapId(array: any[]): any {
+    var map = {}
+    if (array)
+      array.forEach(el => {
+        map[el.streetName] = el;
+      })
+    return map;
+  }
+  
+  search(input: any) {
+    let val;
+      if (input) {
+        if (input.detail) {
+          val = input.detail.target.value;
+        } else {
+          val = input;
+        }
+        if (val === '') {
+          this.streetDetails = [];
+        } else {
+          if (this.streets) {
+            this.streetDetails = this.streets.filter((el) => {
+              return (el.streetName.toLowerCase().indexOf(val.toLowerCase()) > -1);
+            });
+            //  this.streetDetails = this.getUnique(this.streetDetails, 'streetCode')
+          }
 
+      }
+  }}
+  getUnique(arr, comp) {
 
+    const unique = arr
+      .map(e => e[comp])
+
+      // store the keys of the unique objects
+      .map((e, i, final) => final.indexOf(e) === i && i)
+
+      // eliminate the dead keys & store unique objects
+      .filter(e => arr[e]).map(e => arr[e]);
+
+    return unique;
+  }
   toggleNotification(street) {
-
+    if (this.notif[street.streetName] != undefined) {
+      this.notSrv.disableNotification(street);
+    } else {
+      this.notSrv.setNotification(street);
+    }
+    this.notif = this.convertToMapId(this.notSrv.getNotStreets());
   }
   isEnabled(street) {
-    return true
+    return this.notif[street.streetName] != undefined
   }
   /**
    * Go to map page with specified coordinates
@@ -70,42 +119,5 @@ export class StreetDetailPage implements OnInit {
     this.router.navigate(['/ps'], { queryParams: { coord: JSON.stringify(coord) } });
   }
 
-  /**
-   * Enable or disable notifications
-   * @param event `click` event
-   */
-  toggle(event) {
-    this.platform.ready().then(() => {
-      let element, toggle: any;
-      if (this.streets) {
-        const street = this.streets.filter(function (val) {
-          return val.streetName === event.detail.value;
-        });
-        if (event.detail.checked) {
-          street.forEach(s => {
-            element = document.getElementById('not-' + s.idNumber);
-            toggle = document.getElementById('tog-' + s.idNumber);
-            this.notificationSrv.setNotification(street);
-            element.style.color = 'green';
-            this.translate.get('NOTIFY-ENA').subscribe(x => {
-              element.innerHTML = x;
-            });
-            toggle.checked = true;
-          });
-        } else {
-          street.forEach(s => {
-            element = document.getElementById('not-' + s.idNumber);
-            toggle = document.getElementById('tog-' + s.idNumber);
-            this.notificationSrv.disableNotification(street);
-            element.style.color = '#737373';
-            this.translate.get('NOTIFY-DIS').subscribe(x => {
-              element.innerHTML = x;
-            });
-            toggle.checked = false;
-          });
-        }
-      }
-    });
-
-  }
+  
 }

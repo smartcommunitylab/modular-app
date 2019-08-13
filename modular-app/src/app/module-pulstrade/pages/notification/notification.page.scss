@@ -14,5 +14,17 @@ ion-card {
     text-align: center;
 }
 .left h1 {
-    margin-top:15%;
+    // margin-top:15%;
+}
+.interaction {
+    color: #11B3EF!important;
+}
+.icon-notification{
+    font-size: 30px;
+}
+.fab-notification{
+    --background:#11B3EF!important;
+}
+.result{
+    font-size: 30px;
 }

@@ -1,24 +1,24 @@
 <ion-header no-border>
-    <ion-searchbar class="search-event" style="display: none" showCancelButton animated (search)="toggleSearch()"
+  <ion-searchbar class="search-event" style="display: none" showCancelButton animated (search)="toggleSearch()"
     (ionInput)="searchChanged($event)" (ionCancel)="toggleSearch()"></ion-searchbar>
   <ion-toolbar>
 
-    <ion-buttons slot="start">
+    <ion-buttons class="interactive" slot="start">
       <ion-back-button class="interaction"></ion-back-button>
     </ion-buttons>
     <ion-buttons slot="end">
-      <ion-button [routerLink]="['/ps-notification']" >
-          <ion-icon name="notifications"></ion-icon>
-        </ion-button>
+      <ion-button [routerLink]="['/ps-notification']">
+        <ion-icon class="icon-bar" name="notifications"></ion-icon>
+      </ion-button>
       <ion-button [routerLink]="['/ps-search']">
-        <ion-icon name="search"></ion-icon>
+        <ion-icon class="icon-bar" name="search"></ion-icon>
       </ion-button>
     </ion-buttons>
     <ion-title>
-        {{'HOME' | translate}}
-      </ion-title>
+      {{'HOME' | translate}}
+    </ion-title>
   </ion-toolbar>
-<!--   
+  <!--   
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
@@ -39,44 +39,32 @@
 <!-- ---------------------------- -->
 
 
-<!-- TODO: LINK IN POPUP PER PAGINA "RICERCA" CONTENENTE STRADA E LISTA PULIZIE STRADA -->
 <ion-row>
-  <ion-col>
-    <!-- <ion-item class="calButton" > -->
-      <ion-icon name="arrow-back" (click)="dayBack()"></ion-icon>
-    <!-- </ion-item> -->
+  <ion-col  class="ion-text-start interaction " size="2">
+    <ion-icon  name="arrow-back" class="icon-home" (click)="dayBack()"></ion-icon>
   </ion-col>
-  <ion-col>
-    <!-- <ion-item> -->
-      <ion-datetime (ionChange)="setDate($event)" class="date" display-format="DD-MM-YYYY" picker-format="DD MM YYYY" [value]="showDate"></ion-datetime>
-    <!-- </ion-item> -->
+  <ion-col class="ion-text-center" size="8">
+    <ion-datetime (ionChange)="setDate($event)" class="date " display-format="DD-MM-YYYY" picker-format="DD MM YYYY"
+      [value]="showDate"></ion-datetime>
   </ion-col>
-  <ion-col>
-    <!-- <ion-item class="calButton"> -->
-      <ion-icon name="arrow-forward" (click)="dayForward()"></ion-icon>
-    <!-- </ion-item> -->
+  <ion-col class="ion-text-end interaction" size="2">
+    <ion-icon name="arrow-forward" class="icon-home"  (click)="dayForward()"></ion-icon>
   </ion-col>
 </ion-row>
 <ion-row>
-    <ion-col >
-      <!-- <ion-item class="calButton" > -->
-        <ion-icon name="skip-backward" (click)="firstDayBck()" *ngIf="afterFirstDayForward()"></ion-icon>
-      <!-- </ion-item> -->
-    </ion-col>
-    <ion-col>
-      <!-- <ion-item> -->
-        {{labelResult}}
-      <!-- </ion-item> -->
-    </ion-col>
-    <ion-col>
-      <!-- <ion-item class="calButton"> -->
-          <ion-icon name="skip-forward" (click)="firstDayFwd()"></ion-icon>
-          <!-- </ion-item> -->
-    </ion-col>
-  </ion-row>
+  <ion-col class="ion-text-start interaction" size="2">
+    <ion-icon class="icon-home"  name="rewind" (click)="firstDayBck()" *ngIf="afterFirstDayForward()"></ion-icon>
+  </ion-col>
+  <ion-col class="ion-text-center interaction" size="8">
+    {{labelResult}} {{'clean_label' | translate}}
+  </ion-col>
+  <ion-col class="ion-text-end interaction" size="2">
+    <ion-icon  class="icon-home"  name="fastforward" (click)="firstDayFwd()"></ion-icon>
+  </ion-col>
+</ion-row>
 
 
-<ion-content padding>
+<ion-content>
   <div class="map">
     <div id="home-map"></div>
   </div>
