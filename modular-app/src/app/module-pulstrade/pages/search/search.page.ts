@@ -20,6 +20,7 @@ export class SearchPage implements OnInit {
   streets: any;
   notif: any;
   showStreets: any = [];
+  searching: boolean=false;
   constructor(private translate: TranslateService,
     private config: ConfigService,
     private notSrv: NotificationService,
@@ -92,9 +93,12 @@ export class SearchPage implements OnInit {
       if (input) {
         if (input.detail) {
           val = input.detail.target.value;
-        } else {
-          val = input;
+          // this.searching=true;
+
         }
+        //  else {
+        //   val = input;
+        // }
         if (val === '') {
           this.showStreets = [];
         } else {
@@ -103,6 +107,7 @@ export class SearchPage implements OnInit {
               return (el.streetName.toLowerCase().indexOf(val.toLowerCase()) > -1);
             });
             this.showStreets = this.getUnique(this.showStreets, 'streetCode')
+            // this.searching=false;
           }
 
         }

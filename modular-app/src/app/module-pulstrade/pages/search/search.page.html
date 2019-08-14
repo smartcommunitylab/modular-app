@@ -13,6 +13,8 @@
 
 
 <ion-content padding>
+    <!-- <ion-spinner name="dots" *ngIf="searching"></ion-spinner> -->
+
   <ion-list no-lines *ngIf="showStreets">
     <div *ngFor="let s of showStreets">
       <div [id]="s.id">

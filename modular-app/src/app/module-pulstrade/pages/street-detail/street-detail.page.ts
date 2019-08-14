@@ -19,7 +19,7 @@ export class StreetDetailPage implements OnInit {
   streetDetails: any = [];
   notif: any;
   streetName: any;
-  
+
   constructor(private translate: TranslateService,
     private config: ConfigService,
     private router: Router,
@@ -54,8 +54,7 @@ export class StreetDetailPage implements OnInit {
     try {
       this.route.queryParams
         .subscribe(params => {
-          this.streetName = params.street;
-           this.search(params.street);
+          this.search(params.street);
         });
     } catch { }
   }
@@ -68,27 +67,31 @@ export class StreetDetailPage implements OnInit {
       })
     return map;
   }
-  
+
   search(input: any) {
     let val;
-      if (input) {
-        if (input.detail) {
-          val = input.detail.target.value;
-        } else {
-          val = input;
+    if (input) {
+      if (input.detail) {
+        val = input.detail.target.value;
+      } else {
+        val = input;
+      }
+      if (val === '') {
+        this.streetDetails = [];
+      } else {
+        if (this.streets) {
+          this.streetDetails = this.streets.filter((el) => {
+            return (String(el.idNumber) === val);
+          });
+          if (this.streetDetails && this.streetDetails.length > 0)
+            this.streetName = this.streetDetails[0].streetName;
+
+          //  this.streetDetails = this.getUnique(this.streetDetails, 'streetCode')
         }
-        if (val === '') {
-          this.streetDetails = [];
-        } else {
-          if (this.streets) {
-            this.streetDetails = this.streets.filter((el) => {
-              return (el.streetName.toLowerCase().indexOf(val.toLowerCase()) > -1);
-            });
-            //  this.streetDetails = this.getUnique(this.streetDetails, 'streetCode')
-          }
 
       }
-  }}
+    }
+  }
   getUnique(arr, comp) {
 
     const unique = arr
@@ -113,7 +116,7 @@ export class StreetDetailPage implements OnInit {
   }
   isEnabled() {
     if (this.streetName)
-    return this.notif[this.streetName] != undefined
+      return this.notif[this.streetName] != undefined
   }
   /**
    * Go to map page with specified coordinates
@@ -123,5 +126,5 @@ export class StreetDetailPage implements OnInit {
     this.router.navigate(['/ps'], { queryParams: { coord: JSON.stringify(coord) } });
   }
 
-  
+
 }

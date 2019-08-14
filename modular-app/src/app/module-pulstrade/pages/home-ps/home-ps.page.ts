@@ -124,6 +124,13 @@ export class HomePage implements OnInit {
       return this.selectedDate.getTime() > this.today;
     return false
   }
+  ionViewDidEnter() {
+    setTimeout(() => {
+      if (this.map)
+        this.map.invalidateSize();
+    }, 500);
+
+  }
   /**
    * Reset center map coordinates
    */
