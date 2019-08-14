@@ -1259,7 +1259,8 @@ var DatiServiceService = /** @class */ (function () {
                 var parser = new DOMParser();
                 for (var _i = 0, _a = JSON.parse(res['_body']).content; _i < _a.length; _i++) {
                     var item = _a[_i];
-                    item.description = parser.parseFromString(item.description, 'text/html').body.textContent; //rende il contenuto del testo interpreteabile da HTML
+                    // item.description = parser.parseFromString(item.description, 'text/html').body.textContent.replace(/&quot;/g,'"'); //rende il contenuto del testo interpreteabile da HTML
+                    item.shortAbstract = item.shortAbstract.replace(/&quot;/g, '"');
                     vetDati.push(item);
                 }
                 resolve(vetDati);

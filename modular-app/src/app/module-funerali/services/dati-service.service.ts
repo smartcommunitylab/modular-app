@@ -5,25 +5,27 @@ import { Http } from '@angular/http';
   providedIn: 'root'
 })
 
-export class DatiServiceService {
+export class DatiService {
+  urlBase = 'https://tn.smartcommunitylab.it/trentorienta/api/funerali/';
 
   constructor(private http: Http) { }
 
-  getDati(parametri: any) {
-    let vetDati = [];
-    let url = 'https://tn.smartcommunitylab.it/trentorienta/api/events';
+  getDati(data:string):Promise<any> {
+    let parametri = {}
+    return new Promise((resolve,reject)=> {
+      return this.http.get(this.urlBase+"from?date="+data,parametri).toPromise().then(response => {
+        // return this.http.get('./assets/funerali/data/localFunerali.json').toPromise().then(response => {
+          if (response['_body']){
+          resolve(JSON.parse(response['_body']));
+        }
+        reject();
+      },err =>{
+        reject()
+      })
 
-    let strData = this.http.post(url,parametri );
+    })
 
-    strData.subscribe(data => {
-      let parser = new DOMParser();
-      for (let item of JSON.parse(data['_body']).content) {
-        item.description = parser.parseFromString(item.description, 'text/html').body.textContent; //rende il contenuto del testo interpreteabile da HTML
-        vetDati.push(item);
-      }
-    }, error => {
-      console.error(error);
-    });
-    return vetDati;
+
+
   }
 }

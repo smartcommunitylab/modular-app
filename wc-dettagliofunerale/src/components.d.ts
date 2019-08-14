@@ -8,25 +8,19 @@
 import '@stencil/core';
 
 
-import {
-  TipoDefunto,
-  TipoFunerale,
-} from './components/Dati/tipoDatiFunerali';
 
 
 export namespace Components {
 
   interface DettaglioMorte {
-    'defunto': TipoDefunto;
-    'funerale': TipoFunerale;
-    'isFunerale': boolean;
+    'funerale': string;
+    'string': string;
   }
   interface DettaglioMorteAttributes extends StencilHTMLAttributes {
-    'defunto'?: TipoDefunto;
-    'funerale'?: TipoFunerale;
-    'isFunerale'?: boolean;
+    'funerale'?: string;
     'onCondividi'?: (event: CustomEvent) => void;
     'onIndicazioni'?: (event: CustomEvent) => void;
+    'string'?: string;
   }
 }
 

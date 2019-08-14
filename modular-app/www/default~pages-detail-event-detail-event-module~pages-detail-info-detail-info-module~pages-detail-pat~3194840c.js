@@ -17116,8 +17116,9 @@ var DbService = /** @class */ (function () {
         this.opts = { live: true, retry: true };
         this.MIN_SYNCH_TIME = 600000;
         this.db = new pouchdb__WEBPACK_IMPORTED_MODULE_1__["default"]('comune-in-tasca');
-        this.remote = 'http://192.168.42.201:5984/comune-in-tasca';
-        // 'http://192.168.1.197:5984/comune-in-tasca'
+        this.remote = 'https://cit.platform.smartcommunitylab.it/comuneintasca2';
+        //  'http://192.168.42.201:5984/comune-in-tasca';
+        //'http://192.168.1.197:5984/comune-in-tasca'
         // 'http://127.0.0.1:5984/comune-in-tasca';
         this.contentTypes = {
             'content': 'content-item',
@@ -17258,7 +17259,8 @@ var DbService = /** @class */ (function () {
                         //     "$lte": new Date().getTime()
                         //  }
                         // }]
-                    }
+                    },
+                    "limit": 100
                 });
             }
         }

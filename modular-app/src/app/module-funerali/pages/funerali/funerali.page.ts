@@ -3,6 +3,8 @@ import { TipoDefunto } from '../../domain/tipo-defunto';
 import { TipoFunerale } from '../../domain/tipo-funerale';
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 import { IonInfiniteScroll } from '@ionic/angular';
+import { DatiService } from '../../services/dati-service.service';
+import { start } from 'repl';
 
 @Component({
   selector: 'funerali-page',
@@ -19,27 +21,46 @@ export class FuneraliPage {
   isGiorniOpen = false; //true se la barra dei giorni è aperta
   isSepoltura = false; //controlla se ci troviamo in schermata funerali o sepoltura
   linkMappa = "https://www.google.com/maps/search/?api=1&query="; //link a maps
-
+string = JSON.stringify({
+  dataMorte:"morto il:",
+  dataFunerale:"In data:",
+  oraMorte:"Alle ore:",
+  luogoFunerale:"il funerale sara' celebrato presso:",
+  mappa:"Mappa",
+  condividi:"Condividi"
+})
   vetDefunti: TipoDefunto[] = [];
   vetFunerali: TipoFunerale[] = [];
 
   date = new Date(); //data odierna
 
-  constructor(private social: SocialSharing) { }
+  constructor(private social: SocialSharing, private datiService: DatiService ) { }
 
   ngOnInit() {
     this.vetFunerali.push(this.Funerale); //aggiunti per test
     this.vetFunerali.push(this.Funerale);
     this.vetDefunti.push(this.Defunto);
-    document.getElementById("titleSepoltura").style.fontWeight = "300"; 
-    document.getElementById("titleFunerali").style.fontWeight = "600"; //evidenzia il titolo dei funerali
+    // document.getElementById("titleSepoltura").style.fontWeight = "300"; 
+    // document.getElementById("titleFunerali").style.fontWeight = "600"; //evidenzia il titolo dei funerali
     document.getElementById("ricercaNome").style.display = "none"; //nasconde la ricerca per nome
     document.getElementById("barraGiorni").style.height = "0px"; //nasconde la barra dei giorni
     document.getElementById("data").innerHTML = this.GetFormattedData();
-    document.getElementById("btnOpen").innerHTML = '<ion-icon color="dark" name="search"></ion-icon>'; //imposta come svg in alto a destra la lente
-
+    // document.getElementById("btnOpen").innerHTML = '<ion-icon color="dark" name="search"></ion-icon>'; //imposta come svg in alto a destra la lente
+    this.CaricaDati();
+    
   }
-
+  sendParam(item){
+    return JSON.stringify(item);
+  }
+yyyymmdd(date: Date):string {
+    var mm = date.getMonth() + 1; // getMonth() is zero-based
+    var dd = date.getDate();
+  
+    return [date.getFullYear(),
+            (mm>9 ? '' : '0') + mm,
+            (dd>9 ? '' : '0') + dd
+           ].join('');
+  };
   //restituisce la data formattata
   GetFormattedData() {
     return this.date.getDate() + "/" + this.date.getMonth() + "/" + this.date.getFullYear();
@@ -131,11 +152,18 @@ export class FuneraliPage {
   //test per l'infinity scroll
   CaricaDati(){
     //aggiungere controllo sulla variabile isSepoltura
-    this.vetFunerali.push(this.Funerale);
-    this.vetFunerali.push(this.Funerale);
-    this.vetFunerali.push(this.Funerale);
-    this.vetFunerali.push(this.Funerale);
-    this.infiniteScroll.complete();
+    // this.vetFunerali.push(this.Funerale);
+    // this.vetFunerali.push(this.Funerale);
+    // this.vetFunerali.push(this.Funerale);
+    // this.vetFunerali.push(this.Funerale);
+    let startDate = new Date();
+    var pastDate = startDate.getDate() - 7;
+    startDate.setDate(pastDate);
+    this.datiService.getDati(this.yyyymmdd(startDate)).then((res)=> {
+      console.log(res);
+      this.vetFunerali = res;
+    })
+    // this.infiniteScroll.complete();
   }
 
   //chiude la ricerca

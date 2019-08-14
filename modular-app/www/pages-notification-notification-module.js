@@ -77,7 +77,7 @@ var NotificationPageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header no-border>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-back-button></ion-back-button>\n    </ion-buttons>\n    <ion-title>\n      {{'NOTIFY' | translate}}\n    </ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content padding>\n    <ion-list no-lines *ngIf=\"showStreets\">\n        <div *ngFor=\"let s of showStreets\">\n          <ion-card [id]=\"s.id\">\n            <ion-card-content>\n              <div class=\"left\">\n                <h1>{{s.streetName}}</h1>\n              </div>\n              <div class=\"right\">\n                <ion-toggle [id]=\"'tog-' + s.idNumber\" (ionChange)=\"toggle($event)\" [value]=\"s.streetName\" checked></ion-toggle>\n              </div>\n              <p style=\"color:green;\" [id]=\"'not-' + s.idNumber\" class=\"notification\">{{'NOTIFY-ENA' | translate}}</p>\n            </ion-card-content>\n          </ion-card>\n        </div>\n      </ion-list>\n</ion-content>\n"
+module.exports = "<ion-header >\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-back-button></ion-back-button>\n    </ion-buttons>\n    <ion-title>\n      {{'NOTIFY' | translate}}\n    </ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content padding>\n  <ion-fab vertical=\"bottom\" horizontal=\"end\" slot=\"fixed\">\n    <ion-fab-button class=\"fab-notification\" [routerLink]=\"['/ps-search']\">\n      <ion-icon name=\"add\"></ion-icon>\n    </ion-fab-button>\n\n  </ion-fab>\n  <ion-list no-lines *ngIf=\"showStreets\">\n    <div *ngFor=\"let s of showStreets\">\n      <div [id]=\"s.id\">\n        <div>\n          <div class=\"left\" (click)=\"openStreetDetail(s)\">\n              <div class=\"interaction result\">{{s.streetName}}</div>\n              <div class=\"interaction sub-result\">{{s.notes}}</div>\n            </div>\n          <div class=\"right\" (click)=\"toggleNotification(s)\">\n              <ion-icon class=\"interaction icon-notification\" name=\"notifications\" *ngIf=\"isEnabled(s); else disabled\"></ion-icon>\n              <ng-template #disabled>\n                <ion-icon class=\"interaction icon-notification\" name=\"notifications-outline\"></ion-icon>\n              </ng-template>\n            </div>\n          </div>\n      </div>\n    </div>\n  </ion-list>\n</ion-content>"
 
 /***/ }),
 
@@ -88,7 +88,7 @@ module.exports = "<ion-header no-border>\n  <ion-toolbar>\n    <ion-buttons slot
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "ion-card {\n  background: white !important; }\n\n.left {\n  float: left;\n  width: 75%;\n  padding-bottom: 5%; }\n\n.right {\n  float: right;\n  vertical-align: middle; }\n\n.notification {\n  text-align: center; }\n\n.left h1 {\n  margin-top: 15%; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL2NoaW44L0RvY3VtZW50cy93b3JrL21vZHVsYXJBcHAvbW9kdWxhci1hcHAvc3JjL2FwcC9tb2R1bGUtcHVsc3RyYWRlL3BhZ2VzL25vdGlmaWNhdGlvbi9ub3RpZmljYXRpb24ucGFnZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksNkJBQTRCLEVBQy9COztBQUNEO0VBQ0ksWUFBVztFQUNYLFdBQVU7RUFDVixtQkFBa0IsRUFDckI7O0FBQ0Q7RUFDSSxhQUFZO0VBQ1osdUJBQXNCLEVBQ3pCOztBQUNEO0VBQ0ksbUJBQWtCLEVBQ3JCOztBQUNEO0VBQ0ksZ0JBQWMsRUFDakIiLCJmaWxlIjoic3JjL2FwcC9tb2R1bGUtcHVsc3RyYWRlL3BhZ2VzL25vdGlmaWNhdGlvbi9ub3RpZmljYXRpb24ucGFnZS5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiaW9uLWNhcmQge1xuICAgIGJhY2tncm91bmQ6IHdoaXRlICFpbXBvcnRhbnQ7XG59XG4ubGVmdCB7XG4gICAgZmxvYXQ6IGxlZnQ7XG4gICAgd2lkdGg6IDc1JTtcbiAgICBwYWRkaW5nLWJvdHRvbTogNSU7XG59XG4ucmlnaHQge1xuICAgIGZsb2F0OiByaWdodDtcbiAgICB2ZXJ0aWNhbC1hbGlnbjogbWlkZGxlO1xufVxuLm5vdGlmaWNhdGlvbiB7XG4gICAgdGV4dC1hbGlnbjogY2VudGVyO1xufVxuLmxlZnQgaDEge1xuICAgIG1hcmdpbi10b3A6MTUlO1xufSJdfQ== */"
+module.exports = "ion-card {\n  background: white !important; }\n\n.left {\n  float: left;\n  width: 75%;\n  padding-bottom: 5%; }\n\n.right {\n  float: right;\n  vertical-align: middle; }\n\n.notification {\n  text-align: center; }\n\n.interaction {\n  color: #11B3EF !important; }\n\n.icon-notification {\n  font-size: 30px; }\n\n.fab-notification {\n  --background:#11B3EF!important; }\n\n.result {\n  font-size: 30px; }\n\n.sub-result {\n  font-size: 15px; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL2NoaW44L0RvY3VtZW50cy93b3JrL21vZHVsYXJBcHAvbW9kdWxhci1hcHAvc3JjL2FwcC9tb2R1bGUtcHVsc3RyYWRlL3BhZ2VzL25vdGlmaWNhdGlvbi9ub3RpZmljYXRpb24ucGFnZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksNkJBQTRCLEVBQy9COztBQUNEO0VBQ0ksWUFBVztFQUNYLFdBQVU7RUFDVixtQkFBa0IsRUFDckI7O0FBQ0Q7RUFDSSxhQUFZO0VBQ1osdUJBQXNCLEVBQ3pCOztBQUNEO0VBQ0ksbUJBQWtCLEVBQ3JCOztBQUlEO0VBQ0ksMEJBQXdCLEVBQzNCOztBQUNEO0VBQ0ksZ0JBQWUsRUFDbEI7O0FBQ0Q7RUFDSSwrQkFBYSxFQUNoQjs7QUFDRDtFQUNJLGdCQUFlLEVBQ2xCOztBQUNEO0VBQ0ksZ0JBQWUsRUFDbEIiLCJmaWxlIjoic3JjL2FwcC9tb2R1bGUtcHVsc3RyYWRlL3BhZ2VzL25vdGlmaWNhdGlvbi9ub3RpZmljYXRpb24ucGFnZS5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiaW9uLWNhcmQge1xuICAgIGJhY2tncm91bmQ6IHdoaXRlICFpbXBvcnRhbnQ7XG59XG4ubGVmdCB7XG4gICAgZmxvYXQ6IGxlZnQ7XG4gICAgd2lkdGg6IDc1JTtcbiAgICBwYWRkaW5nLWJvdHRvbTogNSU7XG59XG4ucmlnaHQge1xuICAgIGZsb2F0OiByaWdodDtcbiAgICB2ZXJ0aWNhbC1hbGlnbjogbWlkZGxlO1xufVxuLm5vdGlmaWNhdGlvbiB7XG4gICAgdGV4dC1hbGlnbjogY2VudGVyO1xufVxuLmxlZnQgaDEge1xuICAgIC8vIG1hcmdpbi10b3A6MTUlO1xufVxuLmludGVyYWN0aW9uIHtcbiAgICBjb2xvcjogIzExQjNFRiFpbXBvcnRhbnQ7XG59XG4uaWNvbi1ub3RpZmljYXRpb257XG4gICAgZm9udC1zaXplOiAzMHB4O1xufVxuLmZhYi1ub3RpZmljYXRpb257XG4gICAgLS1iYWNrZ3JvdW5kOiMxMUIzRUYhaW1wb3J0YW50O1xufVxuLnJlc3VsdHtcbiAgICBmb250LXNpemU6IDMwcHg7XG59XG4uc3ViLXJlc3VsdHtcbiAgICBmb250LXNpemU6IDE1cHg7XG59Il19 */"
 
 /***/ }),
 
@@ -108,6 +108,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ngx_translate_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ngx-translate/core */ "./node_modules/@ngx-translate/core/fesm5/ngx-translate-core.js");
 /* harmony import */ var src_app_services_config_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/services/config.service */ "./src/app/services/config.service.ts");
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -123,19 +124,24 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var NotificationPage = /** @class */ (function () {
-    function NotificationPage(notSrv, translate, config, mapSrv, platform) {
+    function NotificationPage(notSrv, translate, config, mapSrv, platform, router) {
         this.notSrv = notSrv;
         this.translate = translate;
         this.config = config;
         this.mapSrv = mapSrv;
         this.platform = platform;
+        this.router = router;
         this.showStreets = []; /** Streets object for page view */
         this.language = window[this.config.getAppModuleName()]['language'];
         this.translate.use(this.language);
     }
     NotificationPage.prototype.ngOnInit = function () {
+    };
+    NotificationPage.prototype.ionViewDidEnter = function () {
         this.notif = this.notSrv.getNotStreets();
+        this.notifMap = this.convertToMapId(this.notSrv.getNotStreets());
         this.streets = this.mapSrv.getData();
         this.buildShowNot();
     };
@@ -144,12 +150,36 @@ var NotificationPage = /** @class */ (function () {
      */
     NotificationPage.prototype.buildShowNot = function () {
         var tmp = [];
-        this.notif.forEach(function (s) {
-            if (tmp.filter(function (t) { return t.streetName === s.streetName; }).length === 0) {
-                tmp.push(s);
-            }
-        });
+        if (this.notif) {
+            this.notif.forEach(function (s) {
+                if (tmp.filter(function (t) { return t.idNumber === s.idNumber; }).length === 0) {
+                    tmp.push(s);
+                }
+            });
+        }
         this.showStreets = tmp;
+    };
+    NotificationPage.prototype.toggleNotification = function (street) {
+        if (this.notifMap[street.idNumber] != undefined) {
+            this.notSrv.disableNotification(street);
+        }
+        else {
+            this.notSrv.setNotification(street);
+        }
+        this.notifMap = this.convertToMapId(this.notSrv.getNotStreets());
+    };
+    NotificationPage.prototype.convertToMapId = function (array) {
+        var map = {};
+        if (array)
+            array.forEach(function (el) {
+                map[el.idNumber] = el;
+            });
+        return map;
+    };
+    NotificationPage.prototype.isEnabled = function (street) {
+        if (street)
+            return this.notifMap[street.idNumber] != undefined;
+        return false;
     };
     /**
      * Enable or disable notifications for the choosen street.
@@ -189,6 +219,9 @@ var NotificationPage = /** @class */ (function () {
             }
         });
     };
+    NotificationPage.prototype.openStreetDetail = function (s) {
+        this.router.navigate(['street-detail'], { queryParams: { street: s.idNumber } });
+    };
     NotificationPage = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'app-notification',
@@ -199,7 +232,8 @@ var NotificationPage = /** @class */ (function () {
             _ngx_translate_core__WEBPACK_IMPORTED_MODULE_3__["TranslateService"],
             src_app_services_config_service__WEBPACK_IMPORTED_MODULE_4__["ConfigService"],
             _services_map_service__WEBPACK_IMPORTED_MODULE_1__["MapService"],
-            _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["Platform"]])
+            _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["Platform"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_6__["Router"]])
     ], NotificationPage);
     return NotificationPage;
 }());

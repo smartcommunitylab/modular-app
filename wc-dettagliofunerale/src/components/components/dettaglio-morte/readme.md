@@ -7,11 +7,10 @@
 
 ## Properties
 
-| Property     | Attribute     | Description | Type           | Default     |
-| ------------ | ------------- | ----------- | -------------- | ----------- |
-| `defunto`    | --            |             | `TipoDefunto`  | `undefined` |
-| `funerale`   | --            |             | `TipoFunerale` | `undefined` |
-| `isFunerale` | `is-funerale` |             | `boolean`      | `undefined` |
+| Property   | Attribute  | Description | Type     | Default     |
+| ---------- | ---------- | ----------- | -------- | ----------- |
+| `funerale` | `funerale` |             | `string` | `undefined` |
+| `string`   | `string`   |             | `string` | `undefined` |
 
 
 ## Events

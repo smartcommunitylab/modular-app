@@ -41,6 +41,11 @@
               },
               {
                 "glob": "**/*",
+                "input": "src/app/module-funerali/assets/",
+                "output": "assets/funerali"
+              },
+              {
+                "glob": "**/*",
                 "input": "./node_modules/leaflet/dist/images",
                 "output": "leaflet/"
               }, {

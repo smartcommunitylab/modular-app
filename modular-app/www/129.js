@@ -1,9 +1,9 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[129],{
 
-/***/ "./node_modules/wcs-dettagliofunerale/dist/esm/es5/polyfills/array.js":
-/*!****************************************************************************!*\
-  !*** ./node_modules/wcs-dettagliofunerale/dist/esm/es5/polyfills/array.js ***!
-  \****************************************************************************/
+/***/ "../wc-dettagliofunerale/dist/esm/es5/polyfills/array.js":
+/*!***************************************************************!*\
+  !*** ../wc-dettagliofunerale/dist/esm/es5/polyfills/array.js ***!
+  \***************************************************************/
 /*! exports provided: applyPolyfill */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 

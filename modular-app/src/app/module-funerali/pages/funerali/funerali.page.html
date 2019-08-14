@@ -1,6 +1,11 @@
 <ion-header>
     <ion-toolbar>
-        <ion-grid>
+            <ion-searchbar (ionChange)="Ricerca()" placeholder="cerca nominativo" [(ngModel)]="name" clearIcon="false">
+                </ion-searchbar>
+        <ion-buttons class="interactive" slot="start">
+            <ion-back-button class="interaction"></ion-back-button>
+        </ion-buttons>
+        <!-- <ion-grid>
             <ion-row align-items-center>
                 <ion-col size="4" (click)="Funerali()">
                     <ion-title float-left id="titleFunerali">Funerali</ion-title>
@@ -14,14 +19,14 @@
                     </ion-button>
                 </ion-col>
             </ion-row>
-        </ion-grid>
+        </ion-grid> -->
     </ion-toolbar>
 
     <ion-row justify-content-center align-items-center id="ricercaNome">
         <ion-button id="buttonGiorni" icon-only color="light" (click)="OpenBarraGiorni()">
             <ion-icon name="calendar"></ion-icon>
         </ion-button>
-        <ion-searchbar (ionChange)="Ricerca()" placeholder="cerca nominativo" [(ngModel)]="name" clearIcon="false"></ion-searchbar>
+        <!-- <ion-searchbar (ionChange)="Ricerca()" placeholder="cerca nominativo" [(ngModel)]="name" clearIcon="false"></ion-searchbar> -->
     </ion-row>
 
     <ion-row justify-content-center align-items-center id="barraGiorni">
@@ -43,11 +48,11 @@
     <ion-icon id="buttonTop" (click)="GoOnTop()" color="dark" name="arrow-dropup"></ion-icon>
     <div id="funerali">
         <div *ngFor="let item of vetFunerali; let i = index;">
-            <dettaglio-morte (indicazioni)="IndicazioniFunerali(i)" (condividi)="CondividiFunerali(i)" [funerale]="item"
+            <dettaglio-morte (indicazioni)="IndicazioniFunerali(i)" (condividi)="CondividiFunerali(i)" [funerale]="sendParam(item)" [string]="string"
                 isFunerale={{true}}></dettaglio-morte>
         </div>
     </div>
-    <div id="sepolture" style="display: none;">
+    <!-- <div id="sepolture" style="display: none;">
         <div *ngFor="let item of vetDefunti; let i = index;">
             <dettaglio-morte (indicazioni)="IndicazioniSepolture(i)" (condividi)="CondividSepolture(i)" [defunto]="item"
                 isFunerale={{false}}></dettaglio-morte>
@@ -55,8 +60,9 @@
     </div>
 
     <ion-infinite-scroll threshold="100px" (ionInfinite)="CaricaDati()" id="scroll">
-        <ion-infinite-scroll-content loadingSpinner="crescent" loadingText="Sto caricando..."></ion-infinite-scroll-content>
-    </ion-infinite-scroll>
+        <ion-infinite-scroll-content loadingSpinner="crescent" loadingText="Sto caricando...">
+        </ion-infinite-scroll-content>
+    </ion-infinite-scroll> -->
 
 
 </ion-content>

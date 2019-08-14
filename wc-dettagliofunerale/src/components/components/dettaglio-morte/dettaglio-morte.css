@@ -1,161 +1,209 @@
 @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap');
 
-.component{
-    color: #707070;
-    font-family: 'Source Sans Pro', sans-serif;
+.component {
+  color: #707070;
+  font-family: 'Source Sans Pro', sans-serif;
+  background-color: #e3e3e3;
 }
 
-.bordo{
-    width: 96%;
-    height: var(--height);
-    margin-left: 2%;
-    border: 1px solid #707070;
-    background: #ffff;
-    color: #707070;
-    font-weight: 300;
-    overflow: visible;
-    transition: all 0.2s;
-    margin-top: 25px;
+.bordo {
+  width: 96%;
+  height: var(--height);
+  margin-left: 2%;
+  border: 1px solid #707070;
+  background: #ffff;
+  color: #707070;
+  font-weight: 300;
+  overflow: visible;
+  transition: all 0.2s;
+  margin-top: 25px;
 }
 
-.container{
-    margin-left: 3%;
-    width: 94%;
+.container {
+  margin-left: 3%;
+  width: 94%;
 }
 
-.container *{
-    margin-bottom: 5px;
+.horizontal-line {
+  height: 1px;
+  background-color: #707070;
+  width: 70%;
+  margin: auto;
 }
 
-.container h1{
-    font-size: 30px;
-    padding-bottom: 7px;
-    border-bottom: 1px solid #707070;
+.container * {
+  margin-bottom: 5px;
 }
 
-#right{
-    width: 47%;
-    position: absolute;
+.container h1 {
+  font-size: 30px;
+  padding-bottom: 7px;
+  border-bottom: 1px solid #707070;
 }
 
-#left{
-    width: 47%;
-    left: 47%;
-    position: absolute;
+#right {
+  width: 47%;
+  position: absolute;
 }
 
-.colonna p{
-    margin-top: 10px;
-    font-size: 19px;
+#left {
+  width: 47%;
+  left: 47%;
+  position: absolute;
 }
 
-.colonna h2{
-    font-size: 21px;
-    margin-top: 5px;
+.colonna p {
+  margin-top: 10px;
+  font-size: 19px;
 }
 
-.riga{
-    height: 75px;
-    position: relative;
+.colonna h2 {
+  font-size: 21px;
+  margin-top: 5px;
 }
 
-#tipoEvento{
-    border-top: 1px solid #707070;
-    padding-top: 10px;
-    margin-top: 0px;
-    font-size: 18px;
+.riga {
+  height: 75px;
+  position: relative;
 }
 
-#titoloLuogo{
-    margin-top: 17px;
-    font-size: 25px;
+#tipoEvento {
+  border-top: 1px solid #707070;
+  padding-top: 10px;
+  margin-top: 0px;
+  font-size: 18px;
 }
 
-#dettaglioSepoltura{
-    margin-top: 17px;
-    font-size: 19px;
+#titoloLuogo {
+  margin-top: 17px;
+  font-size: 25px;
 }
 
-.esteso{
-    visibility: var(--visibilità-estesa);
-    transition-delay: var(--transition-delay);
+#dettaglioSepoltura {
+  margin-top: 17px;
+  font-size: 19px;
 }
 
-.icone{
-    margin-top: 35px;
-    height: 80px;
-}
-.icone div{
-    text-align: center;
-    position: absolute;
+.esteso {
+  visibility: var(--visibilità-estesa);
+  transition-delay: var(--transition-delay);
 }
 
-.icone svg{
-    width: 45px;
-    height: 35px;
-    margin-bottom: 0px;
+.icone {
+  margin-top: 35px;
+  height: 80px;
 }
 
-.icone p{
-    margin-top: 0px; 
-    font-size: 18px;   
+.icone div {
+  text-align: center;
+  /* position: absolute; */
 }
 
-#secondaIcona{
-    left: 42%;
+.icone svg {
+  width: 45px;
+  height: 35px;
+  margin-bottom: 0px;
+  vertical-align: middle;
 }
 
-.chiudi{
-    margin-top: -12px;
-    text-align: center;
+.icone p {
+  margin-top: 0px;
+  font-size: 18px;
 }
 
-.chiudi p{
-    font-size: 19px;
-    font-weight: 400;
-    width: 80%;
-    margin-left: 10%;
-    margin-bottom: 0px;
+#secondaIcona {
+  left: 42%;
 }
 
-.chiudi svg{
-    margin-top: -25px;
-    width: 80px;
-    height: 80px;
+.chiudi {
+  margin-top: -12px;
+  text-align: center;
 }
 
-#apri{
-    visibility: var(--visibiltà-compatta);
-    position: absolute;
-    width: 94%;
-    margin-left: -3%;
-    margin-top: -15px;
-    text-align: center; 
+.chiudi p {
+  font-size: 19px;
+  font-weight: 400;
+  width: 80%;
+  margin-left: 10%;
+  margin-bottom: 0px;
 }
 
-#apri p{
-    font-size: 19px;
-    font-weight: 400;
-    width: 100%;
-    margin-bottom: 0px;
+.chiudi svg {
+  margin-top: -25px;
+  width: 80px;
+  height: 80px;
 }
 
-#apri svg{
-    margin-top: -30px;
-    width: 80px;
-    height: 80px;
+#apri {
+  visibility: var(--visibiltà-compatta);
+  position: absolute;
+  width: 94%;
+  margin-left: -3%;
+  margin-top: -15px;
+  text-align: center;
+}
+
+#apri p {
+  font-size: 19px;
+  font-weight: 400;
+  width: 100%;
+  margin-bottom: 0px;
+}
+
+#apri svg {
+  margin-top: -30px;
+  width: 80px;
+  height: 80px;
 }
 
 
-#comune{
-    margin-top: -5px;
+#comune {
+  margin-top: -5px;
 }
 
-.funerale{
-    margin-top: 15px;
-    margin-bottom: -8px;
+.funerale {
+  margin-top: 15px;
+  margin-bottom: -8px;
 }
 
-.pFunerale{
-    font-size: 19px;
+.pFunerale {
+  font-size: 19px;
+}
+
+.nome {
+  font-size: 20px;
+  width: 100%;
+  text-align: center;
+  padding: 8px;
+}
+
+.label {
+  color: #9f9f9f;
+}
+
+.dato {
+  color: #707070;
+
+}
+
+.azioni {
+  display: inline-block;
+  width: 40%;
+  margin: 10px;
+  background-color: white;
+  border-radius: 8px;
+  border: 1px solid #11b3ef;
+}
+
+.azione-label {
+  color: #11b3ef;
+  text-align: center;
+  width: 100%;
+  display: inline;
+
+}
+
+.data-label {
+  display: inline-block;
+  width: 50%;
 }

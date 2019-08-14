@@ -78,7 +78,7 @@ var HomePagePSModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header no-border>\n    <ion-searchbar class=\"search-event\" style=\"display: none\" showCancelButton animated (search)=\"toggleSearch()\"\n    (ionInput)=\"searchChanged($event)\" (ionCancel)=\"toggleSearch()\"></ion-searchbar>\n  <ion-toolbar>\n\n    <ion-buttons slot=\"start\">\n      <ion-back-button class=\"interaction\"></ion-back-button>\n    </ion-buttons>\n    <ion-buttons slot=\"end\">\n      <ion-button [routerLink]=\"['/ps-notification']\" >\n          <ion-icon name=\"notifications\"></ion-icon>\n        </ion-button>\n      <ion-button (click)=\"toggleSearch()\">\n        <ion-icon name=\"search\"></ion-icon>\n      </ion-button>\n    </ion-buttons>\n    <ion-title>\n        {{'HOME' | translate}}\n      </ion-title>\n  </ion-toolbar>\n<!--   \n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-back-button></ion-back-button>\n    </ion-buttons>\n    <ion-title>\n      {{'HOME' | translate}}\n    </ion-title>\n  </ion-toolbar> -->\n</ion-header>\n\n\n<!-- FLOATING BUTTON -->\n<!-- <ion-fab class=\"fixed\" vertical=\"bottom\" horizontal=\"end\" slot=\"fixed\">\n  <ion-fab-button color=\"danger\" [routerLink]=\"['/ps-notification']\" routerDirection=\"forward\">\n    <ion-icon name=\"notifications\"></ion-icon>\n  </ion-fab-button>\n</ion-fab> -->\n<!-- ---------------------------- -->\n\n\n<!-- TODO: LINK IN POPUP PER PAGINA \"RICERCA\" CONTENENTE STRADA E LISTA PULIZIE STRADA -->\n<ion-row>\n  <ion-col>\n    <ion-item class=\"calButton\" >\n      <ion-icon name=\"skip-backward\" (click)=\"firstDayBck()\"></ion-icon>\n      <ion-icon name=\"arrow-back\" (click)=\"dayBack()\"></ion-icon>\n    </ion-item>\n  </ion-col>\n  <ion-col>\n    <ion-item>\n      <ion-datetime (ionChange)=\"setDate($event)\" class=\"date\" display-format=\"DD-MM-YYYY\" picker-format=\"DD MM YYYY\" [value]=\"showDate\"></ion-datetime>\n    </ion-item>\n  </ion-col>\n  <ion-col>\n    <ion-item class=\"calButton\">\n      <ion-icon name=\"arrow-forward\" (click)=\"dayForward()\"></ion-icon>\n      <ion-icon name=\"skip-forward\" (click)=\"firstDayFwd()\"></ion-icon>\n    </ion-item>\n  </ion-col>\n</ion-row>\n\n\n<ion-content padding>\n  <div class=\"map\">\n    <div id=\"home-map\"></div>\n  </div>\n</ion-content>"
+module.exports = "<ion-header no-border>\n  <ion-searchbar class=\"search-event\" style=\"display: none\" showCancelButton animated (search)=\"toggleSearch()\"\n    (ionInput)=\"searchChanged($event)\" (ionCancel)=\"toggleSearch()\"></ion-searchbar>\n  <ion-toolbar>\n\n    <ion-buttons class=\"interactive\" slot=\"start\">\n      <ion-back-button class=\"interaction\"></ion-back-button>\n    </ion-buttons>\n    <ion-buttons slot=\"end\">\n      <ion-button [routerLink]=\"['/ps-notification']\">\n        <ion-icon class=\"icon-bar\" name=\"notifications\"></ion-icon>\n      </ion-button>\n      <ion-button [routerLink]=\"['/ps-search']\">\n        <ion-icon class=\"icon-bar\" name=\"search\"></ion-icon>\n      </ion-button>\n    </ion-buttons>\n    <ion-title>\n      {{'HOME' | translate}}\n    </ion-title>\n  </ion-toolbar>\n\n</ion-header>\n<ion-row>\n  <ion-col  class=\"ion-text-start interaction \" size=\"2\">\n    <ion-icon  name=\"arrow-back\" class=\"icon-home\" (click)=\"dayBack()\"></ion-icon>\n  </ion-col>\n  <ion-col class=\"ion-text-center\" size=\"8\">\n    <ion-datetime (ionChange)=\"setDate($event)\" class=\"date \" display-format=\"DD-MM-YYYY\" picker-format=\"DD MM YYYY\"\n      [value]=\"showDate\"></ion-datetime>\n  </ion-col>\n  <ion-col class=\"ion-text-end interaction\" size=\"2\">\n    <ion-icon name=\"arrow-forward\" class=\"icon-home\"  (click)=\"dayForward()\"></ion-icon>\n  </ion-col>\n</ion-row>\n<ion-row>\n  <ion-col class=\"ion-text-start interaction\" size=\"2\">\n    <ion-icon class=\"icon-home\"  name=\"rewind\" (click)=\"firstDayBck()\" *ngIf=\"afterFirstDayForward() && past\"></ion-icon>\n  </ion-col>\n  <ion-col class=\"ion-text-center interaction\" size=\"8\">\n    {{labelResult}} {{'clean_label' | translate}}\n  </ion-col>\n  <ion-col class=\"ion-text-end interaction\" size=\"2\">\n    <ion-icon  class=\"icon-home\"  name=\"fastforward\" (click)=\"firstDayFwd()\" *ngIf=\"future\"></ion-icon>\n  </ion-col>\n</ion-row>\n\n\n<ion-content>\n  <div class=\"map\">\n    <div id=\"home-map\"></div>\n  </div>\n</ion-content>"
 
 /***/ }),
 
@@ -89,7 +89,7 @@ module.exports = "<ion-header no-border>\n    <ion-searchbar class=\"search-even
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "ion-button {\n  margin-bottom: 5%; }\n\n.map {\n  height: 100%;\n  border: 1px solid black;\n  margin-bottom: 5%; }\n\n#home-map {\n  width: 100%;\n  height: 100%; }\n\nion-item * {\n  margin: 0 auto; }\n\nion-item {\n  border-bottom: none !important;\n  border-width: 0px !important; }\n\n.leaflet-control .mapSearch {\n  width: 25px;\n  height: 25px; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL2NoaW44L0RvY3VtZW50cy93b3JrL21vZHVsYXJBcHAvbW9kdWxhci1hcHAvc3JjL2FwcC9tb2R1bGUtcHVsc3RyYWRlL3BhZ2VzL2hvbWUtcHMvaG9tZS1wcy5wYWdlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDSSxrQkFBaUIsRUFDcEI7O0FBQ0Q7RUFDSSxhQUFZO0VBQ1osd0JBQXVCO0VBQ3ZCLGtCQUFnQixFQUNuQjs7QUFDRDtFQUNJLFlBQVc7RUFDWCxhQUFZLEVBQ2Y7O0FBQ0Q7RUFDSSxlQUFjLEVBQ2pCOztBQUNEO0VBQ0ksK0JBQThCO0VBQzlCLDZCQUE0QixFQUMvQjs7QUFDRDtFQUNJLFlBQVc7RUFDWCxhQUFZLEVBQ2YiLCJmaWxlIjoic3JjL2FwcC9tb2R1bGUtcHVsc3RyYWRlL3BhZ2VzL2hvbWUtcHMvaG9tZS1wcy5wYWdlLnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyJpb24tYnV0dG9uIHtcbiAgICBtYXJnaW4tYm90dG9tOiA1JTtcbn1cbi5tYXAge1xuICAgIGhlaWdodDogMTAwJTtcbiAgICBib3JkZXI6IDFweCBzb2xpZCBibGFjaztcbiAgICBtYXJnaW4tYm90dG9tOjUlO1xufVxuI2hvbWUtbWFwIHtcbiAgICB3aWR0aDogMTAwJTtcbiAgICBoZWlnaHQ6IDEwMCU7XG59XG5pb24taXRlbSAqe1xuICAgIG1hcmdpbjogMCBhdXRvO1xufVxuaW9uLWl0ZW0ge1xuICAgIGJvcmRlci1ib3R0b206IG5vbmUgIWltcG9ydGFudDtcbiAgICBib3JkZXItd2lkdGg6IDBweCAhaW1wb3J0YW50O1xufVxuLmxlYWZsZXQtY29udHJvbCAubWFwU2VhcmNoIHtcbiAgICB3aWR0aDogMjVweDtcbiAgICBoZWlnaHQ6IDI1cHg7XG59XG4iXX0= */"
+module.exports = "ion-button {\n  margin-bottom: 5%; }\n\n.map {\n  height: 100%;\n  border: 1px solid black; }\n\n#home-map {\n  width: 100%;\n  height: 100%; }\n\nion-item * {\n  margin: 0 auto; }\n\nion-item {\n  border-bottom: none !important;\n  border-width: 0px !important; }\n\n.leaflet-control .mapSearch {\n  width: 25px;\n  height: 25px; }\n\n.interaction {\n  color: #11B3EF !important; }\n\n.date {\n  background-color: #11B3EF !important;\n  color: white;\n  border-radius: 4px; }\n\n.icon-home {\n  font-size: 20px;\n  text-align: center;\n  width: 100%;\n  height: 100%; }\n\n.icon-bar {\n  font-size: 30px; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL2NoaW44L0RvY3VtZW50cy93b3JrL21vZHVsYXJBcHAvbW9kdWxhci1hcHAvc3JjL2FwcC9tb2R1bGUtcHVsc3RyYWRlL3BhZ2VzL2hvbWUtcHMvaG9tZS1wcy5wYWdlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQ0E7RUFDSSxrQkFBaUIsRUFDcEI7O0FBQ0Q7RUFDSSxhQUFZO0VBQ1osd0JBQXVCLEVBRTFCOztBQUNEO0VBQ0ksWUFBVztFQUNYLGFBQVksRUFDZjs7QUFDRDtFQUNJLGVBQWMsRUFDakI7O0FBQ0Q7RUFDSSwrQkFBOEI7RUFDOUIsNkJBQTRCLEVBQy9COztBQUNEO0VBQ0ksWUFBVztFQUNYLGFBQVksRUFDZjs7QUFDRDtFQUNJLDBCQUF3QixFQUMzQjs7QUFDRDtFQUNJLHFDQUFtQztFQUNuQyxhQUFZO0VBQ1osbUJBQWtCLEVBQ3JCOztBQUNEO0VBQ0ksZ0JBQWU7RUFDZixtQkFBa0I7RUFDbEIsWUFBVztFQUNYLGFBQVksRUFDZjs7QUFDRDtFQUNJLGdCQUFlLEVBRWxCIiwiZmlsZSI6InNyYy9hcHAvbW9kdWxlLXB1bHN0cmFkZS9wYWdlcy9ob21lLXBzL2hvbWUtcHMucGFnZS5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiXG5pb24tYnV0dG9uIHtcbiAgICBtYXJnaW4tYm90dG9tOiA1JTtcbn1cbi5tYXAge1xuICAgIGhlaWdodDogMTAwJTtcbiAgICBib3JkZXI6IDFweCBzb2xpZCBibGFjaztcbiAgICAvLyBtYXJnaW4tYm90dG9tOjUlO1xufVxuI2hvbWUtbWFwIHtcbiAgICB3aWR0aDogMTAwJTtcbiAgICBoZWlnaHQ6IDEwMCU7XG59XG5pb24taXRlbSAqe1xuICAgIG1hcmdpbjogMCBhdXRvO1xufVxuaW9uLWl0ZW0ge1xuICAgIGJvcmRlci1ib3R0b206IG5vbmUgIWltcG9ydGFudDtcbiAgICBib3JkZXItd2lkdGg6IDBweCAhaW1wb3J0YW50O1xufVxuLmxlYWZsZXQtY29udHJvbCAubWFwU2VhcmNoIHtcbiAgICB3aWR0aDogMjVweDtcbiAgICBoZWlnaHQ6IDI1cHg7XG59XG4uaW50ZXJhY3Rpb24ge1xuICAgIGNvbG9yOiAjMTFCM0VGIWltcG9ydGFudDtcbn1cbi5kYXRlIHtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiAjMTFCM0VGIWltcG9ydGFudDtcbiAgICBjb2xvcjogd2hpdGU7XG4gICAgYm9yZGVyLXJhZGl1czogNHB4O1xufVxuLmljb24taG9tZSB7XG4gICAgZm9udC1zaXplOiAyMHB4O1xuICAgIHRleHQtYWxpZ246IGNlbnRlcjtcbiAgICB3aWR0aDogMTAwJTtcbiAgICBoZWlnaHQ6IDEwMCU7XG59XG4uaWNvbi1iYXIge1xuICAgIGZvbnQtc2l6ZTogMzBweDtcblxufVxuIl19 */"
 
 /***/ }),
 
@@ -170,6 +170,7 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
 
 var HomePage = /** @class */ (function () {
     function HomePage(translate, config, router, geo, mapSrv, datePipe, route, util, toastCtrl) {
+        var _this_1 = this;
         this.translate = translate;
         this.config = config;
         this.router = router;
@@ -179,11 +180,44 @@ var HomePage = /** @class */ (function () {
         this.route = route;
         this.util = util;
         this.toastCtrl = toastCtrl;
-        this.myPos = {}; /** Current GPS location */
+        this.myPos = this.util.getDefaultPos();
+        this.past = true;
+        this.future = true;
         this.mapCenter = []; /** Coordinates of map center */
+        this.labelResult = 0;
+        this.today = new Date().setHours(0, 0, 0, 0);
         this.language = window[this.config.getAppModuleName()]['language'];
         this.translate.use(this.language);
+        /** Get translations for popup */
+        this.translate.get('NO-CLEANING').subscribe(function (s) {
+            _this_1.noCleaning = s;
+        });
+        this.translate.get('FOR').subscribe(function (s) {
+            _this_1.forStr = s;
+        });
+        this.translate.get('TO').subscribe(function (s) {
+            _this_1.to = s;
+        });
+        this.translate.get('IN-DATE').subscribe(function (s) {
+            _this_1.inDateStr = s;
+        });
+        this.translate.get('NO-PARKING-FROM').subscribe(function (s) {
+            _this_1.noPark = s;
+        });
+        this.translate.get('IN-ZONE').subscribe(function (s) {
+            _this_1.inZone = s;
+        });
+        this.translate.get('DETAILS').subscribe(function (s) {
+            _this_1.details = s;
+        });
+        this.translate.get('no_street_future').subscribe(function (s) {
+            _this_1.noStreetFuture = s;
+        });
+        this.translate.get('no_street_past').subscribe(function (s) {
+            _this_1.noStreetPast = s;
+        });
     }
+    ; /** Current GPS location */
     /**
      * Build center coordinates object `myPos` based on URL params, else use the GPS location
      * @param params URL Params
@@ -196,15 +230,57 @@ var HomePage = /** @class */ (function () {
             this.myPos.lat = coord[0].lat;
             this.myPos.long = coord[0].lng;
         }
-        else {
+        else if (window[this.config.getAppModuleName()]['geolocation']) {
             this.myPos = window[this.config.getAppModuleName()]['geolocation'];
         }
+        else
+            this.myPos = this.util.getDefaultPos();
     };
     /**
      * Set current date, get streets ordered by `cleaningDay` property, build map
      */
     HomePage.prototype.ngOnInit = function () {
         var _this_1 = this;
+        this.mapSrv.Init().then(function () {
+            _this_1.route.queryParams
+                .subscribe(function (params) {
+                _this_1.parseUrlParams(params);
+                _this_1.selectedDate = new Date();
+                _this_1.selectedDate.setHours(0, 0, 0, 0);
+                _this_1.showDate = _this_1.selectedDate.toISOString();
+                if (_this_1.myPos)
+                    _this_1.mapCenter = [_this_1.myPos.lat ? _this_1.myPos.lat : 0, _this_1.myPos.long ? _this_1.myPos.long : 0];
+                else
+                    _this_1.mapCenter = _this_1.mapSrv.getDefaultCenter();
+                _this_1.streets = _this_1.mapSrv.getData().sort(function (a, b) {
+                    return a.cleaningDay - b.cleaningDay;
+                });
+                _this_1.buildMap();
+            });
+        }, function (err) {
+            _this_1.translate.get('error_init').subscribe(function (s) {
+                _this_1.util.showErrorConnectionMessage(s);
+            });
+        });
+    };
+    HomePage.prototype.afterFirstDayForward = function () {
+        if (this.selectedDate)
+            return this.selectedDate.getTime() > this.today;
+        return false;
+    };
+    HomePage.prototype.ionViewDidEnter = function () {
+        var _this_1 = this;
+        setTimeout(function () {
+            if (_this_1.map)
+                _this_1.map.invalidateSize();
+        }, 500);
+    };
+    /**
+     * Reset center map coordinates
+     */
+    HomePage.prototype.ionViewWillLeave = function () {
+        var _this_1 = this;
+        this.myPos = {};
         this.mapSrv.Init().then(function () {
             _this_1.route.queryParams
                 .subscribe(function (params) {
@@ -221,14 +297,10 @@ var HomePage = /** @class */ (function () {
                 _this_1.buildMap();
             });
         }, function (err) {
-            _this_1.util.showErrorConnectionMessage();
+            _this_1.translate.get('error_init').subscribe(function (s) {
+                _this_1.util.showErrorConnectionMessage(s);
+            });
         });
-    };
-    /**
-     * Reset center map coordinates
-     */
-    HomePage.prototype.ionViewWillLeave = function () {
-        this.myPos = {};
     };
     /**
      * Go to another page
@@ -252,24 +324,24 @@ var HomePage = /** @class */ (function () {
         catch (_a) { } /** Reset map */
         var _this = this;
         /** Build custom "search" button and add it to map */
-        var searchControl = leaflet__WEBPACK_IMPORTED_MODULE_4___default.a.Control.extend({
-            options: {
-                position: 'topright'
-            },
-            onAdd: function (map) {
-                var container = leaflet__WEBPACK_IMPORTED_MODULE_4___default.a.DomUtil.create('div', 'leaflet-bar leaflet-control leaflet-control-custom');
-                container.style.backgroundColor = 'white';
-                container.style.width = '30px';
-                container.style.height = '30px';
-                container.style.borderRadius = '50%';
-                container.innerHTML = '<ion-icon style="width: 25px; height: 25px;" name="search"></ion-icon>';
-                container.onclick = function () {
-                    _this.router.navigate(['/ps-search']);
-                };
-                return container;
-            }
-        });
-        this.map = new leaflet__WEBPACK_IMPORTED_MODULE_4___default.a.Map('home-map', { zoomControl: false, attributionControl: false }).setView(this.mapCenter, 15);
+        // const searchControl = leaflet.Control.extend({
+        //   options: {
+        //     position: 'topright'
+        //   },
+        //   onAdd: function (map) {
+        //     const container = leaflet.DomUtil.create('div', 'leaflet-bar leaflet-control leaflet-control-custom');
+        //     container.style.backgroundColor = 'white';
+        //     container.style.width = '30px';
+        //     container.style.height = '30px';
+        //     container.style.borderRadius = '50%';
+        //     container.innerHTML = '<ion-icon style="width: 25px; height: 25px;" name="search"></ion-icon>';
+        //     container.onclick = function () {
+        //       _this.router.navigate(['/ps-search']);
+        //     };
+        //     return container;
+        //   }
+        // });
+        this.map = new leaflet__WEBPACK_IMPORTED_MODULE_4___default.a.Map('home-map', { zoomControl: true, attributionControl: false, dragging: true, tap: false }).setView(this.mapCenter, 15);
         /** Build polyline after drag */
         this.map.on('dragend', function (e) {
             this.mapCenter = [e.target.getCenter().lat, e.target.getCenter().lng];
@@ -295,7 +367,7 @@ var HomePage = /** @class */ (function () {
         // attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(this.map);
         /** Add search button to map */
-        this.map.addControl(new searchControl());
+        // this.map.addControl(new searchControl());
         /** Build polylines */
         this.buildPolyline(this.mapCenter);
     };
@@ -305,34 +377,13 @@ var HomePage = /** @class */ (function () {
      */
     HomePage.prototype.buildPolyline = function (center) {
         return __awaiter(this, void 0, void 0, function () {
-            var counter, noCleaning, forStr, to, inDateStr, noPark, inZone, details, _a;
+            var counter, _a;
             var _this_1 = this;
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
                         counter = 0;
-                        /** Get translations for popup */
-                        this.translate.get('NO-CLEANING').subscribe(function (s) {
-                            noCleaning = s;
-                        });
-                        this.translate.get('FOR').subscribe(function (s) {
-                            forStr = s;
-                        });
-                        this.translate.get('TO').subscribe(function (s) {
-                            to = s;
-                        });
-                        this.translate.get('IN-DATE').subscribe(function (s) {
-                            inDateStr = s;
-                        });
-                        this.translate.get('NO-PARKING-FROM').subscribe(function (s) {
-                            noPark = s;
-                        });
-                        this.translate.get('IN-ZONE').subscribe(function (s) {
-                            inZone = s;
-                        });
-                        this.translate.get('DETAILS').subscribe(function (s) {
-                            details = s;
-                        });
+                        this.labelResult = 0;
                         /** Reset polyline */
                         if (this.map) {
                             this.clearPolyline(this.map);
@@ -345,28 +396,29 @@ var HomePage = /** @class */ (function () {
                                 var inDate = (new Date(_this_1.selectedDate).setHours(0, 0, 0, 0) === new Date(s.cleaningDay).setHours(0, 0, 0, 0));
                                 var color = (inDate) ? 'red' : 'green';
                                 /** Build popup content */
-                                var freeStreetContent = noCleaning + " <br/><b>" + _this_1.datePipe.transform(_this_1.selectedDate, 'dd/MM/yyyy') + "</b> " + forStr + "<br/>\n        <b> " + s.streetName + "</b>";
-                                var closedStreetContent = "<b>" + s.streetName + "</b><br/>" + noPark + " <b>" + new Date(s.stopStartingTime).getHours() + "</b> " + to + "\n        <b> " + new Date(s.stopEndingTime).getHours() + "</b> " + inDateStr + " <br/>\n        <b>" + _this_1.datePipe.transform(_this_1.selectedDate, 'dd/MM/yyyy') + "</b><br/>\n        <a style=\"float:right; margin-top: -5%\">" + details + "</a>";
+                                var freeStreetContent = _this_1.noCleaning + " <br/><b>" + _this_1.datePipe.transform(_this_1.selectedDate, 'dd/MM/yyyy') + "</b> " + _this_1.forStr + "<br/>\n        <b> " + s.streetName + "</b>";
+                                var closedStreetContent = "<b>" + s.streetName + "</b><br/>" + _this_1.noPark + " <b>" + new Date(s.stopStartingTime).getHours() + "</b> " + _this_1.to + "\n        <b> " + new Date(s.stopEndingTime).getHours() + "</b> " + _this_1.inDateStr + " <br/>\n        <b>" + _this_1.datePipe.transform(_this_1.selectedDate, 'dd/MM/yyyy') + "</b><br/>\n        <a style=\"float:right; margin-top: -5%\">" + _this_1.details + "</a>";
                                 /**
                                  * Build polyline based on: current day, current zoom, map center
                                  */
-                                if (inDate && ((dist < ((18 % _this_1.map.getZoom()) - 1) || dist < 0.3))) {
+                                if (inDate && ((dist < ((17 % _this_1.map.getZoom()) - 1) || dist < 0.3))) {
+                                    _this_1.labelResult++;
                                     var popupContent = (inDate) ? closedStreetContent : freeStreetContent;
-                                    var polyline = leaflet__WEBPACK_IMPORTED_MODULE_4___default.a.polyline(s.polylines, { color: color }).addTo(_this_1.map);
+                                    var polyline = leaflet__WEBPACK_IMPORTED_MODULE_4___default.a.polyline(s.polylines, { color: color, weight: 7 }).addTo(_this_1.map);
                                     var popup = leaflet__WEBPACK_IMPORTED_MODULE_4___default.a.popup({ className: "pop-" + s.streetName.replace(/\s/g, '') }).setContent(popupContent);
                                     polyline.bindPopup(popup).on('popupopen', function (e) {
                                         var el = document.getElementsByClassName("pop-" + s.streetName.replace(/\s/g, ''))[0].addEventListener('click', function () {
-                                            _this_1.goToSearch(s.streetName);
+                                            _this_1.goToDetail(s.idNumber);
                                         });
                                     });
                                     counter++;
                                 }
                             });
                         }
-                        if (!(counter === 0 && inZone && noCleaning)) return [3 /*break*/, 3];
+                        if (!(counter === 0 && this.inZone && this.noCleaning)) return [3 /*break*/, 3];
                         _a = this;
                         return [4 /*yield*/, this.toastCtrl.create({
-                                message: noCleaning + " " + this.datePipe.transform(this.selectedDate, 'dd/MM/yyyy') + " " + inZone,
+                                message: this.noCleaning + " " + this.datePipe.transform(this.selectedDate, 'dd/MM/yyyy') + " " + this.inZone,
                                 duration: 3000,
                                 showCloseButton: true
                             })];
@@ -418,34 +470,110 @@ var HomePage = /** @class */ (function () {
      * Get last cleaning day and build polylines
      */
     HomePage.prototype.firstDayFwd = function () {
-        var _this_1 = this;
-        var center = this.mapCenter;
-        this.streets.forEach(function (s) {
-            var dist = _this_1.geo.getDistanceKM({ lat: center[0], lon: center[1] }, { lat: s.centralCoords[0]['lat'], lon: s.centralCoords[0]['lng'] });
-            if (s.cleaningDay > _this_1.selectedDate) {
-                if ((dist < ((18 % _this_1.map.getZoom()) - 1) || dist < 0.3)) {
-                    _this_1.selectedDate = new Date(s.cleaningDay);
-                    _this_1.showDate = _this_1.selectedDate.toISOString();
-                    _this_1.buildPolyline(center);
+        return __awaiter(this, void 0, void 0, function () {
+            var center, nextDay, _a;
+            var _this_1 = this;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        this.past = true;
+                        this.labelResult = 0;
+                        center = this.mapCenter;
+                        nextDay = null;
+                        if (this.streets)
+                            this.streets.forEach(function (s) {
+                                var dist = _this_1.geo.getDistanceKM({ lat: center[0], lon: center[1] }, { lat: s.centralCoords[0]['lat'], lon: s.centralCoords[0]['lng'] });
+                                if ((dist < ((17 % _this_1.map.getZoom()) - 1) || dist < 0.3)) {
+                                    if (!nextDay && s.cleaningDay && s.cleaningDay > new Date(_this_1.selectedDate).getTime()) {
+                                        nextDay = s.cleaningDay;
+                                    }
+                                }
+                                //select first next day of cleaning inside
+                                if ((dist < ((17 % _this_1.map.getZoom()) - 1) || dist < 0.3)) {
+                                    if (nextDay && s.cleaningDay > _this_1.selectedDate.getTime() && s.cleaningDay <= nextDay && s.cleaningDay > _this_1.today) {
+                                        nextDay = s.cleaningDay;
+                                    }
+                                }
+                            });
+                        if (!(nextDay != null && nextDay > this.selectedDate.getTime())) return [3 /*break*/, 1];
+                        this.selectedDate = new Date(nextDay);
+                        this.showDate = this.selectedDate.toISOString();
+                        this.future = true;
+                        return [3 /*break*/, 4];
+                    case 1:
+                        _a = this;
+                        return [4 /*yield*/, this.toastCtrl.create({
+                                message: this.noStreetFuture,
+                                duration: 3000,
+                                showCloseButton: true
+                            })];
+                    case 2:
+                        _a.toast = _b.sent();
+                        this.future = false;
+                        return [4 /*yield*/, this.toast.present()];
+                    case 3:
+                        _b.sent();
+                        _b.label = 4;
+                    case 4:
+                        this.buildPolyline(center);
+                        return [2 /*return*/];
                 }
-            }
+            });
         });
     };
     /**
      * Get first cleaning day and build polylines
      */
     HomePage.prototype.firstDayBck = function () {
-        var _this_1 = this;
-        var center = this.mapCenter;
-        this.streets.forEach(function (s) {
-            var dist = _this_1.geo.getDistanceKM({ lat: center[0], lon: center[1] }, { lat: s.centralCoords[0]['lat'], lon: s.centralCoords[0]['lng'] });
-            if (s.cleaningDay < _this_1.selectedDate) {
-                if ((dist < ((18 % _this_1.map.getZoom()) - 1) || dist < 0.3)) {
-                    _this_1.selectedDate = new Date(s.cleaningDay);
-                    _this_1.showDate = _this_1.selectedDate.toISOString();
-                    _this_1.buildPolyline(center);
+        return __awaiter(this, void 0, void 0, function () {
+            var center, prevDay, _a;
+            var _this_1 = this;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        this.future = true;
+                        this.labelResult = 0;
+                        center = this.mapCenter;
+                        prevDay = null;
+                        if (this.streets)
+                            this.streets.forEach(function (s) {
+                                var dist = _this_1.geo.getDistanceKM({ lat: center[0], lon: center[1] }, { lat: s.centralCoords[0]['lat'], lon: s.centralCoords[0]['lng'] });
+                                if ((dist < ((17 % _this_1.map.getZoom()) - 1) || dist < 0.3)) {
+                                    if (!prevDay && s.cleaningDay && s.cleaningDay < new Date(_this_1.selectedDate).getTime()) {
+                                        prevDay = s.cleaningDay;
+                                    }
+                                }
+                                //select first next day of cleaning inside
+                                if ((dist < ((17 % _this_1.map.getZoom()) - 1) || dist < 0.3)) {
+                                    if (prevDay && s.cleaningDay < _this_1.selectedDate.getTime() && s.cleaningDay >= prevDay && s.cleaningDay > _this_1.today) {
+                                        prevDay = s.cleaningDay;
+                                    }
+                                }
+                            });
+                        if (!(prevDay != null && prevDay < this.selectedDate.getTime())) return [3 /*break*/, 1];
+                        this.selectedDate = new Date(prevDay);
+                        this.showDate = this.selectedDate.toISOString();
+                        this.past = true;
+                        return [3 /*break*/, 4];
+                    case 1:
+                        _a = this;
+                        return [4 /*yield*/, this.toastCtrl.create({
+                                message: this.noStreetPast,
+                                duration: 3000,
+                                showCloseButton: true
+                            })];
+                    case 2:
+                        _a.toast = _b.sent();
+                        this.past = false;
+                        return [4 /*yield*/, this.toast.present()];
+                    case 3:
+                        _b.sent();
+                        _b.label = 4;
+                    case 4:
+                        this.buildPolyline(center);
+                        return [2 /*return*/];
                 }
-            }
+            });
         });
     };
     /**
@@ -461,8 +589,8 @@ var HomePage = /** @class */ (function () {
      * Go to search page with defined searching value
      * @param name Street's name for automatic search
      */
-    HomePage.prototype.goToSearch = function (name) {
-        this.router.navigate(['ps-search'], { queryParams: { street: name } });
+    HomePage.prototype.goToDetail = function (name) {
+        this.router.navigate(['street-detail'], { queryParams: { street: name } });
     };
     HomePage = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -549,14 +677,21 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
 var UtilService = /** @class */ (function () {
     function UtilService(toastController) {
         this.toastController = toastController;
+        this.defaultPosition = {
+            lat: 46.0748,
+            long: 11.1217
+        };
     }
-    UtilService.prototype.showErrorConnectionMessage = function () {
+    UtilService.prototype.getDefaultPos = function () {
+        return this.defaultPosition;
+    };
+    UtilService.prototype.showErrorConnectionMessage = function (message) {
         return __awaiter(this, void 0, void 0, function () {
             var toast;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, this.toastController.create({
-                            message: 'Your settings have been saved.',
+                            message: message,
                             duration: 2000
                         })];
                     case 1:

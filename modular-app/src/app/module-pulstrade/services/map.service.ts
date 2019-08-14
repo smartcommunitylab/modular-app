@@ -44,8 +44,8 @@ export class MapService {
       if (this.data) {
         return resolve(this.data);
       }
-       //this.http.get('https://tn.smartcommunitylab.it/streetcleaning/rest/street').toPromise().then(response => {
-       this.http.get('./assets/strade/data/spazzamento.json').toPromise().then(response => {
+       this.http.get('https://tn.smartcommunitylab.it/streetcleaning/rest/street').toPromise().then(response => {
+      //  this.http.get('./assets/strade/data/spazzamento.json').toPromise().then(response => {
           this.data = this.buildFinalData(response);
         resolve()
       }, err => {

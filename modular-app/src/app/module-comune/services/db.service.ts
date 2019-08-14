@@ -23,7 +23,8 @@ export class DbService {
 
     this.db = new PouchDB('comune-in-tasca');
 
-    this.remote = 'http://192.168.42.201:5984/comune-in-tasca';
+    this.remote ='https://cit.platform.smartcommunitylab.it/comuneintasca2';
+    //  'http://192.168.42.201:5984/comune-in-tasca';
     //'http://192.168.1.197:5984/comune-in-tasca'
     // 'http://127.0.0.1:5984/comune-in-tasca';
 

@@ -332,12 +332,12 @@ var ListEventPage = /** @class */ (function () {
                         _this_1.subCategories(_this_1.fullPois);
                         _this_1.buildShowPois();
                         _this_1.tags = _this_1.buildFilter();
-                        _this_1.utils.hideLoading();
                     }
                     else {
                         _this_1.emptyList = true;
                     }
                     _this_1.isLoading = false;
+                    _this_1.utils.hideLoading();
                     console.log(_this_1.showPois);
                 }, function (err) {
                     _this_1.utils.hideLoading();

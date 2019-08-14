@@ -78,7 +78,7 @@ var NotiziePageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\n  <ion-toolbar>\n      <ion-searchbar (ionChange)=\"Ricerca()\" placeholder=\"Cerca\" id=\"barraDiRicerca\" [(ngModel)]=\"daCercare\"></ion-searchbar>\n    <ion-grid *ngIf=\"!isRicercaOpen\">\n      <ion-row justify-content-center align-items-center>\n        <ion-col col-6>\n          <ion-title float-left id=\"TITOLO\">      {{'avvisi_label'|translate}}\n            </ion-title>\n        </ion-col>\n        <ion-col col-6>\n          <ion-button fill=\"clear\" float-right (click)=\"OpenCloseRicerca()\" id=\"btnImpostazioniRicerca\" color=\"light\">\n            <svg width='24' height='24' viewBox='0 0 24 24'>\n              <path fill='none' d='M0 0h24v24H0V0z' />\n              <path\n                d='M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z' />\n            </svg>\n          </ion-button>\n        </ion-col>\n      </ion-row>\n    </ion-grid>\n  </ion-toolbar>\n\n</ion-header>\n<ion-content>\n  <div class=\"ion-padding\" *ngIf=\"!emptyList; else emptyListTemplate\">\n    <div *ngFor=\"let item of datiRicerca\" id=\"contenitoreAnteprima\">\n      <wc-anteprima (eventMappa)=\"visualizzaMappa(item.coordinates[0], item.coordinates[1])\"\n        (eventShare)=\"visualizzaShare(item.title, item.image ,item.description)\" id=\"elemento\" img={{item.image}}\n        [titolo]=\"item.shortAbstract\" orario={{item.eventStart}} datapubblicazione={{formattaData(item.created)}}\n        dataevento={{item.eventDate}} durata={{item.eventTiming}} [descrizione]=\"item.description\"\n        luogo={{item.address}}>\n      </wc-anteprima>\n    </div>\n    <ion-infinite-scroll threshold=\"100px\" (ionInfinite)=\"caricaAltriDati($event)\">\n      <ion-infinite-scroll-content loadingSpinner=\"crescent\" loadingText=\"Sto caricando...\"></ion-infinite-scroll-content>\n    </ion-infinite-scroll>\n  </div>\n  <ng-template #emptyListTemplate>\n      {{'empty_list_label'|translate}}\n    </ng-template>\n</ion-content>"
+module.exports = "<ion-header>\n  <ion-toolbar>\n    <ion-searchbar showCancelButton=\"never\" animated (ionChange)=\"Ricerca()\" placeholder=\"Cerca\" id=\"barraDiRicerca\"\n      [(ngModel)]=\"daCercare\"></ion-searchbar>\n      <ion-buttons slot=\"start\">\n        <ion-back-button></ion-back-button>\n      </ion-buttons>\n      <ion-grid *ngIf=\"!isRicercaOpen\">\n        <ion-row justify-content-center align-items-center>\n          <ion-col col-6>\n            <ion-title float-left id=\"TITOLO\"> {{'avvisi_label'|translate}}\n            </ion-title>\n          </ion-col>\n          <ion-col col-6>\n            <ion-button fill=\"clear\" float-right (click)=\"OpenCloseRicerca()\" id=\"btnImpostazioniRicerca\" color=\"light\">\n              <svg width='24' height='24' viewBox='0 0 24 24'>\n                <path fill='none' d='M0 0h24v24H0V0z' />\n                <path\n                  d='M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z' />\n              </svg>\n            </ion-button>\n          </ion-col>\n        </ion-row>\n      </ion-grid>\n  </ion-toolbar>\n\n</ion-header>\n<ion-content>\n    <div class=\"ion-padding\" *ngIf=\"!emptyList; else emptyListTemplate\">\n      <div *ngFor=\"let item of datiRicerca\" id=\"contenitoreAnteprima\">\n        <wc-anteprima (eventMappa)=\"visualizzaMappa(item.coordinates[0], item.coordinates[1])\"\n          (eventShare)=\"visualizzaShare(item.title, item.image ,item.description)\" id=\"elemento\" img={{item.image}}\n          [titolo]=\"item.title\" orario={{item.eventStart}} datapubblicazione={{formattaData(item.created)}}\n          dataevento={{item.eventDate}} durata={{item.eventTiming}} [descrizione]=\"item.description\"\n          luogo={{item.address}}>\n        </wc-anteprima>\n      </div>\n  <ion-infinite-scroll threshold=\"100px\" (ionInfinite)=\"caricaAltriDati($event)\">\n    <ion-infinite-scroll-content loadingSpinner=\"crescent\" loadingText=\"Sto caricando...\"></ion-infinite-scroll-content>\n  </ion-infinite-scroll>\n  </div>\n  <ng-template #emptyListTemplate>\n    {{'empty_list_label'|translate}}\n  </ng-template>\n</ion-content>"
 
 /***/ }),
 
@@ -140,11 +140,10 @@ var NotiziePage = /** @class */ (function () {
             "fromDate": null,
             "size": 10,
             "sortForList": 0,
-            "source": ["Avvisi del Comune di Trento"],
-            "start": 0,
-            "tag": [],
-            "themes": []
+            "source": ["Avvisi oggetti rinvenuti"],
+            "start": 0
         };
+        this.doneTypingInterval = 500; //time in ms, 5 second for example
         this.language = window[this.config.getAppModuleName()]['language'];
         this.translate.use(this.language);
     }
@@ -170,22 +169,19 @@ var NotiziePage = /** @class */ (function () {
             _this.datiRicerca = _this.DatiEvento;
         });
     };
-    NotiziePage.prototype.caricaAltriDati = function (event) {
-        var _this = this;
-        this.start += 10;
-        var parametriPost = {
-            "fromDate": null,
-            "size": 10,
-            "sortForList": 0,
-            "source": ["Avvisi del Comune di Trento"],
-            "start": this.start,
-            "tag": [],
-            "themes": []
-        };
-        this.vetNuoviDati = this.datiService.getDati(parametriPost);
-        console.log(this.datiRicerca);
-        setTimeout(function () { _this.visualizzaDati(_this.vetNuoviDati, event); }, 1500);
-    };
+    // caricaAltriDati(event) {
+    //   this.start += 10;
+    //   let parametriPost = {
+    //     "fromDate": null,
+    //     "size": 10,
+    //     "sortForList": 1,
+    //     "source": ["Avvisi oggetti rinvenuti"],
+    //     "start": this.start
+    //   }
+    //   this.vetNuoviDati = this.datiService.getDati(parametriPost);
+    //   console.log(this.datiRicerca);
+    //   setTimeout(() => { this.visualizzaDati(this.vetNuoviDati, event) }, 1500);
+    // }
     NotiziePage.prototype.visualizzaDati = function (vet, event) {
         for (var _i = 0, vet_1 = vet; _i < vet_1.length; _i++) {
             var item = vet_1[_i];
@@ -201,35 +197,78 @@ var NotiziePage = /** @class */ (function () {
         if (!this.isRicercaOpen) {
             document.getElementById("barraDiRicerca").style.display = "inherit";
             document.getElementById("btnImpostazioniRicerca").innerHTML = "<svg width='24' height='24' viewBox='0 0 24 24'><path fill='none' d='M0 0h24v24H0V0z'/><path d='M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z'/></svg>";
-            this.infiniteScroll.disabled = true;
-            this.Ricerca();
+            // this.infiniteScroll.disabled = true;
+            // this.Ricerca();
+            this.daCercare = "";
         }
         else {
             document.getElementById("barraDiRicerca").style.display = "none";
             document.getElementById("btnImpostazioniRicerca").innerHTML = "<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'><path fill='none' d='M0 0h24v24H0V0z'/><path d='M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z'/></svg>";
             this.datiRicerca = this.DatiEvento;
-            this.infiniteScroll.disabled = false;
+            // this.infiniteScroll.disabled = false;
         }
         this.isRicercaOpen = !this.isRicercaOpen;
     };
     NotiziePage.prototype.Ricerca = function () {
-        var vetRisultati = [];
-        if (this.daCercare != null) {
-            for (var _i = 0, _a = this.DatiEvento; _i < _a.length; _i++) {
-                var item = _a[_i];
-                if ((item.description.toUpperCase().includes(this.daCercare.toUpperCase())) || (item.title.toUpperCase().includes(this.daCercare.toUpperCase()))) {
-                    vetRisultati.push(item);
-                }
+        var _this = this;
+        clearTimeout(this.typingTimer);
+        this.typingTimer = setTimeout(function () {
+            if (_this.daCercare != null) {
+                var parametriPost = {
+                    "fromDate": null,
+                    "size": 10,
+                    "sortForList": 1,
+                    "source": ["Avvisi oggetti rinvenuti"],
+                    "start": 0,
+                    "filter": _this.daCercare
+                };
+                _this.datiService.getDati(parametriPost).then(function (data) {
+                    if (data.length == 0) {
+                        _this.emptyList = true;
+                    }
+                    else {
+                        _this.emptyList = false;
+                        _this.DatiEvento = data;
+                        _this.datiRicerca = _this.DatiEvento;
+                    }
+                });
             }
-            this.datiRicerca = vetRisultati;
-            vetRisultati = null;
-            if (this.datiRicerca.length == 0) {
-                {
-                    this.emptyList = true;
-                }
-            }
-        }
+        }, this.doneTypingInterval);
     };
+    NotiziePage.prototype.caricaAltriDati = function (event) {
+        var _this = this;
+        this.start += 10;
+        var parametriPost = {
+            "fromDate": null,
+            "size": 10,
+            "sortForList": 1,
+            "source": ["Avvisi oggetti rinvenuti"],
+            "start": this.start,
+            "filter": this.daCercare
+        };
+        this.datiService.getDati(parametriPost).then(function (dati) {
+            _this.vetNuoviDati = dati;
+            _this.visualizzaDati(_this.vetNuoviDati, event);
+        });
+        console.log(this.datiRicerca);
+    };
+    // Ricerca() {
+    //   let vetRisultati: any[] = [];
+    //   if (this.daCercare != null) {
+    //     for (let item of this.DatiEvento) {
+    //       if ((item.description.toUpperCase().includes(this.daCercare.toUpperCase())) || (item.title.toUpperCase().includes(this.daCercare.toUpperCase()))) {
+    //         vetRisultati.push(item);
+    //       }
+    //     }
+    //     this.datiRicerca = vetRisultati;
+    //     vetRisultati = null;
+    //     if (this.datiRicerca.length == 0) {
+    //       {
+    //         this.emptyList = true;
+    //       }
+    //     }
+    //   }
+    // }
     NotiziePage.prototype.formattaData = function (data) {
         var anno = data.slice(0, 4);
         var mese = data.slice(4, 6);

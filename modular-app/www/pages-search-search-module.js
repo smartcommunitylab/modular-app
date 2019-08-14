@@ -78,7 +78,7 @@ var SearchPageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header no-border>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-back-button></ion-back-button>\n    </ion-buttons>\n    <ion-title>\n      {{'SEARCH' | translate}}\n    </ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-searchbar showCancelButton animated (ionInput)=\"search($event)\" placeholder=\"{{'SEARCH' | translate}}\"></ion-searchbar>\n\n<ion-content padding>\n  <ion-list no-lines *ngIf=\"showStreets\">\n    <div *ngFor=\"let s of showStreets\">\n      <ion-card [id]=\"s.id\">\n        <ion-card-content>\n          <div class=\"left\" [routerLink]=\"['/ps']\" [queryParams]=\"{coord: s.centralCoordStr}\" routerDirection=\"forward\">\n            <b>{{s.cleaningDayStr}}</b>\n            <h1>{{s.streetName}}</h1>\n            <p>{{'CLOSED' | translate}} <b>{{s.stopStartingTimeStr}}</b> - <b>{{s.stopEndingTimeStr}}</b></p>\n          </div>\n          <div class=\"right\">\n            <ion-toggle [id]=\"'tog-' + s.idNumber\" (ionChange)=\"toggle($event)\" [value]=\"s.streetName\"></ion-toggle>\n          </div>\n          <p [id]=\"'not-' + s.idNumber\" class=\"notification\">{{'NOTIFY-DIS' | translate}}</p>\n        </ion-card-content>\n      </ion-card>\n    </div>\n  </ion-list>\n</ion-content>"
+module.exports = "<ion-header >\n  <ion-toolbar>\n    <ion-searchbar showCancelButton=\"never\" animated (ionInput)=\"search($event)\" placeholder=\"{{'SEARCH' | translate}}\">\n    </ion-searchbar>\n    <ion-buttons slot=\"start\">\n      <ion-back-button class=\"interaction\"></ion-back-button>\n    </ion-buttons>\n    <!-- <ion-title>\n      {{'SEARCH' | translate}}\n    </ion-title> -->\n  </ion-toolbar>\n</ion-header>\n\n\n<ion-content padding>\n    <!-- <ion-spinner name=\"dots\" *ngIf=\"searching\"></ion-spinner> -->\n\n  <ion-list no-lines *ngIf=\"showStreets\">\n    <div *ngFor=\"let s of showStreets\">\n      <div [id]=\"s.id\">\n        <div>\n          <div class=\"left\" [routerLink]=\"['/street-detail']\" [queryParams]=\"{street: s.idNumber }\" routerDirection=\"forward\">\n            <div class=\"result interaction\" >{{s.streetName}}</div>\n            <div class=\"sub-result interaction\" >{{s.tratto}}</div>\n          </div>\n          <div class=\"right\" (click)=\"toggleNotification(s)\">\n            <ion-icon class=\"interaction icon-notification\" name=\"notifications\" *ngIf=\"isEnabled(s); else disabled\"></ion-icon>\n            <ng-template #disabled>\n              <ion-icon  class=\"interaction icon-notification\" name=\"notifications-outline\"></ion-icon>\n            </ng-template>\n          </div>\n        </div>\n      </div>\n    </div>\n  </ion-list>\n</ion-content>"
 
 /***/ }),
 
@@ -89,7 +89,7 @@ module.exports = "<ion-header no-border>\n  <ion-toolbar>\n    <ion-buttons slot
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "ion-card {\n  background: white !important; }\n\n.left {\n  float: left;\n  width: 75%;\n  padding-bottom: 5%; }\n\n.right {\n  float: right;\n  vertical-align: middle; }\n\n.notification {\n  text-align: center; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL2NoaW44L0RvY3VtZW50cy93b3JrL21vZHVsYXJBcHAvbW9kdWxhci1hcHAvc3JjL2FwcC9tb2R1bGUtcHVsc3RyYWRlL3BhZ2VzL3NlYXJjaC9zZWFyY2gucGFnZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksNkJBQTRCLEVBQy9COztBQUNEO0VBQ0ksWUFBVztFQUNYLFdBQVU7RUFDVixtQkFBa0IsRUFDckI7O0FBQ0Q7RUFDSSxhQUFZO0VBQ1osdUJBQXNCLEVBQ3pCOztBQUNEO0VBQ0ksbUJBQWtCLEVBQ3JCIiwiZmlsZSI6InNyYy9hcHAvbW9kdWxlLXB1bHN0cmFkZS9wYWdlcy9zZWFyY2gvc2VhcmNoLnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbImlvbi1jYXJkIHtcbiAgICBiYWNrZ3JvdW5kOiB3aGl0ZSAhaW1wb3J0YW50O1xufVxuLmxlZnQge1xuICAgIGZsb2F0OiBsZWZ0O1xuICAgIHdpZHRoOiA3NSU7XG4gICAgcGFkZGluZy1ib3R0b206IDUlO1xufVxuLnJpZ2h0IHtcbiAgICBmbG9hdDogcmlnaHQ7XG4gICAgdmVydGljYWwtYWxpZ246IG1pZGRsZTtcbn1cbi5ub3RpZmljYXRpb24ge1xuICAgIHRleHQtYWxpZ246IGNlbnRlcjtcbn0iXX0= */"
+module.exports = "ion-card {\n  background: white !important; }\n\n.left {\n  float: left;\n  width: 75%; }\n\n.right {\n  float: right;\n  vertical-align: middle; }\n\n.notification {\n  text-align: center; }\n\n.interaction {\n  color: #11B3EF !important; }\n\n.icon-notification {\n  font-size: 30px; }\n\n.result {\n  font-size: 30px; }\n\n.sub-result {\n  font-size: 15px; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL2NoaW44L0RvY3VtZW50cy93b3JrL21vZHVsYXJBcHAvbW9kdWxhci1hcHAvc3JjL2FwcC9tb2R1bGUtcHVsc3RyYWRlL3BhZ2VzL3NlYXJjaC9zZWFyY2gucGFnZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksNkJBQTRCLEVBQy9COztBQUNEO0VBQ0ksWUFBVztFQUNYLFdBQVUsRUFFYjs7QUFDRDtFQUNJLGFBQVk7RUFDWix1QkFBc0IsRUFDekI7O0FBQ0Q7RUFDSSxtQkFBa0IsRUFDckI7O0FBQ0Q7RUFDSSwwQkFBd0IsRUFDM0I7O0FBRUQ7RUFDSSxnQkFBZSxFQUNsQjs7QUFDRDtFQUNJLGdCQUFlLEVBQ2xCOztBQUNEO0VBQ0ksZ0JBQWUsRUFDbEIiLCJmaWxlIjoic3JjL2FwcC9tb2R1bGUtcHVsc3RyYWRlL3BhZ2VzL3NlYXJjaC9zZWFyY2gucGFnZS5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiaW9uLWNhcmQge1xuICAgIGJhY2tncm91bmQ6IHdoaXRlICFpbXBvcnRhbnQ7XG59XG4ubGVmdCB7XG4gICAgZmxvYXQ6IGxlZnQ7XG4gICAgd2lkdGg6IDc1JTtcbiAgICAvLyBwYWRkaW5nLWJvdHRvbTogNSU7XG59XG4ucmlnaHQge1xuICAgIGZsb2F0OiByaWdodDtcbiAgICB2ZXJ0aWNhbC1hbGlnbjogbWlkZGxlO1xufVxuLm5vdGlmaWNhdGlvbiB7XG4gICAgdGV4dC1hbGlnbjogY2VudGVyO1xufVxuLmludGVyYWN0aW9uIHtcbiAgICBjb2xvcjogIzExQjNFRiFpbXBvcnRhbnQ7XG59XG5cbi5pY29uLW5vdGlmaWNhdGlvbntcbiAgICBmb250LXNpemU6IDMwcHg7XG59XG4ucmVzdWx0e1xuICAgIGZvbnQtc2l6ZTogMzBweDtcbn1cbi5zdWItcmVzdWx0e1xuICAgIGZvbnQtc2l6ZTogMTVweDtcbn0iXX0= */"
 
 /***/ }),
 
@@ -129,9 +129,10 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 var SearchPage = /** @class */ (function () {
-    function SearchPage(translate, config, router, mapSrv, datePipe, notificationSrv, route, platform) {
+    function SearchPage(translate, config, notSrv, router, mapSrv, datePipe, notificationSrv, route, platform) {
         this.translate = translate;
         this.config = config;
+        this.notSrv = notSrv;
         this.router = router;
         this.mapSrv = mapSrv;
         this.datePipe = datePipe;
@@ -139,23 +140,44 @@ var SearchPage = /** @class */ (function () {
         this.route = route;
         this.platform = platform;
         this.showStreets = [];
+        this.searching = false;
+        this.doneTypingInterval = 500; //time in ms, 5 second for example
         this.language = window[this.config.getAppModuleName()]['language'];
         this.translate.use(this.language);
         this.myPos = window[this.config.getAppModuleName()]['geolocation'];
     }
     SearchPage.prototype.ngOnInit = function () {
+    };
+    SearchPage.prototype.convertToMapId = function (array) {
+        var map = {};
+        if (array)
+            array.forEach(function (el) {
+                map[el.idNumber] = el;
+            });
+        return map;
+    };
+    /**
+     * Set searchbar focus
+     */
+    SearchPage.prototype.ionViewDidEnter = function () {
         var _this = this;
+        var el = document.querySelector('ion-searchbar');
+        if (el) {
+            el.setFocus();
+        }
+        this.notif = this.convertToMapId(this.notSrv.getNotStreets());
         this.streets = this.mapSrv.getData();
         /** Add DateTimes in string format */
-        this.streets.forEach(function (s) {
-            s.cleaningDayStr = _this.datePipe.transform(s.cleaningDay, 'dd/MM/yyyy');
-            var tmp = new Date(s.stopStartingTime).toLocaleTimeString().split(':');
-            s.stopStartingTimeStr = tmp[0] + ":" + tmp[1];
-            tmp = new Date(s.stopEndingTime).toLocaleTimeString().split(':');
-            s.stopEndingTimeStr = tmp[0] + ":" + tmp[1];
-            s.centralCoordStr = JSON.stringify(s.centralCoords);
-            s.idNumber = parseInt(s.streetCode.replace(/\_/g, ''), 10);
-        });
+        if (this.streets)
+            this.streets.forEach(function (s) {
+                s.cleaningDayStr = _this.datePipe.transform(s.cleaningDay, 'dd/MM/yyyy');
+                var tmp = new Date(s.stopStartingTime).toLocaleTimeString().split(':');
+                s.stopStartingTimeStr = tmp[0] + ":" + tmp[1];
+                tmp = new Date(s.stopEndingTime).toLocaleTimeString().split(':');
+                s.stopEndingTimeStr = tmp[0] + ":" + tmp[1];
+                s.centralCoordStr = JSON.stringify(s.centralCoords);
+                s.idNumber = parseInt(s.streetCode.replace(/\_/g, ''), 10);
+            });
         /** Parse URL params */
         try {
             this.route.queryParams
@@ -165,37 +187,56 @@ var SearchPage = /** @class */ (function () {
         }
         catch (_a) { }
     };
-    /**
-     * Set searchbar focus
-     */
-    SearchPage.prototype.ionViewDidEnter = function () {
-        var el = document.querySelector('ion-searchbar');
-        if (el) {
-            el.setFocus();
-        }
-    };
-    /**
-     * Search streets and put them in `showStreets` object
-     * @param input `(change)` event
-     */
     SearchPage.prototype.search = function (input) {
+        var _this = this;
         var val;
-        if (input) {
-            if (input.detail) {
-                val = input.detail.target.value;
+        clearTimeout(this.typingTimer);
+        this.typingTimer = setTimeout(function () {
+            if (input) {
+                if (input.detail) {
+                    val = input.detail.target.value;
+                    // this.searching=true;
+                }
+                //  else {
+                //   val = input;
+                // }
+                if (val === '') {
+                    _this.showStreets = [];
+                }
+                else {
+                    if (_this.streets) {
+                        _this.showStreets = _this.streets.filter(function (el) {
+                            return (el.streetName.toLowerCase().indexOf(val.toLowerCase()) > -1);
+                        });
+                        _this.showStreets = _this.getUnique(_this.showStreets, 'streetCode');
+                        // this.searching=false;
+                    }
+                }
             }
-            else {
-                val = input;
-            }
-            if (val === '') {
-                this.showStreets = [];
-            }
-            else {
-                this.showStreets = this.streets.filter(function (el) {
-                    return (el.streetName.toLowerCase().indexOf(val.toLowerCase()) > -1);
-                });
-            }
+        }, this.doneTypingInterval);
+    };
+    SearchPage.prototype.getUnique = function (arr, comp) {
+        var unique = arr
+            .map(function (e) { return e[comp]; })
+            // store the keys of the unique objects
+            .map(function (e, i, final) { return final.indexOf(e) === i && i; })
+            // eliminate the dead keys & store unique objects
+            .filter(function (e) { return arr[e]; }).map(function (e) { return arr[e]; });
+        return unique;
+    };
+    SearchPage.prototype.toggleNotification = function (street) {
+        if (this.notif[street.idNumber] != undefined) {
+            this.notificationSrv.disableNotification(street);
         }
+        else {
+            this.notSrv.setNotification(street);
+        }
+        this.notif = this.convertToMapId(this.notSrv.getNotStreets());
+    };
+    SearchPage.prototype.isEnabled = function (street) {
+        if (street)
+            return this.notif[street.idNumber] != undefined;
+        return false;
     };
     /**
      * Go to map page with specified coordinates
@@ -212,32 +253,34 @@ var SearchPage = /** @class */ (function () {
         var _this = this;
         this.platform.ready().then(function () {
             var element, toggle;
-            var street = _this.streets.filter(function (val) {
-                return val.streetName === event.detail.value;
-            });
-            if (event.detail.checked) {
-                street.forEach(function (s) {
-                    element = document.getElementById('not-' + s.idNumber);
-                    toggle = document.getElementById('tog-' + s.idNumber);
-                    _this.notificationSrv.setNotification(street);
-                    element.style.color = 'green';
-                    _this.translate.get('NOTIFY-ENA').subscribe(function (x) {
-                        element.innerHTML = x;
-                    });
-                    toggle.checked = true;
+            if (_this.streets) {
+                var street_1 = _this.streets.filter(function (val) {
+                    return val.idNumber === event.detail.value;
                 });
-            }
-            else {
-                street.forEach(function (s) {
-                    element = document.getElementById('not-' + s.idNumber);
-                    toggle = document.getElementById('tog-' + s.idNumber);
-                    _this.notificationSrv.disableNotification(street);
-                    element.style.color = '#737373';
-                    _this.translate.get('NOTIFY-DIS').subscribe(function (x) {
-                        element.innerHTML = x;
+                if (event.detail.checked) {
+                    street_1.forEach(function (s) {
+                        element = document.getElementById('not-' + s.idNumber);
+                        toggle = document.getElementById('tog-' + s.idNumber);
+                        _this.notificationSrv.setNotification(street_1);
+                        element.style.color = 'green';
+                        _this.translate.get('NOTIFY-ENA').subscribe(function (x) {
+                            element.innerHTML = x;
+                        });
+                        toggle.checked = true;
                     });
-                    toggle.checked = false;
-                });
+                }
+                else {
+                    street_1.forEach(function (s) {
+                        element = document.getElementById('not-' + s.idNumber);
+                        toggle = document.getElementById('tog-' + s.idNumber);
+                        _this.notificationSrv.disableNotification(street_1);
+                        element.style.color = '#737373';
+                        _this.translate.get('NOTIFY-DIS').subscribe(function (x) {
+                            element.innerHTML = x;
+                        });
+                        toggle.checked = false;
+                    });
+                }
             }
         });
     };
@@ -250,6 +293,7 @@ var SearchPage = /** @class */ (function () {
         }),
         __metadata("design:paramtypes", [_ngx_translate_core__WEBPACK_IMPORTED_MODULE_1__["TranslateService"],
             src_app_services_config_service__WEBPACK_IMPORTED_MODULE_2__["ConfigService"],
+            _services_notification_service__WEBPACK_IMPORTED_MODULE_6__["NotificationService"],
             _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"],
             _services_map_service__WEBPACK_IMPORTED_MODULE_4__["MapService"],
             _angular_common__WEBPACK_IMPORTED_MODULE_5__["DatePipe"],
