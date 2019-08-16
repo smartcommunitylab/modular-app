@@ -165,16 +165,24 @@ export class ListPoiPage implements OnInit {
     const poiElement: any = {};
     if (x) {
       if (x.title) {
+        if (x.title[this.language])
         poiElement.title = x.title[this.language];
+        else poiElement.title = x.title["it"];
       }
       if (x.classification) {
+        if (x.classification[this.language])
         poiElement.classification = x.classification[this.language];
+        else poiElement.classification = x.classification["it"];
       }
       if (x.subtitle) {
+        if (x.subtitle[this.language])
         poiElement.subtitle = x.subtitle[this.language];
+        else poiElement.subtitle = x.subtitle["it"];
       }
       if (x.description) {
+        if (x.description[this.language])
         poiElement.description = x.description[this.language];
+        else poiElement.description = x.description["it"];
       }
       if (x.image) {
         poiElement.image = x.image;
@@ -245,9 +253,10 @@ export class ListPoiPage implements OnInit {
           // checks whether an element is even
           return element.isChecked;
         };
-        this.tags = filters.data;
-
-        if (filters.data.some(even)) {
+        if (filters.data) {
+          this.tags = filters.data;
+        }
+        if (filters.data && filters.data.some(even)) {
           this.presentFilter = true;
           this.firstAccess = false;
           this.buildShowPois(this.tags)

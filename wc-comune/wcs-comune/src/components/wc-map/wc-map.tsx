@@ -104,14 +104,14 @@ export class WcTabs {
     if (this.pointsObj) {
       this.pointsObj.forEach((element, i) => {
         //add char because selector must start with it
-        var customPopup = "<div id='a"+element.id+"'><div  class=\"index-poi\">"+i+"</div><div  class=\"element-name\">"+element.name + "</div><br/> <div class=\"detail-bar\"></div><img src=" + element.img + " width='350px'/></div>";
+        var customPopup = "<div id='a"+element.id+"'><div  class=\"index-poi\">"+(i+1)+"</div><div  class=\"element-name\">"+element.name + "</div><br/> <div class=\"detail-bar\"></div><img src=" + element.img + " width='350px'/></div>";
         // specify popup options 
         var customOptions =
         {
           'maxWidth': '500',
           'className': 'custom'
         }
-        var m=leaflet.marker([element.lat, element.lon], { icon: new leaflet.NumberedDivIcon({ number: i }) })
+        var m=leaflet.marker([element.lat, element.lon], { icon: new leaflet.NumberedDivIcon({ number: (i+1) }) })
         m.id=element.id;
         m.bindPopup(customPopup, customOptions).addTo(map)
           .on('popupopen', (popup)=> {

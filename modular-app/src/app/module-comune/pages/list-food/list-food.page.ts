@@ -112,7 +112,7 @@ export class ListFoodPage implements OnInit {
   ionViewDidEnter() {
 
     if (this.category) {
-      let query = { 'selector': { 'element-type': 'restaurant-item' } };
+      let query = { 'selector': { 'elementType': 'restaurant-item' } };
       this.dbService.synch().then(()=>{
         this.dbService.getObjectByQuery(query).then((data) => {
           this.fullPois = data.docs.map(x => this.convertPois(x));
@@ -165,13 +165,20 @@ export class ListFoodPage implements OnInit {
     const poiElement: any = {};
     if (x) {
       if (x.title) {
+        if( x.title[this.language])
         poiElement.title = x.title[this.language];
+        else         poiElement.title = x.title["it"];
+
       }
-      if (x.subtitle) {
-        poiElement.description = x.subtitle[this.language];
-      }
+      // if (x.subtitle) {
+      //   if (x.subtitle[this.language])
+      //   poiElement.description = x.subtitle[this.language];
+      //   else poiElement.description = x.subtitle["it"];
+      // }
       if (x.description) {
+        if (x.description[this.language])
         poiElement.description += '<br/>' + x.description[this.language];
+        else poiElement.description += '<br/>' + x.description["it"];
       }
       if (x.image) {
         poiElement.image = x.image;
@@ -180,29 +187,39 @@ export class ListFoodPage implements OnInit {
         poiElement.id = x._id;
       }
       if (x.timetable) {
+        if (x.timetable[this.language])
         poiElement.date = x.timetable[this.language];
+        else poiElement.date = x.timetable["it"];
       }
       if (x.closing) {
         if (x.closing[this.language]) {
+          if( x.closing[this.language])
           poiElement.info = '<b>Chiusura: ' + x.closing[this.language] + '</b>';
+          else poiElement.info = '<b>Chiusura: ' + x.closing["it"] + '</b>';
         }
       }
       if (x.address) {
+        if(x.address[this.language])
         poiElement.address = x.address[this.language];
+        else poiElement.address = x.address["it"];
       }
       if (x.description) {
+        if( x.description[this.language])
         poiElement.text = x.description[this.language];
+        else poiElement.text = x.description["it"];
       }
       if (x.category) {
         poiElement.category = x.category.charAt(0).toUpperCase() + x.category.slice(1);
       }
       if (x.classification) {
+        if ( x.classification[this.language])
         poiElement.subtitle = x.classification[this.language];
-        // poiElement.cat = [];
-        // poiElement.cat.push(x.classification[this.language]);
+        else poiElement.subtitle = x.classification["it"];
       }
       if (x.classification) {
+        if (x.classification[this.language])
         poiElement.classification = x.classification[this.language];
+        else poiElement.classification = x.classification["it"];
         // poiElement.cat = [];
         // poiElement.cat.push(x.classification[this.language]);
       }
@@ -276,10 +293,11 @@ export class ListFoodPage implements OnInit {
           // checks whether an element is even
           return element.isChecked;
         };
-        this.tags=filters.data;
+        if (filters.data) {
+          this.tags = filters.data;
+        }
+        if (filters.data && filters.data.some(even)) {
 
-        if (filters.data.some(even))
-        {
           this.firstAccess = false;
           this.buildShowPois(this.tags)
 
@@ -321,30 +339,7 @@ export class ListFoodPage implements OnInit {
         } else {
     this.buildShowPois();}
   }
-  // toggleSearch() {
-  //   this.search = !this.search;
-  //   const searchbar = document.querySelector('ion-searchbar');
-  //   if (searchbar.style.display === 'none') {
-  //     searchbar.style.display = 'unset';
-  //     searchbar.setFocus();
-  //   } else {
-  //     searchbar.style.display = 'none';
-  //   }
-  // }
-
-  // searchChanged(input: any) {
-  //   const value = input.detail.target.value;
-  //   const _this = this;
-  //   _this.categories.forEach(c => {
-  //     this.showPois[c] = this.fullPois.filter(function (el) {
-  //       return (el.title.toLowerCase().indexOf(value.toLowerCase()) > -1);
-  //     });
-  //   });
-  // }
-
-  // filterClicked() {
-  //   this.buildAlert('filter');
-  // }
+  
 
   async buildAlert(type: string) {
     const _this = this;

@@ -98,7 +98,7 @@ export class HomePage extends MainPage {
     console.log(item);
     this.dbService.getObjectByDataId(item.objectIds[0]).then(res => {
       var found = res.docs.filter(obj => {
-        return obj["element-type"] != undefined
+        return obj["elementType"] != undefined
       })
       this.router.navigate(['/detail-poi'], { queryParams: { _id: found._id } });
     })

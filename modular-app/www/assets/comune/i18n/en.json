@@ -14,5 +14,7 @@
     "distance_label":"Distanza: ",
     "poi_list":"Tappe",
     "service_label":"Servizi per il turista",
-    "empty_list":"Nessun elemento presente"
+    "empty_list":"Nessun elemento presente",
+    "cancel_button":"Annulla",
+    "ok_button":"Ok"
 }

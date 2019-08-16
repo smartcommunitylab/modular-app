@@ -20,7 +20,7 @@
     "icon": "home",
     "params": {
       "selector": {
-        "element-type": "event-item"
+        "elementType": "event-item"
       }
     }
   }, {
@@ -158,7 +158,7 @@
     "icon": "home",
     "params": {
       "selector": {
-        "element-type": "itinerary-item"
+        "elementType": "itinerary-item"
       },
       "type": "itineraries"
     }

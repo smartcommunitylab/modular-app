@@ -36,7 +36,7 @@ export class ListFarmaciePage implements OnInit {
   farmacieTurno: string;
   turno: boolean = true;
   emptyList: boolean = false;
-
+  closingLabel: string = "";
   constructor(
     private modalController: ModalController,
     private config: ConfigService,
@@ -84,6 +84,7 @@ export class ListFarmaciePage implements OnInit {
       value => {
         this.altImage = value;
         this.distanceLabel = this.translate.instant('distance_label');
+        this.closingLabel = this.translate.instant('closing_label');
       }
     );
     this.config.getStringContacts(this.translate, this.language).then(strings => {
@@ -118,7 +119,7 @@ export class ListFarmaciePage implements OnInit {
     if (this.category) {
       let query = {
         'selector': {
-          'element-type': 'poi-item', 'classification.it': "Farmacia"
+          'elementType': 'poi-item', 'classification.it': "Farmacia"
 
         }
       };
@@ -190,14 +191,31 @@ export class ListFarmaciePage implements OnInit {
     const poiElement: any = {};
     if (x) {
       if (x.title) {
-        poiElement.title = x.title[this.language];
+        if (x.title[this.language]) {
+          poiElement.title = x.title[this.language];
+        }
+        else {
+          poiElement.title = x.title["it"];
+        }
+
       }
       if (x.subtitle) {
-        poiElement.description = x.subtitle[this.language];
+        if (x.subtitle[this.language]) {
+
+          poiElement.description = x.subtitle[this.language];
+        } else {
+          poiElement.description = x.subtitle["it"];
+
+        }
       }
       if (x.description) {
-        poiElement.description += '<br/>' + x.description[this.language];
+        if (x.description[this.language]) {
+          poiElement.description += '<br/>' + x.description[this.language];
+        } else {
+          poiElement.description += '<br/>' + x.description["it"];
+        }
       }
+
       if (x.image) {
         poiElement.image = x.image;
       }
@@ -205,31 +223,45 @@ export class ListFarmaciePage implements OnInit {
         poiElement.id = x._id;
       }
       if (x.timetable) {
-        poiElement.date = x.timetable[this.language];
+        if (x.timetable[this.language]) {
+          poiElement.date = x.timetable[this.language];
+        } else {
+          poiElement.date = x.timetable["it"];
+        }
+
       }
       if (x.closing) {
         if (x.closing[this.language]) {
-          poiElement.info = '<b>Chiusura: ' + x.closing[this.language] + '</b>';
+          poiElement.info = '<b>' + this.closingLabel + ': ' + x.closing[this.language] + '</b>';
+        } else {
+          poiElement.info = '<b>' + this.closingLabel + ': ' + x.closing["it"] + '</b>';
         }
       }
       if (x.address) {
-        poiElement.address = x.address[this.language];
+        if (x.address[this.language]) {
+          poiElement.address = x.address[this.language];
+        }
+        else {
+          poiElement.address = x.address["it"];
+        }
       }
       if (x.description) {
-        poiElement.text = x.description[this.language];
+        if (x.description[this.language])
+        {poiElement.text = x.description[this.language];}
+        else {
+          poiElement.text = x.description["it"];
+
+        }
       }
       if (x.category) {
         poiElement.category = x.category.charAt(0).toUpperCase() + x.category.slice(1);
       }
       if (x.classification) {
-        poiElement.subtitle = x.classification[this.language];
-        // poiElement.cat = [];
-        // poiElement.cat.push(x.classification[this.language]);
-      }
-      if (x.classification) {
-        poiElement.classification = x.classification[this.language];
-        // poiElement.cat = [];
-        // poiElement.cat.push(x.classification[this.language]);
+        if (x.classification[this.language])
+        {poiElement.classification = x.classification[this.language];}
+        else {
+          poiElement.classification = x.classification["it"];
+        }
       }
       if (x.url) {
         poiElement.url = x.url;
@@ -446,7 +478,7 @@ export class ListFarmaciePage implements OnInit {
     _this.isLoading = false;
   }
   getDistance(poi) {
-    return this.distanceLabel + (poi.distance / 1000).toFixed(2) + " Km";
+    return this.distanceLabel + (poi.distance ).toFixed(2) + " Km";
   }
   showPopover() {
     this.buildAlert('cat');

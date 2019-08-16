@@ -258,7 +258,7 @@ var ListFoodPage = /** @class */ (function () {
     ListFoodPage.prototype.ionViewDidEnter = function () {
         var _this_1 = this;
         if (this.category) {
-            var query_1 = { 'selector': { 'element-type': 'restaurant-item' } };
+            var query_1 = { 'selector': { 'elementType': 'restaurant-item' } };
             this.dbService.synch().then(function () {
                 _this_1.dbService.getObjectByQuery(query_1).then(function (data) {
                     _this_1.fullPois = data.docs.map(function (x) { return _this_1.convertPois(x); });

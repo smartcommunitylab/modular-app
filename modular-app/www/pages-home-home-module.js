@@ -252,7 +252,7 @@ var HomePage = /** @class */ (function (_super) {
         console.log(item);
         this.dbService.getObjectByDataId(item.objectIds[0]).then(function (res) {
             var found = res.docs.filter(function (obj) {
-                return obj["element-type"] != undefined;
+                return obj["elementType"] != undefined;
             });
             _this.router.navigate(['/detail-poi'], { queryParams: { _id: found._id } });
         });

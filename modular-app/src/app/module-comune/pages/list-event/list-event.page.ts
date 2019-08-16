@@ -80,7 +80,7 @@ export class ListEventPage implements OnInit {
     // array=array.concat(arrayMultipleEventTags);
     var newArray1 = array.flat();
     var newArray = newArray1.filter((value, index, self) => {
-      return self.indexOf(value) === index && value!=undefined
+      return self.indexOf(value) === index && value != undefined
 
     })
     var value = this.firstAccess ? false : true;
@@ -91,7 +91,7 @@ export class ListEventPage implements OnInit {
       }
     })
     //addmultipleEventTag
-    return returnArray; 
+    return returnArray;
 
   }
   ionViewDidEnter() {
@@ -223,7 +223,7 @@ export class ListEventPage implements OnInit {
 
   buildShowPois(filters?) {
     this.showPois = [];
-    this.fullPois.forEach(p => { 
+    this.fullPois.forEach(p => {
       if (!this.showPois[p.category]) {
         this.showPois[p.category] = [];
       }
@@ -234,7 +234,7 @@ export class ListEventPage implements OnInit {
         // else (item.isChecked &&   p.parentObjectName == item.value)
       }).length > 0 : true) {
         this.showPois[p.category].push(p);
-      } 
+      }
     });
     //orderArray
     this.orderArray('asc', this);
@@ -244,13 +244,22 @@ export class ListEventPage implements OnInit {
     const poiElement: any = {};
     if (x) {
       if (x.title) {
+        if (x.title[this.language])
         poiElement.title = x.title[this.language];
+        else poiElement.title = x.title["it"];
       }
       if (x.subtitle) {
+        if (x.subtitle[this.language])
         poiElement.subtitle = x.subtitle[this.language];
+        else poiElement.subtitle = x.subtitle["it"];
+      }
+      if (x.fromTime) {
+        poiElement.fromTime = x.fromTime;
       }
       if (x.description) {
+        if (x.description[this.language])
         poiElement.description = x.description[this.language];
+        else poiElement.description = x.description["it"];
       }
       if (x.image) {
         poiElement.image = x.image;
@@ -261,26 +270,36 @@ export class ListEventPage implements OnInit {
       if (x.topics) {
         poiElement.cat = x.topics;
       }
-      else poiElement["cat"]=[];
+      else poiElement["cat"] = [];
       if (x.eventPeriod) {
+        if ( x.eventPeriod[this.language])
         poiElement.date = x.eventPeriod[this.language];
+        else poiElement.date = x.eventPeriod["it"];
       }
       if (x.eventTiming) {
+        if (x.eventTiming[this.language])
         poiElement.time = x.eventTiming[this.language];
+        else poiElement.time = x.eventTiming["it"];
       }
       if (x.info) {
+        if ( x.info[this.language])
         poiElement.info = x.info[this.language];
+        else poiElement.info = x.info["it"];
       }
       if (x.address) {
+        if ( x.address[this.language])
         poiElement.address = x.address[this.language];
+        else poiElement.address = x.address["it"];
       }
       if (x.description) {
+        if (x.description[this.language])
         poiElement.text = x.description[this.language];
+        else poiElement.text = x.description["it"];
       }
-      if (x.parentEventId){ 
+      if (x.parentEventId) {
         if (poiElement.cat)
-        poiElement.cat.push( JSON.parse(x.parentEventId).objectName);
-        else poiElement["cat"]=[ JSON.parse(x.parentEventId).objectName];
+          poiElement.cat.push(JSON.parse(x.parentEventId).objectName);
+        else poiElement["cat"] = [JSON.parse(x.parentEventId).objectName];
         // poiElement.parentObjectName = JSON.parse(x.parentEventId).objectName;
       }
       //TO DO
@@ -291,7 +310,9 @@ export class ListEventPage implements OnInit {
           poiElement.category = x.category;
       }
       if (x.classification) {
+        if (x.classification[this.language])
         poiElement.classification = x.classification[this.language];
+        else poiElement.classification = x.classification["it"];
       }
       if (x.url) {
         poiElement.url = x.url;
@@ -365,9 +386,10 @@ export class ListEventPage implements OnInit {
           // checks whether an element is even
           return element.isChecked;
         };
-        this.tags = filters.data;
-
-        if (filters.data.some(even)) {
+        if (filters.data) {
+          this.tags = filters.data;
+        }
+        if (filters.data && filters.data.some(even)) {
           this.presentFilter = true;
           this.firstAccess = false;
           this.buildShowPois(this.tags)

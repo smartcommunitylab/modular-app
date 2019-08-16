@@ -123,8 +123,8 @@ export class WcDetails {
     }
     if (arr.url) {
       tmp.url = arr.url;
-      tmp.share = arr.url;
     }
+    tmp.share = this.contactsJSON;
 
     var keys = Object.keys(tmp);
 

@@ -24,7 +24,7 @@ export class DbService {
     this.db = new PouchDB('comune-in-tasca');
 
     this.remote ='https://cit.platform.smartcommunitylab.it/comuneintasca2';
-    //  'http://192.168.42.201:5984/comune-in-tasca';
+    // 'http://192.168.42.201:5984/comune-in-tasca';
     //'http://192.168.1.197:5984/comune-in-tasca'
     // 'http://127.0.0.1:5984/comune-in-tasca';
 
@@ -136,14 +136,14 @@ export class DbService {
         if (query.type !== 'event') {
           return this.db.find({
             selector: {
-              'element-type': view,
+              'elementType': view,
               'classification.it': classification
             }
           });
         } else {
           return this.db.find({
             selector: {
-              'element-type': view,
+              'elementType': view,
               'category': classification
             }
           });
@@ -151,35 +151,37 @@ export class DbService {
       } else {
         return this.db.find({
           selector: {
-            'element-type': view
+            'elementType': view
           }
         });
       }
     }
     if (query.selector) {
-      if (query.selector['element-type'] == 'event-item') {
+      if (query.selector['elementType'] == 'event-item') {
         return this.db.find({
           selector: {
+
             "$or": [
 
               {
-                 "element-type": "event-item"
+                 "elementType": "event-item"
               },
               {
-                "element-type": "main-event-item"
+                "elementType": "main-event-item"
              }
            ]
-          //   ,
-          //   "$nor": [
-          //     { "fromTime": {
-          //       "$lte": new Date().getTime()
-          //    }
-          //   },{ "toTime": {
-          //     "$lte": new Date().getTime()
-          //  }
-          // }]
-          },
-          "limit": 100
+            ,
+            "$nor": [
+              { "fromTime": {
+                "$lte": new Date().getTime()
+             }
+            },{ "toTime": {
+              "$lte": new Date().getTime()
+           }
+          }]
+          }
+          // ,
+          // "limit": 100
         });
       }
     }

@@ -1,4 +1,4 @@
-#buttonGiorni{
+#buttonGiorni {
     position: absolute;
     right: 0;
     margin: 10px 10px;
@@ -11,18 +11,22 @@
     overflow: hidden;
 
 }
-
-ion-icon{
+ion-searchbar {
+    position: fixed;
+    // top: 58px;
+    z-index: 999;
+}
+ion-icon {
     width: 30px;
     height: 30px;
 }
 
-#scroll{
+#scroll {
     margin-top: 30px;
     margin-bottom: 0;
 }
 
-#buttonTop{
+#buttonTop {
     position: fixed;
     right: 0;
     bottom: 0;
@@ -31,7 +35,62 @@ ion-icon{
     padding: 10px 10px 5px 10px;
     z-index: 9999;
 }
-.interaction {
-    color: #11B3EF!important;
+
+.wrapper {
+    .scrolling-wrapper-flexbox {
+        -webkit-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+        -moz-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+        -ms-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+        -o-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+        background-color: white;
+        width: 100%;
+        display: flex;
+        overflow-x: auto;
+        z-index: 999;
+        position: fixed;
+
+        .container {
+            flex: 0 0 auto;
+
+            .tag {
+                flex: 0 0 auto;
+                margin: 8px;
+
+                .tag-text {
+                    padding: 4px;
+                    color: white;
+                    background-color: #11b3ef;
+                }
+            }
+
+        }
+
+        ion-chip {
+            flex: 0 0 auto;
+            background-color: white;
+        }
+    }
 }
 
+.interaction {
+    color: #11b3ef;
+}
+
+.datesSelected {
+    color: white !important;
+    background-color: #11b3ef !important;
+
+}
+.label-type{
+    width: 100%;
+    font-weight: bold;
+    --background: #e3e3e3;
+    --color: #707070;
+    font-size: 22px;
+    margin-bottom: 8px;
+
+    div{
+        width: 100%;
+    }
+}

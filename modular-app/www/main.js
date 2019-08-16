@@ -8,12 +8,12 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
-	"./v1wzpgyr.entry.js": [
-		"../wc-dettagliofunerale/dist/esm/es5/build/v1wzpgyr.entry.js",
+	"./olwdpuhx.entry.js": [
+		"../wc-dettagliofunerale/dist/esm/es5/build/olwdpuhx.entry.js",
 		127
 	],
-	"./v1wzpgyr.sc.entry.js": [
-		"../wc-dettagliofunerale/dist/esm/es5/build/v1wzpgyr.sc.entry.js",
+	"./olwdpuhx.sc.entry.js": [
+		"../wc-dettagliofunerale/dist/esm/es5/build/olwdpuhx.sc.entry.js",
 		128
 	]
 };
@@ -50,7 +50,7 @@ module.exports = webpackAsyncContext;
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "COMPONENTS", function() { return COMPONENTS; });
 // WcDettagliofunerale: Host Data, ES Module/es5 Target
-var COMPONENTS = [["dettaglio-morte","v1wzpgyr",1,[["funerale",1,0,1,2],["funeraleState",16],["string",1,0,1,2],["stringState",16]],1]]
+var COMPONENTS = [["dettaglio-morte","olwdpuhx",1,[["funerale",1,0,1,2],["funeraleState",16],["string",1,0,1,2],["stringState",16]],1]]
 
 /***/ }),
 
@@ -2221,6 +2221,8 @@ var map = {
 	],
 	"./pages/funerali/funerali.module": [
 		"./src/app/module-funerali/pages/funerali/funerali.module.ts",
+		"default~pages-funerali-funerali-module~pages-home-trasporti-home-trasporti-module~pages-list-event-l~db85891d",
+		"common",
 		"pages-funerali-funerali-module"
 	],
 	"./pages/home-common/home-common.module": [
@@ -2241,7 +2243,7 @@ var map = {
 	"./pages/home-trasporti/home-trasporti.module": [
 		"./src/app/module-trasporti/pages/home-trasporti/home-trasporti.module.ts",
 		"default~pages-home-trasporti-home-trasporti-module~pages-map-spots-map-spots-module~pages-transport-~936e53eb",
-		"default~pages-home-trasporti-home-trasporti-module~pages-list-event-list-event-module~pages-list-poi~75a08768",
+		"default~pages-funerali-funerali-module~pages-home-trasporti-home-trasporti-module~pages-list-event-l~db85891d",
 		"common",
 		"pages-home-trasporti-home-trasporti-module"
 	],
@@ -2260,7 +2262,7 @@ var map = {
 	"./pages/list-event/list-event.module": [
 		"./src/app/module-comune/pages/list-event/list-event.module.ts",
 		"default~pages-detail-event-detail-event-module~pages-detail-info-detail-info-module~pages-detail-pat~3194840c",
-		"default~pages-home-trasporti-home-trasporti-module~pages-list-event-list-event-module~pages-list-poi~75a08768",
+		"default~pages-funerali-funerali-module~pages-home-trasporti-home-trasporti-module~pages-list-event-l~db85891d",
 		"common",
 		"pages-list-event-list-event-module"
 	],
@@ -2290,7 +2292,7 @@ var map = {
 	"./pages/list-poi/list-poi.module": [
 		"./src/app/module-comune/pages/list-poi/list-poi.module.ts",
 		"default~pages-detail-event-detail-event-module~pages-detail-info-detail-info-module~pages-detail-pat~3194840c",
-		"default~pages-home-trasporti-home-trasporti-module~pages-list-event-list-event-module~pages-list-poi~75a08768",
+		"default~pages-funerali-funerali-module~pages-home-trasporti-home-trasporti-module~pages-list-event-l~db85891d",
 		"common",
 		"pages-list-poi-list-poi-module"
 	],

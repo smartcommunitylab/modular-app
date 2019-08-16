@@ -259,7 +259,7 @@ var ListFarmaciePage = /** @class */ (function () {
         if (this.category) {
             var query_1 = {
                 'selector': {
-                    'element-type': 'poi-item', 'classification.it': "Farmacia"
+                    'elementType': 'poi-item', 'classification.it': "Farmacia"
                 }
             };
             this.dbService.synch().then(function () {

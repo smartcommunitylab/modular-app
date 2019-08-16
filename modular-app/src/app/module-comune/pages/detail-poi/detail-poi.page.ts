@@ -102,12 +102,18 @@ export class DetailPoiPage implements OnInit {
     if (this.poiInput) {
       if (this.poiInput.title) {
         poiElement.title = this.poiInput.title[this.language];
+        poiElement.title = this.poiInput.title[this.language];
+        poiElement.title = this.poiInput.title["it"];
       }
       if (this.poiInput.subtitle) {
         poiElement.subtitle = this.poiInput.subtitle[this.language];
+        poiElement.subtitle = this.poiInput.subtitle[this.language];
+        poiElement.subtitle = this.poiInput.subtitle["it"];
       }
       if (this.poiInput.description) {
         poiElement.description = this.poiInput.description[this.language];
+        poiElement.description = this.poiInput.description[this.language];
+        poiElement.description = this.poiInput.description["it"];
       }
       if (this.poiInput.image) {
         poiElement.image = this.poiInput.image;
@@ -119,25 +125,37 @@ export class DetailPoiPage implements OnInit {
         poiElement.cat = this.poiInput.topics;
       }
       if (this.poiInput.eventPeriod) {
+        if  (this.poiInput.eventPeriod[this.language])
         poiElement.date = this.poiInput.eventPeriod[this.language];
+        else poiElement.date = this.poiInput.eventPeriod["it"];
       }
       if (this.poiInput.eventTiming) {
+        if (this.poiInput.eventTiming[this.language])
         poiElement.time = this.poiInput.eventTiming[this.language];
+        else poiElement.time = this.poiInput.eventTiming["it"];
       }
       if (this.poiInput.info) {
+        if ( this.poiInput.info[this.language])
         poiElement.info = this.poiInput.info[this.language];
+        else poiElement.info = this.poiInput.info["it"];
       }
       if (this.poiInput.address) {
+        if ( this.poiInput.address[this.language])
         poiElement.address = this.poiInput.address[this.language];
+        else poiElement.address = this.poiInput.address["it"];
       }
       if (this.poiInput.description) {
+        if (this.poiInput.description[this.language])
         poiElement.text = this.poiInput.description[this.language];
+        else poiElement.text = this.poiInput.description["it"];
       }
       if (this.poiInput.category) {
         poiElement.category = this.poiInput.category;
       }
       if (this.poiInput.classification) {
+        if  (this.poiInput.classification[this.language])
         poiElement.classification = this.poiInput.classification[this.language];
+        else poiElement.classification = this.poiInput.classification["it"];
       }
       if (this.poiInput.url) {
         poiElement.url = this.poiInput.url;

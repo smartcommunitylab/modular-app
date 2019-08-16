@@ -20,12 +20,6 @@
   </ion-toolbar>
 </ion-header>
 
-<!-- <ion-grid style="height: 100%" *ngIf="isLoading">
-  <ion-row justify-content-center align-items-center style="height: 100%">
-    <ion-spinner name="circles"></ion-spinner>
-  </ion-row>
-</ion-grid> -->
-
 <ion-content [scrollEvents]="true" (ionScroll)="onScroll($event)">
 
   <ion-searchbar style="display: none" showCancelButton animated (search)="toggleSearch()"
@@ -53,10 +47,11 @@
   </div>
   <ion-list no-lines id="poi-list">
     <div *ngFor="let c of categories">
-      <!-- <ion-item class="label-type ion-text-center" sticky *ngIf="oneElement(c) && !presentFilter">
+      <ion-item class="label-type ion-text-center" sticky *ngIf="oneElement(c) && !presentFilter">
           <div>{{c}}</div>
-      </ion-item> -->
+      </ion-item>
       <div class="content">
+        
         <div *ngFor="let poi of showPois[c]; let i = index">
           <div class="{{poi.category}}"   inViewport
           [inViewportOptions]="{ threshold: [0] }" (inViewportAction)="onIntersection($event)">

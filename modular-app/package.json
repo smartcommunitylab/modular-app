@@ -67,6 +67,7 @@
     "ionic-long-press": "^1.5.0",
     "jszip": "^2.6.0",
     "jszip-utils": "0.0.2",
+    "moment": "^2.24.0",
     "mx.ferreyra.callnumber": "~0.0.2",
     "ng-in-viewport": "^6.0.3",
     "ng2-dragula": "^2.1.1",
@@ -75,7 +76,7 @@
     "rxjs": "^6.3.3",
     "tslib": "^1.9.3",
     "wc-trasporti": "file:../wc-trasporti/wc-trasporti",
-    "wcs-comune": "0.0.154",
+    "wcs-comune": "0.0.157",
     "wcs-dettagliofunerale": "file:../wc-dettagliofunerale",
     "wcs-info": "file:../wc-info/wc-info",
     "zone.js": "~0.8.26"

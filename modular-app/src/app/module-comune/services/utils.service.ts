@@ -37,7 +37,7 @@ export class UtilsService {
 
   }
   openShare(value: any): any {
-    throw new Error("Method not implemented.");
+    console.log(value);
   }
 
 

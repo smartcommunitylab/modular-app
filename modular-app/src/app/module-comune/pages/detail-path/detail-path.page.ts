@@ -46,6 +46,7 @@ export class DetailPathPage implements OnInit {
   }
 
   private getPois(path: any) {
+    this.dbService.synch().then(() => {
     path.steps.forEach(element => {
       const query = {
         selector: {
@@ -53,7 +54,6 @@ export class DetailPathPage implements OnInit {
           'localId': element
         }
       };
-      this.dbService.synch().then(() => {
         this.dbService.getObjectByQuery(query).then(data => {
           if (data.docs[0]) {
             this.fullPois.push(this.convertPois(data.docs[0]));

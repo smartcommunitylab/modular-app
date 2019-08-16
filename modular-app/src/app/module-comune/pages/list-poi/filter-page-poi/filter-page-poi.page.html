@@ -20,13 +20,13 @@
 <ion-footer>
   <ion-grid>
     <ion-row>
-      <ion-col>
-        <ion-button (click)="closeModal()">cancel</ion-button>
-      </ion-col>
-      <ion-col>
-        <ion-button (click)="filter()">ok</ion-button>
-
-      </ion-col>
+        <ion-col size="6">
+            <ion-button class="button-interaction" (click)="closeModal()">{{'cancel_button'|translate}}</ion-button>
+          </ion-col>
+          <ion-col size="6">
+            <ion-button class="button-interaction" (click)="filter()">{{'ok_button'|translate}}</ion-button>
+    
+          </ion-col>
     </ion-row>
   </ion-grid>
 </ion-footer>

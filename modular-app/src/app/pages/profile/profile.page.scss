@@ -1,6 +1,8 @@
 ion-content {
-    --overflow: hidden;;
+    --overflow: hidden;
+    ;
 }
+
 ion-button {
     margin: auto;
     text-align: center;
@@ -8,15 +10,18 @@ ion-button {
     width: 50%;
     font-size: 22px;
     font-weight: bold;
-    --color: #11b3ef!important;
---background: #e3e3e3!important;
+    --color: #11b3ef !important;
+    --background-activated: #11b3ef !important;
+    --background-focused: #11b3ef !important;
+    --background: #e3e3e3 !important;
 }
 
 ion-button:after {
     content: "";
     display: block;
     padding-bottom: 100%;
-  }
+}
+
 .main-title {
     font-size: 28px;
     color: black;
@@ -26,6 +31,6 @@ ion-button:after {
 
 .second-title {
     font-size: 22px;
-    color:#707070;
+    color: #707070;
     font-weight: bold;
 }
