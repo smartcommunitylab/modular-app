@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-button color=\"dark\" (click)=\"closeModal()\">\n        <ion-icon name=\"arrow-back\"></ion-icon>\n      </ion-button>\n    </ion-buttons>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <ion-list>\n    <ion-item *ngFor=\"let item of filters\">\n      <ion-label>{{item.value}}</ion-label>\n      <ion-checkbox slot=\"end\" [(ngModel)]=\"item.isChecked\"></ion-checkbox>\n    </ion-item>\n  </ion-list>\n\n</ion-content>\n<ion-footer>\n  <ion-grid>\n    <ion-row>\n      <ion-col>\n        <ion-button (click)=\"closeModal()\">cancel</ion-button>\n      </ion-col>\n      <ion-col>\n        <ion-button (click)=\"filter()\">ok</ion-button>\n\n      </ion-col>\n    </ion-row>\n  </ion-grid>\n</ion-footer>"
+module.exports = "<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-button color=\"dark\" (click)=\"closeModal()\">\n        <ion-icon name=\"arrow-back\"></ion-icon>\n      </ion-button>\n    </ion-buttons>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <ion-list>\n    <ion-item *ngFor=\"let item of filters\">\n      <ion-label>{{item.value}}</ion-label>\n      <ion-checkbox slot=\"end\" [(ngModel)]=\"item.isChecked\"></ion-checkbox>\n    </ion-item>\n  </ion-list>\n\n</ion-content>\n<ion-footer>\n  <ion-grid>\n    <ion-row>\n        <ion-col size=\"6\">\n            <ion-button class=\"button-interaction\" (click)=\"closeModal()\">{{'cancel_button'|translate}}</ion-button>\n          </ion-col>\n          <ion-col size=\"6\">\n            <ion-button class=\"button-interaction\" (click)=\"filter()\">{{'ok_button'|translate}}</ion-button>\n    \n          </ion-col>\n    </ion-row>\n  </ion-grid>\n</ion-footer>"
 
 /***/ }),
 
@@ -18,7 +18,7 @@ module.exports = "<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\"
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL21vZHVsZS1jb211bmUvcGFnZXMvbGlzdC1wb2kvZmlsdGVyLXBhZ2UtcG9pL2ZpbHRlci1wYWdlLXBvaS5wYWdlLnNjc3MifQ== */"
+module.exports = ".button-interaction {\n  width: 100%;\n  --background:#11b3ef;\n  --color:white; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL2NoaW44L0RvY3VtZW50cy93b3JrL21vZHVsYXJBcHAvbW9kdWxhci1hcHAvc3JjL2FwcC9tb2R1bGUtY29tdW5lL3BhZ2VzL2xpc3QtcG9pL2ZpbHRlci1wYWdlLXBvaS9maWx0ZXItcGFnZS1wb2kucGFnZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksWUFBVztFQUNYLHFCQUFhO0VBQ2IsY0FBUSxFQUNYIiwiZmlsZSI6InNyYy9hcHAvbW9kdWxlLWNvbXVuZS9wYWdlcy9saXN0LXBvaS9maWx0ZXItcGFnZS1wb2kvZmlsdGVyLXBhZ2UtcG9pLnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi5idXR0b24taW50ZXJhY3Rpb257XG4gICAgd2lkdGg6IDEwMCU7XG4gICAgLS1iYWNrZ3JvdW5kOiMxMWIzZWY7XG4gICAgLS1jb2xvcjp3aGl0ZTtcbn0iXX0= */"
 
 /***/ }),
 
@@ -388,16 +388,28 @@ var ListPoiPage = /** @class */ (function () {
         var poiElement = {};
         if (x) {
             if (x.title) {
-                poiElement.title = x.title[this.language];
+                if (x.title[this.language])
+                    poiElement.title = x.title[this.language];
+                else
+                    poiElement.title = x.title["it"];
             }
             if (x.classification) {
-                poiElement.classification = x.classification[this.language];
+                if (x.classification[this.language])
+                    poiElement.classification = x.classification[this.language];
+                else
+                    poiElement.classification = x.classification["it"];
             }
             if (x.subtitle) {
-                poiElement.subtitle = x.subtitle[this.language];
+                if (x.subtitle[this.language])
+                    poiElement.subtitle = x.subtitle[this.language];
+                else
+                    poiElement.subtitle = x.subtitle["it"];
             }
             if (x.description) {
-                poiElement.description = x.description[this.language];
+                if (x.description[this.language])
+                    poiElement.description = x.description[this.language];
+                else
+                    poiElement.description = x.description["it"];
             }
             if (x.image) {
                 poiElement.image = x.image;
@@ -472,8 +484,10 @@ var ListPoiPage = /** @class */ (function () {
                                 // checks whether an element is even
                                 return element.isChecked;
                             };
-                            _this_1.tags = filters.data;
-                            if (filters.data.some(even)) {
+                            if (filters.data) {
+                                _this_1.tags = filters.data;
+                            }
+                            if (filters.data && filters.data.some(even)) {
                                 _this_1.presentFilter = true;
                                 _this_1.firstAccess = false;
                                 _this_1.buildShowPois(_this_1.tags);

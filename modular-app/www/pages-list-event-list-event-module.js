@@ -477,16 +477,25 @@ var ListEventPage = /** @class */ (function () {
         var poiElement = {};
         if (x) {
             if (x.title) {
-                poiElement.title = x.title[this.language];
+                if (x.title[this.language])
+                    poiElement.title = x.title[this.language];
+                else
+                    poiElement.title = x.title["it"];
             }
             if (x.subtitle) {
-                poiElement.subtitle = x.subtitle[this.language];
+                if (x.subtitle[this.language])
+                    poiElement.subtitle = x.subtitle[this.language];
+                else
+                    poiElement.subtitle = x.subtitle["it"];
             }
             if (x.fromTime) {
                 poiElement.fromTime = x.fromTime;
             }
             if (x.description) {
-                poiElement.description = x.description[this.language];
+                if (x.description[this.language])
+                    poiElement.description = x.description[this.language];
+                else
+                    poiElement.description = x.description["it"];
             }
             if (x.image) {
                 poiElement.image = x.image;
@@ -500,19 +509,34 @@ var ListEventPage = /** @class */ (function () {
             else
                 poiElement["cat"] = [];
             if (x.eventPeriod) {
-                poiElement.date = x.eventPeriod[this.language];
+                if (x.eventPeriod[this.language])
+                    poiElement.date = x.eventPeriod[this.language];
+                else
+                    poiElement.date = x.eventPeriod["it"];
             }
             if (x.eventTiming) {
-                poiElement.time = x.eventTiming[this.language];
+                if (x.eventTiming[this.language])
+                    poiElement.time = x.eventTiming[this.language];
+                else
+                    poiElement.time = x.eventTiming["it"];
             }
             if (x.info) {
-                poiElement.info = x.info[this.language];
+                if (x.info[this.language])
+                    poiElement.info = x.info[this.language];
+                else
+                    poiElement.info = x.info["it"];
             }
             if (x.address) {
-                poiElement.address = x.address[this.language];
+                if (x.address[this.language])
+                    poiElement.address = x.address[this.language];
+                else
+                    poiElement.address = x.address["it"];
             }
             if (x.description) {
-                poiElement.text = x.description[this.language];
+                if (x.description[this.language])
+                    poiElement.text = x.description[this.language];
+                else
+                    poiElement.text = x.description["it"];
             }
             if (x.parentEventId) {
                 if (poiElement.cat)
@@ -529,7 +553,10 @@ var ListEventPage = /** @class */ (function () {
                     poiElement.category = x.category;
             }
             if (x.classification) {
-                poiElement.classification = x.classification[this.language];
+                if (x.classification[this.language])
+                    poiElement.classification = x.classification[this.language];
+                else
+                    poiElement.classification = x.classification["it"];
             }
             if (x.url) {
                 poiElement.url = x.url;

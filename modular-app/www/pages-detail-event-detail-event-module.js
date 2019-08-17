@@ -246,13 +246,22 @@ var DetailEventPage = /** @class */ (function () {
         var poiElement = {};
         if (this.poiInput) {
             if (this.poiInput.title) {
-                poiElement.title = this.poiInput.title[this.language];
+                if (this.poiInput.title[this.language])
+                    poiElement.title = this.poiInput.title[this.language];
+                else
+                    poiElement.title = this.poiInput.title["it"];
             }
             if (this.poiInput.subtitle) {
-                poiElement.subtitle = this.poiInput.subtitle[this.language];
+                if (this.poiInput.subtitle[this.language])
+                    poiElement.subtitle = this.poiInput.subtitle[this.language];
+                else
+                    poiElement.subtitle = this.poiInput.subtitle["it"];
             }
             if (this.poiInput.description) {
-                poiElement.description = this.poiInput.description[this.language];
+                if (this.poiInput.description[this.language])
+                    poiElement.description = this.poiInput.description[this.language];
+                else
+                    poiElement.description = this.poiInput.description["it"];
             }
             if (this.poiInput.image) {
                 poiElement.image = this.poiInput.image;
@@ -264,25 +273,42 @@ var DetailEventPage = /** @class */ (function () {
                 poiElement.cat = this.poiInput.topics;
             }
             if (this.poiInput.eventPeriod) {
-                poiElement.date = this.poiInput.eventPeriod[this.language];
+                if (this.poiInput.eventPeriod[this.language])
+                    poiElement.date = this.poiInput.eventPeriod[this.language];
+                else
+                    poiElement.date = this.poiInput.eventPeriod["it"];
             }
             if (this.poiInput.eventTiming) {
-                poiElement.time = this.poiInput.eventTiming[this.language];
+                if (this.poiInput.eventTiming[this.language])
+                    poiElement.time = this.poiInput.eventTiming[this.language];
+                else
+                    poiElement.time = this.poiInput.eventTiming["it"];
             }
             if (this.poiInput.info) {
-                poiElement.info = this.poiInput.info[this.language];
+                if (this.poiInput.info[this.language])
+                    poiElement.info = this.poiInput.info[this.language];
+                else
+                    poiElement.info = this.poiInput.info["it"];
             }
             if (this.poiInput.address) {
-                poiElement.address = this.poiInput.address[this.language];
+                if (this.poiInput.address[this.language])
+                    poiElement.address = this.poiInput.address[this.language];
+                else
+                    poiElement.address = this.poiInput.address["it"];
             }
             if (this.poiInput.description) {
-                poiElement.text = this.poiInput.description[this.language];
+                if (this.poiInput.description[this.language])
+                    poiElement.text = this.poiInput.description[this.language];
+                else
+                    this.poiInput.description["it"];
             }
             if (this.poiInput.category) {
                 poiElement.category = this.poiInput.category;
             }
             if (this.poiInput.classification) {
                 poiElement.classification = this.poiInput.classification[this.language];
+                poiElement.classification = this.poiInput.classification[this.language];
+                poiElement.classification = this.poiInput.classification["it"];
             }
             if (this.poiInput.url) {
                 poiElement.url = this.poiInput.url;

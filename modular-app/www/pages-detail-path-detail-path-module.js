@@ -191,14 +191,14 @@ var DetailPathPage = /** @class */ (function () {
     }
     DetailPathPage.prototype.getPois = function (path) {
         var _this_1 = this;
-        path.steps.forEach(function (element) {
-            var query = {
-                selector: {
-                    'category': 'cultura',
-                    'localId': element
-                }
-            };
-            _this_1.dbService.synch().then(function () {
+        this.dbService.synch().then(function () {
+            path.steps.forEach(function (element) {
+                var query = {
+                    selector: {
+                        'category': 'cultura',
+                        'localId': element
+                    }
+                };
                 _this_1.dbService.getObjectByQuery(query).then(function (data) {
                     if (data.docs[0]) {
                         _this_1.fullPois.push(_this_1.convertPois(data.docs[0]));

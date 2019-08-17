@@ -132,7 +132,7 @@ export class WcDetails {
       this.tmpContacts.push(
         <div class="external-container">
           <div class="contact-container" onClick={(event: UIEvent) => k.indexOf('share') > -1 ?
-            this.contactClickHandler(k, this.contactsJSON['url'],event) :
+            this.contactClickHandler(k, JSON.stringify(this.contactsJSON),event) :
             this.contactClickHandler(k, this.contactsJSON[k],event)
           }>
             <div class="icon icon-contact">

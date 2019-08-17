@@ -185,13 +185,22 @@ var ListPathPage = /** @class */ (function () {
         var poiElement = {};
         if (x) {
             if (x.title) {
-                poiElement.title = x.title[this.language];
+                if (x.title[this.language])
+                    poiElement.title = x.title[this.language];
+                else
+                    poiElement.title = x.title["it"];
             }
             if (x.subtitle) {
-                poiElement.subtitle = x.subtitle[this.language];
+                if (x.subtitle[this.language])
+                    poiElement.subtitle = x.subtitle[this.language];
+                else
+                    poiElement.subtitle = x.subtitle["it"];
             }
             if (x.description) {
-                poiElement.description = x.description[this.language];
+                if (x.description[this.language])
+                    poiElement.description = x.description[this.language];
+                else
+                    poiElement.description = x.description["it"];
             }
             if (x.image) {
                 poiElement.image = x.image;
