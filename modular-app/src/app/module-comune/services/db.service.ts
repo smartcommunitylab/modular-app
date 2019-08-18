@@ -180,8 +180,8 @@ export class DbService {
            }
           }]
           }
-          // ,
-          // "limit": 100
+          ,
+          "limit": 100
         });
       }
     }

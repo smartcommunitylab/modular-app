@@ -5,8 +5,11 @@
           <ion-icon slot="icon-only" name="arrow-round-back"></ion-icon>
         </div>
         <div shape="round" class="map-button" (click)="goMap()">
-            <ion-icon slot="icon-only" name="map"></ion-icon>
-          </div>
+          <ion-icon slot="icon-only" name="map"></ion-icon>
+        </div>
+        <div shape="round" class="share-button" (click)="share()">
+          <ion-icon slot="icon-only" name="share"></ion-icon>
+        </div>
      <div *ngIf="!isLoading" >
       <!-- <wc-details *ngIf="(paths) && (tabActived == 'info')" [title]="paths.title" [subtitle]="paths.subtitle" [text]="paths.description" [info]="paths.info" [img]="paths.image"></wc-details> -->
       <!-- <wc-details *ngIf="(paths) " [title]="paths.title" [subtitle]="paths.subtitle" [text]="paths.description" [info]="paths.info" [img]="paths.image"></wc-details> -->

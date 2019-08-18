@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DbService } from '../../services/db.service';
+import { UtilsService } from '../../services/utils.service';
 @Component({
   selector: 'app-detail-info',
   templateUrl: './detail-info.page.html',
@@ -13,7 +14,7 @@ export class DetailInfoPage implements OnInit {
     info: any;
     details: any[]=[];
     language="it";
-    constructor(private router: Router, private route: ActivatedRoute, private dbService: DbService) { }
+    constructor(private router: Router, private utils: UtilsService, private route: ActivatedRoute, private dbService: DbService) { }
   
     ngOnInit() {
       this.route.queryParams
@@ -24,6 +25,9 @@ export class DetailInfoPage implements OnInit {
             this.info = info;
           }
         });
+    }
+    share() {
+      this.utils.openShare(JSON.stringify(this.info));
     }
     ionViewDidEnter() {
       if (this.info && this.info.objectIds)

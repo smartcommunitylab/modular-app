@@ -183,6 +183,9 @@ export class DetailPathPage implements OnInit {
   goBack() {
     this.location.back();
   }
+  share() {
+this.utils.openShare(JSON.stringify(this.paths));
+  }
   buildLangPaths() {
     this.paths.description = this.paths.description[this.language];
     this.paths.info = this.paths.info[this.language];

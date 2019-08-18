@@ -91,7 +91,9 @@ export class DetailEventPage implements OnInit {
       })
     }
   }
-
+  share() {
+    this.utils.openShare(JSON.stringify(this.poi));
+      }
   buildContacts() {
     const poiElement: any = {};
     if (this.poiInput) {

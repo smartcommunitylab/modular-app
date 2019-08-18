@@ -83,7 +83,9 @@ export class DetailPoiPage implements OnInit {
   goBack() {
     this.location.back();
   }
-
+  share() {
+    this.utils.openShare(JSON.stringify(this.poi));
+      }
   manageoLcalId(objectIds) {
     if (objectIds.length == 1) {
       this.dbService.synch().then(() => {
