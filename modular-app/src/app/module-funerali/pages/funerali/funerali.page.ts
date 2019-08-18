@@ -6,6 +6,7 @@ import { IonInfiniteScroll, IonContent } from '@ionic/angular';
 import { DatiService } from '../../services/dati-service.service';
 import { start } from 'repl';
 import * as moment from 'moment';
+import { UtilsService } from '../../services/utils.service';
 
 
 @Component({
@@ -40,10 +41,15 @@ export class FuneraliPage {
   fullDates: any = [];
   actualVisualized: any;
 
-  constructor(private social: SocialSharing, private datiService: DatiService) { }
+  constructor(private social: SocialSharing, private datiService: DatiService, private utils: UtilsService) { }
 
   ngOnInit() {
-    this.CaricaDati();
+    this.utils.presentLoading()
+    this.CaricaDati().then(() => {
+      this.utils.hideLoading();
+    }, err => {
+      this.utils.hideLoading();
+    })
   }
 
   typingTimer;                //timer identifier
@@ -71,7 +77,8 @@ export class FuneraliPage {
     });
     this.dates = this.fullDates;
     if (this.dates.length > 0)
-      this.actualVisualized = this.dates[0]
+      setTimeout(() => this.actualVisualized = this.dates[0]
+        , 500)
   }
   oneElement(category) {
     if (this.showFunerali && this.showFunerali[category])
@@ -82,23 +89,23 @@ export class FuneraliPage {
     this.typingTimer = setTimeout(() => {
       if (!input.detail) {
         this.dates.forEach(c => {
-          this.showFunerali[c] = this.vetFunerali.filter( el => {
+          this.showFunerali[c] = this.vetFunerali.filter(el => {
             return (el.dataFunerale == c);
           });
         });
         // emptyList = false;
       }
       else {
-      const value = input.detail.target.value;
-      // const _this = this;
-      this.dates.forEach(c => {
-        this.showFunerali[c] = this.vetFunerali.filter(el => {
-          if (el.nome)
-            return (el.nome.toLowerCase().indexOf(value.toLowerCase()) > -1 && el.dataFunerale == c);
-          return false
+        const value = input.detail.target.value;
+        // const _this = this;
+        this.dates.forEach(c => {
+          this.showFunerali[c] = this.vetFunerali.filter(el => {
+            if (el.nome)
+              return (el.nome.toLowerCase().indexOf(value.toLowerCase()) > -1 && el.dataFunerale == c);
+            return false
+          });
         });
-      });
-    }
+      }
     }, this.doneTypingInterval);
 
   }
@@ -249,23 +256,22 @@ export class FuneraliPage {
   }
 
   //test per l'infinity scroll
-  CaricaDati() {
-    //aggiungere controllo sulla variabile isSepoltura
-    // this.vetFunerali.push(this.Funerale);
-    // this.vetFunerali.push(this.Funerale);
-    // this.vetFunerali.push(this.Funerale);
-    // this.vetFunerali.push(this.Funerale);
-    let startDate = new Date();
-    var pastDate = startDate.getDate() - 7;
-    startDate.setDate(pastDate);
-    this.datiService.getDati(this.yyyymmdd(startDate)).then((res) => {
-      console.log(res);
-      this.vetFunerali = this.convertDates(res);
-      this.subCategories(this.vetFunerali);
-      this.buildShowPois();
+  CaricaDati(): Promise<any> {
 
+    return new Promise<any>((resolve, reject) => {
+      let startDate = new Date();
+      var pastDate = startDate.getDate() - 7;
+      startDate.setDate(pastDate);
+      this.datiService.getDati(this.yyyymmdd(startDate)).then((res) => {
+        console.log(res);
+        this.vetFunerali = this.convertDates(res);
+        this.subCategories(this.vetFunerali);
+        this.buildShowPois();
+        resolve();
+      }, err => {
+        reject();
+      })
     })
-    // this.infiniteScroll.complete();
   }
   convertDates(res: any): any[] {
     //     dataFunerale: "2019-08-09"
@@ -273,7 +279,7 @@ export class FuneraliPage {
     // luogoFunerale: "LOMAZZO -  - LOMAZZO"
     // nome: "CASARTELLI,OSCAR"
     // oraFunerale: "08:45:00"
-    return res.map(el => { 
+    return res.map(el => {
       // var elem = {};
       if (el.dataFunerale)
         el.dataFunerale = (moment(el.dataFunerale, 'YYYY-MM-DD').format('DD/MM/YYYY'))
@@ -281,7 +287,7 @@ export class FuneraliPage {
         el.dataMorte = (moment(el.dataMorte, 'YYYY-MM-DD').format('DD/MM/YYYY'))
       if (el.oraFunerale)
         el.oraFunerale = (moment(el.oraFunerale, 'HH:mm:ss').format('HH:mm'))
-        return el;
+      return el;
     })
 
   }

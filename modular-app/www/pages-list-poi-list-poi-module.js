@@ -529,7 +529,7 @@ var ListPoiPage = /** @class */ (function () {
         });
         this.categories = this.fullCategories;
         if (this.categories.length > 0)
-            this.actualVisualized = this.categories[0];
+            setTimeout(function () { return _this_1.actualVisualized = _this_1.categories[0]; }, 500);
     };
     ListPoiPage.prototype.buildShowPois = function (filters) {
         var _this_1 = this;

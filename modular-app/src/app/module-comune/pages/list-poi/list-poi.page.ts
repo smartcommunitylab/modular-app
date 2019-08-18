@@ -295,8 +295,8 @@ export class ListPoiPage implements OnInit {
     });
     this.categories = this.fullCategories;
     if (this.categories.length > 0)
-      this.actualVisualized = this.categories[0]
-  }
+    setTimeout(() => this.actualVisualized = this.categories[0]
+    , 500)  }
 
   buildShowPois(filters?) {
     this.showPois = [];
