@@ -46,26 +46,31 @@ export class DetailPathPage implements OnInit {
   }
 
   private getPois(path: any) {
-    this.dbService.synch().then(() => {
+    // this.dbService.synch().then(() => {
+    const query = {
+      "selector": {
+        "$or": []
+      }
+    };
     path.steps.forEach(element => {
-      const query = {
-        selector: {
-          'category': 'cultura',
-          'localId': element
-        }
-      };
-        this.dbService.getObjectByQuery(query).then(data => {
-          if (data.docs[0]) {
-            this.fullPois.push(this.convertPois(data.docs[0]));
-          }
-        }).then(() => {
-          this.showPois = this.fullPois;
-          this.isLoading = false;
-          this.utils.hideLoading();
+      query.selector.$or.push({ "localId": element })
+    });
+
+    this.dbService.getObjectByQuery(query).then(data => {
+      if (data.docs) {
+        data.docs.forEach(element => {
+          this.fullPois.push(this.convertPois(element));
 
         });
-      });
+      }
+    }).then(() => {
+      this.showPois = this.fullPois;
+      this.isLoading = false;
+      this.utils.hideLoading();
+
     });
+    // });
+    // });
   }
 
   ngOnInit() {
@@ -184,7 +189,7 @@ export class DetailPathPage implements OnInit {
     this.location.back();
   }
   share() {
-this.utils.openShare(JSON.stringify(this.paths));
+    this.utils.openShare(JSON.stringify(this.paths));
   }
   buildLangPaths() {
     this.paths.description = this.paths.description[this.language];

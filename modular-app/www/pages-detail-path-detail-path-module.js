@@ -191,25 +191,28 @@ var DetailPathPage = /** @class */ (function () {
     }
     DetailPathPage.prototype.getPois = function (path) {
         var _this_1 = this;
-        this.dbService.synch().then(function () {
-            path.steps.forEach(function (element) {
-                var query = {
-                    selector: {
-                        'category': 'cultura',
-                        'localId': element
-                    }
-                };
-                _this_1.dbService.getObjectByQuery(query).then(function (data) {
-                    if (data.docs[0]) {
-                        _this_1.fullPois.push(_this_1.convertPois(data.docs[0]));
-                    }
-                }).then(function () {
-                    _this_1.showPois = _this_1.fullPois;
-                    _this_1.isLoading = false;
-                    _this_1.utils.hideLoading();
-                });
-            });
+        // this.dbService.synch().then(() => {
+        var query = {
+            "selector": {
+                "$or": []
+            }
+        };
+        path.steps.forEach(function (element) {
+            query.selector.$or.push({ "localId": element });
         });
+        this.dbService.getObjectByQuery(query).then(function (data) {
+            if (data.docs) {
+                data.docs.forEach(function (element) {
+                    _this_1.fullPois.push(_this_1.convertPois(element));
+                });
+            }
+        }).then(function () {
+            _this_1.showPois = _this_1.fullPois;
+            _this_1.isLoading = false;
+            _this_1.utils.hideLoading();
+        });
+        // });
+        // });
     };
     DetailPathPage.prototype.ngOnInit = function () {
         var _this_1 = this;

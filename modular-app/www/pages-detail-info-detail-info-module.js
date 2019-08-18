@@ -94,6 +94,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var _services_db_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/db.service */ "./src/app/module-comune/services/db.service.ts");
+/* harmony import */ var _services_utils_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../services/utils.service */ "./src/app/module-comune/services/utils.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -106,9 +107,11 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var DetailInfoPage = /** @class */ (function () {
-    function DetailInfoPage(router, route, dbService) {
+    function DetailInfoPage(router, utils, route, dbService) {
         this.router = router;
+        this.utils = utils;
         this.route = route;
         this.dbService = dbService;
         this.details = [];
@@ -124,6 +127,9 @@ var DetailInfoPage = /** @class */ (function () {
                 _this.info = info;
             }
         });
+    };
+    DetailInfoPage.prototype.share = function () {
+        this.utils.openShare(JSON.stringify(this.info));
     };
     DetailInfoPage.prototype.ionViewDidEnter = function () {
         var _this = this;
@@ -154,7 +160,7 @@ var DetailInfoPage = /** @class */ (function () {
             template: __webpack_require__(/*! ./detail-info.page.html */ "./src/app/module-comune/pages/detail-info/detail-info.page.html"),
             styles: [__webpack_require__(/*! ./detail-info.page.scss */ "./src/app/module-comune/pages/detail-info/detail-info.page.scss")]
         }),
-        __metadata("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"], _angular_router__WEBPACK_IMPORTED_MODULE_1__["ActivatedRoute"], _services_db_service__WEBPACK_IMPORTED_MODULE_2__["DbService"]])
+        __metadata("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"], _services_utils_service__WEBPACK_IMPORTED_MODULE_3__["UtilsService"], _angular_router__WEBPACK_IMPORTED_MODULE_1__["ActivatedRoute"], _services_db_service__WEBPACK_IMPORTED_MODULE_2__["DbService"]])
     ], DetailInfoPage);
     return DetailInfoPage;
 }());
