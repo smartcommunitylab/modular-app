@@ -43,7 +43,8 @@ export class AppHome {
   @Prop() littletable: boolean;
   @Prop() showHeader: boolean;
   @Prop() agencyid: string;
-
+  @Prop() emptytable: boolean;
+  @Prop() emptytablelabel: string;
   @Watch('littletable')
   changeStyle() {
     this.changeStyleTable();
@@ -601,7 +602,10 @@ export class AppHome {
             </ion-col>
           </ion-row>
         </div>
-        <div class="row table-container" >
+        { this.emptytable
+         ?<div class="no-table">{this.emptytablelabel}</div>
+
+        : <div class="row table-container" >
           <div class={"tt-table" + (this.accessibility === true ? ' tt-table-acc' : ' ')}>
             {this.orari && this.showHeader
               ? <div id="table-corner" style={styleTableCorner} >
@@ -625,26 +629,26 @@ export class AppHome {
 
                   parseInt(index) % 2 == 0
                     ? <div id='grigioFermate' onClick={() => this.showStop(stop)}>
-                    { this.accessibility
-                    ? <div>
-                      {!!this.dataTT.wheelChairBoarding && this.dataTT.wheelChairBoarding[index] == 1
-                        ? <div><div class="accessibilityBullet"><ion-icon name="radio-button-on"></ion-icon></div>{stop}</div>
-                        : <div><div class="accessibilityBullet"></div>  <span>{stop}</span></div>
+                      {this.accessibility
+                        ? <div>
+                          {!!this.dataTT.wheelChairBoarding && this.dataTT.wheelChairBoarding[index] == 1
+                            ? <div><div class="accessibilityBullet"><ion-icon name="radio-button-on"></ion-icon></div>{stop}</div>
+                            : <div><div class="accessibilityBullet"></div>  <span>{stop}</span></div>
+                          }
+                        </div>
+                        : <div>{stop}</div>
                       }
-                      </div>
-                      :<div>{stop}</div>
-                    }
                     </div>
                     : <div id='biancoFermate' onClick={() => this.showStop(stop)}>
-                     { this.accessibility
-                      ? <div>
-                      {!!this.dataTT.wheelChairBoarding && this.dataTT.wheelChairBoarding[index] == 1
-                        ? <div><div class="accessibilityBullet"><ion-icon name="radio-button-on"></ion-icon></div>{stop}</div>
-                        : <div><div class="accessibilityBullet"></div> <span>{stop}</span></div>
+                      {this.accessibility
+                        ? <div>
+                          {!!this.dataTT.wheelChairBoarding && this.dataTT.wheelChairBoarding[index] == 1
+                            ? <div><div class="accessibilityBullet"><ion-icon name="radio-button-on"></ion-icon></div>{stop}</div>
+                            : <div><div class="accessibilityBullet"></div> <span>{stop}</span></div>
+                          }
+                        </div>
+                        : <div>{stop}</div>
                       }
-                                            </div>
-                      :<div>{stop}</div>
-                    }
                     </div>
                 )}
               </div>
@@ -662,11 +666,8 @@ export class AppHome {
             </ion-content>
           </div>
         </div>
+        }
       </div>
     ];
   }
-  // formatDate(day: string, format): any {
-  //   // console.log(moment(day).format(format))
-  //   return moment(Number(day)).format(format);
-  // }
 }

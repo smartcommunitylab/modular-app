@@ -26,6 +26,8 @@ export declare class AppHome {
     littletable: boolean;
     showHeader: boolean;
     agencyid: string;
+    emptytable: boolean;
+    emptytablelabel: string;
     changeStyle(): void;
     changeDateEvent: EventEmitter;
     showStopEvent: EventEmitter;

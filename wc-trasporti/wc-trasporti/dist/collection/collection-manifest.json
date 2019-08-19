@@ -260,6 +260,16 @@
           "attr": "day"
         },
         {
+          "name": "emptytable",
+          "type": "Boolean",
+          "attr": "emptytable"
+        },
+        {
+          "name": "emptytablelabel",
+          "type": "String",
+          "attr": "emptytablelabel"
+        },
+        {
           "name": "font",
           "type": "String",
           "attr": "font"

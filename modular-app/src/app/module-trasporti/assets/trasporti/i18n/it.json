@@ -14,6 +14,7 @@
     "trains":"Treni",
     "timetable_label":"Orari",
     "choose_direction_label":"Scegli una direzione",
-    "initdb_label":"Inizializzazione dati in corso"
+    "initdb_label":"Inizializzazione dati in corso",
+    "no_table":"Nessun viaggio presente per la data selezionata"
 
 }

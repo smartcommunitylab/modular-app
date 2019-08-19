@@ -3,8 +3,8 @@
   "fsNamespace": "mycomponent",
   "loader": "../mycomponent.js",
   "global": "mycomponent.global.js",
-  "core": "mycomponent.kyd0z51f.js",
-  "corePolyfilled": "mycomponent.ggdh7f7o.js",
+  "core": "mycomponent.unsw7quz.js",
+  "corePolyfilled": "mycomponent.wpwqykjx.js",
   "components": {
     "ion-col": {
       "bundleIds": {
@@ -14,7 +14,7 @@
     },
     "ion-content": {
       "bundleIds": {
-        "$": "6jj5rtep"
+        "$": "u0bbxdix"
       },
       "encapsulation": "shadow"
     },
@@ -44,7 +44,7 @@
     },
     "wc-trasporti-table": {
       "bundleIds": {
-        "$": "6jj5rtep"
+        "$": "u0bbxdix"
       },
       "encapsulation": "shadow"
     }

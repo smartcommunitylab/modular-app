@@ -17,8 +17,8 @@ import { registerLocaleData } from '@angular/common';
   styleUrls: ['./transport-tt.page.scss'],
 })
 export class TransportTtPage implements OnInit {
- 
-  ref:string;
+
+  ref: string;
   date: Date = new Date();
   color: string = "#123456";
   title: string = "";
@@ -36,7 +36,9 @@ export class TransportTtPage implements OnInit {
   groupId: string;
   lang: string;
   datePipe: DatePipe;
-  showHeader:boolean;
+  showHeader: boolean;
+  emptyTable: boolean = false;
+  noTable: any;
   constructor(private trasportiService: TransportService,
     private loadingController: LoadingController,
     private translate: TranslateService,
@@ -61,8 +63,12 @@ export class TransportTtPage implements OnInit {
     this.datetable = this.datePipe.transform(this.date, "EEE dd-MM-yyyy")
     this.translate.use(language);
     this.lang = language;
-    this.showHeader = (this.ref=='trains')?true:false;
-
+    this.showHeader = (this.ref == 'trains') ? true : false;
+    this.translate.get('no_table').subscribe(
+      value => {
+        this.noTable = value;
+      }
+    )
   }
   registerlocale(lang): any {
     switch (lang) {
@@ -105,15 +111,20 @@ export class TransportTtPage implements OnInit {
         message: (<any>stop).detail,
         duration: 2000
       });
-      toast.present();    })
+      toast.present();
+    })
   }
   async getTT(date) {
+    this.emptyTable = false;
     const loading = await this.loadingController.create();
     loading.present();
     // var that = this;
     this.trasportiService.getTT(this.agencyId, this.routeId, date).then(
       (data: any) => {
         // get data with delay
+        if (!data.tripIds || data.tripIds.length == 0) {
+          this.emptyTable = true;
+        }
         this.data = JSON.stringify(data);
         //get type
         // var str = "";

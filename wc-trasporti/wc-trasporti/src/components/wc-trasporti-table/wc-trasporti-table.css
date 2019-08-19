@@ -267,3 +267,8 @@
   .line-title{
     text-align: center;
   }
+  .no-table{
+    width: 100%;
+    text-align: center;
+    size: 22px;
+  }

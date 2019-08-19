@@ -98,6 +98,8 @@ export namespace Components {
     'data': string;
     'datetable': string;
     'day': string;
+    'emptytable': boolean;
+    'emptytablelabel': string;
     'font': string;
     'labeldelay': string;
     'labeltrips': string;
@@ -119,6 +121,8 @@ export namespace Components {
     'data'?: string;
     'datetable'?: string;
     'day'?: string;
+    'emptytable'?: boolean;
+    'emptytablelabel'?: string;
     'font'?: string;
     'labeldelay'?: string;
     'labeltrips'?: string;

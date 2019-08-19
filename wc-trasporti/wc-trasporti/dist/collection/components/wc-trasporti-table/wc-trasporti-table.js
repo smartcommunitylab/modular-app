@@ -376,50 +376,52 @@ export class AppHome {
                         h("ion-col", { size: "10", class: "col col-50 tt-day " }, this.datetable),
                         h("ion-col", { size: "1", class: "col col-25 tt-day btn", onClick: () => this.nextDate() },
                             h("ion-icon", { name: "arrow-dropright" })))),
-                h("div", { class: "row table-container" },
-                    h("div", { class: "tt-table" + (this.accessibility === true ? ' tt-table-acc' : ' ') },
-                        this.orari && this.showHeader
-                            ? h("div", { id: "table-corner", style: styleTableCorner },
-                                h("div", { style: styleAccessibility },
-                                    " ",
-                                    h("ion-icon", { class: "table-accessibility", name: "person" }),
-                                    h("span", { class: "corner-delay" }, this.tableCornerStr[0])),
-                                this.header_row_number == 2
-                                    ? h("div", { class: "delay", style: styleSecondRow }, this.tableCornerStr[1])
-                                    : "")
-                            : "",
-                        h("ion-content", { scrollX: true, scrollY: true, scrollEvents: true, "has-bouncing": "false", id: "tablescroll", onIonScrollStart: () => { }, onIonScroll: (event) => this.scrollOrari(event), onIonScrollEnd: () => { }, style: styleTableScroll, class: "overlapDiv", "delegate-handle": "list" },
-                            h("div", { id: "table-col", style: styleTableCol }, this.dataTT.stops.map((stop, index) => parseInt(index) % 2 == 0
-                                ? h("div", { id: 'grigioFermate', onClick: () => this.showStop(stop) }, this.accessibility
-                                    ? h("div", null, !!this.dataTT.wheelChairBoarding && this.dataTT.wheelChairBoarding[index] == 1
-                                        ? h("div", null,
-                                            h("div", { class: "accessibilityBullet" },
-                                                h("ion-icon", { name: "radio-button-on" })),
-                                            stop)
-                                        : h("div", null,
-                                            h("div", { class: "accessibilityBullet" }),
-                                            "  ",
-                                            h("span", null, stop)))
-                                    : h("div", null, stop))
-                                : h("div", { id: 'biancoFermate', onClick: () => this.showStop(stop) }, this.accessibility
-                                    ? h("div", null, !!this.dataTT.wheelChairBoarding && this.dataTT.wheelChairBoarding[index] == 1
-                                        ? h("div", null,
-                                            h("div", { class: "accessibilityBullet" },
-                                                h("ion-icon", { name: "radio-button-on" })),
-                                            stop)
-                                        : h("div", null,
-                                            h("div", { class: "accessibilityBullet" }),
-                                            " ",
-                                            h("span", null, stop)))
-                                    : h("div", null, stop)))),
-                            this.showHeader
-                                ? h("div", { id: "table-header", style: styleTableHeader },
-                                    h("div", { innerHTML: this.headStr[0] }),
+                this.emptytable
+                    ? h("div", { class: "no-table" }, this.emptytablelabel)
+                    : h("div", { class: "row table-container" },
+                        h("div", { class: "tt-table" + (this.accessibility === true ? ' tt-table-acc' : ' ') },
+                            this.orari && this.showHeader
+                                ? h("div", { id: "table-corner", style: styleTableCorner },
+                                    h("div", { style: styleAccessibility },
+                                        " ",
+                                        h("ion-icon", { class: "table-accessibility", name: "person" }),
+                                        h("span", { class: "corner-delay" }, this.tableCornerStr[0])),
                                     this.header_row_number == 2
-                                        ? h("div", { innerHTML: this.headStr[1], class: "header-row-types" })
+                                        ? h("div", { class: "delay", style: styleSecondRow }, this.tableCornerStr[1])
                                         : "")
                                 : "",
-                            h("div", { id: "table-table", innerHTML: this.visualizza(this.orari), style: styleTableTable })))))
+                            h("ion-content", { scrollX: true, scrollY: true, scrollEvents: true, "has-bouncing": "false", id: "tablescroll", onIonScrollStart: () => { }, onIonScroll: (event) => this.scrollOrari(event), onIonScrollEnd: () => { }, style: styleTableScroll, class: "overlapDiv", "delegate-handle": "list" },
+                                h("div", { id: "table-col", style: styleTableCol }, this.dataTT.stops.map((stop, index) => parseInt(index) % 2 == 0
+                                    ? h("div", { id: 'grigioFermate', onClick: () => this.showStop(stop) }, this.accessibility
+                                        ? h("div", null, !!this.dataTT.wheelChairBoarding && this.dataTT.wheelChairBoarding[index] == 1
+                                            ? h("div", null,
+                                                h("div", { class: "accessibilityBullet" },
+                                                    h("ion-icon", { name: "radio-button-on" })),
+                                                stop)
+                                            : h("div", null,
+                                                h("div", { class: "accessibilityBullet" }),
+                                                "  ",
+                                                h("span", null, stop)))
+                                        : h("div", null, stop))
+                                    : h("div", { id: 'biancoFermate', onClick: () => this.showStop(stop) }, this.accessibility
+                                        ? h("div", null, !!this.dataTT.wheelChairBoarding && this.dataTT.wheelChairBoarding[index] == 1
+                                            ? h("div", null,
+                                                h("div", { class: "accessibilityBullet" },
+                                                    h("ion-icon", { name: "radio-button-on" })),
+                                                stop)
+                                            : h("div", null,
+                                                h("div", { class: "accessibilityBullet" }),
+                                                " ",
+                                                h("span", null, stop)))
+                                        : h("div", null, stop)))),
+                                this.showHeader
+                                    ? h("div", { id: "table-header", style: styleTableHeader },
+                                        h("div", { innerHTML: this.headStr[0] }),
+                                        this.header_row_number == 2
+                                            ? h("div", { innerHTML: this.headStr[1], class: "header-row-types" })
+                                            : "")
+                                    : "",
+                                h("div", { id: "table-table", innerHTML: this.visualizza(this.orari), style: styleTableTable })))))
         ];
     }
     static get is() { return "wc-trasporti-table"; }
@@ -464,6 +466,14 @@ export class AppHome {
         },
         "element": {
             "elementRef": true
+        },
+        "emptytable": {
+            "type": Boolean,
+            "attr": "emptytable"
+        },
+        "emptytablelabel": {
+            "type": String,
+            "attr": "emptytablelabel"
         },
         "fermate": {
             "state": true
