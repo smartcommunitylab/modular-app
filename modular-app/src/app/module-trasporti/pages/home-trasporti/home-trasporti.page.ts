@@ -34,8 +34,22 @@ export class HomeTrasportiPage extends MainPage implements OnInit {
   }
 
   async ngOnInit() {
-    const loading = await this.loadingController.create();
-    //await loading.present();
+    this.translate.get('initdb_label').subscribe(
+      value => {
+        var initDb= value;
+        this.synch(initDb);
+
+      }, err => {
+        this.synch("");
+      }
+    );
+   
+  }
+  async synch(initDb: any): Promise<any> {
+    const loading = await this.loadingController.create({
+      message: initDb
+    });
+    await loading.present();
     this.dbService.Init().then(function () {
       loading.dismiss();
     }, function (err) {
@@ -49,8 +63,7 @@ export class HomeTrasportiPage extends MainPage implements OnInit {
     this.config.getHomeButtons().then(res => {
       this.primaryLinks = res;
       this.loadListAll(this.primaryLinks);
-    })
-  }
+    })  }
 
   private prepareGrid() {
     var cols = Math.floor(window.innerWidth / this.min_grid_cell_width);

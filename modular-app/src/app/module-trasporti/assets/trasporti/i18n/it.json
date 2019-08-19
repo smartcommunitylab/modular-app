@@ -13,6 +13,7 @@
     "urbano":"Autobus",
     "trains":"Treni",
     "timetable_label":"Orari",
-    "choose_direction_label":"Scegli una direzione"
+    "choose_direction_label":"Scegli una direzione",
+    "initdb_label":"Inizializzazione dati in corso"
 
 }
