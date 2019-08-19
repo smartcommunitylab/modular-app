@@ -5,6 +5,9 @@ import { LoadingController } from '@ionic/angular';
   providedIn: 'root'
 })
 export class UtilsService {
+  private appModuleName: string = "app-module";
+
+
 
   constructor(private loadingController: LoadingController) { }
   async presentLoading() {
@@ -18,5 +21,8 @@ export class UtilsService {
   }
   hideLoading() {
     this.loadingController.dismiss()
+  }
+  getAppModuleName(): any {
+   return this.appModuleName;
   }
 }

@@ -7,6 +7,8 @@ import { DatiService } from '../../services/dati-service.service';
 import { start } from 'repl';
 import * as moment from 'moment';
 import { UtilsService } from '../../services/utils.service';
+import { TranslateService } from '@ngx-translate/core';
+import { ConfigService } from 'src/app/module-comune/services/config.service';
 
 
 @Component({
@@ -24,14 +26,7 @@ export class FuneraliPage {
   isSepoltura = false; //controlla se ci troviamo in schermata funerali o sepoltura
   linkMappa = "https://www.google.com/maps/search/?api=1&query="; //link a maps
   //todo stringhe
-  string = JSON.stringify({
-    dataMorte: "morto il:",
-    dataFunerale: "In data:",
-    oraMorte: "Alle ore:",
-    luogoFunerale: "il funerale sara' celebrato presso:",
-    mappa: "Mappa",
-    condividi: "Condividi"
-  })
+  string = "";
   vetFunerali: any[] = [];
 
   date = new Date(); //data odierna
@@ -40,8 +35,20 @@ export class FuneraliPage {
   showFunerali: any = [];
   fullDates: any = [];
   actualVisualized: any;
+  dataMorte: any;
+  dataFunerale: any;
+  oraMorte: any;
+  luogoFunerale: any;
+  mappa: any;
+  condividi: any;
 
-  constructor(private social: SocialSharing, private datiService: DatiService, private utils: UtilsService) { }
+  constructor(private social: SocialSharing, 
+    private datiService: DatiService,
+     private utils: UtilsService,
+      private translate: TranslateService) {
+    var language = window[this.utils.getAppModuleName()]['language'];
+    this.translate.use(language);
+   }
 
   ngOnInit() {
     this.utils.presentLoading()
@@ -50,6 +57,25 @@ export class FuneraliPage {
     }, err => {
       this.utils.hideLoading();
     })
+    this.translate.get('data_morte').subscribe(
+      value => {
+        this.dataMorte = value;
+        this.dataFunerale = this.translate.instant('data_funerale');
+        this.oraMorte = this.translate.instant('ora_morte');
+        this.luogoFunerale = this.translate.instant('luogo_funerale');
+        this.mappa = this.translate.instant('mappa');
+        this.condividi = this.translate.instant('condividi');
+        this.string=JSON.stringify({
+          dataMorte: this.dataMorte,
+          dataFunerale: this.dataFunerale,
+          oraMorte:this.oraMorte,
+          luogoFunerale:this.luogoFunerale,
+          mappa: this.mappa,
+          condividi:this.condividi
+        })
+      }
+    );
+
   }
 
   typingTimer;                //timer identifier
@@ -192,7 +218,7 @@ export class FuneraliPage {
   //condividi da mobile per i funerali
   CondividiFunerali(i) {
     this.social.canShareViaEmail().then(() => {
-      this.social.share(this.vetFunerali[i].nominativo + " " + this.vetFunerali[i].luogoFunerale, null, null);
+      this.social.share(this.vetFunerali[i].nome + " " + this.vetFunerali[i].luogoFunerale+ " " + this.vetFunerali[i].dataFunerale+ " " + this.vetFunerali[i].luogoFunerale, null, null);
     }).catch(() => {
       alert("Il servizio di condivisione non è disponibile per questo dispositivo");
     });
