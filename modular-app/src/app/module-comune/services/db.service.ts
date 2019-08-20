@@ -3,6 +3,9 @@ import { Injectable } from '@angular/core';
 import PouchDB from 'pouchdb';
 import PouchDBFind from 'pouchdb-find';
 import { resolve } from 'url';
+import { LoadingController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
+import { ConfigService } from './config.service';
 PouchDB.plugin(PouchDBFind);
 
 @Injectable({
@@ -15,15 +18,18 @@ export class DbService {
   categories: any;
   menu: any;
   db: any;
-  remote: any;
+  remoteDb: any;
   opts = { live: true, retry: true };
   contentTypes: any;
   MIN_SYNCH_TIME: number=600000;
-  constructor() {
-
+  initDbString="";
+  constructor(private loadingController:LoadingController,private config: ConfigService, private translate:TranslateService) {
+    var language = window[config.getAppModuleName()]['language'];
+    this.translate.use(language);
+    console.log(language);
     this.db = new PouchDB('comune-in-tasca');
 
-    this.remote ='https://cit.platform.smartcommunitylab.it/comuneintasca2';
+    this.remoteDb = new PouchDB('https://cit.platform.smartcommunitylab.it/comuneintasca2');
     // 'http://192.168.42.201:5984/comune-in-tasca';
     //'http://192.168.1.197:5984/comune-in-tasca'
     // 'http://127.0.0.1:5984/comune-in-tasca';
@@ -45,9 +51,10 @@ export class DbService {
     };
     // var url = 'http://192.168.42.201:5984/comune-in-tasca';
     // var opts = { live: true, retry: true };
-
-
+    translate.get('init_db').subscribe(value => {
+      this.initDbString = value})
   }
+  
   onSyncChange(arg0: string, onSyncChange: any): any {
     throw new Error("Method not implemented.");
   }
@@ -68,16 +75,20 @@ export class DbService {
   updateLastTimeSynch() {
     localStorage.setItem('UPDATE_SYNCH',new Date().getTime().toString());
   }
+  
   synch(): Promise<any> {
     console.log('enter in synch')
-    return new Promise((resolve, reject) => {
+    return new Promise(async (resolve, reject) => {
       if (this.lastTimeSynch()>this.MIN_SYNCH_TIME){
-      // do one way, one-off sync from the server until completion
+        const loading = await this.loadingController.create({
+          message: this.initDbString
+        });
+        if (!localStorage.getItem('UPDATE_SYNCH'))
+        await loading.present();
       console.log('this.lastTimeSynch()>this.MIN_SYNCH_TIME')
-
-      this.db.sync(this.remote).on('complete',  ()=> {
+      this.remoteDb.replicate.to(this.db).on('complete',  ()=> {
         console.log('synch done')
-
+        loading.dismiss();
         this.updateLastTimeSynch();
         resolve();
       }).on('error', function (err) {

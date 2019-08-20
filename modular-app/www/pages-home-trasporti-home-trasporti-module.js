@@ -236,14 +236,32 @@ var HomeTrasportiPage = /** @class */ (function (_super) {
     }
     HomeTrasportiPage.prototype.ngOnInit = function () {
         return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
+            return __generator(this, function (_a) {
+                this.translate.get('initdb_label').subscribe(function (value) {
+                    var initDb = value;
+                    _this.synch(initDb);
+                }, function (err) {
+                    _this.synch("");
+                });
+                return [2 /*return*/];
+            });
+        });
+    };
+    HomeTrasportiPage.prototype.synch = function (initDb) {
+        return __awaiter(this, void 0, void 0, function () {
             var loading;
             var _this = this;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.loadingController.create()];
+                    case 0: return [4 /*yield*/, this.loadingController.create({
+                            message: initDb
+                        })];
                     case 1:
                         loading = _a.sent();
-                        //await loading.present();
+                        return [4 /*yield*/, loading.present()];
+                    case 2:
+                        _a.sent();
                         this.dbService.Init().then(function () {
                             loading.dismiss();
                         }, function (err) {

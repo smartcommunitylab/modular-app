@@ -76,4 +76,10 @@ html {
       font-weight: bold;
       color: $app-gray-4;
   }
+  ion-radio{
+  --color-checked:#11B3EF;
+  }
+  ion-checkbox {
+    --background-checked:#11B3EF;
+  }
  

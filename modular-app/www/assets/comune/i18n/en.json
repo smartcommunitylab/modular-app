@@ -16,5 +16,6 @@
     "service_label":"Servizi per il turista",
     "empty_list":"Nessun elemento presente",
     "cancel_button":"Annulla",
-    "ok_button":"Ok"
+    "ok_button":"Ok",
+    "init_db":"Inizializzazione dati in corso..."
 }

@@ -1,3 +1,9 @@
 {
-    "HOME": "Home"
+    "HOME": "Home",
+    "data_morte": "morto il:",
+    "data_funerale": "In data:",
+    "ora_morte": "Alle ore:",
+    "luogo_funerale": "il funerale sara' celebrato presso:",
+    "mappa": "Mappa",
+    "condividi": "Condividi"
 }

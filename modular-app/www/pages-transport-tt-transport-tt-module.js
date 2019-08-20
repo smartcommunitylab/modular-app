@@ -315,7 +315,7 @@ var TransportTtPageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header no-border>\n    <ion-toolbar>\n        <ion-buttons slot=\"start\">\n            <ion-back-button></ion-back-button>\n        </ion-buttons>\n        <ion-title>\n            <div class=\"ion-text-center\">{{groupId}}</div>\n        </ion-title>\n        <ion-buttons slot=\"end\">\n            <ion-icon name=\"body\" class=\"tt-button\" [ngClass]=\"{'filled': accessibility}\"\n                (click)=\"changeAccessibility()\"></ion-icon>\n            <ion-icon name=\"resize\" class=\"tt-button\" [ngClass]=\"{'filled': !littletable}\" (click)=\"changeSize()\">\n            </ion-icon>\n        </ion-buttons>\n    </ion-toolbar>\n</ion-header>\n\n<ion-content>\n    <div id=\"table-tt\">\n        <wc-trasporti-table *ngIf=\"data\" [agencyid]=\"agencyId\" [datetable]=\"datetable\" [lang]=\"lang\" [color]=\"color\" [data]=\"data\" [title]=\"title\" [day]=\"day\" [arrows]=\"true\"\n            [littletable]=\"littletable\" [showtrips]=\"showtrips\" [showHeader]=\"showHeader\"  [labeldelay]=\"labeldelay\" [labeltrips]=\"labeltrips\"\n            [accessibility]=\"accessibility\"  [tripsvalue]=\"tripsvalue\"></wc-trasporti-table>\n    </div>\n\n</ion-content>"
+module.exports = "<ion-header no-border>\n    <ion-toolbar>\n        <ion-buttons slot=\"start\">\n            <ion-back-button></ion-back-button>\n        </ion-buttons>\n        <ion-title>\n            <div class=\"ion-text-center\">{{groupId}}</div>\n        </ion-title>\n        <ion-buttons slot=\"end\">\n            <ion-icon name=\"body\" class=\"tt-button\" [ngClass]=\"{'filled': accessibility}\"\n                (click)=\"changeAccessibility()\"></ion-icon>\n            <ion-icon name=\"resize\" class=\"tt-button\" [ngClass]=\"{'filled': !littletable}\" (click)=\"changeSize()\">\n            </ion-icon>\n        </ion-buttons>\n    </ion-toolbar>\n</ion-header>\n\n<ion-content>\n    <div id=\"table-tt\">\n        <wc-trasporti-table *ngIf=\"data\" [agencyid]=\"agencyId\" [datetable]=\"datetable\" [lang]=\"lang\" [color]=\"color\" [data]=\"data\" [title]=\"title\" [day]=\"day\" [arrows]=\"true\"\n            [littletable]=\"littletable\" [showtrips]=\"showtrips\" [showHeader]=\"showHeader\"  [labeldelay]=\"labeldelay\" [labeltrips]=\"labeltrips\"\n            [accessibility]=\"accessibility\"  [tripsvalue]=\"tripsvalue\" [emptytable]=\"emptyTable\" [emptytablelabel]=\"noTable\"></wc-trasporti-table>\n    </div>\n\n</ion-content>"
 
 /***/ }),
 
@@ -326,7 +326,7 @@ module.exports = "<ion-header no-border>\n    <ion-toolbar>\n        <ion-button
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".tt-button {\n  font-size: 24px;\n  margin: 8px; }\n\n.filled {\n  background-color: black;\n  color: white; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL2NoaW44L0RvY3VtZW50cy93b3JrL21vZHVsYXJBcHAvbW9kdWxhci1hcHAvc3JjL2FwcC9tb2R1bGUtdHJhc3BvcnRpL3BhZ2VzL3RyYW5zcG9ydC10dC90cmFuc3BvcnQtdHQucGFnZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksZ0JBQWU7RUFDZixZQUFXLEVBQ2Q7O0FBQ0Q7RUFDSSx3QkFBdUI7RUFDdkIsYUFBWSxFQUNmIiwiZmlsZSI6InNyYy9hcHAvbW9kdWxlLXRyYXNwb3J0aS9wYWdlcy90cmFuc3BvcnQtdHQvdHJhbnNwb3J0LXR0LnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi50dC1idXR0b257XG4gICAgZm9udC1zaXplOiAyNHB4O1xuICAgIG1hcmdpbjogOHB4O1xufVxuLmZpbGxlZHtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiBibGFjaztcbiAgICBjb2xvcjogd2hpdGU7XG59Il19 */"
+module.exports = ".tt-button {\n  font-size: 24px;\n  margin: 8px; }\n\n.filled {\n  background-color: black;\n  color: white; }\n\n.noTable {\n  width: 100%;\n  font-size: 24px;\n  text-align: center; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL2NoaW44L0RvY3VtZW50cy93b3JrL21vZHVsYXJBcHAvbW9kdWxhci1hcHAvc3JjL2FwcC9tb2R1bGUtdHJhc3BvcnRpL3BhZ2VzL3RyYW5zcG9ydC10dC90cmFuc3BvcnQtdHQucGFnZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksZ0JBQWU7RUFDZixZQUFXLEVBQ2Q7O0FBQ0Q7RUFDSSx3QkFBdUI7RUFDdkIsYUFBWSxFQUNmOztBQUNEO0VBQ0ksWUFBVztFQUNYLGdCQUFlO0VBQ2YsbUJBQWtCLEVBQ3JCIiwiZmlsZSI6InNyYy9hcHAvbW9kdWxlLXRyYXNwb3J0aS9wYWdlcy90cmFuc3BvcnQtdHQvdHJhbnNwb3J0LXR0LnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi50dC1idXR0b257XG4gICAgZm9udC1zaXplOiAyNHB4O1xuICAgIG1hcmdpbjogOHB4O1xufVxuLmZpbGxlZHtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiBibGFjaztcbiAgICBjb2xvcjogd2hpdGU7XG59XG4ubm9UYWJsZSB7XG4gICAgd2lkdGg6IDEwMCU7XG4gICAgZm9udC1zaXplOiAyNHB4O1xuICAgIHRleHQtYWxpZ246IGNlbnRlcjtcbn0iXX0= */"
 
 /***/ }),
 
@@ -426,6 +426,7 @@ var TransportTtPage = /** @class */ (function () {
         this.labeltrips = "TIPO";
         this.accessibility = false; // shows coulumn of accessibility
         this.data = "";
+        this.emptyTable = false;
         var language = this.config.getLanguage();
         ;
         this.translate.use(language);
@@ -433,6 +434,7 @@ var TransportTtPage = /** @class */ (function () {
         this.datePipe = new _angular_common__WEBPACK_IMPORTED_MODULE_6__["DatePipe"](this.translate.currentLang);
     }
     TransportTtPage.prototype.ngOnInit = function () {
+        var _this = this;
         this.ref = this.route.snapshot.paramMap.get('ref');
         ;
         this.agencyId = this.route.snapshot.paramMap.get('agencyId');
@@ -448,6 +450,9 @@ var TransportTtPage = /** @class */ (function () {
         this.translate.use(language);
         this.lang = language;
         this.showHeader = (this.ref == 'trains') ? true : false;
+        this.translate.get('no_table').subscribe(function (value) {
+            _this.noTable = value;
+        });
     };
     TransportTtPage.prototype.registerlocale = function (lang) {
         switch (lang) {
@@ -504,13 +509,18 @@ var TransportTtPage = /** @class */ (function () {
             var _this = this;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.loadingController.create()];
+                    case 0:
+                        this.emptyTable = false;
+                        return [4 /*yield*/, this.loadingController.create()];
                     case 1:
                         loading = _a.sent();
                         loading.present();
                         // var that = this;
                         this.trasportiService.getTT(this.agencyId, this.routeId, date).then(function (data) {
                             // get data with delay
+                            if (!data.tripIds || data.tripIds.length == 0) {
+                                _this.emptyTable = true;
+                            }
                             _this.data = JSON.stringify(data);
                             //get type
                             // var str = "";

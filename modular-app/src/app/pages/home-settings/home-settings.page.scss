@@ -1,8 +1,16 @@
 @import '../../../global.scss';
 
+ion-content{
+    --overflow: hidden;
+}
+.close-setting{
+    background-color: white;
+    color: $app-interaction-color;
+    font-size: 32px;
+}
 .title {
     background-color: rgba(255, 255, 255, .5);
-    color: $app-interaction-color;
+    color: #707070;
     text-align: center;
     font-weight: bold;
     font-size: 24px;
@@ -33,7 +41,10 @@
         font-size: 16px;
         font-weight: bold;
         text-align: center;
-        .add{
+        -webkit-box-shadow: 14px 14px 42px -10px rgba(0,0,0,0.82);
+        -moz-box-shadow: 14px 14px 42px -10px rgba(0,0,0,0.82);
+        box-shadow: 14px 14px 42px -10px rgba(0,0,0,0.82);
+         .add{
             position: absolute;
             background: green;
             color: white;
@@ -49,14 +60,19 @@
 }
 
 .container-button {
-    height: 100%;
-    
-
+    height: 65%;
+    overflow: hidden;
+    overflow-y: scroll;
+    border: 3px solid $app-interaction-color;
     #category-buttons {
-        height: calc(100% - 187px);
-        border: 3px solid $app-interaction-color;
+        height: 100%;
+        // height: calc(100% - 187px);
+       
         position: relative;
         background-color: $app-gray-2;
+        ion-grid{
+            height: 100%;
+        }
         .drag-label {
             position: absolute;
             bottom: 0px;
@@ -66,16 +82,15 @@
         }
 
         .home-button {
-            color: black;
-            border-radius: 4px;
-            width: 100%;
-            height: 100%;
-            margin-bottom: 5%;
-            background: white;
-            color: $app-interaction-color;
-            text-align: center;
-            padding: 2%;
-            position: relative;
+               // border: 2px solid black;
+    border-radius: 4px;
+    width: 100%;
+    min-height: 90px;
+    // margin-bottom: 5%;
+    background: white;
+    color: $app-interaction-color;
+    text-align: center;
+    padding: 2%;
             .close {
                 position: absolute;
                 background: red;
@@ -89,8 +104,17 @@
                 border-radius: 10px;
             }
             .label-button {
-                padding: 8px 0px;
-                font-size: 16px;
+                position: absolute;
+                left: 0;
+                right: 0;
+                top: 50%;
+                transform: translateY(-50%);
+                margin: auto;
+                font-size: 22px;
+                text-align: center;
+                display: inline-block;
+                padding: 21px 15px;
+                font-size: 22px;
                 font-weight: bold;
             }
         }
@@ -199,7 +223,7 @@
 }
 
 ion-chip {
-    width: 40%;
+    width: 47%;
     font-weight: bold;
 
     ion-label {
@@ -224,3 +248,19 @@ ion-fab-button {
         background-color: $app-interaction-color;
     }
 }
+div[scrollx=true], div[scrolly=true] {
+    position: relative;
+    overflow: hidden;
+  
+    ::-webkit-scrollbar {
+      display: none;
+    }
+  }
+  
+  div[scrollx=true] {
+    overflow-x: auto;
+  }
+  
+  div[scrolly=true] {
+    overflow-y: auto;
+  }

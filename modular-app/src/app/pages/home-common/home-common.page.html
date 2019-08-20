@@ -6,13 +6,14 @@
 <ion-content >
   <ion-slides pager="true">
     <ion-slide *ngFor="let slide of elementsGallery">
-      <div (click)="openElement(slide)">
+      <div class="image-container" (click)="openElement(slide)">
         <img src={{slide.image}}>
-        <div>{{slide.name}}</div>
+        <div class="label-slide"></div>
+        <div class="string-slide">{{slide.name}}</div>
       </div>
     </ion-slide>
   </ion-slides>
-  <div *ngIf="!editMode; else edit">
+  <div class="container" *ngIf="!editMode; else edit">
     <ion-grid id="category-buttons">
       <ion-row>
         <ion-col size="6" *ngFor="let category of categories">

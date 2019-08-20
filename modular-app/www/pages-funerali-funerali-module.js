@@ -17720,7 +17720,7 @@ var FuneraliPageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header no-border>\n        <ion-searchbar class=\"search-funerali\" style=\"display: none\" showCancelButton animated (search)=\"toggleSearch()\"\n        (ionInput)=\"searchChanged($event)\" (ionCancel)=\"toggleSearch()\"></ion-searchbar>\n    <ion-toolbar>\n        <!-- <ion-searchbar (ionChange)=\"Ricerca()\" placeholder=\"cerca nominativo\" [(ngModel)]=\"name\" clearIcon=\"false\"> -->\n        <!-- </ion-searchbar> -->\n\n        <ion-buttons class=\"interactive\" slot=\"start\">\n            <ion-back-button class=\"interaction\"></ion-back-button>\n        </ion-buttons>\n        <ion-buttons slot=\"end\">\n            <ion-button (click)=\"toggleSearch()\">\n                <ion-icon name=\"search\"></ion-icon>\n            </ion-button>\n        </ion-buttons>\n    </ion-toolbar>\n\n</ion-header>\n\n<ion-content>\n    <div class=\"wrapper\" *ngIf=\"!search\">\n        <div class=\"scrolling-wrapper-flexbox loop\">\n            <ion-chip *ngFor=\"let c of dates\" (click)=\"selectInternalElement(c)\"\n                [ngClass]=\"{'datesSelected': isSelected(c)}\">\n                <ion-label class=\"interaction\" [ngClass]=\"{'datesSelected': c==actualVisualized}\">{{c}}</ion-label>\n            </ion-chip>\n        </div>\n    </div>\n    <!-- <div id=\"top\"></div>\n    <ion-icon id=\"buttonTop\" (click)=\"GoOnTop()\" color=\"dark\" name=\"arrow-dropup\"></ion-icon> -->\n    <div id=\"funerali\">\n        <ion-list no-lines padding>\n            <div *ngFor=\"let c of dates\">\n                <ion-item class=\"label-type ion-text-center\" sticky *ngIf=\"oneElement(c)\">\n                    <div>{{c}}</div>\n                </ion-item>\n                <div class=\"content\">\n                    <div *ngFor=\"let item of showFunerali[c]; let i = index\">\n                        <!-- <div *ngFor=\"let item of vetFunerali; let i = index;\"> -->\n                        <div class=\"{{item.dataFunerale}}\" inViewport [inViewportOptions]=\"{ threshold: [0] }\"\n                            (inViewportAction)=\"onIntersection($event)\">\n                            <dettaglio-morte (indicazioni)=\"IndicazioniFunerali(i)\" (condividi)=\"CondividiFunerali(i)\"\n                                [funerale]=\"sendParam(item)\" [string]=\"string\" isFunerale={{true}}></dettaglio-morte>\n                        </div>\n                    </div>\n                </div>\n            </div>\n        </ion-list>\n    </div>\n</ion-content>"
+module.exports = "<ion-header >\n        <ion-searchbar class=\"search-funerali\" style=\"display: none\" showCancelButton animated (search)=\"toggleSearch()\"\n        (ionInput)=\"searchChanged($event)\" (ionCancel)=\"toggleSearch()\"></ion-searchbar>\n    <ion-toolbar>\n        <!-- <ion-searchbar (ionChange)=\"Ricerca()\" placeholder=\"cerca nominativo\" [(ngModel)]=\"name\" clearIcon=\"false\"> -->\n        <!-- </ion-searchbar> -->\n\n        <ion-buttons class=\"interactive\" slot=\"start\">\n            <ion-back-button class=\"interaction\"></ion-back-button>\n        </ion-buttons>\n        <ion-buttons slot=\"end\">\n            <ion-button (click)=\"toggleSearch()\">\n                <ion-icon name=\"search\"></ion-icon>\n            </ion-button>\n        </ion-buttons>\n    </ion-toolbar>\n\n</ion-header>\n\n<ion-content>\n    <div class=\"wrapper\" *ngIf=\"!search\">\n        <div class=\"scrolling-wrapper-flexbox loop\">\n            <ion-chip *ngFor=\"let c of dates\" (click)=\"selectInternalElement(c)\"\n                [ngClass]=\"{'datesSelected': isSelected(c)}\">\n                <ion-label class=\"interaction\" [ngClass]=\"{'datesSelected': c==actualVisualized}\">{{c}}</ion-label>\n            </ion-chip>\n        </div>\n    </div>\n    <!-- <div id=\"top\"></div>\n    <ion-icon id=\"buttonTop\" (click)=\"GoOnTop()\" color=\"dark\" name=\"arrow-dropup\"></ion-icon> -->\n    <div id=\"funerali\">\n        <ion-list no-lines padding>\n            <div *ngFor=\"let c of dates\">\n                <ion-item class=\"label-type ion-text-center\" sticky *ngIf=\"oneElement(c)\">\n                    <div>{{c}}</div>\n                </ion-item>\n                <div class=\"content\">\n                    <div *ngFor=\"let item of showFunerali[c]; let i = index\">\n                        <!-- <div *ngFor=\"let item of vetFunerali; let i = index;\"> -->\n                        <div class=\"{{item.dataFunerale}}\" inViewport [inViewportOptions]=\"{ threshold: [0] }\"\n                            (inViewportAction)=\"onIntersection($event)\">\n                            <dettaglio-morte (indicazioni)=\"IndicazioniFunerali(i)\" (condividi)=\"CondividiFunerali(i)\"\n                                [funerale]=\"sendParam(item)\" [string]=\"string\" isFunerale={{true}}></dettaglio-morte>\n                        </div>\n                    </div>\n                </div>\n            </div>\n        </ion-list>\n    </div>\n</ion-content>"
 
 /***/ }),
 
@@ -17752,6 +17752,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _services_utils_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../services/utils.service */ "./src/app/module-funerali/services/utils.service.ts");
+/* harmony import */ var _ngx_translate_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ngx-translate/core */ "./node_modules/@ngx-translate/core/fesm5/ngx-translate-core.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -17767,30 +17768,27 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var FuneraliPage = /** @class */ (function () {
-    function FuneraliPage(social, datiService, utils) {
+    function FuneraliPage(social, datiService, utils, translate) {
         this.social = social;
         this.datiService = datiService;
         this.utils = utils;
+        this.translate = translate;
         this.isRicercaOpen = false; //true se la barra di ricerca è aperta
         this.isGiorniOpen = false; //true se la barra dei giorni è aperta
         this.isSepoltura = false; //controlla se ci troviamo in schermata funerali o sepoltura
         this.linkMappa = "https://www.google.com/maps/search/?api=1&query="; //link a maps
         //todo stringhe
-        this.string = JSON.stringify({
-            dataMorte: "morto il:",
-            dataFunerale: "In data:",
-            oraMorte: "Alle ore:",
-            luogoFunerale: "il funerale sara' celebrato presso:",
-            mappa: "Mappa",
-            condividi: "Condividi"
-        });
+        this.string = "";
         this.vetFunerali = [];
         this.date = new Date(); //data odierna
         this.dates = [];
         this.showFunerali = [];
         this.fullDates = [];
         this.doneTypingInterval = 500; //time in ms, 5 second for example
+        var language = window[this.utils.getAppModuleName()]['language'];
+        this.translate.use(language);
     }
     FuneraliPage.prototype.ngOnInit = function () {
         var _this = this;
@@ -17799,6 +17797,22 @@ var FuneraliPage = /** @class */ (function () {
             _this.utils.hideLoading();
         }, function (err) {
             _this.utils.hideLoading();
+        });
+        this.translate.get('data_morte').subscribe(function (value) {
+            _this.dataMorte = value;
+            _this.dataFunerale = _this.translate.instant('data_funerale');
+            _this.oraMorte = _this.translate.instant('ora_morte');
+            _this.luogoFunerale = _this.translate.instant('luogo_funerale');
+            _this.mappa = _this.translate.instant('mappa');
+            _this.condividi = _this.translate.instant('condividi');
+            _this.string = JSON.stringify({
+                dataMorte: _this.dataMorte,
+                dataFunerale: _this.dataFunerale,
+                oraMorte: _this.oraMorte,
+                luogoFunerale: _this.luogoFunerale,
+                mappa: _this.mappa,
+                condividi: _this.condividi
+            });
         });
     };
     FuneraliPage.prototype.toggleSearch = function () {
@@ -17936,7 +17950,7 @@ var FuneraliPage = /** @class */ (function () {
     FuneraliPage.prototype.CondividiFunerali = function (i) {
         var _this = this;
         this.social.canShareViaEmail().then(function () {
-            _this.social.share(_this.vetFunerali[i].nominativo + " " + _this.vetFunerali[i].luogoFunerale, null, null);
+            _this.social.share(_this.vetFunerali[i].nome + " " + _this.vetFunerali[i].luogoFunerale + " " + _this.vetFunerali[i].dataFunerale + " " + _this.vetFunerali[i].luogoFunerale, null, null);
         }).catch(function () {
             alert("Il servizio di condivisione non è disponibile per questo dispositivo");
         });
@@ -18063,7 +18077,10 @@ var FuneraliPage = /** @class */ (function () {
             template: __webpack_require__(/*! ./funerali.page.html */ "./src/app/module-funerali/pages/funerali/funerali.page.html"),
             styles: [__webpack_require__(/*! ./funerali.page.scss */ "./src/app/module-funerali/pages/funerali/funerali.page.scss")]
         }),
-        __metadata("design:paramtypes", [_ionic_native_social_sharing_ngx__WEBPACK_IMPORTED_MODULE_1__["SocialSharing"], _services_dati_service_service__WEBPACK_IMPORTED_MODULE_3__["DatiService"], _services_utils_service__WEBPACK_IMPORTED_MODULE_5__["UtilsService"]])
+        __metadata("design:paramtypes", [_ionic_native_social_sharing_ngx__WEBPACK_IMPORTED_MODULE_1__["SocialSharing"],
+            _services_dati_service_service__WEBPACK_IMPORTED_MODULE_3__["DatiService"],
+            _services_utils_service__WEBPACK_IMPORTED_MODULE_5__["UtilsService"],
+            _ngx_translate_core__WEBPACK_IMPORTED_MODULE_6__["TranslateService"]])
     ], FuneraliPage);
     return FuneraliPage;
 }());
@@ -18189,6 +18206,7 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
 var UtilsService = /** @class */ (function () {
     function UtilsService(loadingController) {
         this.loadingController = loadingController;
+        this.appModuleName = "app-module";
     }
     UtilsService.prototype.presentLoading = function () {
         return __awaiter(this, void 0, void 0, function () {
@@ -18211,6 +18229,9 @@ var UtilsService = /** @class */ (function () {
     };
     UtilsService.prototype.hideLoading = function () {
         this.loadingController.dismiss();
+    };
+    UtilsService.prototype.getAppModuleName = function () {
+        return this.appModuleName;
     };
     UtilsService = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
