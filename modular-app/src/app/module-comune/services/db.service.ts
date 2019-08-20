@@ -21,7 +21,7 @@ export class DbService {
   remoteDb: any;
   opts = { live: true, retry: true };
   contentTypes: any;
-  MIN_SYNCH_TIME: number=600000;
+  MIN_SYNCH_TIME: number=24*60*60*1000;
   initDbString="";
   constructor(private loadingController:LoadingController,private config: ConfigService, private translate:TranslateService) {
     var language = window[config.getAppModuleName()]['language'];

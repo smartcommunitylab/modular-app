@@ -48,8 +48,8 @@
     "id": "i",
     "name": {
       "it": "Pulizia strade",
-      "en": "streets",
-      "de": "strasse"
+      "en": "Streets",
+      "de": "Strasse"
     },
     "url": "/ps",
     "icon": "information"

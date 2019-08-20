@@ -39,8 +39,8 @@
       </div>
     </div>
   <div class="wrapper" *ngIf="!presentFilter">
-    <div class="scrolling-wrapper-flexbox loop">
-      <ion-chip *ngFor="let c of categories" (click)="selectInternalElement(c)" [ngClass]="{'categorySelected': isSelected(c)}">
+    <div id="idCategories" class="scrolling-wrapper-flexbox loop">
+      <ion-chip *ngFor="let c of categories" id="{{c}}" (click)="selectInternalElement(c)" [ngClass]="{'categorySelected': isSelected(c)}">
         <ion-label class="interaction" [ngClass]="{'categorySelected': c==actualVisualized}">{{c}}</ion-label>
       </ion-chip>
     </div>

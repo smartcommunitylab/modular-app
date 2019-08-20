@@ -2508,8 +2508,8 @@ var AppComponent = /** @class */ (function () {
             //   StatusBar.overlaysWebView(true);            
             //   StatusBar.styleDefault();
             // }
-            _this.statusBar.overlaysWebView(true);
-            _this.statusBar.styleDefault();
+            _this.statusBar.overlaysWebView(false);
+            _this.statusBar.styleLightContent();
             _this.splashScreen.hide();
             _this.updateApp();
         });

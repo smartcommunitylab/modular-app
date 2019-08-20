@@ -1,6 +1,10 @@
 ion-content {
     --overflow: hidden;
-    ;
+    // --background: url('assets/sfondoHome.png')
+    img{
+        position: fixed;
+        top: 0px;
+    }
 }
 
 ion-button {

@@ -4,7 +4,9 @@
     <ion-toolbar>
         <!-- <ion-searchbar (ionChange)="Ricerca()" placeholder="cerca nominativo" [(ngModel)]="name" clearIcon="false"> -->
         <!-- </ion-searchbar> -->
-
+        <ion-title>
+                {{'title_funerali'|translate}}
+              </ion-title>
         <ion-buttons class="interactive" slot="start">
             <ion-back-button class="interaction"></ion-back-button>
         </ion-buttons>
@@ -19,8 +21,8 @@
 
 <ion-content>
     <div class="wrapper" *ngIf="!search">
-        <div class="scrolling-wrapper-flexbox loop">
-            <ion-chip *ngFor="let c of dates" (click)="selectInternalElement(c)"
+        <div id="idDates" class="scrolling-wrapper-flexbox loop">
+            <ion-chip *ngFor="let c of dates" id="{{c}}" (click)="selectInternalElement(c)"
                 [ngClass]="{'datesSelected': isSelected(c)}">
                 <ion-label class="interaction" [ngClass]="{'datesSelected': c==actualVisualized}">{{c}}</ion-label>
             </ion-chip>
@@ -29,12 +31,12 @@
     <!-- <div id="top"></div>
     <ion-icon id="buttonTop" (click)="GoOnTop()" color="dark" name="arrow-dropup"></ion-icon> -->
     <div id="funerali">
-        <ion-list no-lines padding>
+        <ion-list no-lines padding *ngIf="!emptyList">
             <div *ngFor="let c of dates">
                 <ion-item class="label-type ion-text-center" sticky *ngIf="oneElement(c)">
                     <div>{{c}}</div>
                 </ion-item>
-                <div class="content">
+                <div class="content" >
                     <div *ngFor="let item of showFunerali[c]; let i = index">
                         <!-- <div *ngFor="let item of vetFunerali; let i = index;"> -->
                         <div class="{{item.dataFunerale}}" inViewport [inViewportOptions]="{ threshold: [0] }"
@@ -46,5 +48,8 @@
                 </div>
             </div>
         </ion-list>
+        <div class="empty-list" *ngIf="emptyList">
+                {{'empty_list' | translate}}
+            </div>
     </div>
 </ion-content>

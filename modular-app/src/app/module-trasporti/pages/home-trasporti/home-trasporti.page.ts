@@ -88,7 +88,7 @@ export class HomeTrasportiPage extends MainPage implements OnInit {
     var elem: any = document.getElementsByClassName(ref.state);
     if (elem.length > 0) {
       let yOffset = elem[0].offsetTop;
-      this.content.scrollToPoint(0, yOffset, 0)
+      this.content.scrollToPoint(0, yOffset-100, 0)
     }
   }
 

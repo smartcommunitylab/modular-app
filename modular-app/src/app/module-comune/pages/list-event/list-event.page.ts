@@ -182,9 +182,8 @@ export class ListEventPage implements OnInit {
     var elem: any = document.getElementsByClassName(ref);
     if (elem.length > 0) {
       let yOffset = elem[0].offsetTop;
-      this.content.scrollToPoint(0, yOffset, 0)
-      // var scrollheight = elem[0].getBoundingClientRect().top;
-      // this.content.scrollToPoint(0, scrollheight, 1000);
+      this.content.scrollToPoint(0, yOffset-100, 0)
+
     }
   }
 

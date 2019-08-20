@@ -41,14 +41,16 @@ export class FuneraliPage {
   luogoFunerale: any;
   mappa: any;
   condividi: any;
+  emptyList: boolean = false;
+  networkMessage: any;
 
-  constructor(private social: SocialSharing, 
+  constructor(private social: SocialSharing,
     private datiService: DatiService,
-     private utils: UtilsService,
-      private translate: TranslateService) {
+    private utils: UtilsService,
+    private translate: TranslateService) {
     var language = window[this.utils.getAppModuleName()]['language'];
     this.translate.use(language);
-   }
+  }
 
   ngOnInit() {
     this.utils.presentLoading()
@@ -65,13 +67,14 @@ export class FuneraliPage {
         this.luogoFunerale = this.translate.instant('luogo_funerale');
         this.mappa = this.translate.instant('mappa');
         this.condividi = this.translate.instant('condividi');
-        this.string=JSON.stringify({
+        this.networkMessage = this.translate.instant('network_message');
+        this.string = JSON.stringify({
           dataMorte: this.dataMorte,
           dataFunerale: this.dataFunerale,
-          oraMorte:this.oraMorte,
-          luogoFunerale:this.luogoFunerale,
+          oraMorte: this.oraMorte,
+          luogoFunerale: this.luogoFunerale,
           mappa: this.mappa,
-          condividi:this.condividi
+          condividi: this.condividi
         })
       }
     );
@@ -96,15 +99,19 @@ export class FuneraliPage {
     }
   }
   subCategories(array: Array<any>) {
-    array.forEach(element => {
+    var i = 0;
+    array.forEach((element, index) => {
       if (!this.fullDates.includes(element.dataFunerale)) {
         this.fullDates.push(element.dataFunerale);
+        if ((moment(element.dataFunerale, 'YYYY-MM-DD').isSame(new Date(), "day")))
+          i = this.fullDates.length;
       }
     });
     this.dates = this.fullDates;
-    if (this.dates.length > 0)
-      setTimeout(() => this.actualVisualized = this.dates[0]
+    if (this.dates.length > 0) {
+      setTimeout(() => this.selectInternalElement(this.dates[i])
         , 500)
+    }
   }
   oneElement(category) {
     if (this.showFunerali && this.showFunerali[category])
@@ -178,9 +185,10 @@ export class FuneraliPage {
     var elem: any = document.getElementsByClassName(ref);
     if (elem.length > 0) {
       let yOffset = elem[0].offsetTop;
-      this.content.scrollToPoint(0, yOffset, 0)
-      // var scrollheight = elem[0].getBoundingClientRect().top;
-      // this.content.scrollToPoint(0, scrollheight, 1000);
+      this.content.scrollToPoint(0, yOffset - 100, 0);
+      var myElement = document.getElementById(ref);
+      var topPos = myElement.offsetLeft;
+      document.getElementById('idDates').scrollLeft = topPos -( window.innerWidth/2);
     }
   }
 
@@ -218,7 +226,7 @@ export class FuneraliPage {
   //condividi da mobile per i funerali
   CondividiFunerali(i) {
     this.social.canShareViaEmail().then(() => {
-      this.social.share(this.vetFunerali[i].nome + " " + this.vetFunerali[i].luogoFunerale+ " " + this.vetFunerali[i].dataFunerale+ " " + this.vetFunerali[i].luogoFunerale, null, null);
+      this.social.share(this.vetFunerali[i].nome + " " + this.vetFunerali[i].luogoFunerale + " " + this.vetFunerali[i].dataFunerale + " " + this.vetFunerali[i].luogoFunerale, null, null);
     }).catch(() => {
       alert("Il servizio di condivisione non è disponibile per questo dispositivo");
     });
@@ -289,22 +297,24 @@ export class FuneraliPage {
       var pastDate = startDate.getDate() - 7;
       startDate.setDate(pastDate);
       this.datiService.getDati(this.yyyymmdd(startDate)).then((res) => {
+        if (res.length>0){
+          this.emptyList=false;
         console.log(res);
         this.vetFunerali = this.convertDates(res);
         this.subCategories(this.vetFunerali);
         this.buildShowPois();
+        } else {
+          this.emptyList =true;
+        }
         resolve();
       }, err => {
         reject();
+        this.emptyList = true;
+        this.utils.showErrorConnectionMessage(this.networkMessage);
       })
     })
   }
   convertDates(res: any): any[] {
-    //     dataFunerale: "2019-08-09"
-    // dataMorte: "2019-08-06"
-    // luogoFunerale: "LOMAZZO -  - LOMAZZO"
-    // nome: "CASARTELLI,OSCAR"
-    // oraFunerale: "08:45:00"
     return res.map(el => {
       // var elem = {};
       if (el.dataFunerale)

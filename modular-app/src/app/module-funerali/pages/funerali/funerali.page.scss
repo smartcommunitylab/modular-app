@@ -76,7 +76,7 @@ ion-list{
 }
 
 .interaction {
-    color: #11b3ef;
+    color: #11b3ef!important;
 }
 
 .datesSelected {
@@ -95,4 +95,9 @@ ion-list{
     div{
         width: 100%;
     }
+}
+.empty-list{
+   text-align: center;
+   font-weight: bold;
+   font-size: 24px; 
 }

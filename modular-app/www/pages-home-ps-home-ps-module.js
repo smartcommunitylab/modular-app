@@ -241,7 +241,9 @@ var HomePage = /** @class */ (function () {
      */
     HomePage.prototype.ngOnInit = function () {
         var _this_1 = this;
+        console.log("init");
         this.mapSrv.Init().then(function () {
+            console.log("init done");
             _this_1.route.queryParams
                 .subscribe(function (params) {
                 _this_1.parseUrlParams(params);
@@ -382,6 +384,7 @@ var HomePage = /** @class */ (function () {
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
+                        console.log("buildpolyline");
                         counter = 0;
                         this.labelResult = 0;
                         /** Reset polyline */
@@ -401,7 +404,14 @@ var HomePage = /** @class */ (function () {
                                 /**
                                  * Build polyline based on: current day, current zoom, map center
                                  */
+                                console.log(JSON.stringify(s));
+                                console.log("new Date(this.selectedDate).setHours(0, 0, 0, 0)" + new Date(_this_1.selectedDate).setHours(0, 0, 0, 0));
+                                console.log("new Date(s.cleaningDay).setHours(0, 0, 0, 0)" + new Date(s.cleaningDay).setHours(0, 0, 0, 0));
+                                console.log((inDate + "inDate") + new Date(s.cleaningDay).setHours(0, 0, 0, 0));
+                                console.log(((((dist < ((17 % _this_1.map.getZoom()) - 1)) + "(dist < ((17 % this.map.getZoom()) - 1"))));
+                                console.log((dist < 0.3) + "dist < 0.3");
                                 if (inDate && ((dist < ((17 % _this_1.map.getZoom()) - 1) || dist < 0.3))) {
+                                    console.log("trovata strada dentro intervallo");
                                     _this_1.labelResult++;
                                     var popupContent = (inDate) ? closedStreetContent : freeStreetContent;
                                     var polyline = leaflet__WEBPACK_IMPORTED_MODULE_4___default.a.polyline(s.polylines, { color: color, weight: 7 }).addTo(_this_1.map);
