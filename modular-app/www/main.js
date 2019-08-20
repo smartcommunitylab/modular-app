@@ -2504,6 +2504,11 @@ var AppComponent = /** @class */ (function () {
     AppComponent.prototype.initializeApp = function () {
         var _this = this;
         this.platform.ready().then(function () {
+            // if (window.StatusBar) {
+            //   StatusBar.overlaysWebView(true);            
+            //   StatusBar.styleDefault();
+            // }
+            _this.statusBar.overlaysWebView(true);
             _this.statusBar.styleDefault();
             _this.splashScreen.hide();
             _this.updateApp();
