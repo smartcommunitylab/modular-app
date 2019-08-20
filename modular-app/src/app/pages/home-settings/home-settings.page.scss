@@ -1,13 +1,15 @@
 @import '../../../global.scss';
 
-ion-content{
+ion-content {
     --overflow: hidden;
 }
-.close-setting{
+
+.close-setting {
     background-color: white;
     color: $app-interaction-color;
     font-size: 32px;
 }
+
 .title {
     background-color: rgba(255, 255, 255, .5);
     color: #707070;
@@ -18,7 +20,7 @@ ion-content{
 }
 
 .scrolling-wrapper-flexbox {
-    background-color: rgba(255, 255, 255, .5);
+    // background-color: rgba(255, 255, 255, .5);
     left: 0px;
     position: fixed;
     bottom: 50px;
@@ -27,34 +29,67 @@ ion-content{
     display: flex;
     overflow-x: auto;
     z-index: 999;
-    padding-top: 8px;
+    // padding-top: 8px;
+
     .card {
+        margin: 0px 16px;
+        background-color: #efefef!important;
         flex: 0 0 auto;
-        color: black;
-        border: 2px solid $app-interaction-color;
+        color: #707070;
         background: white;
-        padding: 8px;
-        margin: 4px;
+        border-radius: 12px;
         position: relative;
         width: 40%;
-        padding: 8px 0px;
         font-size: 16px;
         font-weight: bold;
         text-align: center;
-        -webkit-box-shadow: 14px 14px 42px -10px rgba(0,0,0,0.82);
-        -moz-box-shadow: 14px 14px 42px -10px rgba(0,0,0,0.82);
-        box-shadow: 14px 14px 42px -10px rgba(0,0,0,0.82);
-         .add{
-            position: absolute;
-            background: green;
-            color: white;
-            text-align: center;
-            top: -10px;
-            right: -3px;
-            width: 20px;
-            height: 20px;
-            font-size: 16px;
-            border-radius: 10px;
+        -webkit-box-shadow:  0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        -moz-box-shadow:  0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        box-shadow:  0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        margin-bottom: 8px;
+
+        .home-container {
+            display: table;
+            width: 100%;
+            height: 100%;
+                    .label-button {
+                font-size: 22px;
+                text-align: center;
+                display: inline-block;
+                font-size: 22px;
+                font-weight: bold;
+                width: 75%;
+                height: 100%;
+                display: inline;
+
+                display: table-cell;
+                vertical-align: middle;
+                text-align: center;
+                display: table-cell;
+                vertical-align: middle;
+            }
+            .add {
+                position: relative;
+                border-radius: 0px 12px 12px 0px;
+                background: #2d981f;
+                color: white;
+                font-size: 16px;
+                display: inline;
+                float: right;
+                height: 100%;
+                width: 100%;
+                display: table-cell;
+                vertical-align: middle;
+
+                ion-icon {
+                    position: absolute;
+                    top: 50%;
+                    transform: translate(-50%, -50%);
+                    /* width: 100%; */
+                    left: 50%;
+                    font-size: 48px;
+                }
+            }
         }
     }
 }
@@ -64,15 +99,18 @@ ion-content{
     overflow: hidden;
     overflow-y: scroll;
     border: 3px solid $app-interaction-color;
+    background-color: #e3e3e3;
     #category-buttons {
         height: 100%;
         // height: calc(100% - 187px);
-       
+
         position: relative;
         background-color: $app-gray-2;
-        ion-grid{
+
+        ion-grid {
             height: 100%;
         }
+
         .drag-label {
             position: absolute;
             bottom: 0px;
@@ -82,40 +120,60 @@ ion-content{
         }
 
         .home-button {
-               // border: 2px solid black;
-    border-radius: 4px;
-    width: 100%;
-    min-height: 90px;
-    // margin-bottom: 5%;
-    background: white;
-    color: $app-interaction-color;
-    text-align: center;
-    padding: 2%;
-            .close {
-                position: absolute;
-                background: red;
-                color: white;
-                text-align: center;
-                top: -10px;
-                right: -3px;
-                width: 20px;
-                height: 20px;
-                font-size: 16px;
-                border-radius: 10px;
-            }
-            .label-button {
-                position: absolute;
-                left: 0;
-                right: 0;
-                top: 50%;
-                transform: translateY(-50%);
-                margin: auto;
-                font-size: 22px;
-                text-align: center;
-                display: inline-block;
-                padding: 21px 15px;
-                font-size: 22px;
-                font-weight: bold;
+            border-radius: 12px;
+            width: 100%;
+            min-height: 90px;
+            background: white;
+            color: $app-interaction-color;
+            text-align: center;
+
+            .home-container {
+                /* text-align: center; */
+
+                display: table;
+                width: 100%;
+                height: 90px;
+
+                .close {
+                    position: relative;
+                    border-radius: 0px 12px 12px 0px;
+                    background: #ff6c00;
+                    color: white;
+                    font-size: 16px;
+                    display: inline;
+                    float: right;
+                    height: 100%;
+                    width: 100%;
+                    display: table-cell;
+                    vertical-align: middle;
+
+                    ion-icon {
+                        position: absolute;
+                        top: 50%;
+                        transform: translate(-50%, -50%);
+                        /* width: 100%; */
+                        left: 50%;
+                        font-size: 48px;
+                    }
+                }
+
+                .label-button {
+
+                    font-size: 22px;
+                    text-align: center;
+                    display: inline-block;
+                    font-size: 22px;
+                    font-weight: bold;
+                    width: 75%;
+                    height: 100%;
+                    display: inline;
+
+                    display: table-cell;
+                    vertical-align: middle;
+                    text-align: center;
+                    display: table-cell;
+                    vertical-align: middle;
+                }
             }
         }
     }
@@ -231,10 +289,12 @@ ion-chip {
         text-align: center;
     }
 }
+
 ion-fab-button {
-    --background :  #11B3EF;
+    --background: #11B3EF;
 
 }
+
 .chip-selected {
     background-color: $app-interaction-color;
 
@@ -248,19 +308,21 @@ ion-fab-button {
         background-color: $app-interaction-color;
     }
 }
-div[scrollx=true], div[scrolly=true] {
+
+div[scrollx=true],
+div[scrolly=true] {
     position: relative;
     overflow: hidden;
-  
+
     ::-webkit-scrollbar {
-      display: none;
+        display: none;
     }
-  }
-  
-  div[scrollx=true] {
+}
+
+div[scrollx=true] {
     overflow-x: auto;
-  }
-  
-  div[scrolly=true] {
+}
+
+div[scrolly=true] {
     overflow-y: auto;
-  }
+}
