@@ -2080,23 +2080,23 @@ var map = {
 		"common",
 		103
 	],
-	"./g0ugp9ng.entry.js": [
-		"./node_modules/wcs-comune/dist/esm/es5/build/g0ugp9ng.entry.js",
+	"./bmijcbma.entry.js": [
+		"./node_modules/wcs-comune/dist/esm/es5/build/bmijcbma.entry.js",
 		"common",
 		104
 	],
-	"./g0ugp9ng.sc.entry.js": [
-		"./node_modules/wcs-comune/dist/esm/es5/build/g0ugp9ng.sc.entry.js",
+	"./bmijcbma.sc.entry.js": [
+		"./node_modules/wcs-comune/dist/esm/es5/build/bmijcbma.sc.entry.js",
 		"common",
 		105
 	],
-	"./j7prjc9g.entry.js": [
-		"./node_modules/wcs-comune/dist/esm/es5/build/j7prjc9g.entry.js",
+	"./g0ugp9ng.entry.js": [
+		"./node_modules/wcs-comune/dist/esm/es5/build/g0ugp9ng.entry.js",
 		"common",
 		106
 	],
-	"./j7prjc9g.sc.entry.js": [
-		"./node_modules/wcs-comune/dist/esm/es5/build/j7prjc9g.sc.entry.js",
+	"./g0ugp9ng.sc.entry.js": [
+		"./node_modules/wcs-comune/dist/esm/es5/build/g0ugp9ng.sc.entry.js",
 		"common",
 		107
 	],

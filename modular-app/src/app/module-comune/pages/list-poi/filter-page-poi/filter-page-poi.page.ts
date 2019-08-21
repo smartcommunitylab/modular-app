@@ -8,11 +8,16 @@ import { NavParams, ModalController } from '@ionic/angular';
 })
 export class FilterPagePoiPage implements OnInit {
   @Input() filters: any;
+  selected: boolean;
   constructor(navParams: NavParams, private modalCtrl:ModalController) {
     // componentProps can also be accessed at construction time using NavParams
     console.log(navParams.get('filters'));
   }
   ngOnInit() {
+    this.filters.forEach(element => {
+      if (element.isChecked)
+        return this.selected = true;
+    });
   }
 closeModal() {
     this.modalCtrl.dismiss();

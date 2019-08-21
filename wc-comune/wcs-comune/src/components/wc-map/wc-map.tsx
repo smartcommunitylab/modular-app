@@ -41,16 +41,14 @@ export class WcTabs {
   private myPosObj: { lat: number, lon: number } = { lat: 0, lon: 0 };
 
   componentWillLoad() {
-    if (this.points)
-    {
+    if (this.points) {
       console.log(this.points)
       this.pointsObj = JSON.parse(this.points);
     }
-    
-    if (this.mypos)
-    {
+
+    if (this.mypos) {
       console.log(this.mypos)
-       this.myPosObj = JSON.parse(this.mypos);
+      this.myPosObj = JSON.parse(this.mypos);
     }
     // this.myPoints.long = this.pointsObj[this.pointsObj.length - 1].lon;
   }
@@ -59,7 +57,8 @@ export class WcTabs {
     /* CREAZIONE MAPPA */
     this.mapElement = this.element.shadowRoot.getElementById('map');
     var map = leaflet.map(this.mapElement, {
-      zoomControl: false}).setView([this.myPosObj['lat'], this.myPosObj['long']], 13);
+      zoomControl: false
+    }).setView([this.myPosObj['lat'], this.myPosObj['long']], 13);
 
     leaflet.NumberedDivIcon = leaflet.Icon.extend({
       options: {
@@ -98,32 +97,36 @@ export class WcTabs {
     leaflet.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
-    
+
     leaflet.control.zoom({ position: 'bottomleft' }).addTo(map);
 
     if (this.pointsObj) {
+      var arrayMarker = [];
       this.pointsObj.forEach((element, i) => {
         //add char because selector must start with it
-        var customPopup = "<div id='a"+element.id+"'><div  class=\"index-poi\">"+(i+1)+"</div><div  class=\"element-name\">"+element.name + "</div><br/> <div class=\"detail-bar\"></div><img src=" + element.img + " width='350px'/></div>";
+        var customPopup = "<div id='a" + element.id + "'><div  class=\"index-poi\">" + (i + 1) + "</div><div  class=\"element-name\">" + element.name + "</div><br/> <div class=\"detail-bar\"></div><img src=" + element.img + " width='350px'/></div>";
         // specify popup options 
         var customOptions =
         {
           'maxWidth': '500',
           'className': 'custom'
         }
-        var m=leaflet.marker([element.lat, element.lon], { icon: new leaflet.NumberedDivIcon({ number: (i+1) }) })
-        m.id=element.id;
+        var m = leaflet.marker([element.lat, element.lon], { icon: new leaflet.NumberedDivIcon({ number: (i + 1) }) })
+        m.id = element.id;
         m.bindPopup(customPopup, customOptions).addTo(map)
-          .on('popupopen', (popup)=> {
+          .on('popupopen', (popup) => {
             //generate event choosing the right popup (id without a added earlier)
             console.log("popup opened !", popup);
-            var popupDDOM=this.mapElement.querySelector('#a'+element.id);
-            popupDDOM.addEventListener('click',()=>{
+            var popupDDOM = this.mapElement.querySelector('#a' + element.id);
+            popupDDOM.addEventListener('click', () => {
               this.poiSelected.emit(element.id.substring(0, element.id.length));
             });
           });
         // }
+        arrayMarker.push(m);
       });
+      var group = new leaflet.featureGroup(arrayMarker);
+      map.fitBounds(group.getBounds());
     }
     /*********************************************************************************************************************** */
   }

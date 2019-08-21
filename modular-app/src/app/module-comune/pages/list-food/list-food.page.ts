@@ -312,7 +312,7 @@ export class ListFoodPage implements OnInit {
   buildFilter(): any {
     var array = this.fullPois.map(item => item.classification);
     var newArray= array.filter((value, index, self) =>{
-     return self.indexOf(value) === index
+     return (self.indexOf(value) === index  && value)
 
     })
     var value = this.firstAccess? false:true;

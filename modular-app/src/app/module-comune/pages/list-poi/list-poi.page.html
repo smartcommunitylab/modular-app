@@ -1,27 +1,8 @@
-<!-- <ion-header no-border>
-    <ion-toolbar>
-      <ion-buttons slot="start">
-          <ion-back-button></ion-back-button>
-        </ion-buttons>
-      <ion-title>
-          {{'title_list_poi'|translate}}
-        </ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-<ion-content padding>
-  <ion-list no-lines id="poi-list">
-    <div *ngFor="let poi of pois">      
-      <wc-path-list-el type="POI" [id]="poi.id" [img]="poi.image" [title]="poi.title" [text]="poi.subtitle" main-color="red"></wc-path-list-el>
-    </div>
-  </ion-list>
-</ion-content> -->
-
 <ion-header no-border>
-    <ion-searchbar class="search-poi" style="display: none" showCancelButton animated (search)="toggleSearch()"
-    (ionInput)="searchChanged($event)" (ionCancel)="toggleSearch()"></ion-searchbar>
-    <ion-toolbar>
 
+    <ion-toolbar>
+        <ion-searchbar class="search-poi" style="display: none" showCancelButton="never" animated (search)="toggleSearch()"
+        (ionInput)="searchChanged($event)" (ionCancel)="toggleSearch()" (ionClear)="toggleSearch()"></ion-searchbar>
       <ion-buttons slot="start">
         <ion-back-button class="interaction"></ion-back-button>
       </ion-buttons>
@@ -38,13 +19,7 @@
       </ion-title>
     </ion-toolbar>
   </ion-header>
-  
-  <!-- <ion-grid style="height: 100%" *ngIf="isLoading">
-    <ion-row justify-content-center align-items-center style="height: 100%">
-      <ion-spinner name="circles"></ion-spinner>
-    </ion-row>
-  </ion-grid> -->
-  
+
   <ion-content [scrollEvents]="true" (ionScroll)="onScroll($event)">
   
     <ion-searchbar style="display: none" showCancelButton animated (search)="toggleSearch()"

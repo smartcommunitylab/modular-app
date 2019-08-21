@@ -110,6 +110,10 @@ export class HomePage implements OnInit {
           this.streets = this.mapSrv.getData().sort(function (a, b) {
             return a.cleaningDay - b.cleaningDay;
           });
+          if (this.mapSrv.getData()[this.mapSrv.getData().length-1].cleaningDay<this.selectedDate.getTime())
+          {
+            this.future=false;
+          }
           this.buildMap();
         });
     }, err => {
@@ -175,25 +179,6 @@ export class HomePage implements OnInit {
   buildMap() {
     try { this.map.remove(); } catch { } /** Reset map */
     const _this = this;
-    /** Build custom "search" button and add it to map */
-    // const searchControl = leaflet.Control.extend({
-    //   options: {
-    //     position: 'topright'
-    //   },
-    //   onAdd: function (map) {
-    //     const container = leaflet.DomUtil.create('div', 'leaflet-bar leaflet-control leaflet-control-custom');
-    //     container.style.backgroundColor = 'white';
-    //     container.style.width = '30px';
-    //     container.style.height = '30px';
-    //     container.style.borderRadius = '50%';
-    //     container.innerHTML = '<ion-icon style="width: 25px; height: 25px;" name="search"></ion-icon>';
-    //     container.onclick = function () {
-    //       _this.router.navigate(['/ps-search']);
-    //     };
-    //     return container;
-    //   }
-    // });
-
     this.map = new leaflet.Map('home-map', { zoomControl: true, attributionControl: false, dragging: true, tap: false }).setView(this.mapCenter, 15);
 
     /** Build polyline after drag */
@@ -235,6 +220,8 @@ export class HomePage implements OnInit {
    * @param center Map center's coordinates
    */
   async buildPolyline(center) {
+    // if (this.toast)
+    //   this.toast.dismiss();
     let counter = 0;
     this.labelResult = 0;
 
@@ -287,8 +274,7 @@ export class HomePage implements OnInit {
     if (counter === 0 && this.inZone && this.noCleaning) {
       this.toast = await this.toastCtrl.create({
         message: `${this.noCleaning} ${this.datePipe.transform(this.selectedDate, 'dd/MM/yyyy')} ${this.inZone}`,
-        duration: 3000,
-        showCloseButton: true
+        duration: 2000
       });
       await this.toast.present();
     }
@@ -365,6 +351,7 @@ export class HomePage implements OnInit {
       });
       this.future = false;
       await this.toast.present();
+      return;
     }
     this.buildPolyline(center);
 
@@ -418,6 +405,14 @@ export class HomePage implements OnInit {
   setDate(event: any) {
     this.selectedDate = new Date(event.detail.value);
     this.showDate = this.selectedDate.toISOString();
+    if (this.mapSrv.getData()[this.mapSrv.getData().length-1].cleaningDay<this.selectedDate.getTime())
+    {
+      this.future=false;
+    }
+    else {
+      this.future = true;
+    }
+    
     this.buildPolyline(this.mapCenter);
   }
   /**

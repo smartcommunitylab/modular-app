@@ -62,7 +62,7 @@ export class ListPoiPage implements OnInit {
     var array = this.fullPois.map(item => item.classification);
     var newArray1 = array.flat();
     var newArray = newArray1.filter((value, index, self) => {
-      return self.indexOf(value) === index
+      return (self.indexOf(value) === index  && value)
 
     })
     var value = this.firstAccess ? false : true;

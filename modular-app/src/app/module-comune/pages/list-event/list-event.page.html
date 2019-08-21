@@ -1,8 +1,8 @@
 <ion-header no-border>
-    <ion-searchbar class="search-event" style="display: none" showCancelButton animated (search)="toggleSearch()"
-    (ionInput)="searchChanged($event)" (ionCancel)="toggleSearch()"></ion-searchbar>
-  <ion-toolbar>
 
+  <ion-toolbar>
+      <ion-searchbar class="search-event" style="display: none" showCancelButton="never" animated  (search)="toggleSearch()"
+      (ionInput)="searchChanged($event)" (ionCancel)="toggleSearch()"  (ionClear)="toggleSearch()"></ion-searchbar>
     <ion-buttons slot="start">
       <ion-back-button class="interaction"></ion-back-button>
     </ion-buttons>

@@ -255,6 +255,9 @@ var HomePage = /** @class */ (function () {
                 _this_1.streets = _this_1.mapSrv.getData().sort(function (a, b) {
                     return a.cleaningDay - b.cleaningDay;
                 });
+                if (_this_1.mapSrv.getData()[_this_1.mapSrv.getData().length - 1].cleaningDay < _this_1.selectedDate.getTime()) {
+                    _this_1.future = false;
+                }
                 _this_1.buildMap();
             });
         }, function (err) {
@@ -323,24 +326,6 @@ var HomePage = /** @class */ (function () {
         }
         catch (_a) { } /** Reset map */
         var _this = this;
-        /** Build custom "search" button and add it to map */
-        // const searchControl = leaflet.Control.extend({
-        //   options: {
-        //     position: 'topright'
-        //   },
-        //   onAdd: function (map) {
-        //     const container = leaflet.DomUtil.create('div', 'leaflet-bar leaflet-control leaflet-control-custom');
-        //     container.style.backgroundColor = 'white';
-        //     container.style.width = '30px';
-        //     container.style.height = '30px';
-        //     container.style.borderRadius = '50%';
-        //     container.innerHTML = '<ion-icon style="width: 25px; height: 25px;" name="search"></ion-icon>';
-        //     container.onclick = function () {
-        //       _this.router.navigate(['/ps-search']);
-        //     };
-        //     return container;
-        //   }
-        // });
         this.map = new leaflet__WEBPACK_IMPORTED_MODULE_4___default.a.Map('home-map', { zoomControl: true, attributionControl: false, dragging: true, tap: false }).setView(this.mapCenter, 15);
         /** Build polyline after drag */
         this.map.on('dragend', function (e) {
@@ -419,8 +404,7 @@ var HomePage = /** @class */ (function () {
                         _a = this;
                         return [4 /*yield*/, this.toastCtrl.create({
                                 message: this.noCleaning + " " + this.datePipe.transform(this.selectedDate, 'dd/MM/yyyy') + " " + this.inZone,
-                                duration: 3000,
-                                showCloseButton: true
+                                duration: 2000
                             })];
                     case 1:
                         _a.toast = _b.sent();
@@ -513,7 +497,7 @@ var HomePage = /** @class */ (function () {
                         return [4 /*yield*/, this.toast.present()];
                     case 3:
                         _b.sent();
-                        _b.label = 4;
+                        return [2 /*return*/];
                     case 4:
                         this.buildPolyline(center);
                         return [2 /*return*/];
@@ -583,6 +567,12 @@ var HomePage = /** @class */ (function () {
     HomePage.prototype.setDate = function (event) {
         this.selectedDate = new Date(event.detail.value);
         this.showDate = this.selectedDate.toISOString();
+        if (this.mapSrv.getData()[this.mapSrv.getData().length - 1].cleaningDay < this.selectedDate.getTime()) {
+            this.future = false;
+        }
+        else {
+            this.future = true;
+        }
         this.buildPolyline(this.mapCenter);
     };
     /**

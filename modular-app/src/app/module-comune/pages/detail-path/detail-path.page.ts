@@ -110,16 +110,6 @@ export class DetailPathPage implements OnInit {
   ionViewDidEnter() {
     const element = document.getElementById('path');
 
-    // // const el = document.getElementById('tabs');
-    // element.addEventListener('tabSelected', path => {
-    //   this.tabActived = (<any>path).detail;
-    //   if (this.tabActived === 'map') {
-    //     this.buildMapPoints();
-    //   }
-    // });
-    // window.addEventListener('pathSelected', target => {
-    //   this.goToPoi((<any>target).detail);
-    // });
     window.addEventListener('actionSelected', target => {
       this.goToPoi((<any>target).detail);
     });
