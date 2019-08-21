@@ -247,26 +247,28 @@ var TouristServicesPage = /** @class */ (function () {
                     "classification.it": "Servizi"
                 }
             };
-            this.dbService.synch().then(function () {
-                _this_1.dbService.getObjectByQuery(query_1).then(function (data) {
-                    if (data.docs.length > 0) {
-                        _this_1.fullPois = data.docs.map(function (x) { return _this_1.convertPois(x); });
-                        _this_1.subCategories(_this_1.fullPois);
-                        _this_1.buildShowPois();
-                        _this_1.tags = _this_1.buildFilter();
-                        _this_1.orderArray('near', _this_1);
-                        _this_1.isLoading = false;
+            this.translate.get('init_db').subscribe(function (value) {
+                _this_1.dbService.synch(value).then(function () {
+                    _this_1.dbService.getObjectByQuery(query_1).then(function (data) {
+                        if (data.docs.length > 0) {
+                            _this_1.fullPois = data.docs.map(function (x) { return _this_1.convertPois(x); });
+                            _this_1.subCategories(_this_1.fullPois);
+                            _this_1.buildShowPois();
+                            _this_1.tags = _this_1.buildFilter();
+                            _this_1.orderArray('near', _this_1);
+                            _this_1.isLoading = false;
+                            _this_1.utils.hideLoading();
+                        }
+                        else {
+                            _this_1.emptyList = true;
+                            _this_1.utils.hideLoading();
+                        }
+                    }, function (err) {
                         _this_1.utils.hideLoading();
-                    }
-                    else {
-                        _this_1.emptyList = true;
-                        _this_1.utils.hideLoading();
-                    }
+                    });
                 }, function (err) {
                     _this_1.utils.hideLoading();
                 });
-            }, function (err) {
-                _this_1.utils.hideLoading();
             });
         }
     };

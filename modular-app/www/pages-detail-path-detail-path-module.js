@@ -230,14 +230,16 @@ var DetailPathPage = /** @class */ (function () {
             if (params) {
                 var id_1 = params.id.split(';')[0];
                 _this_1.isLoading = true;
-                _this_1.dbService.synch().then(function () {
-                    _this_1.dbService.getObjectById(id_1).then(function (data) {
-                        _this_1.paths = data.docs[0];
-                        _this_1.buildLangPaths();
-                        _this_1.getPois(_this_1.paths);
+                _this_1.translate.get('init_db').subscribe(function (value) {
+                    _this_1.dbService.synch(value).then(function () {
+                        _this_1.dbService.getObjectById(id_1).then(function (data) {
+                            _this_1.paths = data.docs[0];
+                            _this_1.buildLangPaths();
+                            _this_1.getPois(_this_1.paths);
+                        });
+                    }, function (err) {
+                        _this_1.utils.hideLoading();
                     });
-                }, function (err) {
-                    _this_1.utils.hideLoading();
                 });
             }
         }, function (err) {

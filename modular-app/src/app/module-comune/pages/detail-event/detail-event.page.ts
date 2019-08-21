@@ -81,35 +81,37 @@ export class DetailEventPage implements OnInit {
   }
   manageoLcalId(objectIds) {
     if (objectIds.length == 1) {
-      this.dbService.synch().then(() => {
-        this.dbService.getObjectByDataId(objectIds[0]).then(data => {
-          this.poiInput = data.docs[0];
-          this.poi = data.docs[0];
-          this.type = data.docs[0].fromTime ? 'EVENT' : 'POI';
-          this.buildContacts();
-        });
+      this.translate.get('init_db').subscribe(value => {
+        this.dbService.synch(value).then(() => {
+          this.dbService.getObjectByDataId(objectIds[0]).then(data => {
+            this.poiInput = data.docs[0];
+            this.poi = data.docs[0];
+            this.type = data.docs[0].fromTime ? 'EVENT' : 'POI';
+            this.buildContacts();
+          });
+        })
       })
     }
   }
   share() {
     this.utils.openShare(JSON.stringify(this.poi));
-      }
+  }
   buildContacts() {
     const poiElement: any = {};
     if (this.poiInput) {
       if (this.poiInput.title) {
         if (this.poiInput.title[this.language])
-        poiElement.title = this.poiInput.title[this.language];
+          poiElement.title = this.poiInput.title[this.language];
         else poiElement.title = this.poiInput.title["it"];
       }
       if (this.poiInput.subtitle) {
-        if  (this.poiInput.subtitle[this.language])
-        poiElement.subtitle = this.poiInput.subtitle[this.language];
+        if (this.poiInput.subtitle[this.language])
+          poiElement.subtitle = this.poiInput.subtitle[this.language];
         else poiElement.subtitle = this.poiInput.subtitle["it"];
       }
       if (this.poiInput.description) {
-        if  (this.poiInput.description[this.language])
-        poiElement.description = this.poiInput.description[this.language];
+        if (this.poiInput.description[this.language])
+          poiElement.description = this.poiInput.description[this.language];
         else poiElement.description = this.poiInput.description["it"];
       }
       if (this.poiInput.image) {
@@ -122,29 +124,29 @@ export class DetailEventPage implements OnInit {
         poiElement.cat = this.poiInput.topics;
       }
       if (this.poiInput.eventPeriod) {
-       if ( this.poiInput.eventPeriod[this.language])
-        poiElement.date = this.poiInput.eventPeriod[this.language];
+        if (this.poiInput.eventPeriod[this.language])
+          poiElement.date = this.poiInput.eventPeriod[this.language];
         else poiElement.date = this.poiInput.eventPeriod["it"];
       }
       if (this.poiInput.eventTiming) {
-        if  (this.poiInput.eventTiming[this.language])
-        poiElement.time = this.poiInput.eventTiming[this.language];
+        if (this.poiInput.eventTiming[this.language])
+          poiElement.time = this.poiInput.eventTiming[this.language];
         else poiElement.time = this.poiInput.eventTiming["it"];
       }
       if (this.poiInput.info) {
         if (this.poiInput.info[this.language])
-        poiElement.info = this.poiInput.info[this.language];
+          poiElement.info = this.poiInput.info[this.language];
         else poiElement.info = this.poiInput.info["it"];
       }
       if (this.poiInput.address) {
-        if ( this.poiInput.address[this.language])
-        poiElement.address = this.poiInput.address[this.language];
+        if (this.poiInput.address[this.language])
+          poiElement.address = this.poiInput.address[this.language];
         else poiElement.address = this.poiInput.address["it"];
       }
       if (this.poiInput.description) {
         if (this.poiInput.description[this.language])
-        poiElement.text = this.poiInput.description[this.language];
-        else  this.poiInput.description["it"];
+          poiElement.text = this.poiInput.description[this.language];
+        else this.poiInput.description["it"];
       }
       if (this.poiInput.category) {
         poiElement.category = this.poiInput.category;

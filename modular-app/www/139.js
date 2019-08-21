@@ -237,7 +237,7 @@ var wcVideo = /** @class */ (function () {
         this.DisplayReverse = "none";
         this.Opacity = "1";
         setTimeout(function () { _this.OpacityReverse = "0"; }, 100);
-        this.ImgTop = "-80px";
+        this.ImgTop = "-110px";
         this.MousePointer = "pointer";
         this.MarginTitolo = "40px";
     };

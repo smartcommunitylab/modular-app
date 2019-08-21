@@ -94,6 +94,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var _services_db_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/db.service */ "./src/app/module-comune/services/db.service.ts");
+/* harmony import */ var _ngx_translate_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ngx-translate/core */ "./node_modules/@ngx-translate/core/fesm5/ngx-translate-core.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -106,9 +107,11 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var ListCategoriesPage = /** @class */ (function () {
-    function ListCategoriesPage(router, route, dbService) {
+    function ListCategoriesPage(router, translate, route, dbService) {
         this.router = router;
+        this.translate = translate;
         this.route = route;
         this.dbService = dbService;
         this.showPois = [];
@@ -138,13 +141,15 @@ var ListCategoriesPage = /** @class */ (function () {
                             _this.categories = _this.categories.map(function (x) { return _this.convertCategories(x); });
                             _this.categories.forEach(function (element) {
                                 if (element && element.query) {
-                                    _this.dbService.synch().then(function () {
-                                        _this.dbService.getObjectByQuery(element.query).then(function (data) {
-                                            _this.fullPois = data.docs.map(function (x) { return _this.convertPois(x); });
-                                            _this.subCategories(_this.fullPois);
-                                            _this.buildShowPois();
-                                            _this.isLoading = false;
-                                            console.log(_this.showPois);
+                                    _this.translate.get('init_db').subscribe(function (value) {
+                                        _this.dbService.synch(value).then(function () {
+                                            _this.dbService.getObjectByQuery(element.query).then(function (data) {
+                                                _this.fullPois = data.docs.map(function (x) { return _this.convertPois(x); });
+                                                _this.subCategories(_this.fullPois);
+                                                _this.buildShowPois();
+                                                _this.isLoading = false;
+                                                console.log(_this.showPois);
+                                            });
                                         });
                                     });
                                 }
@@ -286,7 +291,7 @@ var ListCategoriesPage = /** @class */ (function () {
             template: __webpack_require__(/*! ./list-categories.page.html */ "./src/app/module-comune/pages/list-categories/list-categories.page.html"),
             styles: [__webpack_require__(/*! ./list-categories.page.scss */ "./src/app/module-comune/pages/list-categories/list-categories.page.scss")]
         }),
-        __metadata("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"], _angular_router__WEBPACK_IMPORTED_MODULE_1__["ActivatedRoute"], _services_db_service__WEBPACK_IMPORTED_MODULE_2__["DbService"]])
+        __metadata("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"], _ngx_translate_core__WEBPACK_IMPORTED_MODULE_3__["TranslateService"], _angular_router__WEBPACK_IMPORTED_MODULE_1__["ActivatedRoute"], _services_db_service__WEBPACK_IMPORTED_MODULE_2__["DbService"]])
     ], ListCategoriesPage);
     return ListCategoriesPage;
 }());

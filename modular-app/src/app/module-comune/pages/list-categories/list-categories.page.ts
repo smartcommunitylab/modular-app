@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DbService } from '../../services/db.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-list-categories',
@@ -16,7 +17,7 @@ export class ListCategoriesPage implements OnInit {
   isLoading = true;
   private type: string;
 
-  constructor(private router: Router, private route: ActivatedRoute, public dbService: DbService
+  constructor(private router: Router, private translate: TranslateService, private route: ActivatedRoute, public dbService: DbService
   ) { }
 
 
@@ -40,15 +41,17 @@ export class ListCategoriesPage implements OnInit {
                 this.categories = this.categories.map(x => this.convertCategories(x));
                 this.categories.forEach(element => {
                   if (element && element.query) {
-                    this.dbService.synch().then(() => {
-                      this.dbService.getObjectByQuery(element.query).then((data) => {
-                        this.fullPois = data.docs.map(x => this.convertPois(x));
-                        this.subCategories(this.fullPois);
-                        this.buildShowPois();
-                        this.isLoading = false;
-                        console.log(this.showPois);
+                    this.translate.get('init_db').subscribe(value => {
+                      this.dbService.synch(value).then(() => {
+                        this.dbService.getObjectByQuery(element.query).then((data) => {
+                          this.fullPois = data.docs.map(x => this.convertPois(x));
+                          this.subCategories(this.fullPois);
+                          this.buildShowPois();
+                          this.isLoading = false;
+                          console.log(this.showPois);
+                        });
                       });
-                    });
+                    })
                   }
                   const el = document.getElementById('poi-list');
                   el.addEventListener('pathSelected', path => {
@@ -57,6 +60,7 @@ export class ListCategoriesPage implements OnInit {
                     this.goToDetail(id);
                   });
                 });
+
               }
             });
           } else {

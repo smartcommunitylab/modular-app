@@ -36,18 +36,20 @@ export class ListPathPage implements OnInit {
   }
   ionViewDidEnter() {
     if (this.category && this.category.query) {
-      this.dbService.synch().then(() => {
-        this.dbService.getObjectByQuery(this.category.query).then((data) => {
-          this.pois = data.docs.map(x => this.convertPois(x));
-          this.fullPois = this.pois;
-          this.utils.hideLoading();
+      this.translate.get('init_db').subscribe(value => {
+        this.dbService.synch(value).then(() => {
+          this.dbService.getObjectByQuery(this.category.query).then((data) => {
+            this.pois = data.docs.map(x => this.convertPois(x));
+            this.fullPois = this.pois;
+            this.utils.hideLoading();
 
+          }, err => {
+            this.utils.hideLoading();
+
+          });
         }, err => {
           this.utils.hideLoading();
-
-        });
-      }, err => {
-        this.utils.hideLoading();
+        })
       })
     }
     const el = document.getElementById('path-list');

@@ -17172,8 +17172,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var pouchdb__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! pouchdb */ "./node_modules/pouchdb/lib/index-browser.es.js");
 /* harmony import */ var pouchdb_find__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! pouchdb-find */ "./node_modules/pouchdb-find/lib/index-browser.es.js");
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
-/* harmony import */ var _ngx_translate_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ngx-translate/core */ "./node_modules/@ngx-translate/core/fesm5/ngx-translate-core.js");
-/* harmony import */ var _config_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./config.service */ "./src/app/module-comune/services/config.service.ts");
+/* harmony import */ var _config_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./config.service */ "./src/app/module-comune/services/config.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -17224,21 +17223,14 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
 
 
 
-
 pouchdb__WEBPACK_IMPORTED_MODULE_1__["default"].plugin(pouchdb_find__WEBPACK_IMPORTED_MODULE_2__["default"]);
 var DbService = /** @class */ (function () {
-    function DbService(loadingController, config, translate) {
-        var _this = this;
+    function DbService(loadingController, config) {
         this.loadingController = loadingController;
         this.config = config;
-        this.translate = translate;
         this.elements = {};
         this.opts = { live: true, retry: true };
-        this.MIN_SYNCH_TIME = 600000;
-        this.initDbString = "";
-        var language = window[config.getAppModuleName()]['language'];
-        this.translate.use(language);
-        console.log(language);
+        this.MIN_SYNCH_TIME = 24 * 60 * 60 * 1000;
         this.db = new pouchdb__WEBPACK_IMPORTED_MODULE_1__["default"]('comune-in-tasca');
         this.remoteDb = new pouchdb__WEBPACK_IMPORTED_MODULE_1__["default"]('https://cit.platform.smartcommunitylab.it/comuneintasca2');
         // 'http://192.168.42.201:5984/comune-in-tasca';
@@ -17261,9 +17253,6 @@ var DbService = /** @class */ (function () {
         };
         // var url = 'http://192.168.42.201:5984/comune-in-tasca';
         // var opts = { live: true, retry: true };
-        translate.get('init_db').subscribe(function (value) {
-            _this.initDbString = value;
-        });
     }
     DbService.prototype.onSyncChange = function (arg0, onSyncChange) {
         throw new Error("Method not implemented.");
@@ -17285,7 +17274,7 @@ var DbService = /** @class */ (function () {
     DbService.prototype.updateLastTimeSynch = function () {
         localStorage.setItem('UPDATE_SYNCH', new Date().getTime().toString());
     };
-    DbService.prototype.synch = function () {
+    DbService.prototype.synch = function (message) {
         var _this = this;
         console.log('enter in synch');
         return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
@@ -17296,7 +17285,7 @@ var DbService = /** @class */ (function () {
                     case 0:
                         if (!(this.lastTimeSynch() > this.MIN_SYNCH_TIME)) return [3 /*break*/, 4];
                         return [4 /*yield*/, this.loadingController.create({
-                                message: this.initDbString
+                                message: message
                             })];
                     case 1:
                         loading_1 = _a.sent();
@@ -17307,7 +17296,7 @@ var DbService = /** @class */ (function () {
                         _a.label = 3;
                     case 3:
                         console.log('this.lastTimeSynch()>this.MIN_SYNCH_TIME');
-                        this.remoteDb.replicate.to(this.db).on('complete', function () {
+                        this.remoteDb.replicate.to(this.db, { checkpoint: "target" }).on('complete', function () {
                             console.log('synch done');
                             loading_1.dismiss();
                             _this.updateLastTimeSynch();
@@ -17575,7 +17564,7 @@ var DbService = /** @class */ (function () {
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
             providedIn: 'root'
         }),
-        __metadata("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_3__["LoadingController"], _config_service__WEBPACK_IMPORTED_MODULE_5__["ConfigService"], _ngx_translate_core__WEBPACK_IMPORTED_MODULE_4__["TranslateService"]])
+        __metadata("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_3__["LoadingController"], _config_service__WEBPACK_IMPORTED_MODULE_4__["ConfigService"]])
     ], DbService);
     return DbService;
 }());

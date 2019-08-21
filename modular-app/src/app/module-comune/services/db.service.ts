@@ -22,11 +22,8 @@ export class DbService {
   opts = { live: true, retry: true };
   contentTypes: any;
   MIN_SYNCH_TIME: number=24*60*60*1000;
-  initDbString="";
-  constructor(private loadingController:LoadingController,private config: ConfigService, private translate:TranslateService) {
-    var language = window[config.getAppModuleName()]['language'];
-    this.translate.use(language);
-    console.log(language);
+  constructor(private loadingController:LoadingController,private config: ConfigService) {
+
     this.db = new PouchDB('comune-in-tasca');
 
     this.remoteDb = new PouchDB('https://cit.platform.smartcommunitylab.it/comuneintasca2');
@@ -51,8 +48,7 @@ export class DbService {
     };
     // var url = 'http://192.168.42.201:5984/comune-in-tasca';
     // var opts = { live: true, retry: true };
-    translate.get('init_db').subscribe(value => {
-      this.initDbString = value})
+
   }
   
   onSyncChange(arg0: string, onSyncChange: any): any {
@@ -76,17 +72,17 @@ export class DbService {
     localStorage.setItem('UPDATE_SYNCH',new Date().getTime().toString());
   }
   
-  synch(): Promise<any> {
+  synch(message): Promise<any> {
     console.log('enter in synch')
     return new Promise(async (resolve, reject) => {
       if (this.lastTimeSynch()>this.MIN_SYNCH_TIME){
         const loading = await this.loadingController.create({
-          message: this.initDbString
+          message: message
         });
         if (!localStorage.getItem('UPDATE_SYNCH'))
         await loading.present();
       console.log('this.lastTimeSynch()>this.MIN_SYNCH_TIME')
-      this.remoteDb.replicate.to(this.db).on('complete',  ()=> {
+      this.remoteDb.replicate.to(this.db,{checkpoint:"target"}).on('complete',  ()=> {
         console.log('synch done')
         loading.dismiss();
         this.updateLastTimeSynch();

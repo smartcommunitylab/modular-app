@@ -113,8 +113,8 @@ export class ListFoodPage implements OnInit {
 
     if (this.category) {
       let query = { 'selector': { 'elementType': 'restaurant-item' } };
-      this.dbService.synch().then(()=>{
-        this.dbService.getObjectByQuery(query).then((data) => {
+      this.translate.get('init_db').subscribe(value => {
+        this.dbService.synch(value).then(() => {        this.dbService.getObjectByQuery(query).then((data) => {
           this.fullPois = data.docs.map(x => this.convertPois(x));
           this.subCategories(this.fullPois);
           this.buildShowPois();
@@ -131,7 +131,7 @@ export class ListFoodPage implements OnInit {
         this.utils.hideLoading();
 
       }})
-
+    })
     }
   }
 

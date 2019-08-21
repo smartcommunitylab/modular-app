@@ -243,8 +243,8 @@
   {
     "title": {
       "it": "Pulizia strade",
-      "en": "Streets",
-      "de": "Strasse"
+      "en": "streets",
+      "de": "strasse"
     },
     "url": "/ps",
     "icon": "information"

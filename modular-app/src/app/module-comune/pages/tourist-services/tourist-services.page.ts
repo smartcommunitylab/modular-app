@@ -106,28 +106,30 @@ export class TouristServicesPage implements OnInit {
 
         }
       };
-      this.dbService.synch().then(() => {
-        this.dbService.getObjectByQuery(query).then((data) => {
-          if (data.docs.length > 0) {
+      this.translate.get('init_db').subscribe(value => {
+        this.dbService.synch(value).then(() => {
+          this.dbService.getObjectByQuery(query).then((data) => {
+            if (data.docs.length > 0) {
 
-          this.fullPois = data.docs.map(x => this.convertPois(x));
-          this.subCategories(this.fullPois);
-          this.buildShowPois();
-          this.tags = this.buildFilter();
-          this.orderArray('near', this);
-          this.isLoading = false;
-          this.utils.hideLoading();
-        } else {
-          this.emptyList = true;
-          this.utils.hideLoading();
-        }
-        },err=> {
+              this.fullPois = data.docs.map(x => this.convertPois(x));
+              this.subCategories(this.fullPois);
+              this.buildShowPois();
+              this.tags = this.buildFilter();
+              this.orderArray('near', this);
+              this.isLoading = false;
+              this.utils.hideLoading();
+            } else {
+              this.emptyList = true;
+              this.utils.hideLoading();
+            }
+          }, err => {
+            this.utils.hideLoading();
+
+          })
+        }, err => {
           this.utils.hideLoading();
 
         })
-      }, err => {
-        this.utils.hideLoading();
-
       })
     }
   }
@@ -259,20 +261,20 @@ export class TouristServicesPage implements OnInit {
       }
       else {
 
-      const value = input.detail.target.value;
-      const _this = this;
-      _this.categories.forEach(c => {
-        this.showPois[c] = this.fullPois.filter(function (el) {
-          return (el.title.toLowerCase().indexOf(value.toLowerCase()) > -1);
+        const value = input.detail.target.value;
+        const _this = this;
+        _this.categories.forEach(c => {
+          this.showPois[c] = this.fullPois.filter(function (el) {
+            return (el.title.toLowerCase().indexOf(value.toLowerCase()) > -1);
+          });
+          if (this.showPois[c].length > 0)
+            emptyList = false;
         });
-        if (this.showPois[c].length > 0)
-          emptyList = false;
-      });
-    }
-    this.emptyList = emptyList;
+      }
+      this.emptyList = emptyList;
 
-  }, this.doneTypingInterval);
-}
+    }, this.doneTypingInterval);
+  }
 
 
   buildFilter(): any {

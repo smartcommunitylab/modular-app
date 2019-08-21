@@ -88,8 +88,8 @@ export class DetailPathPage implements OnInit {
         if (params) {
           const id = params.id.split(';')[0];
           this.isLoading = true;
-          this.dbService.synch().then(() => {
-            this.dbService.getObjectById(id).then(data => {
+          this.translate.get('init_db').subscribe(value => {
+            this.dbService.synch(value).then(() => {            this.dbService.getObjectById(id).then(data => {
               this.paths = data.docs[0];
               this.buildLangPaths();
               this.getPois(this.paths);
@@ -97,6 +97,7 @@ export class DetailPathPage implements OnInit {
           }, err => {
             this.utils.hideLoading();
           })
+        })
         }
       }, err => {
         this.utils.hideLoading();

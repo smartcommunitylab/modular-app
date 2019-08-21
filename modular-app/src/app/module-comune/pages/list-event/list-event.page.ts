@@ -96,25 +96,28 @@ export class ListEventPage implements OnInit {
   }
   ionViewDidEnter() {
     if (this.category && this.category.query) {
-      this.dbService.synch().then(() => {
-        this.dbService.getObjectByQuery(this.category.query).then((data) => {
-          if (data.docs.length > 0) {
-            this.fullPois = data.docs.map(x => this.convertPois(x));
-            this.subCategories(this.fullPois);
-            this.buildShowPois();
-            this.tags = this.buildFilter();
-
-          }
-          else {
-            this.emptyList = true;
-          }
-          this.isLoading = false;
-          this.utils.hideLoading();
-          console.log(this.showPois);
-        }, (err) => {
-          this.utils.hideLoading();
+      this.translate.get('init_db').subscribe(value => {
+        this.dbService.synch(value).then(() => {
+          this.dbService.getObjectByQuery(this.category.query).then((data) => {
+            if (data.docs.length > 0) {
+              this.fullPois = data.docs.map(x => this.convertPois(x));
+              this.subCategories(this.fullPois);
+              this.buildShowPois();
+              this.tags = this.buildFilter();
+  
+            }
+            else {
+              this.emptyList = true;
+            }
+            this.isLoading = false;
+            this.utils.hideLoading();
+            console.log(this.showPois);
+          }, (err) => {
+            this.utils.hideLoading();
+          });
         });
-      });
+      })
+
     } else {
       this.utils.hideLoading();
     }

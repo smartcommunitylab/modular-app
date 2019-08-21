@@ -112,23 +112,25 @@ export class ListRHPage implements OnInit {
 
     if (this.category) {
       let query = { 'selector': { 'elementType': 'hotel-item' } };
-      this.dbService.synch().then(() => {
-        this.dbService.getObjectByQuery(query).then((data) => {
-          this.fullPois = data.docs.map(x => this.convertPois(x));
-          this.subCategories(this.fullPois);
-          this.buildShowPois();
-          this.tags = this.buildFilter();
-          this.orderArray('near', this);
-          this.isLoading = false;
+      this.translate.get('init_db').subscribe(value => {
+        this.dbService.synch(value).then(() => {
+          this.dbService.getObjectByQuery(query).then((data) => {
+            this.fullPois = data.docs.map(x => this.convertPois(x));
+            this.subCategories(this.fullPois);
+            this.buildShowPois();
+            this.tags = this.buildFilter();
+            this.orderArray('near', this);
+            this.isLoading = false;
+            this.utils.hideLoading();
+
+          }, err => {
+            this.utils.hideLoading();
+
+          })
+        }, err => {
           this.utils.hideLoading();
 
-        }, err=> {
-          this.utils.hideLoading();
-
-        })
-      }, err => {
-        this.utils.hideLoading();
-
+        });
       });
     }
   }
@@ -163,18 +165,18 @@ export class ListRHPage implements OnInit {
     const poiElement: any = {};
     if (x) {
       if (x.title) {
-       if (x.title[this.language])
-        poiElement.title = x.title[this.language];
+        if (x.title[this.language])
+          poiElement.title = x.title[this.language];
         else poiElement.title = x.title["it"];
       }
       if (x.subtitle) {
         if (x.subtitle[this.language])
-        poiElement.description = x.subtitle[this.language];
+          poiElement.description = x.subtitle[this.language];
         else poiElement.description = x.subtitle["it"];
       }
       if (x.description) {
         if (x.description[this.language])
-        poiElement.description += '<br/>' + x.description[this.language];
+          poiElement.description += '<br/>' + x.description[this.language];
         else poiElement.description += '<br/>' + x.description["it"];
       }
       if (x.image) {
@@ -185,8 +187,8 @@ export class ListRHPage implements OnInit {
       }
       if (x.timetable) {
         if (x.timetable[this.language])
-        poiElement.date = x.timetable[this.language];
-        else  poiElement.date = x.timetable["it"];
+          poiElement.date = x.timetable[this.language];
+        else poiElement.date = x.timetable["it"];
       }
       if (x.closing) {
         if (x.closing[this.language]) {
@@ -197,26 +199,26 @@ export class ListRHPage implements OnInit {
         }
       }
       if (x.address) {
-        if ( x.address[this.language])
-        poiElement.address = x.address[this.language];
-        else  poiElement.address = x.address["it"];
+        if (x.address[this.language])
+          poiElement.address = x.address[this.language];
+        else poiElement.address = x.address["it"];
       }
       if (x.description) {
-        if ( x.description[this.language])
-        poiElement.text = x.description[this.language];
-        else  poiElement.text = x.description["it"];
+        if (x.description[this.language])
+          poiElement.text = x.description[this.language];
+        else poiElement.text = x.description["it"];
       }
       if (x.category) {
         poiElement.category = x.category.charAt(0).toUpperCase() + x.category.slice(1);
       }
       if (x.classification) {
-        if ( x.classification[this.language])
-        poiElement.subtitle = x.classification[this.language];
-        else  poiElement.subtitle = x.classification["it"];
+        if (x.classification[this.language])
+          poiElement.subtitle = x.classification[this.language];
+        else poiElement.subtitle = x.classification["it"];
       }
       if (x.classification) {
-        if ( x.classification[this.language])
-        poiElement.classification = x.classification[this.language];
+        if (x.classification[this.language])
+          poiElement.classification = x.classification[this.language];
         else poiElement.classification = x.classification["it"];
 
       }
@@ -338,7 +340,7 @@ export class ListRHPage implements OnInit {
       this.buildShowPois();
     }
   }
-  
+
   async buildAlert(type: string) {
     const _this = this;
     let alInputs: AlertInput[] = [];

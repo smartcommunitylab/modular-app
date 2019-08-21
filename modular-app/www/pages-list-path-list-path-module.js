@@ -79,7 +79,7 @@ var ListPathPageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\n    <ion-searchbar class=\"search-path\" style=\"display: none\" showCancelButton animated (search)=\"toggleSearch()\"\n    (ionInput)=\"searchChanged($event)\" (ionCancel)=\"toggleSearch()\"></ion-searchbar>\n    <ion-toolbar>\n\n      <ion-buttons slot=\"start\">\n          <ion-back-button></ion-back-button>\n        </ion-buttons>\n        <ion-buttons slot=\"end\">\n            <ion-button (click)=\"toggleSearch()\">\n              <ion-icon name=\"search\"></ion-icon>\n            </ion-button>\n          </ion-buttons>\n      <ion-title>\n          {{'PATH'|translate}}\n        </ion-title>\n    </ion-toolbar>\n  </ion-header>\n\n<ion-content padding>\n  <ion-list no-lines id=\"path-list\">\n    <div *ngFor=\"let poi of pois\">      \n      <wc-path-list-el type=\"PATH\" [id]=\"poi.id\" [img]=\"poi.image\" [title]=\"poi.title\" [text]=\"poi.subtitle\" main-color=\"#11b3ef\" desc-color=\"#707070\"></wc-path-list-el>\n    </div>\n  </ion-list>\n</ion-content>\n"
+module.exports = "<ion-header>\n    <ion-searchbar class=\"search-path\" style=\"display: none\" showCancelButton animated (search)=\"toggleSearch()\"\n    (ionInput)=\"searchChanged($event)\" (ionCancel)=\"toggleSearch()\"></ion-searchbar>\n    <ion-toolbar>\n\n      <ion-buttons slot=\"start\">\n          <ion-back-button class=\"interaction\"></ion-back-button>\n        </ion-buttons>\n        <ion-buttons slot=\"end\">\n            <ion-button (click)=\"toggleSearch()\">\n              <ion-icon name=\"search\"></ion-icon>\n            </ion-button>\n          </ion-buttons>\n      <ion-title>\n          {{'PATH'|translate}}\n        </ion-title>\n    </ion-toolbar>\n  </ion-header>\n\n<ion-content padding>\n  <ion-list no-lines id=\"path-list\">\n    <div *ngFor=\"let poi of pois\">      \n      <wc-path-list-el type=\"PATH\" [id]=\"poi.id\" [img]=\"poi.image\" [title]=\"poi.title\" [text]=\"poi.subtitle\" main-color=\"#11b3ef\" desc-color=\"#707070\"></wc-path-list-el>\n    </div>\n  </ion-list>\n</ion-content>\n"
 
 /***/ }),
 
@@ -90,7 +90,7 @@ module.exports = "<ion-header>\n    <ion-searchbar class=\"search-path\" style=\
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "ion-searchbar {\n  position: fixed;\n  z-index: 999; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL2NoaW44L0RvY3VtZW50cy93b3JrL21vZHVsYXJBcHAvbW9kdWxhci1hcHAvc3JjL2FwcC9tb2R1bGUtY29tdW5lL3BhZ2VzL2xpc3QtcGF0aC9saXN0LXBhdGgucGFnZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksZ0JBQWU7RUFFZixhQUFZLEVBQ2YiLCJmaWxlIjoic3JjL2FwcC9tb2R1bGUtY29tdW5lL3BhZ2VzL2xpc3QtcGF0aC9saXN0LXBhdGgucGFnZS5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiaW9uLXNlYXJjaGJhciB7XG4gICAgcG9zaXRpb246IGZpeGVkO1xuICAgIC8vIHRvcDogNThweDtcbiAgICB6LWluZGV4OiA5OTk7XG59Il19 */"
+module.exports = "ion-searchbar {\n  position: fixed;\n  z-index: 999; }\n\n.interaction {\n  color: #11b3ef !important; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL2NoaW44L0RvY3VtZW50cy93b3JrL21vZHVsYXJBcHAvbW9kdWxhci1hcHAvc3JjL2FwcC9tb2R1bGUtY29tdW5lL3BhZ2VzL2xpc3QtcGF0aC9saXN0LXBhdGgucGFnZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksZ0JBQWU7RUFFZixhQUFZLEVBQ2Y7O0FBQ0Q7RUFDSSwwQkFBd0IsRUFDM0IiLCJmaWxlIjoic3JjL2FwcC9tb2R1bGUtY29tdW5lL3BhZ2VzL2xpc3QtcGF0aC9saXN0LXBhdGgucGFnZS5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiaW9uLXNlYXJjaGJhciB7XG4gICAgcG9zaXRpb246IGZpeGVkO1xuICAgIC8vIHRvcDogNThweDtcbiAgICB6LWluZGV4OiA5OTk7XG59XG4uaW50ZXJhY3Rpb24ge1xuICAgIGNvbG9yOiAjMTFiM2VmIWltcG9ydGFudDtcbn0iXX0= */"
 
 /***/ }),
 
@@ -156,16 +156,18 @@ var ListPathPage = /** @class */ (function () {
     ListPathPage.prototype.ionViewDidEnter = function () {
         var _this_1 = this;
         if (this.category && this.category.query) {
-            this.dbService.synch().then(function () {
-                _this_1.dbService.getObjectByQuery(_this_1.category.query).then(function (data) {
-                    _this_1.pois = data.docs.map(function (x) { return _this_1.convertPois(x); });
-                    _this_1.fullPois = _this_1.pois;
-                    _this_1.utils.hideLoading();
+            this.translate.get('init_db').subscribe(function (value) {
+                _this_1.dbService.synch(value).then(function () {
+                    _this_1.dbService.getObjectByQuery(_this_1.category.query).then(function (data) {
+                        _this_1.pois = data.docs.map(function (x) { return _this_1.convertPois(x); });
+                        _this_1.fullPois = _this_1.pois;
+                        _this_1.utils.hideLoading();
+                    }, function (err) {
+                        _this_1.utils.hideLoading();
+                    });
                 }, function (err) {
                     _this_1.utils.hideLoading();
                 });
-            }, function (err) {
-                _this_1.utils.hideLoading();
             });
         }
         var el = document.getElementById('path-list');

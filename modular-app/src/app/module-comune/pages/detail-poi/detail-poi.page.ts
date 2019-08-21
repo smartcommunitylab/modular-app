@@ -85,17 +85,19 @@ export class DetailPoiPage implements OnInit {
   }
   share() {
     this.utils.openShare(JSON.stringify(this.poi));
-      }
+  }
   manageoLcalId(objectIds) {
     if (objectIds.length == 1) {
-      this.dbService.synch().then(() => {
-        this.dbService.getObjectByDataId(objectIds[0]).then(data => {
-          this.poiInput = data.docs[0];
-          this.poi = data.docs[0];
-          this.type = data.docs[0].fromTime ? 'EVENT' : 'POI';
-          this.buildContacts();
+      this.translate.get('init_db').subscribe(value => {
+        this.dbService.synch(value).then(() => {
+          this.dbService.getObjectByDataId(objectIds[0]).then(data => {
+            this.poiInput = data.docs[0];
+            this.poi = data.docs[0];
+            this.type = data.docs[0].fromTime ? 'EVENT' : 'POI';
+            this.buildContacts();
+          });
         });
-      });
+      })
     }
   }
 
@@ -127,36 +129,36 @@ export class DetailPoiPage implements OnInit {
         poiElement.cat = this.poiInput.topics;
       }
       if (this.poiInput.eventPeriod) {
-        if  (this.poiInput.eventPeriod[this.language])
-        poiElement.date = this.poiInput.eventPeriod[this.language];
+        if (this.poiInput.eventPeriod[this.language])
+          poiElement.date = this.poiInput.eventPeriod[this.language];
         else poiElement.date = this.poiInput.eventPeriod["it"];
       }
       if (this.poiInput.eventTiming) {
         if (this.poiInput.eventTiming[this.language])
-        poiElement.time = this.poiInput.eventTiming[this.language];
+          poiElement.time = this.poiInput.eventTiming[this.language];
         else poiElement.time = this.poiInput.eventTiming["it"];
       }
       if (this.poiInput.info) {
-        if ( this.poiInput.info[this.language])
-        poiElement.info = this.poiInput.info[this.language];
+        if (this.poiInput.info[this.language])
+          poiElement.info = this.poiInput.info[this.language];
         else poiElement.info = this.poiInput.info["it"];
       }
       if (this.poiInput.address) {
-        if ( this.poiInput.address[this.language])
-        poiElement.address = this.poiInput.address[this.language];
+        if (this.poiInput.address[this.language])
+          poiElement.address = this.poiInput.address[this.language];
         else poiElement.address = this.poiInput.address["it"];
       }
       if (this.poiInput.description) {
         if (this.poiInput.description[this.language])
-        poiElement.text = this.poiInput.description[this.language];
+          poiElement.text = this.poiInput.description[this.language];
         else poiElement.text = this.poiInput.description["it"];
       }
       if (this.poiInput.category) {
         poiElement.category = this.poiInput.category;
       }
       if (this.poiInput.classification) {
-        if  (this.poiInput.classification[this.language])
-        poiElement.classification = this.poiInput.classification[this.language];
+        if (this.poiInput.classification[this.language])
+          poiElement.classification = this.poiInput.classification[this.language];
         else poiElement.classification = this.poiInput.classification["it"];
       }
       if (this.poiInput.url) {

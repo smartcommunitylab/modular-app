@@ -17720,7 +17720,7 @@ var FuneraliPageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header >\n        <ion-searchbar class=\"search-funerali\" style=\"display: none\" showCancelButton animated (search)=\"toggleSearch()\"\n        (ionInput)=\"searchChanged($event)\" (ionCancel)=\"toggleSearch()\"></ion-searchbar>\n    <ion-toolbar>\n        <!-- <ion-searchbar (ionChange)=\"Ricerca()\" placeholder=\"cerca nominativo\" [(ngModel)]=\"name\" clearIcon=\"false\"> -->\n        <!-- </ion-searchbar> -->\n\n        <ion-buttons class=\"interactive\" slot=\"start\">\n            <ion-back-button class=\"interaction\"></ion-back-button>\n        </ion-buttons>\n        <ion-buttons slot=\"end\">\n            <ion-button (click)=\"toggleSearch()\">\n                <ion-icon name=\"search\"></ion-icon>\n            </ion-button>\n        </ion-buttons>\n    </ion-toolbar>\n\n</ion-header>\n\n<ion-content>\n    <div class=\"wrapper\" *ngIf=\"!search\">\n        <div class=\"scrolling-wrapper-flexbox loop\">\n            <ion-chip *ngFor=\"let c of dates\" (click)=\"selectInternalElement(c)\"\n                [ngClass]=\"{'datesSelected': isSelected(c)}\">\n                <ion-label class=\"interaction\" [ngClass]=\"{'datesSelected': c==actualVisualized}\">{{c}}</ion-label>\n            </ion-chip>\n        </div>\n    </div>\n    <!-- <div id=\"top\"></div>\n    <ion-icon id=\"buttonTop\" (click)=\"GoOnTop()\" color=\"dark\" name=\"arrow-dropup\"></ion-icon> -->\n    <div id=\"funerali\">\n        <ion-list no-lines padding>\n            <div *ngFor=\"let c of dates\">\n                <ion-item class=\"label-type ion-text-center\" sticky *ngIf=\"oneElement(c)\">\n                    <div>{{c}}</div>\n                </ion-item>\n                <div class=\"content\">\n                    <div *ngFor=\"let item of showFunerali[c]; let i = index\">\n                        <!-- <div *ngFor=\"let item of vetFunerali; let i = index;\"> -->\n                        <div class=\"{{item.dataFunerale}}\" inViewport [inViewportOptions]=\"{ threshold: [0] }\"\n                            (inViewportAction)=\"onIntersection($event)\">\n                            <dettaglio-morte (indicazioni)=\"IndicazioniFunerali(i)\" (condividi)=\"CondividiFunerali(i)\"\n                                [funerale]=\"sendParam(item)\" [string]=\"string\" isFunerale={{true}}></dettaglio-morte>\n                        </div>\n                    </div>\n                </div>\n            </div>\n        </ion-list>\n    </div>\n</ion-content>"
+module.exports = "<ion-header >\n        <ion-searchbar class=\"search-funerali\" style=\"display: none\" showCancelButton animated (search)=\"toggleSearch()\"\n        (ionInput)=\"searchChanged($event)\" (ionCancel)=\"toggleSearch()\"></ion-searchbar>\n    <ion-toolbar>\n        <!-- <ion-searchbar (ionChange)=\"Ricerca()\" placeholder=\"cerca nominativo\" [(ngModel)]=\"name\" clearIcon=\"false\"> -->\n        <!-- </ion-searchbar> -->\n        <ion-title>\n                {{'title_funerali'|translate}}\n              </ion-title>\n        <ion-buttons class=\"interactive\" slot=\"start\">\n            <ion-back-button class=\"interaction\"></ion-back-button>\n        </ion-buttons>\n        <ion-buttons slot=\"end\">\n            <ion-button (click)=\"toggleSearch()\">\n                <ion-icon name=\"search\"></ion-icon>\n            </ion-button>\n        </ion-buttons>\n    </ion-toolbar>\n\n</ion-header>\n\n<ion-content>\n    <div class=\"wrapper\" *ngIf=\"!search\">\n        <div id=\"idDates\" class=\"scrolling-wrapper-flexbox loop\">\n            <ion-chip *ngFor=\"let c of dates\" id=\"{{c}}\" (click)=\"selectInternalElement(c)\"\n                [ngClass]=\"{'datesSelected': isSelected(c)}\">\n                <ion-label class=\"interaction\" [ngClass]=\"{'datesSelected': c==actualVisualized}\">{{c}}</ion-label>\n            </ion-chip>\n        </div>\n    </div>\n    <!-- <div id=\"top\"></div>\n    <ion-icon id=\"buttonTop\" (click)=\"GoOnTop()\" color=\"dark\" name=\"arrow-dropup\"></ion-icon> -->\n    <div id=\"funerali\">\n        <ion-list no-lines padding *ngIf=\"!emptyList\">\n            <div *ngFor=\"let c of dates\">\n                <ion-item class=\"label-type ion-text-center\" sticky *ngIf=\"oneElement(c)\">\n                    <div>{{c}}</div>\n                </ion-item>\n                <div class=\"content\" >\n                    <div *ngFor=\"let item of showFunerali[c]; let i = index\">\n                        <!-- <div *ngFor=\"let item of vetFunerali; let i = index;\"> -->\n                        <div class=\"{{item.dataFunerale}}\" inViewport [inViewportOptions]=\"{ threshold: [0] }\"\n                            (inViewportAction)=\"onIntersection($event)\">\n                            <dettaglio-morte (indicazioni)=\"IndicazioniFunerali(i)\" (condividi)=\"CondividiFunerali(i)\"\n                                [funerale]=\"sendParam(item)\" [string]=\"string\" isFunerale={{true}}></dettaglio-morte>\n                        </div>\n                    </div>\n                </div>\n            </div>\n        </ion-list>\n        <div class=\"empty-list\" *ngIf=\"emptyList\">\n                {{'empty_list' | translate}}\n            </div>\n    </div>\n</ion-content>"
 
 /***/ }),
 
@@ -17731,7 +17731,7 @@ module.exports = "<ion-header >\n        <ion-searchbar class=\"search-funerali\
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "#buttonGiorni {\n  position: absolute;\n  right: 0;\n  margin: 10px 10px;\n  z-index: 9999; }\n\n#barraGiorni {\n  text-align: center;\n  background-color: #f4f5f8;\n  overflow: hidden; }\n\nion-searchbar {\n  position: fixed;\n  z-index: 999; }\n\nion-icon {\n  width: 30px;\n  height: 30px; }\n\n#scroll {\n  margin-top: 30px;\n  margin-bottom: 0; }\n\nion-list {\n  padding-top: 40px; }\n\n#buttonTop {\n  position: fixed;\n  right: 0;\n  bottom: 0;\n  width: 50px;\n  height: 50px;\n  padding: 10px 10px 5px 10px;\n  z-index: 9999; }\n\n.wrapper .scrolling-wrapper-flexbox {\n  -ms-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);\n  -o-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);\n  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);\n  background-color: white;\n  width: 100%;\n  display: flex;\n  overflow-x: auto;\n  z-index: 999;\n  position: fixed; }\n\n.wrapper .scrolling-wrapper-flexbox .container {\n    flex: 0 0 auto; }\n\n.wrapper .scrolling-wrapper-flexbox .container .tag {\n      flex: 0 0 auto;\n      margin: 8px; }\n\n.wrapper .scrolling-wrapper-flexbox .container .tag .tag-text {\n        padding: 4px;\n        color: white;\n        background-color: #11b3ef; }\n\n.wrapper .scrolling-wrapper-flexbox ion-chip {\n    flex: 0 0 auto;\n    background-color: white; }\n\n.interaction {\n  color: #11b3ef; }\n\n.datesSelected {\n  color: white !important;\n  background-color: #11b3ef !important; }\n\n.label-type {\n  width: 100%;\n  font-weight: bold;\n  --background: #e3e3e3;\n  --color: #707070;\n  font-size: 22px;\n  margin-bottom: 8px; }\n\n.label-type div {\n    width: 100%; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL2NoaW44L0RvY3VtZW50cy93b3JrL21vZHVsYXJBcHAvbW9kdWxhci1hcHAvc3JjL2FwcC9tb2R1bGUtZnVuZXJhbGkvcGFnZXMvZnVuZXJhbGkvZnVuZXJhbGkucGFnZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksbUJBQWtCO0VBQ2xCLFNBQVE7RUFDUixrQkFBaUI7RUFDakIsY0FBYSxFQUNoQjs7QUFFRDtFQUNJLG1CQUFrQjtFQUNsQiwwQkFBeUI7RUFDekIsaUJBQWdCLEVBRW5COztBQUNEO0VBQ0ksZ0JBQWU7RUFFZixhQUFZLEVBQ2Y7O0FBQ0Q7RUFDSSxZQUFXO0VBQ1gsYUFBWSxFQUNmOztBQUVEO0VBQ0ksaUJBQWdCO0VBQ2hCLGlCQUFnQixFQUNuQjs7QUFDRDtFQUNJLGtCQUFpQixFQUNwQjs7QUFDRDtFQUNJLGdCQUFlO0VBQ2YsU0FBUTtFQUNSLFVBQVM7RUFDVCxZQUFXO0VBQ1gsYUFBWTtFQUNaLDRCQUEyQjtFQUMzQixjQUFhLEVBQ2hCOztBQUVEO0VBSVEsK0VBQThFO0VBQzlFLDhFQUE2RTtFQUM3RSwyRUFBMEU7RUFDMUUsd0JBQXVCO0VBQ3ZCLFlBQVc7RUFDWCxjQUFhO0VBQ2IsaUJBQWdCO0VBQ2hCLGFBQVk7RUFDWixnQkFBZSxFQXNCbEI7O0FBbENMO0lBZVksZUFBYyxFQWFqQjs7QUE1QlQ7TUFrQmdCLGVBQWM7TUFDZCxZQUFXLEVBT2Q7O0FBMUJiO1FBc0JvQixhQUFZO1FBQ1osYUFBWTtRQUNaLDBCQUF5QixFQUM1Qjs7QUF6QmpCO0lBK0JZLGVBQWM7SUFDZCx3QkFBdUIsRUFDMUI7O0FBSVQ7RUFDSSxlQUFjLEVBQ2pCOztBQUVEO0VBQ0ksd0JBQXVCO0VBQ3ZCLHFDQUFvQyxFQUV2Qzs7QUFDRDtFQUNJLFlBQVc7RUFDWCxrQkFBaUI7RUFDakIsc0JBQWE7RUFDYixpQkFBUTtFQUNSLGdCQUFlO0VBQ2YsbUJBQWtCLEVBS3JCOztBQVhEO0lBU1EsWUFBVyxFQUNkIiwiZmlsZSI6InNyYy9hcHAvbW9kdWxlLWZ1bmVyYWxpL3BhZ2VzL2Z1bmVyYWxpL2Z1bmVyYWxpLnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIiNidXR0b25HaW9ybmkge1xuICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgICByaWdodDogMDtcbiAgICBtYXJnaW46IDEwcHggMTBweDtcbiAgICB6LWluZGV4OiA5OTk5O1xufVxuXG4jYmFycmFHaW9ybmkge1xuICAgIHRleHQtYWxpZ246IGNlbnRlcjtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiAjZjRmNWY4O1xuICAgIG92ZXJmbG93OiBoaWRkZW47XG5cbn1cbmlvbi1zZWFyY2hiYXIge1xuICAgIHBvc2l0aW9uOiBmaXhlZDtcbiAgICAvLyB0b3A6IDU4cHg7XG4gICAgei1pbmRleDogOTk5O1xufVxuaW9uLWljb24ge1xuICAgIHdpZHRoOiAzMHB4O1xuICAgIGhlaWdodDogMzBweDtcbn1cblxuI3Njcm9sbCB7XG4gICAgbWFyZ2luLXRvcDogMzBweDtcbiAgICBtYXJnaW4tYm90dG9tOiAwO1xufVxuaW9uLWxpc3R7XG4gICAgcGFkZGluZy10b3A6IDQwcHg7XG59XG4jYnV0dG9uVG9wIHtcbiAgICBwb3NpdGlvbjogZml4ZWQ7XG4gICAgcmlnaHQ6IDA7XG4gICAgYm90dG9tOiAwO1xuICAgIHdpZHRoOiA1MHB4O1xuICAgIGhlaWdodDogNTBweDtcbiAgICBwYWRkaW5nOiAxMHB4IDEwcHggNXB4IDEwcHg7XG4gICAgei1pbmRleDogOTk5OTtcbn1cblxuLndyYXBwZXIge1xuICAgIC5zY3JvbGxpbmctd3JhcHBlci1mbGV4Ym94IHtcbiAgICAgICAgLXdlYmtpdC1ib3gtc2hhZG93OiAwIDEwcHggMjBweCByZ2JhKDAsIDAsIDAsIDAuMTkpLCAwIDZweCA2cHggcmdiYSgwLCAwLCAwLCAwLjIzKTtcbiAgICAgICAgLW1vei1ib3gtc2hhZG93OiAwIDEwcHggMjBweCByZ2JhKDAsIDAsIDAsIDAuMTkpLCAwIDZweCA2cHggcmdiYSgwLCAwLCAwLCAwLjIzKTtcbiAgICAgICAgLW1zLWJveC1zaGFkb3c6IDAgMTBweCAyMHB4IHJnYmEoMCwgMCwgMCwgMC4xOSksIDAgNnB4IDZweCByZ2JhKDAsIDAsIDAsIDAuMjMpO1xuICAgICAgICAtby1ib3gtc2hhZG93OiAwIDEwcHggMjBweCByZ2JhKDAsIDAsIDAsIDAuMTkpLCAwIDZweCA2cHggcmdiYSgwLCAwLCAwLCAwLjIzKTtcbiAgICAgICAgYm94LXNoYWRvdzogMCAxMHB4IDIwcHggcmdiYSgwLCAwLCAwLCAwLjE5KSwgMCA2cHggNnB4IHJnYmEoMCwgMCwgMCwgMC4yMyk7XG4gICAgICAgIGJhY2tncm91bmQtY29sb3I6IHdoaXRlO1xuICAgICAgICB3aWR0aDogMTAwJTtcbiAgICAgICAgZGlzcGxheTogZmxleDtcbiAgICAgICAgb3ZlcmZsb3cteDogYXV0bztcbiAgICAgICAgei1pbmRleDogOTk5O1xuICAgICAgICBwb3NpdGlvbjogZml4ZWQ7XG5cbiAgICAgICAgLmNvbnRhaW5lciB7XG4gICAgICAgICAgICBmbGV4OiAwIDAgYXV0bztcblxuICAgICAgICAgICAgLnRhZyB7XG4gICAgICAgICAgICAgICAgZmxleDogMCAwIGF1dG87XG4gICAgICAgICAgICAgICAgbWFyZ2luOiA4cHg7XG5cbiAgICAgICAgICAgICAgICAudGFnLXRleHQge1xuICAgICAgICAgICAgICAgICAgICBwYWRkaW5nOiA0cHg7XG4gICAgICAgICAgICAgICAgICAgIGNvbG9yOiB3aGl0ZTtcbiAgICAgICAgICAgICAgICAgICAgYmFja2dyb3VuZC1jb2xvcjogIzExYjNlZjtcbiAgICAgICAgICAgICAgICB9XG4gICAgICAgICAgICB9XG5cbiAgICAgICAgfVxuXG4gICAgICAgIGlvbi1jaGlwIHtcbiAgICAgICAgICAgIGZsZXg6IDAgMCBhdXRvO1xuICAgICAgICAgICAgYmFja2dyb3VuZC1jb2xvcjogd2hpdGU7XG4gICAgICAgIH1cbiAgICB9XG59XG5cbi5pbnRlcmFjdGlvbiB7XG4gICAgY29sb3I6ICMxMWIzZWY7XG59XG5cbi5kYXRlc1NlbGVjdGVkIHtcbiAgICBjb2xvcjogd2hpdGUgIWltcG9ydGFudDtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiAjMTFiM2VmICFpbXBvcnRhbnQ7XG5cbn1cbi5sYWJlbC10eXBle1xuICAgIHdpZHRoOiAxMDAlO1xuICAgIGZvbnQtd2VpZ2h0OiBib2xkO1xuICAgIC0tYmFja2dyb3VuZDogI2UzZTNlMztcbiAgICAtLWNvbG9yOiAjNzA3MDcwO1xuICAgIGZvbnQtc2l6ZTogMjJweDtcbiAgICBtYXJnaW4tYm90dG9tOiA4cHg7XG5cbiAgICBkaXZ7XG4gICAgICAgIHdpZHRoOiAxMDAlO1xuICAgIH1cbn0iXX0= */"
+module.exports = "#buttonGiorni {\n  position: absolute;\n  right: 0;\n  margin: 10px 10px;\n  z-index: 9999; }\n\n#barraGiorni {\n  text-align: center;\n  background-color: #f4f5f8;\n  overflow: hidden; }\n\nion-searchbar {\n  position: fixed;\n  z-index: 999; }\n\nion-icon {\n  width: 30px;\n  height: 30px; }\n\n#scroll {\n  margin-top: 30px;\n  margin-bottom: 0; }\n\nion-list {\n  padding-top: 40px; }\n\n#buttonTop {\n  position: fixed;\n  right: 0;\n  bottom: 0;\n  width: 50px;\n  height: 50px;\n  padding: 10px 10px 5px 10px;\n  z-index: 9999; }\n\n.wrapper .scrolling-wrapper-flexbox {\n  -ms-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);\n  -o-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);\n  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);\n  background-color: white;\n  width: 100%;\n  display: flex;\n  overflow-x: auto;\n  z-index: 999;\n  position: fixed; }\n\n.wrapper .scrolling-wrapper-flexbox .container {\n    flex: 0 0 auto; }\n\n.wrapper .scrolling-wrapper-flexbox .container .tag {\n      flex: 0 0 auto;\n      margin: 8px; }\n\n.wrapper .scrolling-wrapper-flexbox .container .tag .tag-text {\n        padding: 4px;\n        color: white;\n        background-color: #11b3ef; }\n\n.wrapper .scrolling-wrapper-flexbox ion-chip {\n    flex: 0 0 auto;\n    background-color: white; }\n\n.interaction {\n  color: #11b3ef !important; }\n\n.datesSelected {\n  color: white !important;\n  background-color: #11b3ef !important; }\n\n.label-type {\n  width: 100%;\n  font-weight: bold;\n  --background: #e3e3e3;\n  --color: #707070;\n  font-size: 22px;\n  margin-bottom: 8px; }\n\n.label-type div {\n    width: 100%; }\n\n.empty-list {\n  text-align: center;\n  font-weight: bold;\n  font-size: 24px; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL2NoaW44L0RvY3VtZW50cy93b3JrL21vZHVsYXJBcHAvbW9kdWxhci1hcHAvc3JjL2FwcC9tb2R1bGUtZnVuZXJhbGkvcGFnZXMvZnVuZXJhbGkvZnVuZXJhbGkucGFnZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksbUJBQWtCO0VBQ2xCLFNBQVE7RUFDUixrQkFBaUI7RUFDakIsY0FBYSxFQUNoQjs7QUFFRDtFQUNJLG1CQUFrQjtFQUNsQiwwQkFBeUI7RUFDekIsaUJBQWdCLEVBRW5COztBQUNEO0VBQ0ksZ0JBQWU7RUFFZixhQUFZLEVBQ2Y7O0FBQ0Q7RUFDSSxZQUFXO0VBQ1gsYUFBWSxFQUNmOztBQUVEO0VBQ0ksaUJBQWdCO0VBQ2hCLGlCQUFnQixFQUNuQjs7QUFDRDtFQUNJLGtCQUFpQixFQUNwQjs7QUFDRDtFQUNJLGdCQUFlO0VBQ2YsU0FBUTtFQUNSLFVBQVM7RUFDVCxZQUFXO0VBQ1gsYUFBWTtFQUNaLDRCQUEyQjtFQUMzQixjQUFhLEVBQ2hCOztBQUVEO0VBSVEsK0VBQThFO0VBQzlFLDhFQUE2RTtFQUM3RSwyRUFBMEU7RUFDMUUsd0JBQXVCO0VBQ3ZCLFlBQVc7RUFDWCxjQUFhO0VBQ2IsaUJBQWdCO0VBQ2hCLGFBQVk7RUFDWixnQkFBZSxFQXNCbEI7O0FBbENMO0lBZVksZUFBYyxFQWFqQjs7QUE1QlQ7TUFrQmdCLGVBQWM7TUFDZCxZQUFXLEVBT2Q7O0FBMUJiO1FBc0JvQixhQUFZO1FBQ1osYUFBWTtRQUNaLDBCQUF5QixFQUM1Qjs7QUF6QmpCO0lBK0JZLGVBQWM7SUFDZCx3QkFBdUIsRUFDMUI7O0FBSVQ7RUFDSSwwQkFBd0IsRUFDM0I7O0FBRUQ7RUFDSSx3QkFBdUI7RUFDdkIscUNBQW9DLEVBRXZDOztBQUNEO0VBQ0ksWUFBVztFQUNYLGtCQUFpQjtFQUNqQixzQkFBYTtFQUNiLGlCQUFRO0VBQ1IsZ0JBQWU7RUFDZixtQkFBa0IsRUFLckI7O0FBWEQ7SUFTUSxZQUFXLEVBQ2Q7O0FBRUw7RUFDRyxtQkFBa0I7RUFDbEIsa0JBQWlCO0VBQ2pCLGdCQUFlLEVBQ2pCIiwiZmlsZSI6InNyYy9hcHAvbW9kdWxlLWZ1bmVyYWxpL3BhZ2VzL2Z1bmVyYWxpL2Z1bmVyYWxpLnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIiNidXR0b25HaW9ybmkge1xuICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgICByaWdodDogMDtcbiAgICBtYXJnaW46IDEwcHggMTBweDtcbiAgICB6LWluZGV4OiA5OTk5O1xufVxuXG4jYmFycmFHaW9ybmkge1xuICAgIHRleHQtYWxpZ246IGNlbnRlcjtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiAjZjRmNWY4O1xuICAgIG92ZXJmbG93OiBoaWRkZW47XG5cbn1cbmlvbi1zZWFyY2hiYXIge1xuICAgIHBvc2l0aW9uOiBmaXhlZDtcbiAgICAvLyB0b3A6IDU4cHg7XG4gICAgei1pbmRleDogOTk5O1xufVxuaW9uLWljb24ge1xuICAgIHdpZHRoOiAzMHB4O1xuICAgIGhlaWdodDogMzBweDtcbn1cblxuI3Njcm9sbCB7XG4gICAgbWFyZ2luLXRvcDogMzBweDtcbiAgICBtYXJnaW4tYm90dG9tOiAwO1xufVxuaW9uLWxpc3R7XG4gICAgcGFkZGluZy10b3A6IDQwcHg7XG59XG4jYnV0dG9uVG9wIHtcbiAgICBwb3NpdGlvbjogZml4ZWQ7XG4gICAgcmlnaHQ6IDA7XG4gICAgYm90dG9tOiAwO1xuICAgIHdpZHRoOiA1MHB4O1xuICAgIGhlaWdodDogNTBweDtcbiAgICBwYWRkaW5nOiAxMHB4IDEwcHggNXB4IDEwcHg7XG4gICAgei1pbmRleDogOTk5OTtcbn1cblxuLndyYXBwZXIge1xuICAgIC5zY3JvbGxpbmctd3JhcHBlci1mbGV4Ym94IHtcbiAgICAgICAgLXdlYmtpdC1ib3gtc2hhZG93OiAwIDEwcHggMjBweCByZ2JhKDAsIDAsIDAsIDAuMTkpLCAwIDZweCA2cHggcmdiYSgwLCAwLCAwLCAwLjIzKTtcbiAgICAgICAgLW1vei1ib3gtc2hhZG93OiAwIDEwcHggMjBweCByZ2JhKDAsIDAsIDAsIDAuMTkpLCAwIDZweCA2cHggcmdiYSgwLCAwLCAwLCAwLjIzKTtcbiAgICAgICAgLW1zLWJveC1zaGFkb3c6IDAgMTBweCAyMHB4IHJnYmEoMCwgMCwgMCwgMC4xOSksIDAgNnB4IDZweCByZ2JhKDAsIDAsIDAsIDAuMjMpO1xuICAgICAgICAtby1ib3gtc2hhZG93OiAwIDEwcHggMjBweCByZ2JhKDAsIDAsIDAsIDAuMTkpLCAwIDZweCA2cHggcmdiYSgwLCAwLCAwLCAwLjIzKTtcbiAgICAgICAgYm94LXNoYWRvdzogMCAxMHB4IDIwcHggcmdiYSgwLCAwLCAwLCAwLjE5KSwgMCA2cHggNnB4IHJnYmEoMCwgMCwgMCwgMC4yMyk7XG4gICAgICAgIGJhY2tncm91bmQtY29sb3I6IHdoaXRlO1xuICAgICAgICB3aWR0aDogMTAwJTtcbiAgICAgICAgZGlzcGxheTogZmxleDtcbiAgICAgICAgb3ZlcmZsb3cteDogYXV0bztcbiAgICAgICAgei1pbmRleDogOTk5O1xuICAgICAgICBwb3NpdGlvbjogZml4ZWQ7XG5cbiAgICAgICAgLmNvbnRhaW5lciB7XG4gICAgICAgICAgICBmbGV4OiAwIDAgYXV0bztcblxuICAgICAgICAgICAgLnRhZyB7XG4gICAgICAgICAgICAgICAgZmxleDogMCAwIGF1dG87XG4gICAgICAgICAgICAgICAgbWFyZ2luOiA4cHg7XG5cbiAgICAgICAgICAgICAgICAudGFnLXRleHQge1xuICAgICAgICAgICAgICAgICAgICBwYWRkaW5nOiA0cHg7XG4gICAgICAgICAgICAgICAgICAgIGNvbG9yOiB3aGl0ZTtcbiAgICAgICAgICAgICAgICAgICAgYmFja2dyb3VuZC1jb2xvcjogIzExYjNlZjtcbiAgICAgICAgICAgICAgICB9XG4gICAgICAgICAgICB9XG5cbiAgICAgICAgfVxuXG4gICAgICAgIGlvbi1jaGlwIHtcbiAgICAgICAgICAgIGZsZXg6IDAgMCBhdXRvO1xuICAgICAgICAgICAgYmFja2dyb3VuZC1jb2xvcjogd2hpdGU7XG4gICAgICAgIH1cbiAgICB9XG59XG5cbi5pbnRlcmFjdGlvbiB7XG4gICAgY29sb3I6ICMxMWIzZWYhaW1wb3J0YW50O1xufVxuXG4uZGF0ZXNTZWxlY3RlZCB7XG4gICAgY29sb3I6IHdoaXRlICFpbXBvcnRhbnQ7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogIzExYjNlZiAhaW1wb3J0YW50O1xuXG59XG4ubGFiZWwtdHlwZXtcbiAgICB3aWR0aDogMTAwJTtcbiAgICBmb250LXdlaWdodDogYm9sZDtcbiAgICAtLWJhY2tncm91bmQ6ICNlM2UzZTM7XG4gICAgLS1jb2xvcjogIzcwNzA3MDtcbiAgICBmb250LXNpemU6IDIycHg7XG4gICAgbWFyZ2luLWJvdHRvbTogOHB4O1xuXG4gICAgZGl2e1xuICAgICAgICB3aWR0aDogMTAwJTtcbiAgICB9XG59XG4uZW1wdHktbGlzdHtcbiAgIHRleHQtYWxpZ246IGNlbnRlcjtcbiAgIGZvbnQtd2VpZ2h0OiBib2xkO1xuICAgZm9udC1zaXplOiAyNHB4OyBcbn0iXX0= */"
 
 /***/ }),
 
@@ -17786,6 +17786,7 @@ var FuneraliPage = /** @class */ (function () {
         this.dates = [];
         this.showFunerali = [];
         this.fullDates = [];
+        this.emptyList = false;
         this.doneTypingInterval = 500; //time in ms, 5 second for example
         var language = window[this.utils.getAppModuleName()]['language'];
         this.translate.use(language);
@@ -17805,6 +17806,7 @@ var FuneraliPage = /** @class */ (function () {
             _this.luogoFunerale = _this.translate.instant('luogo_funerale');
             _this.mappa = _this.translate.instant('mappa');
             _this.condividi = _this.translate.instant('condividi');
+            _this.networkMessage = _this.translate.instant('network_message');
             _this.string = JSON.stringify({
                 dataMorte: _this.dataMorte,
                 dataFunerale: _this.dataFunerale,
@@ -17834,14 +17836,18 @@ var FuneraliPage = /** @class */ (function () {
     };
     FuneraliPage.prototype.subCategories = function (array) {
         var _this = this;
-        array.forEach(function (element) {
+        var i = 0;
+        array.forEach(function (element, index) {
             if (!_this.fullDates.includes(element.dataFunerale)) {
                 _this.fullDates.push(element.dataFunerale);
+                if ((moment__WEBPACK_IMPORTED_MODULE_4__(element.dataFunerale, 'YYYY-MM-DD').isSame(new Date(), "day")))
+                    i = _this.fullDates.length;
             }
         });
         this.dates = this.fullDates;
-        if (this.dates.length > 0)
-            setTimeout(function () { return _this.actualVisualized = _this.dates[0]; }, 500);
+        if (this.dates.length > 0) {
+            setTimeout(function () { return _this.selectInternalElement(_this.dates[i]); }, 500);
+        }
     };
     FuneraliPage.prototype.oneElement = function (category) {
         if (this.showFunerali && this.showFunerali[category])
@@ -17916,9 +17922,10 @@ var FuneraliPage = /** @class */ (function () {
         var elem = document.getElementsByClassName(ref);
         if (elem.length > 0) {
             var yOffset = elem[0].offsetTop;
-            this.content.scrollToPoint(0, yOffset, 0);
-            // var scrollheight = elem[0].getBoundingClientRect().top;
-            // this.content.scrollToPoint(0, scrollheight, 1000);
+            this.content.scrollToPoint(0, yOffset - 100, 0);
+            var myElement = document.getElementById(ref);
+            var topPos = myElement.offsetLeft;
+            document.getElementById('idDates').scrollLeft = topPos - (window.innerWidth / 2);
         }
     };
     FuneraliPage.prototype.yyyymmdd = function (date) {
@@ -18014,22 +18021,25 @@ var FuneraliPage = /** @class */ (function () {
             var pastDate = startDate.getDate() - 7;
             startDate.setDate(pastDate);
             _this.datiService.getDati(_this.yyyymmdd(startDate)).then(function (res) {
-                console.log(res);
-                _this.vetFunerali = _this.convertDates(res);
-                _this.subCategories(_this.vetFunerali);
-                _this.buildShowPois();
+                if (res.length > 0) {
+                    _this.emptyList = false;
+                    console.log(res);
+                    _this.vetFunerali = _this.convertDates(res);
+                    _this.subCategories(_this.vetFunerali);
+                    _this.buildShowPois();
+                }
+                else {
+                    _this.emptyList = true;
+                }
                 resolve();
             }, function (err) {
                 reject();
+                _this.emptyList = true;
+                _this.utils.showErrorConnectionMessage(_this.networkMessage);
             });
         });
     };
     FuneraliPage.prototype.convertDates = function (res) {
-        //     dataFunerale: "2019-08-09"
-        // dataMorte: "2019-08-06"
-        // luogoFunerale: "LOMAZZO -  - LOMAZZO"
-        // nome: "CASARTELLI,OSCAR"
-        // oraFunerale: "08:45:00"
         return res.map(function (el) {
             // var elem = {};
             if (el.dataFunerale)
@@ -18204,8 +18214,9 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
 
 
 var UtilsService = /** @class */ (function () {
-    function UtilsService(loadingController) {
+    function UtilsService(loadingController, toastController) {
         this.loadingController = loadingController;
+        this.toastController = toastController;
         this.appModuleName = "app-module";
     }
     UtilsService.prototype.presentLoading = function () {
@@ -18233,11 +18244,28 @@ var UtilsService = /** @class */ (function () {
     UtilsService.prototype.getAppModuleName = function () {
         return this.appModuleName;
     };
+    UtilsService.prototype.showErrorConnectionMessage = function (message) {
+        return __awaiter(this, void 0, void 0, function () {
+            var toast;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.toastController.create({
+                            message: message,
+                            duration: 2000
+                        })];
+                    case 1:
+                        toast = _a.sent();
+                        toast.present();
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
     UtilsService = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
             providedIn: 'root'
         }),
-        __metadata("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_1__["LoadingController"]])
+        __metadata("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_1__["LoadingController"], _ionic_angular__WEBPACK_IMPORTED_MODULE_1__["ToastController"]])
     ], UtilsService);
     return UtilsService;
 }());

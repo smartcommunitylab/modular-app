@@ -232,12 +232,14 @@ var DetailEventPage = /** @class */ (function () {
     DetailEventPage.prototype.manageoLcalId = function (objectIds) {
         var _this = this;
         if (objectIds.length == 1) {
-            this.dbService.synch().then(function () {
-                _this.dbService.getObjectByDataId(objectIds[0]).then(function (data) {
-                    _this.poiInput = data.docs[0];
-                    _this.poi = data.docs[0];
-                    _this.type = data.docs[0].fromTime ? 'EVENT' : 'POI';
-                    _this.buildContacts();
+            this.translate.get('init_db').subscribe(function (value) {
+                _this.dbService.synch(value).then(function () {
+                    _this.dbService.getObjectByDataId(objectIds[0]).then(function (data) {
+                        _this.poiInput = data.docs[0];
+                        _this.poi = data.docs[0];
+                        _this.type = data.docs[0].fromTime ? 'EVENT' : 'POI';
+                        _this.buildContacts();
+                    });
                 });
             });
         }

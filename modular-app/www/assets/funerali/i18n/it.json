@@ -5,5 +5,9 @@
     "ora_morte": "Alle ore:",
     "luogo_funerale": "il funerale sara' celebrato presso:",
     "mappa": "Mappa",
-    "condividi": "Condividi"
+    "condividi": "Condividi",
+    "title_funerali":"Funerali",
+    "network_message":"Errore nella ricezione dei dati",
+    "empty_list":"Nessun funerale presente"
+
 }

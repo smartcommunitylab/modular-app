@@ -123,7 +123,8 @@ export class ListFarmaciePage implements OnInit {
 
         }
       };
-      this.dbService.synch().then(() => {
+      this.translate.get('init_db').subscribe(value => {
+        this.dbService.synch(value).then(() => {
         this.dbService.getObjectByQuery(query).then((data) => {
           if (data.docs.length > 0) {
             this.fullPois = data.docs.map(x => this.convertPois(x));
@@ -145,6 +146,7 @@ export class ListFarmaciePage implements OnInit {
       }, err => {
         this.utils.hideLoading();
       });
+    })
     }
   }
   closeTurno() {
