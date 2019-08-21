@@ -17840,7 +17840,7 @@ var FuneraliPage = /** @class */ (function () {
         array.forEach(function (element, index) {
             if (!_this.fullDates.includes(element.dataFunerale)) {
                 _this.fullDates.push(element.dataFunerale);
-                if ((moment__WEBPACK_IMPORTED_MODULE_4__(element.dataFunerale, 'YYYY-MM-DD').isSame(new Date(), "day")))
+                if ((moment__WEBPACK_IMPORTED_MODULE_4__(element.dataFunerale, 'DD/MM/YYYY').isSame(new Date(), "day")))
                     i = _this.fullDates.length;
             }
         });

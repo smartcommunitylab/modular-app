@@ -16,14 +16,9 @@
   </ion-toolbar>
 </ion-header>
 
-<!-- <ion-grid style="height: 100%" *ngIf="isLoading">
-  <ion-row justify-content-center align-items-center style="height: 100%">
-    <ion-spinner name="circles"></ion-spinner>
-  </ion-row>
-</ion-grid> -->
 
 <ion-content>
-  <ion-card class="card-turni" *ngIf="turno">
+  <ion-card class="card-turni" *ngIf="turno && farmacieTurno">
       <button ion-button icon-only (click)="closeTurno()">
         <ion-icon name="close"></ion-icon>
       </button>
