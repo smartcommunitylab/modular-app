@@ -103,7 +103,7 @@ export class FuneraliPage {
     array.forEach((element, index) => {
       if (!this.fullDates.includes(element.dataFunerale)) {
         this.fullDates.push(element.dataFunerale);
-        if ((moment(element.dataFunerale, 'YYYY-MM-DD').isSame(new Date(), "day")))
+        if ((moment(element.dataFunerale, 'DD/MM/YYYY').isSame(new Date(), "day")))
           i = this.fullDates.length;
       }
     });
