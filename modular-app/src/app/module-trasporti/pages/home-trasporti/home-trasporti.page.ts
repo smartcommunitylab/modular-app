@@ -36,14 +36,14 @@ export class HomeTrasportiPage extends MainPage implements OnInit {
   async ngOnInit() {
     this.translate.get('initdb_label').subscribe(
       value => {
-        var initDb= value;
+        var initDb = value;
         this.synch(initDb);
 
       }, err => {
         this.synch("");
       }
     );
-   
+
   }
   async synch(initDb: any): Promise<any> {
     const loading = await this.loadingController.create({
@@ -63,7 +63,8 @@ export class HomeTrasportiPage extends MainPage implements OnInit {
     this.config.getHomeButtons().then(res => {
       this.primaryLinks = res;
       this.loadListAll(this.primaryLinks);
-    })  }
+    })
+  }
 
   private prepareGrid() {
     var cols = Math.floor(window.innerWidth / this.min_grid_cell_width);
@@ -88,10 +89,20 @@ export class HomeTrasportiPage extends MainPage implements OnInit {
     var elem: any = document.getElementsByClassName(ref.state);
     if (elem.length > 0) {
       let yOffset = elem[0].offsetTop;
-      this.content.scrollToPoint(0, yOffset-100, 0)
+      this.content.scrollToPoint(0, yOffset - 100, 0)
     }
   }
-
+  getHtml(elem) {
+    if (elem.ref == "trains")
+      return ""
+    if (this.inside(elem.title))
+      return "<span>" + elem.title + "</span>"
+    else return "<span>" + elem.title.substring(0, 3); +"</span>"
+  }
+  getIcon(elem) {
+    if (elem.ref == "trains")
+      return "train"
+  }
   public onIntersection({ target, visible }: { target: Element; visible: boolean }): void {
     if (visible && this.actualVisualized != target.className)
       this.actualVisualized = target.className;
@@ -100,7 +111,10 @@ export class HomeTrasportiPage extends MainPage implements OnInit {
   isSelected(category) {
     return category.state == this.actualVisualized;
   }
+  getIconStyle(elem) {
+    return { 'color': elem.color }
 
+  }
   compareElements(i) {
     if (i == 0)
       return true
@@ -146,9 +160,9 @@ export class HomeTrasportiPage extends MainPage implements OnInit {
     return (elem && elem.group && elem.group.routes && elem.group.routes.length > 0 && elem.group.routes[0].title) ? true : false;
   }
   inside(string) {
-    return string.length<3
-      
-    
+    return string.length < 3
+
+
   }
   selectElement(e) {
     // route element: go to table
@@ -156,11 +170,11 @@ export class HomeTrasportiPage extends MainPage implements OnInit {
       // if (!this.groupId) {
       //   this.groupId = "no-group";
       // }
-      this.router.navigate(['/tt', e.ref, e.agencyId, this.groupId ? this.groupId:e.title, e.route.routeSymId, e.title,e.color]);
+      this.router.navigate(['/tt', e.ref, e.agencyId, this.groupId ? this.groupId : e.title, e.route.routeSymId, e.title, e.color]);
 
       // group with single route: go to table
     } else if (e.group.routes != null && e.group.routes.length == 1) {
-      this.router.navigate(['/tt', e.ref, e.agencyId, e.group.label, e.group.routes[0].routeSymId, e.title,e.color]);
+      this.router.navigate(['/tt', e.ref, e.agencyId, e.group.label, e.group.routes[0].routeSymId, e.title, e.color]);
 
       // group with multiple elements: go to group
     } else {
