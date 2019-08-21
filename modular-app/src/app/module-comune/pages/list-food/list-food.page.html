@@ -1,8 +1,8 @@
 <ion-header no-border>
-
+    <ion-searchbar class="search-food" style="display: none" showCancelButton="always" animated (search)="toggleSearch()"
+    (ionInput)="searchChanged($event)" (ionCancel)="toggleSearch()" ></ion-searchbar>
   <ion-toolbar>
-      <ion-searchbar class="search-food" style="display: none" showCancelButton="never" animated (search)="toggleSearch()"
-      (ionInput)="searchChanged($event)" (ionCancel)="toggleSearch()" (ionClear)="toggleSearch()"></ion-searchbar>
+
     <ion-buttons slot="start">
       <ion-back-button class="interaction"></ion-back-button>
     </ion-buttons>
@@ -19,39 +19,9 @@
     </ion-title>
   </ion-toolbar>
 </ion-header>
-<!-- 
-<ion-grid style="height: 100%" *ngIf="isLoading">
-  <ion-row justify-content-center align-items-center style="height: 100%">
-    <ion-spinner name="circles"></ion-spinner>
-  </ion-row>
-</ion-grid> -->
-
 <ion-content>
 
-  <!-- <ion-searchbar style="display: none" showCancelButton animated (ionInput)="searchChanged($event)" (ionCancel)="toggleSearch()" (search)="toggleSearch()"></ion-searchbar> -->
-
-  <!-- FLOATING BUTTON -->
-  <!-- <ion-fab *ngIf="!isLoading" class="fixed" vertical="bottom" horizontal="start" slot="fixed">
-      <ion-fab-button color="danger">
-        <ion-icon name="arrow-dropup-circle"></ion-icon>
-      </ion-fab-button>
-      <ion-fab-list side="top">
-          <ion-fab-button (click)="toggleSearch()">
-            <ion-icon name="search"></ion-icon>
-          </ion-fab-button>
-          <ion-fab-button (click)="showPopover()">
-              <ion-icon name="funnel"></ion-icon>
-            </ion-fab-button>
-      </ion-fab-list>
-    </ion-fab> -->
-  <!-- ---------------------------- -->
-  <!-- <div class="wrapper">
-        <div class="scrolling-wrapper-flexbox loop">
-          <ion-chip *ngFor="let c of categories" (click)="selectInternalElement(c)">
-            <ion-label class="interaction">{{c}}</ion-label>
-          </ion-chip>
-        </div>
-      </div> -->
+  
   <div class="wrapper" *ngIf="!firstAccess">
     <div class="scrolling-wrapper-flexbox loop">
       <div class="container" *ngFor="let tag of tags">
@@ -68,21 +38,10 @@
 
   <ion-list no-lines id="poi-list">
     <div *ngFor="let c of categories">
-      <!-- <ion-item-divider class="category row" sticky> -->
-      <!-- <div class="column c-icon" (click)="goToMap()">
-            <ion-icon name="map"></ion-icon>
-          </div> -->
-      <!-- <div class="column c-text">
-            <ion-label>{{c}}</ion-label>
-          </div> -->
-      <!-- <div class="column c-btn">
-            <ion-button *ngIf="!search" class="popover-btn" size="small" color="success" (click)="filterClicked()">Ordina</ion-button>
-          </div> -->
-      <!-- </ion-item-divider> -->
       <div class="content">
         <div *ngFor="let poi of showPois[c]; let i = index">
           <wc-details [img]="poi.image" [stringsinput]="stringsContact" [title]="poi.title" [altImage]="altImage"
-            [subtitle]="poi.subtitle" [text]="poi.text" [info]="poi.info" [contacts]="poi.infos"
+            [subtitle]="poi.subtitle"[distance]="getDistance(poi)"  [text]="poi.text" [info]="poi.info" [contacts]="poi.infos"
             heading-color="#707070" second-color="#11b3ef" expandable=false expanse=false ></wc-details>
           <div class="spacing" *ngIf="i == showPois.length - 1"></div>
         </div>

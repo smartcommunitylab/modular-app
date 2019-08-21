@@ -33,6 +33,8 @@ export class ListRHPage implements OnInit {
   altImage: string;
   stringsContact: any;
   tags: any = [];
+  distanceLabel: any;
+  noDistanceLabel: any;
 
   constructor(
     private modalController: ModalController,
@@ -80,6 +82,9 @@ export class ListRHPage implements OnInit {
     this.translate.get('alt_image_string').subscribe(
       value => {
         this.altImage = value;
+        this.distanceLabel = this.translate.instant('distance_label');
+        this.noDistanceLabel =this.translate.instant('no_distance_label');
+
       }
     );
     this.config.getStringContacts(this.translate, this.language).then(strings => {
@@ -107,7 +112,18 @@ export class ListRHPage implements OnInit {
       }
     })
   }
+  addDistance(): any {
+    this.fullPois.forEach(element => {
+      if (element.location && element.location[0] && element.location[1])
+        element['distance'] = this.geoSrv.getDistanceKM({ lat: this.mypos.lat, lon: this.mypos.long }, { lat: element.location[0], lon: element.location[1] });
 
+    });
+  }
+  getDistance(poi) {
+    if (poi.distance)
+      return this.distanceLabel + (poi.distance).toFixed(2) + " Km";
+    else return this.noDistanceLabel;
+  }
   ionViewDidEnter() {
 
     if (this.category) {
@@ -116,6 +132,7 @@ export class ListRHPage implements OnInit {
         this.dbService.synch(value).then(() => {
           this.dbService.getObjectByQuery(query).then((data) => {
             this.fullPois = data.docs.map(x => this.convertPois(x));
+            this.addDistance();
             this.subCategories(this.fullPois);
             this.buildShowPois();
             this.tags = this.buildFilter();

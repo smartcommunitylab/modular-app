@@ -1,5 +1,5 @@
 #barraDiRicerca{
-    display: none;
+    // display: none;
 }
 
 #contenitoreAnteprima{
@@ -7,4 +7,11 @@
 }
 .interaction {
     color: #11b3ef!important;
+}
+ion-searchbar {
+    position: fixed;
+    // width: calc(100% - 60px);
+    // top: 3px;
+    // top: 58px;
+    z-index: 999;
 }

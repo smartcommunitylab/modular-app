@@ -1,8 +1,10 @@
 <ion-header>
+    <!-- <ion-searchbar showCancelButton="always" animated  (ionChange)="Ricerca()"
+    placeholder="Cerca" id="barraDiRicerca" [(ngModel)]="daCercare">    </ion-searchbar> -->
+    <ion-searchbar class="search-video" style="display: none"  showCancelButton="always" animated (ionChange)="Ricerca()" (ionCancel)="OpenCloseRicerca()"  placeholder="Cerca" id="barraDiRicerca"
+    [(ngModel)]="daCercare"></ion-searchbar>
   <ion-toolbar>
-    <ion-searchbar showCancelButton="never" animated  (ionChange)="Ricerca()"
-      placeholder="Cerca" id="barraDiRicerca" [(ngModel)]="daCercare">
-    </ion-searchbar>
+
     <ion-buttons slot="start">
       <ion-back-button class="interaction"></ion-back-button>
     </ion-buttons>

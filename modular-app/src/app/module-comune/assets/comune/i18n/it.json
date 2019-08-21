@@ -17,5 +17,6 @@
     "empty_list":"Nessun elemento presente",
     "cancel_button":"Annulla",
     "ok_button":"Ok",
-    "init_db":"Inizializzazione dati in corso..."
+    "init_db":"Inizializzazione dati in corso...",
+    "no_distance_label":"Distanza non specificata"
 }

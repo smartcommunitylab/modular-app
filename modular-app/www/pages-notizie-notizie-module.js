@@ -78,7 +78,7 @@ var NotiziePageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\n  <ion-toolbar>\n    <ion-searchbar showCancelButton=\"never\" animated (ionChange)=\"Ricerca()\" placeholder=\"Cerca\" id=\"barraDiRicerca\"\n      [(ngModel)]=\"daCercare\"></ion-searchbar>\n      <ion-buttons slot=\"start\">\n        <ion-back-button class=\"interaction\"></ion-back-button>\n      </ion-buttons>\n      <ion-grid *ngIf=\"!isRicercaOpen\">\n        <ion-row justify-content-center align-items-center>\n          <ion-col col-6>\n            <ion-title float-left id=\"TITOLO\"> {{'avvisi_label'|translate}}\n            </ion-title>\n          </ion-col>\n          <ion-col col-6>\n            <ion-button fill=\"clear\" float-right (click)=\"OpenCloseRicerca()\" id=\"btnImpostazioniRicerca\" color=\"light\">\n              <svg width='24' height='24' viewBox='0 0 24 24'>\n                <path fill='none' d='M0 0h24v24H0V0z' />\n                <path\n                  d='M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z' />\n              </svg>\n            </ion-button>\n          </ion-col>\n        </ion-row>\n      </ion-grid>\n  </ion-toolbar>\n\n</ion-header>\n<ion-content>\n    <div class=\"ion-padding\" *ngIf=\"!emptyList; else emptyListTemplate\">\n      <div *ngFor=\"let item of datiRicerca\" id=\"contenitoreAnteprima\">\n        <wc-anteprima (eventMappa)=\"visualizzaMappa(item.coordinates[0], item.coordinates[1])\"\n          (eventShare)=\"visualizzaShare(item.title, item.image ,item.description)\" id=\"elemento\" img={{item.image}}\n          [titolo]=\"item.title\" orario={{item.eventStart}} datapubblicazione={{formattaData(item.created)}}\n          dataevento={{item.eventDate}} durata={{item.eventTiming}} [descrizione]=\"item.description\"\n          luogo={{item.address}}>\n        </wc-anteprima>\n      </div>\n  <ion-infinite-scroll threshold=\"100px\" (ionInfinite)=\"caricaAltriDati($event)\">\n    <ion-infinite-scroll-content loadingSpinner=\"crescent\" loadingText=\"Sto caricando...\"></ion-infinite-scroll-content>\n  </ion-infinite-scroll>\n  </div>\n  <ng-template #emptyListTemplate>\n    {{'empty_list_label'|translate}}\n  </ng-template>\n</ion-content>"
+module.exports = "<ion-header>\n    <ion-searchbar class=\"search-notizie\" style=\"display: none\"  showCancelButton=\"always\" animated (ionChange)=\"Ricerca()\" (ionCancel)=\"OpenCloseRicerca()\"  placeholder=\"Cerca\" id=\"barraDiRicerca\"\n    [(ngModel)]=\"daCercare\"></ion-searchbar>\n  <ion-toolbar>\n\n      <ion-buttons slot=\"start\">\n        <ion-back-button class=\"interaction\"></ion-back-button>\n      </ion-buttons>\n      <ion-grid *ngIf=\"!isRicercaOpen\">\n        <ion-row justify-content-center align-items-center>\n          <ion-col col-6>\n            <ion-title float-left id=\"TITOLO\"> {{'avvisi_label'|translate}}\n            </ion-title>\n          </ion-col>\n          <ion-col col-6>\n            <ion-button fill=\"clear\" float-right (click)=\"OpenCloseRicerca()\" id=\"btnImpostazioniRicerca\" color=\"light\">\n              <svg width='24' height='24' viewBox='0 0 24 24'>\n                <path fill='none' d='M0 0h24v24H0V0z' />\n                <path\n                  d='M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z' />\n              </svg>\n            </ion-button>\n          </ion-col>\n        </ion-row>\n      </ion-grid>\n  </ion-toolbar>\n\n</ion-header>\n<ion-content>\n    <div class=\"ion-padding\" *ngIf=\"!emptyList; else emptyListTemplate\">\n      <div *ngFor=\"let item of datiRicerca\" id=\"contenitoreAnteprima\">\n        <wc-anteprima (eventMappa)=\"visualizzaMappa(item.coordinates[0], item.coordinates[1])\"\n          (eventShare)=\"visualizzaShare(item.title, item.image ,item.description)\" id=\"elemento\" img={{item.image}}\n          [titolo]=\"item.title\" orario={{item.eventStart}} datapubblicazione={{formattaData(item.created)}}\n          dataevento={{item.eventDate}} durata={{item.eventTiming}} [descrizione]=\"item.description\"\n          luogo={{item.address}}>\n        </wc-anteprima>\n      </div>\n  <ion-infinite-scroll threshold=\"100px\" (ionInfinite)=\"caricaAltriDati($event)\">\n    <ion-infinite-scroll-content loadingSpinner=\"crescent\" loadingText=\"Sto caricando...\"></ion-infinite-scroll-content>\n  </ion-infinite-scroll>\n  </div>\n  <ng-template #emptyListTemplate>\n    {{'empty_list_label'|translate}}\n  </ng-template>\n</ion-content>"
 
 /***/ }),
 
@@ -89,7 +89,7 @@ module.exports = "<ion-header>\n  <ion-toolbar>\n    <ion-searchbar showCancelBu
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "#barraDiRicerca {\n  display: none; }\n\n#contenitoreAnteprima {\n  padding-bottom: 6px; }\n\n.interaction {\n  color: #11b3ef !important; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL2NoaW44L0RvY3VtZW50cy93b3JrL21vZHVsYXJBcHAvbW9kdWxhci1hcHAvc3JjL2FwcC9tb2R1bGUtaW5mby9wYWdlcy9ub3RpemllL25vdGl6aWUucGFnZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksY0FBYSxFQUNoQjs7QUFFRDtFQUNJLG9CQUFtQixFQUN0Qjs7QUFDRDtFQUNJLDBCQUF3QixFQUMzQiIsImZpbGUiOiJzcmMvYXBwL21vZHVsZS1pbmZvL3BhZ2VzL25vdGl6aWUvbm90aXppZS5wYWdlLnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIjYmFycmFEaVJpY2VyY2F7XG4gICAgZGlzcGxheTogbm9uZTtcbn1cblxuI2NvbnRlbml0b3JlQW50ZXByaW1he1xuICAgIHBhZGRpbmctYm90dG9tOiA2cHg7XG59XG4uaW50ZXJhY3Rpb24ge1xuICAgIGNvbG9yOiAjMTFiM2VmIWltcG9ydGFudDtcbn1cbiJdfQ== */"
+module.exports = "#contenitoreAnteprima {\n  padding-bottom: 6px; }\n\n.interaction {\n  color: #11b3ef !important; }\n\nion-searchbar {\n  position: fixed;\n  z-index: 999; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL2NoaW44L0RvY3VtZW50cy93b3JrL21vZHVsYXJBcHAvbW9kdWxhci1hcHAvc3JjL2FwcC9tb2R1bGUtaW5mby9wYWdlcy9ub3RpemllL25vdGl6aWUucGFnZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUlBO0VBQ0ksb0JBQW1CLEVBQ3RCOztBQUNEO0VBQ0ksMEJBQXdCLEVBQzNCOztBQUNEO0VBQ0ksZ0JBQWU7RUFJZixhQUFZLEVBQ2YiLCJmaWxlIjoic3JjL2FwcC9tb2R1bGUtaW5mby9wYWdlcy9ub3RpemllL25vdGl6aWUucGFnZS5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiI2JhcnJhRGlSaWNlcmNhe1xuICAgIC8vIGRpc3BsYXk6IG5vbmU7XG59XG5cbiNjb250ZW5pdG9yZUFudGVwcmltYXtcbiAgICBwYWRkaW5nLWJvdHRvbTogNnB4O1xufVxuLmludGVyYWN0aW9uIHtcbiAgICBjb2xvcjogIzExYjNlZiFpbXBvcnRhbnQ7XG59XG5pb24tc2VhcmNoYmFyIHtcbiAgICBwb3NpdGlvbjogZml4ZWQ7XG4gICAgLy8gd2lkdGg6IGNhbGMoMTAwJSAtIDYwcHgpO1xuICAgIC8vIHRvcDogM3B4O1xuICAgIC8vIHRvcDogNThweDtcbiAgICB6LWluZGV4OiA5OTk7XG59Il19 */"
 
 /***/ }),
 
@@ -194,20 +194,30 @@ var NotiziePage = /** @class */ (function () {
         event.target.complete();
     };
     NotiziePage.prototype.OpenCloseRicerca = function () {
-        if (!this.isRicercaOpen) {
-            document.getElementById("barraDiRicerca").style.display = "inherit";
-            document.getElementById("btnImpostazioniRicerca").innerHTML = "<svg width='24' height='24' viewBox='0 0 24 24'><path fill='none' d='M0 0h24v24H0V0z'/><path d='M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z'/></svg>";
-            // this.infiniteScroll.disabled = true;
-            // this.Ricerca();
-            this.daCercare = "";
+        this.isRicercaOpen = !this.isRicercaOpen;
+        var searchbar = document.querySelector('.search-notizie');
+        if (searchbar.style.display === 'none') {
+            searchbar.style.display = 'unset';
+            searchbar.focus();
+            this.datiRicerca = this.DatiEvento;
         }
         else {
-            document.getElementById("barraDiRicerca").style.display = "none";
-            document.getElementById("btnImpostazioniRicerca").innerHTML = "<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'><path fill='none' d='M0 0h24v24H0V0z'/><path d='M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z'/></svg>";
-            this.datiRicerca = this.DatiEvento;
-            // this.infiniteScroll.disabled = false;
+            searchbar.style.display = 'none';
         }
-        this.isRicercaOpen = !this.isRicercaOpen;
+        // if (!this.isRicercaOpen) {
+        //   // document.getElementById("barraDiRicerca").style.display = "inherit";
+        //   // document.getElementById("btnImpostazioniRicerca").innerHTML = "<svg width='24' height='24' viewBox='0 0 24 24'><path fill='none' d='M0 0h24v24H0V0z'/><path d='M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z'/></svg>";
+        //   // this.infiniteScroll.disabled = true;
+        //   // this.Ricerca();
+        //   this.daCercare="";
+        // }
+        // else {
+        //   // document.getElementById("barraDiRicerca").style.display = "none";
+        //   // document.getElementById("btnImpostazioniRicerca").innerHTML = "<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'><path fill='none' d='M0 0h24v24H0V0z'/><path d='M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z'/></svg>";
+        //   this.datiRicerca = this.DatiEvento;
+        //   // this.infiniteScroll.disabled = false;
+        // }
+        // this.isRicercaOpen = !this.isRicercaOpen;
     };
     NotiziePage.prototype.Ricerca = function () {
         var _this = this;

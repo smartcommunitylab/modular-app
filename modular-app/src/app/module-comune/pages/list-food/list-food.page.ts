@@ -24,7 +24,7 @@ export class ListFoodPage implements OnInit {
   category: any;
   tags: any = [];
   private type: string;
-  firstAccess=true;
+  firstAccess = true;
   search = false;
   isLoading = true;
   fullCategories: any = [];
@@ -33,6 +33,8 @@ export class ListFoodPage implements OnInit {
   mypos: { lat: number, long: number };
   altImage: string;
   stringsContact: any;
+  distanceLabel: any;
+  noDistanceLabel: any;
 
   constructor(
     private modalController: ModalController,
@@ -80,9 +82,11 @@ export class ListFoodPage implements OnInit {
     this.translate.get('alt_image_string').subscribe(
       value => {
         this.altImage = value;
+        this.distanceLabel = this.translate.instant('distance_label');
+        this.noDistanceLabel =this.translate.instant('no_distance_label');
       }
     );
-     this.config.getStringContacts(this.translate,this.language).then(strings => {
+    this.config.getStringContacts(this.translate, this.language).then(strings => {
       this.stringsContact = strings
     });
     element.addEventListener('contactClick', async (contact) => {
@@ -114,27 +118,36 @@ export class ListFoodPage implements OnInit {
     if (this.category) {
       let query = { 'selector': { 'elementType': 'restaurant-item' } };
       this.translate.get('init_db').subscribe(value => {
-        this.dbService.synch(value).then(() => {        this.dbService.getObjectByQuery(query).then((data) => {
-          this.fullPois = data.docs.map(x => this.convertPois(x));
-          this.subCategories(this.fullPois);
-          this.buildShowPois();
-          this.tags = this.buildFilter();
-          this.orderArray('near', this);
-          this.isLoading = false;
-          this.utils.hideLoading();
+        this.dbService.synch(value).then(() => {
+          this.dbService.getObjectByQuery(query).then((data) => {
+            this.fullPois = data.docs.map(x => this.convertPois(x));
+            this.addDistance();
+            this.subCategories(this.fullPois);
+            this.buildShowPois();
+            this.tags = this.buildFilter();
+            this.orderArray('near', this);
+            this.isLoading = false;
+            this.utils.hideLoading();
 
-        }, err => {
-          this.utils.hideLoading();
+          }, err => {
+            this.utils.hideLoading();
 
+          })
+            , err => {
+              this.utils.hideLoading();
+
+            }
         })
-      , err => {
-        this.utils.hideLoading();
-
-      }})
-    })
+      })
     }
   }
+  addDistance(): any {
+    this.fullPois.forEach(element => {
+      if (element.location && element.location[0] && element.location[1])
+        element['distance'] = this.geoSrv.getDistanceKM({ lat: this.mypos.lat, lon: this.mypos.long }, { lat: element.location[0], lon: element.location[1] });
 
+    });
+  }
   subCategories(array: Array<any>) {
     array.forEach(element => {
       if (!this.fullCategories.includes(element.category)) {
@@ -145,15 +158,15 @@ export class ListFoodPage implements OnInit {
   }
 
   buildShowPois(filters?) {
-    this.showPois=[];
+    this.showPois = [];
     this.fullCategories.forEach(e => {
       this.fullPois.forEach(p => {
         if (!this.showPois[e]) {
           this.showPois[e] = [];
         }
-        if (p.category === e && filters? filters.filter(item=> {
-          return (item.isChecked && p.classification==item.value)
-        }).length>0:true) {
+        if (p.category === e && filters ? filters.filter(item => {
+          return (item.isChecked && p.classification == item.value)
+        }).length > 0 : true) {
           this.showPois[e].push(p);
         }
       });
@@ -165,9 +178,9 @@ export class ListFoodPage implements OnInit {
     const poiElement: any = {};
     if (x) {
       if (x.title) {
-        if( x.title[this.language])
-        poiElement.title = x.title[this.language];
-        else         poiElement.title = x.title["it"];
+        if (x.title[this.language])
+          poiElement.title = x.title[this.language];
+        else poiElement.title = x.title["it"];
 
       }
       // if (x.subtitle) {
@@ -177,7 +190,7 @@ export class ListFoodPage implements OnInit {
       // }
       if (x.description) {
         if (x.description[this.language])
-        poiElement.description += '<br/>' + x.description[this.language];
+          poiElement.description += '<br/>' + x.description[this.language];
         else poiElement.description += '<br/>' + x.description["it"];
       }
       if (x.image) {
@@ -188,37 +201,37 @@ export class ListFoodPage implements OnInit {
       }
       if (x.timetable) {
         if (x.timetable[this.language])
-        poiElement.date = x.timetable[this.language];
+          poiElement.date = x.timetable[this.language];
         else poiElement.date = x.timetable["it"];
       }
       if (x.closing) {
         if (x.closing[this.language]) {
-          if( x.closing[this.language])
-          poiElement.info = '<b>Chiusura: ' + x.closing[this.language] + '</b>';
+          if (x.closing[this.language])
+            poiElement.info = '<b>Chiusura: ' + x.closing[this.language] + '</b>';
           else poiElement.info = '<b>Chiusura: ' + x.closing["it"] + '</b>';
         }
       }
       if (x.address) {
-        if(x.address[this.language])
-        poiElement.address = x.address[this.language];
+        if (x.address[this.language])
+          poiElement.address = x.address[this.language];
         else poiElement.address = x.address["it"];
       }
       if (x.description) {
-        if( x.description[this.language])
-        poiElement.text = x.description[this.language];
+        if (x.description[this.language])
+          poiElement.text = x.description[this.language];
         else poiElement.text = x.description["it"];
       }
       if (x.category) {
         poiElement.category = x.category.charAt(0).toUpperCase() + x.category.slice(1);
       }
       if (x.classification) {
-        if ( x.classification[this.language])
-        poiElement.subtitle = x.classification[this.language];
+        if (x.classification[this.language])
+          poiElement.subtitle = x.classification[this.language];
         else poiElement.subtitle = x.classification["it"];
       }
       if (x.classification) {
         if (x.classification[this.language])
-        poiElement.classification = x.classification[this.language];
+          poiElement.classification = x.classification[this.language];
         else poiElement.classification = x.classification["it"];
         // poiElement.cat = [];
         // poiElement.cat.push(x.classification[this.language]);
@@ -289,7 +302,7 @@ export class ListFoodPage implements OnInit {
       .then((filters) => {
 
         this.firstAccess = true;
-        var even = function(element) {
+        var even = function (element) {
           // checks whether an element is even
           return element.isChecked;
         };
@@ -305,41 +318,46 @@ export class ListFoodPage implements OnInit {
           this.buildShowPois()
 
         }
-    });
+      });
     return await modal.present();
     //this.buildAlert('filter');
   }
   buildFilter(): any {
     var array = this.fullPois.map(item => item.classification);
-    var newArray= array.filter((value, index, self) =>{
-     return (self.indexOf(value) === index  && value)
+    var newArray = array.filter((value, index, self) => {
+      return (self.indexOf(value) === index && value)
 
     })
-    var value = this.firstAccess? false:true;
-    var returnArray = newArray.map(item =>{
+    var value = this.firstAccess ? false : true;
+    var returnArray = newArray.map(item => {
       return {
-        "value":item,
-        "isChecked":value
+        "value": item,
+        "isChecked": value
       }
     })
- return returnArray;
+    return returnArray;
+  }
+  getDistance(poi) {
+    if (poi.distance)
+      return this.distanceLabel + (poi.distance).toFixed(2) + " Km";
+    else return this.noDistanceLabel;
   }
   removeTag(tag) {
-    this.tags = this.tags.filter(item => item.value != tag.value )
+    this.tags = this.tags.filter(item => item.value != tag.value)
     this.firstAccess = true;
-        var even = function(element) {
-          // checks whether an element is even
-          return element.isChecked;
-        };
-        if (this.tags.some(even))
-        {
-          this.firstAccess = false;
-          this.buildShowPois(this.tags);
+    var even = function (element) {
+      // checks whether an element is even
+      return element.isChecked;
+    };
+    if (this.tags.some(even)) {
+      this.firstAccess = false;
+      this.buildShowPois(this.tags);
 
-        } else {
-    this.buildShowPois();}
+    } else {
+      this.buildShowPois();
+    }
   }
-  
+
 
   async buildAlert(type: string) {
     const _this = this;
