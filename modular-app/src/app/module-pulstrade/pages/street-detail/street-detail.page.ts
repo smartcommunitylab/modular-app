@@ -6,6 +6,7 @@ import { MapService } from '../../services/map.service';
 import { DatePipe } from '@angular/common';
 import { NotificationService } from '../../services/notification.service';
 import { Platform } from '@ionic/angular';
+import { element } from '@angular/core/src/render3';
 
 @Component({
   selector: 'app-street-detail',
@@ -19,7 +20,7 @@ export class StreetDetailPage implements OnInit {
   streetDetails: any = [];
   notif: any;
   streetName: any;
-  idNumber:any;
+  idNumber: any;
   constructor(private translate: TranslateService,
     private config: ConfigService,
     private router: Router,
@@ -54,17 +55,18 @@ export class StreetDetailPage implements OnInit {
     try {
       this.route.queryParams
         .subscribe(params => {
-          this.idNumber=params.street;
+          this.idNumber = params.street;
           this.search(params.street);
         });
-    } catch { }
+    } catch { } 
   }
 
   convertToMapId(array: any[]): any {
     var map = {}
     if (array)
       array.forEach(el => {
-        map[el.idNumber] = el;
+        if (el && el.idNumber)
+          map[el.idNumber] = el;
       })
     return map;
   }
@@ -109,9 +111,13 @@ export class StreetDetailPage implements OnInit {
   toggleNotification() {
     var street = this.notif[this.idNumber];
     if (this.notif[this.idNumber] != undefined) {
-      this.notSrv.disableNotification(street);
+      this.streetDetails.forEach(element => {
+        this.notSrv.disableNotification(element);
+      })
     } else {
-      this.notSrv.setNotification(street);
+      this.streetDetails.forEach(element => {
+        this.notSrv.setNotification(element);
+      })
     }
     this.notif = this.convertToMapId(this.notSrv.getNotStreets());
   }

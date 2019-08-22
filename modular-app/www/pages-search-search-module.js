@@ -78,7 +78,7 @@ var SearchPageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header >\n  <ion-toolbar>\n    <ion-searchbar showCancelButton=\"never\" animated (ionInput)=\"search($event)\" placeholder=\"{{'SEARCH' | translate}}\">\n    </ion-searchbar>\n    <ion-buttons slot=\"start\">\n      <ion-back-button class=\"interaction\"></ion-back-button>\n    </ion-buttons>\n    <!-- <ion-title>\n      {{'SEARCH' | translate}}\n    </ion-title> -->\n  </ion-toolbar>\n</ion-header>\n\n\n<ion-content padding>\n    <!-- <ion-spinner name=\"dots\" *ngIf=\"searching\"></ion-spinner> -->\n\n  <ion-list no-lines *ngIf=\"showStreets\">\n    <div *ngFor=\"let s of showStreets\">\n      <div [id]=\"s.id\">\n        <div>\n          <div class=\"left\" [routerLink]=\"['/street-detail']\" [queryParams]=\"{street: s.idNumber }\" routerDirection=\"forward\">\n            <div class=\"result interaction\" >{{s.streetName}}</div>\n            <div class=\"sub-result interaction\" >{{s.tratto}}</div>\n          </div>\n          <div class=\"right\" (click)=\"toggleNotification(s)\">\n            <ion-icon class=\"interaction icon-notification\" name=\"notifications\" *ngIf=\"isEnabled(s); else disabled\"></ion-icon>\n            <ng-template #disabled>\n              <ion-icon  class=\"interaction icon-notification\" name=\"notifications-outline\"></ion-icon>\n            </ng-template>\n          </div>\n        </div>\n      </div>\n    </div>\n  </ion-list>\n</ion-content>"
+module.exports = "<ion-header >\n    <!-- <ion-searchbar  (ionCancel)=\"toggleSearch()\" showCancelButton=\"always\" animated (ionInput)=\"search($event)\" placeholder=\"{{'SEARCH' | translate}}\">\n      </ion-searchbar> -->\n  <ion-toolbar>\n      <ion-searchbar showCancelButton=\"never\" animated (ionInput)=\"search($event)\" placeholder=\"{{'SEARCH' | translate}}\">\n        </ion-searchbar>\n    <ion-buttons slot=\"start\">\n      <ion-back-button class=\"interaction\"></ion-back-button>\n    </ion-buttons>\n    <!-- <ion-title>\n      {{'SEARCH' | translate}}\n    </ion-title> -->\n  </ion-toolbar>\n</ion-header>\n\n\n<ion-content padding>\n    <!-- <ion-spinner name=\"dots\" *ngIf=\"searching\"></ion-spinner> -->\n\n  <ion-list no-lines *ngIf=\"showStreets\">\n    <div *ngFor=\"let s of showStreets\">\n      <div [id]=\"s.id\">\n        <div>\n          <div class=\"left\" [routerLink]=\"['/street-detail']\" [queryParams]=\"{street: s.idNumber }\" routerDirection=\"forward\">\n            <div class=\"result interaction\" >{{s.streetName}}</div>\n            <div class=\"sub-result interaction\" >{{s.tratto}}</div>\n          </div>\n          <div class=\"right\" (click)=\"toggleNotification(s)\">\n            <ion-icon class=\"interaction icon-notification\" name=\"notifications\" *ngIf=\"isEnabled(s); else disabled\"></ion-icon>\n            <ng-template #disabled>\n              <ion-icon  class=\"interaction icon-notification\" name=\"notifications-outline\"></ion-icon>\n            </ng-template>\n          </div>\n        </div>\n      </div>\n    </div>\n  </ion-list>\n  <div *ngIf=\"noResults\">\n    empty\n  </div>\n</ion-content>"
 
 /***/ }),
 
@@ -89,7 +89,7 @@ module.exports = "<ion-header >\n  <ion-toolbar>\n    <ion-searchbar showCancelB
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "ion-card {\n  background: white !important; }\n\n.left {\n  float: left;\n  width: 75%; }\n\n.right {\n  float: right;\n  vertical-align: middle; }\n\n.notification {\n  text-align: center; }\n\n.interaction {\n  color: #11B3EF !important; }\n\n.icon-notification {\n  font-size: 30px; }\n\n.result {\n  font-size: 30px; }\n\n.sub-result {\n  font-size: 15px; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL2NoaW44L0RvY3VtZW50cy93b3JrL21vZHVsYXJBcHAvbW9kdWxhci1hcHAvc3JjL2FwcC9tb2R1bGUtcHVsc3RyYWRlL3BhZ2VzL3NlYXJjaC9zZWFyY2gucGFnZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksNkJBQTRCLEVBQy9COztBQUNEO0VBQ0ksWUFBVztFQUNYLFdBQVUsRUFFYjs7QUFDRDtFQUNJLGFBQVk7RUFDWix1QkFBc0IsRUFDekI7O0FBQ0Q7RUFDSSxtQkFBa0IsRUFDckI7O0FBQ0Q7RUFDSSwwQkFBd0IsRUFDM0I7O0FBRUQ7RUFDSSxnQkFBZSxFQUNsQjs7QUFDRDtFQUNJLGdCQUFlLEVBQ2xCOztBQUNEO0VBQ0ksZ0JBQWUsRUFDbEIiLCJmaWxlIjoic3JjL2FwcC9tb2R1bGUtcHVsc3RyYWRlL3BhZ2VzL3NlYXJjaC9zZWFyY2gucGFnZS5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiaW9uLWNhcmQge1xuICAgIGJhY2tncm91bmQ6IHdoaXRlICFpbXBvcnRhbnQ7XG59XG4ubGVmdCB7XG4gICAgZmxvYXQ6IGxlZnQ7XG4gICAgd2lkdGg6IDc1JTtcbiAgICAvLyBwYWRkaW5nLWJvdHRvbTogNSU7XG59XG4ucmlnaHQge1xuICAgIGZsb2F0OiByaWdodDtcbiAgICB2ZXJ0aWNhbC1hbGlnbjogbWlkZGxlO1xufVxuLm5vdGlmaWNhdGlvbiB7XG4gICAgdGV4dC1hbGlnbjogY2VudGVyO1xufVxuLmludGVyYWN0aW9uIHtcbiAgICBjb2xvcjogIzExQjNFRiFpbXBvcnRhbnQ7XG59XG5cbi5pY29uLW5vdGlmaWNhdGlvbntcbiAgICBmb250LXNpemU6IDMwcHg7XG59XG4ucmVzdWx0e1xuICAgIGZvbnQtc2l6ZTogMzBweDtcbn1cbi5zdWItcmVzdWx0e1xuICAgIGZvbnQtc2l6ZTogMTVweDtcbn0iXX0= */"
+module.exports = "ion-card {\n  background: white !important; }\n\n.left {\n  float: left;\n  width: 75%; }\n\n.right {\n  float: right;\n  vertical-align: middle; }\n\n.notification {\n  text-align: center; }\n\n.interaction {\n  color: #11B3EF !important; }\n\n.icon-notification {\n  font-size: 30px; }\n\n.result {\n  font-size: 30px; }\n\n.sub-result {\n  font-size: 15px; }\n\nion-searchbar {\n  z-index: 999; }\n\n.no-results {\n  text-align: center;\n  font-size: 22px;\n  font-weight: bold; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL2NoaW44L0RvY3VtZW50cy93b3JrL21vZHVsYXJBcHAvbW9kdWxhci1hcHAvc3JjL2FwcC9tb2R1bGUtcHVsc3RyYWRlL3BhZ2VzL3NlYXJjaC9zZWFyY2gucGFnZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksNkJBQTRCLEVBQy9COztBQUNEO0VBQ0ksWUFBVztFQUNYLFdBQVUsRUFFYjs7QUFDRDtFQUNJLGFBQVk7RUFDWix1QkFBc0IsRUFDekI7O0FBQ0Q7RUFDSSxtQkFBa0IsRUFDckI7O0FBQ0Q7RUFDSSwwQkFBd0IsRUFDM0I7O0FBRUQ7RUFDSSxnQkFBZSxFQUNsQjs7QUFDRDtFQUNJLGdCQUFlLEVBQ2xCOztBQUNEO0VBQ0ksZ0JBQWUsRUFDbEI7O0FBQ0Q7RUFLSSxhQUFZLEVBQ2Y7O0FBQ0Q7RUFDSSxtQkFBa0I7RUFDbEIsZ0JBQWU7RUFDZixrQkFBaUIsRUFDcEIiLCJmaWxlIjoic3JjL2FwcC9tb2R1bGUtcHVsc3RyYWRlL3BhZ2VzL3NlYXJjaC9zZWFyY2gucGFnZS5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiaW9uLWNhcmQge1xuICAgIGJhY2tncm91bmQ6IHdoaXRlICFpbXBvcnRhbnQ7XG59XG4ubGVmdCB7XG4gICAgZmxvYXQ6IGxlZnQ7XG4gICAgd2lkdGg6IDc1JTtcbiAgICAvLyBwYWRkaW5nLWJvdHRvbTogNSU7XG59XG4ucmlnaHQge1xuICAgIGZsb2F0OiByaWdodDtcbiAgICB2ZXJ0aWNhbC1hbGlnbjogbWlkZGxlO1xufVxuLm5vdGlmaWNhdGlvbiB7XG4gICAgdGV4dC1hbGlnbjogY2VudGVyO1xufVxuLmludGVyYWN0aW9uIHtcbiAgICBjb2xvcjogIzExQjNFRiFpbXBvcnRhbnQ7XG59XG5cbi5pY29uLW5vdGlmaWNhdGlvbntcbiAgICBmb250LXNpemU6IDMwcHg7XG59XG4ucmVzdWx0e1xuICAgIGZvbnQtc2l6ZTogMzBweDtcbn1cbi5zdWItcmVzdWx0e1xuICAgIGZvbnQtc2l6ZTogMTVweDtcbn1cbmlvbi1zZWFyY2hiYXIge1xuICAgIC8vIHBvc2l0aW9uOiBmaXhlZDtcbiAgICAvLyB3aWR0aDogY2FsYygxMDAlIC0gNjBweCk7XG4gICAgLy8gdG9wOiAzcHg7XG4gICAgLy8gLy8gdG9wOiA1OHB4O1xuICAgIHotaW5kZXg6IDk5OTtcbn1cbi5uby1yZXN1bHRze1xuICAgIHRleHQtYWxpZ246IGNlbnRlcjtcbiAgICBmb250LXNpemU6IDIycHg7XG4gICAgZm9udC13ZWlnaHQ6IGJvbGQ7XG59Il19 */"
 
 /***/ }),
 
@@ -139,6 +139,7 @@ var SearchPage = /** @class */ (function () {
         this.notificationSrv = notificationSrv;
         this.route = route;
         this.platform = platform;
+        this.noResults = false;
         this.showStreets = [];
         this.searching = false;
         this.doneTypingInterval = 500; //time in ms, 5 second for example
@@ -152,7 +153,8 @@ var SearchPage = /** @class */ (function () {
         var map = {};
         if (array)
             array.forEach(function (el) {
-                map[el.idNumber] = el;
+                if (el && el.idNumber)
+                    map[el.idNumber] = el;
             });
         return map;
     };
@@ -210,6 +212,12 @@ var SearchPage = /** @class */ (function () {
                         });
                         _this.showStreets = _this.getUnique(_this.showStreets, 'streetCode');
                         // this.searching=false;
+                        if (_this.showStreets.length == 0) {
+                            _this.noResults = true;
+                        }
+                        else {
+                            _this.noResults = false;
+                        }
                     }
                 }
             }

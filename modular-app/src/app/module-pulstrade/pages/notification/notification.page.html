@@ -1,7 +1,7 @@
 <ion-header >
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
+      <ion-back-button class="interactive"></ion-back-button>
     </ion-buttons>
     <ion-title>
       {{'NOTIFY' | translate}}
@@ -34,4 +34,7 @@
       </div>
     </div>
   </ion-list>
+  <div class="no-notification" *ngIf="showStreets.length==0">
+      {{'no_notify' | translate}}
+  </div>
 </ion-content>

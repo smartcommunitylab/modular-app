@@ -26,3 +26,15 @@ ion-card {
 .sub-result{
     font-size: 15px;
 }
+ion-searchbar {
+    // position: fixed;
+    // width: calc(100% - 60px);
+    // top: 3px;
+    // // top: 58px;
+    z-index: 999;
+}
+.no-results{
+    text-align: center;
+    font-size: 22px;
+    font-weight: bold;
+}

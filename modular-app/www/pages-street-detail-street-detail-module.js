@@ -172,7 +172,8 @@ var StreetDetailPage = /** @class */ (function () {
         var map = {};
         if (array)
             array.forEach(function (el) {
-                map[el.idNumber] = el;
+                if (el && el.idNumber)
+                    map[el.idNumber] = el;
             });
         return map;
     };

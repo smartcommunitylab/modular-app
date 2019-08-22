@@ -8,6 +8,7 @@ import { MapService } from '../../services/map.service';
 import { DatePipe } from '@angular/common';
 import { ToastController } from '@ionic/angular';
 import { UtilService } from '../../services/util.service';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-home-ps',
@@ -44,7 +45,8 @@ export class HomePage implements OnInit {
     private datePipe: DatePipe,
     private route: ActivatedRoute,
     private util: UtilService,
-    private toastCtrl: ToastController
+    private toastCtrl: ToastController,
+    private notificationService: NotificationService
   ) {
     this.language = window[this.config.getAppModuleName()]['language'];
     this.translate.use(this.language);
@@ -110,11 +112,11 @@ export class HomePage implements OnInit {
           this.streets = this.mapSrv.getData().sort(function (a, b) {
             return a.cleaningDay - b.cleaningDay;
           });
-          if (this.mapSrv.getData()[this.mapSrv.getData().length-1].cleaningDay<this.selectedDate.getTime())
-          {
-            this.future=false;
+          if (this.mapSrv.getData()[this.mapSrv.getData().length - 1].cleaningDay < this.selectedDate.getTime()) {
+            this.future = false;
           }
           this.buildMap();
+          // this.updateNotification(this.streets);
         });
     }, err => {
       this.translate.get('error_init').subscribe(s => {
@@ -122,6 +124,9 @@ export class HomePage implements OnInit {
       });
     })
 
+  }
+  updateNotification(streets): any {
+    this.notificationService.updateNotification(streets);
   }
   afterFirstDayForward() {
     if (this.selectedDate)
@@ -172,7 +177,9 @@ export class HomePage implements OnInit {
       this.router.navigate([this.router.url + '/' + path]);
     }
   }
+  // setFutureAndPast() {
 
+  // }
   /**
    * Build leaflet map, with custom controls and polylines
    */
@@ -185,11 +192,13 @@ export class HomePage implements OnInit {
     this.map.on('dragend', function (e) {
       this.mapCenter = [e.target.getCenter().lat, e.target.getCenter().lng];
       _this.buildPolyline(this.mapCenter);
+      // _this.setFutureAndPast();
     });
     /** Build polyline after zoom */
     this.map.on('zoomend', function (e) {
       this.mapCenter = [e.target.getCenter().lat, e.target.getCenter().lng];
       _this.buildPolyline(this.mapCenter);
+      // _this.setFutureAndPast();
     });
 
     /** Define marker icon */
@@ -224,7 +233,8 @@ export class HomePage implements OnInit {
     //   this.toast.dismiss();
     let counter = 0;
     this.labelResult = 0;
-
+    this.past = false;
+    this.future = false;
     /** Reset polyline */
     if (this.map) {
       this.clearPolyline(this.map);
@@ -236,6 +246,7 @@ export class HomePage implements OnInit {
           { lat: center[0], lon: center[1] },
           { lat: s.centralCoords[0]['lat'], lon: s.centralCoords[0]['lng'] }
         );
+        s.idNumber = parseInt(s.streetCode.replace(/\_/g, ''), 10);
 
         /** Check if is a 'cleaning day' */
         const inDate = (new Date(this.selectedDate).setHours(0, 0, 0, 0) === new Date(s.cleaningDay).setHours(0, 0, 0, 0));
@@ -266,18 +277,30 @@ export class HomePage implements OnInit {
           });
           counter++;
         }
+        if (!this.past) {
+          //se nella regione e prima metti a true
+          if ((new Date(this.selectedDate).setHours(0, 0, 0, 0) > new Date(s.cleaningDay).setHours(0, 0, 0, 0)) && ((dist < ((17 % this.map.getZoom()) - 1) || dist < 0.3))) {
+            this.past = true;
+          }
+        }
+        if (!this.future) {
+          //se nella regione e prima metti a true
+          if ((new Date(this.selectedDate).setHours(0, 0, 0, 0) < new Date(s.cleaningDay).setHours(0, 0, 0, 0)) && ((dist < ((17 % this.map.getZoom()) - 1) || dist < 0.3))) {
+            this.future = true;
+          }
+        }
       });
     }
-    /**
-     * If no polylines built in map, show 'toast' element
-     */
-    if (counter === 0 && this.inZone && this.noCleaning) {
-      this.toast = await this.toastCtrl.create({
-        message: `${this.noCleaning} ${this.datePipe.transform(this.selectedDate, 'dd/MM/yyyy')} ${this.inZone}`,
-        duration: 2000
-      });
-      await this.toast.present();
-    }
+    // /**
+    //  * If no polylines built in map, show 'toast' element
+    //  */
+    // if (counter === 0 && this.inZone && this.noCleaning) {
+    //   this.toast = await this.toastCtrl.create({
+    //     message: `${this.noCleaning} ${this.datePipe.transform(this.selectedDate, 'dd/MM/yyyy')} ${this.inZone}`,
+    //     duration: 2000
+    //   });
+    //   await this.toast.present();
+    // }
   }
   /**
    * Clear polylines levels
@@ -365,7 +388,8 @@ export class HomePage implements OnInit {
     const center = this.mapCenter;
     let prevDay = null;
     if (this.streets)
-      this.streets.forEach(s => {
+      for (var i = this.streets.length - 1; i >= 0; i--) {
+        var s = this.streets[i];
         const dist = this.geo.getDistanceKM(
           { lat: center[0], lon: center[1] },
           { lat: s.centralCoords[0]['lat'], lon: s.centralCoords[0]['lng'] }
@@ -381,7 +405,7 @@ export class HomePage implements OnInit {
             prevDay = s.cleaningDay;
           }
         }
-      });
+      };
     if (prevDay != null && prevDay < this.selectedDate.getTime()) {
       this.selectedDate = new Date(prevDay);
       this.showDate = this.selectedDate.toISOString();
@@ -405,14 +429,13 @@ export class HomePage implements OnInit {
   setDate(event: any) {
     this.selectedDate = new Date(event.detail.value);
     this.showDate = this.selectedDate.toISOString();
-    if (this.mapSrv.getData()[this.mapSrv.getData().length-1].cleaningDay<this.selectedDate.getTime())
-    {
-      this.future=false;
+    if (this.mapSrv.getData()[this.mapSrv.getData().length - 1].cleaningDay < this.selectedDate.getTime()) {
+      this.future = false;
     }
     else {
       this.future = true;
     }
-    
+
     this.buildPolyline(this.mapCenter);
   }
   /**

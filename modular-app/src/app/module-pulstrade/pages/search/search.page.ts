@@ -19,8 +19,9 @@ export class SearchPage implements OnInit {
   myPos: any;
   streets: any;
   notif: any;
+  noResults: boolean = false;
   showStreets: any = [];
-  searching: boolean=false;
+  searching: boolean = false;
   constructor(private translate: TranslateService,
     private config: ConfigService,
     private notSrv: NotificationService,
@@ -37,14 +38,15 @@ export class SearchPage implements OnInit {
   }
 
   ngOnInit() {
-    
+
   }
 
   convertToMapId(array: any[]): any {
     var map = {}
     if (array)
       array.forEach(el => {
-        map[el.idNumber] = el;
+        if (el && el.idNumber)
+          map[el.idNumber] = el;
       })
     return map;
   }
@@ -84,16 +86,17 @@ export class SearchPage implements OnInit {
    * Search streets and put them in `showStreets` object
    * @param input `(change)` event
    */
-  typingTimer;                //timer identifier
-  doneTypingInterval = 500;  //time in ms, 5 second for example
+  typingTimer;                
+  doneTypingInterval = 500;  
   search(input: any) {
     let val;
     clearTimeout(this.typingTimer);
     this.typingTimer = setTimeout(() => {
       if (input) {
+        // this.searching=true;
+
         if (input.detail) {
           val = input.detail.target.value;
-          // this.searching=true;
 
         }
         //  else {
@@ -107,10 +110,14 @@ export class SearchPage implements OnInit {
               return (el.streetName.toLowerCase().indexOf(val.toLowerCase()) > -1);
             });
             this.showStreets = this.getUnique(this.showStreets, 'streetCode')
-            // this.searching=false;
+            if (this.showStreets.length == 0) { this.noResults = true }
+            else { this.noResults = false }
+            
           }
 
         }
+        // this.searching=false;
+
       }
     }, this.doneTypingInterval);
   }
@@ -129,7 +136,7 @@ export class SearchPage implements OnInit {
   }
 
   toggleNotification(street) {
-    if (this.notif[street.idNumber]!=undefined) {
+    if (this.notif[street.idNumber] != undefined) {
       this.notificationSrv.disableNotification(street);
     } else {
       this.notSrv.setNotification(street);
@@ -138,7 +145,7 @@ export class SearchPage implements OnInit {
   }
   isEnabled(street) {
     if (street)
-    return this.notif[street.idNumber]!=undefined
+      return this.notif[street.idNumber] != undefined
     return false;
   }
   /**

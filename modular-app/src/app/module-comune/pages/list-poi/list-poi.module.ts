@@ -5,7 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
 import { ListPoiPage } from './list-poi.page';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { InViewportModule } from 'ng-in-viewport';
 import { FilterPagePoiPage } from './filter-page-poi/filter-page-poi.page';
@@ -25,8 +25,11 @@ export function HttpLoaderFactory(http: HttpClient) {
     FormsModule,
     InViewportModule,
     IonicModule,
-    TranslateModule,
-    RouterModule.forChild(routes)
+    TranslateModule.forRoot({ loader: {
+      provide: TranslateLoader,
+      useFactory: HttpLoaderFactory,
+      deps: [HttpClient]
+    }}),    RouterModule.forChild(routes)
   ],
   entryComponents:[FilterPagePoiPage],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],

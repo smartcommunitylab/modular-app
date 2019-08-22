@@ -42,7 +42,9 @@ export class ListPoiPage implements OnInit {
     private utils: UtilsService,
     private loadingController: LoadingController,
     private config: ConfigService) {
-    this.language = window[this.config.getAppModuleName()]['language'];
+    if (window[this.config.getAppModuleName()]['language'])
+      this.language = window[this.config.getAppModuleName()]['language'];
+    this.translate.use(this.language);
   }
 
 
@@ -62,7 +64,7 @@ export class ListPoiPage implements OnInit {
     var array = this.fullPois.map(item => item.classification);
     var newArray1 = array.flat();
     var newArray = newArray1.filter((value, index, self) => {
-      return (self.indexOf(value) === index  && value)
+      return (self.indexOf(value) === index && value)
 
     })
     var value = this.firstAccess ? false : true;
@@ -81,23 +83,23 @@ export class ListPoiPage implements OnInit {
       this.translate.get('init_db').subscribe(value => {
         this.dbService.synch(value).then(() => {
           this.dbService.getObjectByQuery(this.category.query).then((data) => {
-          if (data.docs.length > 0) {
-            this.fullPois = data.docs.map(x => this.convertPois(x));
-            this.subCategories(this.fullPois);
-            this.buildShowPois();
-            this.tags = this.buildFilter();
-            this.utils.hideLoading();
-          }
-          else {
-            this.emptyList = true;
-          }
-          this.isLoading = false;
-          console.log(this.showPois);
+            if (data.docs.length > 0) {
+              this.fullPois = data.docs.map(x => this.convertPois(x));
+              this.subCategories(this.fullPois);
+              this.buildShowPois();
+              this.tags = this.buildFilter();
+              this.utils.hideLoading();
+            }
+            else {
+              this.emptyList = true;
+            }
+            this.isLoading = false;
+            console.log(this.showPois);
 
-        }, (err) => {
-          this.utils.hideLoading();
+          }, (err) => {
+            this.utils.hideLoading();
+          });
         });
-      });
       })
     }
     else {
@@ -158,7 +160,7 @@ export class ListPoiPage implements OnInit {
     var elem: any = document.getElementsByClassName(ref);
     if (elem.length > 0) {
       let yOffset = elem[0].offsetTop;
-      this.content.scrollToPoint(0, yOffset-100, 0)
+      this.content.scrollToPoint(0, yOffset - 100, 0)
       // var scrollheight = elem[0].getBoundingClientRect().top;
       // this.content.scrollToPoint(0, scrollheight, 1000);
     }
@@ -168,22 +170,22 @@ export class ListPoiPage implements OnInit {
     if (x) {
       if (x.title) {
         if (x.title[this.language])
-        poiElement.title = x.title[this.language];
+          poiElement.title = x.title[this.language];
         else poiElement.title = x.title["it"];
       }
       if (x.classification) {
         if (x.classification[this.language])
-        poiElement.classification = x.classification[this.language];
+          poiElement.classification = x.classification[this.language];
         else poiElement.classification = x.classification["it"];
       }
       if (x.subtitle) {
         if (x.subtitle[this.language])
-        poiElement.subtitle = x.subtitle[this.language];
+          poiElement.subtitle = x.subtitle[this.language];
         else poiElement.subtitle = x.subtitle["it"];
       }
       if (x.description) {
         if (x.description[this.language])
-        poiElement.description = x.description[this.language];
+          poiElement.description = x.description[this.language];
         else poiElement.description = x.description["it"];
       }
       if (x.image) {
@@ -297,8 +299,9 @@ export class ListPoiPage implements OnInit {
     });
     this.categories = this.fullCategories;
     if (this.categories.length > 0)
-    setTimeout(() => this.actualVisualized = this.categories[0]
-    , 500)  }
+      setTimeout(() => this.actualVisualized = this.categories[0]
+        , 500)
+  }
 
   buildShowPois(filters?) {
     this.showPois = [];

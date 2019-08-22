@@ -39,7 +39,7 @@ export class DetailEventPage implements OnInit {
             this.poiInput = data.docs[0];
             this.buildContacts();
           });
-        }
+        } 
       });
     this.translate.get('alt_image_string').subscribe(
       value => {

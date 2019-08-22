@@ -5,6 +5,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { ConfigService } from 'src/app/services/config.service';
 import { Platform } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { UtilService } from '../../services/util.service';
 
 @Component({
   selector: 'app-notification',
@@ -24,7 +25,8 @@ export class NotificationPage implements OnInit {
     private config: ConfigService,
     private mapSrv: MapService,
     private platform: Platform,
-    private router: Router
+    private router: Router,
+    private utils: UtilService
   ) {
     this.language = window[this.config.getAppModuleName()]['language'];
     this.translate.use(this.language);
@@ -34,7 +36,9 @@ export class NotificationPage implements OnInit {
 
   }
   ionViewDidEnter() {
+    // this.utils.presentLoading();
     this.notif = this.notSrv.getNotStreets();
+    // this.utils.hideLoading();
     this.notifMap = this.convertToMapId(this.notSrv.getNotStreets());
     this.streets = this.mapSrv.getData();
     this.buildShowNot();
@@ -46,7 +50,7 @@ export class NotificationPage implements OnInit {
     let tmp = [];
     if (this.notif) {
       this.notif.forEach(s => {
-        if (tmp.filter(t => t.idNumber === s.idNumber).length === 0) {
+        if (s && tmp.filter(t => t.idNumber === s.idNumber).length === 0) {
           tmp.push(s);
         }
       });
@@ -66,7 +70,8 @@ export class NotificationPage implements OnInit {
     var map = {}
     if (array)
       array.forEach(el => {
-        map[el.idNumber] = el;
+        if (el && el.idNumber)
+          map[el.idNumber] = el;
       })
     return map;
   }

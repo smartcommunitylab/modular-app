@@ -78,7 +78,7 @@ var HomePagePSModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header no-border>\n  <ion-searchbar class=\"search-event\" style=\"display: none\" showCancelButton animated (search)=\"toggleSearch()\"\n    (ionInput)=\"searchChanged($event)\" (ionCancel)=\"toggleSearch()\"></ion-searchbar>\n  <ion-toolbar>\n\n    <ion-buttons class=\"interactive\" slot=\"start\">\n      <ion-back-button class=\"interaction\"></ion-back-button>\n    </ion-buttons>\n    <ion-buttons slot=\"end\">\n      <ion-button [routerLink]=\"['/ps-notification']\">\n        <ion-icon class=\"icon-bar\" name=\"notifications\"></ion-icon>\n      </ion-button>\n      <ion-button [routerLink]=\"['/ps-search']\">\n        <ion-icon class=\"icon-bar\" name=\"search\"></ion-icon>\n      </ion-button>\n    </ion-buttons>\n    <ion-title>\n      {{'HOME' | translate}}\n    </ion-title>\n  </ion-toolbar>\n\n</ion-header>\n<ion-row>\n  <ion-col  class=\"ion-text-start interaction \" size=\"2\">\n    <ion-icon  name=\"arrow-back\" class=\"icon-home\" (click)=\"dayBack()\"></ion-icon>\n  </ion-col>\n  <ion-col class=\"ion-text-center\" size=\"8\">\n    <ion-datetime (ionChange)=\"setDate($event)\" class=\"date \" display-format=\"DD-MM-YYYY\" picker-format=\"DD MM YYYY\"\n      [value]=\"showDate\"></ion-datetime>\n  </ion-col>\n  <ion-col class=\"ion-text-end interaction\" size=\"2\">\n    <ion-icon name=\"arrow-forward\" class=\"icon-home\"  (click)=\"dayForward()\"></ion-icon>\n  </ion-col>\n</ion-row>\n<ion-row>\n  <ion-col class=\"ion-text-start interaction\" size=\"2\">\n    <ion-icon class=\"icon-home\"  name=\"rewind\" (click)=\"firstDayBck()\" *ngIf=\"afterFirstDayForward() && past\"></ion-icon>\n  </ion-col>\n  <ion-col class=\"ion-text-center interaction\" size=\"8\">\n    {{labelResult}} {{'clean_label' | translate}}\n  </ion-col>\n  <ion-col class=\"ion-text-end interaction\" size=\"2\">\n    <ion-icon  class=\"icon-home\"  name=\"fastforward\" (click)=\"firstDayFwd()\" *ngIf=\"future\"></ion-icon>\n  </ion-col>\n</ion-row>\n\n\n<ion-content>\n  <div class=\"map\">\n    <div id=\"home-map\"></div>\n  </div>\n</ion-content>"
+module.exports = "<ion-header no-border>\n  <ion-searchbar class=\"search-event\" style=\"display: none\" showCancelButton animated (search)=\"toggleSearch()\"\n    (ionInput)=\"searchChanged($event)\" (ionCancel)=\"toggleSearch()\"></ion-searchbar>\n  <ion-toolbar>\n\n    <ion-buttons class=\"interactive\" slot=\"start\">\n      <ion-back-button class=\"interaction\"></ion-back-button>\n    </ion-buttons>\n    <ion-buttons slot=\"end\">\n      <ion-button [routerLink]=\"['/ps-notification']\">\n        <ion-icon class=\"icon-bar\" name=\"notifications\"></ion-icon>\n      </ion-button>\n      <ion-button [routerLink]=\"['/ps-search']\">\n        <ion-icon class=\"icon-bar\" name=\"search\"></ion-icon>\n      </ion-button>\n    </ion-buttons>\n    <ion-title>\n      {{'HOME' | translate}}\n    </ion-title>\n  </ion-toolbar>\n\n</ion-header>\n<ion-row>\n    <ion-col class=\"ion-text-start interaction\" size=\"2\">\n        <ion-icon class=\"icon-home\"  name=\"rewind\" (click)=\"firstDayBck()\" *ngIf=\"past\"></ion-icon>\n      </ion-col>\n  <ion-col  class=\"ion-text-start interaction \" size=\"2\">\n    <ion-icon  name=\"arrow-back\" class=\"icon-home\" (click)=\"dayBack()\"></ion-icon>\n  </ion-col>\n  <ion-col class=\"ion-text-center\" size=\"4\">\n    <ion-datetime (ionChange)=\"setDate($event)\" class=\"date \" display-format=\"DD-MM-YYYY\" picker-format=\"DD MM YYYY\"\n      [value]=\"showDate\"></ion-datetime>\n  </ion-col>\n  <ion-col class=\"ion-text-end interaction\" size=\"2\">\n    <ion-icon name=\"arrow-forward\" class=\"icon-home\"  (click)=\"dayForward()\"></ion-icon>\n  </ion-col>\n  <ion-col class=\"ion-text-end interaction\" size=\"2\">\n      <ion-icon  class=\"icon-home\"  name=\"fastforward\" (click)=\"firstDayFwd()\" *ngIf=\"future\"></ion-icon>\n    </ion-col>\n</ion-row>\n<ion-row>\n\n  <ion-col class=\"ion-text-center interaction\" size=\"12\">\n    {{labelResult}} {{'clean_label' | translate}}\n  </ion-col>\n\n</ion-row>\n\n\n<ion-content>\n  <div class=\"map\">\n    <div id=\"home-map\"></div>\n  </div>\n</ion-content>"
 
 /***/ }),
 
@@ -89,7 +89,7 @@ module.exports = "<ion-header no-border>\n  <ion-searchbar class=\"search-event\
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "ion-button {\n  margin-bottom: 5%; }\n\n.map {\n  height: 100%;\n  border: 1px solid black; }\n\n#home-map {\n  width: 100%;\n  height: 100%; }\n\nion-item * {\n  margin: 0 auto; }\n\nion-item {\n  border-bottom: none !important;\n  border-width: 0px !important; }\n\n.leaflet-control .mapSearch {\n  width: 25px;\n  height: 25px; }\n\n.interaction {\n  color: #11B3EF !important; }\n\n.date {\n  background-color: #11B3EF !important;\n  color: white;\n  border-radius: 4px; }\n\n.icon-home {\n  font-size: 20px;\n  text-align: center;\n  width: 100%;\n  height: 100%; }\n\n.icon-bar {\n  font-size: 30px; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL2NoaW44L0RvY3VtZW50cy93b3JrL21vZHVsYXJBcHAvbW9kdWxhci1hcHAvc3JjL2FwcC9tb2R1bGUtcHVsc3RyYWRlL3BhZ2VzL2hvbWUtcHMvaG9tZS1wcy5wYWdlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQ0E7RUFDSSxrQkFBaUIsRUFDcEI7O0FBQ0Q7RUFDSSxhQUFZO0VBQ1osd0JBQXVCLEVBRTFCOztBQUNEO0VBQ0ksWUFBVztFQUNYLGFBQVksRUFDZjs7QUFDRDtFQUNJLGVBQWMsRUFDakI7O0FBQ0Q7RUFDSSwrQkFBOEI7RUFDOUIsNkJBQTRCLEVBQy9COztBQUNEO0VBQ0ksWUFBVztFQUNYLGFBQVksRUFDZjs7QUFDRDtFQUNJLDBCQUF3QixFQUMzQjs7QUFDRDtFQUNJLHFDQUFtQztFQUNuQyxhQUFZO0VBQ1osbUJBQWtCLEVBQ3JCOztBQUNEO0VBQ0ksZ0JBQWU7RUFDZixtQkFBa0I7RUFDbEIsWUFBVztFQUNYLGFBQVksRUFDZjs7QUFDRDtFQUNJLGdCQUFlLEVBRWxCIiwiZmlsZSI6InNyYy9hcHAvbW9kdWxlLXB1bHN0cmFkZS9wYWdlcy9ob21lLXBzL2hvbWUtcHMucGFnZS5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiXG5pb24tYnV0dG9uIHtcbiAgICBtYXJnaW4tYm90dG9tOiA1JTtcbn1cbi5tYXAge1xuICAgIGhlaWdodDogMTAwJTtcbiAgICBib3JkZXI6IDFweCBzb2xpZCBibGFjaztcbiAgICAvLyBtYXJnaW4tYm90dG9tOjUlO1xufVxuI2hvbWUtbWFwIHtcbiAgICB3aWR0aDogMTAwJTtcbiAgICBoZWlnaHQ6IDEwMCU7XG59XG5pb24taXRlbSAqe1xuICAgIG1hcmdpbjogMCBhdXRvO1xufVxuaW9uLWl0ZW0ge1xuICAgIGJvcmRlci1ib3R0b206IG5vbmUgIWltcG9ydGFudDtcbiAgICBib3JkZXItd2lkdGg6IDBweCAhaW1wb3J0YW50O1xufVxuLmxlYWZsZXQtY29udHJvbCAubWFwU2VhcmNoIHtcbiAgICB3aWR0aDogMjVweDtcbiAgICBoZWlnaHQ6IDI1cHg7XG59XG4uaW50ZXJhY3Rpb24ge1xuICAgIGNvbG9yOiAjMTFCM0VGIWltcG9ydGFudDtcbn1cbi5kYXRlIHtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiAjMTFCM0VGIWltcG9ydGFudDtcbiAgICBjb2xvcjogd2hpdGU7XG4gICAgYm9yZGVyLXJhZGl1czogNHB4O1xufVxuLmljb24taG9tZSB7XG4gICAgZm9udC1zaXplOiAyMHB4O1xuICAgIHRleHQtYWxpZ246IGNlbnRlcjtcbiAgICB3aWR0aDogMTAwJTtcbiAgICBoZWlnaHQ6IDEwMCU7XG59XG4uaWNvbi1iYXIge1xuICAgIGZvbnQtc2l6ZTogMzBweDtcblxufVxuIl19 */"
+module.exports = "ion-button {\n  margin-bottom: 5%; }\n\n.map {\n  height: 100%;\n  border: 1px solid black; }\n\n#home-map {\n  width: 100%;\n  height: 100%; }\n\nion-item * {\n  margin: 0 auto; }\n\nion-item {\n  border-bottom: none !important;\n  border-width: 0px !important; }\n\n.leaflet-control .mapSearch {\n  width: 25px;\n  height: 25px; }\n\n.interaction {\n  color: #11B3EF !important; }\n\n.date {\n  color: #11B3EF !important; }\n\n.icon-home {\n  font-size: 20px;\n  text-align: center;\n  width: 100%;\n  height: 100%; }\n\n.icon-bar {\n  font-size: 30px; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL2NoaW44L0RvY3VtZW50cy93b3JrL21vZHVsYXJBcHAvbW9kdWxhci1hcHAvc3JjL2FwcC9tb2R1bGUtcHVsc3RyYWRlL3BhZ2VzL2hvbWUtcHMvaG9tZS1wcy5wYWdlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQ0E7RUFDSSxrQkFBaUIsRUFDcEI7O0FBQ0Q7RUFDSSxhQUFZO0VBQ1osd0JBQXVCLEVBRTFCOztBQUNEO0VBQ0ksWUFBVztFQUNYLGFBQVksRUFDZjs7QUFDRDtFQUNJLGVBQWMsRUFDakI7O0FBQ0Q7RUFDSSwrQkFBOEI7RUFDOUIsNkJBQTRCLEVBQy9COztBQUNEO0VBQ0ksWUFBVztFQUNYLGFBQVksRUFDZjs7QUFDRDtFQUNJLDBCQUF3QixFQUMzQjs7QUFDRDtFQUVJLDBCQUF3QixFQUUzQjs7QUFDRDtFQUNJLGdCQUFlO0VBQ2YsbUJBQWtCO0VBQ2xCLFlBQVc7RUFDWCxhQUFZLEVBQ2Y7O0FBQ0Q7RUFDSSxnQkFBZSxFQUVsQiIsImZpbGUiOiJzcmMvYXBwL21vZHVsZS1wdWxzdHJhZGUvcGFnZXMvaG9tZS1wcy9ob21lLXBzLnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIlxuaW9uLWJ1dHRvbiB7XG4gICAgbWFyZ2luLWJvdHRvbTogNSU7XG59XG4ubWFwIHtcbiAgICBoZWlnaHQ6IDEwMCU7XG4gICAgYm9yZGVyOiAxcHggc29saWQgYmxhY2s7XG4gICAgLy8gbWFyZ2luLWJvdHRvbTo1JTtcbn1cbiNob21lLW1hcCB7XG4gICAgd2lkdGg6IDEwMCU7XG4gICAgaGVpZ2h0OiAxMDAlO1xufVxuaW9uLWl0ZW0gKntcbiAgICBtYXJnaW46IDAgYXV0bztcbn1cbmlvbi1pdGVtIHtcbiAgICBib3JkZXItYm90dG9tOiBub25lICFpbXBvcnRhbnQ7XG4gICAgYm9yZGVyLXdpZHRoOiAwcHggIWltcG9ydGFudDtcbn1cbi5sZWFmbGV0LWNvbnRyb2wgLm1hcFNlYXJjaCB7XG4gICAgd2lkdGg6IDI1cHg7XG4gICAgaGVpZ2h0OiAyNXB4O1xufVxuLmludGVyYWN0aW9uIHtcbiAgICBjb2xvcjogIzExQjNFRiFpbXBvcnRhbnQ7XG59XG4uZGF0ZSB7XG4gICAgLy8gYmFja2dyb3VuZC1jb2xvcjogIzExQjNFRiFpbXBvcnRhbnQ7XG4gICAgY29sb3I6ICMxMUIzRUYhaW1wb3J0YW50OztcbiAgICAvLyBib3JkZXItcmFkaXVzOiA0cHg7XG59XG4uaWNvbi1ob21lIHtcbiAgICBmb250LXNpemU6IDIwcHg7XG4gICAgdGV4dC1hbGlnbjogY2VudGVyO1xuICAgIHdpZHRoOiAxMDAlO1xuICAgIGhlaWdodDogMTAwJTtcbn1cbi5pY29uLWJhciB7XG4gICAgZm9udC1zaXplOiAzMHB4O1xuXG59XG4iXX0= */"
 
 /***/ }),
 
@@ -362,58 +362,44 @@ var HomePage = /** @class */ (function () {
      */
     HomePage.prototype.buildPolyline = function (center) {
         return __awaiter(this, void 0, void 0, function () {
-            var counter, _a;
+            var counter;
             var _this_1 = this;
-            return __generator(this, function (_b) {
-                switch (_b.label) {
-                    case 0:
-                        counter = 0;
-                        this.labelResult = 0;
-                        /** Reset polyline */
-                        if (this.map) {
-                            this.clearPolyline(this.map);
-                        }
-                        if (this.streets) {
-                            /** Check distance from center map and street */
-                            this.streets.forEach(function (s) {
-                                var dist = _this_1.geo.getDistanceKM({ lat: center[0], lon: center[1] }, { lat: s.centralCoords[0]['lat'], lon: s.centralCoords[0]['lng'] });
-                                /** Check if is a 'cleaning day' */
-                                var inDate = (new Date(_this_1.selectedDate).setHours(0, 0, 0, 0) === new Date(s.cleaningDay).setHours(0, 0, 0, 0));
-                                var color = (inDate) ? 'red' : 'green';
-                                /** Build popup content */
-                                var freeStreetContent = _this_1.noCleaning + " <br/><b>" + _this_1.datePipe.transform(_this_1.selectedDate, 'dd/MM/yyyy') + "</b> " + _this_1.forStr + "<br/>\n        <b> " + s.streetName + "</b>";
-                                var closedStreetContent = "<b>" + s.streetName + "</b><br/>" + _this_1.noPark + " <b>" + new Date(s.stopStartingTime).getHours() + "</b> " + _this_1.to + "\n        <b> " + new Date(s.stopEndingTime).getHours() + "</b> " + _this_1.inDateStr + " <br/>\n        <b>" + _this_1.datePipe.transform(_this_1.selectedDate, 'dd/MM/yyyy') + "</b><br/>\n        <a style=\"float:right; margin-top: -5%\">" + _this_1.details + "</a>";
-                                /**
-                                 * Build polyline based on: current day, current zoom, map center
-                                 */
-                                if (inDate && ((dist < ((17 % _this_1.map.getZoom()) - 1) || dist < 0.3))) {
-                                    _this_1.labelResult++;
-                                    var popupContent = (inDate) ? closedStreetContent : freeStreetContent;
-                                    var polyline = leaflet__WEBPACK_IMPORTED_MODULE_4___default.a.polyline(s.polylines, { color: color, weight: 7 }).addTo(_this_1.map);
-                                    var popup = leaflet__WEBPACK_IMPORTED_MODULE_4___default.a.popup({ className: "pop-" + s.streetName.replace(/\s/g, '') }).setContent(popupContent);
-                                    polyline.bindPopup(popup).on('popupopen', function (e) {
-                                        var el = document.getElementsByClassName("pop-" + s.streetName.replace(/\s/g, ''))[0].addEventListener('click', function () {
-                                            _this_1.goToDetail(s.idNumber);
-                                        });
-                                    });
-                                    counter++;
-                                }
-                            });
-                        }
-                        if (!(counter === 0 && this.inZone && this.noCleaning)) return [3 /*break*/, 3];
-                        _a = this;
-                        return [4 /*yield*/, this.toastCtrl.create({
-                                message: this.noCleaning + " " + this.datePipe.transform(this.selectedDate, 'dd/MM/yyyy') + " " + this.inZone,
-                                duration: 2000
-                            })];
-                    case 1:
-                        _a.toast = _b.sent();
-                        return [4 /*yield*/, this.toast.present()];
-                    case 2:
-                        _b.sent();
-                        _b.label = 3;
-                    case 3: return [2 /*return*/];
+            return __generator(this, function (_a) {
+                counter = 0;
+                this.labelResult = 0;
+                /** Reset polyline */
+                if (this.map) {
+                    this.clearPolyline(this.map);
                 }
+                if (this.streets) {
+                    /** Check distance from center map and street */
+                    this.streets.forEach(function (s) {
+                        var dist = _this_1.geo.getDistanceKM({ lat: center[0], lon: center[1] }, { lat: s.centralCoords[0]['lat'], lon: s.centralCoords[0]['lng'] });
+                        s.idNumber = parseInt(s.streetCode.replace(/\_/g, ''), 10);
+                        /** Check if is a 'cleaning day' */
+                        var inDate = (new Date(_this_1.selectedDate).setHours(0, 0, 0, 0) === new Date(s.cleaningDay).setHours(0, 0, 0, 0));
+                        var color = (inDate) ? 'red' : 'green';
+                        /** Build popup content */
+                        var freeStreetContent = _this_1.noCleaning + " <br/><b>" + _this_1.datePipe.transform(_this_1.selectedDate, 'dd/MM/yyyy') + "</b> " + _this_1.forStr + "<br/>\n        <b> " + s.streetName + "</b>";
+                        var closedStreetContent = "<b>" + s.streetName + "</b><br/>" + _this_1.noPark + " <b>" + new Date(s.stopStartingTime).getHours() + "</b> " + _this_1.to + "\n        <b> " + new Date(s.stopEndingTime).getHours() + "</b> " + _this_1.inDateStr + " <br/>\n        <b>" + _this_1.datePipe.transform(_this_1.selectedDate, 'dd/MM/yyyy') + "</b><br/>\n        <a style=\"float:right; margin-top: -5%\">" + _this_1.details + "</a>";
+                        /**
+                         * Build polyline based on: current day, current zoom, map center
+                         */
+                        if (inDate && ((dist < ((17 % _this_1.map.getZoom()) - 1) || dist < 0.3))) {
+                            _this_1.labelResult++;
+                            var popupContent = (inDate) ? closedStreetContent : freeStreetContent;
+                            var polyline = leaflet__WEBPACK_IMPORTED_MODULE_4___default.a.polyline(s.polylines, { color: color, weight: 7 }).addTo(_this_1.map);
+                            var popup = leaflet__WEBPACK_IMPORTED_MODULE_4___default.a.popup({ className: "pop-" + s.streetName.replace(/\s/g, '') }).setContent(popupContent);
+                            polyline.bindPopup(popup).on('popupopen', function (e) {
+                                var el = document.getElementsByClassName("pop-" + s.streetName.replace(/\s/g, ''))[0].addEventListener('click', function () {
+                                    _this_1.goToDetail(s.idNumber);
+                                });
+                            });
+                            counter++;
+                        }
+                    });
+                }
+                return [2 /*return*/];
             });
         });
     };
@@ -510,8 +496,7 @@ var HomePage = /** @class */ (function () {
      */
     HomePage.prototype.firstDayBck = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var center, prevDay, _a;
-            var _this_1 = this;
+            var center, prevDay, i, s, dist, _a;
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
@@ -520,20 +505,22 @@ var HomePage = /** @class */ (function () {
                         center = this.mapCenter;
                         prevDay = null;
                         if (this.streets)
-                            this.streets.forEach(function (s) {
-                                var dist = _this_1.geo.getDistanceKM({ lat: center[0], lon: center[1] }, { lat: s.centralCoords[0]['lat'], lon: s.centralCoords[0]['lng'] });
-                                if ((dist < ((17 % _this_1.map.getZoom()) - 1) || dist < 0.3)) {
-                                    if (!prevDay && s.cleaningDay && s.cleaningDay < new Date(_this_1.selectedDate).getTime()) {
+                            for (i = this.streets.length - 1; i >= 0; i--) {
+                                s = this.streets[i];
+                                dist = this.geo.getDistanceKM({ lat: center[0], lon: center[1] }, { lat: s.centralCoords[0]['lat'], lon: s.centralCoords[0]['lng'] });
+                                if ((dist < ((17 % this.map.getZoom()) - 1) || dist < 0.3)) {
+                                    if (!prevDay && s.cleaningDay && s.cleaningDay < new Date(this.selectedDate).getTime()) {
                                         prevDay = s.cleaningDay;
                                     }
                                 }
                                 //select first next day of cleaning inside
-                                if ((dist < ((17 % _this_1.map.getZoom()) - 1) || dist < 0.3)) {
-                                    if (prevDay && s.cleaningDay < _this_1.selectedDate.getTime() && s.cleaningDay >= prevDay && s.cleaningDay > _this_1.today) {
+                                if ((dist < ((17 % this.map.getZoom()) - 1) || dist < 0.3)) {
+                                    if (prevDay && s.cleaningDay < this.selectedDate.getTime() && s.cleaningDay >= prevDay && s.cleaningDay > this.today) {
                                         prevDay = s.cleaningDay;
                                     }
                                 }
-                            });
+                            }
+                        ;
                         if (!(prevDay != null && prevDay < this.selectedDate.getTime())) return [3 /*break*/, 1];
                         this.selectedDate = new Date(prevDay);
                         this.showDate = this.selectedDate.toISOString();

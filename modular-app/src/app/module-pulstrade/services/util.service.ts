@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ToastController } from '@ionic/angular';
+import { ToastController, LoadingController } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root'
@@ -12,13 +12,25 @@ export class UtilService {
   getDefaultPos(): any {
     return this.defaultPosition;
   }
-
-  constructor(private toastController: ToastController) { }
+ 
+  constructor(private toastController: ToastController, private loadingController: LoadingController) { }
   async showErrorConnectionMessage(message) {
     const toast = await this.toastController.create({
       message: message,
       duration: 2000
     });
     toast.present();
+  }
+  async presentLoading() {
+    const loading = await this.loadingController.create({
+      // spinner: null,
+      // message: `<img src="assets/animation/loading.gif" />`,
+      // cssClass: 'custom-loading',
+      duration: 10000
+    });
+    return await loading.present();
+  }
+  hideLoading() {
+    this.loadingController.dismiss()
   }
 }

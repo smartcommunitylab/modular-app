@@ -10,6 +10,7 @@ import { start } from 'repl';
 })
 export class NotificationService {
 
+
   private language: string; /** Actived language */
   private activedNots: any = []; /** Actived notifications */
   private notifiedStreets: any = []; /** Streets that will be notified */
@@ -44,17 +45,20 @@ export class NotificationService {
     this.platform.ready().then(() => {
       /** Get translations */
       this.translate.get('IN-CLEANING').subscribe(tr => {
-        const tmp = new Date(new Date().getTime() + 20000).getTime(); // SOLO PER DEBUG; DA TOGLIERE
+        // const tmp = new Date(new Date().getTime() + 20000).getTime(); // SOLO PER DEBUG; DA TOGLIERE
 
         const noti = [];
-        if (!this.checkIfNotify(street.idNumber, street.cleaningDay)) {
-          noti.push({
-            id: street.idNumber,
-            text: `${tr} ${street.streetName}`,
-            data: street.streetName,
-            vibrate: true,
-            trigger: { at: tmp } // new Date(s.cleaningDay).getTime() }
-          });
+        var today = new Date().getTime();
+        if (today < street.cleaningDay) {
+          if (!this.checkIfNotify(street.idNumber, street.cleaningDay)) {
+            noti.push({
+              id: street.idNumber,
+              text: `${tr} ${street.streetName}`,
+              data: street.streetName,
+              vibrate: true,
+              trigger: street.cleaningDay
+            });
+          }
         }
         // street.forEach(s => {
         //   if (!this.checkIfNotify(s.idNumber, s.cleaningDay)) {
@@ -74,7 +78,11 @@ export class NotificationService {
       });
     });
   }
-
+  updateNotification(streets): any {
+    var notification = this.getNotStreets();
+    //check if notification are more recent
+    console.log(JSON.stringify(notification));
+  }
   /**
    * Disable notifications and delete streets from `LocalStorage`
    * @param street streets object

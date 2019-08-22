@@ -1,16 +1,16 @@
-<ion-header >
+<ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-back-button class="interaction"></ion-back-button>
     </ion-buttons>
     <ion-buttons slot="end">
-        <div (click)="toggleNotification()">
-            <ion-icon class="interaction icon-bar" name="notifications" *ngIf="isEnabled(); else disabled"></ion-icon>
-            <ng-template #disabled>
-              <ion-icon class="interaction icon-bar" name="notifications-outline"></ion-icon>
-            </ng-template>
-          </div>
-              </ion-buttons>
+      <div (click)="toggleNotification()">
+        <ion-icon class="interaction icon-bar" name="notifications" *ngIf="isEnabled(); else disabled"></ion-icon>
+        <ng-template #disabled>
+          <ion-icon class="interaction icon-bar" name="notifications-outline"></ion-icon>
+        </ng-template>
+      </div>
+    </ion-buttons>
 
     <ion-title>
       {{streetName}}
@@ -20,17 +20,23 @@
 
 
 <ion-content padding>
-  <ion-list  *ngIf="streetDetails">
+  <ion-list *ngIf="streetDetails">
     <div class="clean-container" *ngFor="let s of streetDetails">
       <div [id]="s.id">
-        <div>
-          <div class="left">
-            <b>{{s.cleaningDayStr}}</b>
-            <!-- <h1>{{s.streetName}}</h1> -->
-            <p>{{'CLOSED' | translate}} <b>{{s.stopStartingTimeStr}}</b> - <b>{{s.stopEndingTimeStr}}</b></p>
-            <div>{{s.notes}}</div>
-          </div>
-        </div>
+        <ion-grid class="note">
+        <ion-row>
+          <ion-col size="2">
+            <ion-icon name="close-circle"></ion-icon>
+          </ion-col>
+          <ion-col  size="10">
+            <div >
+              <div class="day">{{s.cleaningDayStr}}</div>
+              <div class="time">{{'CLOSED' | translate}} {{s.stopStartingTimeStr}}- {{s.stopEndingTimeStr}}</div>
+              <div class="notes">{{s.notes}}</div>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
       </div>
     </div>
   </ion-list>
