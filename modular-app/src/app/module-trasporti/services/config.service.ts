@@ -6,8 +6,8 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ConfigService {
   getLanguage(): any {
-    if (localStorage.getItem('comune-setting')) {
-      var setting = JSON.parse(localStorage.getItem('comune-setting'));
+    if (localStorage.getItem('app-module')) {
+      var setting = JSON.parse(localStorage.getItem('app-module'));
       var language = setting.language;
       if (language)
         return language

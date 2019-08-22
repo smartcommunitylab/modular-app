@@ -72,7 +72,7 @@ export class ListEventPage implements OnInit {
     // this.isScrolledIntoView();
   }
   buildFilter(): any {
-    var array = this.fullPois.map(item => item.cat);
+    var array = this.fullPois.map(item => item.cat).flat();
     // var arrayMultipleEvent = this.fullPois.filter(item => item.parentObjectName !=null);
     // var arrayMultipleEventTags = arrayMultipleEvent.map(item => {
     //   return item.parentObjectName
@@ -270,9 +270,14 @@ export class ListEventPage implements OnInit {
         poiElement.id = x._id;
       }
       if (x.topics) {
-        poiElement.cat = x.topics;
+        poiElement.topics = x.topics;
       }
-      else poiElement["cat"] = [];
+      else poiElement["topics"] = [];
+      if (x.cat) {
+        if (x.cat[this.language])
+        poiElement.cat = x.cat[this.language];
+        else poiElement.cat = x.cat["it"];
+      }
       if (x.eventPeriod) {
         if ( x.eventPeriod[this.language])
         poiElement.date = x.eventPeriod[this.language];
@@ -301,7 +306,7 @@ export class ListEventPage implements OnInit {
       if (x.parentEventId) {
         if (poiElement.cat)
           poiElement.cat.push(JSON.parse(x.parentEventId).objectName);
-        else poiElement["cat"] = [JSON.parse(x.parentEventId).objectName];
+        else poiElement["topics"] = [JSON.parse(x.parentEventId).objectName];
         // poiElement.parentObjectName = JSON.parse(x.parentEventId).objectName;
       }
       //TO DO

@@ -78,7 +78,7 @@ var SearchPageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header >\n    <!-- <ion-searchbar  (ionCancel)=\"toggleSearch()\" showCancelButton=\"always\" animated (ionInput)=\"search($event)\" placeholder=\"{{'SEARCH' | translate}}\">\n      </ion-searchbar> -->\n  <ion-toolbar>\n      <ion-searchbar showCancelButton=\"never\" animated (ionInput)=\"search($event)\" placeholder=\"{{'SEARCH' | translate}}\">\n        </ion-searchbar>\n    <ion-buttons slot=\"start\">\n      <ion-back-button class=\"interaction\"></ion-back-button>\n    </ion-buttons>\n    <!-- <ion-title>\n      {{'SEARCH' | translate}}\n    </ion-title> -->\n  </ion-toolbar>\n</ion-header>\n\n\n<ion-content padding>\n    <!-- <ion-spinner name=\"dots\" *ngIf=\"searching\"></ion-spinner> -->\n\n  <ion-list no-lines *ngIf=\"showStreets\">\n    <div *ngFor=\"let s of showStreets\">\n      <div [id]=\"s.id\">\n        <div>\n          <div class=\"left\" [routerLink]=\"['/street-detail']\" [queryParams]=\"{street: s.idNumber }\" routerDirection=\"forward\">\n            <div class=\"result interaction\" >{{s.streetName}}</div>\n            <div class=\"sub-result interaction\" >{{s.tratto}}</div>\n          </div>\n          <div class=\"right\" (click)=\"toggleNotification(s)\">\n            <ion-icon class=\"interaction icon-notification\" name=\"notifications\" *ngIf=\"isEnabled(s); else disabled\"></ion-icon>\n            <ng-template #disabled>\n              <ion-icon  class=\"interaction icon-notification\" name=\"notifications-outline\"></ion-icon>\n            </ng-template>\n          </div>\n        </div>\n      </div>\n    </div>\n  </ion-list>\n  <div *ngIf=\"noResults\">\n    empty\n  </div>\n</ion-content>"
+module.exports = "<ion-header >\n    <!-- <ion-searchbar  (ionCancel)=\"toggleSearch()\" showCancelButton=\"always\" animated (ionInput)=\"search($event)\" placeholder=\"{{'SEARCH' | translate}}\">\n      </ion-searchbar> -->\n  <ion-toolbar>\n      <ion-searchbar showCancelButton=\"never\" animated (ionInput)=\"search($event)\" placeholder=\"{{'SEARCH' | translate}}\">\n        </ion-searchbar>\n    <ion-buttons slot=\"start\">\n      <ion-back-button class=\"interaction\"></ion-back-button>\n    </ion-buttons>\n    <!-- <ion-title>\n      {{'SEARCH' | translate}}\n    </ion-title> -->\n  </ion-toolbar>\n</ion-header>\n\n\n<ion-content padding>\n    <!-- <ion-spinner name=\"dots\" *ngIf=\"searching\"></ion-spinner> -->\n\n  <ion-list no-lines *ngIf=\"showStreets\">\n    <div *ngFor=\"let s of showStreets\">\n      <div [id]=\"s.id\">\n        <div>\n          <div class=\"left\" [routerLink]=\"['/street-detail']\" [queryParams]=\"{street: s.idNumber }\" routerDirection=\"forward\">\n            <div class=\"result interaction\" >{{s.streetName}}</div>\n            <div class=\"sub-result interaction\" >{{s.tratto}}</div>\n          </div>\n          <div class=\"right\" (click)=\"toggleNotification(s)\">\n            <ion-icon class=\"interaction icon-notification\" name=\"notifications\" *ngIf=\"isEnabled(s); else disabled\"></ion-icon>\n            <ng-template #disabled>\n              <ion-icon  class=\"interaction icon-notification\" name=\"notifications-outline\"></ion-icon>\n            </ng-template>\n          </div>\n        </div>\n      </div>\n    </div>\n  </ion-list>\n  <div class=\"no-results\" *ngIf=\"noResults\">\n    {{'no_roads_search'|translate}}\n  </div>\n</ion-content>"
 
 /***/ }),
 
@@ -142,7 +142,7 @@ var SearchPage = /** @class */ (function () {
         this.noResults = false;
         this.showStreets = [];
         this.searching = false;
-        this.doneTypingInterval = 500; //time in ms, 5 second for example
+        this.doneTypingInterval = 500;
         this.language = window[this.config.getAppModuleName()]['language'];
         this.translate.use(this.language);
         this.myPos = window[this.config.getAppModuleName()]['geolocation'];
@@ -195,9 +195,9 @@ var SearchPage = /** @class */ (function () {
         clearTimeout(this.typingTimer);
         this.typingTimer = setTimeout(function () {
             if (input) {
+                // this.searching=true;
                 if (input.detail) {
                     val = input.detail.target.value;
-                    // this.searching=true;
                 }
                 //  else {
                 //   val = input;
@@ -211,7 +211,6 @@ var SearchPage = /** @class */ (function () {
                             return (el.streetName.toLowerCase().indexOf(val.toLowerCase()) > -1);
                         });
                         _this.showStreets = _this.getUnique(_this.showStreets, 'streetCode');
-                        // this.searching=false;
                         if (_this.showStreets.length == 0) {
                             _this.noResults = true;
                         }
@@ -220,6 +219,7 @@ var SearchPage = /** @class */ (function () {
                         }
                     }
                 }
+                // this.searching=false;
             }
         }, this.doneTypingInterval);
     };

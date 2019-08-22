@@ -19,7 +19,7 @@ export class HomeSettingsPage implements OnInit {
   categories: any = [];
   allCategories: any = [];
   language = 'it';
-  selection = null;
+  selection = 'home';
   setting: any;
   languages: any;
   myLanguage: any;
@@ -155,17 +155,11 @@ export class HomeSettingsPage implements OnInit {
     return categoryElement;
   }
   select(sel) {
-    // this.router.navigate(['/setting']);
     if (this.selection == sel)
       this.selection = null;
     else this.selection = sel;
   }
-  // goToAbout(sel) {
-  //   // this.router.navigate(['/setting']);
-  //   if (this.selection == sel)
-  //     this.selection = null;
-  //   else this.selection = sel;
-  // }
+
   isSelected(sel) {
     return sel == this.selection;
   }

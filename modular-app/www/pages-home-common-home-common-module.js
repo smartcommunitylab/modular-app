@@ -134,46 +134,25 @@ var HomeCommonPage = /** @class */ (function () {
         this.pois = [];
         this.language = 'it';
         this.language = window[this.config.getAppModuleName()]['language'];
-        translate.use(this.language); // SET DEFAULT LANGUAGE
-        // this.subs.add(dragulaService.dropModel('entries')
-        //   .subscribe(({ el, target, source, sourceModel, targetModel, item }) => {
-        //     console.log('dropModel:');
-        //     console.log(el);
-        //     console.log(source);
-        //     console.log(target);
-        //     console.log(sourceModel);
-        //     console.log(targetModel);
-        //     console.log(item);
-        //   })
-        // );
-        // this.subs.add(dragulaService.removeModel('entries')
-        //   .subscribe(({ el, source, item, sourceModel }) => {
-        //     console.log('removeModel:');
-        //     console.log(el);
-        //     console.log(source);
-        //     console.log(sourceModel);
-        //     console.log(item);
-        //   })
-        // );
+        translate.use(this.language);
     }
     HomeCommonPage.prototype.ngOnInit = function () {
     };
-    HomeCommonPage.prototype.ionViewDidEnter = function () {
+    HomeCommonPage.prototype.ionViewDidLoad = function () {
         var _this = this;
+        this.translate.onLangChange.subscribe(function (event) {
+            _this.init();
+        });
+    };
+    HomeCommonPage.prototype.ionViewDidEnter = function () {
+        this.init();
+    };
+    HomeCommonPage.prototype.init = function () {
+        var _this = this;
+        this.language = window[this.config.getAppModuleName()]['language'];
+        this.translate.use(this.language);
         this.elementsGallery = [];
         this.categories = this.config.getModuleEntries().map(function (x) { return _this.convertCategories(x); });
-        // this.config.getAllModuleEntries().then(res => {
-        //   this.allCategories = res.map(x => this.convertCategories(x));
-        //   this.allCategories = this.allCategories.filter(( el ) =>{
-        //     //solo gli elementi non presenti nell'array categories.
-        //     var present = this.categories.filter(element => {
-        //       console.log(element.id );
-        //       return element.id === el.id});
-        //     if (present.length==0)
-        //       return true
-        //       return false;
-        //   }) 
-        // })
         console.log(this.categories);
         this.elementsGallery = this.config.getCarousel().map(function (x) { return _this.convertGallery(x); });
         window.addEventListener('categorySelected', function (category) {
@@ -184,9 +163,6 @@ var HomeCommonPage = /** @class */ (function () {
             _this.goToItem(item['detail']);
         });
     };
-    // ngOnDestroy() {
-    //   this.subs.unsubscribe();
-    // }
     HomeCommonPage.prototype.convertGallery = function (x) {
         var galleryElement = {};
         if (x.name) {

@@ -2146,13 +2146,13 @@ var map = {
 		"common",
 		117
 	],
-	"./s4kba3uq.entry.js": [
-		"./node_modules/wcs-comune/dist/esm/es5/build/s4kba3uq.entry.js",
+	"./urz9smta.entry.js": [
+		"./node_modules/wcs-comune/dist/esm/es5/build/urz9smta.entry.js",
 		"common",
 		118
 	],
-	"./s4kba3uq.sc.entry.js": [
-		"./node_modules/wcs-comune/dist/esm/es5/build/s4kba3uq.sc.entry.js",
+	"./urz9smta.sc.entry.js": [
+		"./node_modules/wcs-comune/dist/esm/es5/build/urz9smta.sc.entry.js",
 		"common",
 		119
 	]
@@ -2325,6 +2325,7 @@ var map = {
 	],
 	"./pages/notification/notification.module": [
 		"./src/app/module-pulstrade/pages/notification/notification.module.ts",
+		"common",
 		"pages-notification-notification-module"
 	],
 	"./pages/notizie/notizie.module": [
@@ -3691,16 +3692,19 @@ var NotificationService = /** @class */ (function () {
         this.platform.ready().then(function () {
             /** Get translations */
             _this.translate.get('IN-CLEANING').subscribe(function (tr) {
-                var tmp = new Date(new Date().getTime() + 20000).getTime(); // SOLO PER DEBUG; DA TOGLIERE
+                // const tmp = new Date(new Date().getTime() + 20000).getTime(); // SOLO PER DEBUG; DA TOGLIERE
                 var noti = [];
-                if (!_this.checkIfNotify(street.idNumber, street.cleaningDay)) {
-                    noti.push({
-                        id: street.idNumber,
-                        text: tr + " " + street.streetName,
-                        data: street.streetName,
-                        vibrate: true,
-                        trigger: { at: tmp } // new Date(s.cleaningDay).getTime() }
-                    });
+                var today = new Date().getTime();
+                if (today < street.cleaningDay) {
+                    if (!_this.checkIfNotify(street.idNumber, street.cleaningDay)) {
+                        noti.push({
+                            id: street.idNumber,
+                            text: tr + " " + street.streetName,
+                            data: street.streetName,
+                            vibrate: true,
+                            trigger: street.cleaningDay
+                        });
+                    }
                 }
                 // street.forEach(s => {
                 //   if (!this.checkIfNotify(s.idNumber, s.cleaningDay)) {
@@ -3719,6 +3723,11 @@ var NotificationService = /** @class */ (function () {
                 _this.buildActived();
             });
         });
+    };
+    NotificationService.prototype.updateNotification = function (streets) {
+        var notification = this.getNotStreets();
+        //check if notification are more recent
+        console.log(JSON.stringify(notification));
     };
     /**
      * Disable notifications and delete streets from `LocalStorage`
@@ -3986,8 +3995,8 @@ var ConfigService = /** @class */ (function () {
         this.init();
     }
     ConfigService.prototype.getLanguage = function () {
-        if (localStorage.getItem('comune-setting')) {
-            var setting = JSON.parse(localStorage.getItem('comune-setting'));
+        if (localStorage.getItem('app-module')) {
+            var setting = JSON.parse(localStorage.getItem('app-module'));
             var language = setting.language;
             if (language)
                 return language;
@@ -4397,11 +4406,13 @@ var SettingService = /** @class */ (function () {
         if (this.setting) {
             return this.setting;
         }
-        this.setting = JSON.parse(localStorage.getItem('comune-setting'));
+        this.setting = JSON.parse(localStorage.getItem('app-module'));
     };
     SettingService.prototype.setUserSetting = function (setting) {
-        localStorage.setItem('comune-setting', JSON.stringify(setting));
-        this.setting = JSON.parse(localStorage.getItem('comune-setting'));
+        localStorage.setItem('app-module', JSON.stringify(setting));
+        this.setting = JSON.parse(localStorage.getItem('app-module'));
+        var language = setting['language'];
+        window[this.config.getAppModuleName()]['language'] = language;
     };
     SettingService.prototype.getUserLanguage = function () {
         return this.setting['language'];
@@ -4414,7 +4425,7 @@ var SettingService = /** @class */ (function () {
         return new Promise(function (resolve, reject) {
             var language;
             var baseSetting;
-            if (!localStorage.getItem('comune-setting')) {
+            if (!localStorage.getItem('app-module')) {
                 baseSetting = {};
                 console.log(navigator);
                 language = navigator.language;
@@ -4432,7 +4443,7 @@ var SettingService = /** @class */ (function () {
                 _this.setUserSetting(_this.setting);
             }
             else {
-                baseSetting = JSON.parse(localStorage.getItem('comune-setting'));
+                baseSetting = JSON.parse(localStorage.getItem('app-module'));
                 _this.setting = baseSetting;
                 language = baseSetting['language'];
             }

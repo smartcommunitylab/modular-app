@@ -26,11 +26,14 @@ export class SettingService {
     if (this.setting) {
       return this.setting;
     }
-    this.setting = JSON.parse(localStorage.getItem('comune-setting'));
+    this.setting = JSON.parse(localStorage.getItem('app-module'));
   }
   setUserSetting(setting) {
-    localStorage.setItem('comune-setting', JSON.stringify(setting));
-    this.setting = JSON.parse(localStorage.getItem('comune-setting'));
+    localStorage.setItem('app-module', JSON.stringify(setting));
+    this.setting = JSON.parse(localStorage.getItem('app-module'));
+    var  language = setting['language'];
+    window[this.config.getAppModuleName()]['language'] = language;
+
   }
   getUserLanguage() {
     return this.setting['language'];
@@ -43,7 +46,7 @@ export class SettingService {
     return new Promise<void>((resolve, reject) => {
       let language;
       let baseSetting;
-      if (!localStorage.getItem('comune-setting')) {
+      if (!localStorage.getItem('app-module')) {
 
         baseSetting = {};
         console.log(navigator);
@@ -61,7 +64,7 @@ export class SettingService {
         this.setting = baseSetting;
         this.setUserSetting(this.setting);
       } else {
-        baseSetting = JSON.parse(localStorage.getItem('comune-setting'));
+        baseSetting = JSON.parse(localStorage.getItem('app-module'));
         this.setting = baseSetting;
         language = baseSetting['language'];
       }

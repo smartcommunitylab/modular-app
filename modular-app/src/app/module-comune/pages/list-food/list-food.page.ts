@@ -183,11 +183,11 @@ export class ListFoodPage implements OnInit {
         else poiElement.title = x.title["it"];
 
       }
-      // if (x.subtitle) {
-      //   if (x.subtitle[this.language])
-      //   poiElement.description = x.subtitle[this.language];
-      //   else poiElement.description = x.subtitle["it"];
-      // }
+      if (x.cat) {
+        if (x.cat[this.language])
+        poiElement.cat = x.cat[this.language];
+        else poiElement.cat = x.cat["it"];
+      }
       if (x.description) {
         if (x.description[this.language])
           poiElement.description += '<br/>' + x.description[this.language];
@@ -318,12 +318,13 @@ export class ListFoodPage implements OnInit {
           this.buildShowPois()
 
         }
+        this.orderArray('near', this);
       });
     return await modal.present();
     //this.buildAlert('filter');
   }
   buildFilter(): any {
-    var array = this.fullPois.map(item => item.classification);
+    var array = this.fullPois.map(item => item.cat).flat();
     var newArray = array.filter((value, index, self) => {
       return (self.indexOf(value) === index && value)
 

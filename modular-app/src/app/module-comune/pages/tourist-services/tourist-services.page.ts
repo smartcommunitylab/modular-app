@@ -205,6 +205,11 @@ export class TouristServicesPage implements OnInit {
         // poiElement.cat = [];
         // poiElement.cat.push(x.classification[this.language]);
       }
+      if (x.cat) {
+        if (x.cat[this.language])
+        poiElement.cat = x.cat[this.language];
+        else poiElement.cat = x.cat["it"];
+      }
       if (x.url) {
         poiElement.url = x.url;
       }
@@ -278,7 +283,7 @@ export class TouristServicesPage implements OnInit {
 
 
   buildFilter(): any {
-    var array = this.fullPois.map(item => item.classification);
+    var array = this.fullPois.map(item => item.cat).flat();
     var newArray = array.filter((value, index, self) => {
       return (self.indexOf(value) === index  && value)
 

@@ -61,7 +61,7 @@ export class ListPoiPage implements OnInit {
   }
 
   buildFilter(): any {
-    var array = this.fullPois.map(item => item.classification);
+    var array = this.fullPois.map(item => item.cat).flat();
     var newArray1 = array.flat();
     var newArray = newArray1.filter((value, index, self) => {
       return (self.indexOf(value) === index && value)
@@ -177,6 +177,11 @@ export class ListPoiPage implements OnInit {
         if (x.classification[this.language])
           poiElement.classification = x.classification[this.language];
         else poiElement.classification = x.classification["it"];
+      }
+      if (x.cat) {
+        if (x.cat[this.language])
+          poiElement.cat = x.cat[this.language];
+        else poiElement.cat = x.cat["it"];
       }
       if (x.subtitle) {
         if (x.subtitle[this.language])

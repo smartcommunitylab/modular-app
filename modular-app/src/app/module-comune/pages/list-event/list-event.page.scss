@@ -2,6 +2,9 @@
     padding-left:2%;
     padding-right: 2%;
 }
+ion-title {
+    font-weight: bold;
+}
 ion-searchbar {
     position: fixed;
     // width: calc(100% - 60px);
@@ -60,6 +63,7 @@ ion-list{
                 padding: 4px;
             color: white;
             background-color:   #11b3ef;
+            font-weight: bold;
             }
         }
             
@@ -67,6 +71,11 @@ ion-list{
         ion-chip {
             flex: 0 0 auto;
             background-color: white;
+            font-size: 20px;
+            ion-label {
+                font-size: 16px;
+                padding: 0px 8px;
+            }
         }
     }
 }
@@ -85,5 +94,12 @@ ion-list{
     font-size: 22px;
     div{
         width: 100%;
+    }
+}
+ion-toolbar{
+    ion-buttons{
+        ion-button{
+            font-size: 20px;
+        }
     }
 }

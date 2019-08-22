@@ -265,6 +265,11 @@ export class ListFarmaciePage implements OnInit {
           poiElement.classification = x.classification["it"];
         }
       }
+      if (x.cat) {
+        if (x.cat[this.language])
+        poiElement.cat = x.cat[this.language];
+        else poiElement.cat = x.cat["it"];
+      }
       if (x.url) {
         poiElement.url = x.url;
       }
@@ -337,7 +342,7 @@ export class ListFarmaciePage implements OnInit {
 
 
   buildFilter(): any {
-    var array = this.fullPois.map(item => item.classification);
+    var array = this.fullPois.map(item => item.cat).flat();
     var newArray = array.filter((value, index, self) => {
       return self.indexOf(value) === index 
 

@@ -109,6 +109,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var src_app_services_config_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/services/config.service */ "./src/app/services/config.service.ts");
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _services_util_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../services/util.service */ "./src/app/module-pulstrade/services/util.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -125,14 +126,16 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var NotificationPage = /** @class */ (function () {
-    function NotificationPage(notSrv, translate, config, mapSrv, platform, router) {
+    function NotificationPage(notSrv, translate, config, mapSrv, platform, router, utils) {
         this.notSrv = notSrv;
         this.translate = translate;
         this.config = config;
         this.mapSrv = mapSrv;
         this.platform = platform;
         this.router = router;
+        this.utils = utils;
         this.showStreets = []; /** Streets object for page view */
         this.language = window[this.config.getAppModuleName()]['language'];
         this.translate.use(this.language);
@@ -140,7 +143,9 @@ var NotificationPage = /** @class */ (function () {
     NotificationPage.prototype.ngOnInit = function () {
     };
     NotificationPage.prototype.ionViewDidEnter = function () {
+        // this.utils.presentLoading();
         this.notif = this.notSrv.getNotStreets();
+        // this.utils.hideLoading();
         this.notifMap = this.convertToMapId(this.notSrv.getNotStreets());
         this.streets = this.mapSrv.getData();
         this.buildShowNot();
@@ -234,7 +239,8 @@ var NotificationPage = /** @class */ (function () {
             src_app_services_config_service__WEBPACK_IMPORTED_MODULE_4__["ConfigService"],
             _services_map_service__WEBPACK_IMPORTED_MODULE_1__["MapService"],
             _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["Platform"],
-            _angular_router__WEBPACK_IMPORTED_MODULE_6__["Router"]])
+            _angular_router__WEBPACK_IMPORTED_MODULE_6__["Router"],
+            _services_util_service__WEBPACK_IMPORTED_MODULE_7__["UtilService"]])
     ], NotificationPage);
     return NotificationPage;
 }());

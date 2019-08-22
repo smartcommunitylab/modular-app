@@ -46,7 +46,7 @@
       </div>
     </div>
     <ion-list no-lines id="poi-list">
-      <div *ngFor="let c of categories">
+      <div class="list-container" *ngFor="let c of categories">
         <ion-item class="label-type ion-text-center" sticky *ngIf="oneElement(c) && !presentFilter">
             <div>{{c}}</div>
         </ion-item>

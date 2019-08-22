@@ -233,6 +233,11 @@ export class ListRHPage implements OnInit {
           poiElement.subtitle = x.classification[this.language];
         else poiElement.subtitle = x.classification["it"];
       }
+      if (x.cat) {
+        if (x.cat[this.language])
+        poiElement.cat = x.cat[this.language];
+        else poiElement.cat = x.cat["it"];
+      }
       if (x.classification) {
         if (x.classification[this.language])
           poiElement.classification = x.classification[this.language];
@@ -321,6 +326,7 @@ export class ListRHPage implements OnInit {
           this.buildShowPois()
 
         }
+        this.orderArray('near', this);
       });
     return await modal.present();
     //this.buildAlert('filter');
@@ -328,7 +334,7 @@ export class ListRHPage implements OnInit {
 
 
   buildFilter(): any {
-    var array = this.fullPois.map(item => item.classification);
+    var array = this.fullPois.map(item => item.cat).flat();
     var newArray = array.filter((value, index, self) => {
       return (self.indexOf(value) === index && value)
 

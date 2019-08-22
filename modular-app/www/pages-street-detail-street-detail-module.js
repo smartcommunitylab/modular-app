@@ -78,7 +78,7 @@ var StreetDetailPageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header >\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-back-button class=\"interaction\"></ion-back-button>\n    </ion-buttons>\n    <ion-buttons slot=\"end\">\n        <div (click)=\"toggleNotification()\">\n            <ion-icon class=\"interaction icon-bar\" name=\"notifications\" *ngIf=\"isEnabled(); else disabled\"></ion-icon>\n            <ng-template #disabled>\n              <ion-icon class=\"interaction icon-bar\" name=\"notifications-outline\"></ion-icon>\n            </ng-template>\n          </div>\n              </ion-buttons>\n\n    <ion-title>\n      {{streetName}}\n    </ion-title>\n  </ion-toolbar>\n</ion-header>\n\n\n<ion-content padding>\n  <ion-list  *ngIf=\"streetDetails\">\n    <div class=\"clean-container\" *ngFor=\"let s of streetDetails\">\n      <div [id]=\"s.id\">\n        <div>\n          <div class=\"left\">\n            <b>{{s.cleaningDayStr}}</b>\n            <!-- <h1>{{s.streetName}}</h1> -->\n            <p>{{'CLOSED' | translate}} <b>{{s.stopStartingTimeStr}}</b> - <b>{{s.stopEndingTimeStr}}</b></p>\n            <div>{{s.notes}}</div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </ion-list>\n</ion-content>"
+module.exports = "<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-back-button class=\"interaction\"></ion-back-button>\n    </ion-buttons>\n    <ion-buttons slot=\"end\">\n      <div (click)=\"toggleNotification()\">\n        <ion-icon class=\"interaction icon-bar\" name=\"notifications\" *ngIf=\"isEnabled(); else disabled\"></ion-icon>\n        <ng-template #disabled>\n          <ion-icon class=\"interaction icon-bar\" name=\"notifications-outline\"></ion-icon>\n        </ng-template>\n      </div>\n    </ion-buttons>\n\n    <ion-title>\n      {{streetName}}\n    </ion-title>\n  </ion-toolbar>\n</ion-header>\n\n\n<ion-content padding>\n  <ion-list *ngIf=\"streetDetails\">\n    <div class=\"clean-container\" *ngFor=\"let s of streetDetails\">\n      <div [id]=\"s.id\">\n        <ion-grid class=\"note\">\n        <ion-row>\n          <ion-col size=\"2\">\n            <ion-icon name=\"close-circle\"></ion-icon>\n          </ion-col>\n          <ion-col  size=\"10\">\n            <div >\n              <div class=\"day\">{{s.cleaningDayStr}}</div>\n              <div class=\"time\">{{'CLOSED' | translate}} {{s.stopStartingTimeStr}}- {{s.stopEndingTimeStr}}</div>\n              <div class=\"notes\">{{s.notes}}</div>\n            </div>\n          </ion-col>\n        </ion-row>\n      </ion-grid>\n      </div>\n    </div>\n  </ion-list>\n</ion-content>"
 
 /***/ }),
 
@@ -89,7 +89,7 @@ module.exports = "<ion-header >\n  <ion-toolbar>\n    <ion-buttons slot=\"start\
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".interaction {\n  color: #11B3EF !important; }\n\n.clean-container {\n  background-color: #e3e3e3; }\n\n.icon-bar {\n  font-size: 30px; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL2NoaW44L0RvY3VtZW50cy93b3JrL21vZHVsYXJBcHAvbW9kdWxhci1hcHAvc3JjL2FwcC9tb2R1bGUtcHVsc3RyYWRlL3BhZ2VzL3N0cmVldC1kZXRhaWwvc3RyZWV0LWRldGFpbC5wYWdlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDSSwwQkFBd0IsRUFDM0I7O0FBQ0Q7RUFDSSwwQkFBeUIsRUFDNUI7O0FBQ0Q7RUFDSSxnQkFBZSxFQUNsQiIsImZpbGUiOiJzcmMvYXBwL21vZHVsZS1wdWxzdHJhZGUvcGFnZXMvc3RyZWV0LWRldGFpbC9zdHJlZXQtZGV0YWlsLnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi5pbnRlcmFjdGlvbiB7XG4gICAgY29sb3I6ICMxMUIzRUYhaW1wb3J0YW50O1xufVxuLmNsZWFuLWNvbnRhaW5lcntcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiAjZTNlM2UzO1xufVxuLmljb24tYmFyIHtcbiAgICBmb250LXNpemU6IDMwcHg7XG59Il19 */"
+module.exports = ".interaction {\n  color: #11B3EF !important; }\n\n.clean-container {\n  background-color: #e3e3e3; }\n\n.icon-bar {\n  font-size: 30px; }\n\n.note {\n  padding: 8px;\n  margin: 4px;\n  text-align: center;\n  color: #707070;\n  font-weight: bold; }\n\n.note ion-icon {\n    font-size: 35px;\n    height: 100%;\n    display: block;\n    vertical-align: middle;\n    color: #ff6c00; }\n\n.day {\n  margin: 4px;\n  font-size: 22px; }\n\n.time {\n  margin: 4px;\n  font-size: 17px; }\n\n.note {\n  margin: 4px;\n  font-size: 14px; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL2NoaW44L0RvY3VtZW50cy93b3JrL21vZHVsYXJBcHAvbW9kdWxhci1hcHAvc3JjL2FwcC9tb2R1bGUtcHVsc3RyYWRlL3BhZ2VzL3N0cmVldC1kZXRhaWwvc3RyZWV0LWRldGFpbC5wYWdlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDSSwwQkFBeUIsRUFDNUI7O0FBRUQ7RUFDSSwwQkFBeUIsRUFDNUI7O0FBRUQ7RUFDSSxnQkFBZSxFQUNsQjs7QUFFRDtFQUNJLGFBQVk7RUFDWixZQUFXO0VBQ1gsbUJBQWtCO0VBQ2xCLGVBQWM7RUFDZCxrQkFBaUIsRUFTcEI7O0FBZEQ7SUFRUSxnQkFBZTtJQUNmLGFBQVk7SUFDWixlQUFjO0lBQ2QsdUJBQXNCO0lBQ3RCLGVBQWMsRUFDakI7O0FBR0w7RUFDSSxZQUFXO0VBQ1gsZ0JBQWUsRUFDbEI7O0FBRUQ7RUFDSSxZQUFXO0VBQ1gsZ0JBQWUsRUFDbEI7O0FBRUQ7RUFDSSxZQUFXO0VBQ1gsZ0JBQWUsRUFDbEIiLCJmaWxlIjoic3JjL2FwcC9tb2R1bGUtcHVsc3RyYWRlL3BhZ2VzL3N0cmVldC1kZXRhaWwvc3RyZWV0LWRldGFpbC5wYWdlLnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuaW50ZXJhY3Rpb24ge1xuICAgIGNvbG9yOiAjMTFCM0VGICFpbXBvcnRhbnQ7XG59XG5cbi5jbGVhbi1jb250YWluZXIge1xuICAgIGJhY2tncm91bmQtY29sb3I6ICNlM2UzZTM7XG59XG5cbi5pY29uLWJhciB7XG4gICAgZm9udC1zaXplOiAzMHB4O1xufVxuXG4ubm90ZSB7XG4gICAgcGFkZGluZzogOHB4O1xuICAgIG1hcmdpbjogNHB4O1xuICAgIHRleHQtYWxpZ246IGNlbnRlcjtcbiAgICBjb2xvcjogIzcwNzA3MDtcbiAgICBmb250LXdlaWdodDogYm9sZDtcblxuICAgIGlvbi1pY29uIHtcbiAgICAgICAgZm9udC1zaXplOiAzNXB4O1xuICAgICAgICBoZWlnaHQ6IDEwMCU7XG4gICAgICAgIGRpc3BsYXk6IGJsb2NrO1xuICAgICAgICB2ZXJ0aWNhbC1hbGlnbjogbWlkZGxlO1xuICAgICAgICBjb2xvcjogI2ZmNmMwMDtcbiAgICB9XG59XG5cbi5kYXkge1xuICAgIG1hcmdpbjogNHB4O1xuICAgIGZvbnQtc2l6ZTogMjJweDtcbn1cblxuLnRpbWUge1xuICAgIG1hcmdpbjogNHB4O1xuICAgIGZvbnQtc2l6ZTogMTdweDtcbn1cblxuLm5vdGUge1xuICAgIG1hcmdpbjogNHB4O1xuICAgIGZvbnQtc2l6ZTogMTRweDtcbn0iXX0= */"
 
 /***/ }),
 
@@ -211,12 +211,17 @@ var StreetDetailPage = /** @class */ (function () {
         return unique;
     };
     StreetDetailPage.prototype.toggleNotification = function () {
+        var _this = this;
         var street = this.notif[this.idNumber];
         if (this.notif[this.idNumber] != undefined) {
-            this.notSrv.disableNotification(street);
+            this.streetDetails.forEach(function (element) {
+                _this.notSrv.disableNotification(element);
+            });
         }
         else {
-            this.notSrv.setNotification(street);
+            this.streetDetails.forEach(function (element) {
+                _this.notSrv.setNotification(element);
+            });
         }
         this.notif = this.convertToMapId(this.notSrv.getNotStreets());
     };

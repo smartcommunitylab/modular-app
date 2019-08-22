@@ -28,34 +28,9 @@
     </ion-grid>
     <ion-fab vertical="bottom" horizontal="end" slot="fixed">
       <ion-fab-button (click)="editHome()">
-        <ion-icon name="create"></ion-icon>
+        <ion-icon name="cog"></ion-icon>
       </ion-fab-button>
     </ion-fab>
   </div>
-  <!-- <ng-template #edit>
-    <ion-grid id="category-buttons">
-      <ion-row dragula="entries" [(dragulaModel)]="categories" lines="none">
-        <ion-col size="6" *ngFor="let category of categories" >
-          <div class="home-button">
-            <div>
-              <div>{{category.name[language]}}</div>
-            </div>
-          </div>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-    <div class="wrapper">
 
-      <div class="scrolling-wrapper-flexbox loop"  dragula="entries" [(dragulaModel)]="allCategories">
-        <div class="card" *ngFor="let category of allCategories" >
-          <h2>{{category.name[language]}}</h2>
-        </div>
-      </div>
-    </div>
-      <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-        <ion-fab-button (click)="saveHome()">
-          <ion-icon name="save"></ion-icon>
-        </ion-fab-button>
-      </ion-fab>
-  </ng-template> -->
 </ion-content>

@@ -7,7 +7,7 @@
     "MAP": "Karte",
     "alt_image_string":"Image not present",
     "address_contacts":"Mappa",
-    "phone_contacts":"Telefono",
+    "phone_contacts":"Chiama",
     "url_contacts":"Sito",
     "share_contacts":"Condividi",
     "farmacie_label":"Farmacie",
@@ -18,5 +18,6 @@
     "cancel_button":"Annulla",
     "ok_button":"Ok",
     "init_db":"Inizializzazione dati in corso...",
-    "no_distance_label":"Distanza non specificata"
+    "no_distance_label":"Distanza non specificata",
+    "title_list_poi":"Punti di interesse"
 }

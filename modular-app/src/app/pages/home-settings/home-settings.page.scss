@@ -19,7 +19,7 @@ ion-content {
     margin: 8px 0px;
 }
 
-.scrolling-wrapper-flexbox {
+.scrolling-wrapper-flexbox-cards {
     // background-color: rgba(255, 255, 255, .5);
     left: 0px;
     position: fixed;
@@ -33,7 +33,7 @@ ion-content {
 
     .card {
         margin: 0px 16px;
-        background-color: #efefef!important;
+        background-color: #efefef !important;
         flex: 0 0 auto;
         color: #707070;
         background: white;
@@ -43,16 +43,17 @@ ion-content {
         font-size: 16px;
         font-weight: bold;
         text-align: center;
-        -webkit-box-shadow:  0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-        -moz-box-shadow:  0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-        box-shadow:  0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        -moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
         margin-bottom: 8px;
 
         .home-container {
             display: table;
             width: 100%;
             height: 100%;
-                    .label-button {
+
+            .label-button {
                 font-size: 22px;
                 text-align: center;
                 display: inline-block;
@@ -68,6 +69,7 @@ ion-content {
                 display: table-cell;
                 vertical-align: middle;
             }
+
             .add {
                 position: relative;
                 border-radius: 0px 12px 12px 0px;
@@ -100,6 +102,7 @@ ion-content {
     overflow-y: scroll;
     border: 3px solid $app-interaction-color;
     background-color: #e3e3e3;
+
     #category-buttons {
         height: 100%;
         // height: calc(100% - 187px);
@@ -277,18 +280,10 @@ ion-content {
 }
 
 .interaction {
-    color: #11b3ef!important;
+    color: #11b3ef !important;
 }
 
-ion-chip {
-    width: 47%;
-    font-weight: bold;
 
-    ion-label {
-        width: 100%;
-        text-align: center;
-    }
-}
 
 ion-fab-button {
     --background: #11B3EF;
@@ -299,13 +294,13 @@ ion-fab-button {
     background-color: $app-interaction-color;
 
     ion-icon {
-        color: white;
-        background-color: $app-interaction-color;
+        color: white !important;
+        background-color: $app-interaction-color !important;
     }
 
     ion-label {
-        color: white;
-        background-color: $app-interaction-color;
+        color: white !important;
+        background-color: $app-interaction-color !important;
     }
 }
 
@@ -325,4 +320,30 @@ div[scrollx=true] {
 
 div[scrolly=true] {
     overflow-y: auto;
+}
+
+.wrapper {
+    .scrolling-wrapper-flexbox {
+        position: unset;
+        -webkit-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+        -moz-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+        -ms-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+        -o-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+        background-color: white;
+        width: 100%;
+        display: flex;
+        overflow-x: auto;
+        z-index: 999;
+        // position: fixed;
+        ion-chip {
+            width: 38%;
+            font-weight: bold;
+            flex: 0 0 auto;
+            ion-label {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    }
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController, AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { ConfigService } from '../../services/config.service';
 import { UtilsService } from '../../services/utils.service';
 // import { DragulaService } from 'ng2-dragula';
@@ -31,59 +31,39 @@ export class HomeCommonPage implements OnInit {
 
     private utils: UtilsService) {
     this.language = window[this.config.getAppModuleName()]['language'];
-    translate.use(this.language); // SET DEFAULT LANGUAGE
-    // this.subs.add(dragulaService.dropModel('entries')
-    //   .subscribe(({ el, target, source, sourceModel, targetModel, item }) => {
-    //     console.log('dropModel:');
-    //     console.log(el);
-    //     console.log(source);
-    //     console.log(target);
-    //     console.log(sourceModel);
-    //     console.log(targetModel);
-    //     console.log(item);
-    //   })
-    // );
-    // this.subs.add(dragulaService.removeModel('entries')
-    //   .subscribe(({ el, source, item, sourceModel }) => {
-    //     console.log('removeModel:');
-    //     console.log(el);
-    //     console.log(source);
-    //     console.log(sourceModel);
-    //     console.log(item);
-    //   })
-    // );
+    translate.use(this.language); 
   }
   ngOnInit() {
   }
+  ionViewDidLoad(){
 
-  ionViewDidEnter() {
-    this.elementsGallery = [];
-    this.categories = this.config.getModuleEntries().map(x => this.convertCategories(x));
-    // this.config.getAllModuleEntries().then(res => {
-    //   this.allCategories = res.map(x => this.convertCategories(x));
-    //   this.allCategories = this.allCategories.filter(( el ) =>{
-    //     //solo gli elementi non presenti nell'array categories.
-    //     var present = this.categories.filter(element => {
-    //       console.log(element.id );
-    //       return element.id === el.id});
-    //     if (present.length==0)
-    //       return true
-    //       return false;
-    //   }) 
-    // })
-    console.log(this.categories);
-    this.elementsGallery = this.config.getCarousel().map(x => this.convertGallery(x));
-    window.addEventListener('categorySelected', category => {
-      console.log(category);
-    });
-    window.addEventListener('elementSelected', item => {
-      console.log(item);
-      this.goToItem(item['detail']);
+    this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
+
+
+      this.init()
+
+
     });
   }
-  // ngOnDestroy() {
-  //   this.subs.unsubscribe();
-  // }
+  ionViewDidEnter() {
+    this.init()
+
+  }
+init() {
+  this.language = window[this.config.getAppModuleName()]['language'];
+  this.translate.use(this.language); 
+  this.elementsGallery = [];
+  this.categories = this.config.getModuleEntries().map(x => this.convertCategories(x));
+  console.log(this.categories);
+  this.elementsGallery = this.config.getCarousel().map(x => this.convertGallery(x));
+  window.addEventListener('categorySelected', category => {
+    console.log(category);
+  });
+  window.addEventListener('elementSelected', item => {
+    console.log(item);
+    this.goToItem(item['detail']);
+  });
+}
   convertGallery(x) {
     const galleryElement: any = {};
 

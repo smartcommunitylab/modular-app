@@ -34,7 +34,7 @@ export class WcDetails {
   /** Informazioni a fine pagina */
   @Prop() info: string;
   /** Colore titoli */
-  @Prop() headingColor: string = "red";
+  @Prop() headingColor: string = "#707070";
   /** Colore tag e puslanti */
   @Prop() secondColor: string = "red";
   /** Oggetto JSON per contatti e info aggiuntive */
@@ -63,6 +63,7 @@ export class WcDetails {
   private tmptags = [];
   private tmpContacts = [];
   private strings: any;
+  private url:any;
   async componentWillLoad() {
     if (this.stringsinput) {
       this.strings = JSON.parse(this.stringsinput);
@@ -122,7 +123,7 @@ export class WcDetails {
       tmp.phone = arr.phone;
     }
     if (arr.url) {
-      tmp.url = arr.url;
+      this.url = arr.url;
     }
     tmp.share = this.contactsJSON;
 
@@ -161,7 +162,7 @@ export class WcDetails {
           this.expanse
             ? <div>
               {this.img
-                ? <div class="image">
+                ? <div class="expanse-image image">
                   <img src={this.img}  alt={this.altImage}></img>
                 </div>
                 : ""
@@ -193,7 +194,12 @@ export class WcDetails {
           <div class="contacts">
             {this.tmpContacts}
           </div>
-          <hr />
+          {this.url
+          ?<div class="url"  onClick={(event: UIEvent) => this.contactClickHandler("url", this.url,event)}>
+          {(this.url) ? this.url : ''}
+          </div>
+          :""
+          }
           <div class="datetime">
             {(this.contactsJSON) ? ((this.contactsJSON.date) ? this.contactsJSON.date : '') : ''} {(this.contactsJSON) ? ((this.contactsJSON.time) ? this.contactsJSON.time : '') : ''}
           </div>
@@ -206,7 +212,7 @@ export class WcDetails {
           {this.showTags()}
 
           {this.expanse
-            ? <div><div class="text" innerHTML={this.text}>
+            ? <div  class="description"><div class="text" innerHTML={this.text}>
             </div>
               <div class="title-2" style={{ color: this.headingColor }}>
                 {(this.info && this.info != '') ? "Informazioni" : ""}

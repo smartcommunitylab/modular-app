@@ -8,3 +8,13 @@ ion-searchbar {
 .interaction {
     color: #11b3ef!important;
 }
+ion-toolbar{
+    ion-buttons{
+        ion-button{
+            font-size: 20px;
+        }
+    }
+}
+ion-title{
+    font-weight: bold;
+}

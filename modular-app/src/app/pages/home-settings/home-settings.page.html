@@ -7,51 +7,57 @@
     <ion-title class="title">{{'title_home_setting'|translate}}</ion-title>
   </ion-toolbar>
 </ion-header>
-
+<div class="wrapper">
+    <div class="scrolling-wrapper-flexbox loop">
+      <ion-chip outline=true (click)="select('home')" [ngClass]="{'chip-selected': isSelected('home')}">
+        <ion-label class="interaction">{{'label_personalizza'|translate}}</ion-label>
+      </ion-chip>
+      <ion-chip outline=true (click)="select('settings')" [ngClass]="{'chip-selected': isSelected('settings')}">
+        <ion-label class="interaction">{{'label_other_settinga'|translate}}</ion-label>
+      </ion-chip>
+      <ion-chip outline=true (click)="select('about')" [ngClass]="{'chip-selected': isSelected('about')}">
+        <ion-label class="interaction">{{'label_about'|translate}}</ion-label>
+      </ion-chip>
+    </div>
+  </div>
 <ion-content padding forceOverscroll="false">
-  <ion-chip outline=true (click)="select('settings')" [ngClass]="{'chip-selected': isSelected('settings')}">
-    <ion-icon name="cog" class="interaction"></ion-icon>
-    <ion-label class="interaction">{{'label_other_settinga'|translate}}</ion-label>
-  </ion-chip>
-  <ion-chip outline=true (click)="select('about')" [ngClass]="{'chip-selected': isSelected('about')}">
-    <ion-label class="interaction">{{'label_about'|translate}}</ion-label>
-  </ion-chip>
-  <div class="container-button" *ngIf="!selection" >
+
+  <div class="container-button" *ngIf="isSelected('home')">
     <div scrollY="true">
-    <ion-list  id="category-buttons">
-    <ion-grid>
-      <ion-row>
-        <ion-col size="6" *ngFor="let category of categories">
-          <div class="home-button">
-            <div class="home-container">
-              <div class="label-button">{{category.name[language]}}</div>
-              <div class="close" (click)="removeElement(category)">
-                  <ion-icon name="close"></ion-icon>
+      <ion-list id="category-buttons">
+        <ion-grid>
+          <ion-row>
+            <ion-col size="6" *ngFor="let category of categories">
+              <div class="home-button">
+                <div class="home-container">
+                  <div class="label-button">{{category.name[language]}}</div>
+                  <div class="close" (click)="removeElement(category)">
+                    <ion-icon name="close"></ion-icon>
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </ion-list>
-</div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-list>
+    </div>
     <div class="wrapper">
-      <div class="scrolling-wrapper-flexbox loop">
+      <div class="scrolling-wrapper-flexbox-cards loop">
         <div class="card all-card" *ngFor="let category of allCategories">
-            <div class="home-container">
-                <div class="label-button">{{category.name[language]}}</div>
+          <div class="home-container">
+            <div class="label-button">{{category.name[language]}}</div>
 
             <div class="add" (click)="addElement(category)">
-                <ion-icon name="add"></ion-icon>
-              </div>
-              </div>
+              <ion-icon name="add"></ion-icon>
+            </div>
+          </div>
           <!-- <h2>{{category.name[language]}}</h2> -->
         </div>
       </div>
     </div>
 
   </div>
-  <div  scrollY="true"  *ngIf="isSelected('settings')">
+  <div scrollY="true" *ngIf="isSelected('settings')">
     <ion-list>
       <ion-radio-group (ionChange)="onLanguageChanged($event)" [(ngModel)]="selectedLanguage">
         <ion-list-header>

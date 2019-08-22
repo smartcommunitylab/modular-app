@@ -14,7 +14,7 @@
 | `distance`     | `distance`      |                                                 | `string`  | `undefined` |
 | `expandable`   | `expandable`    |                                                 | `boolean` | `false`     |
 | `expanse`      | `expanse`       |                                                 | `boolean` | `false`     |
-| `headingColor` | `heading-color` | Colore titoli                                   | `string`  | `"red"`     |
+| `headingColor` | `heading-color` | Colore titoli                                   | `string`  | `"#707070"` |
 | `id`           | `id`            | Oggeto JSON contenente i dettagli dei contatti. | `string`  | `undefined` |
 | `img`          | `img`           | Immagine del percorso                           | `string`  | `undefined` |
 | `info`         | `info`          | Informazioni a fine pagina                      | `string`  | `undefined` |

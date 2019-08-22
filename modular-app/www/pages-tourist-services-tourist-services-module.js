@@ -343,6 +343,12 @@ var TouristServicesPage = /** @class */ (function () {
                 // poiElement.cat = [];
                 // poiElement.cat.push(x.classification[this.language]);
             }
+            if (x.cat) {
+                if (x.cat[this.language])
+                    poiElement.cat = x.cat[this.language];
+                else
+                    poiElement.cat = x.cat["it"];
+            }
             if (x.url) {
                 poiElement.url = x.url;
             }
@@ -412,7 +418,7 @@ var TouristServicesPage = /** @class */ (function () {
         }, this.doneTypingInterval);
     };
     TouristServicesPage.prototype.buildFilter = function () {
-        var array = this.fullPois.map(function (item) { return item.classification; });
+        var array = this.fullPois.map(function (item) { return item.cat; }).flat();
         var newArray = array.filter(function (value, index, self) {
             return (self.indexOf(value) === index && value);
         });
