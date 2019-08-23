@@ -33,6 +33,7 @@ export class ListEventPage implements OnInit {
   actualVisualized: string;
   presentFilter = false;
   emptyList: boolean = false;
+  mainEventLabel: any;
   constructor(
     private globalUtils: GlobalUtils,
     private loading: LoadingController,
@@ -95,6 +96,11 @@ export class ListEventPage implements OnInit {
 
   }
   ionViewDidEnter() {
+    this.translate.get('main_event_label').subscribe(
+      value => {
+        this.mainEventLabel = value;
+      }
+    );
     if (this.category && this.category.query) {
       this.translate.get('init_db').subscribe(value => {
         this.dbService.synch(value).then(() => {
@@ -220,8 +226,8 @@ export class ListEventPage implements OnInit {
   }
   subCategories(array: Array<any>) {
     array.forEach(element => {
-      if (!this.fullCategories.includes(element.category)) {
-        this.fullCategories.push(element.category);
+      if (element.cat && !this.fullCategories.includes(element.cat[0])) {
+        this.fullCategories.push(element.cat[0]);
       }
     });
     this.categories = this.fullCategories;
@@ -232,8 +238,8 @@ export class ListEventPage implements OnInit {
   buildShowPois(filters?) {
     this.showPois = [];
     this.fullPois.forEach(p => {
-      if (!this.showPois[p.category]) {
-        this.showPois[p.category] = [];
+      if (!this.showPois[p.cat[0]]) {
+        this.showPois[p.cat[0]] = [];
       }
       if (filters ? filters.filter(item => {
         return (item.isChecked && p.cat.filter(cat => cat == item.value).length > 0)
@@ -241,7 +247,7 @@ export class ListEventPage implements OnInit {
         // return (item.isChecked && (p.cat.filter(cat => cat == item.value).length > 0 || p.parentObjectName == item.value))
         // else (item.isChecked &&   p.parentObjectName == item.value)
       }).length > 0 : true) {
-        this.showPois[p.category].push(p);
+        this.showPois[p.cat[0]].push(p);
       }
     });
     //orderArray
@@ -318,7 +324,10 @@ export class ListEventPage implements OnInit {
       //TO DO
       if (x.category) {
         if (x.category == 'event')
-          poiElement.category = 'Eventi Principali';
+          {
+            poiElement.category = this.mainEventLabel;
+            poiElement.cat=[this.mainEventLabel];
+          }
         else
           poiElement.category = x.category;
       }
@@ -360,7 +369,7 @@ export class ListEventPage implements OnInit {
       this.presentFilter = false;
       this.categories.forEach(c => {
         this.showPois[c] = this.fullPois.filter(function (el) {
-          return (el.category == c);
+          return (el.cat[0] == c);
         });
       });
     }
@@ -376,7 +385,7 @@ export class ListEventPage implements OnInit {
       _this.categories.forEach(c => {
         this.showPois[c] = this.fullPois.filter(function (el) {
           if (el.title)
-            return (el.title.toLowerCase().indexOf(value.toLowerCase()) > -1 && el.category == c);
+            return (el.title.toLowerCase().indexOf(value.toLowerCase()) > -1 && el.cat[0] == c);
           return false
         });
       });

@@ -53,7 +53,7 @@
       <div class="content">
         
         <div *ngFor="let poi of showPois[c]; let i = index">
-          <div class="{{poi.category}}"   inViewport
+          <div class="{{poi.cat[0]}}"   inViewport
           [inViewportOptions]="{ threshold: [0] }" (inViewportAction)="onIntersection($event)">
             <wc-details [id]="poi.id" [img]="poi.image" [stringsinput]="stringsContact" [title]="poi.title"
               [altImage]="altImage" [stringsinput]="stringsContact" [title]="poi.title" [altImage]="altImage"

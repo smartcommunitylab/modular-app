@@ -227,7 +227,7 @@ export class ListPoiPage implements OnInit {
       this.presentFilter = false;
       this.categories.forEach(c => {
         this.showPois[c] = this.fullPois.filter(function (el) {
-          return (el.classification == c);
+          return (el.cat[0] == c);
         });
       });
     }
@@ -243,7 +243,7 @@ export class ListPoiPage implements OnInit {
       _this.categories.forEach(c => {
         this.showPois[c] = this.fullPois.filter(function (el) {
           if (el.title)
-            return (el.title.toLowerCase().indexOf(value.toLowerCase()) > -1 && el.classification == c);
+            return (el.title.toLowerCase().indexOf(value.toLowerCase()) > -1 && el.cat[0] == c);
           return false
         });
       });
@@ -302,8 +302,8 @@ export class ListPoiPage implements OnInit {
   }
   subCategories(array: Array<any>) {
     array.forEach(element => {
-      if (!this.fullCategories.includes(element.classification)) {
-        this.fullCategories.push(element.classification);
+      if (!this.fullCategories.includes(element.cat[0])) {
+        this.fullCategories.push(element.cat[0]);
       }
     });
     this.categories = this.fullCategories;
@@ -315,13 +315,13 @@ export class ListPoiPage implements OnInit {
   buildShowPois(filters?) {
     this.showPois = [];
     this.fullPois.forEach(p => {
-      if (!this.showPois[p.classification]) {
-        this.showPois[p.classification] = [];
+      if (!this.showPois[p.cat[0]]) {
+        this.showPois[p.cat[0]] = [];
       }
       if (filters ? filters.filter(item => {
-        return item.isChecked && p.classification == item.value
+        return item.isChecked && p.cat[0] == item.value
       }).length > 0 : true) {
-        this.showPois[p.classification].push(p);
+        this.showPois[p.cat[0]].push(p);
       }
     });
   }

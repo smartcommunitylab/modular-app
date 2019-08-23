@@ -89,6 +89,27 @@ export class ListFoodPage implements OnInit {
     this.config.getStringContacts(this.translate, this.language).then(strings => {
       this.stringsContact = strings
     });
+    element.addEventListener('tagClicked', async (tag) => {
+      // console.log(contact)
+      var tagSelected = (<any>tag).detail;
+      this.tags = this.tags.map(item => {
+        if (item.value == tagSelected)
+          return {
+            "value": tagSelected,
+            "isChecked": true
+          }
+        else {
+          return {
+            "value": item.value,
+            "isChecked": item.isChecked
+          }
+        }
+      })
+      // this.presentFilter = true;
+      this.firstAccess = false;
+      this.buildShowPois(this.tags)
+      console.log(tagSelected);
+    })
     element.addEventListener('contactClick', async (contact) => {
       // console.log(contact)
       var contactParam = JSON.parse((<any>contact).detail)
@@ -165,7 +186,7 @@ export class ListFoodPage implements OnInit {
           this.showPois[e] = [];
         }
         if (p.category === e && filters ? filters.filter(item => {
-          return (item.isChecked && p.classification == item.value)
+          return (item.isChecked && p.cat[0] == item.value)
         }).length > 0 : true) {
           this.showPois[e].push(p);
         }
@@ -229,13 +250,13 @@ export class ListFoodPage implements OnInit {
           poiElement.subtitle = x.classification[this.language];
         else poiElement.subtitle = x.classification["it"];
       }
-      if (x.classification) {
-        if (x.classification[this.language])
-          poiElement.classification = x.classification[this.language];
-        else poiElement.classification = x.classification["it"];
-        // poiElement.cat = [];
-        // poiElement.cat.push(x.classification[this.language]);
-      }
+      // if (x.classification) {
+      //   if (x.classification[this.language])
+      //     poiElement.classification = x.classification[this.language];
+      //   else poiElement.classification = x.classification["it"];
+      //   // poiElement.cat = [];
+      //   // poiElement.cat.push(x.classification[this.language]);
+      // }
       if (x.url) {
         poiElement.url = x.url;
       }

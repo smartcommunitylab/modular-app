@@ -19,5 +19,6 @@
     "ok_button":"Ok",
     "init_db":"Inizializzazione dati in corso...",
     "no_distance_label":"Distanza non specificata",
-    "title_list_poi":"Punti di interesse"
+    "title_list_poi":"Punti di interesse",
+    "main_event_label":"Main events"
 }
