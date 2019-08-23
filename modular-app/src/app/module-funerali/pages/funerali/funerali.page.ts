@@ -172,6 +172,10 @@ export class FuneraliPage {
   public onIntersection({ target, visible }: { target: Element; visible: boolean }): void {
     if (visible && this.actualVisualized != target.className)
       this.actualVisualized = target.className;
+    //scroll to posiition
+    var element = document.getElementById(this.actualVisualized);
+    if (element)
+      element.scrollIntoView({ block: "center" });
     console.log(target + "" + visible);
   }
   isSelected(date) {
@@ -188,7 +192,7 @@ export class FuneraliPage {
       this.content.scrollToPoint(0, yOffset - 100, 0);
       var myElement = document.getElementById(ref);
       var topPos = myElement.offsetLeft;
-      document.getElementById('idDates').scrollLeft = topPos -( window.innerWidth/2);
+      document.getElementById('idDates').scrollLeft = topPos - (window.innerWidth / 2);
     }
   }
 
@@ -297,14 +301,14 @@ export class FuneraliPage {
       var pastDate = startDate.getDate() - 7;
       startDate.setDate(pastDate);
       this.datiService.getDati(this.yyyymmdd(startDate)).then((res) => {
-        if (res.length>0){
-          this.emptyList=false;
-        console.log(res);
-        this.vetFunerali = this.convertDates(res);
-        this.subCategories(this.vetFunerali);
-        this.buildShowPois();
+        if (res.length > 0) {
+          this.emptyList = false;
+          console.log(res);
+          this.vetFunerali = this.convertDates(res);
+          this.subCategories(this.vetFunerali);
+          this.buildShowPois();
         } else {
-          this.emptyList =true;
+          this.emptyList = true;
         }
         resolve();
       }, err => {

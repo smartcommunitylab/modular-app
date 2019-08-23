@@ -147,6 +147,10 @@ export class ListPoiPage implements OnInit {
   public onIntersection({ target, visible }: { target: Element; visible: boolean }): void {
     if (visible && this.actualVisualized != target.className)
       this.actualVisualized = target.className;
+    //scroll to posiition
+    var element = document.getElementById(this.actualVisualized);
+    if (element)
+      element.scrollIntoView({block:"center"});
     console.log(target + "" + visible);
   }
 
