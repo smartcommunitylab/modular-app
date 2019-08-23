@@ -4425,6 +4425,9 @@ var SettingService = /** @class */ (function () {
         return new Promise(function (resolve, reject) {
             var language;
             var baseSetting;
+            if (!window[_this.config.getAppModuleName()]) {
+                window[_this.config.getAppModuleName()] = {};
+            }
             if (!localStorage.getItem('app-module')) {
                 baseSetting = {};
                 console.log(navigator);
@@ -4446,9 +4449,6 @@ var SettingService = /** @class */ (function () {
                 baseSetting = JSON.parse(localStorage.getItem('app-module'));
                 _this.setting = baseSetting;
                 language = baseSetting['language'];
-            }
-            if (!window[_this.config.getAppModuleName()]) {
-                window[_this.config.getAppModuleName()] = {};
             }
             window[_this.config.getAppModuleName()]['language'] = language;
             resolve();

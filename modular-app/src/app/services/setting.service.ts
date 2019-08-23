@@ -46,6 +46,9 @@ export class SettingService {
     return new Promise<void>((resolve, reject) => {
       let language;
       let baseSetting;
+      if (!window[this.config.getAppModuleName()]) {
+        window[this.config.getAppModuleName()] = {};
+      }
       if (!localStorage.getItem('app-module')) {
 
         baseSetting = {};
@@ -60,6 +63,7 @@ export class SettingService {
         if (language.indexOf('de') > -1) {
           language = 'de';
         }
+
         baseSetting['language'] = language;
         this.setting = baseSetting;
         this.setUserSetting(this.setting);
@@ -68,9 +72,7 @@ export class SettingService {
         this.setting = baseSetting;
         language = baseSetting['language'];
       }
-      if (!window[this.config.getAppModuleName()]) {
-        window[this.config.getAppModuleName()] = {};
-      }
+
       window[this.config.getAppModuleName()]['language'] = language;
       resolve();
     });

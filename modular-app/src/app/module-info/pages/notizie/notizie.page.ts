@@ -31,7 +31,7 @@ export class NotiziePage {
   parametriPost = {
     "fromDate": null,
     "size": 10,
-    "sortForList": 0,
+    "sortForList": 1,
     "source": ["Avvisi oggetti rinvenuti"],
     "start": 0
   }
