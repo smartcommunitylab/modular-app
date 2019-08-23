@@ -83,7 +83,7 @@ export class ListFoodPage implements OnInit {
       value => {
         this.altImage = value;
         this.distanceLabel = this.translate.instant('distance_label');
-        this.noDistanceLabel =this.translate.instant('no_distance_label');
+        this.noDistanceLabel = this.translate.instant('no_distance_label');
       }
     );
     this.config.getStringContacts(this.translate, this.language).then(strings => {
@@ -135,32 +135,32 @@ export class ListFoodPage implements OnInit {
 
 
   ionViewDidEnter() {
-
-    if (this.category) {
-      let query = { 'selector': { 'elementType': 'restaurant-item' } };
-      this.translate.get('init_db').subscribe(value => {
-        this.dbService.synch(value).then(() => {
-          this.dbService.getObjectByQuery(query).then((data) => {
-            this.fullPois = data.docs.map(x => this.convertPois(x));
-            this.addDistance();
-            this.subCategories(this.fullPois);
-            this.buildShowPois();
-            this.tags = this.buildFilter();
-            this.orderArray('near', this);
-            this.isLoading = false;
-            this.utils.hideLoading();
-
-          }, err => {
-            this.utils.hideLoading();
-
-          })
-            , err => {
+    if (!this.fullPois || this.fullPois.length == 0)
+      if (this.category) {
+        let query = { 'selector': { 'elementType': 'restaurant-item' } };
+        this.translate.get('init_db').subscribe(value => {
+          this.dbService.synch(value).then(() => {
+            this.dbService.getObjectByQuery(query).then((data) => {
+              this.fullPois = data.docs.map(x => this.convertPois(x));
+              this.addDistance();
+              this.subCategories(this.fullPois);
+              this.buildShowPois();
+              this.tags = this.buildFilter();
+              this.orderArray('near', this);
+              this.isLoading = false;
               this.utils.hideLoading();
 
-            }
+            }, err => {
+              this.utils.hideLoading();
+
+            })
+              , err => {
+                this.utils.hideLoading();
+
+              }
+          })
         })
-      })
-    }
+      }
   }
   addDistance(): any {
     this.fullPois.forEach(element => {
@@ -206,7 +206,7 @@ export class ListFoodPage implements OnInit {
       }
       if (x.cat) {
         if (x.cat[this.language])
-        poiElement.cat = x.cat[this.language];
+          poiElement.cat = x.cat[this.language];
         else poiElement.cat = x.cat["it"];
       }
       if (x.description) {

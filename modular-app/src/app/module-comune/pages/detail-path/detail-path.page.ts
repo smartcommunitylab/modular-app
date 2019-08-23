@@ -57,7 +57,12 @@ export class DetailPathPage implements OnInit {
     });
 
     this.dbService.getObjectByQuery(query).then(data => {
+
       if (data.docs) {
+              //order by id of path
+              data.docs.sort(function(a,b){
+        return path.steps.indexOf(a.id) - path.steps.indexOf(b.id);
+      });
         data.docs.forEach(element => {
           this.fullPois.push(this.convertPois(element));
 

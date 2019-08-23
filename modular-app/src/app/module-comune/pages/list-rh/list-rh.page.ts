@@ -83,13 +83,34 @@ export class ListRHPage implements OnInit {
       value => {
         this.altImage = value;
         this.distanceLabel = this.translate.instant('distance_label');
-        this.noDistanceLabel =this.translate.instant('no_distance_label');
+        this.noDistanceLabel = this.translate.instant('no_distance_label');
 
       }
     );
     this.config.getStringContacts(this.translate, this.language).then(strings => {
       this.stringsContact = strings
     });
+    element.addEventListener('tagClicked', async (tag) => {
+      // console.log(contact)
+      var tagSelected = (<any>tag).detail;
+      this.tags = this.tags.map(item => {
+        if (item.value == tagSelected)
+          return {
+            "value": tagSelected,
+            "isChecked": true
+          }
+        else {
+          return {
+            "value": item.value,
+            "isChecked": item.isChecked
+          }
+        }
+      })
+      // this.presentFilter = true;
+      this.firstAccess = false;
+      this.buildShowPois(this.tags)
+      console.log(tagSelected);
+    })
     element.addEventListener('contactClick', async (contact) => {
       // console.log(contact)
       var contactParam = JSON.parse((<any>contact).detail)
@@ -125,31 +146,31 @@ export class ListRHPage implements OnInit {
     else return this.noDistanceLabel;
   }
   ionViewDidEnter() {
+    if (!this.fullPois || this.fullPois.length == 0)
+      if (this.category) {
+        let query = { 'selector': { 'elementType': 'hotel-item' } };
+        this.translate.get('init_db').subscribe(value => {
+          this.dbService.synch(value).then(() => {
+            this.dbService.getObjectByQuery(query).then((data) => {
+              this.fullPois = data.docs.map(x => this.convertPois(x));
+              this.addDistance();
+              this.subCategories(this.fullPois);
+              this.buildShowPois();
+              this.tags = this.buildFilter();
+              this.orderArray('near', this);
+              this.isLoading = false;
+              this.utils.hideLoading();
 
-    if (this.category) {
-      let query = { 'selector': { 'elementType': 'hotel-item' } };
-      this.translate.get('init_db').subscribe(value => {
-        this.dbService.synch(value).then(() => {
-          this.dbService.getObjectByQuery(query).then((data) => {
-            this.fullPois = data.docs.map(x => this.convertPois(x));
-            this.addDistance();
-            this.subCategories(this.fullPois);
-            this.buildShowPois();
-            this.tags = this.buildFilter();
-            this.orderArray('near', this);
-            this.isLoading = false;
-            this.utils.hideLoading();
+            }, err => {
+              this.utils.hideLoading();
 
+            })
           }, err => {
             this.utils.hideLoading();
 
-          })
-        }, err => {
-          this.utils.hideLoading();
-
+          });
         });
-      });
-    }
+      }
   }
 
   subCategories(array: Array<any>) {
@@ -235,7 +256,7 @@ export class ListRHPage implements OnInit {
       }
       if (x.cat) {
         if (x.cat[this.language])
-        poiElement.cat = x.cat[this.language];
+          poiElement.cat = x.cat[this.language];
         else poiElement.cat = x.cat["it"];
       }
       if (x.classification) {

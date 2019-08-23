@@ -98,40 +98,40 @@ export class TouristServicesPage implements OnInit {
 
 
   ionViewDidEnter() {
+    if (!this.fullPois || this.fullPois.length == 0)
+      if (this.category) {
+        let query = {
+          'selector': {
+            "classification.it": "Servizi"
 
-    if (this.category) {
-      let query = {
-        'selector': {
-          "classification.it": "Servizi"
+          }
+        };
+        this.translate.get('init_db').subscribe(value => {
+          this.dbService.synch(value).then(() => {
+            this.dbService.getObjectByQuery(query).then((data) => {
+              if (data.docs.length > 0) {
 
-        }
-      };
-      this.translate.get('init_db').subscribe(value => {
-        this.dbService.synch(value).then(() => {
-          this.dbService.getObjectByQuery(query).then((data) => {
-            if (data.docs.length > 0) {
-
-              this.fullPois = data.docs.map(x => this.convertPois(x));
-              this.subCategories(this.fullPois);
-              this.buildShowPois();
-              this.tags = this.buildFilter();
-              this.orderArray('near', this);
-              this.isLoading = false;
+                this.fullPois = data.docs.map(x => this.convertPois(x));
+                this.subCategories(this.fullPois);
+                this.buildShowPois();
+                this.tags = this.buildFilter();
+                this.orderArray('near', this);
+                this.isLoading = false;
+                this.utils.hideLoading();
+              } else {
+                this.emptyList = true;
+                this.utils.hideLoading();
+              }
+            }, err => {
               this.utils.hideLoading();
-            } else {
-              this.emptyList = true;
-              this.utils.hideLoading();
-            }
+
+            })
           }, err => {
             this.utils.hideLoading();
 
           })
-        }, err => {
-          this.utils.hideLoading();
-
         })
-      })
-    }
+      }
   }
 
   subCategories(array: Array<any>) {
@@ -207,7 +207,7 @@ export class TouristServicesPage implements OnInit {
       }
       if (x.cat) {
         if (x.cat[this.language])
-        poiElement.cat = x.cat[this.language];
+          poiElement.cat = x.cat[this.language];
         else poiElement.cat = x.cat["it"];
       }
       if (x.url) {
@@ -285,7 +285,7 @@ export class TouristServicesPage implements OnInit {
   buildFilter(): any {
     var array = this.fullPois.map(item => item.cat).flat();
     var newArray = array.filter((value, index, self) => {
-      return (self.indexOf(value) === index  && value)
+      return (self.indexOf(value) === index && value)
 
     })
     var value = this.firstAccess ? false : true;

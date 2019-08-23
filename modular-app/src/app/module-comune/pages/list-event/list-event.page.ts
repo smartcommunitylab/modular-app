@@ -101,6 +101,7 @@ export class ListEventPage implements OnInit {
         this.mainEventLabel = value;
       }
     );
+    if (!this.fullPois || this.fullPois.length==0)
     if (this.category && this.category.query) {
       this.translate.get('init_db').subscribe(value => {
         this.dbService.synch(value).then(() => {

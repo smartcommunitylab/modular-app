@@ -123,30 +123,31 @@ export class ListFarmaciePage implements OnInit {
 
         }
       };
-      this.translate.get('init_db').subscribe(value => {
-        this.dbService.synch(value).then(() => {
-        this.dbService.getObjectByQuery(query).then((data) => {
-          if (data.docs.length > 0) {
-            this.fullPois = data.docs.map(x => this.convertPois(x));
-            this.addDistance();
-            this.addFarmacieTurno();
-            this.subCategories(this.fullPois);
-            this.buildShowPois();
-            this.tags = this.buildFilter();
-            this.orderArray('near', this);
-            this.isLoading = false;
+      if (!this.fullPois || this.fullPois.length == 0)
+        this.translate.get('init_db').subscribe(value => {
+          this.dbService.synch(value).then(() => {
+            this.dbService.getObjectByQuery(query).then((data) => {
+              if (data.docs.length > 0) {
+                this.fullPois = data.docs.map(x => this.convertPois(x));
+                this.addDistance();
+                this.addFarmacieTurno();
+                this.subCategories(this.fullPois);
+                this.buildShowPois();
+                this.tags = this.buildFilter();
+                this.orderArray('near', this);
+                this.isLoading = false;
+                this.utils.hideLoading();
+              } else {
+                this.emptyList = true;
+                this.utils.hideLoading();
+              }
+            }, err => {
+              this.utils.hideLoading();
+            })
+          }, err => {
             this.utils.hideLoading();
-          } else {
-            this.emptyList = true;
-            this.utils.hideLoading();
-          }
-        }, err => {
-          this.utils.hideLoading();
+          });
         })
-      }, err => {
-        this.utils.hideLoading();
-      });
-    })
     }
   }
   closeTurno() {
@@ -248,8 +249,7 @@ export class ListFarmaciePage implements OnInit {
         }
       }
       if (x.description) {
-        if (x.description[this.language])
-        {poiElement.text = x.description[this.language];}
+        if (x.description[this.language]) { poiElement.text = x.description[this.language]; }
         else {
           poiElement.text = x.description["it"];
 
@@ -259,15 +259,14 @@ export class ListFarmaciePage implements OnInit {
         poiElement.category = x.category.charAt(0).toUpperCase() + x.category.slice(1);
       }
       if (x.classification) {
-        if (x.classification[this.language])
-        {poiElement.classification = x.classification[this.language];}
+        if (x.classification[this.language]) { poiElement.classification = x.classification[this.language]; }
         else {
           poiElement.classification = x.classification["it"];
         }
       }
       if (x.cat) {
         if (x.cat[this.language])
-        poiElement.cat = x.cat[this.language];
+          poiElement.cat = x.cat[this.language];
         else poiElement.cat = x.cat["it"];
       }
       if (x.url) {
@@ -344,7 +343,7 @@ export class ListFarmaciePage implements OnInit {
   buildFilter(): any {
     var array = this.fullPois.map(item => item.cat).flat();
     var newArray = array.filter((value, index, self) => {
-      return self.indexOf(value) === index 
+      return self.indexOf(value) === index
 
     })
     var value = this.firstAccess ? false : true;
@@ -485,7 +484,7 @@ export class ListFarmaciePage implements OnInit {
     _this.isLoading = false;
   }
   getDistance(poi) {
-    return this.distanceLabel + (poi.distance ).toFixed(2) + " Km";
+    return this.distanceLabel + (poi.distance).toFixed(2) + " Km";
   }
   showPopover() {
     this.buildAlert('cat');

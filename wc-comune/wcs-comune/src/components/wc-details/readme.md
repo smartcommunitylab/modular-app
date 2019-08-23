@@ -20,6 +20,8 @@
 | `info`         | `info`          | Informazioni a fine pagina                      | `string`  | `undefined` |
 | `language`     | `language`      | Lingua da utilizzare                            | `string`  | `undefined` |
 | `secondColor`  | `second-color`  | Colore tag e puslanti                           | `string`  | `"red"`     |
+| `showimg`      | `showimg`       |                                                 | `boolean` | `true`      |
+| `showtags`     | `showtags`      |                                                 | `boolean` | `true`      |
 | `stringsinput` | `stringsinput`  |                                                 | `string`  | `undefined` |
 | `subtitle`     | `subtitle`      | Sottotitolo del percorso                        | `string`  | `undefined` |
 | `text`         | `text`          | Descrizione e testo                             | `string`  | `undefined` |

@@ -116,6 +116,8 @@ export namespace Components {
     * Colore tag e puslanti
     */
     'secondColor': string;
+    'showimg': boolean;
+    'showtags': boolean;
     'stringsinput': string;
     /**
     * Sottotitolo del percorso
@@ -169,6 +171,8 @@ export namespace Components {
     * Colore tag e puslanti
     */
     'secondColor'?: string;
+    'showimg'?: boolean;
+    'showtags'?: boolean;
     'stringsinput'?: string;
     /**
     * Sottotitolo del percorso

@@ -51,6 +51,8 @@ export class WcDetails {
   @Prop() expanse: boolean = false;
   /*distance  */
   @Prop() distance: string;
+  @Prop() showimg: boolean = true;
+  @Prop() showtags: boolean = true;
   @Event() contactClick: EventEmitter;
   /*Emit when the expandable is clicked*/
   @Event() expandeClick: EventEmitter;
@@ -63,7 +65,7 @@ export class WcDetails {
   private tmptags = [];
   private tmpContacts = [];
   private strings: any;
-  private url:any;
+  private url: any;
   async componentWillLoad() {
     if (this.stringsinput) {
       this.strings = JSON.parse(this.stringsinput);
@@ -86,7 +88,7 @@ export class WcDetails {
     this.contactClick.emit(JSON.stringify(returnValue));
     console.log("Cliccato: ", type, value);
   }
-  clickTag(tag,event:UIEvent) {
+  clickTag(tag, event: UIEvent) {
     this.tagClicked.emit(tag)
     event.stopPropagation();;
   }
@@ -94,7 +96,7 @@ export class WcDetails {
     if (this.contactsJSON.cat) {
       this.contactsJSON.cat.forEach(c => {
         this.tmptags.push(
-          <div class="tag" onClick={(event: UIEvent) => this.clickTag(c,event)}><p>{c}</p></div>
+          <div class="tag" onClick={(event: UIEvent) => this.clickTag(c, event)}><p>{c}</p></div>
         )
       });
     }
@@ -133,8 +135,8 @@ export class WcDetails {
       this.tmpContacts.push(
         <div class="external-container">
           <div class="contact-container" onClick={(event: UIEvent) => k.indexOf('share') > -1 ?
-            this.contactClickHandler(k, JSON.stringify(this.contactsJSON),event) :
-            this.contactClickHandler(k, this.contactsJSON[k],event)
+            this.contactClickHandler(k, JSON.stringify(this.contactsJSON), event) :
+            this.contactClickHandler(k, this.contactsJSON[k], event)
           }>
             <div class="icon icon-contact">
               {this.icons[k](this.secondColor)}
@@ -161,9 +163,9 @@ export class WcDetails {
         {
           this.expanse
             ? <div>
-              {this.img
+              {this.img && this.showimg
                 ? <div class="expanse-image image">
-                  <img src={this.img}  alt={this.altImage}></img>
+                  <img src={this.img} alt={this.altImage}></img>
                 </div>
                 : ""
               }
@@ -182,7 +184,7 @@ export class WcDetails {
           }
           {!this.expanse
             ? <div>
-              {this.img
+              {this.img && this.showimg
                 ? <div class="image">
                   <img src={this.img} alt={this.altImage}></img>
                 </div>
@@ -195,10 +197,10 @@ export class WcDetails {
             {this.tmpContacts}
           </div>
           {this.url
-          ?<div class="url"  onClick={(event: UIEvent) => this.contactClickHandler("url", this.url,event)}>
-          {(this.url) ? this.url : ''}
-          </div>
-          :""
+            ? <div class="url" onClick={(event: UIEvent) => this.contactClickHandler("url", this.url, event)}>
+              {(this.url) ? this.url : ''}
+            </div>
+            : ""
           }
           <div class="datetime">
             {(this.contactsJSON) ? ((this.contactsJSON.date) ? this.contactsJSON.date : '') : ''} {(this.contactsJSON) ? ((this.contactsJSON.time) ? this.contactsJSON.time : '') : ''}
@@ -209,10 +211,13 @@ export class WcDetails {
           <div class="distance">
             {(this.distance) ? this.distance : ''}
           </div>
-          {this.showTags()}
+          {this.showtags
+            ? <div>{this.showTags()}</div>
+            : ""
+          }
 
           {this.expanse
-            ? <div  class="description"><div class="text" innerHTML={this.text}>
+            ? <div class="description"><div class="text" innerHTML={this.text}>
             </div>
               <div class="title-2" style={{ color: this.headingColor }}>
                 {(this.info && this.info != '') ? "Informazioni" : ""}

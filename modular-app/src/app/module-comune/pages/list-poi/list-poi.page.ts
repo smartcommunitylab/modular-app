@@ -79,32 +79,33 @@ export class ListPoiPage implements OnInit {
   }
 
   ionViewDidEnter() {
-    if (this.category && this.category.query) {
-      this.translate.get('init_db').subscribe(value => {
-        this.dbService.synch(value).then(() => {
-          this.dbService.getObjectByQuery(this.category.query).then((data) => {
-            if (data.docs.length > 0) {
-              this.fullPois = data.docs.map(x => this.convertPois(x));
-              this.subCategories(this.fullPois);
-              this.buildShowPois();
-              this.tags = this.buildFilter();
-              this.utils.hideLoading();
-            }
-            else {
-              this.emptyList = true;
-            }
-            this.isLoading = false;
-            console.log(this.showPois);
+    if (!this.fullPois || this.fullPois.length == 0)
+      if (this.category && this.category.query) {
+        this.translate.get('init_db').subscribe(value => {
+          this.dbService.synch(value).then(() => {
+            this.dbService.getObjectByQuery(this.category.query).then((data) => {
+              if (data.docs.length > 0) {
+                this.fullPois = data.docs.map(x => this.convertPois(x));
+                this.subCategories(this.fullPois);
+                this.buildShowPois();
+                this.tags = this.buildFilter();
+                this.utils.hideLoading();
+              }
+              else {
+                this.emptyList = true;
+              }
+              this.isLoading = false;
+              console.log(this.showPois);
 
-          }, (err) => {
-            this.utils.hideLoading();
+            }, (err) => {
+              this.utils.hideLoading();
+            });
           });
-        });
-      })
-    }
-    else {
-      this.utils.hideLoading();
-    }
+        })
+      }
+      else {
+        this.utils.hideLoading();
+      }
     const element = document.getElementById('poi-list');
     this.translate.get('alt_image_string').subscribe(
       value => {
@@ -150,7 +151,7 @@ export class ListPoiPage implements OnInit {
     //scroll to posiition
     var element = document.getElementById(this.actualVisualized);
     if (element)
-      element.scrollIntoView({block:"center"});
+      element.scrollIntoView({ block: "center" });
     console.log(target + "" + visible);
   }
 

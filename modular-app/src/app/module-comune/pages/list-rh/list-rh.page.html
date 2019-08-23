@@ -39,7 +39,7 @@
       <div *ngFor="let c of categories">
         <div class="content">
           <div *ngFor="let poi of showPois[c]; let i = index">
-            <wc-details [img]="poi.image" [stringsinput]="stringsContact" [title]="poi.title" [altImage]="altImage"
+            <wc-details [img]="poi.image" [stringsinput]="stringsContact" [title]="poi.title" [showimg]=true [showtags]=true [altImage]="altImage"
               [subtitle]="poi.subtitle" [distance]="getDistance(poi)" [text]="poi.text" [info]="poi.info" [contacts]="poi.infos"
               heading-color="#707070" second-color="#11b3ef" expandable=false expanse=false></wc-details>
             <div class="spacing" *ngIf="i == showPois.length - 1"></div>
