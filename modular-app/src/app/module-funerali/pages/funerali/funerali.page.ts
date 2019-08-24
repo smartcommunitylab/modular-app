@@ -104,7 +104,7 @@ export class FuneraliPage {
       if (!this.fullDates.includes(element.dataFunerale)) {
         this.fullDates.push(element.dataFunerale);
         if ((moment(element.dataFunerale, 'DD/MM/YYYY').isSame(new Date(), "day")))
-          i = this.fullDates.length;
+          i = this.fullDates.length - 1;
       }
     });
     this.dates = this.fullDates;
@@ -305,6 +305,7 @@ export class FuneraliPage {
           this.emptyList = false;
           console.log(res);
           this.vetFunerali = this.convertDates(res);
+          this.vetFunerali = this.cleanNames(this.vetFunerali);
           this.subCategories(this.vetFunerali);
           this.buildShowPois();
         } else {
@@ -316,6 +317,14 @@ export class FuneraliPage {
         this.emptyList = true;
         this.utils.showErrorConnectionMessage(this.networkMessage);
       })
+    })
+  }
+  cleanNames(vetFunerali: any[]): any[] {
+    return vetFunerali.map(el => {
+      if (el.nome)
+      el.nome =el.nome.replace(/,/g, ' ');
+        return el
+
     })
   }
   convertDates(res: any): any[] {

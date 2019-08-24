@@ -27,7 +27,7 @@ export class HomePage implements OnInit {
   map: any; /** Leaflet map object */
   selectedDate: Date; /** Selected date */
   showDate: string; /** String based on "selected Date" */
-  mapCenter: any = []; /** Coordinates of map center */
+  mapCenter: any; /** Coordinates of map center */
   noCleaning: string;
   noStreetFuture: string;
   noStreetPast: string;
@@ -103,19 +103,25 @@ export class HomePage implements OnInit {
       this.route.queryParams
         .subscribe(params => {
           this.parseUrlParams(params);
-          this.selectedDate = new Date();
-          this.selectedDate.setHours(0, 0, 0, 0);
-          this.showDate = this.selectedDate.toISOString();
-          if (this.myPos)
-            this.mapCenter = [this.myPos.lat ? this.myPos.lat : 0, this.myPos.long ? this.myPos.long : 0];
-          else this.mapCenter = this.mapSrv.getDefaultCenter()
-          this.streets = this.mapSrv.getData().sort(function (a, b) {
-            return a.cleaningDay - b.cleaningDay;
-          });
+          if (!this.selectedDate) {
+            this.selectedDate = new Date();
+            this.selectedDate.setHours(0, 0, 0, 0);
+            this.showDate = this.selectedDate.toISOString();
+          }
+          if (!this.mapCenter) {
+            if (this.myPos)
+              this.mapCenter = [this.myPos.lat ? this.myPos.lat : 0, this.myPos.long ? this.myPos.long : 0];
+            else this.mapCenter = this.mapSrv.getDefaultCenter()
+          }
+          if (!this.streets)
+            this.streets = this.mapSrv.getData().sort(function (a, b) {
+              return a.cleaningDay - b.cleaningDay;
+            });
           if (this.mapSrv.getData()[this.mapSrv.getData().length - 1].cleaningDay < this.selectedDate.getTime()) {
             this.future = false;
           }
-          this.buildMap();
+          if (!this.map)
+            this.buildMap();
           // this.updateNotification(this.streets);
         });
     }, err => {
@@ -144,26 +150,26 @@ export class HomePage implements OnInit {
    * Reset center map coordinates
    */
   ionViewWillLeave() {
-    this.myPos = {};
-    this.mapSrv.Init().then(() => {
-      this.route.queryParams
-        .subscribe(params => {
-          this.parseUrlParams(params);
-          this.selectedDate = new Date();
-          this.showDate = this.selectedDate.toISOString();
-          if (this.myPos)
-            this.mapCenter = [this.myPos.lat ? this.myPos.lat : 0, this.myPos.long ? this.myPos.long : 0];
-          else this.mapCenter = this.mapSrv.getDefaultCenter()
-          this.streets = this.mapSrv.getData().sort(function (a, b) {
-            return a.cleaningDay - b.cleaningDay;
-          });
-          this.buildMap();
-        });
-    }, err => {
-      this.translate.get('error_init').subscribe(s => {
-        this.util.showErrorConnectionMessage(s);
-      });
-    })
+    // this.myPos = {};
+    // this.mapSrv.Init().then(() => {
+    //   this.route.queryParams
+    //     .subscribe(params => {
+    //       this.parseUrlParams(params);
+    //       this.selectedDate = new Date();
+    //       this.showDate = this.selectedDate.toISOString();
+    //       if (this.myPos)
+    //         this.mapCenter = [this.myPos.lat ? this.myPos.lat : 0, this.myPos.long ? this.myPos.long : 0];
+    //       else this.mapCenter = this.mapSrv.getDefaultCenter()
+    //       this.streets = this.mapSrv.getData().sort(function (a, b) {
+    //         return a.cleaningDay - b.cleaningDay;
+    //       });
+    //       this.buildMap();
+    //     });
+    // }, err => {
+    //   this.translate.get('error_init').subscribe(s => {
+    //     this.util.showErrorConnectionMessage(s);
+    //   });
+    // })
   }
 
   /**
@@ -185,19 +191,19 @@ export class HomePage implements OnInit {
    */
   buildMap() {
     try { this.map.remove(); } catch { } /** Reset map */
-    const _this = this;
+    // const _this = this;
     this.map = new leaflet.Map('home-map', { zoomControl: true, attributionControl: false, dragging: true, tap: false }).setView(this.mapCenter, 15);
 
     /** Build polyline after drag */
-    this.map.on('dragend', function (e) {
+    this.map.on('dragend', (e) => {
       this.mapCenter = [e.target.getCenter().lat, e.target.getCenter().lng];
-      _this.buildPolyline(this.mapCenter);
+      this.buildPolyline(this.mapCenter);
       // _this.setFutureAndPast();
     });
     /** Build polyline after zoom */
-    this.map.on('zoomend', function (e) {
+    this.map.on('zoomend', (e) => {
       this.mapCenter = [e.target.getCenter().lat, e.target.getCenter().lng];
-      _this.buildPolyline(this.mapCenter);
+      this.buildPolyline(this.mapCenter);
       // _this.setFutureAndPast();
     });
 
@@ -236,16 +242,18 @@ export class HomePage implements OnInit {
     this.past = false;
     this.future = false;
     /** Reset polyline */
+    var bounds = this.map.getBounds();
+
     if (this.map) {
       this.clearPolyline(this.map);
     }
     if (this.streets) {
       /** Check distance from center map and street */
       this.streets.forEach(s => {
-        const dist = this.geo.getDistanceKM(
-          { lat: center[0], lon: center[1] },
-          { lat: s.centralCoords[0]['lat'], lon: s.centralCoords[0]['lng'] }
-        );
+        // const dist = this.geo.getDistanceKM(
+        //   { lat: center[0], lon: center[1] },
+        //   { lat: s.centralCoords[0]['lat'], lon: s.centralCoords[0]['lng'] }
+        // );
         s.idNumber = parseInt(s.streetCode.replace(/\_/g, ''), 10);
 
         /** Check if is a 'cleaning day' */
@@ -264,11 +272,13 @@ export class HomePage implements OnInit {
         /**
          * Build polyline based on: current day, current zoom, map center
          */
-        if (inDate && ((dist < ((17 % this.map.getZoom()) - 1) || dist < 0.3))) {
+        // if (inDate && ((dist < ((17 % this.map.getZoom()) - 1) || dist < 0.3))) {
+        if (inDate && bounds.contains([s.centralCoords[0], s.centralCoords[0]])) {
+
           this.labelResult++;
           const popupContent = (inDate) ? closedStreetContent : freeStreetContent;
 
-          const polyline = leaflet.polyline(s.polylines, { color: color, weight: 7 }).addTo(this.map);
+          const polyline = leaflet.polyline(s.polylines, { color: color, weight: 8 }).addTo(this.map);
           const popup = leaflet.popup({ className: `pop-${s.streetName.replace(/\s/g, '')}` }).setContent(popupContent);
           polyline.bindPopup(popup).on('popupopen', (e) => {
             const el = document.getElementsByClassName(`pop-${s.streetName.replace(/\s/g, '')}`)[0].addEventListener('click', () => {
@@ -279,13 +289,13 @@ export class HomePage implements OnInit {
         }
         if (!this.past) {
           //se nella regione e prima metti a true
-          if ((new Date(this.selectedDate).setHours(0, 0, 0, 0) > new Date(s.cleaningDay).setHours(0, 0, 0, 0)) && ((dist < ((17 % this.map.getZoom()) - 1) || dist < 0.3))) {
+          if ((new Date(this.selectedDate).setHours(0, 0, 0, 0) > new Date(s.cleaningDay).setHours(0, 0, 0, 0)) && (bounds.contains([s.centralCoords[0], s.centralCoords[0]]))) {
             this.past = true;
           }
         }
         if (!this.future) {
           //se nella regione e prima metti a true
-          if ((new Date(this.selectedDate).setHours(0, 0, 0, 0) < new Date(s.cleaningDay).setHours(0, 0, 0, 0)) && ((dist < ((17 % this.map.getZoom()) - 1) || dist < 0.3))) {
+          if ((new Date(this.selectedDate).setHours(0, 0, 0, 0) < new Date(s.cleaningDay).setHours(0, 0, 0, 0)) && (bounds.contains([s.centralCoords[0], s.centralCoords[0]]))) {
             this.future = true;
           }
         }
@@ -342,24 +352,30 @@ export class HomePage implements OnInit {
     this.labelResult = 0;
     const center = this.mapCenter;
     let nextDay = null;
+    var bounds = this.map.getBounds();
+
     if (this.streets)
       this.streets.forEach(s => {
-        const dist = this.geo.getDistanceKM(
-          { lat: center[0], lon: center[1] },
-          { lat: s.centralCoords[0]['lat'], lon: s.centralCoords[0]['lng'] }
-        );
-        if ((dist < ((17 % this.map.getZoom()) - 1) || dist < 0.3)) {
+        // const dist = this.geo.getDistanceKM(
+        //   { lat: center[0], lon: center[1] },
+        //   { lat: s.centralCoords[0]['lat'], lon: s.centralCoords[0]['lng'] }
+        // );
+        // if ((dist < ((17 % this.map.getZoom()) - 1) || dist < 0.3)) {
+        if (bounds.contains([s.centralCoords[0], s.centralCoords[0]]))
+
           if (!nextDay && s.cleaningDay && s.cleaningDay > new Date(this.selectedDate).getTime()) {
             nextDay = s.cleaningDay;
           }
-        }
+        // }
 
         //select first next day of cleaning inside
-        if ((dist < ((17 % this.map.getZoom()) - 1) || dist < 0.3)) {
+        // if ((dist < ((17 % this.map.getZoom()) - 1) || dist < 0.3)) {
+        if (bounds.contains([s.centralCoords[0], s.centralCoords[0]]))
+
           if (nextDay && s.cleaningDay > this.selectedDate.getTime() && s.cleaningDay <= nextDay && s.cleaningDay > this.today) {
             nextDay = s.cleaningDay;
           }
-        }
+        // }
       });
     if (nextDay != null && nextDay > this.selectedDate.getTime()) {
       this.selectedDate = new Date(nextDay);
@@ -370,7 +386,7 @@ export class HomePage implements OnInit {
       this.toast = await this.toastCtrl.create({
         message: this.noStreetFuture,
         duration: 3000,
-        showCloseButton: true
+        // showCloseButton: true
       });
       this.future = false;
       await this.toast.present();
@@ -387,24 +403,26 @@ export class HomePage implements OnInit {
     this.labelResult = 0;
     const center = this.mapCenter;
     let prevDay = null;
+    var bounds = this.map.getBounds();
     if (this.streets)
       for (var i = this.streets.length - 1; i >= 0; i--) {
         var s = this.streets[i];
-        const dist = this.geo.getDistanceKM(
-          { lat: center[0], lon: center[1] },
-          { lat: s.centralCoords[0]['lat'], lon: s.centralCoords[0]['lng'] }
-        );
-        if ((dist < ((17 % this.map.getZoom()) - 1) || dist < 0.3)) {
+        // const dist = this.geo.getDistanceKM(
+        //   { lat: center[0], lon: center[1] },
+        //   { lat: s.centralCoords[0]['lat'], lon: s.centralCoords[0]['lng'] }
+        // );
+        if (bounds.contains([s.centralCoords[0], s.centralCoords[0]]))
+          // if ((dist < ((17 % this.map.getZoom()) - 1) || dist < 0.3)) {
           if (!prevDay && s.cleaningDay && s.cleaningDay < new Date(this.selectedDate).getTime()) {
             prevDay = s.cleaningDay;
           }
-        }
+        // }
         //select first next day of cleaning inside
-        if ((dist < ((17 % this.map.getZoom()) - 1) || dist < 0.3)) {
+        if (bounds.contains([s.centralCoords[0], s.centralCoords[0]]))
           if (prevDay && s.cleaningDay < this.selectedDate.getTime() && s.cleaningDay >= prevDay && s.cleaningDay > this.today) {
             prevDay = s.cleaningDay;
           }
-        }
+        // }
       };
     if (prevDay != null && prevDay < this.selectedDate.getTime()) {
       this.selectedDate = new Date(prevDay);
@@ -414,7 +432,7 @@ export class HomePage implements OnInit {
       this.toast = await this.toastCtrl.create({
         message: this.noStreetPast,
         duration: 3000,
-        showCloseButton: true
+        // showCloseButton: true
       });
       this.past = false;
       await this.toast.present();

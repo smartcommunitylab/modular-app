@@ -111,24 +111,11 @@
     "params": {
       "selector": {
         "category": "cultura",
-        "$or": [{
-            "classification.it": "Musei"
-          },{
-            "classification.it": "Edificio storico"
-          }
-          ,{
-            "classification.it": "Chiesa"
-          },{
-            "classification.it": "Area archeologica"
-          },
-          {
-            "classification.it": "Altri siti di interesse storico artistico"
-          },          
-          {
-            "classification.it": "Natura"
-          }
-          
-        ]
+        "cat.it.0": {
+          "$in": [
+            "Musei", "Edifici storici", "Chiese", "Altri siti di interesse storico artistico", "Natura", "Aree archeologiche"
+          ]
+        }
       }
     }
 
