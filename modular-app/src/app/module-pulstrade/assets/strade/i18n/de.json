@@ -19,5 +19,9 @@
     "no_street_future":"Non ci sono pulizie programmate per questa zona dopo la data selezionata",
     "no_street_past":"Non ci sono pulizie programmate per questa zona prima della data selezionata",
     "no_notify":"Nessuna strada salvata",
-    "no_roads_search":"Nessuna strada trovata"
+    "no_roads_search":"Nessuna strada trovata",
+    "side_label":"Lato",
+    "tratto_label":"Tratto"
+    
+
 }

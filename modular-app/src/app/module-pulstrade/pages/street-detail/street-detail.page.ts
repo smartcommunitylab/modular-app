@@ -43,9 +43,9 @@ export class StreetDetailPage implements OnInit {
     if (this.streets)
       this.streets.forEach(s => {
         s.cleaningDayStr = this.datePipe.transform(s.cleaningDay, 'dd/MM/yyyy');
-        let tmp = new Date(s.stopStartingTime).toLocaleTimeString().split(':');
+        let tmp = new Date(s.stopStartingTime).toLocaleTimeString('it-IT').split(':');
         s.stopStartingTimeStr = `${tmp[0]}:${tmp[1]}`;
-        tmp = new Date(s.stopEndingTime).toLocaleTimeString().split(':');
+        tmp = new Date(s.stopEndingTime).toLocaleTimeString('it-IT').split(':');
         s.stopEndingTimeStr = `${tmp[0]}:${tmp[1]}`;
         s.centralCoordStr = JSON.stringify(s.centralCoords);
         s.idNumber = parseInt(s.streetCode.replace(/\_/g, ''), 10);

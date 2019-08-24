@@ -24,19 +24,21 @@
     <div class="clean-container" *ngFor="let s of streetDetails">
       <div [id]="s.id">
         <ion-grid class="note">
-        <ion-row>
-          <ion-col size="2">
-            <ion-icon name="close-circle"></ion-icon>
-          </ion-col>
-          <ion-col  size="10">
-            <div >
-              <div class="day">{{s.cleaningDayStr}}</div>
-              <div class="time">{{'CLOSED' | translate}} {{s.stopStartingTimeStr}}- {{s.stopEndingTimeStr}}</div>
-              <div class="notes">{{s.notes}}</div>
-            </div>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
+          <ion-row>
+            <ion-col size="2">
+              <ion-icon name="close-circle"></ion-icon>
+            </ion-col>
+            <ion-col size="10">
+              <div>
+                <div class="day">{{s.cleaningDayStr}}</div>
+                <div class="time">{{'CLOSED' | translate}} {{s.stopStartingTimeStr}}- {{s.stopEndingTimeStr}}</div>
+                <!-- <div class="notes">{{s.notes}}</div> -->
+                <div class="lato" *ngIf="s.lato">{{'side_label' | translate}} {{s.lato}}</div>
+                <div class="tratto" *ngIf="s.tratto">{{'tratto_label' | translate}} {{s.tratto}}</div>
+              </div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
       </div>
     </div>
   </ion-list>
