@@ -17,7 +17,7 @@ export class NotificationPage implements OnInit {
   streets: any; /** Full streets object */
   language: string; /** Actived language */
   notif: any; /** Notified streets */
-  showStreets: any = []; /** Streets object for page view */
+  showStreets: any; /** Streets object for page view */
   notifMap: any;
   constructor(
     private notSrv: NotificationService,
