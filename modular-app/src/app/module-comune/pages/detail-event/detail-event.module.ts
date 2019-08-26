@@ -28,7 +28,8 @@ export function HttpLoaderFactory(http: HttpClient) {
       provide: TranslateLoader,
       useFactory: HttpLoaderFactory,
       deps: [HttpClient]
-    }}),    RouterModule.forChild(routes)
+    }}),
+        RouterModule.forChild(routes)
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   declarations: [DetailEventPage]

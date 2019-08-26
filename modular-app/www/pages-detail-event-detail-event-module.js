@@ -57,7 +57,8 @@ var DetailEventPageModule = /** @class */ (function () {
                         provide: _ngx_translate_core__WEBPACK_IMPORTED_MODULE_6__["TranslateLoader"],
                         useFactory: HttpLoaderFactory,
                         deps: [_angular_common_http__WEBPACK_IMPORTED_MODULE_7__["HttpClient"]]
-                    } }), _angular_router__WEBPACK_IMPORTED_MODULE_3__["RouterModule"].forChild(routes)
+                    } }),
+                _angular_router__WEBPACK_IMPORTED_MODULE_3__["RouterModule"].forChild(routes)
             ],
             schemas: [_angular_core__WEBPACK_IMPORTED_MODULE_0__["CUSTOM_ELEMENTS_SCHEMA"]],
             declarations: [_detail_event_page__WEBPACK_IMPORTED_MODULE_5__["DetailEventPage"]]

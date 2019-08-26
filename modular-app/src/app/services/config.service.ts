@@ -18,7 +18,7 @@ export class ConfigService {
 
   async showPopUpExpired(): Promise<any> {
     const alert = await this.alertController.create({
-      header: 'Scaduto',
+      header: 'La versione di test è scaduta',
       message: 'Questa applicazione di test è scaduta il '+this.expiringDate,
       backdropDismiss:false,
       buttons: [
@@ -32,7 +32,7 @@ export class ConfigService {
     await alert.present();  }
   async showPopupExpiring(): Promise<any> {
     const alert = await this.alertController.create({
-      header: 'Sta scadento',
+      header: 'La versione di test sta scadendo',
       message: 'Questa applicazione di test  scadrá il '+this.expiringDate,
       buttons: ['OK']
     });

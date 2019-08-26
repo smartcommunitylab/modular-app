@@ -2792,18 +2792,6 @@ var AppComponent = /** @class */ (function () {
     AppComponent.prototype.initializeApp = function () {
         var _this = this;
         this.platform.ready().then(function () {
-            // if (window.StatusBar) {
-            //   StatusBar.overlaysWebView(true);            
-            //   StatusBar.styleDefault();
-            // }
-            if (_this.config.getVersion() == 'test') {
-                if (!_this.config.isExpired()) {
-                    _this.config.showPopupExpiring();
-                }
-                else {
-                    _this.config.showPopUpExpired();
-                }
-            }
             _this.statusBar.overlaysWebView(false);
             _this.statusBar.styleLightContent();
             _this.splashScreen.hide();
@@ -4489,7 +4477,7 @@ var ConfigService = /** @class */ (function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, this.alertController.create({
-                            header: 'Scaduto',
+                            header: 'La versione di test è scaduta',
                             message: 'Questa applicazione di test è scaduta il ' + this.expiringDate,
                             backdropDismiss: false,
                             buttons: [
@@ -4517,7 +4505,7 @@ var ConfigService = /** @class */ (function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, this.alertController.create({
-                            header: 'Sta scadento',
+                            header: 'La versione di test sta scadendo',
                             message: 'Questa applicazione di test  scadrá il ' + this.expiringDate,
                             buttons: ['OK']
                         })];

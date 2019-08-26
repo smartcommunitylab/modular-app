@@ -1,26 +1,25 @@
- 
-  <ion-content>
-        <img src="assets/sfondoHome.png" alt="">
-    <ion-grid >
-        <ion-row >
-            <ion-col>
-                <div class="main-title ion-text-center">{{'title_app'|translate}}</div>
-            </ion-col>
-          </ion-row>
-          <ion-row >
-              <ion-col>
-                  <div class="second-title ion-text-center">{{'title_first_launch'|translate}}</div>
-                </ion-col>
-            </ion-row>
-      <ion-row >
-          <ion-col>
-              <ion-button  (click)="chooseProfile('citizen')">{{'citizen_profile_label'|translate}}</ion-button>
-          </ion-col>
-        </ion-row>
-        <ion-row >
-            <ion-col>
-                <ion-button  (click)="chooseProfile('turist')">{{'turist_profile_label'|translate}}</ion-button>
-            </ion-col>
-          </ion-row>
-    </ion-grid>
-  </ion-content>
+ <ion-content>
+     <img src="assets/sfondoHome.png" alt="">
+     <ion-grid>
+         <ion-row>
+             <ion-col>
+                 <div class="main-title ion-text-center">{{'title_app'|translate}}</div>
+             </ion-col>
+         </ion-row>
+         <ion-row>
+             <ion-col>
+                 <div class="second-title ion-text-center">{{'title_first_launch'|translate}}</div>
+             </ion-col>
+         </ion-row>
+             <ion-row>
+                 <ion-col>
+                     <ion-button (click)="chooseProfile('citizen')">{{'citizen_profile_label'|translate}}</ion-button>
+                 </ion-col>
+             </ion-row>
+             <ion-row>
+                 <ion-col>
+                     <ion-button (click)="chooseProfile('turist')">{{'turist_profile_label'|translate}}</ion-button>
+                 </ion-col>
+             </ion-row>
+     </ion-grid>
+ </ion-content>
