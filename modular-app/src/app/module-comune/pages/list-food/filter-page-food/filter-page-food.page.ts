@@ -20,7 +20,7 @@ export class FilterPageFoodPage implements OnInit {
     });
   }
 closeModal() {
-    this.modalCtrl.dismiss();
+    this.modalCtrl.dismiss(this.filters);
   }
   filter() {
     this.modalCtrl.dismiss(this.filters);

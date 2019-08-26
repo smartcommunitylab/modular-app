@@ -79,7 +79,7 @@ var ListFarmaciePageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header >\n    <ion-searchbar  class=\"search-farmacie\" style=\"display: none\" showCancelButton=\"always\" animated (search)=\"toggleSearch()\"\n    (ionInput)=\"searchChanged($event)\" (ionCancel)=\"toggleSearch()\" ></ion-searchbar>\n  <ion-toolbar>\n\n    <ion-buttons slot=\"start\">\n      <ion-back-button class=\"interaction\"></ion-back-button>\n    </ion-buttons>\n    <ion-buttons slot=\"end\">\n      <ion-button (click)=\"toggleSearch()\">\n        <ion-icon name=\"search\"></ion-icon>\n      </ion-button>\n    </ion-buttons>\n    <ion-title>\n      {{'farmacie_label' | translate}}\n    </ion-title>\n  </ion-toolbar>\n</ion-header>\n\n\n<ion-content>\n  <ion-card class=\"card-turni\" *ngIf=\"turno && farmacieTurno\">\n      <button ion-button icon-only (click)=\"closeTurno()\">\n        <ion-icon name=\"close\"></ion-icon>\n      </button>\n    <div class=\"message\" [innerHTML]=\"farmacieTurno\"></div>\n  </ion-card>\n\n  <ion-list no-lines id=\"poi-list\" >\n    <div *ngIf=\"!emptyList\">\n    <div *ngFor=\"let c of categories\">\n      <div class=\"content\">\n        <div *ngFor=\"let poi of showPois[c]; let i = index\">\n          <wc-details [stringsinput]=\"stringsContact\" [title]=\"poi.title\" [subtitle]=\"poi.subtitle\" [text]=\"poi.text\"\n            [info]=\"poi.info\" [distance]=\"getDistance(poi)\" [contacts]=\"poi.infos\" heading-color=\"#707070\"\n            second-color=\"#11b3ef\" expandable=false expanse=false></wc-details>\n          <div class=\"spacing\" *ngIf=\"i == showPois.length - 1\"></div>\n        </div>\n      </div>\n    </div>\n  </div>\n  </ion-list>\n  <div class=\"empty-list\" *ngIf=\"emptyList\">\n      {{'empty_list' | translate}}\n  </div>\n</ion-content>"
+module.exports = "<ion-header >\n    <ion-searchbar  class=\"search-farmacie\" style=\"display: none\" showCancelButton=\"always\" animated (search)=\"toggleSearch()\"\n    (ionInput)=\"searchChanged($event)\" (ionCancel)=\"toggleSearch()\" ></ion-searchbar>\n  <ion-toolbar>\n\n    <ion-buttons slot=\"start\">\n      <ion-back-button class=\"interaction\"></ion-back-button>\n    </ion-buttons>\n    <ion-buttons slot=\"end\">\n      <ion-button (click)=\"toggleSearch()\">\n        <ion-icon name=\"search\"></ion-icon>\n      </ion-button>\n    </ion-buttons>\n    <ion-title>\n      {{'farmacie_label' | translate}}\n    </ion-title>\n  </ion-toolbar>\n</ion-header>\n\n\n<ion-content>\n  <ion-card class=\"card-turni\" *ngIf=\"turno && farmacieTurno\">\n      <button ion-button icon-only (click)=\"closeTurno()\">\n        <ion-icon name=\"close\"></ion-icon>\n      </button>\n    <div class=\"message\" [innerHTML]=\"farmacieTurno\"></div>\n  </ion-card>\n\n  <ion-list no-lines id=\"poi-list\" >\n    <div *ngIf=\"!emptyList\">\n    <div *ngFor=\"let c of categories\">\n      <div class=\"content\">\n        <div *ngFor=\"let poi of showPois[c]; let i = index\">\n          <wc-details [stringsinput]=\"stringsContact\" [title]=\"poi.title\"  [showtags]=false [subtitle]=\"poi.subtitle\" [text]=\"poi.text\"\n            [info]=\"poi.info\" [distance]=\"getDistance(poi)\" [contacts]=\"poi.infos\" heading-color=\"#707070\"\n            second-color=\"#11b3ef\" expandable=false expanse=false></wc-details>\n          <div class=\"spacing\" *ngIf=\"i == showPois.length - 1\"></div>\n        </div>\n      </div>\n    </div>\n  </div>\n  </ion-list>\n  <div class=\"empty-list\" *ngIf=\"emptyList\">\n      {{'empty_list' | translate}}\n  </div>\n</ion-content>"
 
 /***/ }),
 
@@ -264,31 +264,32 @@ var ListFarmaciePage = /** @class */ (function () {
                     'elementType': 'poi-item', 'classification.it': "Farmacia"
                 }
             };
-            this.translate.get('init_db').subscribe(function (value) {
-                _this_1.dbService.synch(value).then(function () {
-                    _this_1.dbService.getObjectByQuery(query_1).then(function (data) {
-                        if (data.docs.length > 0) {
-                            _this_1.fullPois = data.docs.map(function (x) { return _this_1.convertPois(x); });
-                            _this_1.addDistance();
-                            _this_1.addFarmacieTurno();
-                            _this_1.subCategories(_this_1.fullPois);
-                            _this_1.buildShowPois();
-                            _this_1.tags = _this_1.buildFilter();
-                            _this_1.orderArray('near', _this_1);
-                            _this_1.isLoading = false;
+            if (!this.fullPois || this.fullPois.length == 0)
+                this.translate.get('init_db').subscribe(function (value) {
+                    _this_1.dbService.synch(value).then(function () {
+                        _this_1.dbService.getObjectByQuery(query_1).then(function (data) {
+                            if (data.docs.length > 0) {
+                                _this_1.fullPois = data.docs.map(function (x) { return _this_1.convertPois(x); });
+                                _this_1.addDistance();
+                                _this_1.addFarmacieTurno();
+                                _this_1.subCategories(_this_1.fullPois);
+                                _this_1.buildShowPois();
+                                _this_1.tags = _this_1.buildFilter();
+                                _this_1.orderArray('near', _this_1);
+                                _this_1.isLoading = false;
+                                _this_1.utils.hideLoading();
+                            }
+                            else {
+                                _this_1.emptyList = true;
+                                _this_1.utils.hideLoading();
+                            }
+                        }, function (err) {
                             _this_1.utils.hideLoading();
-                        }
-                        else {
-                            _this_1.emptyList = true;
-                            _this_1.utils.hideLoading();
-                        }
+                        });
                     }, function (err) {
                         _this_1.utils.hideLoading();
                     });
-                }, function (err) {
-                    _this_1.utils.hideLoading();
                 });
-            });
         }
     };
     ListFarmaciePage.prototype.closeTurno = function () {

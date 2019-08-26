@@ -876,7 +876,7 @@ var FilterPageFoodPage = /** @class */ (function () {
         });
     };
     FilterPageFoodPage.prototype.closeModal = function () {
-        this.modalCtrl.dismiss();
+        this.modalCtrl.dismiss(this.filters);
     };
     FilterPageFoodPage.prototype.filter = function () {
         this.modalCtrl.dismiss(this.filters);
@@ -959,7 +959,7 @@ var FilterPageRhPage = /** @class */ (function () {
         });
     };
     FilterPageRhPage.prototype.closeModal = function () {
-        this.modalCtrl.dismiss();
+        this.modalCtrl.dismiss(this.filters);
     };
     FilterPageRhPage.prototype.filter = function () {
         this.modalCtrl.dismiss(this.filters);

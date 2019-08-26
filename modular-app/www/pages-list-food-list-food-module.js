@@ -232,6 +232,30 @@ var ListFoodPage = /** @class */ (function () {
         this.config.getStringContacts(this.translate, this.language).then(function (strings) {
             _this_1.stringsContact = strings;
         });
+        element.addEventListener('tagClicked', function (tag) { return __awaiter(_this_1, void 0, void 0, function () {
+            var tagSelected;
+            return __generator(this, function (_a) {
+                tagSelected = tag.detail;
+                this.tags = this.tags.map(function (item) {
+                    if (item.value == tagSelected)
+                        return {
+                            "value": tagSelected,
+                            "isChecked": true
+                        };
+                    else {
+                        return {
+                            "value": item.value,
+                            "isChecked": item.isChecked
+                        };
+                    }
+                });
+                // this.presentFilter = true;
+                this.firstAccess = false;
+                this.buildShowPois(this.tags);
+                console.log(tagSelected);
+                return [2 /*return*/];
+            });
+        }); });
         element.addEventListener('contactClick', function (contact) { return __awaiter(_this_1, void 0, void 0, function () {
             var contactParam;
             return __generator(this, function (_a) {
@@ -259,28 +283,29 @@ var ListFoodPage = /** @class */ (function () {
     };
     ListFoodPage.prototype.ionViewDidEnter = function () {
         var _this_1 = this;
-        if (this.category) {
-            var query_1 = { 'selector': { 'elementType': 'restaurant-item' } };
-            this.translate.get('init_db').subscribe(function (value) {
-                _this_1.dbService.synch(value).then(function () {
-                    _this_1.dbService.getObjectByQuery(query_1).then(function (data) {
-                        _this_1.fullPois = data.docs.map(function (x) { return _this_1.convertPois(x); });
-                        _this_1.addDistance();
-                        _this_1.subCategories(_this_1.fullPois);
-                        _this_1.buildShowPois();
-                        _this_1.tags = _this_1.buildFilter();
-                        _this_1.orderArray('near', _this_1);
-                        _this_1.isLoading = false;
-                        _this_1.utils.hideLoading();
-                    }, function (err) {
-                        _this_1.utils.hideLoading();
-                    })
-                        , function (err) {
+        if (!this.fullPois || this.fullPois.length == 0)
+            if (this.category) {
+                var query_1 = { 'selector': { 'elementType': 'restaurant-item' } };
+                this.translate.get('init_db').subscribe(function (value) {
+                    _this_1.dbService.synch(value).then(function () {
+                        _this_1.dbService.getObjectByQuery(query_1).then(function (data) {
+                            _this_1.fullPois = data.docs.map(function (x) { return _this_1.convertPois(x); });
+                            _this_1.addDistance();
+                            _this_1.subCategories(_this_1.fullPois);
+                            _this_1.buildShowPois();
+                            _this_1.tags = _this_1.buildFilter();
+                            _this_1.orderArray('near', _this_1);
+                            _this_1.isLoading = false;
                             _this_1.utils.hideLoading();
-                        };
+                        }, function (err) {
+                            _this_1.utils.hideLoading();
+                        })
+                            , function (err) {
+                                _this_1.utils.hideLoading();
+                            };
+                    });
                 });
-            });
-        }
+            }
     };
     ListFoodPage.prototype.addDistance = function () {
         var _this_1 = this;
@@ -307,7 +332,7 @@ var ListFoodPage = /** @class */ (function () {
                     _this_1.showPois[e] = [];
                 }
                 if (p.category === e && filters ? filters.filter(function (item) {
-                    return (item.isChecked && p.classification == item.value);
+                    return (item.isChecked && p.cat[0] == item.value);
                 }).length > 0 : true) {
                     _this_1.showPois[e].push(p);
                 }
@@ -377,14 +402,13 @@ var ListFoodPage = /** @class */ (function () {
                 else
                     poiElement.subtitle = x.classification["it"];
             }
-            if (x.classification) {
-                if (x.classification[this.language])
-                    poiElement.classification = x.classification[this.language];
-                else
-                    poiElement.classification = x.classification["it"];
-                // poiElement.cat = [];
-                // poiElement.cat.push(x.classification[this.language]);
-            }
+            // if (x.classification) {
+            //   if (x.classification[this.language])
+            //     poiElement.classification = x.classification[this.language];
+            //   else poiElement.classification = x.classification["it"];
+            //   // poiElement.cat = [];
+            //   // poiElement.cat.push(x.classification[this.language]);
+            // }
             if (x.url) {
                 poiElement.url = x.url;
             }
@@ -498,7 +522,9 @@ var ListFoodPage = /** @class */ (function () {
             return this.noDistanceLabel;
     };
     ListFoodPage.prototype.removeTag = function (tag) {
+        console.log(tag);
         this.tags = this.tags.filter(function (item) { return item.value != tag.value; });
+        console.log(JSON.stringify(this.tags));
         this.firstAccess = true;
         var even = function (element) {
             // checks whether an element is even

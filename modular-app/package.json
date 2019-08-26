@@ -76,7 +76,7 @@
     "rxjs": "^6.3.3",
     "tslib": "^1.9.3",
     "wc-trasporti": "file:../wc-trasporti/wc-trasporti",
-    "wcs-comune": "0.0.168",
+    "wcs-comune": "0.0.170",
     "wcs-dettagliofunerale": "file:../wc-dettagliofunerale",
     "wcs-info": "file:../wc-info/wc-info",
     "zone.js": "~0.8.26"

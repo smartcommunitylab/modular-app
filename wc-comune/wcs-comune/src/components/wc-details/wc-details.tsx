@@ -217,8 +217,8 @@ export class WcDetails {
           }
 
           {this.expanse
-            ? <div class="description"><div class="text" innerHTML={this.text}>
-            </div>
+            ? <div class="description">
+            <div class="text" innerHTML={this.text}></div>
               <div class="title-2" style={{ color: this.headingColor }}>
                 {(this.info && this.info != '') ? "Informazioni" : ""}
               </div>

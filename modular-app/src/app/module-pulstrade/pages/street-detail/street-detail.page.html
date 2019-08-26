@@ -26,15 +26,18 @@
         <ion-grid class="note">
           <ion-row>
             <ion-col size="2">
-              <ion-icon name="close-circle"></ion-icon>
+              <div >
+                <img src="./assets/strade/icons/divieto.png">
+              </div>
+              <!-- <ion-icon name="close-circle"></ion-icon> -->
             </ion-col>
             <ion-col size="10">
               <div>
                 <div class="day">{{s.cleaningDayStr}}</div>
-                <div class="time">{{'CLOSED' | translate}} {{s.stopStartingTimeStr}}- {{s.stopEndingTimeStr}}</div>
+                <div class="time"><b>{{'CLOSED' | translate}}</b> {{s.stopStartingTimeStr}}- {{s.stopEndingTimeStr}}</div>
                 <!-- <div class="notes">{{s.notes}}</div> -->
-                <div class="lato" *ngIf="s.lato">{{'side_label' | translate}} {{s.lato}}</div>
-                <div class="tratto" *ngIf="s.tratto">{{'tratto_label' | translate}} {{s.tratto}}</div>
+                <div class="lato" *ngIf="s.lato"><b>{{'side_label' | translate}}</b> {{s.lato}}</div>
+                <div class="tratto" *ngIf="s.tratto"><b>{{'tratto_label' | translate}}</b> {{s.tratto}}</div>
               </div>
             </ion-col>
           </ion-row>

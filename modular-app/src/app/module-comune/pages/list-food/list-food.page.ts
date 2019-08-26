@@ -365,7 +365,10 @@ export class ListFoodPage implements OnInit {
     else return this.noDistanceLabel;
   }
   removeTag(tag) {
+    console.log(tag);
     this.tags = this.tags.filter(item => item.value != tag.value)
+    console.log(JSON.stringify(this.tags));
+
     this.firstAccess = true;
     var even = function (element) {
       // checks whether an element is even

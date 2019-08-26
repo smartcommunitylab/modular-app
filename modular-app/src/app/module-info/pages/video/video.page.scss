@@ -15,3 +15,9 @@ ion-searchbar {
     // top: 58px;
     z-index: 999;
 }
+ion-title{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+}

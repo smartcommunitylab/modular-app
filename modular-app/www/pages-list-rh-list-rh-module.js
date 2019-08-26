@@ -81,7 +81,7 @@ var ListRHPageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header no-border>\n    <ion-searchbar class=\"search-rh\" style=\"display: none\" showCancelButton=\"always\" animated (search)=\"toggleSearch()\"\n    (ionInput)=\"searchChanged($event)\" (ionCancel)=\"toggleSearch()\"  ></ion-searchbar>\n    <ion-toolbar>\n\n      <ion-buttons slot=\"start\">\n        <ion-back-button class=\"interaction\"></ion-back-button>\n      </ion-buttons>\n      <ion-buttons slot=\"end\">\n        <ion-button (click)=\"filterClicked()\">\n          <ion-icon name=\"options\"></ion-icon>\n        </ion-button>\n        <ion-button (click)=\"toggleSearch()\">\n          <ion-icon name=\"search\"></ion-icon>\n        </ion-button>\n      </ion-buttons>\n      <ion-title>\n        {{'RH' | translate}}\n      </ion-title>\n    </ion-toolbar>\n  </ion-header>\n  \n  <ion-content>\n    <div class=\"wrapper\" *ngIf=\"!firstAccess\">\n      <div class=\"scrolling-wrapper-flexbox loop\">\n        <div class=\"container\" *ngFor=\"let tag of tags\">\n        <div class=\"tag\"  *ngIf=\"tag.isChecked\">\n          <div class=\"tag-text\">\n            {{tag.value}}\n            <ion-icon name=\"close-circle\" (click)=\"removeTag(tag)\"></ion-icon>\n          </div>\n          \n        </div>\n      </div>\n      </div>\n    </div>\n  \n    <ion-list no-lines id=\"poi-list\">\n      <div *ngFor=\"let c of categories\">\n        <div class=\"content\">\n          <div *ngFor=\"let poi of showPois[c]; let i = index\">\n            <wc-details [img]=\"poi.image\" [stringsinput]=\"stringsContact\" [title]=\"poi.title\" [altImage]=\"altImage\"\n              [subtitle]=\"poi.subtitle\" [distance]=\"getDistance(poi)\" [text]=\"poi.text\" [info]=\"poi.info\" [contacts]=\"poi.infos\"\n              heading-color=\"#707070\" second-color=\"#11b3ef\" expandable=false expanse=false></wc-details>\n            <div class=\"spacing\" *ngIf=\"i == showPois.length - 1\"></div>\n          </div>\n        </div>\n      </div>\n    </ion-list>\n  </ion-content>"
+module.exports = "<ion-header no-border>\n    <ion-searchbar class=\"search-rh\" style=\"display: none\" showCancelButton=\"always\" animated (search)=\"toggleSearch()\"\n    (ionInput)=\"searchChanged($event)\" (ionCancel)=\"toggleSearch()\"  ></ion-searchbar>\n    <ion-toolbar>\n\n      <ion-buttons slot=\"start\">\n        <ion-back-button class=\"interaction\"></ion-back-button>\n      </ion-buttons>\n      <ion-buttons slot=\"end\">\n        <ion-button (click)=\"filterClicked()\">\n          <ion-icon name=\"options\"></ion-icon>\n        </ion-button>\n        <ion-button (click)=\"toggleSearch()\">\n          <ion-icon name=\"search\"></ion-icon>\n        </ion-button>\n      </ion-buttons>\n      <ion-title>\n        {{'RH' | translate}}\n      </ion-title>\n    </ion-toolbar>\n  </ion-header>\n  \n  <ion-content>\n    <div class=\"wrapper\" *ngIf=\"!firstAccess\">\n      <div class=\"scrolling-wrapper-flexbox loop\">\n        <div class=\"container\" *ngFor=\"let tag of tags\">\n        <div class=\"tag\"  *ngIf=\"tag.isChecked\">\n          <div class=\"tag-text\">\n            {{tag.value}}\n            <ion-icon name=\"close-circle\" (click)=\"removeTag(tag)\"></ion-icon>\n          </div>\n          \n        </div>\n      </div>\n      </div>\n    </div>\n  \n    <ion-list no-lines id=\"poi-list\">\n      <div *ngFor=\"let c of categories\">\n        <div class=\"content\">\n          <div *ngFor=\"let poi of showPois[c]; let i = index\">\n            <wc-details [img]=\"poi.image\" [stringsinput]=\"stringsContact\" [title]=\"poi.title\" [showimg]=true [showtags]=true [altImage]=\"altImage\"\n              [subtitle]=\"poi.subtitle\" [distance]=\"getDistance(poi)\" [text]=\"poi.text\" [info]=\"poi.info\" [contacts]=\"poi.infos\"\n              heading-color=\"#707070\" second-color=\"#11b3ef\" expandable=false expanse=false></wc-details>\n            <div class=\"spacing\" *ngIf=\"i == showPois.length - 1\"></div>\n          </div>\n        </div>\n      </div>\n    </ion-list>\n  </ion-content>"
 
 /***/ }),
 
@@ -232,6 +232,30 @@ var ListRHPage = /** @class */ (function () {
         this.config.getStringContacts(this.translate, this.language).then(function (strings) {
             _this_1.stringsContact = strings;
         });
+        element.addEventListener('tagClicked', function (tag) { return __awaiter(_this_1, void 0, void 0, function () {
+            var tagSelected;
+            return __generator(this, function (_a) {
+                tagSelected = tag.detail;
+                this.tags = this.tags.map(function (item) {
+                    if (item.value == tagSelected)
+                        return {
+                            "value": tagSelected,
+                            "isChecked": true
+                        };
+                    else {
+                        return {
+                            "value": item.value,
+                            "isChecked": item.isChecked
+                        };
+                    }
+                });
+                // this.presentFilter = true;
+                this.firstAccess = false;
+                this.buildShowPois(this.tags);
+                console.log(tagSelected);
+                return [2 /*return*/];
+            });
+        }); });
         element.addEventListener('contactClick', function (contact) { return __awaiter(_this_1, void 0, void 0, function () {
             var contactParam;
             return __generator(this, function (_a) {
@@ -272,27 +296,28 @@ var ListRHPage = /** @class */ (function () {
     };
     ListRHPage.prototype.ionViewDidEnter = function () {
         var _this_1 = this;
-        if (this.category) {
-            var query_1 = { 'selector': { 'elementType': 'hotel-item' } };
-            this.translate.get('init_db').subscribe(function (value) {
-                _this_1.dbService.synch(value).then(function () {
-                    _this_1.dbService.getObjectByQuery(query_1).then(function (data) {
-                        _this_1.fullPois = data.docs.map(function (x) { return _this_1.convertPois(x); });
-                        _this_1.addDistance();
-                        _this_1.subCategories(_this_1.fullPois);
-                        _this_1.buildShowPois();
-                        _this_1.tags = _this_1.buildFilter();
-                        _this_1.orderArray('near', _this_1);
-                        _this_1.isLoading = false;
-                        _this_1.utils.hideLoading();
+        if (!this.fullPois || this.fullPois.length == 0)
+            if (this.category) {
+                var query_1 = { 'selector': { 'elementType': 'hotel-item' } };
+                this.translate.get('init_db').subscribe(function (value) {
+                    _this_1.dbService.synch(value).then(function () {
+                        _this_1.dbService.getObjectByQuery(query_1).then(function (data) {
+                            _this_1.fullPois = data.docs.map(function (x) { return _this_1.convertPois(x); });
+                            _this_1.addDistance();
+                            _this_1.subCategories(_this_1.fullPois);
+                            _this_1.buildShowPois();
+                            _this_1.tags = _this_1.buildFilter();
+                            _this_1.orderArray('near', _this_1);
+                            _this_1.isLoading = false;
+                            _this_1.utils.hideLoading();
+                        }, function (err) {
+                            _this_1.utils.hideLoading();
+                        });
                     }, function (err) {
                         _this_1.utils.hideLoading();
                     });
-                }, function (err) {
-                    _this_1.utils.hideLoading();
                 });
-            });
-        }
+            }
     };
     ListRHPage.prototype.subCategories = function (array) {
         var _this_1 = this;

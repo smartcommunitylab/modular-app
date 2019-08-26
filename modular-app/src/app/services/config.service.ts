@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import * as moment from 'moment';
+import { AlertController } from '@ionic/angular';
+import { Platform } from '@ionic/angular';
 const CHOOSEN_KEY: string = "choosen";
 const MODULE_ENTRIES_KEY: string = "moduleEntries";
 
@@ -8,6 +11,45 @@ const MODULE_ENTRIES_KEY: string = "moduleEntries";
 })
 
 export class ConfigService {
+  expiringDate = '08-09-2019'
+  version = 'test';
+  // version = 'prod';
+  constructor(private http: HttpClient,private alertController: AlertController, private platform: Platform) { }
+
+  async showPopUpExpired(): Promise<any> {
+    const alert = await this.alertController.create({
+      header: 'Scaduto',
+      message: 'Questa applicazione di test è scaduta il '+this.expiringDate,
+      backdropDismiss:false,
+      buttons: [
+        {
+          text: 'Ok',
+          handler: () => {
+            navigator['app'].exitApp();
+        }}]}
+    );
+
+    await alert.present();  }
+  async showPopupExpiring(): Promise<any> {
+    const alert = await this.alertController.create({
+      header: 'Sta scadento',
+      message: 'Questa applicazione di test  scadrá il '+this.expiringDate,
+      buttons: ['OK']
+    });
+
+    await alert.present();
+  }
+  isExpired(): any {
+    var today = moment()
+    var expiringDate = moment(this.expiringDate,'DD-MM-YYYY');
+    if (expiringDate.isBefore(today))
+      return true;
+    return false
+
+  }
+  getVersion(): any {
+   return this.version;
+  }
   private appModuleName: string = "app-module";
   private menu: any;
   private carousel: any;
@@ -17,7 +59,6 @@ export class ConfigService {
     lat:46.0748,
     long:11.1217
   }
-  constructor(private http: HttpClient) { }
 
   Init(): Promise<any> {
     return new Promise<void>((resolve, reject) => {

@@ -155,21 +155,22 @@ var ListPathPage = /** @class */ (function () {
     };
     ListPathPage.prototype.ionViewDidEnter = function () {
         var _this_1 = this;
-        if (this.category && this.category.query) {
-            this.translate.get('init_db').subscribe(function (value) {
-                _this_1.dbService.synch(value).then(function () {
-                    _this_1.dbService.getObjectByQuery(_this_1.category.query).then(function (data) {
-                        _this_1.pois = data.docs.map(function (x) { return _this_1.convertPois(x); });
-                        _this_1.fullPois = _this_1.pois;
-                        _this_1.utils.hideLoading();
+        if (!this.fullPois || this.fullPois.length == 0)
+            if (this.category && this.category.query) {
+                this.translate.get('init_db').subscribe(function (value) {
+                    _this_1.dbService.synch(value).then(function () {
+                        _this_1.dbService.getObjectByQuery(_this_1.category.query).then(function (data) {
+                            _this_1.pois = data.docs.map(function (x) { return _this_1.convertPois(x); });
+                            _this_1.fullPois = _this_1.pois;
+                            _this_1.utils.hideLoading();
+                        }, function (err) {
+                            _this_1.utils.hideLoading();
+                        });
                     }, function (err) {
                         _this_1.utils.hideLoading();
                     });
-                }, function (err) {
-                    _this_1.utils.hideLoading();
                 });
-            });
-        }
+            }
         var el = document.getElementById('path-list');
         el.addEventListener('pathSelected', function (path) {
             _this_1.goToDetail(path.detail);

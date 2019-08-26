@@ -35,6 +35,14 @@ export class AppComponent {
       //   StatusBar.overlaysWebView(true);            
       //   StatusBar.styleDefault();
       // }
+      if (this.config.getVersion()=='test'){
+        if (!this.config.isExpired()){
+          this.config.showPopupExpiring()
+        }
+        else {
+          this.config.showPopUpExpired();
+        }
+      }
       this.statusBar.overlaysWebView(false);            
       this.statusBar.styleLightContent();
       this.splashScreen.hide();

@@ -202,6 +202,10 @@ var DetailPathPage = /** @class */ (function () {
         });
         this.dbService.getObjectByQuery(query).then(function (data) {
             if (data.docs) {
+                //order by id of path
+                data.docs.sort(function (a, b) {
+                    return path.steps.indexOf(a.id) - path.steps.indexOf(b.id);
+                });
                 data.docs.forEach(function (element) {
                     _this_1.fullPois.push(_this_1.convertPois(element));
                 });

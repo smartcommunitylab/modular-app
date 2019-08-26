@@ -59,7 +59,7 @@ var FilterPageEventPage = /** @class */ (function () {
         });
     };
     FilterPageEventPage.prototype.closeModal = function () {
-        this.modalCtrl.dismiss();
+        this.modalCtrl.dismiss(this.filters);
     };
     FilterPageEventPage.prototype.filter = function () {
         this.modalCtrl.dismiss(this.filters);
@@ -168,7 +168,7 @@ var ListEventPageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header no-border>\n      <ion-searchbar class=\"search-event\" style=\"display: none\" showCancelButton=\"always\" animated  (search)=\"toggleSearch()\"\n      (ionInput)=\"searchChanged($event)\" (ionCancel)=\"toggleSearch()\" ></ion-searchbar>\n  <ion-toolbar>\n\n    <ion-buttons slot=\"start\">\n      <ion-back-button class=\"interaction\"></ion-back-button>\n    </ion-buttons>\n    <ion-buttons slot=\"end\">\n      <ion-button (click)=\"filterClicked()\">\n        <ion-icon name=\"options\"></ion-icon>\n      </ion-button>\n      <ion-button (click)=\"toggleSearch()\">\n        <ion-icon name=\"search\"></ion-icon>\n      </ion-button>\n    </ion-buttons>\n    <ion-title>\n      {{'EVENTS' | translate}}\n    </ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content [scrollEvents]=\"true\" (ionScroll)=\"onScroll($event)\">\n\n  <ion-searchbar style=\"display: none\" showCancelButton animated (search)=\"toggleSearch()\"\n    (ionInput)=\"searchChanged($event)\" (ionCancel)=\"toggleSearch()\"></ion-searchbar>\n  <div *ngIf=\"!emptyList\">\n  <div class=\"wrapper\" *ngIf=\"presentFilter\">\n      <div class=\"scrolling-wrapper-flexbox loop\">\n        <div class=\"container\" *ngFor=\"let tag of tags\">\n        <div class=\"tag\"  *ngIf=\"tag.isChecked\">\n          <div class=\"tag-text\">\n            {{tag.value}}\n            <ion-icon name=\"close-circle\" (click)=\"removeTag(tag)\"></ion-icon>\n          </div>\n          \n        </div>\n      </div>\n      </div>\n    </div>\n  <div class=\"wrapper\" *ngIf=\"!presentFilter\">\n    <div id=\"idCategories\" class=\"scrolling-wrapper-flexbox loop\">\n      <ion-chip *ngFor=\"let c of categories\" id=\"{{c}}\" (click)=\"selectInternalElement(c)\" [ngClass]=\"{'categorySelected': isSelected(c)}\">\n        <ion-label class=\"interaction\" [ngClass]=\"{'categorySelected': c==actualVisualized}\">{{c}}</ion-label>\n      </ion-chip>\n    </div>\n  </div>\n  <ion-list no-lines id=\"poi-list\">\n    <div *ngFor=\"let c of categories\">\n      <ion-item class=\"label-type ion-text-center\" sticky *ngIf=\"oneElement(c) && !presentFilter\">\n          <div>{{c}}</div>\n      </ion-item>\n      <div class=\"content\">\n        \n        <div *ngFor=\"let poi of showPois[c]; let i = index\">\n          <div class=\"{{poi.category}}\"   inViewport\n          [inViewportOptions]=\"{ threshold: [0] }\" (inViewportAction)=\"onIntersection($event)\">\n            <wc-details [id]=\"poi.id\" [img]=\"poi.image\" [stringsinput]=\"stringsContact\" [title]=\"poi.title\"\n              [altImage]=\"altImage\" [stringsinput]=\"stringsContact\" [title]=\"poi.title\" [altImage]=\"altImage\"\n              [subtitle]=\"poi.subtitle\" [text]=\"poi.text\" [info]=\"poi.info\" [contacts]=\"poi.infos\"\n              heading-color=\"#707070\" second-color=\"#11b3ef\" expandable=true expanse=false></wc-details>\n            <div class=\"spacing\" *ngIf=\"i == showPois.length - 1\"></div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </ion-list>\n</div>\n<div class=\"empty-list\" *ngIf=\"emptyList\">\n    {{'empty_list' | translate}}\n</div>\n</ion-content>"
+module.exports = "<ion-header no-border>\n      <ion-searchbar class=\"search-event\" style=\"display: none\" showCancelButton=\"always\" animated  (search)=\"toggleSearch()\"\n      (ionInput)=\"searchChanged($event)\" (ionCancel)=\"toggleSearch()\" ></ion-searchbar>\n  <ion-toolbar>\n\n    <ion-buttons slot=\"start\">\n      <ion-back-button class=\"interaction\"></ion-back-button>\n    </ion-buttons>\n    <ion-buttons slot=\"end\">\n      <ion-button (click)=\"filterClicked()\">\n        <ion-icon name=\"options\"></ion-icon>\n      </ion-button>\n      <ion-button (click)=\"toggleSearch()\">\n        <ion-icon name=\"search\"></ion-icon>\n      </ion-button>\n    </ion-buttons>\n    <ion-title>\n      {{'EVENTS' | translate}}\n    </ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content [scrollEvents]=\"true\" (ionScroll)=\"onScroll($event)\">\n\n  <ion-searchbar style=\"display: none\" showCancelButton animated (search)=\"toggleSearch()\"\n    (ionInput)=\"searchChanged($event)\" (ionCancel)=\"toggleSearch()\"></ion-searchbar>\n  <div *ngIf=\"!emptyList\">\n  <div class=\"wrapper\" *ngIf=\"presentFilter\">\n      <div class=\"scrolling-wrapper-flexbox loop\">\n        <div class=\"container\" *ngFor=\"let tag of tags\">\n        <div class=\"tag\"  *ngIf=\"tag.isChecked\">\n          <div class=\"tag-text\">\n            {{tag.value}}\n            <ion-icon name=\"close-circle\" (click)=\"removeTag(tag)\"></ion-icon>\n          </div>\n          \n        </div>\n      </div>\n      </div>\n    </div>\n  <div class=\"wrapper\" *ngIf=\"!presentFilter\">\n    <div id=\"idCategories\" class=\"scrolling-wrapper-flexbox loop\">\n      <ion-chip *ngFor=\"let c of categories\" id=\"{{c}}\" (click)=\"selectInternalElement(c)\" [ngClass]=\"{'categorySelected': isSelected(c)}\">\n        <ion-label class=\"interaction\" [ngClass]=\"{'categorySelected': c==actualVisualized}\">{{c}}</ion-label>\n      </ion-chip>\n    </div>\n  </div>\n  <ion-list no-lines id=\"poi-list\">\n    <div *ngFor=\"let c of categories\">\n      <ion-item class=\"label-type ion-text-center\" sticky *ngIf=\"oneElement(c) && !presentFilter\">\n          <div>{{c}}</div>\n      </ion-item>\n      <div class=\"content\">\n        \n        <div *ngFor=\"let poi of showPois[c]; let i = index\">\n          <div class=\"{{poi.cat[0]}}\"   inViewport\n          [inViewportOptions]=\"{ threshold: [0] }\" (inViewportAction)=\"onIntersection($event)\">\n            <wc-details [id]=\"poi.id\" [img]=\"poi.image\" [stringsinput]=\"stringsContact\" [title]=\"poi.title\"\n              [altImage]=\"altImage\" [stringsinput]=\"stringsContact\" [title]=\"poi.title\" [altImage]=\"altImage\"\n              [subtitle]=\"poi.subtitle\" [text]=\"poi.text\" [info]=\"poi.info\" [contacts]=\"poi.infos\"\n              heading-color=\"#707070\" second-color=\"#11b3ef\" expandable=true expanse=false></wc-details>\n            <div class=\"spacing\" *ngIf=\"i == showPois.length - 1\"></div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </ion-list>\n</div>\n<div class=\"empty-list\" *ngIf=\"emptyList\">\n    {{'empty_list' | translate}}\n</div>\n</ion-content>"
 
 /***/ }),
 
@@ -329,31 +329,35 @@ var ListEventPage = /** @class */ (function () {
     };
     ListEventPage.prototype.ionViewDidEnter = function () {
         var _this_1 = this;
-        if (this.category && this.category.query) {
-            this.translate.get('init_db').subscribe(function (value) {
-                _this_1.dbService.synch(value).then(function () {
-                    _this_1.dbService.getObjectByQuery(_this_1.category.query).then(function (data) {
-                        if (data.docs.length > 0) {
-                            _this_1.fullPois = data.docs.map(function (x) { return _this_1.convertPois(x); });
-                            _this_1.subCategories(_this_1.fullPois);
-                            _this_1.buildShowPois();
-                            _this_1.tags = _this_1.buildFilter();
-                        }
-                        else {
-                            _this_1.emptyList = true;
-                        }
-                        _this_1.isLoading = false;
-                        _this_1.utils.hideLoading();
-                        console.log(_this_1.showPois);
-                    }, function (err) {
-                        _this_1.utils.hideLoading();
+        this.translate.get('main_event_label').subscribe(function (value) {
+            _this_1.mainEventLabel = value;
+        });
+        if (!this.fullPois || this.fullPois.length == 0)
+            if (this.category && this.category.query) {
+                this.translate.get('init_db').subscribe(function (value) {
+                    _this_1.dbService.synch(value).then(function () {
+                        _this_1.dbService.getObjectByQuery(_this_1.category.query).then(function (data) {
+                            if (data.docs.length > 0) {
+                                _this_1.fullPois = data.docs.map(function (x) { return _this_1.convertPois(x); });
+                                _this_1.subCategories(_this_1.fullPois);
+                                _this_1.buildShowPois();
+                                _this_1.tags = _this_1.buildFilter();
+                            }
+                            else {
+                                _this_1.emptyList = true;
+                            }
+                            _this_1.isLoading = false;
+                            _this_1.utils.hideLoading();
+                            console.log(_this_1.showPois);
+                        }, function (err) {
+                            _this_1.utils.hideLoading();
+                        });
                     });
                 });
-            });
-        }
-        else {
-            this.utils.hideLoading();
-        }
+            }
+            else {
+                this.utils.hideLoading();
+            }
         var element = document.getElementById('poi-list');
         this.translate.get('alt_image_string').subscribe(function (value) {
             _this_1.altImage = value;
@@ -441,8 +445,13 @@ var ListEventPage = /** @class */ (function () {
     };
     ListEventPage.prototype.onIntersection = function (_a) {
         var target = _a.target, visible = _a.visible;
-        if (visible && this.actualVisualized != target.className)
+        if (visible && this.actualVisualized != target.className) {
             this.actualVisualized = target.className;
+            //scroll to posiition
+            var element = document.getElementById(this.actualVisualized);
+            if (element)
+                element.scrollIntoView({ block: "center" });
+        }
         console.log(target + "" + visible);
     };
     ListEventPage.prototype.isSelected = function (category) {
@@ -451,8 +460,8 @@ var ListEventPage = /** @class */ (function () {
     ListEventPage.prototype.subCategories = function (array) {
         var _this_1 = this;
         array.forEach(function (element) {
-            if (!_this_1.fullCategories.includes(element.category)) {
-                _this_1.fullCategories.push(element.category);
+            if (element.cat && !_this_1.fullCategories.includes(element.cat[0])) {
+                _this_1.fullCategories.push(element.cat[0]);
             }
         });
         this.categories = this.fullCategories;
@@ -463,8 +472,8 @@ var ListEventPage = /** @class */ (function () {
         var _this_1 = this;
         this.showPois = [];
         this.fullPois.forEach(function (p) {
-            if (!_this_1.showPois[p.category]) {
-                _this_1.showPois[p.category] = [];
+            if (!_this_1.showPois[p.cat[0]]) {
+                _this_1.showPois[p.cat[0]] = [];
             }
             if (filters ? filters.filter(function (item) {
                 return (item.isChecked && p.cat.filter(function (cat) { return cat == item.value; }).length > 0);
@@ -472,7 +481,7 @@ var ListEventPage = /** @class */ (function () {
                 // return (item.isChecked && (p.cat.filter(cat => cat == item.value).length > 0 || p.parentObjectName == item.value))
                 // else (item.isChecked &&   p.parentObjectName == item.value)
             }).length > 0 : true) {
-                _this_1.showPois[p.category].push(p);
+                _this_1.showPois[p.cat[0]].push(p);
             }
         });
         //orderArray
@@ -558,8 +567,10 @@ var ListEventPage = /** @class */ (function () {
             }
             //TO DO
             if (x.category) {
-                if (x.category == 'event')
-                    poiElement.category = 'Eventi Principali';
+                if (x.category == 'event') {
+                    poiElement.category = this.mainEventLabel;
+                    poiElement.cat = [this.mainEventLabel];
+                }
                 else
                     poiElement.category = x.category;
             }
@@ -601,7 +612,7 @@ var ListEventPage = /** @class */ (function () {
             this.presentFilter = false;
             this.categories.forEach(function (c) {
                 _this_1.showPois[c] = _this_1.fullPois.filter(function (el) {
-                    return (el.category == c);
+                    return (el.cat[0] == c);
                 });
             });
         }
@@ -618,7 +629,7 @@ var ListEventPage = /** @class */ (function () {
             _this.categories.forEach(function (c) {
                 _this_1.showPois[c] = _this_1.fullPois.filter(function (el) {
                     if (el.title)
-                        return (el.title.toLowerCase().indexOf(value.toLowerCase()) > -1 && el.category == c);
+                        return (el.title.toLowerCase().indexOf(value.toLowerCase()) > -1 && el.cat[0] == c);
                     return false;
                 });
             });
