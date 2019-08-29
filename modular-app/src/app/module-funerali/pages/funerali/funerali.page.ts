@@ -157,6 +157,7 @@ export class FuneraliPage {
         this.showFunerali[p.dataFunerale].push(p);
       }
     });
+    console.log(JSON.stringify(this.showFunerali));
     //orderArray
     // this.orderArray('asc', this);
   }
@@ -194,6 +195,8 @@ export class FuneraliPage {
       var topPos = myElement.offsetLeft;
       document.getElementById('idDates').scrollLeft = topPos - (window.innerWidth / 2);
     }
+    this.actualVisualized = ref;
+
   }
 
   yyyymmdd(date: Date): string {

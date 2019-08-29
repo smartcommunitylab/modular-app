@@ -146,7 +146,10 @@ export class ListPoiPage implements OnInit {
     }
   }
   public onIntersection({ target, visible }: { target: Element; visible: boolean }): void {
-    if (visible && this.actualVisualized != target.className)
+       console.log("visible"+visible);
+       console.log("this.actualVisualized"+this.actualVisualized);
+       console.log("target.className"+target.className);
+       if (visible && this.actualVisualized != target.className)
       this.actualVisualized = target.className;
     //scroll to posiition
     var element = document.getElementById(this.actualVisualized);
@@ -156,6 +159,8 @@ export class ListPoiPage implements OnInit {
   }
 
   isSelected(classification) {
+    // console.log("classification"+classification);
+    // console.log("this.actualVisualized"+this.actualVisualized);
     return classification == this.actualVisualized;
   }
   onScroll(e) {
@@ -169,6 +174,10 @@ export class ListPoiPage implements OnInit {
       // var scrollheight = elem[0].getBoundingClientRect().top;
       // this.content.scrollToPoint(0, scrollheight, 1000);
     }
+    this.actualVisualized = ref;
+    // console.log("this.actualVisualized"+this.actualVisualized);
+    // console.log("ref"+ref);
+
   }
   convertPois(x) {
     const poiElement: any = {};
