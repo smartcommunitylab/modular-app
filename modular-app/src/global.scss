@@ -96,7 +96,10 @@ ion-checkbox {
     .alert-button-inner.sc-ion-alert-md {
         justify-content: center!important;
     }
-
+    .alert-message.sc-ion-alert-ios {
+        max-height: none !important;
+        max-width: none !important;
+    }
     .alert-message.sc-ion-alert-md {
         max-height: none !important;
         max-width: none !important;

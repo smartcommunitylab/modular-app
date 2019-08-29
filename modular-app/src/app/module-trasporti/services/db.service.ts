@@ -26,6 +26,7 @@ export class DbService {
   }
 
   Init(): Promise<any> {
+    console.log('Init')
     return this.plt.ready().then((readySource: string) => {
       return this.dbSetup();
     }).catch((error: Error) => {
@@ -94,45 +95,56 @@ export class DbService {
 
 
   doWithDB(successcallback, errorcallback) {
+    console.log('doWithDB()')
     var that = this;
     if (this.db == null) {
-
-      (<any>window).plugins.sqlDB.copy(this.getDBFileShortName(), 0, () => {
-        console.log('copied');
+      console.log('this.db is null');
+      // (<any>window).plugins.sqlDB.copy(this.getDBFileShortName(), 0, () => {
+      //   console.log('copied success');
         (<any>window).sqlitePlugin.openDatabase({
           // this.sqlite.create({
           name: this.getDBFileShortName(),
-          location: 'default'
+          // location: 'default',
+          bgType:1,
+          skipBackup:true,
+          iosDatabaseLocation:'Documents'
         }, (db) => {
           that.db = db;
+          console.log('opened, try to query')
           db.executeSql("select * from version", [], (res) => {
+            console.log('version present')
             console.log(JSON.stringify(res))
             successcallback();
           }, (e) => {
-            console.log(JSON.stringify(e));
+            console.log("errror select * from version" + JSON.stringify(e));
             errorcallback();
           });
         })
 
-      }, (err) => {
-        console.log(err);
-        if (err.code = 516) {
-          (<any>window).sqlitePlugin.openDatabase({
-            name: this.getDBFileShortName(),
-            location: 'default'
-          }, (db) => {
-            that.db = db;
-            db.executeSql("select * from version", [], (res) => {
-              console.log(JSON.stringify(res))
-              successcallback();
-            }, (e) => {
-              console.log(JSON.stringify(e));
-              errorcallback();
-            });
-          })
-        }
-      })
+      // }, (err) => {
+      //   console.log('not copied')
+      //   console.log(err);
+      //   if (err.code = 516) {
+      //     console.log('error 516');
+      //     (<any>window).sqlitePlugin.openDatabase({
+      //       name: this.getDBFileShortName(),
+      //       location: 'default'
+      //     }, (db) => {
+      //       that.db = db;
+      //       console.log('opened, try to query')
+      //       db.executeSql("select * from version", [], (res) => {
+      //         console.log('version present');
+      //         console.log(JSON.stringify(res))
+      //         successcallback();
+      //       }, (e) => {
+      //         console.log(JSON.stringify(e));
+      //         errorcallback();
+      //       });
+      //     })
+      //   }
+      // })
     } else {
+      console.log('this.db is NOT null'+JSON.stringify(this.db));
       successcallback();
     }
   };
@@ -163,13 +175,16 @@ export class DbService {
   };
 
   openDB(successcallback, errorcallback) {
+    console.log('openDB()')
     var that = this;
     var _do = function () {
       that.db.executeSql("select * from version", [], (res) => {
+        console.log('opened and present version')
         console.log(JSON.stringify(res))
         var data = that.convertData(res);
         successcallback(data);
       }, (e) => {
+        console.log('error query select * from version')
         console.log(JSON.stringify(e));
         errorcallback();
       });
@@ -179,9 +194,11 @@ export class DbService {
   }
   process(url): Promise<any> {
     var that = this;
+    console.log('process()')
     let promise = new Promise((resolve, reject) => {
 
       JSZipUtils.getBinaryContent(url, function (err, data) {
+
         if (err) {
           console.log("Error reading ZIP file: " + err);
           reject(err);
@@ -192,18 +209,24 @@ export class DbService {
         var jszipobj = new JSZip(data);
 
         Object.keys(jszipobj.files).forEach(function (key) {
+          console.log('file'+key);
+
           that.file.createFile(that.getDBPath(), that.getDBFileShortName(), true)
             .then(function (success) {
+              console.log('created file');
+
               var f = jszipobj.file(key);
               // that.file.removeFile(that.getDBPath(), that.getDBFileShortName()).then(function () {
+                console.log("getDBPath"+that.getDBPath());
+                console.log("getDBFileShortName"+that.getDBFileShortName());
               that.file.writeFile(that.getDBPath(), that.getDBFileShortName(), jszipobj.file(key).asArrayBuffer(), { replace: true })
                 .then(function (success) {
-                  console.log('success copy');
+                  console.log('success write');
                   // that.db = null;
                   resolve(true);
 
                 }, function (error) {
-                  console.log('error copy');
+                  console.log('error write');
                   reject(error);
 
                 });
@@ -234,11 +257,14 @@ export class DbService {
   }
 
   installDB(remote) {
+    console.log('installDB('+remote+')')
     return this.process(this.getDataURL(remote));
 
   }
 
   localDBisPresent() {
+    console.log('localDBisPresent()')
+
     var deferred = new Promise((resolve, reject) => {
 
       //return true if a localdb is present
@@ -253,6 +279,7 @@ export class DbService {
   }
 
   mapVersions(arrayOfVersions) {
+    console.log('mapVersion()')
     var returnVersions = {};
     for (var i = 0; i < arrayOfVersions.length; ++i) {
       returnVersions['' + arrayOfVersions[i].agencyID] = arrayOfVersions[i].version;
@@ -263,6 +290,8 @@ export class DbService {
   }
 
   getLocalVersion() {
+    console.log('getLocalVersion()')
+
     var that = this;
     var deferred = new Promise((resolve, reject) => {
       //return true if a localdb is present
@@ -290,6 +319,7 @@ export class DbService {
   }
 
   synchDB() {
+    console.log('synchDB()')
     var that = this;
     var deferred = new Promise((resolve, reject) => {
       var err = function (e) {
@@ -300,7 +330,9 @@ export class DbService {
         resolve(true);
       }
       that.getLocalVersion().then(function (localversion) {
+        console.log('got the local version, try remote');
         that.http.get(that.config.getServerURL() + '/versions').toPromise().then(remoteversion => {
+          console.log('remote version'+remoteversion);
           if (that.compareversions(localversion, remoteversion) < 0) {
             that.installDB(true).then(success, err); //remote
           } else {
@@ -390,24 +422,25 @@ export class DbService {
     return this.syncStops
   }
   dbSetup() {
+    console.log('dbSetup()');
     var that = this;
     var deferred = new Promise((resolve, reject) => {
       var err = function (error) {
         reject(error);
         console.log("NOT synch: " + error);
-
       }
       var success = function () {
         resolve(true);
         console.log("synch done");
-
       }
 
       //try to open db (check if db is present)
       this.localDBisPresent().then(function (result) {
         //use local version of db in data/routesdb.zip
         if (!result) {
+          console.log("start install");
           that.installDB(false).then(function () {
+            console.log("after install, start synch")
             that.synchDB().then(success, err);
           }, err);
         } else {

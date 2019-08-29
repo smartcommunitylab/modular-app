@@ -11,12 +11,15 @@
                  <div class="second-title ion-text-center">{{'title_first_launch'|translate}}</div>
              </ion-col>
          </ion-row>
-             <ion-row>
+             <ion-row text-center>
                  <ion-col>
-                     <ion-button (click)="chooseProfile('citizen')">{{'citizen_profile_label'|translate}}</ion-button>
-                 </ion-col>
+                     <div>
+                     <ion-button (click)="chooseProfile('citizen')">
+                         {{'citizen_profile_label'|translate}}</ion-button>
+                    </div>
+                    </ion-col>
              </ion-row>
-             <ion-row>
+             <ion-row text-center>
                  <ion-col>
                      <ion-button (click)="chooseProfile('turist')">{{'turist_profile_label'|translate}}</ion-button>
                  </ion-col>

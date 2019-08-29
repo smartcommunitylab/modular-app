@@ -1,38 +1,17 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[129],{
 
-/***/ "../wc-dettagliofunerale/dist/esm/es5/polyfills/array.js":
-/*!***************************************************************!*\
-  !*** ../wc-dettagliofunerale/dist/esm/es5/polyfills/array.js ***!
-  \***************************************************************/
-/*! exports provided: applyPolyfill */
+/***/ "./node_modules/wcs-comune/dist/esm/es5/build/oqq34gwq.entry.js":
+/*!**********************************************************************!*\
+  !*** ./node_modules/wcs-comune/dist/esm/es5/build/oqq34gwq.entry.js ***!
+  \**********************************************************************/
+/*! exports provided: WcListPoi */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "applyPolyfill", function() { return applyPolyfill; });
-function applyPolyfill(window, document) {/*!
-Array.prototype.fill
-*/
-Array.prototype.fill||Object.defineProperty(Array.prototype,"fill",{value:function(t){var r,e,i,n,o,a,l;if(null==this)throw new TypeError("this is null or not defined");for(e=(r=Object(this)).length>>>0,n=(i=arguments[1]>>0)<0?Math.max(e+i,0):Math.min(i,e),l=(a=void 0===(o=arguments[2])?e:o>>0)<0?Math.max(e+a,0):Math.min(a,e);n<l;)r[n]=t,n++;return r}});
-
-/*!
-Array.prototype.find
-*/
-Array.prototype.find||Object.defineProperty(Array.prototype,"find",{writable:!0,configurable:!0,value:function(c,e){if(null==this)throw new TypeError('"this" is null or not defined');var b=Object(this),f=b.length>>>0;if("function"!==typeof c)throw new TypeError("predicate must be a function");for(var a=0;a<f;){var d=b[a];if(c.call(e,d,a,b))return d;a++}}});
-/*!
-Array.prototype.findIndex
-*/
-Array.prototype.findIndex||Object.defineProperty(Array.prototype,"findIndex",{value:function(c,d){if(null==this)throw new TypeError('"this" is null or not defined');var b=Object(this),e=b.length>>>0;if("function"!==typeof c)throw new TypeError("predicate must be a function");for(var a=0;a<e;){if(c.call(d,b[a],a,b))return a;a++}return-1},configurable:!0,writable:!0});
-/*!
-Array.from
-*/
-Array.from||(Array.from=function(){var l=Object.prototype.toString,h=function(c){return"function"===typeof c||"[object Function]"===l.call(c)},m=Math.pow(2,53)-1;return function(c){var k=Object(c);if(null==c)throw new TypeError("Array.from requires an array-like object - not null or undefined");var d=1<arguments.length?arguments[1]:void 0,f;if("undefined"!==typeof d){if(!h(d))throw new TypeError("Array.from: when provided, the second argument must be a function");2<arguments.length&&(f=arguments[2])}var a=
-Number(k.length);a=isNaN(a)?0:0!==a&&isFinite(a)?(0<a?1:-1)*Math.floor(Math.abs(a)):a;a=Math.min(Math.max(a,0),m);for(var g=h(this)?Object(new this(a)):Array(a),b=0,e;b<a;)e=k[b],g[b]=d?"undefined"===typeof f?d(e,b):d.call(f,e,b):e,b+=1;g.length=a;return g}}());
-/*!
-Array.prototype.includes
-*/
-Array.prototype.includes||Object.defineProperty(Array.prototype,"includes",{writable:!0,configurable:!0,value:function(r,e){if(null==this)throw new TypeError('"this" is null or not defined');var t=Object(this),n=t.length>>>0;if(0===n)return!1;var i,o,a=0|e,u=Math.max(0<=a?a:n-Math.abs(a),0);for(;u<n;){if((i=t[u])===(o=r)||"number"==typeof i&&"number"==typeof o&&isNaN(i)&&isNaN(o))return!0;u++}return!1}});
-}
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "WcListPoi", function() { return WcPoi; });
+/* harmony import */ var _ws_comune_core_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../ws-comune.core.js */ "./node_modules/wcs-comune/dist/esm/es5/ws-comune.core.js");
+var WcPoi=function(){function e(){}return e.prototype.cjsonHandler=function(){console.log("changed")},e.prototype.poiCompletedHandler=function(e){this.poiCompleted.emit(e)},e.prototype.getPoiTitle=function(){if(this.poi)return this.poi.title},e.prototype.getPoiAddress=function(){if(this.poi&&this.poi.address)return this.poi.address},e.prototype.getPoiAddressName=function(){if(this.poi&&this.poi.address)return this.getPoiAddress().name},e.prototype.getImg=function(){if(this.poi)return this.poi.image},e.prototype.componentDidLoad=function(){console.log(this.getPoiTitle()),this.poiCompletedHandler(this.poi)},e.prototype.render=function(){return Object(_ws_comune_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div",{class:"container"},Object(_ws_comune_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div",{innerHTML:this.poi.title}),Object(_ws_comune_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div",{innerHTML:this.poi.subtitle}),Object(_ws_comune_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div",null,this.getPoiAddressName()),Object(_ws_comune_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div",{innerHTML:this.poi.description}),Object(_ws_comune_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div",null,Object(_ws_comune_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("img",{src:this.getImg()})))},Object.defineProperty(e,"is",{get:function(){return"wc-list-poi"},enumerable:!0,configurable:!0}),Object.defineProperty(e,"encapsulation",{get:function(){return"shadow"},enumerable:!0,configurable:!0}),Object.defineProperty(e,"properties",{get:function(){return{poi:{type:"Any",attr:"poi",mutable:!0,watchCallbacks:["cjsonHandler"]},wcAddress:{type:String,attr:"wc-address",mutable:!0}}},enumerable:!0,configurable:!0}),Object.defineProperty(e,"events",{get:function(){return[{name:"poiCompleted",method:"poiCompleted",bubbles:!0,cancelable:!0,composed:!0}]},enumerable:!0,configurable:!0}),Object.defineProperty(e,"style",{get:function(){return".container{border:1px solid grey;padding:8px;margin:8px}"},enumerable:!0,configurable:!0}),e}();
 
 /***/ })
 

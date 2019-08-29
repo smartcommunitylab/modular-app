@@ -11002,6 +11002,7 @@ var DbService = /** @class */ (function () {
     }
     DbService.prototype.Init = function () {
         var _this = this;
+        console.log('Init');
         return this.plt.ready().then(function (readySource) {
             return _this.dbSetup();
         }).catch(function (error) {
@@ -11070,17 +11071,20 @@ var DbService = /** @class */ (function () {
     ;
     DbService.prototype.doWithDB = function (successcallback, errorcallback) {
         var _this = this;
+        console.log('doWithDB');
         var that = this;
         if (this.db == null) {
             window.plugins.sqlDB.copy(this.getDBFileShortName(), 0, function () {
-                console.log('copied');
+                console.log('copied success');
                 window.sqlitePlugin.openDatabase({
                     // this.sqlite.create({
                     name: _this.getDBFileShortName(),
                     location: 'default'
                 }, function (db) {
                     that.db = db;
+                    console.log('opened, try to query');
                     db.executeSql("select * from version", [], function (res) {
+                        console.log('version present');
                         console.log(JSON.stringify(res));
                         successcallback();
                     }, function (e) {
@@ -11089,14 +11093,18 @@ var DbService = /** @class */ (function () {
                     });
                 });
             }, function (err) {
+                console.log('not copied');
                 console.log(err);
                 if (err.code = 516) {
+                    console.log('error 516');
                     window.sqlitePlugin.openDatabase({
                         name: _this.getDBFileShortName(),
                         location: 'default'
                     }, function (db) {
                         that.db = db;
+                        console.log('opened, try to query');
                         db.executeSql("select * from version", [], function (res) {
+                            console.log('version present');
                             console.log(JSON.stringify(res));
                             successcallback();
                         }, function (e) {
@@ -11142,9 +11150,11 @@ var DbService = /** @class */ (function () {
     };
     ;
     DbService.prototype.openDB = function (successcallback, errorcallback) {
+        console.log('openDB()');
         var that = this;
         var _do = function () {
             that.db.executeSql("select * from version", [], function (res) {
+                console.log('opened and present version');
                 console.log(JSON.stringify(res));
                 var data = that.convertData(res);
                 successcallback(data);
@@ -11157,6 +11167,7 @@ var DbService = /** @class */ (function () {
     };
     DbService.prototype.process = function (url) {
         var that = this;
+        console.log('process()');
         var promise = new Promise(function (resolve, reject) {
             jszip_utils__WEBPACK_IMPORTED_MODULE_5__["getBinaryContent"](url, function (err, data) {
                 if (err) {
@@ -11167,8 +11178,10 @@ var DbService = /** @class */ (function () {
                 jszip__WEBPACK_IMPORTED_MODULE_4__["support"].nodebuffer = false;
                 var jszipobj = new jszip__WEBPACK_IMPORTED_MODULE_4__(data);
                 Object.keys(jszipobj.files).forEach(function (key) {
+                    console.log('file' + key);
                     that.file.createFile(that.getDBPath(), that.getDBFileShortName(), true)
                         .then(function (success) {
+                        console.log('created file');
                         var f = jszipobj.file(key);
                         // that.file.removeFile(that.getDBPath(), that.getDBFileShortName()).then(function () {
                         that.file.writeFile(that.getDBPath(), that.getDBFileShortName(), jszipobj.file(key).asArrayBuffer(), { replace: true })
@@ -11202,10 +11215,12 @@ var DbService = /** @class */ (function () {
         }
     };
     DbService.prototype.installDB = function (remote) {
+        console.log('installDB(' + remote + ')');
         return this.process(this.getDataURL(remote));
     };
     DbService.prototype.localDBisPresent = function () {
         var _this = this;
+        console.log('localDBisPresent()');
         var deferred = new Promise(function (resolve, reject) {
             //return true if a localdb is present
             _this.openDB(function (res) {
@@ -11218,6 +11233,7 @@ var DbService = /** @class */ (function () {
         return deferred;
     };
     DbService.prototype.mapVersions = function (arrayOfVersions) {
+        console.log('mapVersion()');
         var returnVersions = {};
         for (var i = 0; i < arrayOfVersions.length; ++i) {
             returnVersions['' + arrayOfVersions[i].agencyID] = arrayOfVersions[i].version;
@@ -11227,6 +11243,7 @@ var DbService = /** @class */ (function () {
         return returnVersions;
     };
     DbService.prototype.getLocalVersion = function () {
+        console.log('getLocalVersion()');
         var that = this;
         var deferred = new Promise(function (resolve, reject) {
             //return true if a localdb is present
@@ -11251,6 +11268,7 @@ var DbService = /** @class */ (function () {
         return 0;
     };
     DbService.prototype.synchDB = function () {
+        console.log('synchDB()');
         var that = this;
         var deferred = new Promise(function (resolve, reject) {
             var err = function (e) {
@@ -11261,7 +11279,9 @@ var DbService = /** @class */ (function () {
                 resolve(true);
             };
             that.getLocalVersion().then(function (localversion) {
+                console.log('got the local version, try remote');
                 that.http.get(that.config.getServerURL() + '/versions').toPromise().then(function (remoteversion) {
+                    console.log('remote version' + remoteversion);
                     if (that.compareversions(localversion, remoteversion) < 0) {
                         that.installDB(true).then(success, err); //remote
                     }
@@ -11353,6 +11373,7 @@ var DbService = /** @class */ (function () {
     };
     DbService.prototype.dbSetup = function () {
         var _this = this;
+        console.log('dbSetup()');
         var that = this;
         var deferred = new Promise(function (resolve, reject) {
             var err = function (error) {
