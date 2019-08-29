@@ -1,17 +1,35 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[108],{
 
-/***/ "./node_modules/wcs-comune/dist/esm/es5/build/ldobok8w.entry.js":
-/*!**********************************************************************!*\
-  !*** ./node_modules/wcs-comune/dist/esm/es5/build/ldobok8w.entry.js ***!
-  \**********************************************************************/
-/*! exports provided: WcPathInfo */
+/***/ "./node_modules/wc-trasporti/dist/esm/es5/polyfills/object.js":
+/*!********************************************************************!*\
+  !*** ./node_modules/wc-trasporti/dist/esm/es5/polyfills/object.js ***!
+  \********************************************************************/
+/*! exports provided: applyPolyfill */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "WcPathInfo", function() { return WcPathInfo; });
-/* harmony import */ var _ws_comune_core_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../ws-comune.core.js */ "./node_modules/wcs-comune/dist/esm/es5/ws-comune.core.js");
-var WcPathInfo=function(){function t(){this.headingColor="red"}return t.prototype.render=function(){return Object(_ws_comune_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div",{class:"container"},Object(_ws_comune_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div",{class:"image"},Object(_ws_comune_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("img",{src:this.img})),Object(_ws_comune_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div",{class:"info-title",style:{color:this.headingColor}},this.title),Object(_ws_comune_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div",{class:"subtitle",innerHTML:this.subtitle}),Object(_ws_comune_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div",{class:"text",innerHTML:this.text}),Object(_ws_comune_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div",{class:"title-2",style:{color:this.headingColor}},this.info&&""!=this.info?"Informazioni":""),Object(_ws_comune_core_js__WEBPACK_IMPORTED_MODULE_0__["h"])("div",{class:"info text",innerHTML:this.info}))},Object.defineProperty(t,"is",{get:function(){return"wc-path-info"},enumerable:!0,configurable:!0}),Object.defineProperty(t,"encapsulation",{get:function(){return"shadow"},enumerable:!0,configurable:!0}),Object.defineProperty(t,"properties",{get:function(){return{headingColor:{type:String,attr:"heading-color"},img:{type:String,attr:"img"},info:{type:String,attr:"info"},subtitle:{type:String,attr:"subtitle"},text:{type:String,attr:"text",mutable:!0},title:{type:String,attr:"title"}}},enumerable:!0,configurable:!0}),Object.defineProperty(t,"style",{get:function(){return".container{max-width:100%}.image img{height:200px;width:100%}.info-title{font-size:25px;font-weight:700;margin-top:2%;margin-bottom:2%}.subtitle{font-size:18px;font-style:italic;margin-bottom:2%}.title-2{font-size:20px;font-weight:700}.text,.title-2{margin-bottom:2%}.text{font-size:15px}"},enumerable:!0,configurable:!0}),t}();
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "applyPolyfill", function() { return applyPolyfill; });
+function applyPolyfill(window, document) {/*!
+Object.assign
+*/
+"function"!=typeof Object.assign&&Object.defineProperty(Object,"assign",{value:function(d,f){if(null==d)throw new TypeError("Cannot convert undefined or null to object");for(var e=Object(d),b=1;b<arguments.length;b++){var a=arguments[b];if(null!=a)for(var c in a)Object.prototype.hasOwnProperty.call(a,c)&&(e[c]=a[c])}return e},writable:!0,configurable:!0});
+/*!
+Object.entries
+*/
+Object.entries||(Object.entries=function(c){for(var b=Object.keys(c),a=b.length,d=Array(a);a--;)d[a]=[b[a],c[b[a]]];return d});
+/*!
+Object.values
+*/
+Object.values||(Object.values=function(n){return Object.keys(n).map(function(r){return n[r]})});
+
+/*!
+Number
+*/
+void 0===Number.isFinite&&(Number.isFinite=function(a){return"number"===typeof a&&isFinite(a)});
+Number.isNaN=Number.isNaN||function(a){return a!==a};
+Number.isInteger=Number.isInteger||function(a){return"number"===typeof a&&isFinite(a)&&Math.floor(a)===a};
+}
 
 /***/ })
 

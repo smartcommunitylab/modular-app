@@ -90,7 +90,7 @@ module.exports = "<ion-header no-border>\n\n  <ion-toolbar>\n      <ion-searchba
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "ion-searchbar {\n  position: fixed;\n  width: calc(100% - 60px);\n  top: 3px;\n  z-index: 999; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL2NoaW44L0RvY3VtZW50cy93b3JrL21vZHVsYXJBcHAvbW9kdWxhci1hcHAvc3JjL2FwcC9tb2R1bGUtY29tdW5lL3BhZ2VzL3RvdXJpc3Qtc2VydmljZXMvdG91cmlzdC1zZXJ2aWNlcy5wYWdlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDSSxnQkFBZTtFQUNmLHlCQUF3QjtFQUN4QixTQUFRO0VBRVIsYUFBWSxFQUNmIiwiZmlsZSI6InNyYy9hcHAvbW9kdWxlLWNvbXVuZS9wYWdlcy90b3VyaXN0LXNlcnZpY2VzL3RvdXJpc3Qtc2VydmljZXMucGFnZS5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiaW9uLXNlYXJjaGJhciB7XG4gICAgcG9zaXRpb246IGZpeGVkO1xuICAgIHdpZHRoOiBjYWxjKDEwMCUgLSA2MHB4KTtcbiAgICB0b3A6IDNweDtcbiAgICAvLyB0b3A6IDU4cHg7XG4gICAgei1pbmRleDogOTk5O1xufSJdfQ== */"
+module.exports = "ion-searchbar {\n  position: fixed;\n  width: calc(100% - 60px);\n  top: 3px;\n  z-index: 999; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9Vc2Vycy91c2VyL0RvY3VtZW50cy9Qcm9qZWN0cy9tb2R1bGFyQXBwL21vZHVsYXItYXBwL21vZHVsYXItYXBwL3NyYy9hcHAvbW9kdWxlLWNvbXVuZS9wYWdlcy90b3VyaXN0LXNlcnZpY2VzL3RvdXJpc3Qtc2VydmljZXMucGFnZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksZ0JBQWU7RUFDZix5QkFBd0I7RUFDeEIsU0FBUTtFQUVSLGFBQVksRUFDZiIsImZpbGUiOiJzcmMvYXBwL21vZHVsZS1jb211bmUvcGFnZXMvdG91cmlzdC1zZXJ2aWNlcy90b3VyaXN0LXNlcnZpY2VzLnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbImlvbi1zZWFyY2hiYXIge1xuICAgIHBvc2l0aW9uOiBmaXhlZDtcbiAgICB3aWR0aDogY2FsYygxMDAlIC0gNjBweCk7XG4gICAgdG9wOiAzcHg7XG4gICAgLy8gdG9wOiA1OHB4O1xuICAgIHotaW5kZXg6IDk5OTtcbn0iXX0= */"
 
 /***/ }),
 

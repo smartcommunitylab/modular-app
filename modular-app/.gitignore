@@ -27,7 +27,7 @@ plugins/
 plugins/android.json
 plugins/ios.json
 $RECYCLE.BIN/
-
+wc-trasporti/wc-trasporti/node_modules/
 .DS_Store
 Thumbs.db
 UserInterfaceState.xcuserstate

@@ -21,7 +21,20 @@
   </div>
 </div>
 <ion-content padding forceOverscroll="false">
-
+    <div class="wrapper" *ngIf="isSelected('home')">
+        <div class="scrolling-wrapper-flexbox-cards loop">
+          <div class="card all-card" *ngFor="let category of allCategories">
+            <div class="home-container">
+              <div class="label-button">{{category.name[language]}}</div>
+  
+              <div class="add" (click)="addElement(category)">
+                <ion-icon name="add"></ion-icon>
+              </div>
+            </div>
+            <!-- <h2>{{category.name[language]}}</h2> -->
+          </div>
+        </div>
+      </div>
   <div class="container-button" *ngIf="isSelected('home')">
     <div scrollY="true">
       <ion-list id="category-buttons">
@@ -41,20 +54,7 @@
         </ion-grid>
       </ion-list>
     </div>
-    <div class="wrapper">
-      <div class="scrolling-wrapper-flexbox-cards loop">
-        <div class="card all-card" *ngFor="let category of allCategories">
-          <div class="home-container">
-            <div class="label-button">{{category.name[language]}}</div>
 
-            <div class="add" (click)="addElement(category)">
-              <ion-icon name="add"></ion-icon>
-            </div>
-          </div>
-          <!-- <h2>{{category.name[language]}}</h2> -->
-        </div>
-      </div>
-    </div>
 
   </div>
   <div scrollY="true" *ngIf="isSelected('settings')">

@@ -155,9 +155,10 @@ export class HomeSettingsPage implements OnInit {
     return categoryElement;
   }
   select(sel) {
-    if (this.selection == sel)
-      this.selection = null;
-    else this.selection = sel;
+    // if (this.selection == sel)
+    //   this.selection = null;
+    // else 
+    this.selection = sel;
   }
 
   isSelected(sel) {
