@@ -21,7 +21,7 @@
 
 .container {
   margin-left: 3%;
-  width: 94%;
+  width: 100%;
 }
 
 .horizontal-line {
@@ -193,6 +193,7 @@
   background-color: white;
   border-radius: 8px;
   border: 1px solid #11b3ef;
+  min-width: 120px;
 }
 
 .azione-label {
