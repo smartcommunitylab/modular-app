@@ -195,6 +195,7 @@ export class ListEventPage implements OnInit {
       this.content.scrollToPoint(0, yOffset-100, 0)
 
     }
+    this.actualVisualized = ref;
   }
 
   isScrolledIntoView() {

@@ -91,6 +91,7 @@ export class HomeTrasportiPage extends MainPage implements OnInit {
       let yOffset = elem[0].offsetTop;
       this.content.scrollToPoint(0, yOffset - 100, 0)
     }
+    this.actualVisualized = ref;
   }
   getHtml(elem) {
     if (elem.ref == "trains")

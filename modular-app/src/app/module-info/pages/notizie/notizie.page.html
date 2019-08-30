@@ -1,5 +1,5 @@
-<ion-header>
-    <ion-searchbar class="search-notizie" style="display: none"  showCancelButton="always" animated (ionChange)="Ricerca()" (ionCancel)="OpenCloseRicerca()"  placeholder="Cerca" id="barraDiRicerca"
+<ion-header [ngClass]="{'higher': isRicercaOpen}" >
+    <ion-searchbar class="search-notizie" [ngClass]="{'searchspace': isRicercaOpen}" style="display: none"  showCancelButton="always" animated (ionChange)="Ricerca()" (ionCancel)="OpenCloseRicerca()"  placeholder="Cerca" id="barraDiRicerca"
     [(ngModel)]="daCercare"></ion-searchbar>
   <ion-toolbar>
 

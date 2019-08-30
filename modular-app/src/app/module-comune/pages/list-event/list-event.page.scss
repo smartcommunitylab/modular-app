@@ -10,6 +10,7 @@ ion-searchbar {
     // width: calc(100% - 60px);
     // top: 3px;
     // top: 58px;
+    background-color: white;
     z-index: 999;
 }
 .column {
@@ -18,6 +19,12 @@ ion-searchbar {
 .c-text{
     width: 60%;
     margin-left: 20%;
+}
+.searchspace {
+    background-color:white;
+}
+.higher{
+    height: 100px;
 }
 
 .c-btn {

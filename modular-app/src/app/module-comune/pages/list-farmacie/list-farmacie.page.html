@@ -1,5 +1,5 @@
-<ion-header >
-    <ion-searchbar  class="search-farmacie" style="display: none" showCancelButton="always" animated (search)="toggleSearch()"
+<ion-header [ngClass]="{'higher': search}"  >
+    <ion-searchbar  class="search-farmacie" [ngClass]="{'searchspace': search}" style="display: none" showCancelButton="always" animated (search)="toggleSearch()"
     (ionInput)="searchChanged($event)" (ionCancel)="toggleSearch()" ></ion-searchbar>
   <ion-toolbar>
 
@@ -29,7 +29,7 @@
   <ion-list no-lines id="poi-list" >
     <div *ngIf="!emptyList">
     <div *ngFor="let c of categories">
-      <div class="content">
+      <div class="content" >
         <div *ngFor="let poi of showPois[c]; let i = index">
           <wc-details [stringsinput]="stringsContact" [title]="poi.title"  [showtags]=false [subtitle]="poi.subtitle" [text]="poi.text"
             [info]="poi.info" [distance]="getDistance(poi)" [contacts]="poi.infos" heading-color="#707070"

@@ -121,6 +121,12 @@
     <allow-navigation href="http://192.168.31.104:8110" sessionid="a851ed70" />
     <allow-navigation href="http://192.168.31.104:8111" sessionid="e3b45a7c" />
     <allow-navigation href="http://192.168.31.104:8112" sessionid="d6e51928" />
+    <allow-navigation href="http://192.168.31.104:8114" sessionid="60794b1d" />
+    <allow-navigation href="http://192.168.31.104:8115" sessionid="dfd09fc2" />
+    <allow-navigation href="http://192.168.31.104:8116" sessionid="083ddcfc" />
+    <allow-navigation href="http://192.168.31.104:8117" sessionid="826993bb" />
+    <allow-navigation href="http://192.168.31.104:8118" sessionid="86cc9b89" />
+    <allow-navigation href="http://192.168.31.104:8119" sessionid="92e1ba21" />
     <engine name="browser" spec="5.0.4" />
     <engine name="android" spec="7.0.0" />
     <engine name="ios" spec="4.5.5" />

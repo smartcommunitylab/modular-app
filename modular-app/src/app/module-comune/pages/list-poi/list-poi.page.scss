@@ -40,7 +40,9 @@ ion-searchbar {
 .order-icon {
     transform: rotate(90deg)
 }
-
+ion-list {
+    padding-top:40px;
+}
 .wrapper {
 
     .scrolling-wrapper-flexbox {
@@ -117,4 +119,10 @@ ion-toolbar{
 }
 ion-title{
     font-weight: bold;
+}
+.searchspace {
+    background-color:white;
+}
+.higher{
+    height: 100px;
 }

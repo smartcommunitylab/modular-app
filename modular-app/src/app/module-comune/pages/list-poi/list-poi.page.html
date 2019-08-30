@@ -1,5 +1,5 @@
-<ion-header no-border>
-    <ion-searchbar class="search-poi" style="display: none" showCancelButton="always"  animated (search)="toggleSearch()"
+<ion-header no-border [ngClass]="{'higher': search}" >
+    <ion-searchbar class="search-poi" [ngClass]="{'searchspace': search}" style="display: none" showCancelButton="always"  animated (search)="toggleSearch()"
     (ionInput)="searchChanged($event)" (ionCancel)="toggleSearch()" ></ion-searchbar>
     <ion-toolbar>
 
@@ -50,7 +50,7 @@
         <ion-item class="label-type ion-text-center" sticky *ngIf="oneElement(c) && !presentFilter">
             <div>{{c}}</div>
         </ion-item>
-        <div class="content">
+        <div class="content" >
           <div *ngFor="let poi of showPois[c]; let i = index">
             <div class="{{poi.cat[0]}}"   inViewport
             [inViewportOptions]="{ threshold: [0] }" (inViewportAction)="onIntersection($event)">
