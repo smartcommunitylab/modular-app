@@ -108,6 +108,8 @@ export class FuneraliPage {
       }
     });
     this.dates = this.fullDates;
+    console.log("data"+JSON.stringify(this.dates) );
+
     if (this.dates.length > 0) {
       setTimeout(() => this.selectInternalElement(this.dates[i])
         , 500)
@@ -155,9 +157,9 @@ export class FuneraliPage {
         // else (item.isChecked &&   p.parentObjectName == item.value)
       }).length > 0 : true) {
         this.showFunerali[p.dataFunerale].push(p);
+
       }
     });
-    console.log(JSON.stringify(this.showFunerali));
     //orderArray
     // this.orderArray('asc', this);
   }
@@ -171,13 +173,15 @@ export class FuneraliPage {
   //   });
   // }
   public onIntersection({ target, visible }: { target: Element; visible: boolean }): void {
+    console.log("onIntersection");
+
     if (visible && this.actualVisualized != target.className)
       this.actualVisualized = target.className;
     //scroll to posiition
     var element = document.getElementById(this.actualVisualized);
     if (element)
       element.scrollIntoView({ block: "center" });
-    console.log(target + "" + visible);
+    console.log(JSON.stringify(target) + "  " + visible);
   }
   isSelected(date) {
     return date == this.actualVisualized;

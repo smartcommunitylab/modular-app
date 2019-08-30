@@ -1,5 +1,5 @@
-<ion-header >
-        <ion-searchbar class="search-funerali" style="display: none" showCancelButton="always" animated (search)="toggleSearch()"
+<ion-header [ngClass]="{'higher': search}" >
+        <ion-searchbar class="search-funerali" [ngClass]="{'searchspace': search}" style="display: none" showCancelButton="always" animated (search)="toggleSearch()"
         (ionInput)="searchChanged($event)" (ionCancel)="toggleSearch()"></ion-searchbar>
     <ion-toolbar>
         <!-- <ion-searchbar (ionChange)="Ricerca()" placeholder="cerca nominativo" [(ngModel)]="name" clearIcon="false"> -->
@@ -39,7 +39,7 @@
                 <div class="content" >
                     <div *ngFor="let item of showFunerali[c]; let i = index">
                         <!-- <div *ngFor="let item of vetFunerali; let i = index;"> -->
-                        <div class="{{item.dataFunerale}}" inViewport [inViewportOptions]="{ threshold: [0] }"
+                        <div class="{{item.dataFunerale}}" inViewport [inViewportOptions]="{ threshold: [0] , partial:false, root:root}"
                             (inViewportAction)="onIntersection($event)">
                             <dettaglio-morte (indicazioni)="IndicazioniFunerali(i)" (condividi)="CondividiFunerali(i)"
                                 [funerale]="sendParam(item)" [string]="string" isFunerale={{true}}></dettaglio-morte>
