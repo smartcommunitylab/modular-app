@@ -1,4 +1,4 @@
-<ion-header [ngClass]="{'higher': isRicercaOpen}" >
+<ion-header [ngClass]="{'higher': searchAndIos()}">
   <!-- <ion-searchbar showCancelButton="always" animated  (ionChange)="Ricerca()"
     placeholder="Cerca" id="barraDiRicerca" [(ngModel)]="daCercare">    </ion-searchbar> -->
   <ion-searchbar class="search-video" [ngClass]="{'searchspace': isRicercaOpen}" style="display: none" showCancelButton="always" animated (ionChange)="Ricerca()"

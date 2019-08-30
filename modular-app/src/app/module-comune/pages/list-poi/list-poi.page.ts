@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { NavController, AlertController, IonContent, ModalController, LoadingController } from '@ionic/angular';
+import { NavController, AlertController, IonContent, ModalController, LoadingController, Platform } from '@ionic/angular';
 import { DbService } from '../../services/db.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
@@ -40,6 +40,7 @@ export class ListPoiPage implements OnInit {
     private callNumber: CallNumber,
     private modalController: ModalController,
     private utils: UtilsService,
+    private plt: Platform,
     private loadingController: LoadingController,
     private config: ConfigService) {
     if (window[this.config.getAppModuleName()]['language'])
@@ -144,6 +145,9 @@ export class ListPoiPage implements OnInit {
         }
       })
     }
+  }
+  searchAndIos() {
+    return this.plt.is('ios') && this.search
   }
   public onIntersection({ target, visible }: { target: Element; visible: boolean }): void {
        console.log("visible"+visible);

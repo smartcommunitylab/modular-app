@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController, AlertController } from '@ionic/angular';
+import { NavController, AlertController, Platform } from '@ionic/angular';
 import { DbService } from '../../services/db.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
@@ -19,7 +19,7 @@ export class ListPathPage implements OnInit {
   doneTypingInterval = 500;
   search = false;
 
-  constructor(public navCtrl: NavController, private utils: UtilsService, public dbService: DbService, public alertCtrl: AlertController,
+  constructor(public navCtrl: NavController,private plt: Platform, private utils: UtilsService, public dbService: DbService, public alertCtrl: AlertController,
     private router: Router, private route: ActivatedRoute, private translate: TranslateService) {
     this.translate.use(this.language);
   }
@@ -33,6 +33,9 @@ export class ListPathPage implements OnInit {
           this.category = cat;
         }
       });
+  }
+  searchAndIos() {
+    return this.plt.is('ios') && this.search
   }
   ionViewDidEnter() {
     if (!this.fullPois || this.fullPois.length == 0)

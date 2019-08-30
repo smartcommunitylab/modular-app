@@ -1,4 +1,4 @@
-<ion-header no-border [ngClass]="{'higher': search}" >
+<ion-header no-border [ngClass]="{'higher': searchAndIos()}">
 
   <ion-toolbar>
       <ion-searchbar class="search-services" [ngClass]="{'searchspace': search}" style="display: none" showCancelButton="never" animated (search)="toggleSearch()"

@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { NavController, AlertController, PopoverController, Events, IonContent, ModalController, LoadingController } from '@ionic/angular';
+import { NavController, AlertController, PopoverController, Events, IonContent, ModalController, LoadingController, Platform } from '@ionic/angular';
 import { DbService } from '../../services/db.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
@@ -48,7 +48,8 @@ export class ListEventPage implements OnInit {
     public events: Events,
     private translate: TranslateService,
     private callNumber: CallNumber,
-    private utils: UtilsService
+    private utils: UtilsService,
+    private plt:Platform
   ) {
     this.language = window[this.config.getAppModuleName()]['language'];
     this.translate.use(this.language);
@@ -187,6 +188,9 @@ export class ListEventPage implements OnInit {
         }
       })
     }
+  }
+  searchAndIos() {
+    return this.plt.is('ios') && this.search
   }
   selectInternalElement(ref) {
     var elem: any = document.getElementsByClassName(ref);

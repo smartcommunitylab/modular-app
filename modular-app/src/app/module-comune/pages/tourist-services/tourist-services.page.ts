@@ -1,6 +1,6 @@
 // tslint:disable: no-shadowed-variable
 import { Component, OnInit } from '@angular/core';
-import { NavController, AlertController, PopoverController, Events, ModalController } from '@ionic/angular';
+import { NavController, AlertController, PopoverController, Events, ModalController, Platform } from '@ionic/angular';
 import { DbService } from '../../services/db.service';
 import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
 import { PopoverComponent } from 'src/app/shared/popover/popover.component';
@@ -35,6 +35,7 @@ export class TouristServicesPage implements OnInit {
   emptyList: boolean = false;
 
   constructor(
+    private plt:Platform,
     private modalController: ModalController,
     private config: ConfigService,
     public navCtrl: NavController,
@@ -95,7 +96,9 @@ export class TouristServicesPage implements OnInit {
 
     }
   }
-
+  searchAndIos() {
+    return this.plt.is('ios') && this.search
+  }
 
   ionViewDidEnter() {
     if (!this.fullPois || this.fullPois.length == 0)

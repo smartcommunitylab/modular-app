@@ -39,6 +39,7 @@
     "@ngx-translate/http-loader": "^4.0.0",
     "@types/pouchdb": "6.3.3",
     "add-cors-to-couchdb": "0.0.6",
+    "android-versions": "^1.4.0",
     "c-coffee-icon": "0.0.2",
     "call-number": "^1.0.1",
     "cordova-android": "7.0.0",

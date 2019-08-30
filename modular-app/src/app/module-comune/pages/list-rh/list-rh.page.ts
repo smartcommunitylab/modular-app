@@ -1,6 +1,6 @@
 // tslint:disable: no-shadowed-variable
 import { Component, OnInit } from '@angular/core';
-import { NavController, AlertController, PopoverController, Events, ModalController } from '@ionic/angular';
+import { NavController, AlertController, PopoverController, Events, ModalController, Platform } from '@ionic/angular';
 import { DbService } from '../../services/db.service';
 import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
 import { PopoverComponent } from 'src/app/shared/popover/popover.component';
@@ -50,7 +50,9 @@ export class ListRHPage implements OnInit {
     private translate: TranslateService,
     private geoSrv: GeoService,
     private callNumber: CallNumber,
-    private utils: UtilsService
+    private utils: UtilsService,
+    private plt: Platform,
+
   ) {
     if (window[this.config.getAppModuleName()]['language'])
       this.language = window[this.config.getAppModuleName()]['language'];
@@ -132,6 +134,9 @@ export class ListRHPage implements OnInit {
         console.log('vai all\'indirizzo' + contactParam.value);
       }
     })
+  }
+  searchAndIos() {
+    return this.plt.is('ios') && this.search
   }
   addDistance(): any {
     this.fullPois.forEach(element => {

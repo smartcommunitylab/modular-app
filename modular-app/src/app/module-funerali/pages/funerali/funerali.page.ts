@@ -2,7 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { TipoDefunto } from '../../domain/tipo-defunto';
 import { TipoFunerale } from '../../domain/tipo-funerale';
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
-import { IonInfiniteScroll, IonContent } from '@ionic/angular';
+import { IonInfiniteScroll, IonContent, Platform } from '@ionic/angular';
 import { DatiService } from '../../services/dati-service.service';
 import { start } from 'repl';
 import * as moment from 'moment';
@@ -46,6 +46,7 @@ export class FuneraliPage {
 
   constructor(private social: SocialSharing,
     private datiService: DatiService,
+    private plt:Platform,
     private utils: UtilsService,
     private translate: TranslateService) {
     var language = window[this.utils.getAppModuleName()]['language'];
@@ -80,7 +81,9 @@ export class FuneraliPage {
     );
 
   }
-
+  searchAndIos() {
+    return this.plt.is('ios') && this.search
+  }
   typingTimer;                //timer identifier
   doneTypingInterval = 500;  //time in ms, 5 second for example
   toggleSearch() {

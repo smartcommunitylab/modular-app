@@ -2,7 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { DatiServiceService } from '../../services/dati-service.service';
 import { TipoEvento } from '../../domain/tipo-evento';
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
-import { IonInfiniteScroll } from '@ionic/angular';
+import { IonInfiniteScroll, Platform } from '@ionic/angular';
 import { ConfigService } from '../../services/config.service';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -33,7 +33,7 @@ export class VideoPage {
   language: any;
 
 
-  constructor(private datiService: DatiServiceService, private social: SocialSharing, private config: ConfigService, private translate: TranslateService) {
+  constructor(private datiService: DatiServiceService, private plt: Platform, private social: SocialSharing, private config: ConfigService, private translate: TranslateService) {
     this.language = window[this.config.getAppModuleName()]['language'];
     this.translate.use(this.language);
   }
@@ -41,7 +41,9 @@ export class VideoPage {
   visualizzaMappa(latitudine: string, longitudine: string) {
     window.open(encodeURI(this.urlMappa + latitudine + "," + longitudine), '_system');
   }
-
+  searchAndIos() {
+    return this.plt.is('ios') && this.isRicercaOpen
+  }
   visualizzaShare(titolo: string, img: string, linkVideo: string) {
     console.log("Share");
     this.social.canShareViaEmail().then(() => {
