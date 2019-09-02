@@ -7,9 +7,9 @@
             <div class="ion-text-center" *ngIf="groupId!=title">{{groupId}}</div>
         </ion-title>
         <ion-buttons slot="end">
-            <ion-icon name="body" class="tt-button" [ngClass]="{'filled': accessibility}"
+            <ion-icon src="assets/trasporti/wheelchair.svg" class="tt-button" [ngClass]="{'filled': accessibility,'not-filled': !accessibility}"
                 (click)="changeAccessibility()"></ion-icon>
-            <ion-icon name="resize" class="tt-button" [ngClass]="{'filled': !littletable}" (click)="changeSize()">
+            <ion-icon src="assets/trasporti/enlarge.svg" class="tt-button" [ngClass]="{'filled': !littletable,'not-filled': littletable}" (click)="changeSize()">
             </ion-icon>
         </ion-buttons>
     </ion-toolbar>
