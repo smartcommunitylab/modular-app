@@ -2,49 +2,49 @@
   "namespace": "mycomponent",
   "fsNamespace": "mycomponent",
   "loader": "../mycomponent.js",
+  "corePolyfilled": "es5-build-disabled.js",
   "global": "mycomponent.global.js",
-  "core": "mycomponent.unsw7quz.js",
-  "corePolyfilled": "mycomponent.wpwqykjx.js",
+  "core": "mycomponent.core.js",
   "components": {
     "ion-col": {
       "bundleIds": {
-        "$": "ow1he9wh"
+        "$": "ion-col"
       },
       "encapsulation": "shadow"
     },
     "ion-content": {
       "bundleIds": {
-        "$": "u0bbxdix"
+        "$": "wc-trasporti-table"
       },
       "encapsulation": "shadow"
     },
     "ion-icon": {
       "bundleIds": {
-        "$": "ow1he9wh"
+        "$": "ion-col"
       },
       "encapsulation": "shadow"
     },
     "ion-row": {
       "bundleIds": {
-        "$": "ow1he9wh"
+        "$": "ion-col"
       },
       "encapsulation": "shadow"
     },
     "wc-trasporti-map": {
       "bundleIds": {
-        "$": "jdccabjd"
+        "$": "wc-trasporti-map"
       },
       "encapsulation": "shadow"
     },
     "wc-trasporti-stop": {
       "bundleIds": {
-        "$": "wphuzlpk"
+        "$": "wc-trasporti-stop"
       },
       "encapsulation": "shadow"
     },
     "wc-trasporti-table": {
       "bundleIds": {
-        "$": "u0bbxdix"
+        "$": "wc-trasporti-table"
       },
       "encapsulation": "shadow"
     }
