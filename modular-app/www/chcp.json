@@ -1,8 +1,0 @@
-{
-  "name": "modularApp",
-  "ios_identifier": "it.smartcommunitylab.modularapp",
-  "android_identifier": "it.smartcommunitylab.modularapp",
-  "update": "start",
-  "content_url": "https://dev.smartcommunitylab.it/modularapp",
-  "release": "2019.08.18-10.56.20"
-}
