@@ -371,7 +371,7 @@ export class ListFoodPage implements OnInit {
   }
   removeTag(tag) {
     console.log(tag);
-    this.tags = this.tags.filter(item => item.value != tag.value)
+    this.tags = this.tags.map(item => tag.value == item.value ? { value: item.value, isChecked: false } : { value: item.value, isChecked: item.isChecked })
     console.log(JSON.stringify(this.tags));
 
     this.firstAccess = true;

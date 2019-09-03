@@ -39,6 +39,7 @@ export class FuneraliPage {
   dataFunerale: any;
   oraMorte: any;
   luogoFunerale: any;
+  partenzaFunerale:any;
   mappa: any;
   condividi: any;
   emptyList: boolean = false;
@@ -67,6 +68,7 @@ export class FuneraliPage {
         this.dataFunerale = this.translate.instant('data_funerale');
         this.oraMorte = this.translate.instant('ora_morte');
         this.luogoFunerale = this.translate.instant('luogo_funerale');
+        this.partenzaFunerale= this.translate.instant('partenza_funerale');
         this.mappa = this.translate.instant('mappa');
         this.condividi = this.translate.instant('condividi');
         this.networkMessage = this.translate.instant('network_message');
@@ -75,6 +77,7 @@ export class FuneraliPage {
           dataFunerale: this.dataFunerale,
           oraMorte: this.oraMorte,
           luogoFunerale: this.luogoFunerale,
+          partenzaFunerale:this.partenzaFunerale,
           mappa: this.mappa,
           condividi: this.condividi
         })
@@ -249,7 +252,7 @@ export class FuneraliPage {
   //condividi da mobile per i funerali
   CondividiFunerali(i) {
     this.social.canShareViaEmail().then(() => {
-      this.social.share(this.vetFunerali[i].nome + " " + this.vetFunerali[i].luogoFunerale + " " + this.vetFunerali[i].dataFunerale ? this.vetFunerali[i].dataFunerale : this.vetFunerali[i].dataPartenza + " " + this.vetFunerali[i].luogoFunerale, null, null);
+      this.social.share(i.nome + " " +this.luogoFunerale+ i.luogoFunerale + " " +this.dataFunerale+ i.dataFunerale + " " +this.oraMorte+i.oraFunerale);
     }).catch(() => {
       alert("Il servizio di condivisione non è disponibile per questo dispositivo");
     });

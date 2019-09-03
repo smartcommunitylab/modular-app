@@ -1,6 +1,5 @@
 
 ion-button {
-    margin-bottom: 5%;
 }
 .map {
     height: 100%;
@@ -39,4 +38,21 @@ ion-item {
 .icon-bar {
     font-size: 30px;
 
+}
+.locate {
+    font-size: 30px!important;
+}
+.button-locate{
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    z-index: 999;
+    font-size: inherit;
+   
+}
+
+.button-action:hover{
+    background: url('https://i.hizliresim.com/a1zraR.png') no-repeat;
 }

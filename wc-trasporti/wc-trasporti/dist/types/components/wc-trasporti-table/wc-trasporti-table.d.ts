@@ -4,6 +4,7 @@ import '@ionic/core';
 export declare class AppHome {
     element: HTMLElement;
     data: string;
+    colwidth: number;
     reloadTable(): void;
     dataTT: any;
     fontsize: number;
@@ -59,9 +60,11 @@ export declare class AppHome {
     tableHeaderHeight: number;
     headStr: string[];
     animateData(oldValue: string, newValue: string): any;
+    getTextWidth(): number;
     setBiggerStyle(): void;
     setSmallerStyle(): void;
     changeStyleTable(): void;
+    locateTablePosition(data: any, time: any): number;
     initMeasures(data: any, noscroll: any): void;
     componentWillLoad(): void;
     buildData(): any;

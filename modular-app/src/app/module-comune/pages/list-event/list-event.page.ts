@@ -9,6 +9,7 @@ import { CallNumber } from '@ionic-native/call-number/ngx';
 import { UtilsService } from '../../services/utils.service';
 import { UtilsService as GlobalUtils } from 'src/app/services/utils.service';
 import { FilterPageEventPage } from './filter-page-event/filter-page-event.page';
+import moment from 'moment';
 @Component({
   selector: 'app-list-event',
   templateUrl: './list-event.page.html',
@@ -34,6 +35,8 @@ export class ListEventPage implements OnInit {
   presentFilter = false;
   emptyList: boolean = false;
   mainEventLabel: any;
+  todayDate: any = moment();
+  nextWeekDate: any = moment().add(1, 'weeks');
   constructor(
     private globalUtils: GlobalUtils,
     private loading: LoadingController,
@@ -49,7 +52,7 @@ export class ListEventPage implements OnInit {
     private translate: TranslateService,
     private callNumber: CallNumber,
     private utils: UtilsService,
-    private plt:Platform
+    private plt: Platform
   ) {
     this.language = window[this.config.getAppModuleName()]['language'];
     this.translate.use(this.language);
@@ -102,33 +105,34 @@ export class ListEventPage implements OnInit {
         this.mainEventLabel = value;
       }
     );
-    if (!this.fullPois || this.fullPois.length==0)
-    if (this.category && this.category.query) {
-      this.translate.get('init_db').subscribe(value => {
-        this.dbService.synch(value).then(() => {
-          this.dbService.getObjectByQuery(this.category.query).then((data) => {
-            if (data.docs.length > 0) {
-              this.fullPois = data.docs.map(x => this.convertPois(x));
-              this.subCategories(this.fullPois);
-              this.buildShowPois();
-              this.tags = this.buildFilter();
-  
-            }
-            else {
-              this.emptyList = true;
-            }
-            this.isLoading = false;
-            this.utils.hideLoading();
-            console.log(this.showPois);
-          }, (err) => {
-            this.utils.hideLoading();
-          });
-        });
-      })
+    if (!this.fullPois || this.fullPois.length == 0)
+      if (this.category && this.category.query) {
+        this.translate.get('init_db').subscribe(value => {
+          this.dbService.synch(value).then(() => {
+            this.dbService.getObjectByQuery(this.category.query).then((data) => {
+              if (data.docs.length > 0) {
+                this.fullPois = data.docs.map(x => this.convertPois(x));
+                this.spreadEvents();
+                this.subCategories(this.fullPois);
+                this.buildShowPois();
+                this.tags = this.buildFilter();
 
-    } else {
-      this.utils.hideLoading();
-    }
+              }
+              else {
+                this.emptyList = true;
+              }
+              this.isLoading = false;
+              this.utils.hideLoading();
+              console.log(this.showPois);
+            }, (err) => {
+              this.utils.hideLoading();
+            });
+          });
+        })
+
+      } else {
+        this.utils.hideLoading();
+      }
     const element = document.getElementById('poi-list');
     this.translate.get('alt_image_string').subscribe(
       value => {
@@ -167,7 +171,6 @@ export class ListEventPage implements OnInit {
         console.log(tagSelected);
       })
       element.addEventListener('contactClick', async (contact) => {
-        // console.log(contact)
         var contactParam = JSON.parse((<any>contact).detail)
         if (contactParam.type == 'phone') {
           this.callNumber.callNumber(contactParam.value, true)
@@ -189,6 +192,41 @@ export class ListEventPage implements OnInit {
       })
     }
   }
+
+  spreadEvents(): any {
+    //take every event in fullpois e spread it for days;
+    var spreadArray = [];
+    for (var i = 0; i < this.fullPois.length; i++) {
+      var day = moment();
+      var from = moment(this.fullPois[i].fromTime).startOf('day');
+      var to = moment(this.fullPois[i].toTime).endOf('day');
+      if (!from && !to) {
+        //main event
+        spreadArray.push(this.fullPois[i]);
+      }
+      else for (var k = 0; k < 7; k++) {
+        var poi = JSON.parse(JSON.stringify(this.fullPois[i]));
+        if (day.isBetween(from, to)) {
+          var dayP = moment(day);
+          poi['day'] = dayP;
+          spreadArray.push(poi);
+        }
+        day.add(1, 'days');
+      }
+
+    }
+    function compare(a, b) {
+      if (a['day'].unix() < b['day'].unix()) {
+        return -1;
+      }
+      if (a['day'].unix() > b['day'].unix()) {
+        return 1;
+      }
+      return 0;
+    }
+    spreadArray.sort(compare);
+    this.fullPois = spreadArray;
+  }
   searchAndIos() {
     return this.plt.is('ios') && this.search
   }
@@ -196,12 +234,14 @@ export class ListEventPage implements OnInit {
     var elem: any = document.getElementsByClassName(ref);
     if (elem.length > 0) {
       let yOffset = elem[0].offsetTop;
-      this.content.scrollToPoint(0, yOffset-100, 0)
+      this.content.scrollToPoint(0, yOffset - 100, 0)
 
     }
     this.actualVisualized = ref;
   }
-
+  compareActual(c) {
+    return c.startOf('day').format('DD-MM-YYYY') == this.actualVisualized;
+  }
   isScrolledIntoView() {
     var element = document.querySelector('.poi');
     var position = element[0].getBoundingClientRect();
@@ -216,36 +256,44 @@ export class ListEventPage implements OnInit {
       console.log('Element is partially visible in screen');
     }
   }
+  getClassName(day) {
+    return day.startOf('day').format('DD-MM-YYYY');
+  }
   public onIntersection({ target, visible }: { target: Element; visible: boolean }): void {
-    if (visible && this.actualVisualized != target.className)
-     {
-       this.actualVisualized = target.className;
-       //scroll to posiition
-       var element = document.getElementById(this.actualVisualized);
-       if (element)
-       element.scrollIntoView({block:"center"});
-      }
+    if (visible && this.actualVisualized != target.className) {
+      this.actualVisualized = target.className;
+      //scroll to posiition
+      var element = document.getElementById(this.actualVisualized);
+      if (element)
+        element.scrollIntoView({ block: "center" });
+    }
     console.log(target + "" + visible);
   }
   isSelected(category) {
-    return category == this.actualVisualized;
+    return category.startOf('day').format('DD-MM-YYYY') == this.actualVisualized;
+  }
+  getDateSTring(c) {
+    return c.startOf('day').format('DD-MM-YYYY');
   }
   subCategories(array: Array<any>) {
     array.forEach(element => {
-      if (element.cat && !this.fullCategories.includes(element.cat[0])) {
-        this.fullCategories.push(element.cat[0]);
+      if (element.day && this.fullCategories.filter(day => {
+        return day.startOf('day').format('DD-MM-YYYY') === element.day.startOf('day').format('DD-MM-YYYY')
+      }).length == 0) {
+        this.fullCategories.push(element.day);
       }
     });
     this.categories = this.fullCategories;
     if (this.categories.length > 0)
-    setTimeout(() => this.actualVisualized = this.categories[0]
-    , 500)  }
+      setTimeout(() => this.actualVisualized = this.categories[0]
+        , 500)
+  }
 
   buildShowPois(filters?) {
     this.showPois = [];
     this.fullPois.forEach(p => {
-      if (!this.showPois[p.cat[0]]) {
-        this.showPois[p.cat[0]] = [];
+      if (!this.showPois[p.day.startOf('day').format('DD-MM-YYYY')]) {
+        this.showPois[p.day.startOf('day').format('DD-MM-YYYY')] = [];
       }
       if (filters ? filters.filter(item => {
         return (item.isChecked && p.cat.filter(cat => cat == item.value).length > 0)
@@ -253,7 +301,7 @@ export class ListEventPage implements OnInit {
         // return (item.isChecked && (p.cat.filter(cat => cat == item.value).length > 0 || p.parentObjectName == item.value))
         // else (item.isChecked &&   p.parentObjectName == item.value)
       }).length > 0 : true) {
-        this.showPois[p.cat[0]].push(p);
+        this.showPois[p.day.startOf('day').format('DD-MM-YYYY')].push(p);
       }
     });
     //orderArray
@@ -265,20 +313,23 @@ export class ListEventPage implements OnInit {
     if (x) {
       if (x.title) {
         if (x.title[this.language])
-        poiElement.title = x.title[this.language];
+          poiElement.title = x.title[this.language];
         else poiElement.title = x.title["it"];
       }
       if (x.subtitle) {
         if (x.subtitle[this.language])
-        poiElement.subtitle = x.subtitle[this.language];
+          poiElement.subtitle = x.subtitle[this.language];
         else poiElement.subtitle = x.subtitle["it"];
       }
       if (x.fromTime) {
         poiElement.fromTime = x.fromTime;
       }
+      if (x.toTime) {
+        poiElement.toTime = x.toTime;
+      }
       if (x.description) {
         if (x.description[this.language])
-        poiElement.description = x.description[this.language];
+          poiElement.description = x.description[this.language];
         else poiElement.description = x.description["it"];
       }
       if (x.image) {
@@ -293,32 +344,32 @@ export class ListEventPage implements OnInit {
       else poiElement["topics"] = [];
       if (x.cat) {
         if (x.cat[this.language])
-        poiElement.cat = x.cat[this.language];
+          poiElement.cat = x.cat[this.language];
         else poiElement.cat = x.cat["it"];
       }
       if (x.eventPeriod) {
-        if ( x.eventPeriod[this.language])
-        poiElement.date = x.eventPeriod[this.language];
+        if (x.eventPeriod[this.language])
+          poiElement.date = x.eventPeriod[this.language];
         else poiElement.date = x.eventPeriod["it"];
       }
       if (x.eventTiming) {
         if (x.eventTiming[this.language])
-        poiElement.time = x.eventTiming[this.language];
+          poiElement.time = x.eventTiming[this.language];
         else poiElement.time = x.eventTiming["it"];
       }
       if (x.info) {
-        if ( x.info[this.language])
-        poiElement.info = x.info[this.language];
+        if (x.info[this.language])
+          poiElement.info = x.info[this.language];
         else poiElement.info = x.info["it"];
       }
       if (x.address) {
-        if ( x.address[this.language])
-        poiElement.address = x.address[this.language];
+        if (x.address[this.language])
+          poiElement.address = x.address[this.language];
         else poiElement.address = x.address["it"];
       }
       if (x.description) {
         if (x.description[this.language])
-        poiElement.text = x.description[this.language];
+          poiElement.text = x.description[this.language];
         else poiElement.text = x.description["it"];
       }
       if (x.parentEventId) {
@@ -329,17 +380,16 @@ export class ListEventPage implements OnInit {
       }
       //TO DO
       if (x.category) {
-        if (x.category == 'event')
-          {
-            poiElement.category = this.mainEventLabel;
-            poiElement.cat=[this.mainEventLabel];
-          }
+        if (x.category == 'event') {
+          poiElement.category = this.mainEventLabel;
+          poiElement.cat = [this.mainEventLabel];
+        }
         else
           poiElement.category = x.category;
       }
       if (x.classification) {
         if (x.classification[this.language])
-        poiElement.classification = x.classification[this.language];
+          poiElement.classification = x.classification[this.language];
         else poiElement.classification = x.classification["it"];
       }
       if (x.url) {
@@ -381,7 +431,7 @@ export class ListEventPage implements OnInit {
     }
   }
   oneElement(category) {
-    return (this.showPois[category].length > 0)
+    return (this.showPois[category] && this.showPois[category].length > 0)
   }
   searchChanged(input: any) {
     clearTimeout(this.typingTimer);
@@ -435,7 +485,7 @@ export class ListEventPage implements OnInit {
   //   this.buildAlert('filter');
   // }
   removeTag(tag) {
-    this.tags = this.tags.filter(item => item.value != tag.value)
+    this.tags = this.tags.map(item => tag.value == item.value ? { value: item.value, isChecked: false } : { value: item.value, isChecked: item.isChecked })
     this.firstAccess = true;
     var even = function (element) {
       // checks whether an element is even
@@ -522,9 +572,18 @@ export class ListEventPage implements OnInit {
   orderArray(condition: string, _this: any) {
     _this.categories.forEach(c => {
       if (condition.indexOf('asc') > -1) {
-        _this.showPois[c] = _this.showPois[c].sort((a, b) => (a.fromTime > b.fromTime) ? 1 : -1);
+        _this.showPois[c] = _this.showPois[c.format('DD-MM-YYYY')].sort((a, b) => {
+          if (a.fromTime == a.toTime && b.fromTime != b.toTime)
+            return -1
+          else {
+            if (a.fromTime > b.fromTime)
+              return 1
+            else
+              -1
+          }
+        });
       } else {
-        _this.showPois[c] = _this.showPois[c].sort((a, b) => (a.fromTime < b.fromTime) ? 1 : -1);
+        _this.showPois[c] = _this.showPois[c.format('DD-MM-YYYY')].sort((a, b) => (a.fromTime < b.fromTime) ? 1 : -1);
       }
     });
   }

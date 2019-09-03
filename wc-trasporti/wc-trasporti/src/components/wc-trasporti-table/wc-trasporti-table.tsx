@@ -1,6 +1,6 @@
 import { Component, Prop, State, Element, Event, EventEmitter, Watch, Listen } from '@stencil/core';
 import '@ionic/core';
-// import moment from 'moment';
+import moment from 'moment';
 
 
 @Component({
@@ -13,6 +13,7 @@ export class AppHome {
   @Element() element: HTMLElement;
 
   @Prop() data: string;
+  colwidth: number;
   @Watch('data')
   reloadTable() {
     this.componentWillLoad();
@@ -100,7 +101,10 @@ export class AppHome {
   animateData(oldValue: string, newValue: string): any {
     throw new Error("Method not implemented." + oldValue + newValue);
   }
-
+getTextWidth() {
+  var measurer = this.element.shadowRoot.querySelector('#measurer');
+  return (measurer.getBoundingClientRect().width);
+};
   //    set the variables for bigger style
   setBiggerStyle() {
     this.littletable = true;
@@ -187,8 +191,24 @@ export class AppHome {
       // $ionicScrollDelegate.$getByHandle('list').scrollTo(actualCol * this.colwidth, actualRow * this.stopsColLineHeight, false);
 
     }, 2000);
-
   }
+  locateTablePosition(data, time) {
+    if (!data) return;
+    // time = $filter('date')(time, 'HH:mm');
+    time = moment(time).format('HH:mm');
+    for (var i = 0; i < data.tripIds.length; i++) {
+      if (!data.times[i]) continue;
+      for (var j = 0; j < data.times[i].length; j++) {
+        if (!!data.times[i][j]) {
+          if (data.times[i][j].localeCompare(time) >= 0) {
+            return i;
+          }
+        }
+      }
+    }
+    return data.tripIds.length - 1;
+  }
+  
   initMeasures(data, noscroll) {
     if (window.innerHeight < window.innerWidth) {
       this.stopsColWidth = 170;
@@ -211,20 +231,21 @@ export class AppHome {
     this.tableHeaderHeight = this.showHeader ? (this.header_row_number * this.headerRowHeight) : 0;
 
     if (!noscroll) {
-      setTimeout(function () {
+      setTimeout( ()=> {
 
 
-        // var columnScrollTo = ttService.locateTablePosition(data, new Date());
-        // columnScrollTo = Math.min(columnScrollTo, data.tripIds.length - (this.scrollWidth - this.stopsColWidth) / $scope.colwidth);
-        // var pos = this.colwidth * columnScrollTo;
-        // $ionicScrollDelegate.$getByHandle('list').scrollTo(pos, 0, true);
+        var columnScrollTo = this.locateTablePosition(data, new Date());
+        columnScrollTo = Math.min(columnScrollTo, data.tripIds.length - (this.scrollWidth - this.stopsColWidth) / this.colwidth);
+        var pos = this.colwidth * columnScrollTo;
+        var table = this.element.shadowRoot.querySelector('#table-table');
+        table.scrollTo(pos,0);
 
       }, 300);
     }
   }
 
-
-
+  
+  
 
 
 
@@ -244,7 +265,7 @@ export class AppHome {
     this.dataTT = JSON.parse(this.data);
     this.rootstyle();
     this.Fetch();
-    this.initMeasures(this.dataTT, true);
+    this.initMeasures(this.dataTT, false);
 
   }
 
@@ -283,6 +304,8 @@ export class AppHome {
     [].forEach.call(list, li => li.style.color = 'red');
 
     this.setStyle();
+    this.colwidth = this.getTextWidth();
+
   }
   setStyle(): any {
     // console.log(this.element.shadowRoot.innerHTML);
@@ -405,7 +428,7 @@ export class AppHome {
 
     this.tt = rows;
 
-    this.initMeasures(data, true);
+    this.initMeasures(data, false);
   };
 
   tripExtractor(agencyId, tripId) {
@@ -663,6 +686,8 @@ export class AppHome {
                 : ""
               }
               <div id="table-table" innerHTML={this.visualizza(this.orari)} style={styleTableTable} ></div>
+              <div id="measurer" class="mesurer" >123456789</div>
+
             </ion-content>
           </div>
         </div>

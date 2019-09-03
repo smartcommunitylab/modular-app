@@ -5,13 +5,16 @@ export class TipoFunerale {
     luogoFunerale: string;
     dataFunerale: string;
     oraFunerale: string;
-
-    constructor(nominativo, dataMorte, luogoFunerale, dataFunerale, oraFunerale) {
+    dataPartenza: string;
+    oraPartenza: string;
+    constructor(nominativo, dataMorte, luogoFunerale, dataFunerale, oraFunerale, dataPartenza, oraPartenza) {
         this.nome = nominativo;
         this.dataMorte = dataMorte;
         this.luogoFunerale = luogoFunerale;
         this.dataFunerale = dataFunerale;
         this.oraFunerale = oraFunerale;
+        this.dataPartenza = dataPartenza;
+        this.oraPartenza = oraPartenza;
     }
 }
 

@@ -109,9 +109,10 @@ export class HomePage implements OnInit {
             this.showDate = this.selectedDate.toISOString();
           }
           if (!this.mapCenter) {
-            if (this.myPos)
-              this.mapCenter = [this.myPos.lat ? this.myPos.lat : 0, this.myPos.long ? this.myPos.long : 0];
-            else this.mapCenter = this.mapSrv.getDefaultCenter()
+            // if (this.myPos)
+            //   this.mapCenter = [this.myPos.lat ? this.myPos.lat : 0, this.myPos.long ? this.myPos.long : 0];
+            // else 
+            this.mapCenter = this.mapSrv.getDefaultCenter()
           }
           if (!this.streets)
             this.streets = this.mapSrv.getData().sort(function (a, b) {
@@ -192,7 +193,7 @@ export class HomePage implements OnInit {
   buildMap() {
     try { this.map.remove(); } catch { } /** Reset map */
     // const _this = this;
-    this.map = new leaflet.Map('home-map', { zoomControl: true, attributionControl: false, dragging: true, tap: false }).setView(this.mapCenter, 15);
+    this.map = new leaflet.Map('home-map', { zoomControl: true, attributionControl: false, dragging: true, tap: false }).setView(this.mapCenter, 14);
 
     /** Build polyline after drag */
     this.map.on('dragend', (e) => {
@@ -230,6 +231,10 @@ export class HomePage implements OnInit {
     this.buildPolyline(this.mapCenter);
   }
 
+  locate() {
+    this.map.panTo(new leaflet.LatLng(this.myPos.lat ,this.myPos.long));
+
+  }
   /**
    * Build polylines, with popup, and add them to map
    * @param center Map center's coordinates

@@ -77,10 +77,11 @@
     "pouchdb-find": "^7.0.0",
     "rxjs": "^6.3.3",
     "tslib": "^1.9.3",
+    "wc-dettagliofunerale": "^0.2.3",
     "wc-trasporti": "0.0.26",
     "wcs-comune": "0.0.170",
-    "wcs-dettagliofunerale": "0.0.3",
-    "wcs-info": "^0.1.1",
+    "wcs-dettagliofunerale": "0.0.7",
+    "wcs-info": "^0.1.2",
     "zone.js": "~0.8.26"
   },
   "devDependencies": {

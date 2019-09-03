@@ -18,7 +18,7 @@ export class cwAnteprima {
   @Prop() durata: string;
   @Prop() luogo: string;
   @Prop() descrizione: string;
-
+  @Prop() showimage:boolean =true;
   @State() Component_Height: string = "100px"; //altezza della componente
   @State() Component_Border: string = "black"; 
   
@@ -190,7 +190,10 @@ export class cwAnteprima {
         <h1 id="titolo">{this.titolo}</h1>
         
         <div class="detail-bar"></div>
-        <img src={this.img}></img>
+        {this.showimage
+        ?<img src={this.img}></img>
+        :""
+        }
         <div class="descrizione">
           <div id="centra">
             {/* <h1 id="titolo">{this.CalcolaSizeH1()}</h1>

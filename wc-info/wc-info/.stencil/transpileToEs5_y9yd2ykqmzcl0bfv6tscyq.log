@@ -1,7 +1,8 @@
-import { d as registerInstance, e as createEvent, f as h, g as getElement } from './wc-video-5effe51c.js';
+import { d as registerInstance, e as createEvent, f as h, g as getElement } from './wc-video-abd4b94a.js';
 var cwAnteprima = /** @class */ (function () {
     function cwAnteprima(hostRef) {
         registerInstance(this, hostRef);
+        this.showimage = true;
         this.Component_Height = "100px"; //altezza della componente
         this.Component_Border = "black";
         this.Titolo_Visibility = "collapse"; //visualizzazione estesa
@@ -138,7 +139,9 @@ var cwAnteprima = /** @class */ (function () {
             '--OpacityReverse': this.OpacityReverse
         };
         return [
-            h("div", { class: "component", onClick: function () { return _this.VisualizzaDettaglio(); }, style: styles }, h("h1", { id: "titolo" }, this.titolo), h("div", { class: "detail-bar" }), h("img", { src: this.img }), h("div", { class: "descrizione" }, h("div", { id: "centra" })), h("div", { id: "Informazioni" }, h("div", { class: "testo" }, h("p", { id: "descrizione", innerHTML: this.descrizione })), h("div", { class: "margine" })))
+            h("div", { class: "component", onClick: function () { return _this.VisualizzaDettaglio(); }, style: styles }, h("h1", { id: "titolo" }, this.titolo), h("div", { class: "detail-bar" }), this.showimage
+                ? h("img", { src: this.img })
+                : "", h("div", { class: "descrizione" }, h("div", { id: "centra" })), h("div", { id: "Informazioni" }, h("div", { class: "testo" }, h("p", { id: "descrizione", innerHTML: this.descrizione })), h("div", { class: "margine" })))
         ];
     };
     Object.defineProperty(cwAnteprima.prototype, "element", {

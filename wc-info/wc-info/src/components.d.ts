@@ -17,6 +17,7 @@ export namespace Components {
     'img': string;
     'luogo': string;
     'orario': string;
+    'showimage': boolean;
     'titolo': string;
   }
   interface WcVideo {
@@ -63,6 +64,7 @@ declare namespace LocalJSX {
     'onEventMappa'?: (event: CustomEvent<any>) => void;
     'onEventShare'?: (event: CustomEvent<any>) => void;
     'orario'?: string;
+    'showimage'?: boolean;
     'titolo'?: string;
   }
   interface WcVideo extends JSXBase.HTMLAttributes<HTMLWcVideoElement> {

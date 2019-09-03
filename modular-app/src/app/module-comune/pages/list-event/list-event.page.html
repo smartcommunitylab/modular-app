@@ -40,20 +40,20 @@
     </div>
   <div class="wrapper" *ngIf="!presentFilter">
     <div id="idCategories" class="scrolling-wrapper-flexbox loop">
-      <ion-chip *ngFor="let c of categories" id="{{c}}" (click)="selectInternalElement(c)" [ngClass]="{'categorySelected': isSelected(c)}">
-        <ion-label class="interaction" [ngClass]="{'categorySelected': c==actualVisualized}">{{c}}</ion-label>
+      <ion-chip *ngFor="let c of categories" id="{{getClassName(c)}}" (click)="selectInternalElement(getClassName(c))" [ngClass]="{'categorySelected': isSelected(c)}">
+        <ion-label class="interaction" [ngClass]="{'categorySelected': compareActual(c)}">{{getDateSTring(c)}}</ion-label>
       </ion-chip>
     </div>
   </div>
   <ion-list no-lines id="poi-list">
     <div *ngFor="let c of categories">
       <ion-item class="label-type ion-text-center" sticky *ngIf="oneElement(c) && !presentFilter">
-          <div>{{c}}</div>
+          <div>{{getDateSTring(c)}}</div>
       </ion-item>
       <div class="content" >
         
         <div *ngFor="let poi of showPois[c]; let i = index">
-          <div class="{{poi.cat[0]}}"   inViewport
+          <div class="{{getClassName(poi.day)}}"   inViewport
           [inViewportOptions]="{ threshold: [0] }" (inViewportAction)="onIntersection($event)">
             <wc-details [id]="poi.id" [img]="poi.image" [stringsinput]="stringsContact" [title]="poi.title"
               [altImage]="altImage" [stringsinput]="stringsContact" [title]="poi.title" [altImage]="altImage"

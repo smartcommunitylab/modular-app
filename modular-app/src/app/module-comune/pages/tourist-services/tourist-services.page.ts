@@ -301,7 +301,7 @@ export class TouristServicesPage implements OnInit {
     return returnArray;
   }
   removeTag(tag) {
-    this.tags = this.tags.filter(item => item.value != tag.value)
+    this.tags = this.tags.map(item => tag.value == item.value ? { value: item.value, isChecked: false } : { value: item.value, isChecked: item.isChecked })
     this.firstAccess = true;
     var even = function (element) {
       // checks whether an element is even
