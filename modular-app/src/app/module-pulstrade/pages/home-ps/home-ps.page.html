@@ -49,6 +49,10 @@
 
 <ion-content>
   <div class="map">
-    <div id="home-map"></div>
+    <div id="home-map">
+        <ion-button icon-only item-right (click)="locate()" color="light" class="button-locate" >
+            <ion-icon  class="locate" name="locate"></ion-icon>
+        </ion-button>  
+    </div>
   </div>
 </ion-content>
