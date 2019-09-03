@@ -54,8 +54,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         provide: TranslateLoader,
         useFactory: HttpLoaderFactory,
         deps: [HttpClient]
-      },
-      isolate: true
+      }
     }),
     IonicModule.forRoot(),
     ComuneModule.forRoot(),
