@@ -3,11 +3,12 @@
     "data_morte": "morto il:",
     "data_funerale": "In data:",
     "ora_morte": "Alle ore:",
-    "luogo_funerale": "il funerale sarà celebrato presso: ",
+    "luogo_funerale": "il funerale sara' celebrato presso:",
     "partenza_funerale": "Il feretro sarà trasferito presso: ",
     "mappa": "Mappa",
     "condividi": "Condividi",
     "title_funerali":"Funerali",
     "network_message":"Errore nella ricezione dei dati",
     "empty_list":"Nessun funerale presente"
+
 }
