@@ -28,8 +28,6 @@
             </ion-chip>
         </div>
     </div>
-    <!-- <div id="top"></div>
-    <ion-icon id="buttonTop" (click)="GoOnTop()" color="dark" name="arrow-dropup"></ion-icon> -->
     <div id="funerali">
         <ion-list no-lines padding *ngIf="!emptyList">
             <div *ngFor="let c of dates">
@@ -38,10 +36,9 @@
                 </ion-item>
                 <div class="content" >
                     <div *ngFor="let item of showFunerali[c]; let i = index">
-                        <!-- <div *ngFor="let item of vetFunerali; let i = index;"> -->
                         <div class="{{item.dataFunerale}}" inViewport [inViewportOptions]="{ threshold: [0]}"
                             (inViewportAction)="onIntersection($event)">
-                            <dettaglio-morte (indicazioni)="IndicazioniFunerali(i)" (condividi)="CondividiFunerali(i)"
+                            <dettaglio-morte (indicazioni)="IndicazioniFunerali(i)" (condividi)="CondividiFunerali(item)"
                                 [funerale]="sendParam(item)" [string]="string" isFunerale={{true}}></dettaglio-morte>
                         </div>
                     </div>

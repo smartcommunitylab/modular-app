@@ -6,9 +6,10 @@ import { Host as __stencil_Host } from "@stencil/core";
 import { h as __stencil_h } from "@stencil/core";
 import { registerInstance as __stencil_registerInstance } from "@stencil/core";
 import { h } from '@stencil/core';
-export class wcVideo {
+export class cwAnteprima {
     constructor(hostRef) {
         __stencil_registerInstance(this, hostRef);
+        this.showimage = true;
         this.Component_Height = "100px"; //altezza della componente
         this.Component_Border = "black";
         this.Titolo_Visibility = "collapse"; //visualizzazione estesa
@@ -23,18 +24,12 @@ export class wcVideo {
         this.Display = "none";
         this.DisplayReverse = "block";
         this.Opacity = "0";
-        this.OpacityReverse = "1";
-        this.ImgTop = "auto";
-        this.MousePointer = "default";
-        this.MarginTitolo = "0px";
+        this.OpacityReverse = "0";
         this.aperto = false;
         this.AddDurata = 1;
-        this.openHeight = "auto"; //altezza da esteso
-        this.urlMappa = "https://www.google.com/maps/search/?api=1&query=";
         this.chiudiAnteprima = true;
         this.eventMappa = __stencil_createEvent(this, "eventMappa", 7);
         this.eventShare = __stencil_createEvent(this, "eventShare", 7);
-        this.eventVideo = __stencil_createEvent(this, "eventVideo", 7);
     }
     //passa a visualizzazione compatta
     close() {
@@ -52,18 +47,14 @@ export class wcVideo {
         this.Display = "none";
         this.DisplayReverse = "block";
         this.Opacity = "0";
-        this.OpacityReverse = "1";
-        this.DisplayReverse = "block";
-        this.ImgTop = "auto";
-        this.MousePointer = "default";
-        this.MarginTitolo = "0px";
+        this.OpacityReverse = "0";
     }
     //passa a visualizzazione estesa
     open() {
         this.Component_Height = "auto";
         this.Component_Border = "white";
         this.Titolo_Visibility = "block";
-        this.Titolo_Colore = "#707070";
+        this.Titolo_Colore = "black";
         this.Titolo_Size = "25px";
         this.Img_Position = "relative";
         this.Img_Larghezza = "96%";
@@ -74,10 +65,7 @@ export class wcVideo {
         setTimeout(() => { this.Display = "block"; }, 100);
         this.DisplayReverse = "none";
         this.Opacity = "1";
-        setTimeout(() => { this.OpacityReverse = "0"; }, 100);
-        this.ImgTop = "-110px";
-        this.MousePointer = "pointer";
-        this.MarginTitolo = "40px";
+        setTimeout(() => { this.OpacityReverse = "1"; }, 100);
     }
     DataEvento() {
         if (this.dataevento != "") {
@@ -105,19 +93,19 @@ export class wcVideo {
         }
         return;
     }
-    CalcolaSizeH1() {
-        let titolo = "";
-        /*if (this.titolo.length > 35) {
-          for (let i = 0; i < 35; i++) {
-            titolo += this.titolo[i];
-          }
-          titolo += "...";
-        }
-        else*/
-        titolo = this.titolo;
-        console.log(titolo);
-        return titolo;
-    }
+    // CalcolaSizeH1() {
+    //   let titolo = "";
+    //   /*if (this.titolo.length > 35) { 
+    //     for (let i = 0; i < 35; i++) {
+    //       titolo += this.titolo[i];
+    //     }
+    //     titolo += "...";
+    //   }
+    //   else*/
+    //   titolo = this.titolo;
+    //   console.log(titolo);
+    //   return titolo;
+    // }
     VisualizzaDettaglio() {
         if (this.chiudiAnteprima) {
             if (!this.aperto)
@@ -129,26 +117,16 @@ export class wcVideo {
         else
             this.chiudiAnteprima = true;
     }
-    VisualizzaMappa(event) {
+    VisualizzaMappa(todo) {
         this.chiudiAnteprima = false;
-        this.eventMappa.emit(event);
+        this.eventMappa.emit(todo);
     }
-    VisualizzaShare(event) {
+    VisualizzaShare(todo) {
         this.chiudiAnteprima = false;
-        this.eventShare.emit(event);
-    }
-    VisualizzaVideo(event) {
-        if (this.aperto) {
-            this.chiudiAnteprima = false;
-            this.eventVideo.emit(event);
-        }
+        this.eventShare.emit(todo);
     }
     render() {
         var styles = {
-            '--displayReverse': this.DisplayReverse,
-            '--imgTop': this.ImgTop,
-            '--mousePointer': this.MousePointer,
-            '--marginTitolo': this.MarginTitolo,
             '--Component_height': this.Component_Height,
             '--Component_Border': this.Component_Border,
             '--Titolo_Visibility': this.Titolo_Visibility,
@@ -163,11 +141,14 @@ export class wcVideo {
             '--Display': this.Display,
             '--DisplayReverse': this.DisplayReverse,
             '--Opacity': this.Opacity,
+            '--OpacityReverse': this.OpacityReverse
         };
         return [
-            h("div", { class: "component", onClick: () => this.VisualizzaDettaglio(), style: styles }, h("h1", { id: "titolo" }, this.titolo), h("div", { class: "detail-bar " }), h("svg", { class: "pointer", onClick: (e) => this.VisualizzaVideo(e), id: "play", xmlns: 'http://www.w3.org/2000/svg', width: '24', height: '24', viewBox: '0 0 24 24' }, h("path", { fill: 'none', d: 'M0 0h24v24H0V0z' }), h("path", { d: 'M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-2-3.5l6-4.5-6-4.5z' })), h("img", { src: this.img }), h("div", { class: "descrizione" }, h("div", { id: "centra" })), h("div", { id: "Informazioni" }, h("div", { class: "testo" }, h("p", { id: "descrizione" }, this.descrizione))))
+            h("div", { class: "component", onClick: () => this.VisualizzaDettaglio(), style: styles }, h("h1", { id: "titolo" }, this.titolo), h("div", { class: "detail-bar" }), this.showimage
+                ? h("img", { src: this.img })
+                : "", h("div", { class: "descrizione" }, h("div", { id: "centra" })), h("div", { id: "Informazioni" }, h("div", { class: "testo" }, h("p", { id: "descrizione", innerHTML: this.descrizione })), h("div", { class: "margine" })))
         ];
     }
     get element() { return __stencil_getElement(this); }
-    static get style() { return "STYLE_TEXT_PLACEHOLDER:wc-video"; }
+    static get style() { return "STYLE_TEXT_PLACEHOLDER:wc-anteprima"; }
 }
