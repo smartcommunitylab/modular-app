@@ -522,7 +522,7 @@ var ListEventPage = /** @class */ (function () {
         });
         this.categories = this.fullCategories;
         if (this.categories.length > 0)
-            setTimeout(function () { return _this_1.actualVisualized = _this_1.categories[0]; }, 500);
+            setTimeout(function () { return _this_1.actualVisualized = _this_1.categories[0].startOf('day').format('DD-MM-YYYY'); }, 500);
     };
     ListEventPage.prototype.buildShowPois = function (filters) {
         var _this_1 = this;
@@ -671,7 +671,7 @@ var ListEventPage = /** @class */ (function () {
             this.presentFilter = false;
             this.categories.forEach(function (c) {
                 _this_1.showPois[c] = _this_1.fullPois.filter(function (el) {
-                    return (el.cat[0] == c);
+                    return (el.day.startOf('day').format('DD-MM-YYYY') == c.startOf('day').format('DD-MM-YYYY'));
                 });
             });
         }
@@ -688,7 +688,7 @@ var ListEventPage = /** @class */ (function () {
             _this.categories.forEach(function (c) {
                 _this_1.showPois[c] = _this_1.fullPois.filter(function (el) {
                     if (el.title)
-                        return (el.title.toLowerCase().indexOf(value.toLowerCase()) > -1 && el.cat[0] == c);
+                        return (el.title.toLowerCase().indexOf(value.toLowerCase()) > -1 && el.day.startOf('day').format('DD-MM-YYYY') == c.startOf('day').format('DD-MM-YYYY'));
                     return false;
                 });
             });

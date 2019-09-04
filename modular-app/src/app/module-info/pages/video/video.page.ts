@@ -5,6 +5,7 @@ import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 import { IonInfiniteScroll, Platform } from '@ionic/angular';
 import { ConfigService } from '../../services/config.service';
 import { TranslateService } from '@ngx-translate/core';
+import { UtilsService } from '../../services/utils.service';
 
 @Component({
   selector: 'app-video',
@@ -33,7 +34,7 @@ export class VideoPage {
   language: any;
 
 
-  constructor(private datiService: DatiServiceService, private plt: Platform, private social: SocialSharing, private config: ConfigService, private translate: TranslateService) {
+  constructor(private datiService: DatiServiceService, private utils: UtilsService, private plt: Platform, private social: SocialSharing, private config: ConfigService, private translate: TranslateService) {
     this.language = window[this.config.getAppModuleName()]['language'];
     this.translate.use(this.language);
   }
@@ -64,26 +65,33 @@ export class VideoPage {
 
   }
   ngOnInit() {
+    this.utils.presentLoading();
     this.datiService.getDati(this.parametriPost).then(data => {
       if (data.length == 0) {
         this.emptyList = true;
       }
       this.DatiEvento = data;
+      this.DatiEvento.forEach(evento => {
+        evento.image = evento.image.replace('.jpg', '_medium.jpg');
+      })
       this.datiRicerca = this.DatiEvento;
+      this.utils.hideLoading();
+    }, err => {
+      this.utils.hideLoading();
     });
     console.log(this.DatiEvento);
   }
 
   OpenCloseRicerca() {
-      this.isRicercaOpen = !this.isRicercaOpen;
-      const searchbar = <HTMLElement>document.querySelector('.search-video');
-      if (searchbar.style.display === 'none') {
-        searchbar.style.display = 'unset';
-        searchbar.focus();
-        this.datiRicerca = this.DatiEvento;
-      } else {
-        searchbar.style.display = 'none';
-      }
+    this.isRicercaOpen = !this.isRicercaOpen;
+    const searchbar = <HTMLElement>document.querySelector('.search-video');
+    if (searchbar.style.display === 'none') {
+      searchbar.style.display = 'unset';
+      searchbar.focus();
+      this.datiRicerca = this.DatiEvento;
+    } else {
+      searchbar.style.display = 'none';
+    }
     // if (!this.isRicercaOpen) {
     //   document.getElementById("barraDiRicerca").style.display = "inherit";
     //   document.getElementById("btnImpostazioniRicerca").innerHTML = "<svg width='24' height='24' viewBox='0 0 24 24'><path fill='none' d='M0 0h24v24H0V0z'/><path d='M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z'/></svg>";
@@ -102,27 +110,30 @@ export class VideoPage {
   Ricerca() {
     clearTimeout(this.typingTimer);
     this.typingTimer = setTimeout(() => {
-      if (this.daCercare!=null) {
-          let parametriPost = {
-            "fromDate": null,
-            "size": 10,
-            "sortForList": 1,
-            "source": ["Avvisi del Comune di Trento", "Video di TrentoInforma"],
-            "start": 0,
-            "filter":this.daCercare
-          }
-          this.datiService.getDati(parametriPost).then(data => {
-            if (data.length == 0) {
-              this.emptyList = true;
-            }
-             else {
-               this.emptyList = false;
-               this.DatiEvento = data;
-               this.datiRicerca = this.DatiEvento;
-             }
-
-          });
+      if (this.daCercare != null) {
+        let parametriPost = {
+          "fromDate": null,
+          "size": 10,
+          "sortForList": 1,
+          "source": ["Avvisi del Comune di Trento", "Video di TrentoInforma"],
+          "start": 0,
+          "filter": this.daCercare
         }
+        this.datiService.getDati(parametriPost).then(data => {
+          if (data.length == 0) {
+            this.emptyList = true;
+          }
+          else {
+            this.emptyList = false;
+            this.DatiEvento = data;
+            this.DatiEvento.forEach(evento => {
+              evento.image = evento.image.replace('.jpg', '_medium.jpg');
+            })
+            this.datiRicerca = this.DatiEvento;
+          }
+
+        });
+      }
     }, this.doneTypingInterval);
 
   }
@@ -135,7 +146,7 @@ export class VideoPage {
       "sortForList": 1,
       "source": ["Avvisi del Comune di Trento", "Video di TrentoInforma"],
       "start": this.start,
-      "filter":this.daCercare
+      "filter": this.daCercare
     }
     this.datiService.getDati(parametriPost).then(dati => {
       this.vetNuoviDati = dati;
