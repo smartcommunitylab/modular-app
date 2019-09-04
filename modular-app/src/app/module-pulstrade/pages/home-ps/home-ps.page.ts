@@ -213,6 +213,8 @@ dailyStreets:any=[];
     this.map.on('dragend', (e) => {
       this.mapCenter = [e.target.getCenter().lat, e.target.getCenter().lng];
       this.buildPolyline(this.mapCenter);
+      this.glow();
+
       // _this.setFutureAndPast();
     });
     /** Build polyline after zoom */
@@ -220,6 +222,7 @@ dailyStreets:any=[];
       this.mapCenter = [e.target.getCenter().lat, e.target.getCenter().lng];
       this.buildPolyline(this.mapCenter);
       // _this.setFutureAndPast();
+      this.glow();
     });
 
     /** Define marker icon */
@@ -243,6 +246,18 @@ dailyStreets:any=[];
 
     /** Build polylines */
     this.buildPolyline(this.mapCenter);
+  }
+  glow(): any {
+    var runCount = 0;
+    var map = document.getElementById("home-map");
+    var timerId= setInterval(() => {
+      map.classList.toggle("active");
+      runCount++;
+      if(runCount > 3) clearInterval(timerId);
+    },300);
+    // setTimeout(() => {
+    //   map.classList.toggle("active");
+    // },3000);
   }
 
   locate() {
@@ -359,6 +374,8 @@ dailyStreets:any=[];
    * Go one day back
    */
   dayBack() {
+    this.glow();
+
     this.selectedDate.setDate(this.selectedDate.getDate() - 1);
     this.showDate = this.selectedDate.toISOString();
     this.mapCenter = [this.map.getCenter().lat, this.map.getCenter().lng];
@@ -368,6 +385,8 @@ dailyStreets:any=[];
    * Go one day ahead
    */
   dayForward() {
+    this.glow();
+
     this.selectedDate.setDate(this.selectedDate.getDate() + 1);
     this.showDate = this.selectedDate.toISOString();
     this.buildPolyline(this.mapCenter);
@@ -376,6 +395,8 @@ dailyStreets:any=[];
    * Get last cleaning day and build polylines
    */
   async firstDayFwd() {
+    this.glow();
+
     this.past = true;
     this.labelResult = 0;
     const center = this.mapCenter;
@@ -424,6 +445,8 @@ dailyStreets:any=[];
    * Get first cleaning day and build polylines
    */
   async firstDayBck() {
+    this.glow();
+
     this.future = true;
     this.labelResult = 0;
     const center = this.mapCenter;

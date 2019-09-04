@@ -3,12 +3,23 @@ ion-button {
 }
 .map {
     height: 100%;
-    border: 1px solid black;
+    padding: 8px;
+    // border: 1px solid black;
     // margin-bottom:5%;
 }
 #home-map {
     width: 100%;
     height: 100%;
+    border: 2px solid transparent;    
+    -webkit-transition: border 0.1s linear, box-shadow 0.1s linear;
+       -moz-transition: border 0.1s linear, box-shadow 0.1s linear;
+            transition: border 0.1s linear, box-shadow 0.1s linear;
+}
+#home-map.active {
+    border-color: #11B3EF;
+    -webkit-box-shadow: 0 0 5px #11B3EF;
+       -moz-box-shadow: 0 0 5px #11B3EF;
+            box-shadow: 0 0 5px #11B3EF;
 }
 ion-item *{
     margin: 0 auto;
