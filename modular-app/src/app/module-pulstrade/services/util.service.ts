@@ -5,6 +5,9 @@ import { ToastController, LoadingController } from '@ionic/angular';
   providedIn: 'root'
 })
 export class UtilService {
+  private appModuleName: string = "app-module";
+
+
   private defaultPosition = {
     lat: 46.0748,
     long: 11.1217
@@ -12,7 +15,9 @@ export class UtilService {
   getDefaultPos(): any {
     return this.defaultPosition;
   }
- 
+  getAppModuleName(): string {
+    return this.appModuleName;
+  }
   constructor(private toastController: ToastController, private loadingController: LoadingController) { }
   async showErrorConnectionMessage(message) {
     const toast = await this.toastController.create({
