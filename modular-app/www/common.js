@@ -1374,6 +1374,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UtilsService", function() { return UtilsService; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
+/* harmony import */ var _ionic_native_social_sharing_ngx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic-native/social-sharing/ngx */ "./node_modules/@ionic-native/social-sharing/ngx/index.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1420,11 +1421,18 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
 };
 
 
-// import { LoadingModalComponent } from '../shared/loading-modal/loading-modal/loading-modal.component';
+
 var UtilsService = /** @class */ (function () {
-    function UtilsService(toastController /*, private loadingModal: LoadingModalComponent*/) {
+    function UtilsService(toastController, loadingController, socialSharing) {
         this.toastController = toastController;
+        this.loadingController = loadingController;
+        this.socialSharing = socialSharing;
+        this.urlMappa = 'https://www.google.com/maps/search/?api=1&query=';
+        this.pattern = /^((http|https|ftp):\/\/)/;
     }
+    UtilsService.prototype.openAddressMap = function (address) {
+        window.open(encodeURI(this.urlMappa + address), '_system');
+    };
     UtilsService.prototype.showToast = function (message) {
         return __awaiter(this, void 0, void 0, function () {
             var toast;
@@ -1442,18 +1450,65 @@ var UtilsService = /** @class */ (function () {
             });
         });
     };
-    UtilsService.prototype.showSpinner = function () {
+    UtilsService.prototype.presentLoading = function () {
         return __awaiter(this, void 0, void 0, function () {
+            var loading;
             return __generator(this, function (_a) {
-                return [2 /*return*/];
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.loadingController.create({
+                            duration: 10000
+                        })];
+                    case 1:
+                        loading = _a.sent();
+                        return [4 /*yield*/, loading.present()];
+                    case 2: return [2 /*return*/, _a.sent()];
+                }
             });
         });
+    };
+    UtilsService.prototype.hideLoading = function () {
+        this.loadingController.dismiss();
+    };
+    UtilsService.prototype.openUrl = function (value) {
+        if (!this.pattern.test(value)) {
+            value = 'https://' + value;
+        }
+        window.open(value, "_system");
+    };
+    UtilsService.prototype.openShare = function (value) {
+        var object = JSON.parse(value);
+        var text = object.title;
+        var imgUrl = object.image;
+        var webUrl = object.url;
+        this.socialSharing.share(text, text, imgUrl, webUrl);
+    };
+    UtilsService.prototype.openContact = function (data) {
+        switch (data.type) {
+            case 'phone': {
+                window.open('tel:' + data.value, '_system');
+                break;
+            }
+            case 'share': {
+                this.openShare(data.value);
+                break;
+            }
+            case 'address': {
+                this.openAddressMap(data.value);
+                break;
+            }
+            case 'url': {
+                this.openUrl(data.value);
+                break;
+            }
+        }
     };
     UtilsService = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
             providedIn: 'root'
         }),
-        __metadata("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_1__["ToastController"] /*, private loadingModal: LoadingModalComponent*/])
+        __metadata("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_1__["ToastController"],
+            _ionic_angular__WEBPACK_IMPORTED_MODULE_1__["LoadingController"],
+            _ionic_native_social_sharing_ngx__WEBPACK_IMPORTED_MODULE_2__["SocialSharing"]])
     ], UtilsService);
     return UtilsService;
 }());

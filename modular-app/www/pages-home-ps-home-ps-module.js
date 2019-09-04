@@ -78,7 +78,7 @@ var HomePagePSModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header no-border>\n  <ion-searchbar class=\"search-event\" style=\"display: none\" showCancelButton animated (search)=\"toggleSearch()\"\n    (ionInput)=\"searchChanged($event)\" (ionCancel)=\"toggleSearch()\"></ion-searchbar>\n  <ion-toolbar>\n\n    <ion-buttons class=\"interactive\" slot=\"start\">\n      <ion-back-button class=\"interaction\"></ion-back-button>\n    </ion-buttons>\n    <ion-buttons slot=\"end\">\n      <ion-button [routerLink]=\"['/ps-notification']\">\n        <ion-icon class=\"icon-bar\" name=\"notifications-outline\"></ion-icon>\n      </ion-button>\n      <ion-button [routerLink]=\"['/ps-search']\">\n        <ion-icon class=\"icon-bar\" name=\"search\"></ion-icon>\n      </ion-button>\n    </ion-buttons>\n    <ion-title>\n      {{'HOME' | translate}}\n    </ion-title>\n  </ion-toolbar>\n\n</ion-header>\n<ion-row>\n    <ion-col class=\"ion-text-start interaction\" size=\"2\">\n        <ion-icon class=\"icon-home\"  name=\"rewind\" (click)=\"firstDayBck()\" *ngIf=\"past\"></ion-icon>\n      </ion-col>\n  <ion-col  class=\"ion-text-start interaction \" size=\"2\">\n    <ion-icon  name=\"arrow-back\" class=\"icon-home\" (click)=\"dayBack()\"></ion-icon>\n  </ion-col>\n  <ion-col class=\"ion-text-center\" size=\"4\" >\n    <ion-datetime (ionChange)=\"setDate($event)\" class=\"date \" display-format=\"DD-MM-YYYY\" picker-format=\"DD MM YYYY\"\n      [value]=\"showDate\"></ion-datetime>\n  </ion-col>\n  <ion-col class=\"ion-text-end interaction\" size=\"2\">\n    <ion-icon name=\"arrow-forward\" class=\"icon-home\"  (click)=\"dayForward()\"></ion-icon>\n  </ion-col>\n  <ion-col class=\"ion-text-end interaction\" size=\"2\">\n      <ion-icon  class=\"icon-home\"  name=\"fastforward\" (click)=\"firstDayFwd()\" *ngIf=\"future\"></ion-icon>\n    </ion-col>\n</ion-row>\n<ion-row>\n\n  <ion-col class=\"ion-text-center interaction\" size=\"12\" (click)=\"goToList()\">\n    {{labelResult}} {{'clean_label' | translate}}\n  </ion-col>\n\n</ion-row>\n\n\n<ion-content>\n  <div class=\"map\">\n    <div id=\"home-map\">\n        <ion-button icon-only item-right (click)=\"locate()\" color=\"light\" class=\"button-locate\" >\n            <ion-icon  class=\"locate\" name=\"locate\"></ion-icon>\n        </ion-button>  \n    </div>\n  </div>\n</ion-content>"
+module.exports = "<ion-header no-border>\n  <ion-searchbar class=\"search-event\" style=\"display: none\" showCancelButton animated (search)=\"toggleSearch()\"\n    (ionInput)=\"searchChanged($event)\" (ionCancel)=\"toggleSearch()\"></ion-searchbar>\n  <ion-toolbar>\n\n    <ion-buttons class=\"interactive\" slot=\"start\">\n      <ion-back-button class=\"interaction\"></ion-back-button>\n    </ion-buttons>\n    <ion-buttons slot=\"end\">\n      <ion-button [routerLink]=\"['/ps-notification']\">\n        <ion-icon class=\"icon-bar\" name=\"notifications-outline\"></ion-icon>\n      </ion-button>\n      <ion-button [routerLink]=\"['/ps-search']\">\n        <ion-icon class=\"icon-bar\" name=\"search\"></ion-icon>\n      </ion-button>\n    </ion-buttons>\n    <ion-title>\n      {{'HOME' | translate}}\n    </ion-title>\n  </ion-toolbar>\n\n</ion-header>\n<ion-row>\n    <ion-col class=\"ion-text-start interaction\" size=\"2\">\n        <ion-icon class=\"icon-home\"  name=\"rewind\" (click)=\"firstDayBck()\" *ngIf=\"past\"></ion-icon>\n      </ion-col>\n  <ion-col  class=\"ion-text-start interaction \" size=\"2\">\n    <ion-icon  name=\"arrow-back\" class=\"icon-home\" (click)=\"dayBack()\"></ion-icon>\n  </ion-col>\n  <ion-col class=\"ion-text-center\" size=\"4\" >\n    <ion-datetime (ionChange)=\"setDate($event)\" class=\"date \" display-format=\"DD-MM-YYYY\" picker-format=\"DD MM YYYY\"\n      [value]=\"showDate\"></ion-datetime>\n  </ion-col>\n  <ion-col class=\"ion-text-end interaction\" size=\"2\">\n    <ion-icon name=\"arrow-forward\" class=\"icon-home\"  (click)=\"dayForward()\"></ion-icon>\n  </ion-col>\n  <ion-col class=\"ion-text-end interaction\" size=\"2\">\n      <ion-icon  class=\"icon-home\"  name=\"fastforward\" (click)=\"firstDayFwd()\" *ngIf=\"future\"></ion-icon>\n    </ion-col>\n</ion-row>\n<ion-row>\n\n  <ion-col class=\"ion-text-center interaction\" id=\"text-cleaning\" size=\"12\" (click)=\"goToList()\">\n    <b>{{labelResult}}</b> {{'clean_label' | translate}}\n  </ion-col>\n\n</ion-row>\n\n\n<ion-content>\n  <div class=\"map\">\n    <div id=\"home-map\">\n        <ion-button icon-only item-right (click)=\"locate()\" color=\"light\" class=\"button-locate\" >\n            <ion-icon  class=\"locate\" name=\"locate\"></ion-icon>\n        </ion-button>  \n    </div>\n  </div>\n</ion-content>"
 
 /***/ }),
 
@@ -89,7 +89,7 @@ module.exports = "<ion-header no-border>\n  <ion-searchbar class=\"search-event\
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".map {\n  height: 100%;\n  border: 1px solid black; }\n\n#home-map {\n  width: 100%;\n  height: 100%; }\n\nion-item * {\n  margin: 0 auto; }\n\nion-item {\n  border-bottom: none !important;\n  border-width: 0px !important; }\n\n.leaflet-control .mapSearch {\n  width: 25px;\n  height: 25px; }\n\n.interaction {\n  color: #11B3EF !important; }\n\n.date {\n  color: #11B3EF !important;\n  font-size: 20px;\n  padding: 4px; }\n\n.icon-home {\n  font-size: 20px;\n  text-align: center;\n  width: 100%;\n  height: 100%; }\n\n.icon-bar {\n  font-size: 30px; }\n\n.locate {\n  font-size: 30px !important; }\n\n.button-locate {\n  position: absolute;\n  bottom: 20px;\n  right: 20px;\n  width: 50px;\n  height: 50px;\n  z-index: 999;\n  font-size: inherit; }\n\n.button-action:hover {\n  background: url(\"https://i.hizliresim.com/a1zraR.png\") no-repeat; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL2NoaW44L0RvY3VtZW50cy93b3JrL21vZHVsYXJBcHAvbW9kdWxhci1hcHAvc3JjL2FwcC9tb2R1bGUtcHVsc3RyYWRlL3BhZ2VzL2hvbWUtcHMvaG9tZS1wcy5wYWdlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBR0E7RUFDSSxhQUFZO0VBQ1osd0JBQXVCLEVBRTFCOztBQUNEO0VBQ0ksWUFBVztFQUNYLGFBQVksRUFDZjs7QUFDRDtFQUNJLGVBQWMsRUFDakI7O0FBQ0Q7RUFDSSwrQkFBOEI7RUFDOUIsNkJBQTRCLEVBQy9COztBQUNEO0VBQ0ksWUFBVztFQUNYLGFBQVksRUFDZjs7QUFDRDtFQUNJLDBCQUF3QixFQUMzQjs7QUFDRDtFQUVJLDBCQUF3QjtFQUN4QixnQkFBZTtFQUNmLGFBQVksRUFDZjs7QUFDRDtFQUNJLGdCQUFlO0VBQ2YsbUJBQWtCO0VBQ2xCLFlBQVc7RUFDWCxhQUFZLEVBQ2Y7O0FBQ0Q7RUFDSSxnQkFBZSxFQUVsQjs7QUFDRDtFQUNJLDJCQUF5QixFQUM1Qjs7QUFDRDtFQUNJLG1CQUFrQjtFQUNsQixhQUFZO0VBQ1osWUFBVztFQUNYLFlBQVc7RUFDWCxhQUFZO0VBQ1osYUFBWTtFQUNaLG1CQUFrQixFQUVyQjs7QUFFRDtFQUNJLGlFQUFnRSxFQUNuRSIsImZpbGUiOiJzcmMvYXBwL21vZHVsZS1wdWxzdHJhZGUvcGFnZXMvaG9tZS1wcy9ob21lLXBzLnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIlxuaW9uLWJ1dHRvbiB7XG59XG4ubWFwIHtcbiAgICBoZWlnaHQ6IDEwMCU7XG4gICAgYm9yZGVyOiAxcHggc29saWQgYmxhY2s7XG4gICAgLy8gbWFyZ2luLWJvdHRvbTo1JTtcbn1cbiNob21lLW1hcCB7XG4gICAgd2lkdGg6IDEwMCU7XG4gICAgaGVpZ2h0OiAxMDAlO1xufVxuaW9uLWl0ZW0gKntcbiAgICBtYXJnaW46IDAgYXV0bztcbn1cbmlvbi1pdGVtIHtcbiAgICBib3JkZXItYm90dG9tOiBub25lICFpbXBvcnRhbnQ7XG4gICAgYm9yZGVyLXdpZHRoOiAwcHggIWltcG9ydGFudDtcbn1cbi5sZWFmbGV0LWNvbnRyb2wgLm1hcFNlYXJjaCB7XG4gICAgd2lkdGg6IDI1cHg7XG4gICAgaGVpZ2h0OiAyNXB4O1xufVxuLmludGVyYWN0aW9uIHtcbiAgICBjb2xvcjogIzExQjNFRiFpbXBvcnRhbnQ7XG59XG4uZGF0ZSB7XG4gICAgLy8gYmFja2dyb3VuZC1jb2xvcjogIzExQjNFRiFpbXBvcnRhbnQ7XG4gICAgY29sb3I6ICMxMUIzRUYhaW1wb3J0YW50O1xuICAgIGZvbnQtc2l6ZTogMjBweDtcbiAgICBwYWRkaW5nOiA0cHg7XG59XG4uaWNvbi1ob21lIHtcbiAgICBmb250LXNpemU6IDIwcHg7XG4gICAgdGV4dC1hbGlnbjogY2VudGVyO1xuICAgIHdpZHRoOiAxMDAlO1xuICAgIGhlaWdodDogMTAwJTtcbn1cbi5pY29uLWJhciB7XG4gICAgZm9udC1zaXplOiAzMHB4O1xuXG59XG4ubG9jYXRlIHtcbiAgICBmb250LXNpemU6IDMwcHghaW1wb3J0YW50O1xufVxuLmJ1dHRvbi1sb2NhdGV7XG4gICAgcG9zaXRpb246IGFic29sdXRlO1xuICAgIGJvdHRvbTogMjBweDtcbiAgICByaWdodDogMjBweDtcbiAgICB3aWR0aDogNTBweDtcbiAgICBoZWlnaHQ6IDUwcHg7XG4gICAgei1pbmRleDogOTk5O1xuICAgIGZvbnQtc2l6ZTogaW5oZXJpdDtcbiAgIFxufVxuXG4uYnV0dG9uLWFjdGlvbjpob3ZlcntcbiAgICBiYWNrZ3JvdW5kOiB1cmwoJ2h0dHBzOi8vaS5oaXpsaXJlc2ltLmNvbS9hMXpyYVIucG5nJykgbm8tcmVwZWF0O1xufSJdfQ== */"
+module.exports = ".map {\n  height: 100%;\n  padding: 8px; }\n\n#home-map {\n  width: 100%;\n  height: 100%;\n  border: 2px solid transparent;\n  transition: border 0.1s linear, box-shadow 0.1s linear; }\n\n#home-map.active {\n  border-color: #11B3EF;\n  box-shadow: 0 0 5px #11B3EF; }\n\n#text-cleaning {\n  transition: text-shadow 0.1s linear; }\n\n#text-cleaning.active {\n  text-shadow: 0 0 10px #11B3EF; }\n\nion-item * {\n  margin: 0 auto; }\n\nion-item {\n  border-bottom: none !important;\n  border-width: 0px !important; }\n\n.leaflet-control .mapSearch {\n  width: 25px;\n  height: 25px; }\n\n.interaction {\n  color: #11B3EF !important; }\n\n.date {\n  color: #11B3EF !important;\n  font-size: 20px;\n  padding: 4px; }\n\n.icon-home {\n  font-size: 20px;\n  text-align: center;\n  width: 100%;\n  height: 100%; }\n\n.icon-bar {\n  font-size: 30px; }\n\n.locate {\n  font-size: 30px !important; }\n\n.button-locate {\n  position: absolute;\n  bottom: 20px;\n  right: 20px;\n  width: 50px;\n  height: 50px;\n  z-index: 999;\n  font-size: inherit; }\n\n.button-action:hover {\n  background: url(\"https://i.hizliresim.com/a1zraR.png\") no-repeat; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL2NoaW44L0RvY3VtZW50cy93b3JrL21vZHVsYXJBcHAvbW9kdWxhci1hcHAvc3JjL2FwcC9tb2R1bGUtcHVsc3RyYWRlL3BhZ2VzL2hvbWUtcHMvaG9tZS1wcy5wYWdlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBR0E7RUFDSSxhQUFZO0VBQ1osYUFBWSxFQUdmOztBQUNEO0VBQ0ksWUFBVztFQUNYLGFBQVk7RUFDWiw4QkFBNkI7RUFHckIsdURBQXNELEVBQ2pFOztBQUNEO0VBQ0ksc0JBQXFCO0VBR2IsNEJBQTJCLEVBQ3RDOztBQUNEO0VBS0ksb0NBQW1DLEVBQ3RDOztBQUNEO0VBQ0ksOEJBQTZCLEVBQ2hDOztBQUNEO0VBQ0ksZUFBYyxFQUNqQjs7QUFDRDtFQUNJLCtCQUE4QjtFQUM5Qiw2QkFBNEIsRUFDL0I7O0FBQ0Q7RUFDSSxZQUFXO0VBQ1gsYUFBWSxFQUNmOztBQUNEO0VBQ0ksMEJBQXdCLEVBQzNCOztBQUNEO0VBRUksMEJBQXdCO0VBQ3hCLGdCQUFlO0VBQ2YsYUFBWSxFQUNmOztBQUNEO0VBQ0ksZ0JBQWU7RUFDZixtQkFBa0I7RUFDbEIsWUFBVztFQUNYLGFBQVksRUFDZjs7QUFDRDtFQUNJLGdCQUFlLEVBRWxCOztBQUNEO0VBQ0ksMkJBQXlCLEVBQzVCOztBQUNEO0VBQ0ksbUJBQWtCO0VBQ2xCLGFBQVk7RUFDWixZQUFXO0VBQ1gsWUFBVztFQUNYLGFBQVk7RUFDWixhQUFZO0VBQ1osbUJBQWtCLEVBRXJCOztBQUVEO0VBQ0ksaUVBQWdFLEVBQ25FIiwiZmlsZSI6InNyYy9hcHAvbW9kdWxlLXB1bHN0cmFkZS9wYWdlcy9ob21lLXBzL2hvbWUtcHMucGFnZS5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiXG5pb24tYnV0dG9uIHtcbn1cbi5tYXAge1xuICAgIGhlaWdodDogMTAwJTtcbiAgICBwYWRkaW5nOiA4cHg7XG4gICAgLy8gYm9yZGVyOiAxcHggc29saWQgYmxhY2s7XG4gICAgLy8gbWFyZ2luLWJvdHRvbTo1JTtcbn1cbiNob21lLW1hcCB7XG4gICAgd2lkdGg6IDEwMCU7XG4gICAgaGVpZ2h0OiAxMDAlO1xuICAgIGJvcmRlcjogMnB4IHNvbGlkIHRyYW5zcGFyZW50OyAgICBcbiAgICAtd2Via2l0LXRyYW5zaXRpb246IGJvcmRlciAwLjFzIGxpbmVhciwgYm94LXNoYWRvdyAwLjFzIGxpbmVhcjtcbiAgICAgICAtbW96LXRyYW5zaXRpb246IGJvcmRlciAwLjFzIGxpbmVhciwgYm94LXNoYWRvdyAwLjFzIGxpbmVhcjtcbiAgICAgICAgICAgIHRyYW5zaXRpb246IGJvcmRlciAwLjFzIGxpbmVhciwgYm94LXNoYWRvdyAwLjFzIGxpbmVhcjtcbn1cbiNob21lLW1hcC5hY3RpdmUge1xuICAgIGJvcmRlci1jb2xvcjogIzExQjNFRjtcbiAgICAtd2Via2l0LWJveC1zaGFkb3c6IDAgMCA1cHggIzExQjNFRjtcbiAgICAgICAtbW96LWJveC1zaGFkb3c6IDAgMCA1cHggIzExQjNFRjtcbiAgICAgICAgICAgIGJveC1zaGFkb3c6IDAgMCA1cHggIzExQjNFRjtcbn1cbiN0ZXh0LWNsZWFuaW5nIHtcbiAgICAtd2Via2l0LXRyYW5zaXRpb246IHRleHQtc2hhZG93IDAuMXMgbGluZWFyO1xuICAgIC1tb3otdHJhbnNpdGlvbjogdGV4dC1zaGFkb3cgMC4xcyBsaW5lYXI7XG4gICAgLW1zLXRyYW5zaXRpb246IHRleHQtc2hhZG93IDAuMXMgbGluZWFyO1xuICAgIC1vLXRyYW5zaXRpb246IHRleHQtc2hhZG93IDAuMXMgbGluZWFyO1xuICAgIHRyYW5zaXRpb246IHRleHQtc2hhZG93IDAuMXMgbGluZWFyO1xufVxuI3RleHQtY2xlYW5pbmcuYWN0aXZlIHtcbiAgICB0ZXh0LXNoYWRvdzogMCAwIDEwcHggIzExQjNFRjtcbn1cbmlvbi1pdGVtICp7XG4gICAgbWFyZ2luOiAwIGF1dG87XG59XG5pb24taXRlbSB7XG4gICAgYm9yZGVyLWJvdHRvbTogbm9uZSAhaW1wb3J0YW50O1xuICAgIGJvcmRlci13aWR0aDogMHB4ICFpbXBvcnRhbnQ7XG59XG4ubGVhZmxldC1jb250cm9sIC5tYXBTZWFyY2gge1xuICAgIHdpZHRoOiAyNXB4O1xuICAgIGhlaWdodDogMjVweDtcbn1cbi5pbnRlcmFjdGlvbiB7XG4gICAgY29sb3I6ICMxMUIzRUYhaW1wb3J0YW50O1xufVxuLmRhdGUge1xuICAgIC8vIGJhY2tncm91bmQtY29sb3I6ICMxMUIzRUYhaW1wb3J0YW50O1xuICAgIGNvbG9yOiAjMTFCM0VGIWltcG9ydGFudDtcbiAgICBmb250LXNpemU6IDIwcHg7XG4gICAgcGFkZGluZzogNHB4O1xufVxuLmljb24taG9tZSB7XG4gICAgZm9udC1zaXplOiAyMHB4O1xuICAgIHRleHQtYWxpZ246IGNlbnRlcjtcbiAgICB3aWR0aDogMTAwJTtcbiAgICBoZWlnaHQ6IDEwMCU7XG59XG4uaWNvbi1iYXIge1xuICAgIGZvbnQtc2l6ZTogMzBweDtcblxufVxuLmxvY2F0ZSB7XG4gICAgZm9udC1zaXplOiAzMHB4IWltcG9ydGFudDtcbn1cbi5idXR0b24tbG9jYXRle1xuICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgICBib3R0b206IDIwcHg7XG4gICAgcmlnaHQ6IDIwcHg7XG4gICAgd2lkdGg6IDUwcHg7XG4gICAgaGVpZ2h0OiA1MHB4O1xuICAgIHotaW5kZXg6IDk5OTtcbiAgICBmb250LXNpemU6IGluaGVyaXQ7XG4gICBcbn1cblxuLmJ1dHRvbi1hY3Rpb246aG92ZXJ7XG4gICAgYmFja2dyb3VuZDogdXJsKCdodHRwczovL2kuaGl6bGlyZXNpbS5jb20vYTF6cmFSLnBuZycpIG5vLXJlcGVhdDtcbn0iXX0= */"
 
 /***/ }),
 
@@ -357,6 +357,7 @@ var HomePage = /** @class */ (function () {
         this.map.on('dragend', function (e) {
             _this.mapCenter = [e.target.getCenter().lat, e.target.getCenter().lng];
             _this.buildPolyline(_this.mapCenter);
+            _this.glow();
             // _this.setFutureAndPast();
         });
         /** Build polyline after zoom */
@@ -364,6 +365,7 @@ var HomePage = /** @class */ (function () {
             _this.mapCenter = [e.target.getCenter().lat, e.target.getCenter().lng];
             _this.buildPolyline(_this.mapCenter);
             // _this.setFutureAndPast();
+            _this.glow();
         });
         /** Define marker icon */
         var mainIcon = leaflet__WEBPACK_IMPORTED_MODULE_4___default.a.icon({
@@ -383,6 +385,18 @@ var HomePage = /** @class */ (function () {
         // this.map.addControl(new searchControl());
         /** Build polylines */
         this.buildPolyline(this.mapCenter);
+    };
+    HomePage.prototype.glow = function () {
+        var runCount = 2;
+        var map = document.getElementById("home-map");
+        var text = document.getElementById("text-cleaning");
+        var timerId = setInterval(function () {
+            map.classList.toggle("active");
+            text.classList.toggle("active");
+            runCount++;
+            if (runCount > 3)
+                clearInterval(timerId);
+        }, 300);
     };
     HomePage.prototype.locate = function () {
         this.map.panTo(new leaflet__WEBPACK_IMPORTED_MODULE_4___default.a.LatLng(this.myPos.lat, this.myPos.long));
@@ -480,6 +494,7 @@ var HomePage = /** @class */ (function () {
      * Go one day back
      */
     HomePage.prototype.dayBack = function () {
+        this.glow();
         this.selectedDate.setDate(this.selectedDate.getDate() - 1);
         this.showDate = this.selectedDate.toISOString();
         this.mapCenter = [this.map.getCenter().lat, this.map.getCenter().lng];
@@ -489,6 +504,7 @@ var HomePage = /** @class */ (function () {
      * Go one day ahead
      */
     HomePage.prototype.dayForward = function () {
+        this.glow();
         this.selectedDate.setDate(this.selectedDate.getDate() + 1);
         this.showDate = this.selectedDate.toISOString();
         this.buildPolyline(this.mapCenter);
@@ -503,6 +519,7 @@ var HomePage = /** @class */ (function () {
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
+                        this.glow();
                         this.past = true;
                         this.labelResult = 0;
                         center = this.mapCenter;
@@ -562,6 +579,7 @@ var HomePage = /** @class */ (function () {
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
+                        this.glow();
                         this.future = true;
                         this.labelResult = 0;
                         center = this.mapCenter;

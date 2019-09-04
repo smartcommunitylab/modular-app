@@ -21,6 +21,16 @@ ion-button {
        -moz-box-shadow: 0 0 5px #11B3EF;
             box-shadow: 0 0 5px #11B3EF;
 }
+#text-cleaning {
+    -webkit-transition: text-shadow 0.1s linear;
+    -moz-transition: text-shadow 0.1s linear;
+    -ms-transition: text-shadow 0.1s linear;
+    -o-transition: text-shadow 0.1s linear;
+    transition: text-shadow 0.1s linear;
+}
+#text-cleaning.active {
+    text-shadow: 0 0 10px #11B3EF;
+}
 ion-item *{
     margin: 0 auto;
 }
@@ -40,6 +50,7 @@ ion-item {
     color: #11B3EF!important;
     font-size: 20px;
     padding: 4px;
+    font-weight: bold;
 }
 .icon-home {
     font-size: 20px;

@@ -248,16 +248,17 @@ dailyStreets:any=[];
     this.buildPolyline(this.mapCenter);
   }
   glow(): any {
-    var runCount = 0;
+    var runCount = 2;
     var map = document.getElementById("home-map");
+    var text = document.getElementById("text-cleaning");
     var timerId= setInterval(() => {
       map.classList.toggle("active");
+      text.classList.toggle("active");
       runCount++;
       if(runCount > 3) clearInterval(timerId);
+      
     },300);
-    // setTimeout(() => {
-    //   map.classList.toggle("active");
-    // },3000);
+
   }
 
   locate() {
@@ -375,7 +376,6 @@ dailyStreets:any=[];
    */
   dayBack() {
     this.glow();
-
     this.selectedDate.setDate(this.selectedDate.getDate() - 1);
     this.showDate = this.selectedDate.toISOString();
     this.mapCenter = [this.map.getCenter().lat, this.map.getCenter().lng];
