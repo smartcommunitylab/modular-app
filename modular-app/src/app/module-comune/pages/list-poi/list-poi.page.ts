@@ -7,6 +7,7 @@ import { CallNumber } from '@ionic-native/call-number/ngx';
 import { UtilsService } from '../../services/utils.service';
 import { ConfigService } from '../../services/config.service';
 import { FilterPagePoiPage } from './filter-page-poi/filter-page-poi.page';
+import { GeoService } from 'src/app/services/geo.service';
 
 @Component({
   selector: 'app-list-poi',
@@ -31,6 +32,8 @@ export class ListPoiPage implements OnInit {
   actualVisualized: string;
   presentFilter = false;
   emptyList: boolean = false;
+  distanceLabel: any;
+  mypos: { lat: any; long: any; };
   constructor(public navCtrl: NavController,
     public dbService: DbService,
     public alertCtrl: AlertController,
@@ -40,12 +43,21 @@ export class ListPoiPage implements OnInit {
     private callNumber: CallNumber,
     private modalController: ModalController,
     private utils: UtilsService,
+    private geoSrv:GeoService,
     private plt: Platform,
     private loadingController: LoadingController,
     private config: ConfigService) {
     if (window[this.config.getAppModuleName()]['language'])
       this.language = window[this.config.getAppModuleName()]['language'];
     this.translate.use(this.language);
+    if (window[this.config.getAppModuleName()]['geolocation'])
+    this.mypos = {
+      lat: window[this.config.getAppModuleName()]['geolocation']['lat'],
+      long: window[this.config.getAppModuleName()]['geolocation']['long']
+    };
+  else {
+    this.mypos = this.config.getDefaultPosition();
+  }
   }
 
 
@@ -87,9 +99,11 @@ export class ListPoiPage implements OnInit {
             this.dbService.getObjectByQuery(this.category.query).then((data) => {
               if (data.docs.length > 0) {
                 this.fullPois = data.docs.map(x => this.convertPois(x));
+                this.addDistance();
                 this.subCategories(this.fullPois);
                 this.buildShowPois();
                 this.tags = this.buildFilter();
+                this.orderArray('near', this);
                 this.utils.hideLoading();
               }
               else {
@@ -111,6 +125,7 @@ export class ListPoiPage implements OnInit {
     this.translate.get('alt_image_string').subscribe(
       value => {
         this.altImage = value;
+        this.distanceLabel = this.translate.instant('distance_label');
       }
     );
     this.config.getStringContacts(this.translate, this.language).then(strings => {
@@ -148,6 +163,12 @@ export class ListPoiPage implements OnInit {
   }
   searchAndIos() {
     return this.plt.is('ios') && this.search
+  }
+  addDistance(): any {
+    this.fullPois.forEach(element => {
+      element['distance'] = this.geoSrv.getDistanceKM({ lat: this.mypos.lat, lon: this.mypos.long }, { lat: element.location[0], lon: element.location[1] });
+
+    });
   }
   public onIntersection({ target, visible }: { target: Element; visible: boolean }): void {
        console.log("visible"+visible);
@@ -201,6 +222,9 @@ export class ListPoiPage implements OnInit {
           poiElement.cat = x.cat[this.language];
         else poiElement.cat = x.cat["it"];
       }
+      if (x.location) {
+          poiElement.location = x.location;
+      }
       if (x.subtitle) {
         if (x.subtitle[this.language])
           poiElement.subtitle = x.subtitle[this.language];
@@ -212,7 +236,7 @@ export class ListPoiPage implements OnInit {
         else poiElement.description = x.description["it"];
       }
       if (x.image) {
-        poiElement.image = x.image;
+        poiElement.image = x.image.replace('.jpg','_medium.jpg');;
       }
       if (x.id) {
         poiElement.id = x.id;
@@ -226,6 +250,9 @@ export class ListPoiPage implements OnInit {
 
   goToDetail(id) {
     this.router.navigate(['/detail-poi'], { queryParams: { id: id, type: this.type } });
+  }
+  getDistance(poi) {
+    return this.distanceLabel + (poi.distance).toFixed(2) + " Km";
   }
   typingTimer;                //timer identifier
   doneTypingInterval = 500;  //time in ms, 5 second for example
@@ -293,10 +320,30 @@ export class ListPoiPage implements OnInit {
           this.buildShowPois()
 
         }
+        this.orderArray('near', this);
+
       });
     return await modal.present();
   }
-
+  orderArray(condition: string, _this: any) {
+    _this.isLoading = true;
+    if (condition.indexOf('near') > -1) {
+      _this.categories.forEach(c => {
+        _this.showPois[c] = _this.showPois[c].sort(function (a, b) {
+          let dist1 = 0;
+          let dist2 = 0;
+          if (a.location) {
+            dist1 = _this.geoSrv.getDistanceKM({ lat: _this.mypos.lat, lon: _this.mypos.long }, { lat: a.location[0], lon: a.location[1] });
+          }
+          if (b.location) {
+            dist2 = _this.geoSrv.getDistanceKM({ lat: _this.mypos.lat, lon: _this.mypos.long }, { lat: b.location[0], lon: b.location[1] });
+          }
+          return dist1 - dist2;
+        });
+      });
+    }
+    _this.isLoading = false;
+  }
   removeTag(tag) {
     this.tags = this.tags.map(item => tag.value == item.value ? { value: item.value, isChecked: false } : { value: item.value, isChecked: item.isChecked })
     this.firstAccess = true;

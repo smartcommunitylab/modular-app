@@ -10,14 +10,18 @@ import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 
 export namespace Components {
   interface WcAnteprima {
+    'abstract': string;
     'dataevento': string;
     'datapubblicazione': string;
     'descrizione': string;
     'durata': string;
     'img': string;
+    'link': string;
     'luogo': string;
     'orario': string;
+    'showimage': boolean;
     'titolo': string;
+    'web': string;
   }
   interface WcVideo {
     'dataevento': string;
@@ -54,16 +58,20 @@ declare global {
 
 declare namespace LocalJSX {
   interface WcAnteprima extends JSXBase.HTMLAttributes<HTMLWcAnteprimaElement> {
+    'abstract'?: string;
     'dataevento'?: string;
     'datapubblicazione'?: string;
     'descrizione'?: string;
     'durata'?: string;
     'img'?: string;
+    'link'?: string;
     'luogo'?: string;
     'onEventMappa'?: (event: CustomEvent<any>) => void;
     'onEventShare'?: (event: CustomEvent<any>) => void;
     'orario'?: string;
+    'showimage'?: boolean;
     'titolo'?: string;
+    'web'?: string;
   }
   interface WcVideo extends JSXBase.HTMLAttributes<HTMLWcVideoElement> {
     'dataevento'?: string;

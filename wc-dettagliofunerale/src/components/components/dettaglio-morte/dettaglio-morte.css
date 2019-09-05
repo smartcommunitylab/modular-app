@@ -113,6 +113,7 @@
 
 #secondaIcona {
   left: 42%;
+
 }
 
 .chiudi {
@@ -172,7 +173,7 @@
 
 .nome {
   font-size: 20px;
-  width: 100%;
+  width: 80%;
   text-align: center;
   padding: 8px;
 }
@@ -187,13 +188,15 @@
 }
 
 .azioni {
-  display: inline-block;
+  /* display: inline-block; */
   width: 40%;
   margin: 10px;
   background-color: white;
   border-radius: 8px;
   border: 1px solid #11b3ef;
   min-width: 120px;
+  margin: auto;
+  display: table;
 }
 
 .azione-label {

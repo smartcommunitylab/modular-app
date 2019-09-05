@@ -1,13 +1,28 @@
+import moment from 'moment';
 export class AppHome {
     constructor() {
+        // littletable = false;
         this.rowHeight = 20;
-        this.headerRowHeight = 25;
-        this.stopsColWidth = 100;
+        this.headerRowHeight = 25; // has a border
+        this.stopsColWidth = 100; // has border
+        // flagAccessibility = false;
         this.tableStyle = 'ic_text_size';
+        // tableStyle = profileService.isLittleSize() ? 'ic_text_size_outline' : 'ic_text_size';
+        // $scope.flagAccessibility = profileService.getAccessibility();
         this.headervariable = 90;
         this.stopsColLineHeight = 20;
+        // if (ionic.Platform.isWebView() && ionic.Platform.isIOS() && ionic.Platform.version() < 9) {
+        //     $scope.stopsColLineHeight = 21;
+        //     rowHeight = 21;
+        //     $scope.rowHeight = rowHeight;
+        // }
+        // header height from the standard style. Augmented in case of iOS non-fullscreen.
         this.headerHeight = 44 + this.headervariable + 1;
+        // if (ionic.Platform.isIOS() && !ionic.Platform.isFullScreen) {
+        //     headerHeight += 20;
+        // }
         this.cellWidthBase = 50;
+        //    var firstColWidth = 100;
         this.cellHeightBase = 28;
         this.firstRowHeight = 28;
         this.scrollLeftPosition = 0;
@@ -43,53 +58,112 @@ export class AppHome {
     animateData(oldValue, newValue) {
         throw new Error("Method not implemented." + oldValue + newValue);
     }
+    getTextWidth() {
+        var measurer = this.element.shadowRoot.querySelector('#measurer');
+        return (measurer.getBoundingClientRect().width);
+    }
+    ;
+    //    set the variables for bigger style
     setBiggerStyle() {
         this.littletable = true;
         var rowHeight = 30;
         this.rowHeight = rowHeight;
-        this.headerRowHeight = 30;
-        this.stopsColWidth = 150;
+        this.headerRowHeight = 30; // has a border
+        this.stopsColWidth = 150; // has border
         this.stopsColLineHeight = 30;
+        // if (ionic.Platform.isWebView() && ionic.Platform.isIOS() && ionic.Platform.version() < 9) {
+        //   this.stopsColLineHeight = 31;
+        //     rowHeight = 31;
+        //     this.rowHeight = rowHeight;
+        // }
         var headerTable = this.element.shadowRoot.querySelector('#header-table');
         var headerheight = 90;
         if (headerTable) {
             headerheight = headerTable.clientHeight;
         }
         this.headervariable = headerheight + 5 * this.header_row_number;
+        // header height from the standard style. Augmented in case of iOS non-fullscreen.
         var headerHeight = 44 + this.headervariable + 1;
+        // if (ionic.Platform.isIOS() && !ionic.Platform.isFullScreen) {
+        //     headerHeight += 20;
+        // }
         this.fontsize = 16;
         this.scrollHeight = window.innerHeight - headerHeight;
     }
     ;
+    //    set the variables for smaller style
     setSmallerStyle() {
         this.littletable = false;
         var rowHeight = 20;
         this.rowHeight = rowHeight;
-        this.stopsColWidth = 100;
+        // var headerRowHeight = 20; // has a border
+        this.stopsColWidth = 100; // has border
         this.fontsize = 12;
         this.stopsColLineHeight = 20;
+        // if (ionic.Platform.isWebView() && ionic.Platform.isIOS() && ionic.Platform.version() < 9) {
+        //   this.stopsColLineHeight = 21;
+        //     rowHeight = 21;
+        //     this.rowHeight = rowHeight;
+        // }
         var headerTable = this.element.shadowRoot.querySelector('#header-table');
         var headerheight = 90;
         if (headerTable) {
             headerheight = headerTable.clientHeight;
         }
         this.headervariable = headerheight + 5 * this.header_row_number;
+        // header height from the standard style. Augmented in case of iOS non-fullscreen.
         var headerHeight = 44 + this.headervariable + 1;
+        // if (ionic.Platform.isIOS() && !ionic.Platform.isFullScreen) {
+        //     headerHeight += 20;
+        // }
         this.scrollHeight = window.innerHeight - headerHeight;
     }
     ;
     changeStyleTable() {
+        //change style to the table
+        // var actualPosition = {};
+        // var actualCol = 0;
+        // var actualRow = 0;
+        // $ionicLoading.show({
+        //     duration: 2000
+        // });
         setTimeout(() => {
             if (!this.littletable) {
                 this.setBiggerStyle();
+                // profileService.setTableBigSize();
             }
             else {
                 this.setSmallerStyle();
+                // profileService.setTableLittleSize()
             }
             this.tableStyle = this.littletable ? 'ic_text_size' : 'ic_text_size_outline';
+            // actualPosition = $ionicScrollDelegate.$getByHandle('list').getScrollPosition();
+            // actualCol = actualPosition.left / this.colwidth;
+            // actualRow = actualPosition.top / this.stopsColLineHeight;
+            // $ionicScrollDelegate.$getByHandle('list').scrollTo(0, 0, false);
+            // $ionicScrollDelegate.$getByHandle('list').resize();
         }, 100);
         setTimeout(function () {
+            // $ionicScrollDelegate.$getByHandle('list').scrollTo(actualCol * this.colwidth, actualRow * this.stopsColLineHeight, false);
         }, 2000);
+    }
+    locateTablePosition(data, time) {
+        if (!data)
+            return;
+        // time = $filter('date')(time, 'HH:mm');
+        time = moment(time).format('HH:mm');
+        for (var i = 0; i < data.tripIds.length; i++) {
+            if (!data.times[i])
+                continue;
+            for (var j = 0; j < data.times[i].length; j++) {
+                if (!!data.times[i][j]) {
+                    if (data.times[i][j].localeCompare(time) >= 0) {
+                        return i;
+                    }
+                }
+            }
+        }
+        return data.tripIds.length - 1;
     }
     initMeasures(data, noscroll) {
         if (window.innerHeight < window.innerWidth) {
@@ -103,19 +177,31 @@ export class AppHome {
                 this.stopsColWidth = 100;
             }
         }
+        // header rows
         this.header = null;
+        // first col with stops
         this.col = null;
         if (!data.tripIds || data.tripIds.length == 0)
             return;
         this.tableHeight = data.stops.length * this.rowHeight;
-        this.scrollWidth = window.innerWidth + (this.accessibility ? 0 : 25);
+        this.scrollWidth = window.innerWidth + (this.accessibility ? 0 : 25); //plus accessibility
         this.scrollHeight = window.innerHeight - this.headerHeight;
         this.tableHeaderHeight = this.showHeader ? (this.header_row_number * this.headerRowHeight) : 0;
         if (!noscroll) {
-            setTimeout(function () {
+            setTimeout(() => {
+                var columnScrollTo = this.locateTablePosition(data, new Date());
+                columnScrollTo = Math.min(columnScrollTo, data.tripIds.length - (this.scrollWidth - this.stopsColWidth) / this.colwidth);
+                var pos = this.colwidth * columnScrollTo;
+                var table = this.element.shadowRoot.querySelector('#table-table');
+                table.scrollTo(pos, 0);
             }, 300);
         }
     }
+    // @Watch('data')
+    // watchHandler(newValue: string) {
+    //   console.log('The new value of activated is: ', newValue);
+    //   this.buildData()
+    // }
     componentWillLoad() {
         this.changeStyle();
         this.buildData();
@@ -124,7 +210,7 @@ export class AppHome {
         this.dataTT = JSON.parse(this.data);
         this.rootstyle();
         this.Fetch();
-        this.initMeasures(this.dataTT, true);
+        this.initMeasures(this.dataTT, false);
     }
     rootstyle() {
         let root = document.documentElement;
@@ -143,11 +229,24 @@ export class AppHome {
         }
     }
     componentDidLoad() {
+        // console.log(this.element);
+        // this.element.shadowRoot.querySelector('#tablescroll').addEventListener('ionScrollEnd', (e) => {
+        //   this.scrollOrari(e);
+        // });
+        // this.element.shadowRoot.querySelector('#tablescroll').addEventListener('ionScroll', (e) => {
+        //   this.scrollOrari(e);
+        // });
+        // this.element.shadowRoot.querySelector('#tablescroll').addEventListener('ionScrollStart', (e) => {
+        //   this.scrollOrari(e);
+        // });
+        // loop over NodeList as per https://css-tricks.com/snippets/javascript/loop-queryselectorall-matches/
         const list = this.element.shadowRoot.querySelectorAll('li.my-list');
         [].forEach.call(list, li => li.style.color = 'red');
         this.setStyle();
+        this.colwidth = this.getTextWidth();
     }
     setStyle() {
+        // console.log(this.element.shadowRoot.innerHTML);
         this.titleBar = this.element.shadowRoot.querySelector('.titleBar');
         if (this.titleBar) {
             this.titleBar.style.backgroundColor = this.color;
@@ -159,8 +258,15 @@ export class AppHome {
             this.subtitleBar.style.color = this.textColor(this.color);
         }
     }
+    // convert delay object to string
     getDelayValue(delay) {
         var res = '';
+        //    if (delay && delay.SERVICE && delay.SERVICE > 0) {
+        //      res += '<span>'+delay.SERVICE+'\'</span>';
+        //    }
+        //    if (delay && delay.USER && delay.USER > 0) {
+        //      res += '<span>'+delay.USER+'\'</span>';
+        //    }
         if (delay && delay.SERVICE && delay.SERVICE > 0) {
             res += delay.SERVICE + '\'';
         }
@@ -173,6 +279,7 @@ export class AppHome {
     }
     StampaOrari(data) {
         this.header_row_number = this.showtrips ? 2 : 1;
+        // this.header_row_number = 1;
         var dataStr = '';
         var headStr = this.header_row_number == 2 ? ['', ''] : [''];
         var colStr = '';
@@ -182,25 +289,33 @@ export class AppHome {
             for (var row = 0; row < data.stops.length + this.header_row_number; row++) {
                 var rowContent = [];
                 for (var col = 0; col <= data.tripIds.length; col++) {
+                    // corner 0
                     if (col == 0 && row == 0) {
+                        // var str = $filter('translate')('lbl_delays');
                         var str = this.labeldelay;
                         rowContent.push(str);
                         tableCornerStr[0] = str;
+                        // corner 1
                     }
                     else if (this.header_row_number == 2 && row == 1 && col == 0) {
+                        // var str = $filter('translate')('lbl_trips');
                         var str = this.labeltrips;
                         rowContent.push(str);
                         tableCornerStr[1] = str;
+                        // stops column
                     }
                     else if (col == 0) {
                         rowContent.push(data.stops[row - this.header_row_number]);
+                        //check from data if accessibility
                         if (!!data.wheelChairBoarding && data.wheelChairBoarding[row - this.header_row_number] == 1) {
+                            // if (data.wheelChairBoarding && data.wheelChairBoarding[row - $scope.header_row_number] == 1) {
                             colStr += '<div class="accessibilityBullet"><ion-icon name="radio-button-on"></ion-icon></div>';
                         }
                         else {
                             colStr += '<div class="accessibilityBullet"></div>';
                         }
                         colStr += data.stops[row - this.header_row_number] + '<br/>';
+                        // delays header row
                     }
                     else if (row == 0) {
                         var str = '';
@@ -209,13 +324,16 @@ export class AppHome {
                         rowContent.push(str);
                         str = this.expandStr(str);
                         headStr[0] += str;
+                        // train lines header row
                     }
                     else if (this.header_row_number == 2 && row == 1) {
                         var str1 = this.getTripText(this.agencyid, data.tripIds[col - 1]);
                         console.log(str1);
+                        // var str1: any = this.tripsvalue;
                         rowContent.push(str1);
                         str1 = this.expandStr(str1);
                         headStr[1] += str1;
+                        // table data
                     }
                     else {
                         var str1 = data.times[col - 1][row - this.header_row_number];
@@ -234,12 +352,13 @@ export class AppHome {
             data.stops = [];
             data.stopIds = [];
         }
+        // this.data = rows;
         this.headStr = headStr;
         this.orari = dataStr;
         this.tableCornerStr = tableCornerStr;
         this.fermate = colStr;
         this.tt = rows;
-        this.initMeasures(data, true);
+        this.initMeasures(data, false);
     }
     ;
     tripExtractor(agencyId, tripId) {
@@ -256,9 +375,38 @@ export class AppHome {
             return tripLabel;
         }
     }
+    // StampaOrari(param) {
+    //   try {
+    //     let root = document.documentElement;
+    //     let contatore: number = (window.innerWidth / 68);
+    //     this.orari = "";
+    //     let tmp: string = "";
+    //     for (let i in param[0]) {
+    //       this.orari += parseInt(i) % 2 == 0 ? "<div id='grigioOrari'>" : "<div id='biancoOrari'>";
+    //       for (let j in param) {
+    //         tmp = param[j][i] != "" ? param[j][i] : "&nbsp&nbsp&nbsp&nbsp&nbsp";
+    //         this.orari += tmp + "&nbsp&nbsp&nbsp";
+    //         contatore--;
+    //       }
+    //       console.log(contatore);
+    //       for (let j = 0; j < contatore; j++) {
+    //         this.orari += "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp";
+    //       }
+    //       if (contatore > 0)
+    //         root.style.setProperty('--blocca-barra', 'hidden');
+    //       this.orari += "</div>";
+    //       contatore = window.innerWidth / 68;
+    //     }
+    //   } catch{
+    //     alert("Dati non disponibili");
+    //   }
+    // }
     Fetch() {
         if (this.dataTT) {
             console.log(this.dataTT);
+            // this.dataTT = this.data['stopNames'];
+            //this.BiancoNero(this.dataTT['stops']);
+            // this.dataTT = response['trips'];
             this.StampaOrari(this.dataTT);
         }
         if (this.citta && this.numero) {
@@ -279,12 +427,16 @@ export class AppHome {
     }
     scrollOrari(event) {
         event = event;
+        // let elemento = this.element.shadowRoot.querySelectorAll("#myDIV")[0];
+        // let daScrollare = this.element.shadowRoot.querySelectorAll("#listaFermate")[0];
+        // daScrollare.scrollTop = elemento.scrollTop;
         if (this.header == null) {
             this.header = this.element.shadowRoot.querySelector('#table-header');
         }
         if (this.col == null) {
             this.col = this.element.shadowRoot.querySelector('#table-col');
         }
+        // var pos = $ionicScrollDelegate.$getByHandle('list').getScrollPosition();
         var pos = {
             top: event.detail.currentY,
             left: event.detail.currentX
@@ -294,15 +446,18 @@ export class AppHome {
         }
         if (this.col != null) {
             this.col.style.left = pos.left + 'px';
+            //        alert('scroll top' + pos.top + 'px ' + pos.left + 'px');
         }
     }
     visualizza(oggetto) {
         return oggetto;
     }
     prevDate() {
+        //console.log("prevDate");
         this.changeDateEvent.emit('prevDate');
     }
     nextDate() {
+        //console.log("nextDate");
         this.changeDateEvent.emit('nextDate');
     }
     textColor(color) {
@@ -314,17 +469,24 @@ export class AppHome {
     isDarkColor(color) {
         if (!color)
             return true;
-        var c = color.substring(1);
-        var rgb = parseInt(c, 16);
-        var r = (rgb >> 16) & 0xff;
-        var g = (rgb >> 8) & 0xff;
-        var b = (rgb >> 0) & 0xff;
-        var luma = (r + g + b) / 3;
+        var c = color.substring(1); // strip #
+        var rgb = parseInt(c, 16); // convert rrggbb to decimal
+        var r = (rgb >> 16) & 0xff; // extract red
+        var g = (rgb >> 8) & 0xff; // extract green
+        var b = (rgb >> 0) & 0xff; // extract blue
+        var luma = (r + g + b) / 3; //0.2126 * r + 0.7152 * g + 0.0722 * b; // per ITU-R BT.709
         return luma < 128;
     }
     ;
     showStop(stop) {
+        // console.log(stop);
         this.showStopEvent.emit(stop);
+        // showStop($event) {
+        // var pos = $ionicScrollDelegate.$getByHandle('list').getScrollPosition().top + $event.clientY - $scope.tableHeaderHeight - headerHeight;
+        // var idx = Math.floor(pos / $scope.stopsColLineHeight);
+        // if (idx < 0 || idx >= $scope.tt.stops.length) return;
+        // var stop = $scope.tt.stops[idx];
+        // Toast.show(stop, "short", "bottom");
     }
     render() {
         var styleTableScroll = {
@@ -334,10 +496,12 @@ export class AppHome {
         var styleTableCol = {
             width: `${this.stopsColWidth}px`,
             lineHeight: `${this.stopsColLineHeight}px`,
+            // top: `${this.tableHeaderHeight}px`,
             backgroundSize: `100% ${this.rowHeight * 2}px`,
             fontSize: `${this.fontsize}px`,
             left: `${this.col ? this.col.style.left : 0}px`,
             top: `${this.col ? this.col.style.top : 25 * (this.showHeader ? this.header_row_number : 0)}px`,
+            // backgroundImage:`-webkit-linear-gradient(90deg,#fff, #fff {{rowHeight}}px, #eee {{rowHeight}}px, #eee {{rowHeight*2}}px`;
             backgroundImage: `linear-gradient(180deg,#fff, #fff ${this.rowHeight}px, #eee ${this.rowHeight}px, #eee ${this.rowHeight * 2}px`
         };
         var styleTableHeader = {
@@ -351,6 +515,7 @@ export class AppHome {
             lineHeight: `${this.stopsColLineHeight}px`,
             backgroundSize: `100% ${this.rowHeight * 2}px`,
             fontSize: `${this.fontsize}px`,
+            // backgroundImage:`-webkit-linear-gradient(90deg,transparent, transparent ${rowHeight}px, #eee ${rowHeight}px, #eee ${rowHeight*2}px)`,
             backgroundImage: `linear-gradient(180deg,transparent, transparent ${this.rowHeight}px, #eee ${this.rowHeight}px, #eee ${this.rowHeight * 2}px)`
         };
         var styleTableCorner = {
@@ -421,7 +586,8 @@ export class AppHome {
                                             ? h("div", { innerHTML: this.headStr[1], class: "header-row-types" })
                                             : "")
                                     : "",
-                                h("div", { id: "table-table", innerHTML: this.visualizza(this.orari), style: styleTableTable })))))
+                                h("div", { id: "table-table", innerHTML: this.visualizza(this.orari), style: styleTableTable }),
+                                h("div", { id: "measurer", class: "mesurer" }, "123456789")))))
         ];
     }
     static get is() { return "wc-trasporti-table"; }

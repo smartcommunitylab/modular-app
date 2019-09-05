@@ -3,7 +3,7 @@
 
     "name": {
       "it": "Funerali",
-      "en": "Funerali",
+      "en": "Funerals",
       "de": "Funerali"
     },
     "url": "/funerali",
@@ -48,7 +48,7 @@
     "id": "i",
     "name": {
       "it": "Pulizia strade",
-      "en": "Streets",
+      "en": "Streets cleaning",
       "de": "Strasse"
     },
     "url": "/ps",

@@ -11070,52 +11070,56 @@ var DbService = /** @class */ (function () {
     };
     ;
     DbService.prototype.doWithDB = function (successcallback, errorcallback) {
-        var _this = this;
-        console.log('doWithDB');
+        console.log('doWithDB()');
         var that = this;
         if (this.db == null) {
-            window.plugins.sqlDB.copy(this.getDBFileShortName(), 0, function () {
-                console.log('copied success');
-                window.sqlitePlugin.openDatabase({
-                    // this.sqlite.create({
-                    name: _this.getDBFileShortName(),
-                    location: 'default'
-                }, function (db) {
-                    that.db = db;
-                    console.log('opened, try to query');
-                    db.executeSql("select * from version", [], function (res) {
-                        console.log('version present');
-                        console.log(JSON.stringify(res));
-                        successcallback();
-                    }, function (e) {
-                        console.log(JSON.stringify(e));
-                        errorcallback();
-                    });
+            console.log('this.db is null');
+            // (<any>window).plugins.sqlDB.copy(this.getDBFileShortName(), 0, () => {
+            //   console.log('copied success');
+            window.sqlitePlugin.openDatabase({
+                // this.sqlite.create({
+                name: this.getDBFileShortName(),
+                // location: 'default',
+                bgType: 1,
+                skipBackup: true,
+                iosDatabaseLocation: 'Documents'
+            }, function (db) {
+                that.db = db;
+                console.log('opened, try to query');
+                db.executeSql("select * from version", [], function (res) {
+                    console.log('version present');
+                    console.log(JSON.stringify(res));
+                    successcallback();
+                }, function (e) {
+                    console.log("errror select * from version" + JSON.stringify(e));
+                    errorcallback();
                 });
-            }, function (err) {
-                console.log('not copied');
-                console.log(err);
-                if (err.code = 516) {
-                    console.log('error 516');
-                    window.sqlitePlugin.openDatabase({
-                        name: _this.getDBFileShortName(),
-                        location: 'default'
-                    }, function (db) {
-                        that.db = db;
-                        console.log('opened, try to query');
-                        db.executeSql("select * from version", [], function (res) {
-                            console.log('version present');
-                            console.log(JSON.stringify(res));
-                            successcallback();
-                        }, function (e) {
-                            console.log(JSON.stringify(e));
-                            errorcallback();
-                        });
-                    });
-                }
             });
+            // }, (err) => {
+            //   console.log('not copied')
+            //   console.log(err);
+            //   if (err.code = 516) {
+            //     console.log('error 516');
+            //     (<any>window).sqlitePlugin.openDatabase({
+            //       name: this.getDBFileShortName(),
+            //       location: 'default'
+            //     }, (db) => {
+            //       that.db = db;
+            //       console.log('opened, try to query')
+            //       db.executeSql("select * from version", [], (res) => {
+            //         console.log('version present');
+            //         console.log(JSON.stringify(res))
+            //         successcallback();
+            //       }, (e) => {
+            //         console.log(JSON.stringify(e));
+            //         errorcallback();
+            //       });
+            //     })
+            //   }
+            // })
         }
         else {
+            console.log('this.db is NOT null' + JSON.stringify(this.db));
             successcallback();
         }
     };
@@ -11159,6 +11163,7 @@ var DbService = /** @class */ (function () {
                 var data = that.convertData(res);
                 successcallback(data);
             }, function (e) {
+                console.log('error query select * from version');
                 console.log(JSON.stringify(e));
                 errorcallback();
             });
@@ -11184,13 +11189,15 @@ var DbService = /** @class */ (function () {
                         console.log('created file');
                         var f = jszipobj.file(key);
                         // that.file.removeFile(that.getDBPath(), that.getDBFileShortName()).then(function () {
+                        console.log("getDBPath" + that.getDBPath());
+                        console.log("getDBFileShortName" + that.getDBFileShortName());
                         that.file.writeFile(that.getDBPath(), that.getDBFileShortName(), jszipobj.file(key).asArrayBuffer(), { replace: true })
                             .then(function (success) {
-                            console.log('success copy');
+                            console.log('success write');
                             // that.db = null;
                             resolve(true);
                         }, function (error) {
-                            console.log('error copy');
+                            console.log('error write');
                             reject(error);
                         });
                     });
@@ -11388,7 +11395,9 @@ var DbService = /** @class */ (function () {
             _this.localDBisPresent().then(function (result) {
                 //use local version of db in data/routesdb.zip
                 if (!result) {
+                    console.log("start install");
                     that.installDB(false).then(function () {
+                        console.log("after install, start synch");
                         that.synchDB().then(success, err);
                     }, err);
                 }

@@ -39,14 +39,16 @@ export class FuneraliPage {
   dataFunerale: any;
   oraMorte: any;
   luogoFunerale: any;
+  partenzaFunerale:any;
   mappa: any;
   condividi: any;
   emptyList: boolean = false;
   networkMessage: any;
+  refElement: any;
 
   constructor(private social: SocialSharing,
     private datiService: DatiService,
-    private plt:Platform,
+    private plt: Platform,
     private utils: UtilsService,
     private translate: TranslateService) {
     var language = window[this.utils.getAppModuleName()]['language'];
@@ -66,6 +68,7 @@ export class FuneraliPage {
         this.dataFunerale = this.translate.instant('data_funerale');
         this.oraMorte = this.translate.instant('ora_morte');
         this.luogoFunerale = this.translate.instant('luogo_funerale');
+        this.partenzaFunerale= this.translate.instant('partenza_funerale');
         this.mappa = this.translate.instant('mappa');
         this.condividi = this.translate.instant('condividi');
         this.networkMessage = this.translate.instant('network_message');
@@ -74,6 +77,7 @@ export class FuneraliPage {
           dataFunerale: this.dataFunerale,
           oraMorte: this.oraMorte,
           luogoFunerale: this.luogoFunerale,
+          partenzaFunerale:this.partenzaFunerale,
           mappa: this.mappa,
           condividi: this.condividi
         })
@@ -101,22 +105,27 @@ export class FuneraliPage {
       });
     }
   }
+  ionViewDidEnter() {
+    if (this.dates.length > 0) {
+      this.selectInternalElement(this.refElement);
+    }
+  }
   subCategories(array: Array<any>) {
-    var i = 0;
+    var i = null;
     array.forEach((element, index) => {
-      if (!this.fullDates.includes(element.dataFunerale)) {
-        this.fullDates.push(element.dataFunerale);
-        if ((moment(element.dataFunerale, 'DD/MM/YYYY').isSame(new Date(), "day")))
+      var data = element.dataFunerale;
+      if (!this.fullDates.includes(data)) {
+        this.fullDates.push(data);
+        if (((moment(data, 'DD/MM/YYYY').isSame(moment(), "day")) || (moment(data, 'DD/MM/YYYY').isAfter(moment(), "day"))) && !i)
           i = this.fullDates.length - 1;
       }
     });
+    if (!i)
+      i = this.fullDates.length - 1;
     this.dates = this.fullDates;
-    console.log("data"+JSON.stringify(this.dates) );
+    console.log("data" + JSON.stringify(this.dates));
+    this.refElement = this.dates[i];
 
-    if (this.dates.length > 0) {
-      setTimeout(() => this.selectInternalElement(this.dates[i])
-        , 500)
-    }
   }
   oneElement(category) {
     if (this.showFunerali && this.showFunerali[category])
@@ -127,8 +136,9 @@ export class FuneraliPage {
     this.typingTimer = setTimeout(() => {
       if (!input.detail) {
         this.dates.forEach(c => {
+
           this.showFunerali[c] = this.vetFunerali.filter(el => {
-            return (el.dataFunerale == c);
+            return (el.dataFunerale ? el.dataFunerale : el.dataPartenza == c);
           });
         });
         // emptyList = false;
@@ -139,7 +149,7 @@ export class FuneraliPage {
         this.dates.forEach(c => {
           this.showFunerali[c] = this.vetFunerali.filter(el => {
             if (el.nome)
-              return (el.nome.toLowerCase().indexOf(value.toLowerCase()) > -1 && el.dataFunerale == c);
+              return (el.nome.toLowerCase().indexOf(value.toLowerCase()) > -1 && el.dataFunerale ? el.dataFunerale : el.dataPartenza == c);
             return false
           });
         });
@@ -150,8 +160,10 @@ export class FuneraliPage {
   buildShowPois(filters?) {
     this.showFunerali = [];
     this.vetFunerali.forEach(p => {
-      if (!this.showFunerali[p.dataFunerale]) {
-        this.showFunerali[p.dataFunerale] = [];
+      var data = p.dataFunerale ? p.dataFunerale : p.dataPartenza;
+
+      if (!this.showFunerali[data]) {
+        this.showFunerali[data] = [];
       }
       if (filters ? filters.filter(item => {
         return (item.isChecked && p.cat.filter(cat => cat == item.value).length > 0)
@@ -159,7 +171,7 @@ export class FuneraliPage {
         // return (item.isChecked && (p.cat.filter(cat => cat == item.value).length > 0 || p.parentObjectName == item.value))
         // else (item.isChecked &&   p.parentObjectName == item.value)
       }).length > 0 : true) {
-        this.showFunerali[p.dataFunerale].push(p);
+        this.showFunerali[data].push(p);
 
       }
     });
@@ -240,7 +252,7 @@ export class FuneraliPage {
   //condividi da mobile per i funerali
   CondividiFunerali(i) {
     this.social.canShareViaEmail().then(() => {
-      this.social.share(this.vetFunerali[i].nome + " " + this.vetFunerali[i].luogoFunerale + " " + this.vetFunerali[i].dataFunerale + " " + this.vetFunerali[i].luogoFunerale, null, null);
+      this.social.share(i.nome + " " +this.luogoFunerale+ i.luogoFunerale + " " +this.dataFunerale+ i.dataFunerale + " " +this.oraMorte+i.oraFunerale);
     }).catch(() => {
       alert("Il servizio di condivisione non è disponibile per questo dispositivo");
     });
@@ -332,20 +344,24 @@ export class FuneraliPage {
   cleanNames(vetFunerali: any[]): any[] {
     return vetFunerali.map(el => {
       if (el.nome)
-      el.nome =el.nome.replace(/,/g, ' ');
-        return el
+        el.nome = el.nome.replace(/,/g, ' ');
+      return el
 
     })
   }
   convertDates(res: any): any[] {
     return res.map(el => {
-      // var elem = {};
+
       if (el.dataFunerale)
         el.dataFunerale = (moment(el.dataFunerale, 'YYYY-MM-DD').format('DD/MM/YYYY'))
       if (el.dataMorte)
         el.dataMorte = (moment(el.dataMorte, 'YYYY-MM-DD').format('DD/MM/YYYY'))
       if (el.oraFunerale)
         el.oraFunerale = (moment(el.oraFunerale, 'HH:mm:ss').format('HH:mm'))
+      if (el.dataPartenza)
+        el.dataPartenza = (moment(el.dataPartenza, 'YYYY-MM-DD').format('DD/MM/YYYY'))
+      if (el.oraPartenza)
+        el.oraPartenza = (moment(el.oraPartenza, 'HH:mm:ss').format('HH:mm'))
       return el;
     })
 

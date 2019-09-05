@@ -1,14 +1,6 @@
 cordova.define('cordova/plugin_list', function(require, exports, module) {
 module.exports = [
   {
-    "id": "call-number.CallNumber",
-    "file": "plugins/call-number/www/CallNumber.js",
-    "pluginId": "call-number",
-    "clobbers": [
-      "call"
-    ]
-  },
-  {
     "id": "cordova-plugin-badge.Badge",
     "file": "plugins/cordova-plugin-badge/www/badge.js",
     "pluginId": "cordova-plugin-badge",
@@ -183,8 +175,8 @@ module.exports = [
     "runs": true
   },
   {
-    "id": "cordova-plugin-file.iosFileSystem",
-    "file": "plugins/cordova-plugin-file/www/ios/FileSystem.js",
+    "id": "cordova-plugin-file.androidFileSystem",
+    "file": "plugins/cordova-plugin-file/www/android/FileSystem.js",
     "pluginId": "cordova-plugin-file",
     "merges": [
       "FileSystem"
@@ -206,36 +198,18 @@ module.exports = [
     "runs": true
   },
   {
-    "id": "cordova-plugin-geolocation.Coordinates",
-    "file": "plugins/cordova-plugin-geolocation/www/Coordinates.js",
+    "id": "cordova-plugin-geolocation.geolocation",
+    "file": "plugins/cordova-plugin-geolocation/www/android/geolocation.js",
     "pluginId": "cordova-plugin-geolocation",
     "clobbers": [
-      "Coordinates"
+      "navigator.geolocation"
     ]
   },
   {
     "id": "cordova-plugin-geolocation.PositionError",
     "file": "plugins/cordova-plugin-geolocation/www/PositionError.js",
     "pluginId": "cordova-plugin-geolocation",
-    "clobbers": [
-      "PositionError"
-    ]
-  },
-  {
-    "id": "cordova-plugin-geolocation.Position",
-    "file": "plugins/cordova-plugin-geolocation/www/Position.js",
-    "pluginId": "cordova-plugin-geolocation",
-    "clobbers": [
-      "Position"
-    ]
-  },
-  {
-    "id": "cordova-plugin-geolocation.geolocation",
-    "file": "plugins/cordova-plugin-geolocation/www/geolocation.js",
-    "pluginId": "cordova-plugin-geolocation",
-    "clobbers": [
-      "navigator.geolocation"
-    ]
+    "runs": true
   },
   {
     "id": "cordova-plugin-inappbrowser.inappbrowser",
@@ -248,26 +222,10 @@ module.exports = [
   },
   {
     "id": "cordova-plugin-ionic-keyboard.keyboard",
-    "file": "plugins/cordova-plugin-ionic-keyboard/www/ios/keyboard.js",
+    "file": "plugins/cordova-plugin-ionic-keyboard/www/android/keyboard.js",
     "pluginId": "cordova-plugin-ionic-keyboard",
     "clobbers": [
       "window.Keyboard"
-    ]
-  },
-  {
-    "id": "cordova-plugin-ionic-webview.IonicWebView",
-    "file": "plugins/cordova-plugin-ionic-webview/src/www/util.js",
-    "pluginId": "cordova-plugin-ionic-webview",
-    "clobbers": [
-      "Ionic.WebView"
-    ]
-  },
-  {
-    "id": "cordova-plugin-ionic-webview.ios-wkwebview-exec",
-    "file": "plugins/cordova-plugin-ionic-webview/src/www/ios/ios-wkwebview-exec.js",
-    "pluginId": "cordova-plugin-ionic-webview",
-    "clobbers": [
-      "cordova.exec"
     ]
   },
   {
@@ -333,27 +291,53 @@ module.exports = [
     "clobbers": [
       "SQLitePlugin"
     ]
+  },
+  {
+    "id": "mx.ferreyra.callnumber.CallNumber",
+    "file": "plugins/mx.ferreyra.callnumber/www/CallNumber.js",
+    "pluginId": "mx.ferreyra.callnumber",
+    "clobbers": [
+      "call"
+    ]
+  },
+  {
+    "id": "cordova-hot-code-push-plugin.chcp",
+    "file": "plugins/cordova-hot-code-push-plugin/www/chcp.js",
+    "pluginId": "cordova-hot-code-push-plugin",
+    "clobbers": [
+      "chcp"
+    ]
+  },
+  {
+    "id": "cordova-plugin-google-analytics.UniversalAnalytics",
+    "file": "plugins/cordova-plugin-google-analytics/www/analytics.js",
+    "pluginId": "cordova-plugin-google-analytics",
+    "clobbers": [
+      "analytics",
+      "ga"
+    ]
   }
 ];
 module.exports.metadata = 
 // TOP OF METADATA
 {
-  "call-number": "0.0.2",
   "cordova-plugin-badge": "0.8.8",
   "cordova-plugin-dbcopy": "2.1.2",
-  "cordova-plugin-device": "2.0.3",
-  "cordova-plugin-file": "6.0.2",
-  "cordova-plugin-geolocation": "4.0.2",
+  "cordova-plugin-device": "2.0.2",
+  "cordova-plugin-file": "6.0.1",
+  "cordova-plugin-geolocation": "4.0.1",
   "cordova-plugin-inappbrowser": "3.1.0",
   "cordova-plugin-ionic-keyboard": "2.1.3",
-  "cordova-plugin-ionic-webview": "4.1.1",
   "cordova-plugin-local-notification": "0.9.0-beta.2",
-  "cordova-plugin-splashscreen": "5.0.3",
+  "cordova-plugin-splashscreen": "5.0.2",
   "cordova-plugin-statusbar": "2.4.3",
-  "cordova-plugin-whitelist": "1.3.4",
+  "cordova-plugin-whitelist": "1.3.3",
   "es6-promise-plugin": "4.2.2",
   "cordova-plugin-x-socialsharing": "5.4.7",
-  "cordova-sqlite-storage": "3.2.1"
+  "cordova-sqlite-storage": "3.2.0",
+  "mx.ferreyra.callnumber": "0.0.2",
+  "cordova-hot-code-push-plugin": "1.5.3",
+  "cordova-plugin-google-analytics": "1.8.6"
 };
 // BOTTOM OF METADATA
 });

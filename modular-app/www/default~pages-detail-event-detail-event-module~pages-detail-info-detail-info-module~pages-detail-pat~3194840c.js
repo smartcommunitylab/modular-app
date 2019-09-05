@@ -17379,23 +17379,32 @@ var DbService = /** @class */ (function () {
                     selector: {
                         "$or": [
                             {
-                                "elementType": "event-item"
+                                "elementType": "event-item",
+                                "$nor": [
+                                    {
+                                        "fromTime": {
+                                            "$lte": new Date().getTime()
+                                        }
+                                    }, {
+                                        "toTime": {
+                                            "$lte": new Date().getTime()
+                                        }
+                                    }
+                                ],
+                                "$and": [
+                                    {
+                                        "fromTime": {
+                                            "$gte": new Date().getTime()
+                                        }
+                                    }, {
+                                        "fromTime": {
+                                            "$lte": new Date().getTime() + 7 * 24 * 60 * 60 * 1000
+                                        }
+                                    }
+                                ]
                             },
-                            {
-                                "elementType": "main-event-item"
-                            }
-                        ],
-                        "$nor": [
-                            { "fromTime": {
-                                    "$lte": new Date().getTime()
-                                }
-                            }, { "toTime": {
-                                    "$lte": new Date().getTime()
-                                }
-                            }
                         ]
-                    },
-                    "limit": 100
+                    }
                 });
             }
         }

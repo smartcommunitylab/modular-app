@@ -176,7 +176,7 @@ export class TouristServicesPage implements OnInit {
         poiElement.description += '<br/>' + x.description[this.language];
       }
       if (x.image) {
-        poiElement.image = x.image;
+        poiElement.image = x.image.replace('.jpg','_medium.jpg');;
       }
       if (x._id) {
         poiElement.id = x._id;
@@ -301,7 +301,7 @@ export class TouristServicesPage implements OnInit {
     return returnArray;
   }
   removeTag(tag) {
-    this.tags = this.tags.filter(item => item.value != tag.value)
+    this.tags = this.tags.map(item => tag.value == item.value ? { value: item.value, isChecked: false } : { value: item.value, isChecked: item.isChecked })
     this.firstAccess = true;
     var even = function (element) {
       // checks whether an element is even

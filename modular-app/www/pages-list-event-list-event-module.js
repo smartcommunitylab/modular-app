@@ -18,7 +18,7 @@ module.exports = "<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\"
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".button-interaction {\n  width: 100%;\n  --background:#11b3ef;\n  --color:white; }\n\n.interactive {\n  color: #11b3ef !important; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9Vc2Vycy91c2VyL0RvY3VtZW50cy9Qcm9qZWN0cy9tb2R1bGFyQXBwL21vZHVsYXItYXBwL21vZHVsYXItYXBwL3NyYy9hcHAvbW9kdWxlLWNvbXVuZS9wYWdlcy9saXN0LWV2ZW50L2ZpbHRlci1wYWdlLWV2ZW50L2ZpbHRlci1wYWdlLWV2ZW50LnBhZ2Uuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLFlBQVc7RUFDWCxxQkFBYTtFQUNiLGNBQVEsRUFDWDs7QUFDRDtFQUNJLDBCQUF1QixFQUMxQiIsImZpbGUiOiJzcmMvYXBwL21vZHVsZS1jb211bmUvcGFnZXMvbGlzdC1ldmVudC9maWx0ZXItcGFnZS1ldmVudC9maWx0ZXItcGFnZS1ldmVudC5wYWdlLnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuYnV0dG9uLWludGVyYWN0aW9ue1xuICAgIHdpZHRoOiAxMDAlO1xuICAgIC0tYmFja2dyb3VuZDojMTFiM2VmO1xuICAgIC0tY29sb3I6d2hpdGU7XG59XG4uaW50ZXJhY3RpdmV7XG4gICAgY29sb3I6IzExYjNlZiFpbXBvcnRhbnQ7XG59Il19 */"
+module.exports = ".button-interaction {\n  width: 100%;\n  --background:#11b3ef;\n  --color:white; }\n\n.interactive {\n  color: #11b3ef !important; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL2NoaW44L0RvY3VtZW50cy93b3JrL21vZHVsYXJBcHAvbW9kdWxhci1hcHAvc3JjL2FwcC9tb2R1bGUtY29tdW5lL3BhZ2VzL2xpc3QtZXZlbnQvZmlsdGVyLXBhZ2UtZXZlbnQvZmlsdGVyLXBhZ2UtZXZlbnQucGFnZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksWUFBVztFQUNYLHFCQUFhO0VBQ2IsY0FBUSxFQUNYOztBQUNEO0VBQ0ksMEJBQXVCLEVBQzFCIiwiZmlsZSI6InNyYy9hcHAvbW9kdWxlLWNvbXVuZS9wYWdlcy9saXN0LWV2ZW50L2ZpbHRlci1wYWdlLWV2ZW50L2ZpbHRlci1wYWdlLWV2ZW50LnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi5idXR0b24taW50ZXJhY3Rpb257XG4gICAgd2lkdGg6IDEwMCU7XG4gICAgLS1iYWNrZ3JvdW5kOiMxMWIzZWY7XG4gICAgLS1jb2xvcjp3aGl0ZTtcbn1cbi5pbnRlcmFjdGl2ZXtcbiAgICBjb2xvcjojMTFiM2VmIWltcG9ydGFudDtcbn0iXX0= */"
 
 /***/ }),
 
@@ -168,7 +168,7 @@ var ListEventPageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header no-border>\n      <ion-searchbar class=\"search-event\" style=\"display: none\" showCancelButton=\"always\" animated  (search)=\"toggleSearch()\"\n      (ionInput)=\"searchChanged($event)\" (ionCancel)=\"toggleSearch()\" ></ion-searchbar>\n  <ion-toolbar>\n\n    <ion-buttons slot=\"start\">\n      <ion-back-button class=\"interaction\"></ion-back-button>\n    </ion-buttons>\n    <ion-buttons slot=\"end\">\n      <ion-button (click)=\"filterClicked()\">\n        <ion-icon name=\"options\"></ion-icon>\n      </ion-button>\n      <ion-button (click)=\"toggleSearch()\">\n        <ion-icon name=\"search\"></ion-icon>\n      </ion-button>\n    </ion-buttons>\n    <ion-title>\n      {{'EVENTS' | translate}}\n    </ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content [scrollEvents]=\"true\" (ionScroll)=\"onScroll($event)\">\n\n  <ion-searchbar style=\"display: none\" showCancelButton animated (search)=\"toggleSearch()\"\n    (ionInput)=\"searchChanged($event)\" (ionCancel)=\"toggleSearch()\"></ion-searchbar>\n  <div *ngIf=\"!emptyList\">\n  <div class=\"wrapper\" *ngIf=\"presentFilter\">\n      <div class=\"scrolling-wrapper-flexbox loop\">\n        <div class=\"container\" *ngFor=\"let tag of tags\">\n        <div class=\"tag\"  *ngIf=\"tag.isChecked\">\n          <div class=\"tag-text\">\n            {{tag.value}}\n            <ion-icon name=\"close-circle\" (click)=\"removeTag(tag)\"></ion-icon>\n          </div>\n          \n        </div>\n      </div>\n      </div>\n    </div>\n  <div class=\"wrapper\" *ngIf=\"!presentFilter\">\n    <div id=\"idCategories\" class=\"scrolling-wrapper-flexbox loop\">\n      <ion-chip *ngFor=\"let c of categories\" id=\"{{c}}\" (click)=\"selectInternalElement(c)\" [ngClass]=\"{'categorySelected': isSelected(c)}\">\n        <ion-label class=\"interaction\" [ngClass]=\"{'categorySelected': c==actualVisualized}\">{{c}}</ion-label>\n      </ion-chip>\n    </div>\n  </div>\n  <ion-list no-lines id=\"poi-list\">\n    <div *ngFor=\"let c of categories\">\n      <ion-item class=\"label-type ion-text-center\" sticky *ngIf=\"oneElement(c) && !presentFilter\">\n          <div>{{c}}</div>\n      </ion-item>\n      <div class=\"content\">\n        \n        <div *ngFor=\"let poi of showPois[c]; let i = index\">\n          <div class=\"{{poi.cat[0]}}\"   inViewport\n          [inViewportOptions]=\"{ threshold: [0] }\" (inViewportAction)=\"onIntersection($event)\">\n            <wc-details [id]=\"poi.id\" [img]=\"poi.image\" [stringsinput]=\"stringsContact\" [title]=\"poi.title\"\n              [altImage]=\"altImage\" [stringsinput]=\"stringsContact\" [title]=\"poi.title\" [altImage]=\"altImage\"\n              [subtitle]=\"poi.subtitle\" [text]=\"poi.text\" [info]=\"poi.info\" [contacts]=\"poi.infos\"\n              heading-color=\"#707070\" second-color=\"#11b3ef\" expandable=true expanse=false></wc-details>\n            <div class=\"spacing\" *ngIf=\"i == showPois.length - 1\"></div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </ion-list>\n</div>\n<div class=\"empty-list\" *ngIf=\"emptyList\">\n    {{'empty_list' | translate}}\n</div>\n</ion-content>"
+module.exports = "<ion-header no-border [ngClass]=\"{'higher': searchAndIos()}\" >\n      <ion-searchbar class=\"search-event\"  [ngClass]=\"{'searchspace': search}\" style=\"display: none\" showCancelButton=\"always\" animated  (search)=\"toggleSearch()\"\n      (ionInput)=\"searchChanged($event)\" (ionCancel)=\"toggleSearch()\" ></ion-searchbar>\n  <ion-toolbar>\n\n    <ion-buttons slot=\"start\">\n      <ion-back-button class=\"interaction\"></ion-back-button>\n    </ion-buttons>\n    <ion-buttons slot=\"end\">\n      <ion-button (click)=\"filterClicked()\">\n        <ion-icon name=\"options\"></ion-icon>\n      </ion-button>\n      <ion-button (click)=\"toggleSearch()\">\n        <ion-icon name=\"search\"></ion-icon>\n      </ion-button>\n    </ion-buttons>\n    <ion-title>\n      {{'EVENTS' | translate}}\n    </ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content [scrollEvents]=\"true\" (ionScroll)=\"onScroll($event)\">\n\n  <ion-searchbar style=\"display: none\" showCancelButton animated (search)=\"toggleSearch()\"\n    (ionInput)=\"searchChanged($event)\" (ionCancel)=\"toggleSearch()\"></ion-searchbar>\n  <div *ngIf=\"!emptyList\" >\n  <div class=\"wrapper\" *ngIf=\"presentFilter\">\n      <div class=\"scrolling-wrapper-flexbox loop\">\n        <div class=\"container\" *ngFor=\"let tag of tags\">\n        <div class=\"tag\"  *ngIf=\"tag.isChecked\">\n          <div class=\"tag-text\">\n            {{tag.value}}\n            <ion-icon name=\"close-circle\" (click)=\"removeTag(tag)\"></ion-icon>\n          </div>\n          \n        </div>\n      </div>\n      </div>\n    </div>\n  <div class=\"wrapper\" *ngIf=\"!presentFilter\">\n    <div id=\"idCategories\" class=\"scrolling-wrapper-flexbox loop\">\n      <ion-chip *ngFor=\"let c of categories\" id=\"{{getClassName(c)}}\" (click)=\"selectInternalElement(getClassName(c))\" [ngClass]=\"{'categorySelected': isSelected(c)}\">\n        <ion-label class=\"interaction\" [ngClass]=\"{'categorySelected': compareActual(c)}\">{{getDateSTring(c)}}</ion-label>\n      </ion-chip>\n    </div>\n  </div>\n  <ion-list no-lines id=\"poi-list\">\n    <div *ngFor=\"let c of categories\">\n      <ion-item class=\"label-type ion-text-center\" sticky *ngIf=\"oneElement(c) && !presentFilter\">\n          <div>{{getDateSTring(c)}}</div>\n      </ion-item>\n      <div class=\"content\" >\n        \n        <div *ngFor=\"let poi of showPois[c]; let i = index\">\n          <div class=\"{{getClassName(poi.day)}}\"   inViewport\n          [inViewportOptions]=\"{ threshold: [0] }\" (inViewportAction)=\"onIntersection($event)\">\n            <wc-details [id]=\"poi.id\" [img]=\"poi.image\" [stringsinput]=\"stringsContact\" [title]=\"poi.title\"\n              [altImage]=\"altImage\" [stringsinput]=\"stringsContact\" [title]=\"poi.title\" [altImage]=\"altImage\"\n              [subtitle]=\"poi.subtitle\" [text]=\"poi.text\" [info]=\"poi.info\" [contacts]=\"poi.infos\"\n              heading-color=\"#707070\" second-color=\"#11b3ef\" expandable=true expanse=false></wc-details>\n            <div class=\"spacing\" *ngIf=\"i == showPois.length - 1\"></div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </ion-list>\n</div>\n<div class=\"empty-list\" *ngIf=\"emptyList\">\n    {{'empty_list' | translate}}\n</div>\n</ion-content>"
 
 /***/ }),
 
@@ -179,7 +179,7 @@ module.exports = "<ion-header no-border>\n      <ion-searchbar class=\"search-ev
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".content {\n  padding-left: 2%;\n  padding-right: 2%; }\n\nion-title {\n  font-weight: bold; }\n\nion-searchbar {\n  position: fixed;\n  z-index: 999; }\n\n.column {\n  float: left; }\n\n.c-text {\n  width: 60%;\n  margin-left: 20%; }\n\n.c-btn {\n  width: 40%;\n  margin-bottom: 3%; }\n\n.row {\n  text-align: center;\n  vertical-align: middle;\n  height: 40px; }\n\n.row::after {\n  content: \"\";\n  display: table;\n  clear: both; }\n\n.order-icon {\n  transform: rotate(90deg); }\n\nion-list {\n  padding-top: 40px; }\n\n.wrapper .scrolling-wrapper-flexbox {\n  -ms-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);\n  -o-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);\n  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);\n  background-color: white;\n  width: 100%;\n  display: flex;\n  overflow-x: auto;\n  z-index: 999;\n  position: fixed; }\n\n.wrapper .scrolling-wrapper-flexbox .container {\n    flex: 0 0 auto; }\n\n.wrapper .scrolling-wrapper-flexbox .container .tag {\n      flex: 0 0 auto;\n      margin: 8px; }\n\n.wrapper .scrolling-wrapper-flexbox .container .tag .tag-text {\n        padding: 4px;\n        color: white;\n        background-color: #11b3ef;\n        font-weight: bold; }\n\n.wrapper .scrolling-wrapper-flexbox ion-chip {\n    flex: 0 0 auto;\n    background-color: white;\n    font-size: 20px; }\n\n.wrapper .scrolling-wrapper-flexbox ion-chip ion-label {\n      font-size: 16px;\n      padding: 0px 8px; }\n\n.interaction {\n  color: #11b3ef !important; }\n\n.categorySelected {\n  color: white !important;\n  background-color: #11b3ef !important; }\n\n.label-type {\n  width: 100%;\n  font-weight: bold;\n  --background: #e3e3e3;\n  --color: #707070;\n  font-size: 22px; }\n\n.label-type div {\n    width: 100%; }\n\nion-toolbar ion-buttons ion-button {\n  font-size: 20px; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9Vc2Vycy91c2VyL0RvY3VtZW50cy9Qcm9qZWN0cy9tb2R1bGFyQXBwL21vZHVsYXItYXBwL21vZHVsYXItYXBwL3NyYy9hcHAvbW9kdWxlLWNvbXVuZS9wYWdlcy9saXN0LWV2ZW50L2xpc3QtZXZlbnQucGFnZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksaUJBQWU7RUFDZixrQkFBaUIsRUFDcEI7O0FBQ0Q7RUFDSSxrQkFBaUIsRUFDcEI7O0FBQ0Q7RUFDSSxnQkFBZTtFQUlmLGFBQVksRUFDZjs7QUFDRDtFQUNJLFlBQVUsRUFDYjs7QUFDRDtFQUNJLFdBQVU7RUFDVixpQkFBZ0IsRUFDbkI7O0FBRUQ7RUFDSSxXQUFVO0VBQ1Ysa0JBQWdCLEVBQ25COztBQUNEO0VBQ0ksbUJBQWtCO0VBQ2xCLHVCQUFzQjtFQUN0QixhQUFZLEVBQ2Y7O0FBQ0Q7RUFDSSxZQUFXO0VBQ1gsZUFBYTtFQUNiLFlBQVUsRUFDYjs7QUFDRDtFQUNJLHlCQUF3QixFQUMzQjs7QUFDRDtFQUNJLGtCQUFpQixFQUNwQjs7QUFDRDtFQUtRLCtFQUE4RTtFQUM5RSw4RUFBNkU7RUFDN0UsMkVBQTBFO0VBQzFFLHdCQUFzQjtFQUN0QixZQUFXO0VBQ1gsY0FBYTtFQUNiLGlCQUFnQjtFQUNoQixhQUFZO0VBQ1osZ0JBQWUsRUF3QmxCOztBQXJDTDtJQWVZLGVBQWMsRUFZakI7O0FBM0JUO01BaUJZLGVBQWM7TUFDZCxZQUFXLEVBT2Q7O0FBekJUO1FBb0JnQixhQUFZO1FBQ2hCLGFBQVk7UUFDWiwwQkFBMkI7UUFDM0Isa0JBQWlCLEVBQ2hCOztBQXhCYjtJQTZCWSxlQUFjO0lBQ2Qsd0JBQXVCO0lBQ3ZCLGdCQUFlLEVBS2xCOztBQXBDVDtNQWlDZ0IsZ0JBQWU7TUFDZixpQkFBZ0IsRUFDbkI7O0FBSWI7RUFDSSwwQkFBd0IsRUFDM0I7O0FBQ0Q7RUFDSSx3QkFBc0I7RUFDdEIscUNBQW1DLEVBQ3RDOztBQUNEO0VBQ0ksWUFBVztFQUNYLGtCQUFpQjtFQUNqQixzQkFBYTtFQUNiLGlCQUFRO0VBQ1IsZ0JBQWUsRUFJbEI7O0FBVEQ7SUFPUSxZQUFXLEVBQ2Q7O0FBRUw7RUFHWSxnQkFBZSxFQUNsQiIsImZpbGUiOiJzcmMvYXBwL21vZHVsZS1jb211bmUvcGFnZXMvbGlzdC1ldmVudC9saXN0LWV2ZW50LnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi5jb250ZW50IHtcbiAgICBwYWRkaW5nLWxlZnQ6MiU7XG4gICAgcGFkZGluZy1yaWdodDogMiU7XG59XG5pb24tdGl0bGUge1xuICAgIGZvbnQtd2VpZ2h0OiBib2xkO1xufVxuaW9uLXNlYXJjaGJhciB7XG4gICAgcG9zaXRpb246IGZpeGVkO1xuICAgIC8vIHdpZHRoOiBjYWxjKDEwMCUgLSA2MHB4KTtcbiAgICAvLyB0b3A6IDNweDtcbiAgICAvLyB0b3A6IDU4cHg7XG4gICAgei1pbmRleDogOTk5O1xufVxuLmNvbHVtbiB7XG4gICAgZmxvYXQ6bGVmdDtcbn1cbi5jLXRleHR7XG4gICAgd2lkdGg6IDYwJTtcbiAgICBtYXJnaW4tbGVmdDogMjAlO1xufVxuXG4uYy1idG4ge1xuICAgIHdpZHRoOiA0MCU7XG4gICAgbWFyZ2luLWJvdHRvbTozJTtcbn1cbi5yb3d7XG4gICAgdGV4dC1hbGlnbjogY2VudGVyO1xuICAgIHZlcnRpY2FsLWFsaWduOiBtaWRkbGU7XG4gICAgaGVpZ2h0OiA0MHB4O1xufVxuLnJvdzo6YWZ0ZXIge1xuICAgIGNvbnRlbnQ6IFwiXCI7XG4gICAgZGlzcGxheTp0YWJsZTtcbiAgICBjbGVhcjpib3RoO1xufVxuLm9yZGVyLWljb24ge1xuICAgIHRyYW5zZm9ybTogcm90YXRlKDkwZGVnKVxufVxuaW9uLWxpc3R7XG4gICAgcGFkZGluZy10b3A6IDQwcHg7XG59XG4ud3JhcHBlciB7XG5cbiAgICAuc2Nyb2xsaW5nLXdyYXBwZXItZmxleGJveCB7XG4gICAgICAgIC13ZWJraXQtYm94LXNoYWRvdzogMCAxMHB4IDIwcHggcmdiYSgwLCAwLCAwLCAwLjE5KSwgMCA2cHggNnB4IHJnYmEoMCwgMCwgMCwgMC4yMyk7XG4gICAgICAgIC1tb3otYm94LXNoYWRvdzogMCAxMHB4IDIwcHggcmdiYSgwLCAwLCAwLCAwLjE5KSwgMCA2cHggNnB4IHJnYmEoMCwgMCwgMCwgMC4yMyk7XG4gICAgICAgIC1tcy1ib3gtc2hhZG93OiAwIDEwcHggMjBweCByZ2JhKDAsIDAsIDAsIDAuMTkpLCAwIDZweCA2cHggcmdiYSgwLCAwLCAwLCAwLjIzKTtcbiAgICAgICAgLW8tYm94LXNoYWRvdzogMCAxMHB4IDIwcHggcmdiYSgwLCAwLCAwLCAwLjE5KSwgMCA2cHggNnB4IHJnYmEoMCwgMCwgMCwgMC4yMyk7XG4gICAgICAgIGJveC1zaGFkb3c6IDAgMTBweCAyMHB4IHJnYmEoMCwgMCwgMCwgMC4xOSksIDAgNnB4IDZweCByZ2JhKDAsIDAsIDAsIDAuMjMpO1xuICAgICAgICBiYWNrZ3JvdW5kLWNvbG9yOndoaXRlO1xuICAgICAgICB3aWR0aDogMTAwJTtcbiAgICAgICAgZGlzcGxheTogZmxleDtcbiAgICAgICAgb3ZlcmZsb3cteDogYXV0bztcbiAgICAgICAgei1pbmRleDogOTk5O1xuICAgICAgICBwb3NpdGlvbjogZml4ZWQ7XG4gICAgICAgIC5jb250YWluZXJ7XG4gICAgICAgICAgICBmbGV4OiAwIDAgYXV0bztcbiAgICAgICAgLnRhZ3tcbiAgICAgICAgICAgIGZsZXg6IDAgMCBhdXRvO1xuICAgICAgICAgICAgbWFyZ2luOiA4cHg7XG4gICAgICAgICAgICAudGFnLXRleHR7XG4gICAgICAgICAgICAgICAgcGFkZGluZzogNHB4O1xuICAgICAgICAgICAgY29sb3I6IHdoaXRlO1xuICAgICAgICAgICAgYmFja2dyb3VuZC1jb2xvcjogICAjMTFiM2VmO1xuICAgICAgICAgICAgZm9udC13ZWlnaHQ6IGJvbGQ7XG4gICAgICAgICAgICB9XG4gICAgICAgIH1cbiAgICAgICAgICAgIFxuICAgICAgICB9XG4gICAgICAgIGlvbi1jaGlwIHtcbiAgICAgICAgICAgIGZsZXg6IDAgMCBhdXRvO1xuICAgICAgICAgICAgYmFja2dyb3VuZC1jb2xvcjogd2hpdGU7XG4gICAgICAgICAgICBmb250LXNpemU6IDIwcHg7XG4gICAgICAgICAgICBpb24tbGFiZWwge1xuICAgICAgICAgICAgICAgIGZvbnQtc2l6ZTogMTZweDtcbiAgICAgICAgICAgICAgICBwYWRkaW5nOiAwcHggOHB4O1xuICAgICAgICAgICAgfVxuICAgICAgICB9XG4gICAgfVxufVxuLmludGVyYWN0aW9uIHtcbiAgICBjb2xvcjogIzExYjNlZiFpbXBvcnRhbnQ7XG59XG4uY2F0ZWdvcnlTZWxlY3RlZCB7XG4gICAgY29sb3I6IHdoaXRlIWltcG9ydGFudDtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiAjMTFiM2VmIWltcG9ydGFudDtcbn1cbi5sYWJlbC10eXBle1xuICAgIHdpZHRoOiAxMDAlO1xuICAgIGZvbnQtd2VpZ2h0OiBib2xkO1xuICAgIC0tYmFja2dyb3VuZDogI2UzZTNlMztcbiAgICAtLWNvbG9yOiAjNzA3MDcwO1xuICAgIGZvbnQtc2l6ZTogMjJweDtcbiAgICBkaXZ7XG4gICAgICAgIHdpZHRoOiAxMDAlO1xuICAgIH1cbn1cbmlvbi10b29sYmFye1xuICAgIGlvbi1idXR0b25ze1xuICAgICAgICBpb24tYnV0dG9ue1xuICAgICAgICAgICAgZm9udC1zaXplOiAyMHB4O1xuICAgICAgICB9XG4gICAgfVxufSJdfQ== */"
+module.exports = ".content {\n  padding-left: 2%;\n  padding-right: 2%; }\n\nion-title {\n  font-weight: bold; }\n\nion-searchbar {\n  position: fixed;\n  background-color: white;\n  z-index: 999; }\n\n.column {\n  float: left; }\n\n.c-text {\n  width: 60%;\n  margin-left: 20%; }\n\n.searchspace {\n  background-color: white; }\n\n.higher {\n  height: 100px; }\n\n.c-btn {\n  width: 40%;\n  margin-bottom: 3%; }\n\n.row {\n  text-align: center;\n  vertical-align: middle;\n  height: 40px; }\n\n.row::after {\n  content: \"\";\n  display: table;\n  clear: both; }\n\n.order-icon {\n  transform: rotate(90deg); }\n\nion-list {\n  padding-top: 40px; }\n\n.wrapper .scrolling-wrapper-flexbox {\n  -ms-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);\n  -o-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);\n  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);\n  background-color: white;\n  width: 100%;\n  display: flex;\n  overflow-x: auto;\n  z-index: 999;\n  position: fixed; }\n\n.wrapper .scrolling-wrapper-flexbox .container {\n    flex: 0 0 auto; }\n\n.wrapper .scrolling-wrapper-flexbox .container .tag {\n      flex: 0 0 auto;\n      margin: 8px; }\n\n.wrapper .scrolling-wrapper-flexbox .container .tag .tag-text {\n        padding: 4px;\n        color: white;\n        background-color: #11b3ef;\n        font-weight: bold; }\n\n.wrapper .scrolling-wrapper-flexbox ion-chip {\n    flex: 0 0 auto;\n    background-color: white;\n    font-size: 20px; }\n\n.wrapper .scrolling-wrapper-flexbox ion-chip ion-label {\n      font-size: 16px;\n      padding: 0px 8px; }\n\n.interaction {\n  color: #11b3ef !important; }\n\n.categorySelected {\n  color: white !important;\n  background-color: #11b3ef !important; }\n\n.label-type {\n  width: 100%;\n  font-weight: bold;\n  --background: #e3e3e3;\n  --color: #707070;\n  font-size: 22px; }\n\n.label-type div {\n    width: 100%; }\n\nion-toolbar ion-buttons ion-button {\n  font-size: 20px; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL2NoaW44L0RvY3VtZW50cy93b3JrL21vZHVsYXJBcHAvbW9kdWxhci1hcHAvc3JjL2FwcC9tb2R1bGUtY29tdW5lL3BhZ2VzL2xpc3QtZXZlbnQvbGlzdC1ldmVudC5wYWdlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDSSxpQkFBZTtFQUNmLGtCQUFpQixFQUNwQjs7QUFDRDtFQUNJLGtCQUFpQixFQUNwQjs7QUFDRDtFQUNJLGdCQUFlO0VBSWYsd0JBQXVCO0VBQ3ZCLGFBQVksRUFDZjs7QUFDRDtFQUNJLFlBQVUsRUFDYjs7QUFDRDtFQUNJLFdBQVU7RUFDVixpQkFBZ0IsRUFDbkI7O0FBQ0Q7RUFDSSx3QkFBc0IsRUFDekI7O0FBQ0Q7RUFDSSxjQUFhLEVBQ2hCOztBQUVEO0VBQ0ksV0FBVTtFQUNWLGtCQUFnQixFQUNuQjs7QUFDRDtFQUNJLG1CQUFrQjtFQUNsQix1QkFBc0I7RUFDdEIsYUFBWSxFQUNmOztBQUNEO0VBQ0ksWUFBVztFQUNYLGVBQWE7RUFDYixZQUFVLEVBQ2I7O0FBQ0Q7RUFDSSx5QkFBd0IsRUFDM0I7O0FBQ0Q7RUFDSSxrQkFBaUIsRUFDcEI7O0FBQ0Q7RUFLUSwrRUFBOEU7RUFDOUUsOEVBQTZFO0VBQzdFLDJFQUEwRTtFQUMxRSx3QkFBc0I7RUFDdEIsWUFBVztFQUNYLGNBQWE7RUFDYixpQkFBZ0I7RUFDaEIsYUFBWTtFQUNaLGdCQUFlLEVBd0JsQjs7QUFyQ0w7SUFlWSxlQUFjLEVBWWpCOztBQTNCVDtNQWlCWSxlQUFjO01BQ2QsWUFBVyxFQU9kOztBQXpCVDtRQW9CZ0IsYUFBWTtRQUNoQixhQUFZO1FBQ1osMEJBQTJCO1FBQzNCLGtCQUFpQixFQUNoQjs7QUF4QmI7SUE2QlksZUFBYztJQUNkLHdCQUF1QjtJQUN2QixnQkFBZSxFQUtsQjs7QUFwQ1Q7TUFpQ2dCLGdCQUFlO01BQ2YsaUJBQWdCLEVBQ25COztBQUliO0VBQ0ksMEJBQXdCLEVBQzNCOztBQUNEO0VBQ0ksd0JBQXNCO0VBQ3RCLHFDQUFtQyxFQUN0Qzs7QUFDRDtFQUNJLFlBQVc7RUFDWCxrQkFBaUI7RUFDakIsc0JBQWE7RUFDYixpQkFBUTtFQUNSLGdCQUFlLEVBSWxCOztBQVREO0lBT1EsWUFBVyxFQUNkOztBQUVMO0VBR1ksZ0JBQWUsRUFDbEIiLCJmaWxlIjoic3JjL2FwcC9tb2R1bGUtY29tdW5lL3BhZ2VzL2xpc3QtZXZlbnQvbGlzdC1ldmVudC5wYWdlLnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuY29udGVudCB7XG4gICAgcGFkZGluZy1sZWZ0OjIlO1xuICAgIHBhZGRpbmctcmlnaHQ6IDIlO1xufVxuaW9uLXRpdGxlIHtcbiAgICBmb250LXdlaWdodDogYm9sZDtcbn1cbmlvbi1zZWFyY2hiYXIge1xuICAgIHBvc2l0aW9uOiBmaXhlZDtcbiAgICAvLyB3aWR0aDogY2FsYygxMDAlIC0gNjBweCk7XG4gICAgLy8gdG9wOiAzcHg7XG4gICAgLy8gdG9wOiA1OHB4O1xuICAgIGJhY2tncm91bmQtY29sb3I6IHdoaXRlO1xuICAgIHotaW5kZXg6IDk5OTtcbn1cbi5jb2x1bW4ge1xuICAgIGZsb2F0OmxlZnQ7XG59XG4uYy10ZXh0e1xuICAgIHdpZHRoOiA2MCU7XG4gICAgbWFyZ2luLWxlZnQ6IDIwJTtcbn1cbi5zZWFyY2hzcGFjZSB7XG4gICAgYmFja2dyb3VuZC1jb2xvcjp3aGl0ZTtcbn1cbi5oaWdoZXJ7XG4gICAgaGVpZ2h0OiAxMDBweDtcbn1cblxuLmMtYnRuIHtcbiAgICB3aWR0aDogNDAlO1xuICAgIG1hcmdpbi1ib3R0b206MyU7XG59XG4ucm93e1xuICAgIHRleHQtYWxpZ246IGNlbnRlcjtcbiAgICB2ZXJ0aWNhbC1hbGlnbjogbWlkZGxlO1xuICAgIGhlaWdodDogNDBweDtcbn1cbi5yb3c6OmFmdGVyIHtcbiAgICBjb250ZW50OiBcIlwiO1xuICAgIGRpc3BsYXk6dGFibGU7XG4gICAgY2xlYXI6Ym90aDtcbn1cbi5vcmRlci1pY29uIHtcbiAgICB0cmFuc2Zvcm06IHJvdGF0ZSg5MGRlZylcbn1cbmlvbi1saXN0e1xuICAgIHBhZGRpbmctdG9wOiA0MHB4O1xufVxuLndyYXBwZXIge1xuXG4gICAgLnNjcm9sbGluZy13cmFwcGVyLWZsZXhib3gge1xuICAgICAgICAtd2Via2l0LWJveC1zaGFkb3c6IDAgMTBweCAyMHB4IHJnYmEoMCwgMCwgMCwgMC4xOSksIDAgNnB4IDZweCByZ2JhKDAsIDAsIDAsIDAuMjMpO1xuICAgICAgICAtbW96LWJveC1zaGFkb3c6IDAgMTBweCAyMHB4IHJnYmEoMCwgMCwgMCwgMC4xOSksIDAgNnB4IDZweCByZ2JhKDAsIDAsIDAsIDAuMjMpO1xuICAgICAgICAtbXMtYm94LXNoYWRvdzogMCAxMHB4IDIwcHggcmdiYSgwLCAwLCAwLCAwLjE5KSwgMCA2cHggNnB4IHJnYmEoMCwgMCwgMCwgMC4yMyk7XG4gICAgICAgIC1vLWJveC1zaGFkb3c6IDAgMTBweCAyMHB4IHJnYmEoMCwgMCwgMCwgMC4xOSksIDAgNnB4IDZweCByZ2JhKDAsIDAsIDAsIDAuMjMpO1xuICAgICAgICBib3gtc2hhZG93OiAwIDEwcHggMjBweCByZ2JhKDAsIDAsIDAsIDAuMTkpLCAwIDZweCA2cHggcmdiYSgwLCAwLCAwLCAwLjIzKTtcbiAgICAgICAgYmFja2dyb3VuZC1jb2xvcjp3aGl0ZTtcbiAgICAgICAgd2lkdGg6IDEwMCU7XG4gICAgICAgIGRpc3BsYXk6IGZsZXg7XG4gICAgICAgIG92ZXJmbG93LXg6IGF1dG87XG4gICAgICAgIHotaW5kZXg6IDk5OTtcbiAgICAgICAgcG9zaXRpb246IGZpeGVkO1xuICAgICAgICAuY29udGFpbmVye1xuICAgICAgICAgICAgZmxleDogMCAwIGF1dG87XG4gICAgICAgIC50YWd7XG4gICAgICAgICAgICBmbGV4OiAwIDAgYXV0bztcbiAgICAgICAgICAgIG1hcmdpbjogOHB4O1xuICAgICAgICAgICAgLnRhZy10ZXh0e1xuICAgICAgICAgICAgICAgIHBhZGRpbmc6IDRweDtcbiAgICAgICAgICAgIGNvbG9yOiB3aGl0ZTtcbiAgICAgICAgICAgIGJhY2tncm91bmQtY29sb3I6ICAgIzExYjNlZjtcbiAgICAgICAgICAgIGZvbnQtd2VpZ2h0OiBib2xkO1xuICAgICAgICAgICAgfVxuICAgICAgICB9XG4gICAgICAgICAgICBcbiAgICAgICAgfVxuICAgICAgICBpb24tY2hpcCB7XG4gICAgICAgICAgICBmbGV4OiAwIDAgYXV0bztcbiAgICAgICAgICAgIGJhY2tncm91bmQtY29sb3I6IHdoaXRlO1xuICAgICAgICAgICAgZm9udC1zaXplOiAyMHB4O1xuICAgICAgICAgICAgaW9uLWxhYmVsIHtcbiAgICAgICAgICAgICAgICBmb250LXNpemU6IDE2cHg7XG4gICAgICAgICAgICAgICAgcGFkZGluZzogMHB4IDhweDtcbiAgICAgICAgICAgIH1cbiAgICAgICAgfVxuICAgIH1cbn1cbi5pbnRlcmFjdGlvbiB7XG4gICAgY29sb3I6ICMxMWIzZWYhaW1wb3J0YW50O1xufVxuLmNhdGVnb3J5U2VsZWN0ZWQge1xuICAgIGNvbG9yOiB3aGl0ZSFpbXBvcnRhbnQ7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogIzExYjNlZiFpbXBvcnRhbnQ7XG59XG4ubGFiZWwtdHlwZXtcbiAgICB3aWR0aDogMTAwJTtcbiAgICBmb250LXdlaWdodDogYm9sZDtcbiAgICAtLWJhY2tncm91bmQ6ICNlM2UzZTM7XG4gICAgLS1jb2xvcjogIzcwNzA3MDtcbiAgICBmb250LXNpemU6IDIycHg7XG4gICAgZGl2e1xuICAgICAgICB3aWR0aDogMTAwJTtcbiAgICB9XG59XG5pb24tdG9vbGJhcntcbiAgICBpb24tYnV0dG9uc3tcbiAgICAgICAgaW9uLWJ1dHRvbntcbiAgICAgICAgICAgIGZvbnQtc2l6ZTogMjBweDtcbiAgICAgICAgfVxuICAgIH1cbn0iXX0= */"
 
 /***/ }),
 
@@ -203,6 +203,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _services_utils_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../services/utils.service */ "./src/app/module-comune/services/utils.service.ts");
 /* harmony import */ var src_app_services_utils_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! src/app/services/utils.service */ "./src/app/services/utils.service.ts");
 /* harmony import */ var _filter_page_event_filter_page_event_page__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./filter-page-event/filter-page-event.page */ "./src/app/module-comune/pages/list-event/filter-page-event/filter-page-event.page.ts");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_10__);
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -257,8 +259,9 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
 
 
 
+
 var ListEventPage = /** @class */ (function () {
-    function ListEventPage(globalUtils, loading, navCtrl, modalController, dbService, alertCtrl, router, route, alert, config, events, translate, callNumber, utils) {
+    function ListEventPage(globalUtils, loading, navCtrl, modalController, dbService, alertCtrl, router, route, alert, config, events, translate, callNumber, utils, plt) {
         var _this_1 = this;
         this.globalUtils = globalUtils;
         this.loading = loading;
@@ -274,6 +277,7 @@ var ListEventPage = /** @class */ (function () {
         this.translate = translate;
         this.callNumber = callNumber;
         this.utils = utils;
+        this.plt = plt;
         this.showPois = [];
         this.fullPois = [];
         this.tags = [];
@@ -284,6 +288,8 @@ var ListEventPage = /** @class */ (function () {
         this.categories = [];
         this.presentFilter = false;
         this.emptyList = false;
+        this.todayDate = moment__WEBPACK_IMPORTED_MODULE_10___default()();
+        this.nextWeekDate = moment__WEBPACK_IMPORTED_MODULE_10___default()().add(1, 'weeks');
         this.doneTypingInterval = 500; //time in ms, 5 second for example
         this.language = window[this.config.getAppModuleName()]['language'];
         this.translate.use(this.language);
@@ -339,6 +345,7 @@ var ListEventPage = /** @class */ (function () {
                         _this_1.dbService.getObjectByQuery(_this_1.category.query).then(function (data) {
                             if (data.docs.length > 0) {
                                 _this_1.fullPois = data.docs.map(function (x) { return _this_1.convertPois(x); });
+                                _this_1.spreadEvents();
                                 _this_1.subCategories(_this_1.fullPois);
                                 _this_1.buildShowPois();
                                 _this_1.tags = _this_1.buildFilter();
@@ -424,12 +431,53 @@ var ListEventPage = /** @class */ (function () {
             }); });
         }
     };
+    ListEventPage.prototype.spreadEvents = function () {
+        //take every event in fullpois e spread it for days;
+        var spreadArray = [];
+        for (var i = 0; i < this.fullPois.length; i++) {
+            var day = moment__WEBPACK_IMPORTED_MODULE_10___default()();
+            var from = moment__WEBPACK_IMPORTED_MODULE_10___default()(this.fullPois[i].fromTime).startOf('day');
+            var to = moment__WEBPACK_IMPORTED_MODULE_10___default()(this.fullPois[i].toTime).endOf('day');
+            if (!from && !to) {
+                //main event
+                spreadArray.push(this.fullPois[i]);
+            }
+            else
+                for (var k = 0; k < 7; k++) {
+                    var poi = JSON.parse(JSON.stringify(this.fullPois[i]));
+                    if (day.isBetween(from, to)) {
+                        var dayP = moment__WEBPACK_IMPORTED_MODULE_10___default()(day);
+                        poi['day'] = dayP;
+                        spreadArray.push(poi);
+                    }
+                    day.add(1, 'days');
+                }
+        }
+        function compare(a, b) {
+            if (a['day'].unix() < b['day'].unix()) {
+                return -1;
+            }
+            if (a['day'].unix() > b['day'].unix()) {
+                return 1;
+            }
+            return 0;
+        }
+        spreadArray.sort(compare);
+        this.fullPois = spreadArray;
+    };
+    ListEventPage.prototype.searchAndIos = function () {
+        return this.plt.is('ios') && this.search;
+    };
     ListEventPage.prototype.selectInternalElement = function (ref) {
         var elem = document.getElementsByClassName(ref);
         if (elem.length > 0) {
             var yOffset = elem[0].offsetTop;
             this.content.scrollToPoint(0, yOffset - 100, 0);
         }
+        this.actualVisualized = ref;
+    };
+    ListEventPage.prototype.compareActual = function (c) {
+        return c.startOf('day').format('DD-MM-YYYY') == this.actualVisualized;
     };
     ListEventPage.prototype.isScrolledIntoView = function () {
         var element = document.querySelector('.poi');
@@ -443,6 +491,9 @@ var ListEventPage = /** @class */ (function () {
             console.log('Element is partially visible in screen');
         }
     };
+    ListEventPage.prototype.getClassName = function (day) {
+        return day.startOf('day').format('DD-MM-YYYY');
+    };
     ListEventPage.prototype.onIntersection = function (_a) {
         var target = _a.target, visible = _a.visible;
         if (visible && this.actualVisualized != target.className) {
@@ -455,25 +506,30 @@ var ListEventPage = /** @class */ (function () {
         console.log(target + "" + visible);
     };
     ListEventPage.prototype.isSelected = function (category) {
-        return category == this.actualVisualized;
+        return category.startOf('day').format('DD-MM-YYYY') == this.actualVisualized;
+    };
+    ListEventPage.prototype.getDateSTring = function (c) {
+        return c.startOf('day').format('DD-MM-YYYY');
     };
     ListEventPage.prototype.subCategories = function (array) {
         var _this_1 = this;
         array.forEach(function (element) {
-            if (element.cat && !_this_1.fullCategories.includes(element.cat[0])) {
-                _this_1.fullCategories.push(element.cat[0]);
+            if (element.day && _this_1.fullCategories.filter(function (day) {
+                return day.startOf('day').format('DD-MM-YYYY') === element.day.startOf('day').format('DD-MM-YYYY');
+            }).length == 0) {
+                _this_1.fullCategories.push(element.day);
             }
         });
         this.categories = this.fullCategories;
         if (this.categories.length > 0)
-            setTimeout(function () { return _this_1.actualVisualized = _this_1.categories[0]; }, 500);
+            setTimeout(function () { return _this_1.actualVisualized = _this_1.categories[0].startOf('day').format('DD-MM-YYYY'); }, 500);
     };
     ListEventPage.prototype.buildShowPois = function (filters) {
         var _this_1 = this;
         this.showPois = [];
         this.fullPois.forEach(function (p) {
-            if (!_this_1.showPois[p.cat[0]]) {
-                _this_1.showPois[p.cat[0]] = [];
+            if (!_this_1.showPois[p.day.startOf('day').format('DD-MM-YYYY')]) {
+                _this_1.showPois[p.day.startOf('day').format('DD-MM-YYYY')] = [];
             }
             if (filters ? filters.filter(function (item) {
                 return (item.isChecked && p.cat.filter(function (cat) { return cat == item.value; }).length > 0);
@@ -481,7 +537,7 @@ var ListEventPage = /** @class */ (function () {
                 // return (item.isChecked && (p.cat.filter(cat => cat == item.value).length > 0 || p.parentObjectName == item.value))
                 // else (item.isChecked &&   p.parentObjectName == item.value)
             }).length > 0 : true) {
-                _this_1.showPois[p.cat[0]].push(p);
+                _this_1.showPois[p.day.startOf('day').format('DD-MM-YYYY')].push(p);
             }
         });
         //orderArray
@@ -505,6 +561,9 @@ var ListEventPage = /** @class */ (function () {
             if (x.fromTime) {
                 poiElement.fromTime = x.fromTime;
             }
+            if (x.toTime) {
+                poiElement.toTime = x.toTime;
+            }
             if (x.description) {
                 if (x.description[this.language])
                     poiElement.description = x.description[this.language];
@@ -512,7 +571,8 @@ var ListEventPage = /** @class */ (function () {
                     poiElement.description = x.description["it"];
             }
             if (x.image) {
-                poiElement.image = x.image;
+                poiElement.image = x.image.replace('.jpg', '_medium.jpg');
+                ;
             }
             if (x._id) {
                 poiElement.id = x._id;
@@ -612,13 +672,13 @@ var ListEventPage = /** @class */ (function () {
             this.presentFilter = false;
             this.categories.forEach(function (c) {
                 _this_1.showPois[c] = _this_1.fullPois.filter(function (el) {
-                    return (el.cat[0] == c);
+                    return (el.day.startOf('day').format('DD-MM-YYYY') == c.startOf('day').format('DD-MM-YYYY'));
                 });
             });
         }
     };
     ListEventPage.prototype.oneElement = function (category) {
-        return (this.showPois[category].length > 0);
+        return (this.showPois[category] && this.showPois[category].length > 0);
     };
     ListEventPage.prototype.searchChanged = function (input) {
         var _this_1 = this;
@@ -629,7 +689,7 @@ var ListEventPage = /** @class */ (function () {
             _this.categories.forEach(function (c) {
                 _this_1.showPois[c] = _this_1.fullPois.filter(function (el) {
                     if (el.title)
-                        return (el.title.toLowerCase().indexOf(value.toLowerCase()) > -1 && el.cat[0] == c);
+                        return (el.title.toLowerCase().indexOf(value.toLowerCase()) > -1 && el.day.startOf('day').format('DD-MM-YYYY') == c.startOf('day').format('DD-MM-YYYY'));
                     return false;
                 });
             });
@@ -679,7 +739,7 @@ var ListEventPage = /** @class */ (function () {
     //   this.buildAlert('filter');
     // }
     ListEventPage.prototype.removeTag = function (tag) {
-        this.tags = this.tags.filter(function (item) { return item.value != tag.value; });
+        this.tags = this.tags.map(function (item) { return tag.value == item.value ? { value: item.value, isChecked: false } : { value: item.value, isChecked: item.isChecked }; });
         this.firstAccess = true;
         var even = function (element) {
             // checks whether an element is even
@@ -775,10 +835,19 @@ var ListEventPage = /** @class */ (function () {
     ListEventPage.prototype.orderArray = function (condition, _this) {
         _this.categories.forEach(function (c) {
             if (condition.indexOf('asc') > -1) {
-                _this.showPois[c] = _this.showPois[c].sort(function (a, b) { return (a.fromTime > b.fromTime) ? 1 : -1; });
+                _this.showPois[c] = _this.showPois[c.format('DD-MM-YYYY')].sort(function (a, b) {
+                    if (a.fromTime == a.toTime && b.fromTime != b.toTime)
+                        return -1;
+                    else {
+                        if (a.fromTime > b.fromTime)
+                            return 1;
+                        else
+                            -1;
+                    }
+                });
             }
             else {
-                _this.showPois[c] = _this.showPois[c].sort(function (a, b) { return (a.fromTime < b.fromTime) ? 1 : -1; });
+                _this.showPois[c] = _this.showPois[c.format('DD-MM-YYYY')].sort(function (a, b) { return (a.fromTime < b.fromTime) ? 1 : -1; });
             }
         });
     };
@@ -823,7 +892,8 @@ var ListEventPage = /** @class */ (function () {
             _ionic_angular__WEBPACK_IMPORTED_MODULE_1__["Events"],
             _ngx_translate_core__WEBPACK_IMPORTED_MODULE_4__["TranslateService"],
             _ionic_native_call_number_ngx__WEBPACK_IMPORTED_MODULE_6__["CallNumber"],
-            _services_utils_service__WEBPACK_IMPORTED_MODULE_7__["UtilsService"]])
+            _services_utils_service__WEBPACK_IMPORTED_MODULE_7__["UtilsService"],
+            _ionic_angular__WEBPACK_IMPORTED_MODULE_1__["Platform"]])
     ], ListEventPage);
     return ListEventPage;
 }());

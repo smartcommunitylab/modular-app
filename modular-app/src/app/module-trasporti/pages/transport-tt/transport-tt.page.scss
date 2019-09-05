@@ -2,10 +2,15 @@
     font-size: 24px;
     margin: 8px;
 }
-.filled{
-    background-color: black;
-    color: white;
+.not-filled{
+    background-color: white;
+    color: #11b3ef;
 }
+.filled{
+    background-color: #11b3ef!important;
+    color: white!important;
+}
+
 .noTable {
     width: 100%;
     font-size: 24px;

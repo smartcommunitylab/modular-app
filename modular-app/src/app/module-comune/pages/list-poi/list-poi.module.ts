@@ -9,6 +9,7 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { InViewportModule } from 'ng-in-viewport';
 import { FilterPagePoiPage } from './filter-page-poi/filter-page-poi.page';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 const routes: Routes = [
   {
@@ -25,6 +26,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     FormsModule,
     InViewportModule,
     IonicModule,
+    SharedModule,
     TranslateModule.forRoot({ loader: {
       provide: TranslateLoader,
       useFactory: HttpLoaderFactory,

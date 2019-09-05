@@ -79,7 +79,7 @@ var ListPathPageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\n    <ion-searchbar class=\"search-path\" style=\"display: none\" showCancelButton=\"always\" animated (search)=\"toggleSearch()\"\n    (ionInput)=\"searchChanged($event)\" (ionCancel)=\"toggleSearch()\" ></ion-searchbar>\n    <ion-toolbar>\n\n      <ion-buttons slot=\"start\">\n          <ion-back-button class=\"interaction\"></ion-back-button>\n        </ion-buttons>\n        <ion-buttons slot=\"end\">\n            <ion-button (click)=\"toggleSearch()\">\n              <ion-icon name=\"search\"></ion-icon>\n            </ion-button>\n          </ion-buttons>\n      <ion-title>\n          {{'PATH'|translate}}\n        </ion-title>\n    </ion-toolbar>\n  </ion-header>\n\n<ion-content padding>\n  <ion-list no-lines id=\"path-list\">\n    <div *ngFor=\"let poi of pois\">      \n      <wc-path-list-el type=\"PATH\" [id]=\"poi.id\" [img]=\"poi.image\" [title]=\"poi.title\" [text]=\"poi.subtitle\" main-color=\"#11b3ef\" desc-color=\"#707070\"></wc-path-list-el>\n    </div>\n  </ion-list>\n</ion-content>\n"
+module.exports = "<ion-header [ngClass]=\"{'higher': searchAndIos()}\" >\n    <ion-searchbar class=\"search-path\" [ngClass]=\"{'searchspace': search}\" style=\"display: none\" showCancelButton=\"always\" animated (search)=\"toggleSearch()\"\n    (ionInput)=\"searchChanged($event)\" (ionCancel)=\"toggleSearch()\" ></ion-searchbar>\n    <ion-toolbar>\n\n      <ion-buttons slot=\"start\">\n          <ion-back-button class=\"interaction\"></ion-back-button>\n        </ion-buttons>\n        <ion-buttons slot=\"end\">\n            <ion-button (click)=\"toggleSearch()\">\n              <ion-icon name=\"search\"></ion-icon>\n            </ion-button>\n          </ion-buttons>\n      <ion-title>\n          {{'PATH'|translate}}\n        </ion-title>\n    </ion-toolbar>\n  </ion-header>\n\n<ion-content padding>\n  <ion-list no-lines id=\"path-list\" >\n    <div *ngFor=\"let poi of pois\">      \n      <wc-path-list-el type=\"PATH\" [id]=\"poi.id\" [img]=\"poi.image\" [title]=\"poi.title\" [text]=\"poi.subtitle\" main-color=\"#11b3ef\" desc-color=\"#707070\"></wc-path-list-el>\n    </div>\n  </ion-list>\n</ion-content>\n"
 
 /***/ }),
 
@@ -90,7 +90,7 @@ module.exports = "<ion-header>\n    <ion-searchbar class=\"search-path\" style=\
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "ion-searchbar {\n  position: fixed;\n  width: calc(100% - 60px);\n  top: 3px;\n  z-index: 999; }\n\n.interaction {\n  color: #11b3ef !important; }\n\nion-toolbar ion-buttons ion-button {\n  font-size: 20px; }\n\nion-title {\n  font-weight: bold; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9Vc2Vycy91c2VyL0RvY3VtZW50cy9Qcm9qZWN0cy9tb2R1bGFyQXBwL21vZHVsYXItYXBwL21vZHVsYXItYXBwL3NyYy9hcHAvbW9kdWxlLWNvbXVuZS9wYWdlcy9saXN0LXBhdGgvbGlzdC1wYXRoLnBhZ2Uuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLGdCQUFlO0VBQ2YseUJBQXdCO0VBQ3hCLFNBQVE7RUFFUixhQUFZLEVBQ2Y7O0FBQ0Q7RUFDSSwwQkFBd0IsRUFDM0I7O0FBQ0Q7RUFHWSxnQkFBZSxFQUNsQjs7QUFHVDtFQUNJLGtCQUFpQixFQUNwQiIsImZpbGUiOiJzcmMvYXBwL21vZHVsZS1jb211bmUvcGFnZXMvbGlzdC1wYXRoL2xpc3QtcGF0aC5wYWdlLnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyJpb24tc2VhcmNoYmFyIHtcbiAgICBwb3NpdGlvbjogZml4ZWQ7XG4gICAgd2lkdGg6IGNhbGMoMTAwJSAtIDYwcHgpO1xuICAgIHRvcDogM3B4O1xuICAgIC8vIHRvcDogNThweDtcbiAgICB6LWluZGV4OiA5OTk7XG59XG4uaW50ZXJhY3Rpb24ge1xuICAgIGNvbG9yOiAjMTFiM2VmIWltcG9ydGFudDtcbn1cbmlvbi10b29sYmFye1xuICAgIGlvbi1idXR0b25ze1xuICAgICAgICBpb24tYnV0dG9ue1xuICAgICAgICAgICAgZm9udC1zaXplOiAyMHB4O1xuICAgICAgICB9XG4gICAgfVxufVxuaW9uLXRpdGxle1xuICAgIGZvbnQtd2VpZ2h0OiBib2xkO1xufSJdfQ== */"
+module.exports = "ion-searchbar {\n  position: fixed;\n  width: calc(100% - 60px);\n  top: 3px;\n  z-index: 999; }\n\n.interaction {\n  color: #11b3ef !important; }\n\nion-toolbar ion-buttons ion-button {\n  font-size: 20px; }\n\nion-title {\n  font-weight: bold; }\n\n.searchspace {\n  background-color: white; }\n\n.higher {\n  height: 100px; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL2NoaW44L0RvY3VtZW50cy93b3JrL21vZHVsYXJBcHAvbW9kdWxhci1hcHAvc3JjL2FwcC9tb2R1bGUtY29tdW5lL3BhZ2VzL2xpc3QtcGF0aC9saXN0LXBhdGgucGFnZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksZ0JBQWU7RUFDZix5QkFBd0I7RUFDeEIsU0FBUTtFQUVSLGFBQVksRUFDZjs7QUFDRDtFQUNJLDBCQUF3QixFQUMzQjs7QUFDRDtFQUdZLGdCQUFlLEVBQ2xCOztBQUdUO0VBQ0ksa0JBQWlCLEVBQ3BCOztBQUNEO0VBQ0ksd0JBQXNCLEVBQ3pCOztBQUNEO0VBQ0ksY0FBYSxFQUNoQiIsImZpbGUiOiJzcmMvYXBwL21vZHVsZS1jb211bmUvcGFnZXMvbGlzdC1wYXRoL2xpc3QtcGF0aC5wYWdlLnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyJpb24tc2VhcmNoYmFyIHtcbiAgICBwb3NpdGlvbjogZml4ZWQ7XG4gICAgd2lkdGg6IGNhbGMoMTAwJSAtIDYwcHgpO1xuICAgIHRvcDogM3B4O1xuICAgIC8vIHRvcDogNThweDtcbiAgICB6LWluZGV4OiA5OTk7XG59XG4uaW50ZXJhY3Rpb24ge1xuICAgIGNvbG9yOiAjMTFiM2VmIWltcG9ydGFudDtcbn1cbmlvbi10b29sYmFye1xuICAgIGlvbi1idXR0b25ze1xuICAgICAgICBpb24tYnV0dG9ue1xuICAgICAgICAgICAgZm9udC1zaXplOiAyMHB4O1xuICAgICAgICB9XG4gICAgfVxufVxuaW9uLXRpdGxle1xuICAgIGZvbnQtd2VpZ2h0OiBib2xkO1xufVxuLnNlYXJjaHNwYWNlIHtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOndoaXRlO1xufVxuLmhpZ2hlcntcbiAgICBoZWlnaHQ6IDEwMHB4O1xufSJdfQ== */"
 
 /***/ }),
 
@@ -126,8 +126,9 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 var ListPathPage = /** @class */ (function () {
-    function ListPathPage(navCtrl, utils, dbService, alertCtrl, router, route, translate) {
+    function ListPathPage(navCtrl, plt, utils, dbService, alertCtrl, router, route, translate) {
         this.navCtrl = navCtrl;
+        this.plt = plt;
         this.utils = utils;
         this.dbService = dbService;
         this.alertCtrl = alertCtrl;
@@ -152,6 +153,9 @@ var ListPathPage = /** @class */ (function () {
                 _this_1.category = cat;
             }
         });
+    };
+    ListPathPage.prototype.searchAndIos = function () {
+        return this.plt.is('ios') && this.search;
     };
     ListPathPage.prototype.ionViewDidEnter = function () {
         var _this_1 = this;
@@ -206,7 +210,8 @@ var ListPathPage = /** @class */ (function () {
                     poiElement.description = x.description["it"];
             }
             if (x.image) {
-                poiElement.image = x.image;
+                poiElement.image = x.image.replace('.jpg', '_medium.jpg');
+                ;
             }
             if (x._id) {
                 poiElement.id = x._id;
@@ -246,7 +251,7 @@ var ListPathPage = /** @class */ (function () {
             template: __webpack_require__(/*! ./list-path.page.html */ "./src/app/module-comune/pages/list-path/list-path.page.html"),
             styles: [__webpack_require__(/*! ./list-path.page.scss */ "./src/app/module-comune/pages/list-path/list-path.page.scss")]
         }),
-        __metadata("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_1__["NavController"], _services_utils_service__WEBPACK_IMPORTED_MODULE_5__["UtilsService"], _services_db_service__WEBPACK_IMPORTED_MODULE_2__["DbService"], _ionic_angular__WEBPACK_IMPORTED_MODULE_1__["AlertController"],
+        __metadata("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_1__["NavController"], _ionic_angular__WEBPACK_IMPORTED_MODULE_1__["Platform"], _services_utils_service__WEBPACK_IMPORTED_MODULE_5__["UtilsService"], _services_db_service__WEBPACK_IMPORTED_MODULE_2__["DbService"], _ionic_angular__WEBPACK_IMPORTED_MODULE_1__["AlertController"],
             _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"], _ngx_translate_core__WEBPACK_IMPORTED_MODULE_4__["TranslateService"]])
     ], ListPathPage);
     return ListPathPage;

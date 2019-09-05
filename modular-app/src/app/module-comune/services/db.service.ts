@@ -21,8 +21,8 @@ export class DbService {
   remoteDb: any;
   opts = { live: true, retry: true };
   contentTypes: any;
-  MIN_SYNCH_TIME: number=24*60*60*1000;
-  constructor(private loadingController:LoadingController,private config: ConfigService) {
+  MIN_SYNCH_TIME: number = 24 * 60 * 60 * 1000;
+  constructor(private loadingController: LoadingController, private config: ConfigService) {
 
     this.db = new PouchDB('comune-in-tasca');
 
@@ -50,7 +50,7 @@ export class DbService {
     // var opts = { live: true, retry: true };
 
   }
-  
+
   onSyncChange(arg0: string, onSyncChange: any): any {
     throw new Error("Method not implemented.");
   }
@@ -65,41 +65,41 @@ export class DbService {
   }
   lastTimeSynch() {
     var date = new Date().getTime();
-    var last = parseInt(localStorage.getItem('UPDATE_SYNCH')|| '0');
-    return date-last
+    var last = parseInt(localStorage.getItem('UPDATE_SYNCH') || '0');
+    return date - last
   }
   updateLastTimeSynch() {
-    localStorage.setItem('UPDATE_SYNCH',new Date().getTime().toString());
+    localStorage.setItem('UPDATE_SYNCH', new Date().getTime().toString());
   }
-  
+
   synch(message): Promise<any> {
     console.log('enter in synch')
     return new Promise(async (resolve, reject) => {
-      if (this.lastTimeSynch()>this.MIN_SYNCH_TIME){
+      if (this.lastTimeSynch() > this.MIN_SYNCH_TIME) {
         const loading = await this.loadingController.create({
           message: message
         });
         if (!localStorage.getItem('UPDATE_SYNCH'))
-        await loading.present();
-      console.log('this.lastTimeSynch()>this.MIN_SYNCH_TIME')
-      this.remoteDb.replicate.to(this.db,{checkpoint:"target"}).on('complete',  ()=> {
-        console.log('synch done')
-        loading.dismiss();
-        this.updateLastTimeSynch();
-        resolve();
-      }).on('error', function (err) {
-        console.log('error in sync'+err)
+          await loading.present();
+        console.log('this.lastTimeSynch()>this.MIN_SYNCH_TIME')
+        this.remoteDb.replicate.to(this.db, { checkpoint: "target" }).on('complete', () => {
+          console.log('synch done')
+          loading.dismiss();
+          this.updateLastTimeSynch();
+          resolve();
+        }).on('error', function (err) {
+          console.log('error in sync' + err)
 
-        // boo, we hit an error!
-        resolve();
-      });
-    }
-    else {
-      console.log('this.lastTimeSynch()<this.MIN_SYNCH_TIME')
+          // boo, we hit an error!
+          resolve();
+        });
+      }
+      else {
+        console.log('this.lastTimeSynch()<this.MIN_SYNCH_TIME')
 
-      resolve();
-    }
-  })
+        resolve();
+      }
+    })
   }
   getMenuById(identificator) {
     return this.db.find({
@@ -169,26 +169,38 @@ export class DbService {
           selector: {
 
             "$or": [
+              {
+                  
+                    "elementType": "event-item",
+                    "$nor": [
+                      {
+                        "fromTime": {
+                          "$lte": new Date().getTime()
+                        }
+                      }, {
+                        "toTime": {
+                          "$lte": new Date().getTime()
+                        }
+                      }],
+                      "$and": [
+                                {
+                                  "fromTime": {
+                                    "$gte": new Date().getTime()
+                                  }
+                                }, {
+                                  "fromTime": {
+                                    "$lte": new Date().getTime() + 7 * 24 * 60 * 60 * 1000
+                                  }
+                                }
+                              ]
 
-              {
-                 "elementType": "event-item"
               },
-              {
-                "elementType": "main-event-item"
-             }
-           ]
-            ,
-            "$nor": [
-              { "fromTime": {
-                "$lte": new Date().getTime()
-             }
-            },{ "toTime": {
-              "$lte": new Date().getTime()
-           }
-          }]
+              // {
+              //   "elementType": "main-event-item"
+              // }
+            ]
+
           }
-          ,
-          "limit": 100
         });
       }
     }

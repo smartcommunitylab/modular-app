@@ -79,7 +79,7 @@ var TouristServicesPageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header no-border>\n\n  <ion-toolbar>\n      <ion-searchbar class=\"search-services\" style=\"display: none\" showCancelButton=\"never\" animated (search)=\"toggleSearch()\"\n    (ionInput)=\"searchChanged($event)\" (ionCancel)=\"toggleSearch()\"  (ionClear)=\"toggleSearch()\"></ion-searchbar>\n    <ion-buttons slot=\"start\">\n      <ion-back-button class=\"interaction\"></ion-back-button>\n    </ion-buttons>\n    <ion-buttons slot=\"end\">\n      <ion-button (click)=\"toggleSearch()\">\n        <ion-icon name=\"search\"></ion-icon>\n      </ion-button>\n    </ion-buttons>\n    <ion-title>\n      {{'service_label' | translate}}\n    </ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<!-- <ion-grid style=\"height: 100%\" *ngIf=\"isLoading\">\n    <ion-row justify-content-center align-items-center style=\"height: 100%\">\n      <ion-spinner name=\"circles\"></ion-spinner>\n    </ion-row>\n  </ion-grid> -->\n\n<ion-content>\n\n\n  <div class=\"wrapper\" *ngIf=\"!firstAccess\">\n    <div class=\"scrolling-wrapper-flexbox loop\">\n      <div class=\"container\" *ngFor=\"let tag of tags\">\n        <div class=\"tag\" *ngIf=\"tag.isChecked\">\n          <div class=\"tag-text\">\n            {{tag.value}}\n            <ion-icon name=\"close-circle\" (click)=\"removeTag(tag)\"></ion-icon>\n          </div>\n\n        </div>\n      </div>\n    </div>\n  </div>\n\n  <ion-list no-lines id=\"poi-list\">\n    <div *ngIf=\"!emptyList\">\n\n      <div *ngFor=\"let c of categories\">\n        <div class=\"content\">\n          <div *ngFor=\"let poi of showPois[c]; let i = index\">\n            <wc-details [id]=\"poi.id\" [img]=\"poi.image\" [stringsinput]=\"stringsContact\" [title]=\"poi.title\"\n              [altImage]=\"altImage\" [subtitle]=\"poi.subtitle\" [text]=\"poi.text\" [info]=\"poi.info\" [contacts]=\"poi.infos\"\n              heading-color=\"#707070\" second-color=\"#11b3ef\" expandable=true expanse=false></wc-details>\n            <div class=\"spacing\" *ngIf=\"i == showPois.length - 1\"></div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </ion-list>\n  <div class=\"empty-list\" *ngIf=\"emptyList\">\n    {{'empty_list' | translate}}\n  </div>\n</ion-content>"
+module.exports = "<ion-header no-border [ngClass]=\"{'higher': searchAndIos()}\">\n\n  <ion-toolbar>\n      <ion-searchbar class=\"search-services\" [ngClass]=\"{'searchspace': search}\" style=\"display: none\" showCancelButton=\"never\" animated (search)=\"toggleSearch()\"\n    (ionInput)=\"searchChanged($event)\" (ionCancel)=\"toggleSearch()\"  (ionClear)=\"toggleSearch()\"></ion-searchbar>\n    <ion-buttons slot=\"start\">\n      <ion-back-button class=\"interaction\"></ion-back-button>\n    </ion-buttons>\n    <ion-buttons slot=\"end\">\n      <ion-button (click)=\"toggleSearch()\">\n        <ion-icon name=\"search\"></ion-icon>\n      </ion-button>\n    </ion-buttons>\n    <ion-title>\n      {{'service_label' | translate}}\n    </ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<!-- <ion-grid style=\"height: 100%\" *ngIf=\"isLoading\">\n    <ion-row justify-content-center align-items-center style=\"height: 100%\">\n      <ion-spinner name=\"circles\"></ion-spinner>\n    </ion-row>\n  </ion-grid> -->\n\n<ion-content>\n\n\n  <div class=\"wrapper\" *ngIf=\"!firstAccess\">\n    <div class=\"scrolling-wrapper-flexbox loop\">\n      <div class=\"container\" *ngFor=\"let tag of tags\">\n        <div class=\"tag\" *ngIf=\"tag.isChecked\">\n          <div class=\"tag-text\">\n            {{tag.value}}\n            <ion-icon name=\"close-circle\" (click)=\"removeTag(tag)\"></ion-icon>\n          </div>\n\n        </div>\n      </div>\n    </div>\n  </div>\n\n  <ion-list no-lines id=\"poi-list\">\n    <div *ngIf=\"!emptyList\">\n\n      <div *ngFor=\"let c of categories\">\n        <div class=\"content\">\n          <div *ngFor=\"let poi of showPois[c]; let i = index\">\n            <wc-details [id]=\"poi.id\" [img]=\"poi.image\" [stringsinput]=\"stringsContact\" [title]=\"poi.title\"\n              [altImage]=\"altImage\" [subtitle]=\"poi.subtitle\" [text]=\"poi.text\" [info]=\"poi.info\" [contacts]=\"poi.infos\"\n              heading-color=\"#707070\" second-color=\"#11b3ef\" expandable=true expanse=false></wc-details>\n            <div class=\"spacing\" *ngIf=\"i == showPois.length - 1\"></div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </ion-list>\n  <div class=\"empty-list\" *ngIf=\"emptyList\">\n    {{'empty_list' | translate}}\n  </div>\n</ion-content>"
 
 /***/ }),
 
@@ -90,7 +90,7 @@ module.exports = "<ion-header no-border>\n\n  <ion-toolbar>\n      <ion-searchba
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "ion-searchbar {\n  position: fixed;\n  width: calc(100% - 60px);\n  top: 3px;\n  z-index: 999; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9Vc2Vycy91c2VyL0RvY3VtZW50cy9Qcm9qZWN0cy9tb2R1bGFyQXBwL21vZHVsYXItYXBwL21vZHVsYXItYXBwL3NyYy9hcHAvbW9kdWxlLWNvbXVuZS9wYWdlcy90b3VyaXN0LXNlcnZpY2VzL3RvdXJpc3Qtc2VydmljZXMucGFnZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksZ0JBQWU7RUFDZix5QkFBd0I7RUFDeEIsU0FBUTtFQUVSLGFBQVksRUFDZiIsImZpbGUiOiJzcmMvYXBwL21vZHVsZS1jb211bmUvcGFnZXMvdG91cmlzdC1zZXJ2aWNlcy90b3VyaXN0LXNlcnZpY2VzLnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbImlvbi1zZWFyY2hiYXIge1xuICAgIHBvc2l0aW9uOiBmaXhlZDtcbiAgICB3aWR0aDogY2FsYygxMDAlIC0gNjBweCk7XG4gICAgdG9wOiAzcHg7XG4gICAgLy8gdG9wOiA1OHB4O1xuICAgIHotaW5kZXg6IDk5OTtcbn0iXX0= */"
+module.exports = "ion-searchbar {\n  position: fixed;\n  width: calc(100% - 60px);\n  top: 3px;\n  z-index: 999; }\n\n.searchspace {\n  background-color: white; }\n\n.higher {\n  height: 100px; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL2NoaW44L0RvY3VtZW50cy93b3JrL21vZHVsYXJBcHAvbW9kdWxhci1hcHAvc3JjL2FwcC9tb2R1bGUtY29tdW5lL3BhZ2VzL3RvdXJpc3Qtc2VydmljZXMvdG91cmlzdC1zZXJ2aWNlcy5wYWdlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDSSxnQkFBZTtFQUNmLHlCQUF3QjtFQUN4QixTQUFRO0VBRVIsYUFBWSxFQUNmOztBQUNEO0VBQ0ksd0JBQXNCLEVBQ3pCOztBQUNEO0VBQ0ksY0FBYSxFQUNoQiIsImZpbGUiOiJzcmMvYXBwL21vZHVsZS1jb211bmUvcGFnZXMvdG91cmlzdC1zZXJ2aWNlcy90b3VyaXN0LXNlcnZpY2VzLnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbImlvbi1zZWFyY2hiYXIge1xuICAgIHBvc2l0aW9uOiBmaXhlZDtcbiAgICB3aWR0aDogY2FsYygxMDAlIC0gNjBweCk7XG4gICAgdG9wOiAzcHg7XG4gICAgLy8gdG9wOiA1OHB4O1xuICAgIHotaW5kZXg6IDk5OTtcbn1cbi5zZWFyY2hzcGFjZSB7XG4gICAgYmFja2dyb3VuZC1jb2xvcjp3aGl0ZTtcbn1cbi5oaWdoZXJ7XG4gICAgaGVpZ2h0OiAxMDBweDtcbn0iXX0= */"
 
 /***/ }),
 
@@ -168,8 +168,9 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
 
 
 var TouristServicesPage = /** @class */ (function () {
-    function TouristServicesPage(modalController, config, navCtrl, dbService, alertCtrl, router, route, alert, popoverController, events, translate, geoSrv, callNumber, utils) {
+    function TouristServicesPage(plt, modalController, config, navCtrl, dbService, alertCtrl, router, route, alert, popoverController, events, translate, geoSrv, callNumber, utils) {
         var _this_1 = this;
+        this.plt = plt;
         this.modalController = modalController;
         this.config = config;
         this.navCtrl = navCtrl;
@@ -238,6 +239,9 @@ var TouristServicesPage = /** @class */ (function () {
                 });
             }); });
         }
+    };
+    TouristServicesPage.prototype.searchAndIos = function () {
+        return this.plt.is('ios') && this.search;
     };
     TouristServicesPage.prototype.ionViewDidEnter = function () {
         var _this_1 = this;
@@ -312,7 +316,8 @@ var TouristServicesPage = /** @class */ (function () {
                 poiElement.description += '<br/>' + x.description[this.language];
             }
             if (x.image) {
-                poiElement.image = x.image;
+                poiElement.image = x.image.replace('.jpg', '_medium.jpg');
+                ;
             }
             if (x._id) {
                 poiElement.id = x._id;
@@ -433,7 +438,7 @@ var TouristServicesPage = /** @class */ (function () {
         return returnArray;
     };
     TouristServicesPage.prototype.removeTag = function (tag) {
-        this.tags = this.tags.filter(function (item) { return item.value != tag.value; });
+        this.tags = this.tags.map(function (item) { return tag.value == item.value ? { value: item.value, isChecked: false } : { value: item.value, isChecked: item.isChecked }; });
         this.firstAccess = true;
         var even = function (element) {
             // checks whether an element is even
@@ -608,7 +613,8 @@ var TouristServicesPage = /** @class */ (function () {
             template: __webpack_require__(/*! ./tourist-services.page.html */ "./src/app/module-comune/pages/tourist-services/tourist-services.page.html"),
             styles: [__webpack_require__(/*! ./tourist-services.page.scss */ "./src/app/module-comune/pages/tourist-services/tourist-services.page.scss")]
         }),
-        __metadata("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_1__["ModalController"],
+        __metadata("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_1__["Platform"],
+            _ionic_angular__WEBPACK_IMPORTED_MODULE_1__["ModalController"],
             _services_config_service__WEBPACK_IMPORTED_MODULE_7__["ConfigService"],
             _ionic_angular__WEBPACK_IMPORTED_MODULE_1__["NavController"],
             _services_db_service__WEBPACK_IMPORTED_MODULE_2__["DbService"],

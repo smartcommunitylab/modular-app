@@ -78,7 +78,7 @@ var VideoPageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\n  <!-- <ion-searchbar showCancelButton=\"always\" animated  (ionChange)=\"Ricerca()\"\n    placeholder=\"Cerca\" id=\"barraDiRicerca\" [(ngModel)]=\"daCercare\">    </ion-searchbar> -->\n  <ion-searchbar class=\"search-video\" style=\"display: none\" showCancelButton=\"always\" animated (ionChange)=\"Ricerca()\"\n    (ionCancel)=\"OpenCloseRicerca()\" placeholder=\"Cerca\" id=\"barraDiRicerca\" [(ngModel)]=\"daCercare\"></ion-searchbar>\n  <ion-toolbar>\n\n    <ion-buttons slot=\"start\">\n      <ion-back-button class=\"interaction\"></ion-back-button>\n    </ion-buttons>\n    <ion-title float-left id=\"TITOLO\">{{'trento_informa_label'|translate}}</ion-title>\n    <ion-buttons slot=\"end\" *ngIf=\"!isRicercaOpen\">\n\n      <ion-button fill=\"clear\" float-right (click)=\"OpenCloseRicerca()\" id=\"btnImpostazioniRicerca\" color=\"light\">\n        <svg width='24' height='24' viewBox='0 0 24 24'>\n          <path fill='none' d='M0 0h24v24H0V0z' />\n          <path\n            d='M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z' />\n        </svg>\n      </ion-button>\n    </ion-buttons>\n    <!-- \n    <ion-grid *ngIf=\"!isRicercaOpen\">\n      <ion-row justify-content-center align-items-center>\n        <ion-col col-6>\n          <ion-title float-left id=\"TITOLO\">{{'trento_informa_label'|translate}}</ion-title>\n        </ion-col>\n        <ion-col col-6>\n          <ion-button fill=\"clear\" float-right (click)=\"OpenCloseRicerca()\" id=\"btnImpostazioniRicerca\" color=\"light\">\n            <svg width='24' height='24' viewBox='0 0 24 24'>\n              <path fill='none' d='M0 0h24v24H0V0z' />\n              <path\n                d='M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z' />\n            </svg>\n          </ion-button>\n        </ion-col>\n      </ion-row>\n    </ion-grid> -->\n  </ion-toolbar>\n\n</ion-header>\n<ion-content>\n  <div class=\"ion-padding\" *ngIf=\"!emptyList;else other_content\">\n\n\n    <ion-list>\n      <div *ngFor=\"let item of datiRicerca\" id=\"contenitoreAnteprima\">\n        <div *ngIf=\"isVideo(item)\">\n          <wc-video (eventMappa)=\"visualizzaMappa(item.coordinates[0], item.coordinates[1])\"\n            (eventShare)=\"visualizzaShare(item.title, item.image, item.videoLink)\"\n            (eventVideo)=\"visualizzaVideo(item.videoLink)\" video={{item.videoLink}} id=\"elemento\" img={{item.image}}\n            [titolo]=\"item.shortAbstract\" orario={{item.eventStart}} datapubblicazione={{formattaData(item.created)}}\n            dataevento={{item.eventDate}} durata={{item.eventTiming}} [descrizione]=\"item.description\"\n            luogo={{item.address}}>\n          </wc-video>\n        </div>\n        <div *ngIf=\"isNews(item)\">\n          <wc-anteprima (eventMappa)=\"visualizzaMappa(item.coordinates[0], item.coordinates[1])\"\n            (eventShare)=\"visualizzaShare(item.title, item.image ,item.description)\" id=\"elemento\" img={{item.image}}\n            [titolo]=\"item.shortAbstract\" orario={{item.eventStart}} datapubblicazione={{formattaData(item.created)}}\n            dataevento={{item.eventDate}} durata={{item.eventTiming}} [descrizione]=\"item.description\"\n            luogo={{item.address}}>\n          </wc-anteprima>\n        </div>\n      </div>\n    </ion-list>\n    <ion-infinite-scroll threshold=\"100px\" (ionInfinite)=\"caricaAltriDati($event)\">\n      <ion-infinite-scroll-content loadingSpinner=\"crescent\" loadingText=\"Sto caricando...\">\n      </ion-infinite-scroll-content>\n    </ion-infinite-scroll>\n  </div>\n  <ng-template #other_content>\n    {{'empty_list_label'|translate}}\n  </ng-template>\n</ion-content>"
+module.exports = "<ion-header [ngClass]=\"{'higher': searchAndIos()}\">\n  <!-- <ion-searchbar showCancelButton=\"always\" animated  (ionChange)=\"Ricerca()\"\n    placeholder=\"Cerca\" id=\"barraDiRicerca\" [(ngModel)]=\"daCercare\">    </ion-searchbar> -->\n  <ion-searchbar class=\"search-video\" [ngClass]=\"{'searchspace': isRicercaOpen}\" style=\"display: none\" showCancelButton=\"always\" animated (ionChange)=\"Ricerca()\"\n    (ionCancel)=\"OpenCloseRicerca()\" placeholder=\"Cerca\" id=\"barraDiRicerca\" [(ngModel)]=\"daCercare\"></ion-searchbar>\n  <ion-toolbar>\n\n    <ion-buttons slot=\"start\">\n      <ion-back-button class=\"interaction\"></ion-back-button>\n    </ion-buttons>\n    <ion-title float-left id=\"TITOLO\">{{'trento_informa_label'|translate}}</ion-title>\n    <ion-buttons slot=\"end\" *ngIf=\"!isRicercaOpen\">\n\n      <ion-button fill=\"clear\" float-right (click)=\"OpenCloseRicerca()\" id=\"btnImpostazioniRicerca\" color=\"light\">\n        <svg width='24' height='24' viewBox='0 0 24 24'>\n          <path fill='none' d='M0 0h24v24H0V0z' />\n          <path\n            d='M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z' />\n        </svg>\n      </ion-button>\n    </ion-buttons>\n  </ion-toolbar>\n\n</ion-header>\n<ion-content>\n  <div class=\"ion-padding\" *ngIf=\"!emptyList;else other_content\">\n\n\n    <ion-list>\n      <div *ngFor=\"let item of datiRicerca\" id=\"contenitoreAnteprima\">\n        <div *ngIf=\"isVideo(item)\">\n          <wc-video (eventMappa)=\"visualizzaMappa(item.coordinates[0], item.coordinates[1])\"\n            (eventShare)=\"visualizzaShare(item.title, item.image, item.videoLink)\"\n            (eventVideo)=\"visualizzaVideo(item.videoLink)\" video={{item.videoLink}} id=\"elemento\" img={{item.image}}\n            [titolo]=\"item.title\" [abstract]=\"item.shortAbstract\"  orario={{item.eventStart}} datapubblicazione={{formattaData(item.created)}}\n            dataevento={{item.eventDate}} durata={{item.eventTiming}} [descrizione]=\"item.description\"\n            luogo={{item.address}}>\n          </wc-video>\n        </div>\n        <div *ngIf=\"isNews(item)\">\n          <wc-anteprima (eventMappa)=\"visualizzaMappa(item.coordinates[0], item.coordinates[1])\"\n            (eventShare)=\"visualizzaShare(item.title, item.image ,item.description)\" id=\"elemento\" img={{item.image}}\n            [titolo]=\"item.title\" [abstract]=\"item.shortAbstract\"  [web]=\"item.web\" [link]=\"item.file\" orario={{item.eventStart}} datapubblicazione={{formattaData(item.created)}}\n            dataevento={{item.eventDate}} durata={{item.eventTiming}} [descrizione]=\"item.description\"\n            luogo={{item.address}}>\n          </wc-anteprima>\n        </div>\n      </div>\n    </ion-list>\n    <ion-infinite-scroll threshold=\"100px\" (ionInfinite)=\"caricaAltriDati($event)\">\n      <ion-infinite-scroll-content loadingSpinner=\"crescent\" loadingText=\"Sto caricando...\">\n      </ion-infinite-scroll-content>\n    </ion-infinite-scroll>\n  </div>\n  <ng-template #other_content>\n    {{'empty_list_label'|translate}}\n  </ng-template>\n</ion-content>"
 
 /***/ }),
 
@@ -89,7 +89,7 @@ module.exports = "<ion-header>\n  <!-- <ion-searchbar showCancelButton=\"always\
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "#contenitoreAnteprima {\n  padding-bottom: 6px; }\n\n.interaction {\n  color: #11b3ef !important; }\n\nion-searchbar {\n  position: fixed;\n  z-index: 999; }\n\nion-title {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  width: 100%; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9Vc2Vycy91c2VyL0RvY3VtZW50cy9Qcm9qZWN0cy9tb2R1bGFyQXBwL21vZHVsYXItYXBwL21vZHVsYXItYXBwL3NyYy9hcHAvbW9kdWxlLWluZm8vcGFnZXMvdmlkZW8vdmlkZW8ucGFnZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUlBO0VBQ0ksb0JBQW1CLEVBQ3RCOztBQUNEO0VBQ0ksMEJBQXdCLEVBQzNCOztBQUNEO0VBQ0ksZ0JBQWU7RUFJZixhQUFZLEVBQ2Y7O0FBQ0Q7RUFDSSxvQkFBbUI7RUFDbkIsaUJBQWdCO0VBQ2hCLHdCQUF1QjtFQUN2QixZQUFXLEVBQ2QiLCJmaWxlIjoic3JjL2FwcC9tb2R1bGUtaW5mby9wYWdlcy92aWRlby92aWRlby5wYWdlLnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIjYmFycmFEaVJpY2VyY2F7XG4gICAgLy8gZGlzcGxheTogbm9uZTtcbn1cblxuI2NvbnRlbml0b3JlQW50ZXByaW1he1xuICAgIHBhZGRpbmctYm90dG9tOiA2cHg7XG59XG4uaW50ZXJhY3Rpb24ge1xuICAgIGNvbG9yOiAjMTFiM2VmIWltcG9ydGFudDtcbn1cbmlvbi1zZWFyY2hiYXIge1xuICAgIHBvc2l0aW9uOiBmaXhlZDtcbiAgICAvLyB3aWR0aDogY2FsYygxMDAlIC0gNjBweCk7XG4gICAgLy8gdG9wOiAzcHg7XG4gICAgLy8gdG9wOiA1OHB4O1xuICAgIHotaW5kZXg6IDk5OTtcbn1cbmlvbi10aXRsZXtcbiAgICB3aGl0ZS1zcGFjZTogbm93cmFwO1xuICAgIG92ZXJmbG93OiBoaWRkZW47XG4gICAgdGV4dC1vdmVyZmxvdzogZWxsaXBzaXM7XG4gICAgd2lkdGg6IDEwMCU7XG59Il19 */"
+module.exports = "#contenitoreAnteprima {\n  padding-bottom: 6px; }\n\n.interaction {\n  color: #11b3ef !important; }\n\nion-searchbar {\n  position: fixed;\n  z-index: 999; }\n\nion-title {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  width: 100%; }\n\n.searchspace {\n  background-color: white; }\n\n.higher {\n  height: 100px; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL2NoaW44L0RvY3VtZW50cy93b3JrL21vZHVsYXJBcHAvbW9kdWxhci1hcHAvc3JjL2FwcC9tb2R1bGUtaW5mby9wYWdlcy92aWRlby92aWRlby5wYWdlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBSUE7RUFDSSxvQkFBbUIsRUFDdEI7O0FBQ0Q7RUFDSSwwQkFBd0IsRUFDM0I7O0FBQ0Q7RUFDSSxnQkFBZTtFQUlmLGFBQVksRUFDZjs7QUFDRDtFQUNJLG9CQUFtQjtFQUNuQixpQkFBZ0I7RUFDaEIsd0JBQXVCO0VBQ3ZCLFlBQVcsRUFDZDs7QUFDRDtFQUNJLHdCQUFzQixFQUN6Qjs7QUFDRDtFQUNJLGNBQWEsRUFDaEIiLCJmaWxlIjoic3JjL2FwcC9tb2R1bGUtaW5mby9wYWdlcy92aWRlby92aWRlby5wYWdlLnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIjYmFycmFEaVJpY2VyY2F7XG4gICAgLy8gZGlzcGxheTogbm9uZTtcbn1cblxuI2NvbnRlbml0b3JlQW50ZXByaW1he1xuICAgIHBhZGRpbmctYm90dG9tOiA2cHg7XG59XG4uaW50ZXJhY3Rpb24ge1xuICAgIGNvbG9yOiAjMTFiM2VmIWltcG9ydGFudDtcbn1cbmlvbi1zZWFyY2hiYXIge1xuICAgIHBvc2l0aW9uOiBmaXhlZDtcbiAgICAvLyB3aWR0aDogY2FsYygxMDAlIC0gNjBweCk7XG4gICAgLy8gdG9wOiAzcHg7XG4gICAgLy8gdG9wOiA1OHB4O1xuICAgIHotaW5kZXg6IDk5OTtcbn1cbmlvbi10aXRsZXtcbiAgICB3aGl0ZS1zcGFjZTogbm93cmFwO1xuICAgIG92ZXJmbG93OiBoaWRkZW47XG4gICAgdGV4dC1vdmVyZmxvdzogZWxsaXBzaXM7XG4gICAgd2lkdGg6IDEwMCU7XG59XG4uc2VhcmNoc3BhY2Uge1xuICAgIGJhY2tncm91bmQtY29sb3I6d2hpdGU7XG59XG4uaGlnaGVye1xuICAgIGhlaWdodDogMTAwcHg7XG59Il19 */"
 
 /***/ }),
 
@@ -109,6 +109,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
 /* harmony import */ var _services_config_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../services/config.service */ "./src/app/module-info/services/config.service.ts");
 /* harmony import */ var _ngx_translate_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ngx-translate/core */ "./node_modules/@ngx-translate/core/fesm5/ngx-translate-core.js");
+/* harmony import */ var _services_utils_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../services/utils.service */ "./src/app/module-info/services/utils.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -124,9 +125,12 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var VideoPage = /** @class */ (function () {
-    function VideoPage(datiService, social, config, translate) {
+    function VideoPage(datiService, utils, plt, social, config, translate) {
         this.datiService = datiService;
+        this.utils = utils;
+        this.plt = plt;
         this.social = social;
         this.config = config;
         this.translate = translate;
@@ -149,6 +153,9 @@ var VideoPage = /** @class */ (function () {
     VideoPage.prototype.visualizzaMappa = function (latitudine, longitudine) {
         window.open(encodeURI(this.urlMappa + latitudine + "," + longitudine), '_system');
     };
+    VideoPage.prototype.searchAndIos = function () {
+        return this.plt.is('ios') && this.isRicercaOpen;
+    };
     VideoPage.prototype.visualizzaShare = function (titolo, img, linkVideo) {
         var _this = this;
         console.log("Share");
@@ -169,12 +176,19 @@ var VideoPage = /** @class */ (function () {
     };
     VideoPage.prototype.ngOnInit = function () {
         var _this = this;
+        this.utils.presentLoading();
         this.datiService.getDati(this.parametriPost).then(function (data) {
             if (data.length == 0) {
                 _this.emptyList = true;
             }
             _this.DatiEvento = data;
+            _this.DatiEvento.forEach(function (evento) {
+                evento.image = evento.image.replace('.jpg', '_medium.jpg');
+            });
             _this.datiRicerca = _this.DatiEvento;
+            _this.utils.hideLoading();
+        }, function (err) {
+            _this.utils.hideLoading();
         });
         console.log(this.DatiEvento);
     };
@@ -221,6 +235,9 @@ var VideoPage = /** @class */ (function () {
                     else {
                         _this.emptyList = false;
                         _this.DatiEvento = data;
+                        _this.DatiEvento.forEach(function (evento) {
+                            evento.image = evento.image.replace('.jpg', '_medium.jpg');
+                        });
                         _this.datiRicerca = _this.DatiEvento;
                     }
                 });
@@ -271,7 +288,7 @@ var VideoPage = /** @class */ (function () {
             template: __webpack_require__(/*! ./video.page.html */ "./src/app/module-info/pages/video/video.page.html"),
             styles: [__webpack_require__(/*! ./video.page.scss */ "./src/app/module-info/pages/video/video.page.scss")]
         }),
-        __metadata("design:paramtypes", [_services_dati_service_service__WEBPACK_IMPORTED_MODULE_1__["DatiServiceService"], _ionic_native_social_sharing_ngx__WEBPACK_IMPORTED_MODULE_2__["SocialSharing"], _services_config_service__WEBPACK_IMPORTED_MODULE_4__["ConfigService"], _ngx_translate_core__WEBPACK_IMPORTED_MODULE_5__["TranslateService"]])
+        __metadata("design:paramtypes", [_services_dati_service_service__WEBPACK_IMPORTED_MODULE_1__["DatiServiceService"], _services_utils_service__WEBPACK_IMPORTED_MODULE_6__["UtilsService"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["Platform"], _ionic_native_social_sharing_ngx__WEBPACK_IMPORTED_MODULE_2__["SocialSharing"], _services_config_service__WEBPACK_IMPORTED_MODULE_4__["ConfigService"], _ngx_translate_core__WEBPACK_IMPORTED_MODULE_5__["TranslateService"]])
     ], VideoPage);
     return VideoPage;
 }());

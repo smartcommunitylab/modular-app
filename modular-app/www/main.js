@@ -931,12 +931,12 @@ module.exports = webpackAsyncContext;
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
-	"./olwdpuhx.entry.js": [
-		"./node_modules/wcs-dettagliofunerale/dist/esm/es5/build/olwdpuhx.entry.js",
+	"./b0yyakvo.entry.js": [
+		"./node_modules/wcs-dettagliofunerale/dist/esm/es5/build/b0yyakvo.entry.js",
 		142
 	],
-	"./olwdpuhx.sc.entry.js": [
-		"./node_modules/wcs-dettagliofunerale/dist/esm/es5/build/olwdpuhx.sc.entry.js",
+	"./b0yyakvo.sc.entry.js": [
+		"./node_modules/wcs-dettagliofunerale/dist/esm/es5/build/b0yyakvo.sc.entry.js",
 		143
 	]
 };
@@ -1124,6 +1124,11 @@ var map = {
 		"default~pages-detail-event-detail-event-module~pages-detail-info-detail-info-module~pages-detail-pat~3194840c",
 		"common",
 		"pages-list-rh-list-rh-module"
+	],
+	"./pages/list-streets/list-streets.module": [
+		"./src/app/module-pulstrade/pages/list-streets/list-streets.module.ts",
+		"common",
+		"pages-list-streets-list-streets-module"
 	],
 	"./pages/map-path/map-path.module": [
 		"./src/app/module-comune/pages/map-path/map-path.module.ts",
@@ -2182,6 +2187,7 @@ var routes = [
     { path: 'ps-search', loadChildren: './pages/search/search.module#SearchPageModule' },
     { path: 'ps-notification', loadChildren: './pages/notification/notification.module#NotificationPageModule' },
     { path: 'street-detail', loadChildren: './pages/street-detail/street-detail.module#StreetDetailPageModule' },
+    { path: 'list-streets', loadChildren: './pages/list-streets/list-streets.module#ListStreetsPageModule' },
 ];
 var ModulePulstradeRoutingModule = /** @class */ (function () {
     function ModulePulstradeRoutingModule() {
@@ -3403,7 +3409,7 @@ module.exports = "<div class=\"pop-container\">\n    <ion-radio-group>\n      <i
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "ion-label {\n  z-index: 2; }\n\n.pop-container {\n  background: white; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9Vc2Vycy91c2VyL0RvY3VtZW50cy9Qcm9qZWN0cy9tb2R1bGFyQXBwL21vZHVsYXItYXBwL21vZHVsYXItYXBwL3NyYy9hcHAvc2hhcmVkL3BvcG92ZXIvcG9wb3Zlci5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLFdBQVMsRUFDWjs7QUFDRDtFQUNJLGtCQUFnQixFQUNuQiIsImZpbGUiOiJzcmMvYXBwL3NoYXJlZC9wb3BvdmVyL3BvcG92ZXIuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyJpb24tbGFiZWwge1xuICAgIHotaW5kZXg6Mjtcbn1cbi5wb3AtY29udGFpbmVyIHtcbiAgICBiYWNrZ3JvdW5kOndoaXRlO1xufSJdfQ== */"
+module.exports = "ion-label {\n  z-index: 2; }\n\n.pop-container {\n  background: white; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL2NoaW44L0RvY3VtZW50cy93b3JrL21vZHVsYXJBcHAvbW9kdWxhci1hcHAvc3JjL2FwcC9zaGFyZWQvcG9wb3Zlci9wb3BvdmVyLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksV0FBUyxFQUNaOztBQUNEO0VBQ0ksa0JBQWdCLEVBQ25CIiwiZmlsZSI6InNyYy9hcHAvc2hhcmVkL3BvcG92ZXIvcG9wb3Zlci5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbImlvbi1sYWJlbCB7XG4gICAgei1pbmRleDoyO1xufVxuLnBvcC1jb250YWluZXIge1xuICAgIGJhY2tncm91bmQ6d2hpdGU7XG59Il19 */"
 
 /***/ }),
 
@@ -3533,7 +3539,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/user/Documents/Projects/modularApp/modular-app/modular-app/src/main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! /home/chin8/Documents/work/modularApp/modular-app/src/main.ts */"./src/main.ts");
 
 
 /***/ })

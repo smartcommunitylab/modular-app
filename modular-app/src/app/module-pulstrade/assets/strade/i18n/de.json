@@ -15,13 +15,14 @@
     "DETAILS": "Details",
     "IN-CLEANING": "Straße in Sauberkeit",
     "error_init":"Errore inizializzazione dati",
-    "clean_label":"pulizie programmate su quest'area in questa zona",
+    "clean_label":"pulizie programmate su quest'area in questa data",
     "no_street_future":"Non ci sono pulizie programmate per questa zona dopo la data selezionata",
     "no_street_past":"Non ci sono pulizie programmate per questa zona prima della data selezionata",
     "no_notify":"Nessuna strada salvata",
     "no_roads_search":"Nessuna strada trovata",
     "side_label":"Lato: ",
-    "tratto_label":"Tratto: "
+    "tratto_label":"Tratto: ",
+    "list_street_label":"Lista pulizie "
     
 
 }

@@ -56,7 +56,7 @@
             [inViewportOptions]="{ threshold: [0] }" (inViewportAction)="onIntersection($event)">
               <wc-details [id]="poi.id" [img]="poi.image" [stringsinput]="stringsContact" [title]="poi.title"
                 [altImage]="altImage" [stringsinput]="stringsContact" [title]="poi.title" [altImage]="altImage"
-                [subtitle]="poi.subtitle" [text]="poi.text" [info]="poi.info" [contacts]="poi.infos"
+                [subtitle]="poi.subtitle" [text]="poi.text" [info]="poi.info" [distance]="getDistance(poi)" [contacts]="poi.infos"
                 heading-color="#707070" second-color="#11b3ef" expandable=true expanse=false></wc-details>
               <div class="spacing" *ngIf="i == showPois.length - 1"></div>
             </div>

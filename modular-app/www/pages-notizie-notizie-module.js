@@ -78,7 +78,7 @@ var NotiziePageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\n    <ion-searchbar class=\"search-notizie\" style=\"display: none\"  showCancelButton=\"always\" animated (ionChange)=\"Ricerca()\" (ionCancel)=\"OpenCloseRicerca()\"  placeholder=\"Cerca\" id=\"barraDiRicerca\"\n    [(ngModel)]=\"daCercare\"></ion-searchbar>\n  <ion-toolbar>\n\n      <ion-buttons slot=\"start\">\n        <ion-back-button class=\"interaction\"></ion-back-button>\n      </ion-buttons>\n      <ion-title float-left id=\"TITOLO\"> {{'avvisi_label'|translate}}\n      </ion-title>\n      <ion-buttons slot=\"end\" *ngIf=\"!isRicercaOpen\">\n        <ion-button fill=\"clear\" float-right (click)=\"OpenCloseRicerca()\" id=\"btnImpostazioniRicerca\" color=\"light\">\n          <svg width='24' height='24' viewBox='0 0 24 24'>\n            <path fill='none' d='M0 0h24v24H0V0z' />\n            <path\n              d='M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z' />\n          </svg>\n        </ion-button>\n    </ion-buttons>\n      <!-- <ion-grid *ngIf=\"!isRicercaOpen\">\n        <ion-row justify-content-center align-items-center>\n          <ion-col col-6>\n\n          </ion-col>\n          <ion-col col-6>\n            <ion-button fill=\"clear\" float-right (click)=\"OpenCloseRicerca()\" id=\"btnImpostazioniRicerca\" color=\"light\">\n              <svg width='24' height='24' viewBox='0 0 24 24'>\n                <path fill='none' d='M0 0h24v24H0V0z' />\n                <path\n                  d='M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z' />\n              </svg>\n            </ion-button>\n          </ion-col>\n        </ion-row>\n      </ion-grid> -->\n  </ion-toolbar>\n\n</ion-header>\n<ion-content>\n    <div class=\"ion-padding\" *ngIf=\"!emptyList; else emptyListTemplate\">\n      <div *ngFor=\"let item of datiRicerca\" id=\"contenitoreAnteprima\">\n        <wc-anteprima (eventMappa)=\"visualizzaMappa(item.coordinates[0], item.coordinates[1])\"\n          (eventShare)=\"visualizzaShare(item.title, item.image ,item.description)\" id=\"elemento\" img={{item.image}}\n          [titolo]=\"item.title\" orario={{item.eventStart}} datapubblicazione={{formattaData(item.created)}}\n          dataevento={{item.eventDate}} durata={{item.eventTiming}} [descrizione]=\"item.description\"\n          luogo={{item.address}}>\n        </wc-anteprima>\n      </div>\n  <ion-infinite-scroll threshold=\"100px\" (ionInfinite)=\"caricaAltriDati($event)\">\n    <ion-infinite-scroll-content loadingSpinner=\"crescent\" loadingText=\"Sto caricando...\"></ion-infinite-scroll-content>\n  </ion-infinite-scroll>\n  </div>\n  <ng-template #emptyListTemplate>\n    {{'empty_list_label'|translate}}\n  </ng-template>\n</ion-content>"
+module.exports = "<ion-header [ngClass]=\"{'higher': searchAndIos()}\" >\n    <ion-searchbar class=\"search-notizie\" [ngClass]=\"{'searchspace': isRicercaOpen}\" style=\"display: none\"  showCancelButton=\"always\" animated (ionChange)=\"Ricerca()\" (ionCancel)=\"OpenCloseRicerca()\"  placeholder=\"Cerca\" id=\"barraDiRicerca\"\n    [(ngModel)]=\"daCercare\"></ion-searchbar>\n  <ion-toolbar>\n\n      <ion-buttons slot=\"start\">\n        <ion-back-button class=\"interaction\"></ion-back-button>\n      </ion-buttons>\n      <ion-title float-left id=\"TITOLO\"> {{'avvisi_label'|translate}}\n      </ion-title>\n      <ion-buttons slot=\"end\" *ngIf=\"!isRicercaOpen\">\n        <ion-button fill=\"clear\" float-right (click)=\"OpenCloseRicerca()\" id=\"btnImpostazioniRicerca\" color=\"light\">\n          <svg width='24' height='24' viewBox='0 0 24 24'>\n            <path fill='none' d='M0 0h24v24H0V0z' />\n            <path\n              d='M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z' />\n          </svg>\n        </ion-button>\n    </ion-buttons>\n  </ion-toolbar>\n\n</ion-header>\n<ion-content>\n    <div class=\"ion-padding\" *ngIf=\"!emptyList; else emptyListTemplate\">\n      <div *ngFor=\"let item of datiRicerca\" id=\"contenitoreAnteprima\">\n        <wc-anteprima showimage=false (eventMappa)=\"visualizzaMappa(item.coordinates[0], item.coordinates[1])\"\n          (eventShare)=\"visualizzaShare(item.title, item.image ,item.description)\" id=\"elemento\" img={{item.image}}\n          [titolo]=\"item.title\" orario={{item.eventStart}} datapubblicazione={{formattaData(item.created)}}\n          dataevento={{item.eventDate}} durata={{item.eventTiming}} [descrizione]=\"item.description\"\n          luogo={{item.address}}>\n        </wc-anteprima>\n      </div>\n  <ion-infinite-scroll threshold=\"100px\" (ionInfinite)=\"caricaAltriDati($event)\">\n    <ion-infinite-scroll-content loadingSpinner=\"crescent\" loadingText=\"Sto caricando...\"></ion-infinite-scroll-content>\n  </ion-infinite-scroll>\n  </div>\n  <ng-template #emptyListTemplate>\n    {{'empty_list_label'|translate}}\n  </ng-template>\n</ion-content>"
 
 /***/ }),
 
@@ -89,7 +89,7 @@ module.exports = "<ion-header>\n    <ion-searchbar class=\"search-notizie\" styl
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "#contenitoreAnteprima {\n  padding-bottom: 6px; }\n\n.interaction {\n  color: #11b3ef !important; }\n\nion-searchbar {\n  position: fixed;\n  z-index: 999; }\n\nion-title {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  width: 100%; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9Vc2Vycy91c2VyL0RvY3VtZW50cy9Qcm9qZWN0cy9tb2R1bGFyQXBwL21vZHVsYXItYXBwL21vZHVsYXItYXBwL3NyYy9hcHAvbW9kdWxlLWluZm8vcGFnZXMvbm90aXppZS9ub3RpemllLnBhZ2Uuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFJQTtFQUNJLG9CQUFtQixFQUN0Qjs7QUFDRDtFQUNJLDBCQUF3QixFQUMzQjs7QUFDRDtFQUNJLGdCQUFlO0VBSWYsYUFBWSxFQUNmOztBQUNEO0VBQ0ksb0JBQW1CO0VBQ25CLGlCQUFnQjtFQUNoQix3QkFBdUI7RUFDdkIsWUFBVyxFQUNkIiwiZmlsZSI6InNyYy9hcHAvbW9kdWxlLWluZm8vcGFnZXMvbm90aXppZS9ub3RpemllLnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIiNiYXJyYURpUmljZXJjYXtcbiAgICAvLyBkaXNwbGF5OiBub25lO1xufVxuXG4jY29udGVuaXRvcmVBbnRlcHJpbWF7XG4gICAgcGFkZGluZy1ib3R0b206IDZweDtcbn1cbi5pbnRlcmFjdGlvbiB7XG4gICAgY29sb3I6ICMxMWIzZWYhaW1wb3J0YW50O1xufVxuaW9uLXNlYXJjaGJhciB7XG4gICAgcG9zaXRpb246IGZpeGVkO1xuICAgIC8vIHdpZHRoOiBjYWxjKDEwMCUgLSA2MHB4KTtcbiAgICAvLyB0b3A6IDNweDtcbiAgICAvLyB0b3A6IDU4cHg7XG4gICAgei1pbmRleDogOTk5O1xufVxuaW9uLXRpdGxle1xuICAgIHdoaXRlLXNwYWNlOiBub3dyYXA7XG4gICAgb3ZlcmZsb3c6IGhpZGRlbjtcbiAgICB0ZXh0LW92ZXJmbG93OiBlbGxpcHNpcztcbiAgICB3aWR0aDogMTAwJTtcbn0iXX0= */"
+module.exports = "#contenitoreAnteprima {\n  padding-bottom: 6px; }\n\n.interaction {\n  color: #11b3ef !important; }\n\nion-searchbar {\n  position: fixed;\n  z-index: 999; }\n\nion-title {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  width: 100%; }\n\n.searchspace {\n  background-color: white; }\n\n.higher {\n  height: 100px; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL2NoaW44L0RvY3VtZW50cy93b3JrL21vZHVsYXJBcHAvbW9kdWxhci1hcHAvc3JjL2FwcC9tb2R1bGUtaW5mby9wYWdlcy9ub3RpemllL25vdGl6aWUucGFnZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUlBO0VBQ0ksb0JBQW1CLEVBQ3RCOztBQUNEO0VBQ0ksMEJBQXdCLEVBQzNCOztBQUNEO0VBQ0ksZ0JBQWU7RUFJZixhQUFZLEVBQ2Y7O0FBQ0Q7RUFDSSxvQkFBbUI7RUFDbkIsaUJBQWdCO0VBQ2hCLHdCQUF1QjtFQUN2QixZQUFXLEVBQ2Q7O0FBQ0Q7RUFDSSx3QkFBc0IsRUFDekI7O0FBQ0Q7RUFDSSxjQUFhLEVBQ2hCIiwiZmlsZSI6InNyYy9hcHAvbW9kdWxlLWluZm8vcGFnZXMvbm90aXppZS9ub3RpemllLnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIiNiYXJyYURpUmljZXJjYXtcbiAgICAvLyBkaXNwbGF5OiBub25lO1xufVxuXG4jY29udGVuaXRvcmVBbnRlcHJpbWF7XG4gICAgcGFkZGluZy1ib3R0b206IDZweDtcbn1cbi5pbnRlcmFjdGlvbiB7XG4gICAgY29sb3I6ICMxMWIzZWYhaW1wb3J0YW50O1xufVxuaW9uLXNlYXJjaGJhciB7XG4gICAgcG9zaXRpb246IGZpeGVkO1xuICAgIC8vIHdpZHRoOiBjYWxjKDEwMCUgLSA2MHB4KTtcbiAgICAvLyB0b3A6IDNweDtcbiAgICAvLyB0b3A6IDU4cHg7XG4gICAgei1pbmRleDogOTk5O1xufVxuaW9uLXRpdGxle1xuICAgIHdoaXRlLXNwYWNlOiBub3dyYXA7XG4gICAgb3ZlcmZsb3c6IGhpZGRlbjtcbiAgICB0ZXh0LW92ZXJmbG93OiBlbGxpcHNpcztcbiAgICB3aWR0aDogMTAwJTtcbn1cbi5zZWFyY2hzcGFjZSB7XG4gICAgYmFja2dyb3VuZC1jb2xvcjp3aGl0ZTtcbn1cbi5oaWdoZXJ7XG4gICAgaGVpZ2h0OiAxMDBweDtcbn0iXX0= */"
 
 /***/ }),
 
@@ -109,6 +109,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
 /* harmony import */ var _services_config_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../services/config.service */ "./src/app/module-info/services/config.service.ts");
 /* harmony import */ var _ngx_translate_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ngx-translate/core */ "./node_modules/@ngx-translate/core/fesm5/ngx-translate-core.js");
+/* harmony import */ var _services_utils_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../services/utils.service */ "./src/app/module-info/services/utils.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -124,12 +125,15 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var NotiziePage = /** @class */ (function () {
-    function NotiziePage(datiService, social, config, translate) {
+    function NotiziePage(datiService, plt, social, config, translate, utils) {
         this.datiService = datiService;
+        this.plt = plt;
         this.social = social;
         this.config = config;
         this.translate = translate;
+        this.utils = utils;
         this.urlMappa = "https://www.google.com/maps/search/?api=1&query=";
         this.isRicercaOpen = false;
         this.datiRicerca = [];
@@ -150,6 +154,9 @@ var NotiziePage = /** @class */ (function () {
     NotiziePage.prototype.visualizzaMappa = function (latitudine, longitudine) {
         window.open(encodeURI(this.urlMappa + latitudine + "," + longitudine), '_system');
     };
+    NotiziePage.prototype.searchAndIos = function () {
+        return this.plt.is('ios') && this.isRicercaOpen;
+    };
     NotiziePage.prototype.visualizzaShare = function (titolo, img, descrizione) {
         var _this = this;
         console.log("Share");
@@ -161,27 +168,21 @@ var NotiziePage = /** @class */ (function () {
     };
     NotiziePage.prototype.ngOnInit = function () {
         var _this = this;
+        this.utils.presentLoading();
         this.datiService.getDati(this.parametriPost).then(function (data) {
             if (data.length == 0) {
                 _this.emptyList = true;
             }
             _this.DatiEvento = data;
+            _this.DatiEvento.forEach(function (evento) {
+                evento.image = evento.image.replace('.jpg', '_medium.jpg');
+            });
             _this.datiRicerca = _this.DatiEvento;
+            _this.utils.hideLoading();
+        }, function (err) {
+            _this.utils.hideLoading();
         });
     };
-    // caricaAltriDati(event) {
-    //   this.start += 10;
-    //   let parametriPost = {
-    //     "fromDate": null,
-    //     "size": 10,
-    //     "sortForList": 1,
-    //     "source": ["Avvisi oggetti rinvenuti"],
-    //     "start": this.start
-    //   }
-    //   this.vetNuoviDati = this.datiService.getDati(parametriPost);
-    //   console.log(this.datiRicerca);
-    //   setTimeout(() => { this.visualizzaDati(this.vetNuoviDati, event) }, 1500);
-    // }
     NotiziePage.prototype.visualizzaDati = function (vet, event) {
         for (var _i = 0, vet_1 = vet; _i < vet_1.length; _i++) {
             var item = vet_1[_i];
@@ -204,20 +205,6 @@ var NotiziePage = /** @class */ (function () {
         else {
             searchbar.style.display = 'none';
         }
-        // if (!this.isRicercaOpen) {
-        //   // document.getElementById("barraDiRicerca").style.display = "inherit";
-        //   // document.getElementById("btnImpostazioniRicerca").innerHTML = "<svg width='24' height='24' viewBox='0 0 24 24'><path fill='none' d='M0 0h24v24H0V0z'/><path d='M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z'/></svg>";
-        //   // this.infiniteScroll.disabled = true;
-        //   // this.Ricerca();
-        //   this.daCercare="";
-        // }
-        // else {
-        //   // document.getElementById("barraDiRicerca").style.display = "none";
-        //   // document.getElementById("btnImpostazioniRicerca").innerHTML = "<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'><path fill='none' d='M0 0h24v24H0V0z'/><path d='M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z'/></svg>";
-        //   this.datiRicerca = this.DatiEvento;
-        //   // this.infiniteScroll.disabled = false;
-        // }
-        // this.isRicercaOpen = !this.isRicercaOpen;
     };
     NotiziePage.prototype.Ricerca = function () {
         var _this = this;
@@ -239,6 +226,9 @@ var NotiziePage = /** @class */ (function () {
                     else {
                         _this.emptyList = false;
                         _this.DatiEvento = data;
+                        _this.DatiEvento.forEach(function (evento) {
+                            evento.image = evento.image.replace('.jpg', '_medium.jpg');
+                        });
                         _this.datiRicerca = _this.DatiEvento;
                     }
                 });
@@ -295,7 +285,12 @@ var NotiziePage = /** @class */ (function () {
             template: __webpack_require__(/*! ./notizie.page.html */ "./src/app/module-info/pages/notizie/notizie.page.html"),
             styles: [__webpack_require__(/*! ./notizie.page.scss */ "./src/app/module-info/pages/notizie/notizie.page.scss")]
         }),
-        __metadata("design:paramtypes", [_services_dati_service_service__WEBPACK_IMPORTED_MODULE_1__["DatiServiceService"], _ionic_native_social_sharing_ngx__WEBPACK_IMPORTED_MODULE_2__["SocialSharing"], _services_config_service__WEBPACK_IMPORTED_MODULE_4__["ConfigService"], _ngx_translate_core__WEBPACK_IMPORTED_MODULE_5__["TranslateService"]])
+        __metadata("design:paramtypes", [_services_dati_service_service__WEBPACK_IMPORTED_MODULE_1__["DatiServiceService"],
+            _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["Platform"],
+            _ionic_native_social_sharing_ngx__WEBPACK_IMPORTED_MODULE_2__["SocialSharing"],
+            _services_config_service__WEBPACK_IMPORTED_MODULE_4__["ConfigService"],
+            _ngx_translate_core__WEBPACK_IMPORTED_MODULE_5__["TranslateService"],
+            _services_utils_service__WEBPACK_IMPORTED_MODULE_6__["UtilsService"]])
     ], NotiziePage);
     return NotiziePage;
 }());
