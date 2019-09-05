@@ -1,8 +1,9 @@
 <ion-header no-border [ngClass]="{'higher': searchAndIos()}">
 
   <ion-toolbar>
-      <ion-searchbar class="search-services" [ngClass]="{'searchspace': search}" style="display: none" showCancelButton="never" animated (search)="toggleSearch()"
-    (ionInput)="searchChanged($event)" (ionCancel)="toggleSearch()"  (ionClear)="toggleSearch()"></ion-searchbar>
+    <ion-searchbar class="search-services" [ngClass]="{'searchspace': search}" style="display: none"
+      showCancelButton="never" animated (search)="toggleSearch()" (ionInput)="searchChanged($event)"
+      (ionCancel)="toggleSearch()" (ionClear)="toggleSearch()"></ion-searchbar>
     <ion-buttons slot="start">
       <ion-back-button class="interaction"></ion-back-button>
     </ion-buttons>
@@ -15,17 +16,6 @@
       {{'service_label' | translate}}
     </ion-title>
   </ion-toolbar>
-</ion-header>
-
-<!-- <ion-grid style="height: 100%" *ngIf="isLoading">
-    <ion-row justify-content-center align-items-center style="height: 100%">
-      <ion-spinner name="circles"></ion-spinner>
-    </ion-row>
-  </ion-grid> -->
-
-<ion-content>
-
-
   <div class="wrapper" *ngIf="!firstAccess">
     <div class="scrolling-wrapper-flexbox loop">
       <div class="container" *ngFor="let tag of tags">
@@ -39,6 +29,18 @@
       </div>
     </div>
   </div>
+</ion-header>
+
+<!-- <ion-grid style="height: 100%" *ngIf="isLoading">
+    <ion-row justify-content-center align-items-center style="height: 100%">
+      <ion-spinner name="circles"></ion-spinner>
+    </ion-row>
+  </ion-grid> -->
+
+<ion-content>
+
+
+
 
   <ion-list no-lines id="poi-list">
     <div *ngIf="!emptyList">

@@ -6,20 +6,21 @@
       </button> </ion-buttons>
     <ion-title class="title">{{'title_home_setting'|translate}}</ion-title>
   </ion-toolbar>
+  <div class="wrapper">
+      <div class="scrolling-wrapper-flexbox loop">
+        <ion-chip outline=true (click)="select('home')" [ngClass]="{'chip-selected': isSelected('home')}">
+          <ion-label class="interaction">{{'label_personalizza'|translate}}</ion-label>
+        </ion-chip>
+        <ion-chip outline=true (click)="select('settings')" [ngClass]="{'chip-selected': isSelected('settings')}">
+          <ion-label class="interaction">{{'label_other_settinga'|translate}}</ion-label>
+        </ion-chip>
+        <ion-chip outline=true (click)="select('about')" [ngClass]="{'chip-selected': isSelected('about')}">
+          <ion-label class="interaction">{{'label_about'|translate}}</ion-label>
+        </ion-chip>
+      </div>
+    </div>
 </ion-header>
-<div class="wrapper">
-  <div class="scrolling-wrapper-flexbox loop">
-    <ion-chip outline=true (click)="select('home')" [ngClass]="{'chip-selected': isSelected('home')}">
-      <ion-label class="interaction">{{'label_personalizza'|translate}}</ion-label>
-    </ion-chip>
-    <ion-chip outline=true (click)="select('settings')" [ngClass]="{'chip-selected': isSelected('settings')}">
-      <ion-label class="interaction">{{'label_other_settinga'|translate}}</ion-label>
-    </ion-chip>
-    <ion-chip outline=true (click)="select('about')" [ngClass]="{'chip-selected': isSelected('about')}">
-      <ion-label class="interaction">{{'label_about'|translate}}</ion-label>
-    </ion-chip>
-  </div>
-</div>
+
 <ion-content padding forceOverscroll="false">
     <div class="wrapper" *ngIf="isSelected('home')">
         <div class="scrolling-wrapper-flexbox-cards loop">

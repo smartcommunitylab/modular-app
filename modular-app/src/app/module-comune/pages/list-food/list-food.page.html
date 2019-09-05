@@ -19,10 +19,7 @@
     </ion-title>
   </ion-toolbar>
 </ion-header>
-<ion-content>
-
-  
-  <div class="wrapper" *ngIf="!firstAccess">
+<div class="wrapper" *ngIf="!firstAccess">
     <div class="scrolling-wrapper-flexbox loop">
       <div class="container" *ngFor="let tag of tags">
       <div class="tag"  *ngIf="tag.isChecked">
@@ -35,6 +32,10 @@
     </div>
     </div>
   </div>
+<ion-content>
+
+  
+
 
   <ion-list no-lines id="poi-list">
     <div *ngFor="let c of categories">

@@ -18,13 +18,6 @@
         {{'title_list_poi' | translate}}
       </ion-title>
     </ion-toolbar>
-  </ion-header>
-
-  <ion-content [scrollEvents]="true" (ionScroll)="onScroll($event)">
-  
-    <ion-searchbar style="display: none" showCancelButton animated (search)="toggleSearch()"
-      (ionInput)="searchChanged($event)" (ionCancel)="toggleSearch()"></ion-searchbar>
-    <div *ngIf="!emptyList">
     <div class="wrapper" *ngIf="presentFilter">
         <div class="scrolling-wrapper-flexbox loop">
           <div class="container" *ngFor="let tag of tags">
@@ -45,6 +38,14 @@
         </ion-chip>
       </div>
     </div>
+  </ion-header>
+
+  <ion-content [scrollEvents]="true" (ionScroll)="onScroll($event)">
+  
+    <ion-searchbar style="display: none" showCancelButton animated (search)="toggleSearch()"
+      (ionInput)="searchChanged($event)" (ionCancel)="toggleSearch()"></ion-searchbar>
+    <div *ngIf="!emptyList">
+    
     <ion-list no-lines id="poi-list">
       <div class="list-container" *ngFor="let c of categories">
         <ion-item class="label-type ion-text-center" sticky *ngIf="oneElement(c) && !presentFilter">

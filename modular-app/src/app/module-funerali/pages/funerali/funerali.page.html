@@ -16,18 +16,18 @@
             </ion-button>
         </ion-buttons>
     </ion-toolbar>
-
+    <div class="wrapper" *ngIf="!search">
+            <div id="idDates" class="scrolling-wrapper-flexbox loop">
+                <ion-chip *ngFor="let c of dates" id="{{c}}" (click)="selectInternalElement(c)"
+                    [ngClass]="{'datesSelected': isSelected(c)}">
+                    <ion-label class="interaction" [ngClass]="{'datesSelected': c==actualVisualized}">{{c}}</ion-label>
+                </ion-chip>
+            </div>
+        </div>
 </ion-header>
 
 <ion-content>
-    <div class="wrapper" *ngIf="!search">
-        <div id="idDates" class="scrolling-wrapper-flexbox loop">
-            <ion-chip *ngFor="let c of dates" id="{{c}}" (click)="selectInternalElement(c)"
-                [ngClass]="{'datesSelected': isSelected(c)}">
-                <ion-label class="interaction" [ngClass]="{'datesSelected': c==actualVisualized}">{{c}}</ion-label>
-            </ion-chip>
-        </div>
-    </div>
+   
     <div id="funerali">
         <ion-list no-lines padding *ngIf="!emptyList">
             <div *ngFor="let c of dates">

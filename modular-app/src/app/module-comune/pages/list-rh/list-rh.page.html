@@ -18,22 +18,23 @@
         {{'RH' | translate}}
       </ion-title>
     </ion-toolbar>
+    <div class="wrapper" *ngIf="!firstAccess">
+        <div class="scrolling-wrapper-flexbox loop">
+          <div class="container" *ngFor="let tag of tags">
+          <div class="tag"  *ngIf="tag.isChecked">
+            <div class="tag-text">
+              {{tag.value}}
+              <ion-icon name="close-circle" (click)="removeTag(tag)"></ion-icon>
+            </div>
+            
+          </div>
+        </div>
+        </div>
+      </div>
   </ion-header>
   
   <ion-content>
-    <div class="wrapper" *ngIf="!firstAccess">
-      <div class="scrolling-wrapper-flexbox loop">
-        <div class="container" *ngFor="let tag of tags">
-        <div class="tag"  *ngIf="tag.isChecked">
-          <div class="tag-text">
-            {{tag.value}}
-            <ion-icon name="close-circle" (click)="removeTag(tag)"></ion-icon>
-          </div>
-          
-        </div>
-      </div>
-      </div>
-    </div>
+
   
     <ion-list no-lines id="poi-list">
       <div *ngFor="let c of categories">
