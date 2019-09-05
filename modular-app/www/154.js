@@ -154,14 +154,14 @@ var cwAnteprima = /** @class */ (function () {
             Object(_wc_video_bf263864_js__WEBPACK_IMPORTED_MODULE_0__["f"])("div", { class: "component", onClick: function () { return _this.VisualizzaDettaglio(); }, style: styles }, Object(_wc_video_bf263864_js__WEBPACK_IMPORTED_MODULE_0__["f"])("h1", { id: "titolo" }, this.titolo), Object(_wc_video_bf263864_js__WEBPACK_IMPORTED_MODULE_0__["f"])("div", { class: "detail-bar" }), this.showimage
                 ? Object(_wc_video_bf263864_js__WEBPACK_IMPORTED_MODULE_0__["f"])("img", { src: this.img })
                 : "", Object(_wc_video_bf263864_js__WEBPACK_IMPORTED_MODULE_0__["f"])("div", { class: "descrizione" }, Object(_wc_video_bf263864_js__WEBPACK_IMPORTED_MODULE_0__["f"])("div", { id: "centra" })), Object(_wc_video_bf263864_js__WEBPACK_IMPORTED_MODULE_0__["f"])("div", { id: "Informazioni" }, Object(_wc_video_bf263864_js__WEBPACK_IMPORTED_MODULE_0__["f"])("div", { id: "data", innerHTML: this.datapubblicazione }), Object(_wc_video_bf263864_js__WEBPACK_IMPORTED_MODULE_0__["f"])("div", { id: "abstract", innerHTML: this.abstract }), Object(_wc_video_bf263864_js__WEBPACK_IMPORTED_MODULE_0__["f"])("div", { class: "testo" }, Object(_wc_video_bf263864_js__WEBPACK_IMPORTED_MODULE_0__["f"])("p", { id: "descrizione", innerHTML: this.descrizione })), Object(_wc_video_bf263864_js__WEBPACK_IMPORTED_MODULE_0__["f"])("div", { class: "margine" }), this.link && this.link != ""
-                ? Object(_wc_video_bf263864_js__WEBPACK_IMPORTED_MODULE_0__["f"])("div", { class: "external-link", onClick: function () { return _this.openLink(_this.link); } }, "APRI")
+                ? Object(_wc_video_bf263864_js__WEBPACK_IMPORTED_MODULE_0__["f"])("div", { class: "external-link", onClick: function () { return _this.openLink(_this.link); } }, "DOWNLOAD")
                 : "", this.web && this.link != ""
-                ? Object(_wc_video_bf263864_js__WEBPACK_IMPORTED_MODULE_0__["f"])("div", { class: "external-link", onClick: function () { return _this.openLink(_this.web); } }, "DOWNLOAD")
+                ? Object(_wc_video_bf263864_js__WEBPACK_IMPORTED_MODULE_0__["f"])("div", { class: "external-link", onClick: function () { return _this.openLink(_this.web); } }, "APRI")
                 : ""))
         ];
     };
     cwAnteprima.prototype.openLink = function (web) {
-        window.open(web, "_top");
+        window.open(web, '_blank');
     };
     cwAnteprima.prototype.getLink = function (webInner) {
         return "<a href='" + webInner + "' class='external-link'></a>";

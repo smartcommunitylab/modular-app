@@ -169,7 +169,7 @@ var ListPoiPageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header no-border  [ngClass]=\"{'higher': searchAndIos()}\" >\n    <ion-searchbar class=\"search-poi\" [ngClass]=\"{'searchspace': search}\" style=\"display: none\" showCancelButton=\"always\"  animated (search)=\"toggleSearch()\"\n    (ionInput)=\"searchChanged($event)\" (ionCancel)=\"toggleSearch()\" ></ion-searchbar>\n    <ion-toolbar>\n\n      <ion-buttons slot=\"start\">\n        <ion-back-button class=\"interaction\"></ion-back-button>\n      </ion-buttons>\n      <ion-buttons slot=\"end\">\n        <ion-button (click)=\"filterClicked()\">\n          <ion-icon name=\"options\"></ion-icon>\n        </ion-button>\n        <ion-button (click)=\"toggleSearch()\">\n          <ion-icon name=\"search\"></ion-icon>\n        </ion-button>\n      </ion-buttons>\n      <ion-title>\n        {{'title_list_poi' | translate}}\n      </ion-title>\n    </ion-toolbar>\n  </ion-header>\n\n  <ion-content [scrollEvents]=\"true\" (ionScroll)=\"onScroll($event)\">\n  \n    <ion-searchbar style=\"display: none\" showCancelButton animated (search)=\"toggleSearch()\"\n      (ionInput)=\"searchChanged($event)\" (ionCancel)=\"toggleSearch()\"></ion-searchbar>\n    <div *ngIf=\"!emptyList\">\n    <div class=\"wrapper\" *ngIf=\"presentFilter\">\n        <div class=\"scrolling-wrapper-flexbox loop\">\n          <div class=\"container\" *ngFor=\"let tag of tags\">\n          <div class=\"tag\"  *ngIf=\"tag.isChecked\">\n            <div class=\"tag-text\">\n              {{tag.value}}\n              <ion-icon name=\"close-circle\" (click)=\"removeTag(tag)\"></ion-icon>\n            </div>\n            \n          </div>\n        </div>\n        </div>\n      </div>\n    <div class=\"wrapper\" *ngIf=\"!presentFilter\">\n      <div class=\"scrolling-wrapper-flexbox loop\">\n        <ion-chip *ngFor=\"let c of categories\" id=\"{{c}}\" (click)=\"selectInternalElement(c)\" [ngClass]=\"{'categorySelected': isSelected(c)}\">\n          <ion-label class=\"interaction\" [ngClass]=\"{'categorySelected': c==actualVisualized}\">{{c}}</ion-label>\n        </ion-chip>\n      </div>\n    </div>\n    <ion-list no-lines id=\"poi-list\">\n      <div class=\"list-container\" *ngFor=\"let c of categories\">\n        <ion-item class=\"label-type ion-text-center\" sticky *ngIf=\"oneElement(c) && !presentFilter\">\n            <div>{{c}}</div>\n        </ion-item>\n        <div class=\"content\" >\n          <div *ngFor=\"let poi of showPois[c]; let i = index\">\n            <div class=\"{{poi.cat[0]}}\"   inViewport\n            [inViewportOptions]=\"{ threshold: [0] }\" (inViewportAction)=\"onIntersection($event)\">\n              <wc-details [id]=\"poi.id\" [img]=\"poi.image\" [stringsinput]=\"stringsContact\" [title]=\"poi.title\"\n                [altImage]=\"altImage\" [stringsinput]=\"stringsContact\" [title]=\"poi.title\" [altImage]=\"altImage\"\n                [subtitle]=\"poi.subtitle\" [text]=\"poi.text\" [info]=\"poi.info\" [contacts]=\"poi.infos\"\n                heading-color=\"#707070\" second-color=\"#11b3ef\" expandable=true expanse=false></wc-details>\n              <div class=\"spacing\" *ngIf=\"i == showPois.length - 1\"></div>\n            </div>\n          </div>\n        </div>\n      </div>\n    </ion-list>\n  </div>\n  <div *ngIf=\"emptyList\">\n      {{'empty_list' | translate}}\n  </div>\n  </ion-content>\n"
+module.exports = "<ion-header no-border  [ngClass]=\"{'higher': searchAndIos()}\" >\n    <ion-searchbar class=\"search-poi\" [ngClass]=\"{'searchspace': search}\" style=\"display: none\" showCancelButton=\"always\"  animated (search)=\"toggleSearch()\"\n    (ionInput)=\"searchChanged($event)\" (ionCancel)=\"toggleSearch()\" ></ion-searchbar>\n    <ion-toolbar>\n\n      <ion-buttons slot=\"start\">\n        <ion-back-button class=\"interaction\"></ion-back-button>\n      </ion-buttons>\n      <ion-buttons slot=\"end\">\n        <ion-button (click)=\"filterClicked()\">\n          <ion-icon name=\"options\"></ion-icon>\n        </ion-button>\n        <ion-button (click)=\"toggleSearch()\">\n          <ion-icon name=\"search\"></ion-icon>\n        </ion-button>\n      </ion-buttons>\n      <ion-title>\n        {{'title_list_poi' | translate}}\n      </ion-title>\n    </ion-toolbar>\n  </ion-header>\n\n  <ion-content [scrollEvents]=\"true\" (ionScroll)=\"onScroll($event)\">\n  \n    <ion-searchbar style=\"display: none\" showCancelButton animated (search)=\"toggleSearch()\"\n      (ionInput)=\"searchChanged($event)\" (ionCancel)=\"toggleSearch()\"></ion-searchbar>\n    <div *ngIf=\"!emptyList\">\n    <div class=\"wrapper\" *ngIf=\"presentFilter\">\n        <div class=\"scrolling-wrapper-flexbox loop\">\n          <div class=\"container\" *ngFor=\"let tag of tags\">\n          <div class=\"tag\"  *ngIf=\"tag.isChecked\">\n            <div class=\"tag-text\">\n              {{tag.value}}\n              <ion-icon name=\"close-circle\" (click)=\"removeTag(tag)\"></ion-icon>\n            </div>\n            \n          </div>\n        </div>\n        </div>\n      </div>\n    <div class=\"wrapper\" *ngIf=\"!presentFilter\">\n      <div class=\"scrolling-wrapper-flexbox loop\">\n        <ion-chip *ngFor=\"let c of categories\" id=\"{{c}}\" (click)=\"selectInternalElement(c)\" [ngClass]=\"{'categorySelected': isSelected(c)}\">\n          <ion-label class=\"interaction\" [ngClass]=\"{'categorySelected': c==actualVisualized}\">{{c}}</ion-label>\n        </ion-chip>\n      </div>\n    </div>\n    <ion-list no-lines id=\"poi-list\">\n      <div class=\"list-container\" *ngFor=\"let c of categories\">\n        <ion-item class=\"label-type ion-text-center\" sticky *ngIf=\"oneElement(c) && !presentFilter\">\n            <div>{{c}}</div>\n        </ion-item>\n        <div class=\"content\" >\n          <div *ngFor=\"let poi of showPois[c]; let i = index\">\n            <div class=\"{{poi.cat[0]}}\"   inViewport\n            [inViewportOptions]=\"{ threshold: [0] }\" (inViewportAction)=\"onIntersection($event)\">\n              <wc-details [id]=\"poi.id\" [img]=\"poi.image\" [stringsinput]=\"stringsContact\" [title]=\"poi.title\"\n                [altImage]=\"altImage\" [stringsinput]=\"stringsContact\" [title]=\"poi.title\" [altImage]=\"altImage\"\n                [subtitle]=\"poi.subtitle\" [text]=\"poi.text\" [info]=\"poi.info\" [distance]=\"getDistance(poi)\" [contacts]=\"poi.infos\"\n                heading-color=\"#707070\" second-color=\"#11b3ef\" expandable=true expanse=false></wc-details>\n              <div class=\"spacing\" *ngIf=\"i == showPois.length - 1\"></div>\n            </div>\n          </div>\n        </div>\n      </div>\n    </ion-list>\n  </div>\n  <div *ngIf=\"emptyList\">\n      {{'empty_list' | translate}}\n  </div>\n  </ion-content>\n"
 
 /***/ }),
 
@@ -203,6 +203,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _services_utils_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../services/utils.service */ "./src/app/module-comune/services/utils.service.ts");
 /* harmony import */ var _services_config_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../services/config.service */ "./src/app/module-comune/services/config.service.ts");
 /* harmony import */ var _filter_page_poi_filter_page_poi_page__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./filter-page-poi/filter-page-poi.page */ "./src/app/module-comune/pages/list-poi/filter-page-poi/filter-page-poi.page.ts");
+/* harmony import */ var src_app_services_geo_service__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! src/app/services/geo.service */ "./src/app/services/geo.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -256,8 +257,9 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
 
 
 
+
 var ListPoiPage = /** @class */ (function () {
-    function ListPoiPage(navCtrl, dbService, alertCtrl, router, route, translate, callNumber, modalController, utils, plt, loadingController, config) {
+    function ListPoiPage(navCtrl, dbService, alertCtrl, router, route, translate, callNumber, modalController, utils, geoSrv, plt, loadingController, config) {
         this.navCtrl = navCtrl;
         this.dbService = dbService;
         this.alertCtrl = alertCtrl;
@@ -267,6 +269,7 @@ var ListPoiPage = /** @class */ (function () {
         this.callNumber = callNumber;
         this.modalController = modalController;
         this.utils = utils;
+        this.geoSrv = geoSrv;
         this.plt = plt;
         this.loadingController = loadingController;
         this.config = config;
@@ -284,6 +287,14 @@ var ListPoiPage = /** @class */ (function () {
         if (window[this.config.getAppModuleName()]['language'])
             this.language = window[this.config.getAppModuleName()]['language'];
         this.translate.use(this.language);
+        if (window[this.config.getAppModuleName()]['geolocation'])
+            this.mypos = {
+                lat: window[this.config.getAppModuleName()]['geolocation']['lat'],
+                long: window[this.config.getAppModuleName()]['geolocation']['long']
+            };
+        else {
+            this.mypos = this.config.getDefaultPosition();
+        }
     }
     ListPoiPage.prototype.ngOnInit = function () {
         var _this_1 = this;
@@ -321,9 +332,11 @@ var ListPoiPage = /** @class */ (function () {
                         _this_1.dbService.getObjectByQuery(_this_1.category.query).then(function (data) {
                             if (data.docs.length > 0) {
                                 _this_1.fullPois = data.docs.map(function (x) { return _this_1.convertPois(x); });
+                                _this_1.addDistance();
                                 _this_1.subCategories(_this_1.fullPois);
                                 _this_1.buildShowPois();
                                 _this_1.tags = _this_1.buildFilter();
+                                _this_1.orderArray('near', _this_1);
                                 _this_1.utils.hideLoading();
                             }
                             else {
@@ -343,6 +356,7 @@ var ListPoiPage = /** @class */ (function () {
         var element = document.getElementById('poi-list');
         this.translate.get('alt_image_string').subscribe(function (value) {
             _this_1.altImage = value;
+            _this_1.distanceLabel = _this_1.translate.instant('distance_label');
         });
         this.config.getStringContacts(this.translate, this.language).then(function (strings) {
             _this_1.stringsContact = strings;
@@ -384,6 +398,12 @@ var ListPoiPage = /** @class */ (function () {
     };
     ListPoiPage.prototype.searchAndIos = function () {
         return this.plt.is('ios') && this.search;
+    };
+    ListPoiPage.prototype.addDistance = function () {
+        var _this_1 = this;
+        this.fullPois.forEach(function (element) {
+            element['distance'] = _this_1.geoSrv.getDistanceKM({ lat: _this_1.mypos.lat, lon: _this_1.mypos.long }, { lat: element.location[0], lon: element.location[1] });
+        });
     };
     ListPoiPage.prototype.onIntersection = function (_a) {
         var target = _a.target, visible = _a.visible;
@@ -439,6 +459,9 @@ var ListPoiPage = /** @class */ (function () {
                 else
                     poiElement.cat = x.cat["it"];
             }
+            if (x.location) {
+                poiElement.location = x.location;
+            }
             if (x.subtitle) {
                 if (x.subtitle[this.language])
                     poiElement.subtitle = x.subtitle[this.language];
@@ -452,7 +475,8 @@ var ListPoiPage = /** @class */ (function () {
                     poiElement.description = x.description["it"];
             }
             if (x.image) {
-                poiElement.image = x.image;
+                poiElement.image = x.image.replace('.jpg', '_medium.jpg');
+                ;
             }
             if (x.id) {
                 poiElement.id = x.id;
@@ -465,6 +489,9 @@ var ListPoiPage = /** @class */ (function () {
     };
     ListPoiPage.prototype.goToDetail = function (id) {
         this.router.navigate(['/detail-poi'], { queryParams: { id: id, type: this.type } });
+    };
+    ListPoiPage.prototype.getDistance = function (poi) {
+        return this.distanceLabel + (poi.distance).toFixed(2) + " Km";
     };
     ListPoiPage.prototype.toggleSearch = function () {
         var _this_1 = this;
@@ -536,12 +563,32 @@ var ListPoiPage = /** @class */ (function () {
                                 _this_1.presentFilter = false;
                                 _this_1.buildShowPois();
                             }
+                            _this_1.orderArray('near', _this_1);
                         });
                         return [4 /*yield*/, modal.present()];
                     case 2: return [2 /*return*/, _a.sent()];
                 }
             });
         });
+    };
+    ListPoiPage.prototype.orderArray = function (condition, _this) {
+        _this.isLoading = true;
+        if (condition.indexOf('near') > -1) {
+            _this.categories.forEach(function (c) {
+                _this.showPois[c] = _this.showPois[c].sort(function (a, b) {
+                    var dist1 = 0;
+                    var dist2 = 0;
+                    if (a.location) {
+                        dist1 = _this.geoSrv.getDistanceKM({ lat: _this.mypos.lat, lon: _this.mypos.long }, { lat: a.location[0], lon: a.location[1] });
+                    }
+                    if (b.location) {
+                        dist2 = _this.geoSrv.getDistanceKM({ lat: _this.mypos.lat, lon: _this.mypos.long }, { lat: b.location[0], lon: b.location[1] });
+                    }
+                    return dist1 - dist2;
+                });
+            });
+        }
+        _this.isLoading = false;
     };
     ListPoiPage.prototype.removeTag = function (tag) {
         this.tags = this.tags.map(function (item) { return tag.value == item.value ? { value: item.value, isChecked: false } : { value: item.value, isChecked: item.isChecked }; });
@@ -604,6 +651,7 @@ var ListPoiPage = /** @class */ (function () {
             _ionic_native_call_number_ngx__WEBPACK_IMPORTED_MODULE_5__["CallNumber"],
             _ionic_angular__WEBPACK_IMPORTED_MODULE_1__["ModalController"],
             _services_utils_service__WEBPACK_IMPORTED_MODULE_6__["UtilsService"],
+            src_app_services_geo_service__WEBPACK_IMPORTED_MODULE_9__["GeoService"],
             _ionic_angular__WEBPACK_IMPORTED_MODULE_1__["Platform"],
             _ionic_angular__WEBPACK_IMPORTED_MODULE_1__["LoadingController"],
             _services_config_service__WEBPACK_IMPORTED_MODULE_7__["ConfigService"]])

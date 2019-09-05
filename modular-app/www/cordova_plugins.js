@@ -212,6 +212,15 @@ module.exports = [
     "runs": true
   },
   {
+    "id": "cordova-plugin-inappbrowser.inappbrowser",
+    "file": "plugins/cordova-plugin-inappbrowser/www/inappbrowser.js",
+    "pluginId": "cordova-plugin-inappbrowser",
+    "clobbers": [
+      "cordova.InAppBrowser.open",
+      "window.open"
+    ]
+  },
+  {
     "id": "cordova-plugin-ionic-keyboard.keyboard",
     "file": "plugins/cordova-plugin-ionic-keyboard/www/android/keyboard.js",
     "pluginId": "cordova-plugin-ionic-keyboard",
@@ -254,6 +263,14 @@ module.exports = [
     ]
   },
   {
+    "id": "cordova-plugin-statusbar.statusbar",
+    "file": "plugins/cordova-plugin-statusbar/www/statusbar.js",
+    "pluginId": "cordova-plugin-statusbar",
+    "clobbers": [
+      "window.StatusBar"
+    ]
+  },
+  {
     "id": "es6-promise-plugin.Promise",
     "file": "plugins/es6-promise-plugin/www/promise.js",
     "pluginId": "es6-promise-plugin",
@@ -284,20 +301,20 @@ module.exports = [
     ]
   },
   {
-    "id": "cordova-plugin-inappbrowser.inappbrowser",
-    "file": "plugins/cordova-plugin-inappbrowser/www/inappbrowser.js",
-    "pluginId": "cordova-plugin-inappbrowser",
+    "id": "cordova-hot-code-push-plugin.chcp",
+    "file": "plugins/cordova-hot-code-push-plugin/www/chcp.js",
+    "pluginId": "cordova-hot-code-push-plugin",
     "clobbers": [
-      "cordova.InAppBrowser.open",
-      "window.open"
+      "chcp"
     ]
   },
   {
-    "id": "cordova-plugin-statusbar.statusbar",
-    "file": "plugins/cordova-plugin-statusbar/www/statusbar.js",
-    "pluginId": "cordova-plugin-statusbar",
+    "id": "cordova-plugin-google-analytics.UniversalAnalytics",
+    "file": "plugins/cordova-plugin-google-analytics/www/analytics.js",
+    "pluginId": "cordova-plugin-google-analytics",
     "clobbers": [
-      "window.StatusBar"
+      "analytics",
+      "ga"
     ]
   }
 ];
@@ -309,16 +326,18 @@ module.exports.metadata =
   "cordova-plugin-device": "2.0.2",
   "cordova-plugin-file": "6.0.1",
   "cordova-plugin-geolocation": "4.0.1",
+  "cordova-plugin-inappbrowser": "3.1.0",
   "cordova-plugin-ionic-keyboard": "2.1.3",
   "cordova-plugin-local-notification": "0.9.0-beta.2",
   "cordova-plugin-splashscreen": "5.0.2",
+  "cordova-plugin-statusbar": "2.4.3",
   "cordova-plugin-whitelist": "1.3.3",
   "es6-promise-plugin": "4.2.2",
   "cordova-plugin-x-socialsharing": "5.4.7",
   "cordova-sqlite-storage": "3.2.0",
   "mx.ferreyra.callnumber": "0.0.2",
-  "cordova-plugin-inappbrowser": "3.1.0",
-  "cordova-plugin-statusbar": "2.4.3"
+  "cordova-hot-code-push-plugin": "1.5.3",
+  "cordova-plugin-google-analytics": "1.8.6"
 };
 // BOTTOM OF METADATA
 });

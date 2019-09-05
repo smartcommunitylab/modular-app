@@ -213,12 +213,12 @@ export class cwAnteprima {
 
           <div class="margine"></div>
           {this.link && this.link != ""
-            ? <div class="external-link" onClick={() => this.openLink(this.link)} >APRI</div>
+            ? <div class="external-link" onClick={() => this.openLink(this.link)} >DOWNLOAD</div>
 
             : ""
           }
           {this.web && this.link != ""
-            ? <div class="external-link" onClick={() => this.openLink(this.web)} >DOWNLOAD</div>
+            ? <div class="external-link" onClick={() => this.openLink(this.web)} >APRI</div>
 
             : ""
           }
@@ -227,7 +227,7 @@ export class cwAnteprima {
     ];
   }
   openLink(web: string): void {
-    window.open(web, "_top")
+    window.open(web, '_blank')
     }
   getLink(webInner: string): string {
     return "<a href='" + webInner + "' class='external-link'></a>"

@@ -109,6 +109,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
 /* harmony import */ var _services_config_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../services/config.service */ "./src/app/module-info/services/config.service.ts");
 /* harmony import */ var _ngx_translate_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ngx-translate/core */ "./node_modules/@ngx-translate/core/fesm5/ngx-translate-core.js");
+/* harmony import */ var _services_utils_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../services/utils.service */ "./src/app/module-info/services/utils.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -124,9 +125,11 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var VideoPage = /** @class */ (function () {
-    function VideoPage(datiService, plt, social, config, translate) {
+    function VideoPage(datiService, utils, plt, social, config, translate) {
         this.datiService = datiService;
+        this.utils = utils;
         this.plt = plt;
         this.social = social;
         this.config = config;
@@ -173,6 +176,7 @@ var VideoPage = /** @class */ (function () {
     };
     VideoPage.prototype.ngOnInit = function () {
         var _this = this;
+        this.utils.presentLoading();
         this.datiService.getDati(this.parametriPost).then(function (data) {
             if (data.length == 0) {
                 _this.emptyList = true;
@@ -182,6 +186,9 @@ var VideoPage = /** @class */ (function () {
                 evento.image = evento.image.replace('.jpg', '_medium.jpg');
             });
             _this.datiRicerca = _this.DatiEvento;
+            _this.utils.hideLoading();
+        }, function (err) {
+            _this.utils.hideLoading();
         });
         console.log(this.DatiEvento);
     };
@@ -281,7 +288,7 @@ var VideoPage = /** @class */ (function () {
             template: __webpack_require__(/*! ./video.page.html */ "./src/app/module-info/pages/video/video.page.html"),
             styles: [__webpack_require__(/*! ./video.page.scss */ "./src/app/module-info/pages/video/video.page.scss")]
         }),
-        __metadata("design:paramtypes", [_services_dati_service_service__WEBPACK_IMPORTED_MODULE_1__["DatiServiceService"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["Platform"], _ionic_native_social_sharing_ngx__WEBPACK_IMPORTED_MODULE_2__["SocialSharing"], _services_config_service__WEBPACK_IMPORTED_MODULE_4__["ConfigService"], _ngx_translate_core__WEBPACK_IMPORTED_MODULE_5__["TranslateService"]])
+        __metadata("design:paramtypes", [_services_dati_service_service__WEBPACK_IMPORTED_MODULE_1__["DatiServiceService"], _services_utils_service__WEBPACK_IMPORTED_MODULE_6__["UtilsService"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["Platform"], _ionic_native_social_sharing_ngx__WEBPACK_IMPORTED_MODULE_2__["SocialSharing"], _services_config_service__WEBPACK_IMPORTED_MODULE_4__["ConfigService"], _ngx_translate_core__WEBPACK_IMPORTED_MODULE_5__["TranslateService"]])
     ], VideoPage);
     return VideoPage;
 }());
