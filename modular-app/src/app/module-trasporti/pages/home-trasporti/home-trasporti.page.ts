@@ -82,7 +82,8 @@ export class HomeTrasportiPage extends MainPage implements OnInit {
       row.push({});
     }
     this.gridRows = gridRows;
-    this.actualVisualized = this.elements[0]
+    if (this.elements[0] && this.elements[0].ref)
+      this.actualVisualized = this.elements[0].ref
 
   }
   selectInternalElement(ref) {
@@ -91,7 +92,7 @@ export class HomeTrasportiPage extends MainPage implements OnInit {
       let yOffset = elem[0].offsetTop;
       this.content.scrollToPoint(0, yOffset - 100, 0)
     }
-    this.actualVisualized = ref;
+    this.actualVisualized = ref.state;
   }
   getHtml(elem) {
     if (elem.ref == "trains")
@@ -110,6 +111,9 @@ export class HomeTrasportiPage extends MainPage implements OnInit {
     console.log(target + "" + visible);
   }
   isSelected(category) {
+    console.log("category.state" + category.state);
+    console.log("this.actualVisualized" + JSON.stringify(this.actualVisualized));
+    console.log(" category.state == this.actualVisualized" + (category.state == this.actualVisualized));
     return category.state == this.actualVisualized;
   }
   getIconStyle(elem) {
