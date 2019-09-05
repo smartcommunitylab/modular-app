@@ -285,7 +285,7 @@ export class ListEventPage implements OnInit {
     });
     this.categories = this.fullCategories;
     if (this.categories.length > 0)
-      setTimeout(() => this.actualVisualized = this.categories[0]
+      setTimeout(() => this.actualVisualized = this.categories[0].startOf('day').format('DD-MM-YYYY')
         , 500)
   }
 
@@ -333,7 +333,7 @@ export class ListEventPage implements OnInit {
         else poiElement.description = x.description["it"];
       }
       if (x.image) {
-        poiElement.image = x.image;
+        poiElement.image = x.image.replace('.jpg','_medium.jpg');;
       }
       if (x._id) {
         poiElement.id = x._id;
@@ -425,7 +425,7 @@ export class ListEventPage implements OnInit {
       this.presentFilter = false;
       this.categories.forEach(c => {
         this.showPois[c] = this.fullPois.filter(function (el) {
-          return (el.cat[0] == c);
+          return (el.day.startOf('day').format('DD-MM-YYYY') == c.startOf('day').format('DD-MM-YYYY'));
         });
       });
     }
@@ -441,7 +441,7 @@ export class ListEventPage implements OnInit {
       _this.categories.forEach(c => {
         this.showPois[c] = this.fullPois.filter(function (el) {
           if (el.title)
-            return (el.title.toLowerCase().indexOf(value.toLowerCase()) > -1 && el.cat[0] == c);
+            return (el.title.toLowerCase().indexOf(value.toLowerCase()) > -1 && el.day.startOf('day').format('DD-MM-YYYY') == c.startOf('day').format('DD-MM-YYYY'));
           return false
         });
       });

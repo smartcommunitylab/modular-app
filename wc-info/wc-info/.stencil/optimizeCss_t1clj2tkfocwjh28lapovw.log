@@ -1,0 +1,212 @@
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap');
+.component {
+    padding: 10px 0px;
+    height: var(--Component_Height);
+    border: 1px solid none;
+    margin-bottom: 5px;
+    width: 100%;
+    font-family: 'Source Sans Pro', sans-serif;
+    -webkit-transition: 0.3s;
+    transition: 0.3s;
+    background-color: #efefef;
+}
+
+.component img {
+    position: var(--Img_Position);
+    height: var(--Img_Altezza);
+    width: var(--Img_Larghezza);
+    margin-left: var(--Img_MarginLeft);
+    -webkit-transition: 0.3s;
+    transition: 0.3s;
+    z-index: 0;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 900px;
+    max-height: 700px;
+    top: var(--imgTop);
+    position: relative;
+}
+
+.component .descrizione {
+    margin: 0 0 0 100px;
+    padding: 0 18px 0 5px;
+}
+
+.descrizione {
+    display: var(--DisplayReverse);
+    color: var(--Descrizione_Color);
+    -webkit-transition: 0.3s;
+    transition: 0.3s;
+}
+
+.descrizione #centra {
+    height: 16px;
+    display: table-cell;
+    vertical-align: middle;
+}
+.external-link {
+color: #11b3ef;
+}
+#titolo{
+    text-align: center;
+    color:#707070;
+    position: relative;
+    width: 100%;
+    height: auto;
+    z-index: 0;
+    /* opacity: var(--OpacityReverse); */
+    -webkit-transition: 1;
+    transition: 1;
+    position: relative;
+    width: 100%;
+    height: auto;
+    z-index: 0;
+    font-size: 18px;
+
+}
+
+.descrizione h1 {
+    padding: 0;
+    margin: 0 0 5px 0;
+    font-size: 18px;
+    max-height: 55px;
+    overflow: hidden;
+    width: calc(100vw - 125px);
+}
+
+.descrizione p {
+    margin: 1px 0;
+    width: calc(100vw - 125);
+    font-size: 12px;
+}
+
+.descrizione span {
+    color: gray;
+}
+
+.descrizione #campi {
+    max-height: 45px;
+    overflow: hidden;
+}
+
+#TitoloEspanso {
+    visibility: var(--Titolo_Visibility);
+    color: var(--Titolo_Colore);
+    -webkit-transition: 0.3s;
+    transition: 0.3s;
+    font-size: var(--Titolo_Size);
+    text-align: center;
+}
+
+.info svg {
+    position: relative;
+    left: 25px;
+    height: 30px;
+    width: 30px;
+}
+
+.info p {
+    float: left;
+    margin: 0;
+}
+
+.testo {
+    opacity: var(--Opacity);
+    -webkit-transition: 1.2s;
+    transition: 1.2s;
+}
+
+#descrizione {
+    position: relative;
+    top: 40px;
+    text-align: justify;
+    display: var(--Mappa_Display);
+    margin: auto;
+    width: 96%;
+}
+
+.info {
+    opacity: var(--OpacityReverse);
+    position: relative;
+    margin: auto;
+    top: 110px;
+    height: 45px;
+    width: 100%;
+    -webkit-transition: 0.3s;
+    transition: 0.3s;
+}
+
+#mappa {
+    cursor: pointer;
+    display: var(--Display);
+    margin: 0px;
+    padding: 0px;
+}
+
+#TxtMappa {
+    display: var(--Display);
+    position: relative;
+    top: 8px;
+}
+
+#share {
+    display: var(--Display);
+    margin: 0px;
+}
+
+#TxtShare {
+    display: var(--Display);
+    position: relative;
+    top: 8px;
+    left: 6px;
+    margin: 0px;
+    padding: 0px;
+}
+
+#Informazioni{
+    display: var(--Display);
+}
+
+.margine{
+    opacity: var(--OpacityReverse);
+    position: relative;
+    margin: 50px 0px;
+    top: 110px;
+    height: 45px;
+    width: 100%;
+    -webkit-transition: 0.3s;
+    transition: 0.3s;
+    z-index: -2;
+}
+
+#divMappa{
+    position: relative;
+    left: 2%;
+    height: 60px;
+    width: 80px;
+    cursor: pointer;
+}
+
+#divShare{
+    position: relative;
+    top: -60px;
+    left: 120px;
+    width: 80px;
+    height: 60px;
+    -ms-flex-line-pack: center;
+    align-content: center;
+    cursor: pointer;
+}
+.detail-bar {
+    height: 2px;
+    background: #ff6c00;
+    background: -moz-linear-gradient(left, #ff6c00 0%, #ff6c00 25%, #f2c60b 25%, #f2c60b 50%, #6c82ff 50%, #6c82ff 75%, #2d981f 75%, #2d981f 100%);
+    background: -webkit-gradient(linear, left top, right top, color-stop(0%, #ff6c00), color-stop(25%, #ff6c00), color-stop(25%, #f2c60b), color-stop(50%, #f2c60b), color-stop(50%, #6c82ff), color-stop(75%, #6c82ff), color-stop(50%, #2d981f), color-stop(75%, #2d981f));
+    background: -webkit-linear-gradient(left, #ff6c00 0%, #ff6c00 25%, #f2c60b 25%, #f2c60b 50%, #6c82ff 50%, #6c82ff 75%, #2d981f 50%, #2d981f 75%);
+    background: -o-linear-gradient(left, #ff6c00 0%, #ff6c00 25%, #f2c60b 25%, #f2c60b 50%, #6c82ff 50%, #6c82ff 75%, #2d981f 50%, #2d981f 75%);
+    background: -ms-linear-gradient(left, #ff6c00 0%, #ff6c00 25%, #f2c60b 25%, #f2c60b 50%, #6c82ff 50%, #6c82ff 75%, #2d981f 50%, #2d981f 75%);
+    background: -webkit-gradient(linear, left top, right top, from(#ff6c00), color-stop(25%, #ff6c00), color-stop(25%, #f2c60b), color-stop(50%, #f2c60b), color-stop(50%, #6c82ff), color-stop(75%, #6c82ff), color-stop(50%, #2d981f), color-stop(75%, #2d981f));
+    background: linear-gradient(to right, #ff6c00 0%, #ff6c00 25%, #f2c60b 25%, #f2c60b 50%, #6c82ff 50%, #6c82ff 75%, #2d981f 50%, #2d981f 75%);
+    margin: 10px 0px;
+  }

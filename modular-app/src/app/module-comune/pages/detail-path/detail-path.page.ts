@@ -59,10 +59,10 @@ export class DetailPathPage implements OnInit {
     this.dbService.getObjectByQuery(query).then(data => {
 
       if (data.docs) {
-              //order by id of path
-              data.docs.sort(function(a,b){
-        return path.steps.indexOf(a.id) - path.steps.indexOf(b.id);
-      });
+        //order by id of path
+        data.docs.sort(function (a, b) {
+          return path.steps.indexOf(a.id) - path.steps.indexOf(b.id);
+        });
         data.docs.forEach(element => {
           this.fullPois.push(this.convertPois(element));
 
@@ -74,8 +74,6 @@ export class DetailPathPage implements OnInit {
       this.utils.hideLoading();
 
     });
-    // });
-    // });
   }
 
   ngOnInit() {
@@ -94,15 +92,16 @@ export class DetailPathPage implements OnInit {
           const id = params.id.split(';')[0];
           this.isLoading = true;
           this.translate.get('init_db').subscribe(value => {
-            this.dbService.synch(value).then(() => {            this.dbService.getObjectById(id).then(data => {
-              this.paths = data.docs[0];
-              this.buildLangPaths();
-              this.getPois(this.paths);
-            });
-          }, err => {
-            this.utils.hideLoading();
+            this.dbService.synch(value).then(() => {
+              this.dbService.getObjectById(id).then(data => {
+                this.paths = data.docs[0];
+                this.buildLangPaths();
+                this.getPois(this.paths);
+              });
+            }, err => {
+              this.utils.hideLoading();
+            })
           })
-        })
         }
       }, err => {
         this.utils.hideLoading();
@@ -188,11 +187,26 @@ export class DetailPathPage implements OnInit {
     this.utils.openShare(JSON.stringify(this.paths));
   }
   buildLangPaths() {
-    this.paths.description = this.paths.description[this.language];
-    this.paths.info = this.paths.info[this.language];
-    this.paths.subtitle = this.paths.subtitle[this.language];
-    this.paths.title = this.paths.title[this.language];
-    this.paths.difficulty = this.paths.difficulty[this.language];
+    if (this.paths.description[this.language])
+      this.paths.description = this.paths.description[this.language];
+    else this.paths.description = this.paths.description["it"];
+
+    if (this.paths.info[this.language])
+      this.paths.info = this.paths.info[this.language];
+    else this.paths.info = this.paths.info["it"];
+
+    if (this.paths.title[this.language])
+      this.paths.title = this.paths.title[this.language];
+    else this.paths.title = this.paths.title["it"];
+
+    if (this.paths.subtitle[this.language])
+      this.paths.subtitle = this.paths.subtitle[this.language];
+    else this.paths.subtitle = this.paths.subtitle["it"];
+
+    if (this.paths.difficulty[this.language])
+      this.paths.difficulty = this.paths.difficulty[this.language];
+    else this.paths.difficulty = this.paths.difficulty["it"];
+
     console.log(this.paths)
     // this.paths.contacts = {address: this.paths.address}
   }
@@ -281,16 +295,24 @@ export class DetailPathPage implements OnInit {
     const poiElement: any = {};
     if (x) {
       if (x.title) {
-        poiElement.title = x.title[this.language];
+        if (x.title[this.language])
+          poiElement.title = x.title[this.language];
+        else poiElement.title = x.title["it"];
       }
       if (x.classification) {
-        poiElement.classification = x.classification[this.language];
+        if (x.classification[this.language])
+          poiElement.classification = x.classification[this.language];
+        else poiElement.classification = x.title["it"];
       }
       if (x.subtitle) {
-        poiElement.subtitle = x.subtitle[this.language];
+        if (x.subtitle[this.language])
+          poiElement.subtitle = x.subtitle[this.language];
+        else poiElement.subtitle = x.title["it"];
       }
       if (x.description) {
-        poiElement.description = x.description[this.language];
+        if (x.description[this.language])
+          poiElement.description = x.description[this.language];
+        else poiElement.description = x.title["it"];
       }
       if (x.image) {
         poiElement.image = x.image;

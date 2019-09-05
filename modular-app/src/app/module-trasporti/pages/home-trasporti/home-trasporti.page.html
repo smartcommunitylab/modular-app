@@ -6,17 +6,18 @@
     <ion-title>{{'home_trasporto'|translate}}
     </ion-title>
   </ion-toolbar>
+  <div class="wrapper">
+      <div class="scrolling-wrapper-flexbox loop" ng-if="primaryLinks.length>0">
+        <ion-chip *ngFor="let m of primaryLinks" (click)="selectInternalElement(m)" [ngClass]="{'categorySelected': isSelected(m)}">
+          <ion-icon class="interaction" name="{{m.icon}}" [ngClass]="{'categorySelected': isSelected(m)}"></ion-icon>
+          <ion-label class="interaction" [ngClass]="{'categorySelected': isSelected(m)}">{{m.label|translate}}</ion-label>
+        </ion-chip>
+      </div>
+    </div>
 </ion-header>
 
 <ion-content>
-  <div class="wrapper">
-    <div class="scrolling-wrapper-flexbox loop" ng-if="primaryLinks.length>0">
-      <ion-chip *ngFor="let m of primaryLinks" (click)="selectInternalElement(m)" [ngClass]="{'categorySelected': isSelected(m)}">
-        <ion-icon class="interaction" name="{{m.icon}}" [ngClass]="{'categorySelected': isSelected(m)}"></ion-icon>
-        <ion-label class="interaction" [ngClass]="{'categorySelected': isSelected(m)}">{{m.label|translate}}</ion-label>
-      </ion-chip>
-    </div>
-  </div>
+
   <div class="line-container">
     <ion-list class="route-list space-from-top">
       <div *ngFor="let elem of elements; let i = index">

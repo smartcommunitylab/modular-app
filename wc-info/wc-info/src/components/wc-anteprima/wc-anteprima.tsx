@@ -18,14 +18,17 @@ export class cwAnteprima {
   @Prop() durata: string;
   @Prop() luogo: string;
   @Prop() descrizione: string;
-  @Prop() showimage:boolean =true;
+  @Prop() showimage: boolean = true;
+  @Prop() abstract: string;
+  @Prop() web: string;
+  @Prop() link: string;
   @State() Component_Height: string = "100px"; //altezza della componente
-  @State() Component_Border: string = "black"; 
-  
+  @State() Component_Border: string = "black";
+
   @State() Titolo_Visibility: string = "collapse"; //visualizzazione estesa
   @State() Titolo_Colore: string = "white"; //delay utile a non far scomparire gli elementi prima della chiusura della finestra
   @State() Titolo_Size: string = "0px"; //visualizzazione estesa
-  
+
   @State() Img_Position: string = "absolute";
   @State() Img_Larghezza: string = "95px";
   @State() Img_Altezza: string = "95px";
@@ -46,6 +49,8 @@ export class cwAnteprima {
   aperto: boolean = false;
   AddDurata = 1;
   chiudiAnteprima: boolean = true;
+  linkInner: string;
+  webInner: string;
 
   //passa a visualizzazione compatta
   close() {
@@ -102,7 +107,19 @@ export class cwAnteprima {
     }
     return;
   }
+  componentDidLoad() {
 
+    var links = this.element.shadowRoot.querySelector('.external-link');
+    [].forEach.call(links, link => {
+      link.addEventListener("mousedown", function (event) {
+        console.log("href clicked, lets try to stop event propagation");
+        event.stopPropagation();
+        event.preventDefault();
+        return false;
+      });
+    });
+
+  }
   Orario() {
     if (this.orario != "") {
       this.AddDurata++;
@@ -122,19 +139,6 @@ export class cwAnteprima {
     return;
   }
 
-  // CalcolaSizeH1() {
-  //   let titolo = "";
-  //   /*if (this.titolo.length > 35) { 
-  //     for (let i = 0; i < 35; i++) {
-  //       titolo += this.titolo[i];
-  //     }
-  //     titolo += "...";
-  //   }
-  //   else*/
-  //   titolo = this.titolo;
-  //   console.log(titolo);
-  //   return titolo;
-  // }
 
   VisualizzaDettaglio() {
     if (this.chiudiAnteprima) {
@@ -188,39 +192,44 @@ export class cwAnteprima {
       <div class="component" onClick={() => this.VisualizzaDettaglio()} style={styles}>
         {/* <h1 id="TitoloEspanso">{this.titolo}Titolo</h1> */}
         <h1 id="titolo">{this.titolo}</h1>
-        
+
         <div class="detail-bar"></div>
         {this.showimage
-        ?<img src={this.img}></img>
-        :""
+          ? <img src={this.img}></img>
+          : ""
         }
         <div class="descrizione">
           <div id="centra">
-            {/* <h1 id="titolo">{this.CalcolaSizeH1()}</h1>
-              <p><span>pubblicato il: </span>{this.datapubblicazione}</p>
-              {this.DataEvento()}
-              {this.Orario()}
-              {this.Durata()} */}
           </div>
         </div>
         <div id="Informazioni">
+          <div id="data" innerHTML={this.datapubblicazione}></div>
+          <div id="abstract" innerHTML={this.abstract}></div>
           <div class="testo">
             <p id="descrizione" innerHTML={this.descrizione}></p>
-            {/* <div class="info" >
-              <div id="divMappa" onClick={(e) => this.VisualizzaMappa(e)}>
-                <svg id="mappa" ><path fill='none' d='M0 0h24v24H0V0z' /><path d='M12 7.27l4.28 10.43-3.47-1.53-.81-.36-.81.36-3.47 1.53L12 7.27M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71L12 2z' /></svg>
-                <p id="TxtMappa">Indicazioni</p>
-              </div>
-              <div id="divShare" onClick={(e) => this.VisualizzaShare(e)}>
-                <svg id="share" xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'><path fill='none' d='M0 0h24v24H0V0z' /><path d='M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92c0-1.61-1.31-2.92-2.92-2.92zM18 4c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zM6 13c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1zm12 7.02c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1z' /></svg>
-                <p id="TxtShare">Condividi</p>
-              </div>
-            </div> */}
           </div>
 
+
+
           <div class="margine"></div>
+          {this.link && this.link != ""
+            ? <div class="external-link" onClick={() => this.openLink(this.link)} >DOWNLOAD</div>
+
+            : ""
+          }
+          {this.web && this.link != ""
+            ? <div class="external-link" onClick={() => this.openLink(this.web)} >APRI</div>
+
+            : ""
+          }
         </div>
       </div>
     ];
+  }
+  openLink(web: string): void {
+    window.open(web, '_blank')
+    }
+  getLink(webInner: string): string {
+    return "<a href='" + webInner + "' class='external-link'></a>"
   }
 }

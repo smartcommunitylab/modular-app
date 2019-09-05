@@ -57,7 +57,8 @@ export class WcTabs {
     /* CREAZIONE MAPPA */
     this.mapElement = this.element.shadowRoot.getElementById('map');
     var map = leaflet.map(this.mapElement, {
-      zoomControl: false
+      zoomControl: false,
+      tap: false
     }).setView([this.myPosObj['lat'], this.myPosObj['long']], 13);
 
     leaflet.NumberedDivIcon = leaflet.Icon.extend({
@@ -126,9 +127,13 @@ export class WcTabs {
         arrayMarker.push(m);
       });
       var group = new leaflet.featureGroup(arrayMarker);
-      map.fitBounds(group.getBounds());
+
     }
-    /*********************************************************************************************************************** */
+    setTimeout(() => {
+      map.invalidateSize();
+      if (arrayMarker.length > 0)
+        map.fitBounds(group.getBounds());
+    }, 500);
   }
 
   render() {

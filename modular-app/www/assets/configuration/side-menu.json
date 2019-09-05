@@ -1,0 +1,251 @@
+[{
+    "title": {
+      "it": "Home",
+      "en": "Home",
+      "de": "Home"
+    },
+    "url": "/home",
+    "icon": "home"
+  },
+  {
+    "title": {
+      "it": "Scopri",
+      "en": "Discover",
+      "de": "Discoveritsche"
+    },
+    "children": [{
+        "title": {
+          "it": "Informazioni",
+          "en": "Information",
+          "de": "Information"
+        },
+        "url": "/detail-poi",
+        "icon": "information"
+      },
+      {
+        "title": {
+          "it": "Storia",
+          "en": "History",
+          "de": "History"
+        },
+        "url": "/detail-poi",
+        "icon": "information"
+      },
+      {
+        "title": {
+          "it": "Il concilio di Trento",
+          "en": "The Council of Trento",
+          "de": "Information"
+        },
+        "url": "/detail-poi",
+        "icon": "information"
+      },
+      {
+        "title": {
+          "it": "Eventi Principali",
+          "en": "Main Events",
+          "de": "History"
+        },
+        "url": "/detail-poi",
+        "icon": "information"
+      },
+      {
+        "title": {
+          "it": "Il monte Bondone",
+          "en": "Il monte Bondone",
+          "de": "History"
+        },
+        "url": "/detail-poi",
+        "icon": "information"
+      }
+    ]
+
+  },
+  {
+    "title": {
+      "it": "In evidenza",
+      "en": "Highlights",
+      "de": "Discoveritsche"
+    },
+    "children": [{
+        "title": {
+          "it": "Musei",
+          "en": "Museums",
+          "de": "Information"
+        },
+        "url": "/detail-poi",
+        "icon": "information"
+      },
+      {
+        "title": {
+          "it": "Edifico Storici",
+          "en": "Historic Building",
+          "de": "History"
+        },
+        "url": "/detail-poi",
+        "icon": "information"
+      },
+      {
+        "title": {
+          "it": "Chiese",
+          "en": "Churches",
+          "de": "Information"
+        },
+        "url": "/detail-poi",
+        "icon": "information"
+      },
+      {
+        "title": {
+          "it": "Aree archeologiche",
+          "en": "Archaeological Areas",
+          "de": "History"
+        },
+        "url": "/detail-poi",
+        "icon": "information"
+      },
+      {
+        "title": {
+          "it": "Natura",
+          "en": "Nature",
+          "de": "History"
+        },
+        "url": "/detail-poi",
+        "icon": "information"
+      },
+      {
+        "title": {
+          "it": "Altri Siti",
+          "en": "Other sites",
+          "de": "History"
+        },
+        "url": "/detail-poi",
+        "icon": "information"
+      }
+    ]
+  },
+  {
+    "title": {
+      "it": "Ristoranti & Hotel",
+      "en": "Restaurants & Hotel",
+      "de": "Discoveritsche"
+    },
+    "children": [{
+        "title": {
+          "it": "Ristoranti",
+          "en": "Restaurants",
+          "de": "Information"
+        },
+        "url": "/detail-poi",
+        "icon": "information"
+      },
+      {
+        "title": {
+          "it": "Hotel",
+          "en": "Hotel",
+          "de": "History"
+        },
+        "url": "/detail-poi",
+        "icon": "information"
+      }
+    ]
+  },  {
+    "title": {
+      "it": "Eventi",
+      "en": "Events",
+      "de": "Discoveritsche"
+    },
+    "children": [{
+        "title": {
+          "it": "Ristoranti",
+          "en": "Restaurants",
+          "de": "Information"
+        },
+        "url": "/detail-poi",
+        "icon": "information"
+      },
+      {
+        "title": {
+          "it": "Hotel",
+          "en": "Hotel",
+          "de": "History"
+        },
+        "url": "/detail-poi",
+        "icon": "information"
+      }
+    ]
+  },  {
+    "title": {
+      "it": "Itinerari turistici",
+      "en": "Touristic itineraries",
+      "de": "Discoveritsche"
+    },
+    "children": [{
+        "title": {
+          "it": "Ristoranti",
+          "en": "Restaurants",
+          "de": "Information"
+        },
+        "url": "/detail-poi",
+        "icon": "information"
+      }
+    ]
+  },  {
+    "title": {
+      "it": "Informazioni utili",
+      "en": "Useful information",
+      "de": "Discoveritsche"
+    },
+    "children": [{
+        "title": {
+          "it": "Ristoranti",
+          "en": "Restaurants",
+          "de": "Information"
+        },
+        "url": "/detail-poi",
+        "icon": "information"
+      },
+      {
+        "title": {
+          "it": "Hotel",
+          "en": "Hotel",
+          "de": "History"
+        },
+        "url": "/detail-poi",
+        "icon": "information"
+      }
+    ]
+  },
+  {
+    "title": {
+      "it": "Favoriti",
+      "en": "Favourites",
+      "de": "Information"
+    },
+    "url": "/favourites",
+    "icon": "information"
+  },{
+    "title": {
+      "it": "Impostazioni",
+      "en": "Setting",
+      "de": "Information"
+    },
+    "url": "/setting",
+    "icon": "cog"
+  },{
+    "title": {
+      "it": "Credits",
+      "en": "Credits",
+      "de": "Information"
+    },
+    "url": "/credits",
+    "icon": "information"
+  },
+  {
+    "title": {
+      "it": "Pulizia strade",
+      "en": "streets",
+      "de": "strasse"
+    },
+    "url": "/ps",
+    "icon": "information"
+  }]

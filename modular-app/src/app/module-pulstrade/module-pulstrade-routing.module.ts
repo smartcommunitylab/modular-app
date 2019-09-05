@@ -8,6 +8,7 @@ const routes: Routes = [
   { path: 'ps-search', loadChildren: './pages/search/search.module#SearchPageModule' },
   { path: 'ps-notification', loadChildren: './pages/notification/notification.module#NotificationPageModule' },
   { path: 'street-detail', loadChildren: './pages/street-detail/street-detail.module#StreetDetailPageModule' },
+  { path: 'list-streets', loadChildren: './pages/list-streets/list-streets.module#ListStreetsPageModule' },
 
 
 ];

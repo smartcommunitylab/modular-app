@@ -176,7 +176,7 @@ export class TouristServicesPage implements OnInit {
         poiElement.description += '<br/>' + x.description[this.language];
       }
       if (x.image) {
-        poiElement.image = x.image;
+        poiElement.image = x.image.replace('.jpg','_medium.jpg');;
       }
       if (x._id) {
         poiElement.id = x._id;

@@ -17,8 +17,8 @@
     "empty_list":"Nessun elemento presente",
     "cancel_button":"Annulla",
     "ok_button":"Ok",
-    "init_db":"Inizializzazione dati in corso...",
+    "init_db":"Inizializzazione dati in corso...attendere prego",
     "no_distance_label":"Distanza non specificata",
-    "title_list_poi":"Punti di interesse",
+    "title_list_poi":"Visita la città",
     "main_event_label":"Eventi Principali"
 }
