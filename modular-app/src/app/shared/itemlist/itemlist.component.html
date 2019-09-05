@@ -1,4 +1,6 @@
 <ion-header no-border  [ngClass]="{'higher': isIOS && search}" >
+  <ion-searchbar class="search" [ngClass]="{'searchspace': search}" style="display: none" showCancelButton="always"  animated (search)="toggleSearch()"
+    (ionInput)="searchChanged($event)" (ionCancel)="toggleSearch()" ></ion-searchbar>
   <ion-toolbar>    
     <ion-buttons slot="start">
         <ion-button class="interaction" (click)="goBack()">
@@ -20,10 +22,7 @@
   </ion-toolbar>
 </ion-header>
 
-
-<ion-searchbar style="display: none" showCancelButton animated (search)="toggleSearch()"
-  (ionInput)="searchChanged($event)" (ionCancel)="toggleSearch()"></ion-searchbar>
-<div class="wrapper" *ngIf="presentFilter">
+<div class="wrapper" *ngIf="presentFilter && !search">
   <div class="scrolling-wrapper-flexbox loop">
     <div class="container" *ngFor="let tag of tags">
       <div class="tag" *ngIf="tag.isChecked">
@@ -63,7 +62,7 @@
             </div>
           </ion-list>    
     </div>
-    <div *ngIf="items != null && emptyList">
+    <div class="empty-list" *ngIf="items != null && emptyList">
         {{'empty_list' | translate}}
     </div>
   </ion-content>

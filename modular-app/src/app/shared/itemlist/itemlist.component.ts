@@ -72,7 +72,7 @@ export class ItemListComponent implements OnInit {
   ngOnInit() {}
 
   get emptyList() {
-    return this.items === null || Object.keys(this.items).length === 0;
+    return this.items === null || !Object.keys(this.items).some(k => this.items[k].length > 0);
   }
 
   onSearchEnd() {
