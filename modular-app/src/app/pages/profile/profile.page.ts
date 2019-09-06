@@ -84,7 +84,7 @@ export class ProfilePage implements OnInit {
       <div class="subtitle">`+ this.sub1 + `</div>
       <div class"text">`+ this.text1 + `</div></div><div class="subtitle">` + this.sub2 + `</div></div><div class="text">` + this.text2 + `</div>
       <div class="subtitle">`+ this.sub3 + `</div>
-      <div class"text">`+ this.text3 + `</div>
+      <div class="text last-text" >`+ this.text3 + `</div>
       </div>`,
       cssClass: 'welcome',
       buttons: [
