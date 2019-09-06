@@ -22,7 +22,7 @@ export class DbService {
   opts = { live: true, retry: true };
   contentTypes: any;
   MIN_SYNCH_TIME: number = 24 * 60 * 60 * 1000;
-  constructor(private loadingController: LoadingController, private config: ConfigService) {
+  constructor(private loadingController: LoadingController, private translate: TranslateService) {
 
     this.db = new PouchDB('comune-in-tasca');
 
@@ -72,12 +72,12 @@ export class DbService {
     localStorage.setItem('UPDATE_SYNCH', new Date().getTime().toString());
   }
 
-  synch(message): Promise<any> {
+  synch(message?: string): Promise<any> {
     console.log('enter in synch')
     return new Promise(async (resolve, reject) => {
       if (this.lastTimeSynch() > this.MIN_SYNCH_TIME) {
         const loading = await this.loadingController.create({
-          message: message
+          message: message || this.translate.instant('init_db')
         });
         if (!localStorage.getItem('UPDATE_SYNCH'))
           await loading.present();
@@ -439,5 +439,41 @@ export class DbService {
 
     }
 
+  }
+
+  private convert(x) {
+    const lang = this.translate.currentLang;
+    if (x) {
+      const result: any = Object.assign({}, x);
+      if (x.title) {
+        result.title = x.title[lang] || x.title['it'];
+      }
+      if (x.subtitle) {
+        result.subtitle = x.subtitle[lang] || x.subtitle['it'];
+      }
+      if (x.classification) {
+          result.classification = x.classification[lang] || x.classification['it'];
+      }
+      if (x.cat) {
+          result.cat = x.cat[lang] ||  x.cat['it'];
+      }
+      if (x.description) {
+        result.description = x.description[lang] || x.description['it'];
+      }
+      if (x.address) {
+        result.address = x.address[lang] || x.address['it'];
+      }
+      if (x.info) {
+        result.info = x.info[lang] || x.info['it'];
+      }
+      if (x.eventTiming) {
+        result.eventTiming = x.eventTiming[lang] || x.eventTiming['it'];
+      }
+      if (x.eventPeriod) {
+        result.eventPeriod = x.eventPeriod[lang] || x.eventPeriod['it'];
+      }
+      return result;
+    }
+    return null;
   }
 }

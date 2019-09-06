@@ -86,7 +86,7 @@ export class ListPage {
 
   onSearchUpdate(value: string) {
     this.categories.forEach(c => {
-      this.filtered[c] = this.objects.filter(function (el) {
+      this.filtered[c] = this.objects.filter((el) => {
         if (el.title) {
           return (this.appliesSearch(el, value) && this.getItemCategory(el) === c);
         }
