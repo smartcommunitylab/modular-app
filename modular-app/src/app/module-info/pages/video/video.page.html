@@ -1,8 +1,9 @@
 <ion-header [ngClass]="{'higher': searchAndIos()}">
   <!-- <ion-searchbar showCancelButton="always" animated  (ionChange)="Ricerca()"
     placeholder="Cerca" id="barraDiRicerca" [(ngModel)]="daCercare">    </ion-searchbar> -->
-  <ion-searchbar class="search-video" [ngClass]="{'searchspace': isRicercaOpen}" style="display: none" showCancelButton="always" animated (ionChange)="Ricerca()"
-    (ionCancel)="OpenCloseRicerca()" placeholder="Cerca" id="barraDiRicerca" [(ngModel)]="daCercare"></ion-searchbar>
+  <ion-searchbar class="search-video" [ngClass]="{'searchspace': isRicercaOpen}" style="display: none"
+    showCancelButton="always" animated (ionChange)="Ricerca()" (ionCancel)="OpenCloseRicerca()" placeholder="Cerca"
+    id="barraDiRicerca" [(ngModel)]="daCercare"></ion-searchbar>
   <ion-toolbar>
 
     <ion-buttons slot="start">
@@ -32,17 +33,17 @@
           <wc-video (eventMappa)="visualizzaMappa(item.coordinates[0], item.coordinates[1])"
             (eventShare)="visualizzaShare(item.title, item.image, item.videoLink)"
             (eventVideo)="visualizzaVideo(item.videoLink)" video={{item.videoLink}} id="elemento" img={{item.image}}
-            [titolo]="item.title" [abstract]="item.shortAbstract"  orario={{item.eventStart}} datapubblicazione={{formattaData(item.created)}}
-            dataevento={{item.eventDate}} durata={{item.eventTiming}} [descrizione]="item.description"
-            luogo={{item.address}}>
+            [titolo]="item.title" [abstract]="item.shortAbstract" orario={{item.eventStart}}
+            datapubblicazione={{formattaData(item.created)}} dataevento={{item.eventDate}} durata={{item.eventTiming}}
+            [descrizione]="item.description" luogo={{item.address}}>
           </wc-video>
         </div>
         <div *ngIf="isNews(item)">
           <wc-anteprima (eventMappa)="visualizzaMappa(item.coordinates[0], item.coordinates[1])"
             (eventShare)="visualizzaShare(item.title, item.image ,item.description)" id="elemento" img={{item.image}}
-            [titolo]="item.title" [abstract]="item.shortAbstract"  [web]="item.web" [link]="item.file" orario={{item.eventStart}} datapubblicazione={{formattaData(item.created)}}
-            dataevento={{item.eventDate}} durata={{item.eventTiming}} [descrizione]="item.description"
-            luogo={{item.address}}>
+            [titolo]="item.title" [abstract]="item.shortAbstract" [web]="item.web" [link]="item.file"
+            orario={{item.eventStart}} datapubblicazione={{formattaData(item.created)}} dataevento={{item.eventDate}}
+            durata={{item.eventTiming}} [descrizione]="item.description" luogo={{item.address}}>
           </wc-anteprima>
         </div>
       </div>
@@ -53,6 +54,6 @@
     </ion-infinite-scroll>
   </div>
   <ng-template #other_content>
-    {{'empty_list_label'|translate}}
+    <div class="empty-list">{{'empty_list_label'|translate}}</div>
   </ng-template>
 </ion-content>
