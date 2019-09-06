@@ -10,6 +10,7 @@ import { AlertInput } from '@ionic/core';
 import { CallNumber } from '@ionic-native/call-number/ngx';
 import { ConfigService } from '../../services/config.service';
 import { UtilsService } from '../../services/utils.service';
+// import { Market } from '@ionic-native/market';
 
 @Component({
   selector: 'app-list-farmacie',
@@ -38,6 +39,7 @@ export class ListFarmaciePage implements OnInit {
   emptyList: boolean = false;
   closingLabel: string = "";
   constructor(
+    // private market: Market,
     private modalController: ModalController,
     private config: ConfigService,
     public navCtrl: NavController,
@@ -158,8 +160,22 @@ export class ListFarmaciePage implements OnInit {
     this.turno = false;
   }
   addFarmacieTurno(): any {
-    if (this.fullPois.length > 0)
-      this.farmacieTurno = this.fullPois[0].description;
+    this.farmacieTurno =`
+    <div class="message">Per informazioni su <strong>orari e turni</strong> consultare l'app <div style="color:#11b3ef" class="ion-text-center"><b>FarmApp</b></div></p></div>
+    `
+    // if (this.fullPois.length > 0)
+    //   this.farmacieTurno = this.fullPois[0].description;
+  }
+  openMarket(){
+    if (cordova.plugins['market'])
+      cordova.plugins['market'].open('com.app.farmappm')
+
+    // this.market.open('com.app.farmappm');
+
+    // cordova.plugins.market.open('your.app.package')
+  //  var value='market://details?id=com.app.farmappm';
+  //  this.utils.openUrl(value);
+
   }
   addDistance(): any {
     this.fullPois.forEach(element => {

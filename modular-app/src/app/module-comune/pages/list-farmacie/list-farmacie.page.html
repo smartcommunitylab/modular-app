@@ -23,7 +23,7 @@
       <button ion-button icon-only (click)="closeTurno()">
         <ion-icon name="close"></ion-icon>
       </button>
-    <div class="message" [innerHTML]="farmacieTurno"></div>
+    <div class="message" (click)="openMarket()" [innerHTML]="farmacieTurno"></div>
   </ion-card>
 
   <ion-list no-lines id="poi-list" >
