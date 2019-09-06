@@ -39,7 +39,7 @@ export class FuneraliPage {
   dataFunerale: any;
   oraMorte: any;
   luogoFunerale: any;
-  partenzaFunerale:any;
+  partenzaFunerale: any;
   mappa: any;
   condividi: any;
   emptyList: boolean = false;
@@ -68,7 +68,7 @@ export class FuneraliPage {
         this.dataFunerale = this.translate.instant('data_funerale');
         this.oraMorte = this.translate.instant('ora_morte');
         this.luogoFunerale = this.translate.instant('luogo_funerale');
-        this.partenzaFunerale= this.translate.instant('partenza_funerale');
+        this.partenzaFunerale = this.translate.instant('partenza_funerale');
         this.mappa = this.translate.instant('mappa');
         this.condividi = this.translate.instant('condividi');
         this.networkMessage = this.translate.instant('network_message');
@@ -77,7 +77,7 @@ export class FuneraliPage {
           dataFunerale: this.dataFunerale,
           oraMorte: this.oraMorte,
           luogoFunerale: this.luogoFunerale,
-          partenzaFunerale:this.partenzaFunerale,
+          partenzaFunerale: this.partenzaFunerale,
           mappa: this.mappa,
           condividi: this.condividi
         })
@@ -148,15 +148,17 @@ export class FuneraliPage {
         // const _this = this;
         this.dates.forEach(c => {
           this.showFunerali[c] = this.vetFunerali.filter(el => {
-            if (el.nome)
-              return (el.nome.toLowerCase().indexOf(value.toLowerCase()) > -1 && el.dataFunerale ? el.dataFunerale : el.dataPartenza == c);
+            if (el.nome) {
+              var data =el.dataFunerale ? el.dataFunerale : el.dataPartenza;
+              return (el.nome.toLowerCase().indexOf(value.toLowerCase()) > -1 && data == c);
+            }
             return false
           });
         });
       }
     }, this.doneTypingInterval);
-
   }
+  
   buildShowPois(filters?) {
     this.showFunerali = [];
     this.vetFunerali.forEach(p => {
@@ -196,7 +198,7 @@ export class FuneraliPage {
     var element = document.getElementById(this.actualVisualized);
     if (element)
       element.scrollIntoView({ block: "center" });
-    console.log(JSON.stringify(target) + "  " + visible);
+    // console.log(JSON.stringify(target) + "  " + visible);
   }
   isSelected(date) {
     return date == this.actualVisualized;
@@ -252,7 +254,7 @@ export class FuneraliPage {
   //condividi da mobile per i funerali
   CondividiFunerali(i) {
     this.social.canShareViaEmail().then(() => {
-      this.social.share(i.nome + " " +this.luogoFunerale+ i.luogoFunerale + " " +this.dataFunerale+ i.dataFunerale + " " +this.oraMorte+i.oraFunerale);
+      this.social.share(i.nome + " " + this.luogoFunerale + i.luogoFunerale + " " + this.dataFunerale + i.dataFunerale + " " + this.oraMorte + i.oraFunerale);
     }).catch(() => {
       alert("Il servizio di condivisione non è disponibile per questo dispositivo");
     });

@@ -46,19 +46,19 @@ export class ListPoiPage extends ListPage implements OnInit {
   getList(): Observable<any[]> {
     return new Observable(observer => {
       this.utils.presentLoading();
-      this.dbService.synch().then(() => {
-        this.dbService.getObjectByQuery(this.category.query).then((data) => {
-          if (data.docs.length > 0) {
-            const res = data.docs.map(x => this.convertPois(x));
-            this.utils.hideLoading();
-            observer.next(res);
-          }
-        }, (err) => {
-          this.utils.hideLoading();
-          console.error(err);
-          observer.error(err);
-        });
-      });
+      // this.dbService.synch().then(() => {
+      //   this.dbService.getObjectByQuery(this.category.query).then((data) => {
+      //     if (data.docs.length > 0) {
+      //       const res = data.docs.map(x => this.convertPois(x));
+      //       this.utils.hideLoading();
+      //       observer.next(res);
+      //     }
+      //   }, (err) => {
+      //     this.utils.hideLoading();
+      //     console.error(err);
+      //     observer.error(err);
+      //   });
+      // });
     });
   }
 
