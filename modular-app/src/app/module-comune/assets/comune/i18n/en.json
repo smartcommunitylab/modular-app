@@ -20,5 +20,6 @@
     "init_db": "Data download in progress...please wait",
     "no_distance_label": "Distance not specified",
     "title_list_poi": "Visit the city",
-    "main_event_label": "Main events"
+    "main_event_label": "Main events",
+    "title_filtra":"Filter"
   }

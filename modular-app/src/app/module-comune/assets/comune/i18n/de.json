@@ -20,5 +20,6 @@
     "init_db": "Initialisierung der Daten... Bitte warten",
     "no_distance_label": "Entfernung nicht angegeben",
     "title_list_poi": "Besuche die Stadt",
-    "main_event_label": "Wichtige Evente"
+    "main_event_label": "Wichtige Evente",
+    "title_filtra":"Filter"
 }

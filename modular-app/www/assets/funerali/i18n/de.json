@@ -1,14 +1,13 @@
 {
     "HOME": "Home",
-    "data_morte": "morto il:",
-    "data_funerale": "In data:",
-    "ora_morte": "Alle ore:",
-    "luogo_funerale": "il funerale sara' celebrato presso:",
-    "partenza_funerale": "Il feretro sarà trasferito presso: ",
-    "mappa": "Mappa",
-    "condividi": "Condividi",
-    "title_funerali":"Funerali",
-    "network_message":"Errore nella ricezione dei dati",
-    "empty_list":"Nessun funerale presente"
-
-}
+    "data_morte": "gestorben am:",
+    "data_funerale": "Beerdigt am:",
+    "ora_morte": "Uhrzeit:",
+    "luogo_funerale": "Ort der Beerdigung:",
+    "partenza_funerale": "Der Leichanm wird an den folgenden Ort transportiert:",
+    "mappa": "Karte",
+    "condividi": "Teilen",
+    "title_funerali": "Beerdigungen",
+    "network_message": "Fehler bei der Datenaufnahme",
+    "empty_list": "Keine Beerdigung"
+  }

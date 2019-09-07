@@ -1418,14 +1418,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ionic_native_hot_code_push_ngx__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! @ionic-native/hot-code-push/ngx */ "./node_modules/@ionic-native/hot-code-push/ngx/index.js");
 /* harmony import */ var _ionic_native_call_number_ngx__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! @ionic-native/call-number/ngx */ "./node_modules/@ionic-native/call-number/ngx/index.js");
 /* harmony import */ var _ionic_native_in_app_browser_ngx__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! @ionic-native/in-app-browser/ngx */ "./node_modules/@ionic-native/in-app-browser/ngx/index.js");
-/* harmony import */ var _ionic_native_firebase_x_ngx__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! @ionic-native/firebase-x/ngx */ "./node_modules/@ionic-native/firebase-x/ngx/index.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-
 
 
 
@@ -1505,7 +1503,6 @@ var AppModule = /** @class */ (function () {
                 _ionic_native_call_number_ngx__WEBPACK_IMPORTED_MODULE_23__["CallNumber"],
                 _ionic_native_in_app_browser_ngx__WEBPACK_IMPORTED_MODULE_24__["InAppBrowser"],
                 _ionic_native_hot_code_push_ngx__WEBPACK_IMPORTED_MODULE_22__["HotCodePush"],
-                _ionic_native_firebase_x_ngx__WEBPACK_IMPORTED_MODULE_25__["FirebaseX"],
                 _services_setting_service__WEBPACK_IMPORTED_MODULE_10__["SettingService"],
                 { provide: _angular_core__WEBPACK_IMPORTED_MODULE_0__["APP_INITIALIZER"], useFactory: initializeAppConfig, deps: [_services_config_service__WEBPACK_IMPORTED_MODULE_16__["ConfigService"]], multi: true },
                 { provide: _angular_core__WEBPACK_IMPORTED_MODULE_0__["APP_INITIALIZER"], useFactory: initializeAppSetting, deps: [_services_setting_service__WEBPACK_IMPORTED_MODULE_10__["SettingService"]], multi: true },

@@ -3,7 +3,7 @@
     <name>La mia Trento</name>
     <description>Tutti i servizi del comune di Trento a portata di mano</description>
     <author email="hi@ionicframework.com" href="http://ionicframework.com/">Smart Community Lab</author>
-    <content original-src="index.html" src="http://192.168.1.197:8101" />
+    <content src="index.html" />
     <access origin="*" />
     <allow-navigation href="*" />
     <allow-intent href="ionic://*" />
@@ -114,7 +114,6 @@
     <allow-navigation href="http://192.168.31.104:8117" sessionid="826993bb" />
     <allow-navigation href="http://192.168.31.104:8118" sessionid="86cc9b89" />
     <allow-navigation href="http://192.168.31.104:8119" sessionid="92e1ba21" />
-    <allow-navigation href="http://192.168.1.197:8101" sessionid="685d7023" />
     <engine name="browser" spec="5.0.4" />
     <engine name="ios" spec="4.5.5" />
     <engine name="android" spec="8.0.0" />
@@ -136,5 +135,8 @@
     <plugin name="call-number" spec="^1.0.1" />
     <plugin name="cordova-plugin-ionic-webview" spec="^4.1.1" />
     <plugin name="cordova-hot-code-push-plugin" spec="git+https://github.com/nordnet/cordova-hot-code-push.git" />
+    <plugin name="cordova-plugin-google-analytics" spec="^1.8.6">
+        <variable name="GMS_VERSION" value="11.0.1" />
+    </plugin>
     <plugin name="cordova-plugin-market" spec="git+https://github.com/xmartlabs/cordova-plugin-market.git" />
 </widget>

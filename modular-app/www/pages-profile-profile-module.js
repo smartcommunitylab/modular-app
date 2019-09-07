@@ -210,7 +210,7 @@ var ProfilePage = /** @class */ (function () {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, this.alertController.create({
                             message: '<div>' +
-                                "<div class=\"title\">" + this.benvenuto + "</div>\n      <div class=\"hl\"></div>\n      <div class=\"subtitle\">" + this.sub1 + "</div>\n      <div class\"text\">" + this.text1 + "</div></div><div class=\"subtitle\">" + this.sub2 + "</div></div><div class=\"text\">" + this.text2 + "</div>\n      <div class=\"subtitle\">" + this.sub3 + "</div>\n      <div class\"text\">" + this.text3 + "</div>\n      </div>",
+                                "<div class=\"title\">" + this.benvenuto + "</div>\n      <div class=\"hl\"></div>\n      <div class=\"subtitle\">" + this.sub1 + "</div>\n      <div class\"text\">" + this.text1 + "</div></div><div class=\"subtitle\">" + this.sub2 + "</div></div><div class=\"text\">" + this.text2 + "</div>\n      <div class=\"subtitle\">" + this.sub3 + "</div>\n      <div class=\"text last-text\" >" + this.text3 + "</div>\n      </div>",
                             cssClass: 'welcome',
                             buttons: [
                                 {

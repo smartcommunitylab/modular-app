@@ -44,7 +44,7 @@
     "android-versions": "^1.4.0",
     "c-coffee-icon": "0.0.2",
     "call-number": "^1.0.1",
-    "cordova-android": "6.3.0",
+    "cordova-android": "8.0.0",
     "cordova-browser": "5.0.4",
     "cordova-hot-code-push-plugin": "git+https://github.com/nordnet/cordova-hot-code-push.git",
     "cordova-ios": "4.5.5",

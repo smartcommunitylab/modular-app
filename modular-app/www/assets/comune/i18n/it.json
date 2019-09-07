@@ -20,5 +20,6 @@
     "init_db":"Inizializzazione dati in corso...attendere prego",
     "no_distance_label":"Distanza non specificata",
     "title_list_poi":"Visita la città",
-    "main_event_label":"Eventi Principali"
+    "main_event_label":"Eventi Principali",
+    "title_filtra":"Filtra"
 }
