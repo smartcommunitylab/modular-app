@@ -244,8 +244,10 @@ var FuneraliPage = /** @class */ (function () {
                 // const _this = this;
                 _this.dates.forEach(function (c) {
                     _this.showFunerali[c] = _this.vetFunerali.filter(function (el) {
-                        if (el.nome)
-                            return (el.nome.toLowerCase().indexOf(value_1.toLowerCase()) > -1 && el.dataFunerale ? el.dataFunerale : el.dataPartenza == c);
+                        if (el.nome) {
+                            var data = el.dataFunerale ? el.dataFunerale : el.dataPartenza;
+                            return (el.nome.toLowerCase().indexOf(value_1.toLowerCase()) > -1 && data == c);
+                        }
                         return false;
                     });
                 });
@@ -290,7 +292,7 @@ var FuneraliPage = /** @class */ (function () {
         var element = document.getElementById(this.actualVisualized);
         if (element)
             element.scrollIntoView({ block: "center" });
-        console.log(JSON.stringify(target) + "  " + visible);
+        // console.log(JSON.stringify(target) + "  " + visible);
     };
     FuneraliPage.prototype.isSelected = function (date) {
         return date == this.actualVisualized;

@@ -4,7 +4,7 @@
     "name": {
       "it": "Funerali",
       "en": "Funerals",
-      "de": "Funerali"
+      "de": "Beerdigungen"
     },
     "url": "/funerali",
     "icon": "home"
@@ -14,7 +14,7 @@
     "name": {
       "it": "Eventi",
       "en": "Events",
-      "de": "Events"
+      "de": "Evente"
     },
     "url": "/list-event",
     "icon": "home",
@@ -39,7 +39,7 @@
     "name": {
       "it": "Trasporti",
       "en": "Transport",
-      "de": "Transport"
+      "de": "Verkehrsmittel"
     },
     "url": "home-trasporti",
     "icon": "home"
@@ -48,8 +48,8 @@
     "id": "i",
     "name": {
       "it": "Pulizia strade",
-      "en": "Streets cleaning",
-      "de": "Strasse"
+      "en": "Street cleaning",
+      "de": "Straßenputzdienst"
     },
     "url": "/ps",
     "icon": "information"
@@ -59,7 +59,7 @@
     "name": {
       "it": "Farmacie",
       "en": "Pharmacy",
-      "de": "Pharmacy"
+      "de": "Apotheke"
     },
     "url": "/farmacie",
     "icon": "information"
@@ -70,7 +70,7 @@
     "name": {
       "it": "Info&Video",
       "en": "Info&Video",
-      "de": "Info&Video"
+      "de": "Infos & Videos"
     },
     "url": "/video",
     "icon": "home"
@@ -81,7 +81,7 @@
     "name": {
       "it": "Oggetti Smarriti",
       "en": "Lost&Found",
-      "de": "Lost&Found"
+      "de": "Verschollene Gegenst�nde"
     },
     "url": "/notizie",
     "icon": "home"
@@ -92,7 +92,7 @@
     "name": {
       "it": "Servizi per il turista",
       "en": "Tourist services",
-      "de": "Tourist services"
+      "de": "Touristendienstleistungen"
     },
     "url": "/tourist-services",
     "icon": "home"
@@ -125,8 +125,8 @@
     "id": "profile_cit_csvimport_dormire_item_comuneintasca",
     "name": {
       "it": " Alberghi",
-      "en": " Hotel",
-      "de": " Hotel"
+      "en": "Hotels",
+      "de": " Hotels"
     },
     "url": "/list-rh",
     "icon": "home"
@@ -138,8 +138,8 @@
     "id": "a",
     "name": {
       "it": "Percorsi Turistici",
-      "en": "Touristic Itineraties",
-      "de": "Touristic Itineraties"
+      "en": "Touristic paths",
+      "de": "Touristenrouten"
     },
     "url": "/list-path",
     "icon": "home",

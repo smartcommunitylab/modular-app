@@ -53,13 +53,14 @@ var FilterPagePoiPage = /** @class */ (function () {
     }
     FilterPagePoiPage.prototype.ngOnInit = function () {
         var _this = this;
+        this.original = this.filters.map(function (x) { return Object.assign({}, x); });
         this.filters.forEach(function (element) {
             if (element.isChecked)
                 return _this.selected = true;
         });
     };
     FilterPagePoiPage.prototype.closeModal = function () {
-        this.modalCtrl.dismiss(this.filters);
+        this.modalCtrl.dismiss(this.original);
     };
     FilterPagePoiPage.prototype.filter = function () {
         this.modalCtrl.dismiss(this.filters);
@@ -747,7 +748,7 @@ var FilterPage = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header no-border  [ngClass]=\"{'higher': isIOS && search}\" >\n  <ion-toolbar>    \n    <ion-buttons slot=\"start\">\n        <ion-button class=\"interaction\" (click)=\"goBack()\">\n            <ion-icon name=\"arrow-back\"></ion-icon>\n        </ion-button>\n    </ion-buttons>\n        \n    <ion-buttons slot=\"end\">\n      <ng-content select=\"[buttons]\"></ng-content>\n      <ion-button (click)=\"filterClicked()\">\n        <ion-icon name=\"options\"></ion-icon>\n      </ion-button>\n      <ion-button (click)=\"toggleSearch()\">\n        <ion-icon name=\"search\"></ion-icon>\n      </ion-button>\n    </ion-buttons>\n  \n    <ion-title> {{title}} </ion-title>\n  </ion-toolbar>\n</ion-header>\n\n\n<ion-searchbar style=\"display: none\" showCancelButton animated (search)=\"toggleSearch()\"\n  (ionInput)=\"searchChanged($event)\" (ionCancel)=\"toggleSearch()\"></ion-searchbar>\n<div class=\"wrapper\" *ngIf=\"presentFilter\">\n  <div class=\"scrolling-wrapper-flexbox loop\">\n    <div class=\"container\" *ngFor=\"let tag of tags\">\n      <div class=\"tag\" *ngIf=\"tag.isChecked\">\n        <div class=\"tag-text\">\n          {{tag.value}}\n          <ion-icon name=\"close-circle\" (click)=\"removeTag(tag)\"></ion-icon>\n        </div>\n\n      </div>\n    </div>\n  </div>\n</div>\n<div class=\"wrapper\" *ngIf=\"!presentFilter\">\n  <div class=\"scrolling-wrapper-flexbox loop\">\n    <ion-chip *ngFor=\"let c of categories\" id=\"{{c}}\" (click)=\"selectInternalElement(c)\"\n      [ngClass]=\"{'categorySelected': c == currentCategory}\">\n      <ion-label class=\"interaction\" [ngClass]=\"{'categorySelected': c == currentCategory}\">{{c}}</ion-label>\n    </ion-chip>\n  </div>\n</div>\n\n<ion-content [scrollEvents]=\"true\">\n  \n    <div *ngIf=\"items != null && !emptyList\">\n        <ion-list no-lines id=\"itemlist\" #itemlist>\n            <div class=\"list-container\" *ngFor=\"let c of categories\">\n              <ion-item class=\"label-type ion-text-center\" sticky *ngIf=\"items[c].length > 0 && !presentFilter\">\n                  <div id=\"{{'list_'+c}}\">{{c}}</div>\n              </ion-item>\n              <div class=\"content\" >\n                <div *ngFor=\"let item of items[c]; let i = index\" inViewport \n                [inViewportOptions]=\"{ threshold: [0] }\" (inViewportAction)=\"onIntersection($event)\"\n                class=\"{{c}}\">\n                    <ng-container *ngTemplateOutlet=\"listItem ; context: {$implicit: item} \"></ng-container>\n                </div>\n              </div>\n            </div>\n          </ion-list>    \n    </div>\n    <div *ngIf=\"items != null && emptyList\">\n        {{'empty_list' | translate}}\n    </div>\n  </ion-content>"
+module.exports = "<ion-header no-border  [ngClass]=\"{'higher': isIOS && search}\" >\n  <ion-searchbar class=\"search\" [ngClass]=\"{'searchspace': search}\" style=\"display: none\" showCancelButton=\"always\"  animated (search)=\"toggleSearch()\"\n    (ionInput)=\"searchChanged($event)\" (ionCancel)=\"toggleSearch()\" ></ion-searchbar>\n  <ion-toolbar>    \n    <ion-buttons slot=\"start\">\n        <ion-button class=\"interaction\" (click)=\"goBack()\">\n            <ion-icon name=\"arrow-back\"></ion-icon>\n        </ion-button>\n    </ion-buttons>\n        \n    <ion-buttons slot=\"end\">\n      <ng-content select=\"[buttons]\"></ng-content>\n      <ion-button (click)=\"filterClicked()\">\n        <ion-icon name=\"options\"></ion-icon>\n      </ion-button>\n      <ion-button (click)=\"toggleSearch()\">\n        <ion-icon name=\"search\"></ion-icon>\n      </ion-button>\n    </ion-buttons>\n  \n    <ion-title> {{title}} </ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<div class=\"wrapper\" *ngIf=\"presentFilter && !search\">\n  <div class=\"scrolling-wrapper-flexbox loop\">\n    <div class=\"container\" *ngFor=\"let tag of tags\">\n      <div class=\"tag\" *ngIf=\"tag.isChecked\">\n        <div class=\"tag-text\">\n          {{tag.value}}\n          <ion-icon name=\"close-circle\" (click)=\"removeTag(tag)\"></ion-icon>\n        </div>\n\n      </div>\n    </div>\n  </div>\n</div>\n<div class=\"wrapper\" *ngIf=\"!presentFilter\">\n  <div class=\"scrolling-wrapper-flexbox loop\">\n    <ion-chip *ngFor=\"let c of categories\" id=\"{{c}}\" (click)=\"selectInternalElement(c)\"\n      [ngClass]=\"{'categorySelected': c == currentCategory}\">\n      <ion-label class=\"interaction\" [ngClass]=\"{'categorySelected': c == currentCategory}\">{{c}}</ion-label>\n    </ion-chip>\n  </div>\n</div>\n\n<ion-content [scrollEvents]=\"true\">\n  \n    <div *ngIf=\"items != null && !emptyList\">\n        <ion-list no-lines id=\"itemlist\" #itemlist>\n            <div class=\"list-container\" *ngFor=\"let c of categories\">\n              <ion-item class=\"label-type ion-text-center\" sticky *ngIf=\"items[c].length > 0 && !presentFilter\">\n                  <div id=\"{{'list_'+c}}\">{{c}}</div>\n              </ion-item>\n              <div class=\"content\" >\n                <div *ngFor=\"let item of items[c]; let i = index\" inViewport \n                [inViewportOptions]=\"{ threshold: [0] }\" (inViewportAction)=\"onIntersection($event)\"\n                class=\"{{c}}\">\n                    <ng-container *ngTemplateOutlet=\"listItem ; context: {$implicit: item} \"></ng-container>\n                </div>\n              </div>\n            </div>\n          </ion-list>    \n    </div>\n    <div class=\"empty-list\" *ngIf=\"items != null && emptyList\">\n        {{'empty_list' | translate}}\n    </div>\n  </ion-content>"
 
 /***/ }),
 
@@ -883,7 +884,8 @@ var ItemListComponent = /** @class */ (function () {
     ItemListComponent.prototype.ngOnInit = function () { };
     Object.defineProperty(ItemListComponent.prototype, "emptyList", {
         get: function () {
-            return this.items === null || Object.keys(this.items).length === 0;
+            var _this = this;
+            return this.items === null || !Object.keys(this.items).some(function (k) { return _this.items[k].length > 0; });
         },
         enumerable: true,
         configurable: true

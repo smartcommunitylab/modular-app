@@ -79,7 +79,7 @@ var ListFarmaciePageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header  [ngClass]=\"{'higher': searchAndIos()}\" >\n    <ion-searchbar  class=\"search-farmacie\" [ngClass]=\"{'searchspace': search}\" style=\"display: none\" showCancelButton=\"always\" animated (search)=\"toggleSearch()\"\n    (ionInput)=\"searchChanged($event)\" (ionCancel)=\"toggleSearch()\" ></ion-searchbar>\n  <ion-toolbar>\n\n    <ion-buttons slot=\"start\">\n      <ion-back-button class=\"interaction\"></ion-back-button>\n    </ion-buttons>\n    <ion-buttons slot=\"end\">\n      <ion-button (click)=\"toggleSearch()\">\n        <ion-icon name=\"search\"></ion-icon>\n      </ion-button>\n    </ion-buttons>\n    <ion-title>\n      {{'farmacie_label' | translate}}\n    </ion-title>\n  </ion-toolbar>\n</ion-header>\n\n\n<ion-content>\n  <ion-card class=\"card-turni\" *ngIf=\"turno && farmacieTurno\">\n      <button ion-button icon-only (click)=\"closeTurno()\">\n        <ion-icon name=\"close\"></ion-icon>\n      </button>\n    <div class=\"message\" [innerHTML]=\"farmacieTurno\"></div>\n  </ion-card>\n\n  <ion-list no-lines id=\"poi-list\" >\n    <div *ngIf=\"!emptyList\">\n    <div *ngFor=\"let c of categories\">\n      <div class=\"content\" >\n        <div *ngFor=\"let poi of showPois[c]; let i = index\">\n          <wc-details [stringsinput]=\"stringsContact\" [title]=\"poi.title\"  [showtags]=false [subtitle]=\"poi.subtitle\" [text]=\"poi.text\"\n            [info]=\"poi.info\" [distance]=\"getDistance(poi)\" [contacts]=\"poi.infos\" heading-color=\"#707070\"\n            second-color=\"#11b3ef\" expandable=false expanse=false></wc-details>\n          <div class=\"spacing\" *ngIf=\"i == showPois.length - 1\"></div>\n        </div>\n      </div>\n    </div>\n  </div>\n  </ion-list>\n  <div class=\"empty-list\" *ngIf=\"emptyList\">\n      {{'empty_list' | translate}}\n  </div>\n</ion-content>"
+module.exports = "<ion-header  [ngClass]=\"{'higher': searchAndIos()}\" >\n    <ion-searchbar  class=\"search-farmacie\" [ngClass]=\"{'searchspace': search}\" style=\"display: none\" showCancelButton=\"always\" animated (search)=\"toggleSearch()\"\n    (ionInput)=\"searchChanged($event)\" (ionCancel)=\"toggleSearch()\" ></ion-searchbar>\n  <ion-toolbar>\n\n    <ion-buttons slot=\"start\">\n      <ion-back-button class=\"interaction\"></ion-back-button>\n    </ion-buttons>\n    <ion-buttons slot=\"end\">\n      <ion-button (click)=\"toggleSearch()\">\n        <ion-icon name=\"search\"></ion-icon>\n      </ion-button>\n    </ion-buttons>\n    <ion-title>\n      {{'farmacie_label' | translate}}\n    </ion-title>\n  </ion-toolbar>\n</ion-header>\n\n\n<ion-content>\n  <ion-card class=\"card-turni\" *ngIf=\"turno && farmacieTurno\">\n      <button ion-button icon-only (click)=\"closeTurno()\">\n        <ion-icon name=\"close\"></ion-icon>\n      </button>\n    <div class=\"message\" (click)=\"openMarket()\" [innerHTML]=\"farmacieTurno\"></div>\n  </ion-card>\n\n  <ion-list no-lines id=\"poi-list\" >\n    <div *ngIf=\"!emptyList\">\n    <div *ngFor=\"let c of categories\">\n      <div class=\"content\" >\n        <div *ngFor=\"let poi of showPois[c]; let i = index\">\n          <wc-details [stringsinput]=\"stringsContact\" [title]=\"poi.title\"  [showtags]=false [subtitle]=\"poi.subtitle\" [text]=\"poi.text\"\n            [info]=\"poi.info\" [distance]=\"getDistance(poi)\" [contacts]=\"poi.infos\" heading-color=\"#707070\"\n            second-color=\"#11b3ef\" expandable=false expanse=false></wc-details>\n          <div class=\"spacing\" *ngIf=\"i == showPois.length - 1\"></div>\n        </div>\n      </div>\n    </div>\n  </div>\n  </ion-list>\n  <div class=\"empty-list\" *ngIf=\"emptyList\">\n      {{'empty_list' | translate}}\n  </div>\n</ion-content>"
 
 /***/ }),
 
@@ -167,8 +167,11 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
 
 
 
+// import { Market } from '@ionic-native/market';
 var ListFarmaciePage = /** @class */ (function () {
-    function ListFarmaciePage(modalController, config, navCtrl, dbService, alertCtrl, router, route, alert, popoverController, events, translate, geoSrv, callNumber, utils, plt) {
+    function ListFarmaciePage(
+    // private market: Market,
+    modalController, config, navCtrl, dbService, alertCtrl, router, route, alert, popoverController, events, translate, geoSrv, callNumber, utils, plt) {
         var _this_1 = this;
         this.modalController = modalController;
         this.config = config;
@@ -300,8 +303,17 @@ var ListFarmaciePage = /** @class */ (function () {
         this.turno = false;
     };
     ListFarmaciePage.prototype.addFarmacieTurno = function () {
-        if (this.fullPois.length > 0)
-            this.farmacieTurno = this.fullPois[0].description;
+        this.farmacieTurno = "\n    <div class=\"message\">Per informazioni su <strong>orari e turni</strong> consultare l'app <div style=\"color:#11b3ef\" class=\"ion-text-center\"><b>FarmApp</b></div></p></div>\n    ";
+        // if (this.fullPois.length > 0)
+        //   this.farmacieTurno = this.fullPois[0].description;
+    };
+    ListFarmaciePage.prototype.openMarket = function () {
+        if (cordova.plugins['market'])
+            cordova.plugins['market'].open('com.app.farmappm');
+        // this.market.open('com.app.farmappm');
+        // cordova.plugins.market.open('your.app.package')
+        //  var value='market://details?id=com.app.farmappm';
+        //  this.utils.openUrl(value);
     };
     ListFarmaciePage.prototype.addDistance = function () {
         var _this_1 = this;

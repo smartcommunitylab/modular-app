@@ -17083,81 +17083,6 @@ exports.parse = function (str) {
 
 /***/ }),
 
-/***/ "./src/app/module-comune/services/config.service.ts":
-/*!**********************************************************!*\
-  !*** ./src/app/module-comune/services/config.service.ts ***!
-  \**********************************************************/
-/*! exports provided: ConfigService */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ConfigService", function() { return ConfigService; });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (undefined && undefined.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-var ConfigService = /** @class */ (function () {
-    function ConfigService() {
-        this.appModuleName = "app-module";
-        this.defaultPosition = {
-            lat: 46.0748,
-            long: 11.1217
-        };
-        this.menu = [
-            {
-                title: "Home",
-                url: "/home",
-                icon: "home"
-            }
-        ];
-    }
-    ConfigService.prototype.init = function () {
-        localStorage.setItem('comune-menu-', JSON.stringify(this.menu));
-    };
-    ConfigService.prototype.getStringContacts = function (translate, language) {
-        return new Promise(function (resolve, reject) {
-            translate.get('phone_contacts').subscribe(function (phone) {
-                var phone = phone;
-                var address = translate.instant('address_contacts');
-                var url = translate.instant('url_contacts');
-                var share = translate.instant('share_contacts');
-                var contacts = JSON.stringify({
-                    "phone": phone,
-                    "address": address,
-                    "url": url,
-                    "share": share
-                });
-                resolve(contacts);
-            });
-        });
-    };
-    ConfigService.prototype.getAppModuleName = function () {
-        return this.appModuleName;
-    };
-    ConfigService.prototype.getDefaultPosition = function () {
-        return this.defaultPosition;
-    };
-    ConfigService = __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
-            providedIn: 'root'
-        }),
-        __metadata("design:paramtypes", [])
-    ], ConfigService);
-    return ConfigService;
-}());
-
-
-
-/***/ }),
-
 /***/ "./src/app/module-comune/services/db.service.ts":
 /*!******************************************************!*\
   !*** ./src/app/module-comune/services/db.service.ts ***!
@@ -17172,7 +17097,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var pouchdb__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! pouchdb */ "./node_modules/pouchdb/lib/index-browser.es.js");
 /* harmony import */ var pouchdb_find__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! pouchdb-find */ "./node_modules/pouchdb-find/lib/index-browser.es.js");
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
-/* harmony import */ var _config_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./config.service */ "./src/app/module-comune/services/config.service.ts");
+/* harmony import */ var _ngx_translate_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ngx-translate/core */ "./node_modules/@ngx-translate/core/fesm5/ngx-translate-core.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -17225,9 +17150,9 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
 
 pouchdb__WEBPACK_IMPORTED_MODULE_1__["default"].plugin(pouchdb_find__WEBPACK_IMPORTED_MODULE_2__["default"]);
 var DbService = /** @class */ (function () {
-    function DbService(loadingController, config) {
+    function DbService(loadingController, translate) {
         this.loadingController = loadingController;
-        this.config = config;
+        this.translate = translate;
         this.elements = {};
         this.opts = { live: true, retry: true };
         this.MIN_SYNCH_TIME = 24 * 60 * 60 * 1000;
@@ -17285,7 +17210,7 @@ var DbService = /** @class */ (function () {
                     case 0:
                         if (!(this.lastTimeSynch() > this.MIN_SYNCH_TIME)) return [3 /*break*/, 4];
                         return [4 /*yield*/, this.loadingController.create({
-                                message: message
+                                message: message || this.translate.instant('init_db')
                             })];
                     case 1:
                         loading_1 = _a.sent();
@@ -17569,11 +17494,46 @@ var DbService = /** @class */ (function () {
             }
         }
     };
+    DbService.prototype.convert = function (x) {
+        var lang = this.translate.currentLang;
+        if (x) {
+            var result = Object.assign({}, x);
+            if (x.title) {
+                result.title = x.title[lang] || x.title['it'];
+            }
+            if (x.subtitle) {
+                result.subtitle = x.subtitle[lang] || x.subtitle['it'];
+            }
+            if (x.classification) {
+                result.classification = x.classification[lang] || x.classification['it'];
+            }
+            if (x.cat) {
+                result.cat = x.cat[lang] || x.cat['it'];
+            }
+            if (x.description) {
+                result.description = x.description[lang] || x.description['it'];
+            }
+            if (x.address) {
+                result.address = x.address[lang] || x.address['it'];
+            }
+            if (x.info) {
+                result.info = x.info[lang] || x.info['it'];
+            }
+            if (x.eventTiming) {
+                result.eventTiming = x.eventTiming[lang] || x.eventTiming['it'];
+            }
+            if (x.eventPeriod) {
+                result.eventPeriod = x.eventPeriod[lang] || x.eventPeriod['it'];
+            }
+            return result;
+        }
+        return null;
+    };
     DbService = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
             providedIn: 'root'
         }),
-        __metadata("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_3__["LoadingController"], _config_service__WEBPACK_IMPORTED_MODULE_4__["ConfigService"]])
+        __metadata("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_3__["LoadingController"], _ngx_translate_core__WEBPACK_IMPORTED_MODULE_4__["TranslateService"]])
     ], DbService);
     return DbService;
 }());

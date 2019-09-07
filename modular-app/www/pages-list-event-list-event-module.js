@@ -53,13 +53,14 @@ var FilterPageEventPage = /** @class */ (function () {
     }
     FilterPageEventPage.prototype.ngOnInit = function () {
         var _this = this;
+        this.original = this.filters.map(function (x) { return Object.assign({}, x); });
         this.filters.forEach(function (element) {
             if (element.isChecked)
                 return _this.selected = true;
         });
     };
     FilterPageEventPage.prototype.closeModal = function () {
-        this.modalCtrl.dismiss(this.filters);
+        this.modalCtrl.dismiss(this.original);
     };
     FilterPageEventPage.prototype.filter = function () {
         this.modalCtrl.dismiss(this.filters);

@@ -99,6 +99,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ngx_translate_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ngx-translate/core */ "./node_modules/@ngx-translate/core/fesm5/ngx-translate-core.js");
 /* harmony import */ var _services_config_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../services/config.service */ "./src/app/services/config.service.ts");
 /* harmony import */ var _services_utils_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../services/utils.service */ "./src/app/services/utils.service.ts");
+/* harmony import */ var _ionic_native_firebase_x_ngx__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ionic-native/firebase-x/ngx */ "./node_modules/@ionic-native/firebase-x/ngx/index.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -114,18 +115,21 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 // import { DragulaService } from 'ng2-dragula';
 // import { Subscription } from 'rxjs';
 var HomeCommonPage = /** @class */ (function () {
     // subs = new Subscription();
-    function HomeCommonPage(navCtrl, config, router, alertCtrl, translate, 
+    function HomeCommonPage(navCtrl, config, router, alertCtrl, translate, platform, 
     // private dragulaService:DragulaService,
-    utils) {
+    firebase, utils) {
         this.navCtrl = navCtrl;
         this.config = config;
         this.router = router;
         this.alertCtrl = alertCtrl;
         this.translate = translate;
+        this.platform = platform;
+        this.firebase = firebase;
         this.utils = utils;
         // editMode = false;
         this.categories = [];
@@ -135,17 +139,29 @@ var HomeCommonPage = /** @class */ (function () {
         this.language = 'it';
         this.language = window[this.config.getAppModuleName()]['language'];
         translate.use(this.language);
+        // this.firebase.getToken()
+        // .then(token => console.log(`The token is ${token}`)) // save the token server-side and use it to push notifications to this device
+        // .catch(error => {
+        //   console.error('Error getting token', error)
+        // });
     }
     HomeCommonPage.prototype.ngOnInit = function () {
     };
     HomeCommonPage.prototype.ionViewDidLoad = function () {
         var _this = this;
+        this.platform.ready().then(function () {
+            _this.firebase.getToken().then(function (token) { return console.log("The token is " + token); });
+        });
         this.translate.onLangChange.subscribe(function (event) {
             _this.init();
         });
     };
     HomeCommonPage.prototype.ionViewDidEnter = function () {
+        var _this = this;
         this.init();
+        this.platform.ready().then(function () {
+            _this.firebase.getToken().then(function (token) { return console.log("The token is " + token); });
+        });
     };
     HomeCommonPage.prototype.init = function () {
         var _this = this;
@@ -255,6 +271,8 @@ var HomeCommonPage = /** @class */ (function () {
             _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"],
             _ionic_angular__WEBPACK_IMPORTED_MODULE_1__["AlertController"],
             _ngx_translate_core__WEBPACK_IMPORTED_MODULE_3__["TranslateService"],
+            _ionic_angular__WEBPACK_IMPORTED_MODULE_1__["Platform"],
+            _ionic_native_firebase_x_ngx__WEBPACK_IMPORTED_MODULE_6__["FirebaseX"],
             _services_utils_service__WEBPACK_IMPORTED_MODULE_5__["UtilsService"]])
     ], HomeCommonPage);
     return HomeCommonPage;

@@ -814,23 +814,23 @@ var map = {
 		"./node_modules/wcs-comune/dist/esm/es5/build/55jrifnu.sc.entry.js",
 		116
 	],
-	"./a9ze2jpq.entry.js": [
-		"./node_modules/wcs-comune/dist/esm/es5/build/a9ze2jpq.entry.js",
+	"./9uzrpsjz.entry.js": [
+		"./node_modules/wcs-comune/dist/esm/es5/build/9uzrpsjz.entry.js",
 		"common",
 		117
 	],
-	"./a9ze2jpq.sc.entry.js": [
-		"./node_modules/wcs-comune/dist/esm/es5/build/a9ze2jpq.sc.entry.js",
+	"./9uzrpsjz.sc.entry.js": [
+		"./node_modules/wcs-comune/dist/esm/es5/build/9uzrpsjz.sc.entry.js",
 		"common",
 		118
 	],
-	"./bmijcbma.entry.js": [
-		"./node_modules/wcs-comune/dist/esm/es5/build/bmijcbma.entry.js",
+	"./a9ze2jpq.entry.js": [
+		"./node_modules/wcs-comune/dist/esm/es5/build/a9ze2jpq.entry.js",
 		"common",
 		119
 	],
-	"./bmijcbma.sc.entry.js": [
-		"./node_modules/wcs-comune/dist/esm/es5/build/bmijcbma.sc.entry.js",
+	"./a9ze2jpq.sc.entry.js": [
+		"./node_modules/wcs-comune/dist/esm/es5/build/a9ze2jpq.sc.entry.js",
 		"common",
 		120
 	],
@@ -844,59 +844,59 @@ var map = {
 		"common",
 		122
 	],
+	"./ivnrdnju.entry.js": [
+		"./node_modules/wcs-comune/dist/esm/es5/build/ivnrdnju.entry.js",
+		"common",
+		123
+	],
+	"./ivnrdnju.sc.entry.js": [
+		"./node_modules/wcs-comune/dist/esm/es5/build/ivnrdnju.sc.entry.js",
+		"common",
+		124
+	],
 	"./ldobok8w.entry.js": [
 		"./node_modules/wcs-comune/dist/esm/es5/build/ldobok8w.entry.js",
-		123
+		125
 	],
 	"./ldobok8w.sc.entry.js": [
 		"./node_modules/wcs-comune/dist/esm/es5/build/ldobok8w.sc.entry.js",
-		124
+		126
 	],
 	"./mntoagnx.entry.js": [
 		"./node_modules/wcs-comune/dist/esm/es5/build/mntoagnx.entry.js",
 		"common",
-		125
+		127
 	],
 	"./mntoagnx.sc.entry.js": [
 		"./node_modules/wcs-comune/dist/esm/es5/build/mntoagnx.sc.entry.js",
 		"common",
-		126
+		128
 	],
 	"./np47qduy.entry.js": [
 		"./node_modules/wcs-comune/dist/esm/es5/build/np47qduy.entry.js",
 		"common",
-		127
+		129
 	],
 	"./np47qduy.sc.entry.js": [
 		"./node_modules/wcs-comune/dist/esm/es5/build/np47qduy.sc.entry.js",
 		"common",
-		128
+		130
 	],
 	"./oqq34gwq.entry.js": [
 		"./node_modules/wcs-comune/dist/esm/es5/build/oqq34gwq.entry.js",
-		129
+		131
 	],
 	"./oqq34gwq.sc.entry.js": [
 		"./node_modules/wcs-comune/dist/esm/es5/build/oqq34gwq.sc.entry.js",
-		130
+		132
 	],
 	"./q714yko0.entry.js": [
 		"./node_modules/wcs-comune/dist/esm/es5/build/q714yko0.entry.js",
 		"common",
-		131
+		133
 	],
 	"./q714yko0.sc.entry.js": [
 		"./node_modules/wcs-comune/dist/esm/es5/build/q714yko0.sc.entry.js",
-		"common",
-		132
-	],
-	"./xt7a9caa.entry.js": [
-		"./node_modules/wcs-comune/dist/esm/es5/build/xt7a9caa.entry.js",
-		"common",
-		133
-	],
-	"./xt7a9caa.sc.entry.js": [
-		"./node_modules/wcs-comune/dist/esm/es5/build/xt7a9caa.sc.entry.js",
 		"common",
 		134
 	]
@@ -1418,12 +1418,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ionic_native_hot_code_push_ngx__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! @ionic-native/hot-code-push/ngx */ "./node_modules/@ionic-native/hot-code-push/ngx/index.js");
 /* harmony import */ var _ionic_native_call_number_ngx__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! @ionic-native/call-number/ngx */ "./node_modules/@ionic-native/call-number/ngx/index.js");
 /* harmony import */ var _ionic_native_in_app_browser_ngx__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! @ionic-native/in-app-browser/ngx */ "./node_modules/@ionic-native/in-app-browser/ngx/index.js");
+/* harmony import */ var _ionic_native_firebase_x_ngx__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! @ionic-native/firebase-x/ngx */ "./node_modules/@ionic-native/firebase-x/ngx/index.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -1503,6 +1505,7 @@ var AppModule = /** @class */ (function () {
                 _ionic_native_call_number_ngx__WEBPACK_IMPORTED_MODULE_23__["CallNumber"],
                 _ionic_native_in_app_browser_ngx__WEBPACK_IMPORTED_MODULE_24__["InAppBrowser"],
                 _ionic_native_hot_code_push_ngx__WEBPACK_IMPORTED_MODULE_22__["HotCodePush"],
+                _ionic_native_firebase_x_ngx__WEBPACK_IMPORTED_MODULE_25__["FirebaseX"],
                 _services_setting_service__WEBPACK_IMPORTED_MODULE_10__["SettingService"],
                 { provide: _angular_core__WEBPACK_IMPORTED_MODULE_0__["APP_INITIALIZER"], useFactory: initializeAppConfig, deps: [_services_config_service__WEBPACK_IMPORTED_MODULE_16__["ConfigService"]], multi: true },
                 { provide: _angular_core__WEBPACK_IMPORTED_MODULE_0__["APP_INITIALIZER"], useFactory: initializeAppSetting, deps: [_services_setting_service__WEBPACK_IMPORTED_MODULE_10__["SettingService"]], multi: true },

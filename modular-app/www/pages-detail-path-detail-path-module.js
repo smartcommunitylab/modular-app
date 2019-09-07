@@ -77,7 +77,7 @@ var DetailPathPageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n\n   <ion-content padding id=\"path\">\n      <div shape=\"round\" class=\"back-button\" (click)=\"goBack()\">\n          <ion-icon slot=\"icon-only\" name=\"arrow-round-back\"></ion-icon>\n        </div>\n        <div shape=\"round\" class=\"map-button\" (click)=\"goMap()\">\n          <ion-icon slot=\"icon-only\" name=\"map\"></ion-icon>\n        </div>\n        <div shape=\"round\" class=\"share-button\" (click)=\"share()\">\n          <ion-icon slot=\"icon-only\" name=\"share\"></ion-icon>\n        </div>\n     <div *ngIf=\"!isLoading\" >\n      <!-- <wc-details *ngIf=\"(paths) && (tabActived == 'info')\" [title]=\"paths.title\" [subtitle]=\"paths.subtitle\" [text]=\"paths.description\" [info]=\"paths.info\" [img]=\"paths.image\"></wc-details> -->\n      <!-- <wc-details *ngIf=\"(paths) \" [title]=\"paths.title\" [subtitle]=\"paths.subtitle\" [text]=\"paths.description\" [info]=\"paths.info\" [img]=\"paths.image\"></wc-details> -->\n      <wc-details  *ngIf=\"paths\" [img]=\"paths.image\"   [title]=\"paths.title\" [altImage]=\"altImage\"\n      [subtitle]=\"paths.subtitle\" [text]=\"paths.description\"  \n      [expandable]=false [expanse]=true heading-color=\"#707070\"\n      second-color=\"#11b3ef\"> </wc-details>\n      <div id=\"poi-list\">\n          <!-- <div *ngIf=\"tabActived == 'place'\"> -->\n              <div >\n                  <ion-searchbar *ngIf=\"search\" showCancelButton animated (ionInput)=\"searchChanged($event)\" (ionCancel)=\"toggleSearch()\"></ion-searchbar>\n            <!-- ------------------------------- -->\n            <div class=\"poi-list\">{{'poi_list'|translate}}</div>\n            <div class=\"poi-container\" *ngFor=\"let poi of showPois; let i = index\">    \n              <div class=\"index-poi\">{{i+1}}</div> \n            <!-- <div *ngFor=\"let poi of showPois\"> -->\n                <wc-details [id]=\"poi.id\" [img]=\"poi.image\" [stringsinput]=\"stringsContact\" [title]=\"poi.title \" [altImage]=\"altImage\"\n                [subtitle]=\"poi.subtitle \" [text]=\"poi.description \" [info]=\"poi.info\" [contacts]=\"poi.infos\"\n                heading-color=\"#707070\" second-color=\"#11b3ef\" expandable=true expanse=false></wc-details>\n                <!-- <wc-path-list-el type=\"POI\" [id]=\"poi._id\" [img]=\"poi.image\" [title]=\"poi.title[language]\" [text]=\"poi.subtitle[language]\" main-color=\"red\"></wc-path-list-el> -->\n            </div>\n        </div>\n      </div>\n    </div>\n      <!-- <div ion-fixed *ngIf=\"tabActived == 'map'\">\n        <wc-map id=\"wc-map\" [points]=\"mapPoints\" main-marker-icon=\"http://icons.iconarchive.com/icons/paomedia/small-n-flat/256/map-marker-icon.png\" poi-marker-icon=\"https://cdn4.iconfinder.com/data/icons/ios7-active-tab/512/map_marker-512.png\"></wc-map>\n        <wc-modal title=\"DEMO\" text=\"Testo di prova\" btn-text=\"Dettagli\" shown=\"false\" data=\"ciao\"></wc-modal>\n      </div> -->\n  </ion-content>\n"
+module.exports = "<ion-content padding id=\"path\">\n  <div shape=\"round\" class=\"back-button\" (click)=\"goBack()\">\n    <ion-icon slot=\"icon-only\" name=\"arrow-round-back\"></ion-icon>\n  </div>\n  <div shape=\"round\" class=\"map-button\" (click)=\"goMap()\">\n    <ion-icon slot=\"icon-only\" name=\"map\"></ion-icon>\n  </div>\n  <div shape=\"round\" class=\"share-button\" (click)=\"share()\">\n    <ion-icon slot=\"icon-only\" name=\"share\"></ion-icon>\n  </div>\n  <div *ngIf=\"!isLoading\">\n    <wc-details *ngIf=\"paths\" [img]=\"paths.image\" [title]=\"paths.title\" [altImage]=\"altImage\"\n      [subtitle]=\"paths.subtitle\" [text]=\"paths.description\" [expandable]=false [expanse]=true heading-color=\"#707070\"\n      second-color=\"#11b3ef\"> </wc-details>\n    <div id=\"poi-list\">\n      <div>\n        <ion-searchbar *ngIf=\"search\" showCancelButton animated (ionInput)=\"searchChanged($event)\"\n          (ionCancel)=\"toggleSearch()\"></ion-searchbar>\n        <!-- ------------------------------- -->\n        <div class=\"poi-list\">{{'poi_list'|translate}}</div>\n        <div class=\"poi-container\" *ngFor=\"let poi of showPois; let i = index\">\n          <div class=\"index-poi\">{{i+1}}</div>\n          <wc-details [id]=\"poi.id\" [img]=\"poi.image\" [stringsinput]=\"stringsContact\" [title]=\"poi.title \"\n            [altImage]=\"altImage\" [subtitle]=\"poi.subtitle \" [text]=\"poi.description \" [info]=\"poi.info\"\n            [contacts]=\"poi.infos\" heading-color=\"#707070\" second-color=\"#11b3ef\" expandable=true expanse=false>\n          </wc-details>\n        </div>\n      </div>\n    </div>\n  </div>\n\n</ion-content>"
 
 /***/ }),
 
@@ -88,7 +88,7 @@ module.exports = "\n\n   <ion-content padding id=\"path\">\n      <div shape=\"r
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".back-button {\n  position: fixed;\n  color: #11b3ef;\n  --background: white;\n  border-radius: 24px;\n  border: 1px solid #11b3ef;\n  width: 48px;\n  height: 48px;\n  line-height: 48px;\n  text-align: center;\n  background-color: white;\n  z-index: 999;\n  left: 16px;\n  top: 16px; }\n\n.map-button {\n  position: fixed;\n  color: #11b3ef;\n  --background: white;\n  border-radius: 24px;\n  left: 50%;\n  transform: translateX(-50%);\n  border: 1px solid #11b3ef;\n  width: 48px;\n  height: 48px;\n  line-height: 48px;\n  text-align: center;\n  background-color: white;\n  top: 16px;\n  z-index: 999; }\n\n.share-button {\n  position: fixed;\n  color: #11b3ef;\n  --background: white;\n  border-radius: 24px;\n  right: 16px;\n  border: 1px solid #11b3ef;\n  width: 48px;\n  height: 48px;\n  line-height: 48px;\n  text-align: center;\n  background-color: white;\n  top: 16px;\n  z-index: 999; }\n\n.poi-list {\n  width: 100%;\n  font-weight: bold;\n  background-color: #e3e3e3;\n  color: #707070;\n  font-size: 22px;\n  text-align: center;\n  margin: 25px 0px; }\n\n.poi-container {\n  position: relative;\n  margin-top: 20px; }\n\n.poi-container .index-poi {\n    position: absolute;\n    left: 10px;\n    top: -15px;\n    background-color: #707070;\n    color: white;\n    border-radius: 15px;\n    width: 30px;\n    height: 30px;\n    line-height: 30px;\n    text-align: center; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL2NoaW44L0RvY3VtZW50cy93b3JrL21vZHVsYXJBcHAvbW9kdWxhci1hcHAvc3JjL2FwcC9tb2R1bGUtY29tdW5lL3BhZ2VzL2RldGFpbC1wYXRoL2RldGFpbC1wYXRoLnBhZ2Uuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLGdCQUFlO0VBQ2YsZUFBYztFQUNkLG9CQUFhO0VBQ2Isb0JBQW1CO0VBQ25CLDBCQUF5QjtFQUN6QixZQUFXO0VBQ1gsYUFBWTtFQUNaLGtCQUFpQjtFQUNqQixtQkFBa0I7RUFDbEIsd0JBQXVCO0VBQ3ZCLGFBQVk7RUFFWixXQUFVO0VBQ2QsVUFBUyxFQUNSOztBQUVEO0VBQ0ksZ0JBQWU7RUFDZixlQUFjO0VBQ2Qsb0JBQWE7RUFDYixvQkFBbUI7RUFDbkIsVUFBUztFQUNULDRCQUEyQjtFQUMzQiwwQkFBeUI7RUFDekIsWUFBVztFQUNYLGFBQVk7RUFDWixrQkFBaUI7RUFDakIsbUJBQWtCO0VBQ2xCLHdCQUF1QjtFQUN2QixVQUFTO0VBRVQsYUFBWSxFQUNmOztBQUNEO0VBQ0ksZ0JBQWU7RUFDZixlQUFjO0VBQ2Qsb0JBQWE7RUFDYixvQkFBbUI7RUFDbkIsWUFBVztFQUNYLDBCQUF5QjtFQUN6QixZQUFXO0VBQ1gsYUFBWTtFQUNaLGtCQUFpQjtFQUNqQixtQkFBa0I7RUFDbEIsd0JBQXVCO0VBQ3ZCLFVBQVM7RUFFVCxhQUFZLEVBQ2Y7O0FBQ0Q7RUFDSSxZQUFXO0VBQ1gsa0JBQWlCO0VBQ2pCLDBCQUF5QjtFQUN6QixlQUFjO0VBQ2QsZ0JBQWU7RUFDZixtQkFBa0I7RUFDbEIsaUJBQWdCLEVBQ25COztBQUNEO0VBQ0ksbUJBQWtCO0VBQ2xCLGlCQUFnQixFQWNuQjs7QUFoQkQ7SUFJUSxtQkFBa0I7SUFDbEIsV0FBVTtJQUNWLFdBQVU7SUFDViwwQkFBeUI7SUFDekIsYUFBWTtJQUNaLG9CQUFtQjtJQUNuQixZQUFXO0lBQ1gsYUFBWTtJQUNaLGtCQUFpQjtJQUNqQixtQkFBa0IsRUFDckIiLCJmaWxlIjoic3JjL2FwcC9tb2R1bGUtY29tdW5lL3BhZ2VzL2RldGFpbC1wYXRoL2RldGFpbC1wYXRoLnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi5iYWNrLWJ1dHRvbiB7XG4gICAgcG9zaXRpb246IGZpeGVkO1xuICAgIGNvbG9yOiAjMTFiM2VmO1xuICAgIC0tYmFja2dyb3VuZDogd2hpdGU7XG4gICAgYm9yZGVyLXJhZGl1czogMjRweDtcbiAgICBib3JkZXI6IDFweCBzb2xpZCAjMTFiM2VmO1xuICAgIHdpZHRoOiA0OHB4O1xuICAgIGhlaWdodDogNDhweDtcbiAgICBsaW5lLWhlaWdodDogNDhweDtcbiAgICB0ZXh0LWFsaWduOiBjZW50ZXI7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogd2hpdGU7XG4gICAgei1pbmRleDogOTk5O1xuICAgIC8vIGJvcmRlci1yYWRpdXM6IDE4cHg7XG4gICAgbGVmdDogMTZweDtcbnRvcDogMTZweDtcbn1cblxuLm1hcC1idXR0b24ge1xuICAgIHBvc2l0aW9uOiBmaXhlZDtcbiAgICBjb2xvcjogIzExYjNlZjtcbiAgICAtLWJhY2tncm91bmQ6IHdoaXRlO1xuICAgIGJvcmRlci1yYWRpdXM6IDI0cHg7XG4gICAgbGVmdDogNTAlO1xuICAgIHRyYW5zZm9ybTogdHJhbnNsYXRlWCgtNTAlKTtcbiAgICBib3JkZXI6IDFweCBzb2xpZCAjMTFiM2VmO1xuICAgIHdpZHRoOiA0OHB4O1xuICAgIGhlaWdodDogNDhweDtcbiAgICBsaW5lLWhlaWdodDogNDhweDtcbiAgICB0ZXh0LWFsaWduOiBjZW50ZXI7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogd2hpdGU7XG4gICAgdG9wOiAxNnB4O1xuICAgIC8vIGJvcmRlci1yYWRpdXM6IDE4cHg7XG4gICAgei1pbmRleDogOTk5O1xufVxuLnNoYXJlLWJ1dHRvbiB7XG4gICAgcG9zaXRpb246IGZpeGVkO1xuICAgIGNvbG9yOiAjMTFiM2VmO1xuICAgIC0tYmFja2dyb3VuZDogd2hpdGU7XG4gICAgYm9yZGVyLXJhZGl1czogMjRweDtcbiAgICByaWdodDogMTZweDtcbiAgICBib3JkZXI6IDFweCBzb2xpZCAjMTFiM2VmO1xuICAgIHdpZHRoOiA0OHB4O1xuICAgIGhlaWdodDogNDhweDtcbiAgICBsaW5lLWhlaWdodDogNDhweDtcbiAgICB0ZXh0LWFsaWduOiBjZW50ZXI7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogd2hpdGU7XG4gICAgdG9wOiAxNnB4O1xuICAgIC8vIGJvcmRlci1yYWRpdXM6IDE4cHg7XG4gICAgei1pbmRleDogOTk5O1xufVxuLnBvaS1saXN0IHtcbiAgICB3aWR0aDogMTAwJTtcbiAgICBmb250LXdlaWdodDogYm9sZDtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiAjZTNlM2UzO1xuICAgIGNvbG9yOiAjNzA3MDcwO1xuICAgIGZvbnQtc2l6ZTogMjJweDtcbiAgICB0ZXh0LWFsaWduOiBjZW50ZXI7XG4gICAgbWFyZ2luOiAyNXB4IDBweDtcbn1cbi5wb2ktY29udGFpbmVyIHtcbiAgICBwb3NpdGlvbjogcmVsYXRpdmU7XG4gICAgbWFyZ2luLXRvcDogMjBweDtcbiAgICAuaW5kZXgtcG9pIHtcbiAgICAgICAgcG9zaXRpb246IGFic29sdXRlO1xuICAgICAgICBsZWZ0OiAxMHB4O1xuICAgICAgICB0b3A6IC0xNXB4O1xuICAgICAgICBiYWNrZ3JvdW5kLWNvbG9yOiAjNzA3MDcwO1xuICAgICAgICBjb2xvcjogd2hpdGU7XG4gICAgICAgIGJvcmRlci1yYWRpdXM6IDE1cHg7XG4gICAgICAgIHdpZHRoOiAzMHB4O1xuICAgICAgICBoZWlnaHQ6IDMwcHg7XG4gICAgICAgIGxpbmUtaGVpZ2h0OiAzMHB4O1xuICAgICAgICB0ZXh0LWFsaWduOiBjZW50ZXI7XG4gICAgfVxuXG59Il19 */"
+module.exports = ".back-button {\n  position: fixed;\n  color: #11b3ef;\n  --background: white;\n  border-radius: 24px;\n  border: 1px solid #11b3ef;\n  width: 48px;\n  height: 48px;\n  line-height: 48px;\n  text-align: center;\n  background-color: white;\n  z-index: 999;\n  font-size: 44px;\n  left: 16px;\n  top: 16px; }\n\n.map-button {\n  position: fixed;\n  color: #11b3ef;\n  --background: white;\n  border-radius: 24px;\n  left: 50%;\n  transform: translateX(-50%);\n  border: 1px solid #11b3ef;\n  width: 48px;\n  height: 48px;\n  line-height: 48px;\n  text-align: center;\n  background-color: white;\n  top: 16px;\n  font-size: 32px;\n  z-index: 999; }\n\n.share-button {\n  position: fixed;\n  color: #11b3ef;\n  --background: white;\n  border-radius: 24px;\n  right: 16px;\n  border: 1px solid #11b3ef;\n  width: 48px;\n  height: 48px;\n  line-height: 48px;\n  text-align: center;\n  background-color: white;\n  top: 16px;\n  font-size: 32px;\n  z-index: 999; }\n\n.poi-list {\n  width: 100%;\n  font-weight: bold;\n  background-color: #e3e3e3;\n  color: #707070;\n  font-size: 22px;\n  text-align: center;\n  margin: 25px 0px; }\n\n.poi-container {\n  position: relative;\n  margin-top: 20px; }\n\n.poi-container .index-poi {\n    position: absolute;\n    left: 10px;\n    top: -15px;\n    background-color: #707070;\n    color: white;\n    border-radius: 15px;\n    width: 30px;\n    height: 30px;\n    line-height: 30px;\n    text-align: center; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL2NoaW44L0RvY3VtZW50cy93b3JrL21vZHVsYXJBcHAvbW9kdWxhci1hcHAvc3JjL2FwcC9tb2R1bGUtY29tdW5lL3BhZ2VzL2RldGFpbC1wYXRoL2RldGFpbC1wYXRoLnBhZ2Uuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLGdCQUFlO0VBQ2YsZUFBYztFQUNkLG9CQUFhO0VBQ2Isb0JBQW1CO0VBQ25CLDBCQUF5QjtFQUN6QixZQUFXO0VBQ1gsYUFBWTtFQUNaLGtCQUFpQjtFQUNqQixtQkFBa0I7RUFDbEIsd0JBQXVCO0VBQ3ZCLGFBQVk7RUFFWixnQkFBZTtFQUVmLFdBQVU7RUFDZCxVQUFTLEVBQ1I7O0FBRUQ7RUFDSSxnQkFBZTtFQUNmLGVBQWM7RUFDZCxvQkFBYTtFQUNiLG9CQUFtQjtFQUNuQixVQUFTO0VBQ1QsNEJBQTJCO0VBQzNCLDBCQUF5QjtFQUN6QixZQUFXO0VBQ1gsYUFBWTtFQUNaLGtCQUFpQjtFQUNqQixtQkFBa0I7RUFDbEIsd0JBQXVCO0VBQ3ZCLFVBQVM7RUFDVCxnQkFBZTtFQUVmLGFBQVksRUFDZjs7QUFDRDtFQUNJLGdCQUFlO0VBQ2YsZUFBYztFQUNkLG9CQUFhO0VBQ2Isb0JBQW1CO0VBQ25CLFlBQVc7RUFDWCwwQkFBeUI7RUFDekIsWUFBVztFQUNYLGFBQVk7RUFDWixrQkFBaUI7RUFDakIsbUJBQWtCO0VBQ2xCLHdCQUF1QjtFQUN2QixVQUFTO0VBQ1QsZ0JBQWU7RUFDZixhQUFZLEVBQ2Y7O0FBQ0Q7RUFDSSxZQUFXO0VBQ1gsa0JBQWlCO0VBQ2pCLDBCQUF5QjtFQUN6QixlQUFjO0VBQ2QsZ0JBQWU7RUFDZixtQkFBa0I7RUFDbEIsaUJBQWdCLEVBQ25COztBQUNEO0VBQ0ksbUJBQWtCO0VBQ2xCLGlCQUFnQixFQWNuQjs7QUFoQkQ7SUFJUSxtQkFBa0I7SUFDbEIsV0FBVTtJQUNWLFdBQVU7SUFDViwwQkFBeUI7SUFDekIsYUFBWTtJQUNaLG9CQUFtQjtJQUNuQixZQUFXO0lBQ1gsYUFBWTtJQUNaLGtCQUFpQjtJQUNqQixtQkFBa0IsRUFDckIiLCJmaWxlIjoic3JjL2FwcC9tb2R1bGUtY29tdW5lL3BhZ2VzL2RldGFpbC1wYXRoL2RldGFpbC1wYXRoLnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi5iYWNrLWJ1dHRvbiB7XG4gICAgcG9zaXRpb246IGZpeGVkO1xuICAgIGNvbG9yOiAjMTFiM2VmO1xuICAgIC0tYmFja2dyb3VuZDogd2hpdGU7XG4gICAgYm9yZGVyLXJhZGl1czogMjRweDtcbiAgICBib3JkZXI6IDFweCBzb2xpZCAjMTFiM2VmO1xuICAgIHdpZHRoOiA0OHB4O1xuICAgIGhlaWdodDogNDhweDtcbiAgICBsaW5lLWhlaWdodDogNDhweDtcbiAgICB0ZXh0LWFsaWduOiBjZW50ZXI7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogd2hpdGU7XG4gICAgei1pbmRleDogOTk5O1xuICAgIC8vIGJvcmRlci1yYWRpdXM6IDE4cHg7XG4gICAgZm9udC1zaXplOiA0NHB4O1xuXG4gICAgbGVmdDogMTZweDtcbnRvcDogMTZweDtcbn1cblxuLm1hcC1idXR0b24ge1xuICAgIHBvc2l0aW9uOiBmaXhlZDtcbiAgICBjb2xvcjogIzExYjNlZjtcbiAgICAtLWJhY2tncm91bmQ6IHdoaXRlO1xuICAgIGJvcmRlci1yYWRpdXM6IDI0cHg7XG4gICAgbGVmdDogNTAlO1xuICAgIHRyYW5zZm9ybTogdHJhbnNsYXRlWCgtNTAlKTtcbiAgICBib3JkZXI6IDFweCBzb2xpZCAjMTFiM2VmO1xuICAgIHdpZHRoOiA0OHB4O1xuICAgIGhlaWdodDogNDhweDtcbiAgICBsaW5lLWhlaWdodDogNDhweDtcbiAgICB0ZXh0LWFsaWduOiBjZW50ZXI7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogd2hpdGU7XG4gICAgdG9wOiAxNnB4O1xuICAgIGZvbnQtc2l6ZTogMzJweDtcblxuICAgIHotaW5kZXg6IDk5OTtcbn1cbi5zaGFyZS1idXR0b24ge1xuICAgIHBvc2l0aW9uOiBmaXhlZDtcbiAgICBjb2xvcjogIzExYjNlZjtcbiAgICAtLWJhY2tncm91bmQ6IHdoaXRlO1xuICAgIGJvcmRlci1yYWRpdXM6IDI0cHg7XG4gICAgcmlnaHQ6IDE2cHg7XG4gICAgYm9yZGVyOiAxcHggc29saWQgIzExYjNlZjtcbiAgICB3aWR0aDogNDhweDtcbiAgICBoZWlnaHQ6IDQ4cHg7XG4gICAgbGluZS1oZWlnaHQ6IDQ4cHg7XG4gICAgdGV4dC1hbGlnbjogY2VudGVyO1xuICAgIGJhY2tncm91bmQtY29sb3I6IHdoaXRlO1xuICAgIHRvcDogMTZweDtcbiAgICBmb250LXNpemU6IDMycHg7XG4gICAgei1pbmRleDogOTk5O1xufVxuLnBvaS1saXN0IHtcbiAgICB3aWR0aDogMTAwJTtcbiAgICBmb250LXdlaWdodDogYm9sZDtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiAjZTNlM2UzO1xuICAgIGNvbG9yOiAjNzA3MDcwO1xuICAgIGZvbnQtc2l6ZTogMjJweDtcbiAgICB0ZXh0LWFsaWduOiBjZW50ZXI7XG4gICAgbWFyZ2luOiAyNXB4IDBweDtcbn1cbi5wb2ktY29udGFpbmVyIHtcbiAgICBwb3NpdGlvbjogcmVsYXRpdmU7XG4gICAgbWFyZ2luLXRvcDogMjBweDtcbiAgICAuaW5kZXgtcG9pIHtcbiAgICAgICAgcG9zaXRpb246IGFic29sdXRlO1xuICAgICAgICBsZWZ0OiAxMHB4O1xuICAgICAgICB0b3A6IC0xNXB4O1xuICAgICAgICBiYWNrZ3JvdW5kLWNvbG9yOiAjNzA3MDcwO1xuICAgICAgICBjb2xvcjogd2hpdGU7XG4gICAgICAgIGJvcmRlci1yYWRpdXM6IDE1cHg7XG4gICAgICAgIHdpZHRoOiAzMHB4O1xuICAgICAgICBoZWlnaHQ6IDMwcHg7XG4gICAgICAgIGxpbmUtaGVpZ2h0OiAzMHB4O1xuICAgICAgICB0ZXh0LWFsaWduOiBjZW50ZXI7XG4gICAgfVxuXG59Il19 */"
 
 /***/ }),
 
@@ -215,8 +215,6 @@ var DetailPathPage = /** @class */ (function () {
             _this_1.isLoading = false;
             _this_1.utils.hideLoading();
         });
-        // });
-        // });
     };
     DetailPathPage.prototype.ngOnInit = function () {
         var _this_1 = this;
@@ -330,11 +328,26 @@ var DetailPathPage = /** @class */ (function () {
         this.utils.openShare(JSON.stringify(this.paths));
     };
     DetailPathPage.prototype.buildLangPaths = function () {
-        this.paths.description = this.paths.description[this.language];
-        this.paths.info = this.paths.info[this.language];
-        this.paths.subtitle = this.paths.subtitle[this.language];
-        this.paths.title = this.paths.title[this.language];
-        this.paths.difficulty = this.paths.difficulty[this.language];
+        if (this.paths.description[this.language])
+            this.paths.description = this.paths.description[this.language];
+        else
+            this.paths.description = this.paths.description["it"];
+        if (this.paths.info[this.language])
+            this.paths.info = this.paths.info[this.language];
+        else
+            this.paths.info = this.paths.info["it"];
+        if (this.paths.title[this.language])
+            this.paths.title = this.paths.title[this.language];
+        else
+            this.paths.title = this.paths.title["it"];
+        if (this.paths.subtitle[this.language])
+            this.paths.subtitle = this.paths.subtitle[this.language];
+        else
+            this.paths.subtitle = this.paths.subtitle["it"];
+        if (this.paths.difficulty[this.language])
+            this.paths.difficulty = this.paths.difficulty[this.language];
+        else
+            this.paths.difficulty = this.paths.difficulty["it"];
         console.log(this.paths);
         // this.paths.contacts = {address: this.paths.address}
     };
@@ -432,16 +445,28 @@ var DetailPathPage = /** @class */ (function () {
         var poiElement = {};
         if (x) {
             if (x.title) {
-                poiElement.title = x.title[this.language];
+                if (x.title[this.language])
+                    poiElement.title = x.title[this.language];
+                else
+                    poiElement.title = x.title["it"];
             }
             if (x.classification) {
-                poiElement.classification = x.classification[this.language];
+                if (x.classification[this.language])
+                    poiElement.classification = x.classification[this.language];
+                else
+                    poiElement.classification = x.title["it"];
             }
             if (x.subtitle) {
-                poiElement.subtitle = x.subtitle[this.language];
+                if (x.subtitle[this.language])
+                    poiElement.subtitle = x.subtitle[this.language];
+                else
+                    poiElement.subtitle = x.title["it"];
             }
             if (x.description) {
-                poiElement.description = x.description[this.language];
+                if (x.description[this.language])
+                    poiElement.description = x.description[this.language];
+                else
+                    poiElement.description = x.title["it"];
             }
             if (x.image) {
                 poiElement.image = x.image;

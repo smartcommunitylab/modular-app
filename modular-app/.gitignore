@@ -34,3 +34,5 @@ wc-trasporti/wc-trasporti/node_modules/
 .DS_Store
 Thumbs.db
 UserInterfaceState.xcuserstate
+google-services.json
+GoogleService-Info.plist

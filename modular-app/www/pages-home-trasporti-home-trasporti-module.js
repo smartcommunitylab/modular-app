@@ -295,7 +295,8 @@ var HomeTrasportiPage = /** @class */ (function (_super) {
             row.push({});
         }
         this.gridRows = gridRows;
-        this.actualVisualized = this.elements[0];
+        if (this.elements[0] && this.elements[0].ref)
+            this.actualVisualized = this.elements[0].ref;
     };
     HomeTrasportiPage.prototype.selectInternalElement = function (ref) {
         var elem = document.getElementsByClassName(ref.state);
@@ -303,7 +304,7 @@ var HomeTrasportiPage = /** @class */ (function (_super) {
             var yOffset = elem[0].offsetTop;
             this.content.scrollToPoint(0, yOffset - 100, 0);
         }
-        this.actualVisualized = ref;
+        this.actualVisualized = ref.state;
     };
     HomeTrasportiPage.prototype.getHtml = function (elem) {
         if (elem.ref == "trains")
@@ -325,6 +326,9 @@ var HomeTrasportiPage = /** @class */ (function (_super) {
         console.log(target + "" + visible);
     };
     HomeTrasportiPage.prototype.isSelected = function (category) {
+        console.log("category.state" + category.state);
+        console.log("this.actualVisualized" + JSON.stringify(this.actualVisualized));
+        console.log(" category.state == this.actualVisualized" + (category.state == this.actualVisualized));
         return category.state == this.actualVisualized;
     };
     HomeTrasportiPage.prototype.getIconStyle = function (elem) {
