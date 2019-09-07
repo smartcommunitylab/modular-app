@@ -59,6 +59,12 @@ export class HomeSettingsPage implements OnInit {
       })
     );
   }
+  mailto(email) {
+    window.open(`mailto:${email}`, '_system');
+ }
+  openLink(link) {
+    window.open(link, '_system', 'location=yes'); return false;
+  }
   addElement(element) {
     this.categories.push(element);
     //add and remove from all
