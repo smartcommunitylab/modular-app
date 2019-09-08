@@ -116,7 +116,7 @@ export class ListEventPage implements OnInit {
                 this.subCategories(this.fullPois);
                 this.buildShowPois();
                 this.tags = this.buildFilter();
-
+                this.selectFirstDate();
               }
               else {
                 this.emptyList = true;
@@ -284,8 +284,17 @@ export class ListEventPage implements OnInit {
       }
     });
     this.categories = this.fullCategories;
+
+  }
+  selectFirstDate() {
     if (this.categories.length > 0)
-      setTimeout(() => this.actualVisualized = this.categories[0].startOf('day').format('DD-MM-YYYY')
+      setTimeout(() => {
+        this.actualVisualized = this.categories[0].startOf('day').format('DD-MM-YYYY');
+        //scroll to posiition
+        var element = document.getElementById(this.actualVisualized);
+        if (element)
+          element.scrollIntoView({ block: "center" });
+      }
         , 500)
   }
 
