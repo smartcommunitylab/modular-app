@@ -158,7 +158,7 @@ export class FuneraliPage {
       }
     }, this.doneTypingInterval);
   }
-  
+
   buildShowPois(filters?) {
     this.showFunerali = [];
     this.vetFunerali.forEach(p => {
@@ -189,6 +189,16 @@ export class FuneraliPage {
   //     }
   //   });
   // }
+  selectFirstDate() {
+      setTimeout(() => {
+        //scroll to posiition
+        this.selectInternalElement(this.refElement);
+        var element = document.getElementById(this.actualVisualized);
+        if (element)
+          element.scrollIntoView({ block: "center" });
+      }
+        , 500)
+  }
   public onIntersection({ target, visible }: { target: Element; visible: boolean }): void {
     console.log("onIntersection");
 

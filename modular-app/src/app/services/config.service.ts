@@ -11,7 +11,7 @@ const MODULE_ENTRIES_KEY: string = "moduleEntries";
 })
 
 export class ConfigService {
-  expiringDate = '08-09-2019'
+  expiringDate = '20-09-2019'
   version = 'test';
   // version = 'prod';
   constructor(private http: HttpClient,private alertController: AlertController, private platform: Platform) { }
