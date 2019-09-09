@@ -54,7 +54,7 @@ export class ListFarmaciePage implements OnInit {
     private geoSrv: GeoService,
     private callNumber: CallNumber,
     private utils: UtilsService,
-    private plt:Platform
+    private plt: Platform
 
   ) {
     if (window[this.config.getAppModuleName()]['language'])
@@ -160,21 +160,28 @@ export class ListFarmaciePage implements OnInit {
     this.turno = false;
   }
   addFarmacieTurno(): any {
-    this.farmacieTurno =`
+    this.farmacieTurno = `
     <div class="message">Per informazioni su <strong>orari e turni</strong> consultare l'app <div style="color:#11b3ef" class="ion-text-center"><b>FarmApp</b></div></p></div>
     `
     // if (this.fullPois.length > 0)
     //   this.farmacieTurno = this.fullPois[0].description;
   }
-  openMarket(){
-    if (cordova.plugins['market'])
-      cordova.plugins['market'].open('com.app.farmappm')
+  openMarket() {
+    // if (cordova.plugins['market'])
+    //   cordova.plugins['market'].open('com.app.farmappm')
 
     // this.market.open('com.app.farmappm');
 
     // cordova.plugins.market.open('your.app.package')
-  //  var value='market://details?id=com.app.farmappm';
-  //  this.utils.openUrl(value);
+    //  var value='market://details?id=com.app.farmappm';
+    var url = ''
+    if (this.plt.is('android'))
+      url = 'https://play.google.com/store/apps/details?id=it.pcsoft.FarmComApp'
+    else url = ' https://apps.apple.com/us/app/farm-pp/id946185284?l=it&ls=1';
+    {
+    }
+    this.utils.openUrl(url); 
+
 
   }
   addDistance(): any {
