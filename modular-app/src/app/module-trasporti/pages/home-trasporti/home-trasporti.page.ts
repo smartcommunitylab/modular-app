@@ -159,7 +159,7 @@ export class HomeTrasportiPage extends MainPage implements OnInit {
 
   }
   getStyle(elem) {
-    return { 'border': '2px solid ' + elem.color }
+    return { 'border': '4px solid ' + elem.color }
   }
   titleisPresent(elem) {
     return (elem && elem.group && elem.group.routes && elem.group.routes.length > 0 && elem.group.routes[0].title) ? true : false;

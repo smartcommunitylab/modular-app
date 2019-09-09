@@ -30,11 +30,13 @@
     }
     .line-tt {
         border-radius: 8px;
-        height: 50px;
-        width: 50px;
+        height: 45px;
+        width: 45px;
         text-align: center;
-        line-height: 50px;
+        line-height: 40px;
         display: inline-block;
+        margin: 4px;
+        font-size: 19px;
     }
     .label-type{
         width: 100%;
