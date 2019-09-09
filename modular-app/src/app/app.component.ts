@@ -6,6 +6,7 @@ import { ConfigService } from './services/config.service'
 import { SettingService } from './services/setting.service';
 import { TranslateService } from '@ngx-translate/core';
 import { HotCodePush } from '@ionic-native/hot-code-push/ngx';
+import { FirebaseX } from "@ionic-native/firebase-x/ngx";
 
 @Component({
   selector: 'app-root',
@@ -21,7 +22,8 @@ export class AppComponent {
     private config: ConfigService,
     private setting: SettingService,
     private translate: TranslateService,
-    private hotCodePush: HotCodePush
+    private hotCodePush: HotCodePush,
+    private firebase: FirebaseX
   ) {
     this.sideMenu().then(res => {
       this.navigate = res;
@@ -31,7 +33,8 @@ export class AppComponent {
 
   initializeApp() {
     this.platform.ready().then(() => {
-      
+      console.log('token')
+      this.firebase.getToken().then(token => console.log(`The token is ${token}`))
       this.statusBar.overlaysWebView(false);            
       this.statusBar.styleLightContent();
       this.splashScreen.hide();
@@ -54,7 +57,7 @@ export class AppComponent {
   }
   updateApp(): any {
     console.log('Update:'); 
-
+    if (this.hotCodePush)
     this.hotCodePush.fetchUpdate({}).then(data => { 
       console.log('Update available'); 
     });
