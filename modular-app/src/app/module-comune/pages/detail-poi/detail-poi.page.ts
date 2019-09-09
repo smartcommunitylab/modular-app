@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DbService } from '../../services/db.service';
 import { UtilsService } from '../../services/utils.service';
-import { CallNumber } from '@ionic-native/call-number/ngx';
 import { TranslateService } from '@ngx-translate/core';
 import { ConfigService } from '../../services/config.service';
 import { Location } from '@angular/common';
@@ -21,7 +20,7 @@ export class DetailPoiPage implements OnInit {
   stringsContact: any;
   altImage: string;
 
-  constructor(private router: Router, private route: ActivatedRoute, private callNumber: CallNumber, private utils: UtilsService, private location: Location, private translate: TranslateService,
+  constructor(private router: Router, private route: ActivatedRoute,  private utils: UtilsService, private location: Location, private translate: TranslateService,
     private dbService: DbService, private config: ConfigService) {
     this.language = window[this.config.getAppModuleName()]['language'];
     this.translate.use(this.language);
@@ -54,9 +53,8 @@ export class DetailPoiPage implements OnInit {
       // console.log(contact)
       var contactParam = JSON.parse((<any>contact).detail)
       if (contactParam.type == 'phone') {
-        this.callNumber.callNumber(contactParam.value, true)
-          .then(res => console.log('Launched dialer!', res))
-          .catch(err => console.log('Error launching dialer', err));
+        window.open('tel:'+contactParam.value,  '_system')
+
       }
       if (contactParam.type == 'address') {
         this.utils.openAddressMap(contactParam.value);

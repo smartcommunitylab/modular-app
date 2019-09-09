@@ -5,7 +5,6 @@ import { AlertController } from '@ionic/angular';
 import { GeoService } from 'src/app/services/geo.service';
 import { TranslateService } from '@ngx-translate/core';
 import { UtilsService } from '../../services/utils.service';
-import { CallNumber } from '@ionic-native/call-number/ngx';
 import { ConfigService } from '../../services/config.service';
 import { Location } from '@angular/common';
 
@@ -38,8 +37,7 @@ export class DetailPathPage implements OnInit {
     private geoSrv: GeoService,
     private translate: TranslateService,
     private utils: UtilsService,
-    private location: Location,
-    private callNumber: CallNumber
+    private location: Location
   ) {
     this.language = window[this.config.getAppModuleName()]['language'];
     this.translate.use(this.language);
@@ -138,9 +136,8 @@ export class DetailPathPage implements OnInit {
         // console.log(contact)
         var contactParam = JSON.parse((<any>contact).detail)
         if (contactParam.type == 'phone') {
-          this.callNumber.callNumber(contactParam.value, true)
-            .then(res => console.log('Launched dialer!', res))
-            .catch(err => console.log('Error launching dialer', err));
+          window.open('tel:'+contactParam.value,  '_system')
+
         }
         if (contactParam.type == 'address') {
           this.utils.openAddressMap(contactParam.value);

@@ -3,7 +3,7 @@
     <name>La mia Trento</name>
     <description>Tutti i servizi del comune di Trento a portata di mano</description>
     <author email="hi@ionicframework.com" href="http://ionicframework.com/">Smart Community Lab</author>
-    <content original-src="index.html" src="http://192.168.42.201:8100" />
+    <content src="index.html" />
     <access origin="*" />
     <allow-navigation href="*" />
     <allow-intent href="ionic://*" />
@@ -126,7 +126,6 @@
     <plugin name="cordova-plugin-x-socialsharing" spec="^5.4.7">
         <variable name="ANDROID_SUPPORT_V4_VERSION" value="24.1.1+" />
     </plugin>
-    <plugin name="mx.ferreyra.callnumber" spec="0.0.2" />
     <plugin name="cordova-plugin-inappbrowser" spec="^3.1.0" />
     <plugin name="cordova-plugin-statusbar" spec="^2.4.3" />
     <plugin name="call-number" spec="^1.0.1" />
@@ -135,5 +134,4 @@
     <plugin name="cordova-plugin-google-analytics" spec="^1.8.6">
         <variable name="GMS_VERSION" value="11.0.1" />
     </plugin>
-    <plugin name="cordova-plugin-market" spec="git+https://github.com/xmartlabs/cordova-plugin-market.git" />
 </widget>

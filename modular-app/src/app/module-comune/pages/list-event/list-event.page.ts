@@ -5,7 +5,6 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { AlertInput } from '@ionic/core';
 import { ConfigService } from '../../services/config.service';
-import { CallNumber } from '@ionic-native/call-number/ngx';
 import { UtilsService } from '../../services/utils.service';
 import { UtilsService as GlobalUtils } from 'src/app/services/utils.service';
 import { FilterPageEventPage } from './filter-page-event/filter-page-event.page';
@@ -50,7 +49,6 @@ export class ListEventPage implements OnInit {
     private config: ConfigService,
     public events: Events,
     private translate: TranslateService,
-    private callNumber: CallNumber,
     private utils: UtilsService,
     private plt: Platform
   ) {
@@ -173,9 +171,8 @@ export class ListEventPage implements OnInit {
       element.addEventListener('contactClick', async (contact) => {
         var contactParam = JSON.parse((<any>contact).detail)
         if (contactParam.type == 'phone') {
-          this.callNumber.callNumber(contactParam.value, true)
-            .then(res => console.log('Launched dialer!', res))
-            .catch(err => console.log('Error launching dialer', err));
+          window.open('tel:'+contactParam.value,  '_system')
+
         }
         if (contactParam.type == 'address') {
           this.utils.openAddressMap(contactParam.value);

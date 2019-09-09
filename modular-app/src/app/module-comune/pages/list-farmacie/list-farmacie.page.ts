@@ -98,9 +98,8 @@ export class ListFarmaciePage implements OnInit {
       // console.log(contact)
       var contactParam = JSON.parse((<any>contact).detail)
       if (contactParam.type == 'phone') {
-        this.callNumber.callNumber(contactParam.value, true)
-          .then(res => console.log('Launched dialer!', res))
-          .catch(err => console.log('Error launching dialer', err));
+        window.open('tel:'+contactParam.value,  '_system')
+
       }
       if (contactParam.type == 'address') {
         this.utils.openAddressMap(contactParam.value);

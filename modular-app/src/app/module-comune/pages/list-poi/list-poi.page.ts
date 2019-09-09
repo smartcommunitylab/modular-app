@@ -3,7 +3,6 @@ import { NavController, AlertController, IonContent, ModalController, LoadingCon
 import { DbService } from '../../services/db.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { CallNumber } from '@ionic-native/call-number/ngx';
 import { UtilsService } from '../../services/utils.service';
 import { ConfigService } from '../../services/config.service';
 import { FilterPagePoiPage } from './filter-page-poi/filter-page-poi.page';
@@ -40,7 +39,6 @@ export class ListPoiPage implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private translate: TranslateService,
-    private callNumber: CallNumber,
     private modalController: ModalController,
     private utils: UtilsService,
     private geoSrv:GeoService,
@@ -142,9 +140,8 @@ export class ListPoiPage implements OnInit {
         // console.log(contact)
         var contactParam = JSON.parse((<any>contact).detail)
         if (contactParam.type == 'phone') {
-          this.callNumber.callNumber(contactParam.value, true)
-            .then(res => console.log('Launched dialer!', res))
-            .catch(err => console.log('Error launching dialer', err));
+          window.open('tel:'+contactParam.value,  '_system')
+
         }
         if (contactParam.type == 'address') {
           this.utils.openAddressMap(contactParam.value);
