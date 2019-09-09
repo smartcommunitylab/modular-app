@@ -53,6 +53,8 @@ export class AppComponent {
     }
   }
   updateApp(): any {
+    console.log('Update:'); 
+
     this.hotCodePush.fetchUpdate({}).then(data => { 
       console.log('Update available'); 
     });

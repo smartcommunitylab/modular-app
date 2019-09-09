@@ -46,7 +46,7 @@
     "cordova": "^9.0.0",
     "cordova-android": "8.0.0",
     "cordova-browser": "5.0.4",
-    "cordova-hot-code-push-plugin": "git+https://github.com/nordnet/cordova-hot-code-push.git",
+    "cordova-hot-code-push-plugin": "git+https://github.com/wangjingzhao/cordova-hot-code-push.git",
     "cordova-ios": "4.5.5",
     "cordova-plugin-badge": "0.8.8",
     "cordova-plugin-dbcopy": "git+https://github.com/an-rahulpandey/cordova-plugin-dbcopy.git",
@@ -84,6 +84,7 @@
     "wcs-comune": "0.0.176",
     "wcs-dettagliofunerale": "0.0.7",
     "wcs-info": "^0.1.8",
+    "xcode": "^2.0.0",
     "zone.js": "~0.8.26"
   },
   "devDependencies": {
@@ -119,7 +120,8 @@
     "ts-node": "~7.0.0",
     "tslint": "~5.12.0",
     "typescript": "3.1.6",
-    "uglify-js": "^3.4.9"
+    "uglify-js": "^3.4.9",
+    "cordova-plugin-market": "git+https://github.com/xmartlabs/cordova-plugin-market.git"
   },
   "description": "An Ionic project",
   "cordova": {
@@ -141,7 +143,7 @@
       "cordova-plugin-ionic-webview": {
         "ANDROID_SUPPORT_ANNOTATIONS_VERSION": "27.+"
       },
-      "cordova-hot-code-push-plugin": {}
+      "cordova-plugin-market": {}
     },
     "platforms": [
       "browser",
