@@ -4,7 +4,7 @@ import { DbService } from '../../services/db.service';
 import { ConfigService } from '../../services/config.service';
 import { TranslateService } from '@ngx-translate/core';
 import { Location } from '@angular/common';
-import { CallNumber } from '@ionic-native/call-number/ngx';
+// import { CallNumber } from '@ionic-native/call-number/ngx';
 import { UtilsService } from '../../services/utils.service';
 
 @Component({
@@ -22,7 +22,7 @@ export class DetailEventPage implements OnInit {
   altImage: string;
   paramsSubscription: any;
 
-  constructor(private router: Router, private route: ActivatedRoute, private callNumber: CallNumber, private utils: UtilsService, private location: Location, private translate: TranslateService,
+  constructor(private router: Router, private route: ActivatedRoute,  private utils: UtilsService, private location: Location, private translate: TranslateService,
     private dbService: DbService, private config: ConfigService) {
     this.language = window[this.config.getAppModuleName()]['language'];
     this.translate.use(this.language);
@@ -55,9 +55,7 @@ export class DetailEventPage implements OnInit {
       // console.log(contact)
       var contactParam = JSON.parse((<any>contact).detail)
       if (contactParam.type == 'phone') {
-        this.callNumber.callNumber(contactParam.value, true)
-          .then(res => console.log('Launched dialer!', res))
-          .catch(err => console.log('Error launching dialer', err));
+        window.open('tel:'+contactParam.value,  '_system')
       }
       if (contactParam.type == 'address') {
         this.utils.openAddressMap(contactParam.value);
