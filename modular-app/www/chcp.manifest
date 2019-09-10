@@ -1301,7 +1301,7 @@
   },
   {
     "file": "assets/configuration/carousel.json",
-    "hash": "1a12747fe8e53bce852d1bcc547378b3"
+    "hash": "054201c42e9e9ff2ec26a921f23cb727"
   },
   {
     "file": "assets/configuration/default-profiles-module.json",
@@ -1477,7 +1477,7 @@
   },
   {
     "file": "cordova_plugins.js",
-    "hash": "dbaef67e9145c8a48bee1ccfa445f0cc"
+    "hash": "40ff05acda8dfca178d4159c93368c6c"
   },
   {
     "file": "cordova-js-src/android/nativeapiprovider.js",
@@ -1581,11 +1581,11 @@
   },
   {
     "file": "main.js",
-    "hash": "fe26ef157752e49cb740400bdd4a68ff"
+    "hash": "eb89d5e0413b39e784227a33003cc901"
   },
   {
     "file": "main.js.map",
-    "hash": "6f1c9ec20bc0e019a5ca6b943e0c6dae"
+    "hash": "458cb782b42d6404ac61c368a0f059ac"
   },
   {
     "file": "marker-icon.png",
@@ -1641,11 +1641,11 @@
   },
   {
     "file": "pages-home-common-home-common-module.js",
-    "hash": "feb211bffa86ee9946b2ed32d41ee46f"
+    "hash": "d9a872c068906b6a6b5aedde8e4ed269"
   },
   {
     "file": "pages-home-common-home-common-module.js.map",
-    "hash": "b850911f71b37c21f5e1cf87ce347cb3"
+    "hash": "1b80d4312f9a51941ab89785f89b0032"
   },
   {
     "file": "pages-home-home-module.js",
@@ -1665,19 +1665,19 @@
   },
   {
     "file": "pages-home-settings-home-settings-module.js",
-    "hash": "45570fcb2e1beb9ed5acd2e70beef50a"
+    "hash": "856dc9d69289cb84d75ec8b97d82f2f6"
   },
   {
     "file": "pages-home-settings-home-settings-module.js.map",
-    "hash": "64b2a636d46eda07e227918a73a722b3"
+    "hash": "b992c765b5b81f4599d2bf85a7f4253e"
   },
   {
     "file": "pages-home-trasporti-home-trasporti-module.js",
-    "hash": "75b1ecc15b5d824cb0cc72e0397a7eeb"
+    "hash": "47097329faf3b69fa978e46dd46e7862"
   },
   {
     "file": "pages-home-trasporti-home-trasporti-module.js.map",
-    "hash": "e65cebde319b36560fe502ef80366bfe"
+    "hash": "cac60c00115fcf275f1f4c154a304fb6"
   },
   {
     "file": "pages-list-categories-list-categories-module.js",
@@ -1841,11 +1841,11 @@
   },
   {
     "file": "pages-transport-list-transport-list-module.js",
-    "hash": "6c0ffb8236e515bdeb26860a21c74f02"
+    "hash": "8c896698f50e02c6283a4c82f00861e7"
   },
   {
     "file": "pages-transport-list-transport-list-module.js.map",
-    "hash": "1b70f34d30756cd427ae00956f9e3212"
+    "hash": "29e0cc14166f8d3237cf862c53c30e47"
   },
   {
     "file": "pages-transport-tt-transport-tt-module.js",
@@ -2053,11 +2053,11 @@
   },
   {
     "file": "styles.js",
-    "hash": "ea8956d1c4ff3f5fef25ebfe6938aae2"
+    "hash": "7a66620eb4c04c2f7985c88425c2f59c"
   },
   {
     "file": "styles.js.map",
-    "hash": "c03193991ead1fffdf49a95b3d466f71"
+    "hash": "6ced7b3385e77122334cd94f1c4ee5f6"
   },
   {
     "file": "svg/ios-add-circle-outline.svg",

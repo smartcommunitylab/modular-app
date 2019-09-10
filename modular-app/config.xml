@@ -3,7 +3,7 @@
     <name>La mia Trento</name>
     <description>Tutti i servizi del comune di Trento a portata di mano</description>
     <author email="hi@ionicframework.com" href="http://ionicframework.com/">Smart Community Lab</author>
-    <content original-src="index.html" src="http://192.168.42.201:8100" />
+    <content src="index.html" />
     <access origin="*" />
     <allow-navigation href="*" />
     <allow-intent href="ionic://*" />
@@ -90,7 +90,7 @@
     <allow-navigation href="http://192.168.42.201:8100" sessionid="73e1aba0" />
     <allow-navigation href="http://192.168.42.201:8101" sessionid="352ccd8c" />
     <chcp>
-        <config-file url="https://dev.smartcommunitylab.it/modularapp/chcp.json" />
+        <config-file url="https://tn.smartcommunitylab.it/modularapp/chcp.json" />
     </chcp>
     <allow-navigation href="http://192.168.1.197:8100" sessionid="929c171e" />
     <allow-navigation href="http://192.168.31.104:8100" sessionid="ab1a51a0" />
