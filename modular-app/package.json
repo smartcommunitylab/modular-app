@@ -124,8 +124,7 @@
     "ts-node": "~7.0.0",
     "tslint": "~5.12.0",
     "typescript": "3.1.6",
-    "uglify-js": "^3.4.9",
-    "cordova-plugin-market": "git+https://github.com/xmartlabs/cordova-plugin-market.git"
+    "uglify-js": "^3.4.9"
   },
   "description": "An Ionic project",
   "cordova": {
@@ -147,7 +146,6 @@
       "cordova-plugin-ionic-webview": {
         "ANDROID_SUPPORT_ANNOTATIONS_VERSION": "27.+"
       },
-      "cordova-plugin-market": {},
       "cordova-plugin-firebasex": {
         "FIREBASE_ANALYTICS_COLLECTION_ENABLED": "true",
         "FIREBASE_PERFORMANCE_COLLECTION_ENABLED": "true",
