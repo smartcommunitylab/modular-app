@@ -120,6 +120,12 @@ export class HomeTrasportiPage extends MainPage implements OnInit {
     return { 'color': elem.color }
 
   }
+  getIconTitle(i) {
+    if (i.ref == "trains")
+      return "train"
+    else return "bus"
+  }
+
   compareElements(i) {
     if (i == 0)
       return true

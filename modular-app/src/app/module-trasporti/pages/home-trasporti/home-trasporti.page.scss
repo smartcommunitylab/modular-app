@@ -12,6 +12,7 @@
         overflow-x: auto;
         z-index: 999;
         position: fixed;
+        padding-left: 12px;
         ion-chip {
             flex: 0 0 auto;
             background-color: white;
@@ -56,3 +57,14 @@
     color: white!important;
     background-color: #11b3ef!important;
 }
+.header-icon {
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 24px;
+    margin-right: 8px;
+}
+   
+   .header-text{
+     display: inline-block;
+     vertical-align: middle;
+   }
