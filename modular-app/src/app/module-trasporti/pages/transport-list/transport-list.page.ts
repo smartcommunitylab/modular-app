@@ -58,6 +58,9 @@ export class TransportListPage implements OnInit {
     this.gridRows = gridRows;
   }
 
+  notLast(index){
+    return index!=this.elements.length-1
+  }
 
   selectElement(e) {
     // route element: go to table
@@ -77,6 +80,17 @@ export class TransportListPage implements OnInit {
   }
   getStyle() {
     return { 'border': '10px solid ' + this.color }
+  }
+  inside(string) {
+    return string.length < 3
+
+
+  }
+  getHtml(elem) {
+    if (elem)
+    if (this.inside(elem))
+      return "<span>" + elem + "</span>"
+    else return "<span>" + elem.substring(0, 1); +"</span>"
   }
   loadList() {
     this.transport.getTTData(this.ref, this.agencyId, this.groupId).then(res => {

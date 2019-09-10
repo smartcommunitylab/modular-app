@@ -1,33 +1,60 @@
 .route-grid-row {
-    margin-top: 8px !important;
-    margin-bottom: 8px !important;
-  }
-  
-  .route-grid-element {
-    width: 60px;
-    height: 60px;
-    margin: auto;
-    border: 2px solid transparent;
-    border-radius: 50%;
-    text-align: center;
-    color: #fff;
-    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-  }
-  .interaction {
-    color: #11b3ef!important;
+  margin-top: 8px !important;
+  margin-bottom: 8px !important;
 }
+
+.route-grid-element {
+  width: 60px;
+  height: 60px;
+  margin: auto;
+  border: 2px solid transparent;
+  border-radius: 50%;
+  text-align: center;
+  color: #fff;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+.interaction {
+  color: #11b3ef !important;
+}
+
 .direction {
-    color:#9f9f9f;
-    font-weight: bold;
-    font-size: 16px;
-  }
-  .box-line{
-    width: 100px;
-    height: 100px;
-    border: 1px solid black;
-    border-radius: 4px;
-    margin: auto;
-    line-height: 85px;
-    text-align: center;
-    font-size: 50px;
-  }
+  color: #9f9f9f;
+  font-weight: bold;
+  font-size: 16px;
+  margin-top: 40px;
+}
+
+.box-line {
+  margin-top: 40px;
+  width: 100px;
+  height: 100px;
+  border: 1px solid black;
+  border-radius: 4px;
+  margin: auto;
+  line-height: 85px;
+  text-align: center;
+  font-size: 50px;
+}
+
+ion-list {
+  margin-top: 63px;
+  padding-top: 0px !important;
+}
+
+.card-tt {
+  width: 100%;
+  color: #11b3ef;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+ion-item {
+  margin-bottom: 23px;
+  margin-top: 23px;
+}
+.h-line{
+  width: 100%;
+  background-color: #707070;
+  height: 1px;;
+}

@@ -1,13 +1,14 @@
 [  {
+  "id":"d347c18f3a931ae6a512b7d80591afd8",
   "name": {
     "it": "Come arrivare a Trento",
     "en": "Come arrivare a Trento",
     "de": "Come arrivare a Trento"
   },
   "image": {
-    "it": "https://www.ufficiostampa.provincia.tn.it/var/002/storage/images/media/immagini-comunicati-stampa/18738374_1716687045015345_3860171307320583195_o-image/2595486-1-ita-IT/18738374_1716687045015345_3860171307320583195_o_imagefullwide.jpg",
-    "en": "https://www.ufficiostampa.provincia.tn.it/var/002/storage/images/media/immagini-comunicati-stampa/18738374_1716687045015345_3860171307320583195_o-image/2595486-1-ita-IT/18738374_1716687045015345_3860171307320583195_o_imagefullwide.jpg",
-    "de": "https://www.ufficiostampa.provincia.tn.it/var/002/storage/images/media/immagini-comunicati-stampa/18738374_1716687045015345_3860171307320583195_o-image/2595486-1-ita-IT/18738374_1716687045015345_3860171307320583195_o_imagefullwide.jpg"
+    "it": "https://www.comune.trento.it/var/comunetn/storage/images/aree-tematiche/turismo/info-utili/arrivare-a-trento/5987462-6-ita-IT/Arrivare-a-Trento_imagefull.jpg",
+    "en": "https://www.comune.trento.it/var/comunetn/storage/images/aree-tematiche/turismo/info-utili/arrivare-a-trento/5987462-6-ita-IT/Arrivare-a-Trento_imagefull.jpg",
+    "de": "https://www.comune.trento.it/var/comunetn/storage/images/aree-tematiche/turismo/info-utili/arrivare-a-trento/5987462-6-ita-IT/Arrivare-a-Trento_imagefull.jpg"
   },
   "url": "/detail-poi",
   "objectIds": [
@@ -19,20 +20,19 @@
   {
     "id": "d757ee0813bdcc5b6f74044e004226dc",
     "name": {
-      "it": "Discover",
-      "en": "Discover",
-      "de": "Discover"
+      "it": "Trento Smart City Week",
+      "en": "Trento Smart City Week",
+      "de": "Trento Smart City Week"
     },
     "image": {
-      "it": "https://imgur.com/Luv92Ib.jpg",
-      "en": "https://imgur.com/Luv92Ib.jpg",
-      "de": "https://imgur.com/Luv92Ib.jpg"
+      "it": "https://www.comune.trento.it/var/comunetn/storage/images/aree-tematiche/turismo/eventi/eventi-principali/trento-smart-city-week/9998836-37-ita-IT/Trento-Smart-City-Week_imagefull.jpg",
+      "en": "https://www.comune.trento.it/var/comunetn/storage/images/aree-tematiche/turismo/eventi/eventi-principali/trento-smart-city-week/9998836-37-ita-IT/Trento-Smart-City-Week_imagefull.jpg",
+      "de": "https://www.comune.trento.it/var/comunetn/storage/images/aree-tematiche/turismo/eventi/eventi-principali/trento-smart-city-week/9998836-37-ita-IT/Trento-Smart-City-Week_imagefull.jpg"
     },
     "url": "/detail-event",
     "objectIds": [
-      "48b624c0fc02e87c43728ca839ae50f5"
-     ]
-  },
+      "a41e85e995c0e17024cb65791b405961"
+    ]  },
   {
     "id": "8cc43799380fcd360be1219b9fa6b152",
     "name": {
@@ -41,14 +41,30 @@
       "de": "Museum Pass"
     },
     "image": {
+      "it": "https://www.comune.trento.it/var/comunetn/storage/images/aree-tematiche/turismo/info-utili/servizi/museum-pass/8523886-15-ita-IT/Museum-Pass_imagefull.jpg",
+      "en": "https://www.comune.trento.it/var/comunetn/storage/images/aree-tematiche/turismo/info-utili/servizi/museum-pass/8523886-15-ita-IT/Museum-Pass_imagefull.jpg",
+      "de": "https://www.comune.trento.it/var/comunetn/storage/images/aree-tematiche/turismo/info-utili/servizi/museum-pass/8523886-15-ita-IT/Museum-Pass_imagefull.jpg"
+    },
+    "url": "/detail-poi",
+    "objectIds": [
+      "text.3005"
+    ]
+  },
+  {
+    "id":"cultura.72",
+    "name": {
+      "it": "Muse",
+      "en": "Muse",
+      "de": "Muse"
+    },
+    "image": {
       "it": "https://i.imgur.com/AwDAykS.jpg",
       "en": "https://i.imgur.com/AwDAykS.jpg",
       "de": "https://i.imgur.com/AwDAykS.jpg"
     },
     "url": "/detail-poi",
     "objectIds": [
-      "text.3005"
-    ]
-  }
+      "cultura.72"
+    ]  }
 
 ]

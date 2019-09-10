@@ -25,18 +25,18 @@
           (inViewportAction)="onIntersection($event)">
           <ion-item *ngIf="compareElements(i)" class="label-type ion-text-center">
             <div>
-              <ion-icon class="header-icon" name="{{getIconTitle(i)}}"></ion-icon>
+              <!-- <ion-icon class="header-icon" name="{{getIconTitle(i)}}"></ion-icon> -->
               <span class="header-icon"> {{getLabel(i)|translate}}</span>
             </div>
           </ion-item>
-          <ion-item lines="none">
+          <ion-item class="block-tt" lines="none">
             <div class="{{elem.ref}}" (click)="selectElement(elem)">
               <div class="card card-tt" color>
                 <div class="line-tt" [ngStyle]="getStyle(elem)">
                   <span [innerHTML]="getHtml(elem)"></span>
                   <ion-icon [ngStyle]="getIconStyle(elem)" *ngIf="!getHtml(elem)" name="{{getIcon(elem)}}"></ion-icon>
                 </div>
-                <span class="name-line" *ngIf="!inside(elem.title)">{{elem.title}}</span>
+                <span class="name-line" *ngIf="!inside(elem.title) && elem.title!='Funivia'">{{elem.title}}</span>
                 <span class="name-line" *ngIf="titleisPresent(elem)">{{elem.group.routes[0].title}}</span>
               </div>
             </div>

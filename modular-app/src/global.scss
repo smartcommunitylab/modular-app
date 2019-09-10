@@ -163,4 +163,10 @@ itemlist {
 }
 ion-title{
     color: #707070;
+    font-size: 29px;
+    font-weight: bold;
+}
+ion-back-button{
+    --icon-font-size: 40px!important;
+    --padding-start:0px!important;
 }
