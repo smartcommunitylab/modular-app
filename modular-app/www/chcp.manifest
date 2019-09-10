@@ -1301,15 +1301,15 @@
   },
   {
     "file": "assets/configuration/carousel.json",
-    "hash": "10a8dc9ebc162a61677355cadd95e3ba"
+    "hash": "1a12747fe8e53bce852d1bcc547378b3"
   },
   {
     "file": "assets/configuration/default-profiles-module.json",
-    "hash": "3ffd3eb6de045791c87415f9e0f2a35c"
+    "hash": "b1b91bbb846393c697b57b5b0776dc02"
   },
   {
     "file": "assets/configuration/module-entries.json",
-    "hash": "a3e280eb1946574a7e96460640ab0c06"
+    "hash": "db9ee2f89f4dacede1e71b8cb43c4d5c"
   },
   {
     "file": "assets/configuration/side-menu.json",
@@ -1477,7 +1477,7 @@
   },
   {
     "file": "cordova_plugins.js",
-    "hash": "371a9b0bf7e9936f4bfe8c50557af719"
+    "hash": "dbaef67e9145c8a48bee1ccfa445f0cc"
   },
   {
     "file": "cordova-js-src/android/nativeapiprovider.js",
@@ -1581,11 +1581,11 @@
   },
   {
     "file": "main.js",
-    "hash": "95fa8cf6ae808777d3df74a46cd24ec5"
+    "hash": "fe26ef157752e49cb740400bdd4a68ff"
   },
   {
     "file": "main.js.map",
-    "hash": "eae836a8ca7e86c484f820ac9aff2de7"
+    "hash": "6f1c9ec20bc0e019a5ca6b943e0c6dae"
   },
   {
     "file": "marker-icon.png",
@@ -1665,19 +1665,19 @@
   },
   {
     "file": "pages-home-settings-home-settings-module.js",
-    "hash": "2eca45a26f27874957feadb5b61b729a"
+    "hash": "45570fcb2e1beb9ed5acd2e70beef50a"
   },
   {
     "file": "pages-home-settings-home-settings-module.js.map",
-    "hash": "0ece83e30c33f1061e5c0d0a12a582a5"
+    "hash": "64b2a636d46eda07e227918a73a722b3"
   },
   {
     "file": "pages-home-trasporti-home-trasporti-module.js",
-    "hash": "ff6b0499a24fcfb94e37c8f479e3b738"
+    "hash": "75b1ecc15b5d824cb0cc72e0397a7eeb"
   },
   {
     "file": "pages-home-trasporti-home-trasporti-module.js.map",
-    "hash": "c81cf42ac1134363efec8684e3f1999d"
+    "hash": "e65cebde319b36560fe502ef80366bfe"
   },
   {
     "file": "pages-list-categories-list-categories-module.js",
