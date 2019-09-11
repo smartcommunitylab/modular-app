@@ -73,9 +73,9 @@ init() {
     if (x.image) {
       galleryElement.image = x.image[this.language];
     }
-    if (x.url) {
-      galleryElement.url = x.url;
-    }
+    // if (x.url) {
+      galleryElement.url = '/detail-poi';
+    // }
     if (x.params) {
       galleryElement.params = x.params;
     }
@@ -96,9 +96,9 @@ init() {
     if (x.icon) {
       categoryElement.icon = x.icon;
     }
-    if (x.url) {
+     if (x.url) {
       categoryElement.url = x.url;
-    }
+     }
     if (x.params) {
       categoryElement.params = x.params;
     }
@@ -147,6 +147,7 @@ init() {
       );
       this.translate.get('error_data').subscribe(
         value => {
+          console.log("element.url"+element.url+"element.objectIds"+element.objectIds)
           this.utils.showToast(value);
         }
       );

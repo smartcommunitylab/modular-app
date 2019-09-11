@@ -25,6 +25,7 @@ export class HomePage implements OnInit {
   future: boolean = true;
   sideLabel: any;
   trattoLabel: any;
+  dragging: boolean;
   ; /** Current GPS location */
   streets: any; /** Main street object */
   map: any; /** Leaflet map object */
@@ -207,18 +208,30 @@ dailyStreets:any=[];
   buildMap() {
     try { this.map.remove(); } catch { } /** Reset map */
     // const _this = this;
-    this.map = new leaflet.Map('home-map', { zoomControl: false, attributionControl: false, dragging: true, tap: false }).setView(this.mapCenter, 14);
+    this.map = new leaflet.Map('home-map', {minZoom:10, zoomControl: false, attributionControl: false, dragging: true, tap: false }).setView(this.mapCenter, 14);
+    this.map.on('dragstart', (e) => {
+      this.dragging=true;
 
+
+      // _this.setFutureAndPast();
+    });
+    this.map.on('zoomstart', (e) => {
+      this.dragging=true;
+      // _this.setFutureAndPast();
+    });
     /** Build polyline after drag */
     this.map.on('dragend', (e) => {
+      this.glow();
+      this.dragging=false;
       this.mapCenter = [e.target.getCenter().lat, e.target.getCenter().lng];
       this.buildPolyline(this.mapCenter);
-      this.glow();
 
       // _this.setFutureAndPast();
     });
     /** Build polyline after zoom */
     this.map.on('zoomend', (e) => {
+      this.dragging=false;
+
       this.mapCenter = [e.target.getCenter().lat, e.target.getCenter().lng];
       this.buildPolyline(this.mapCenter);
       // _this.setFutureAndPast();
@@ -248,16 +261,18 @@ dailyStreets:any=[];
     this.buildPolyline(this.mapCenter);
   }
   glow(): any {
-    var runCount = 2;
-    var map = document.getElementById("home-map");
-    var text = document.getElementById("text-cleaning");
-    var timerId= setInterval(() => {
-      map.classList.toggle("active");
-      text.classList.toggle("active");
-      runCount++;
-      if(runCount > 3) clearInterval(timerId);
+    // var runCount = 2;
+    // var map = document.getElementById("home-map");
+    // // var text = document.getElementById("text-cleaning");
+    // var timerId= setInterval(() => {
+    //   if (map.classList){
+    //   map.classList.toggle("active");}
+    //   // if (text.classList){
+    //   // text.classList.toggle("active");}
+    //   runCount++;
+    //   if(runCount > 3) clearInterval(timerId);
       
-    },300);
+    // },300);
 
   }
 
@@ -304,13 +319,13 @@ dailyStreets:any=[];
         const freeStreetContent =
           `${this.noCleaning} <br/><b>${this.datePipe.transform(this.selectedDate, 'dd/MM/yyyy')}</b> ${this.forStr}<br/>
         <b> ${s.streetName}</b>`;
-        const closedStreetContent = `<div style=" display: flex;   justify-content: center;  align-items: center;"> <div style="    margin-right: 8px;"><img src="./assets/strade/icons/divieto.png"></div><div><b>${s.streetName}</b><br/>${this.noPark} <b>${new Date(s.stopStartingTime).getHours()}</b> ${this.to}
+        const closedStreetContent = `<div style=" display: flex;   justify-content: center;  align-items: center;"> <div style=" width:50px;image-rendering:auto;margin-right: 8px;"><img src="./assets/strade/icons/divieto.png"></div><div><b>${s.streetName}</b><br/>${this.noPark} <b>${new Date(s.stopStartingTime).getHours()}</b> ${this.to}
         <b> ${new Date(s.stopEndingTime).getHours()}</b> ${this.inDateStr} <br/>
         <b>${this.datePipe.transform(this.selectedDate, 'dd/MM/yyyy')}</b><br/>
         ${lato}
         ${tratto}
 
-        <a style="float:right; margin-top: -5%">${this.details}</a></div></div>`;
+        <a style="float:right;     font-size: 15px;margin-top: -5%">${this.details}</a></div></div>`;
 
         /**
          * Build polyline based on: current day, current zoom, map center

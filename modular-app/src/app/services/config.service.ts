@@ -14,26 +14,30 @@ export class ConfigService {
   expiringDate = '20-09-2019'
   version = 'test';
   // version = 'prod';
-  constructor(private http: HttpClient,private alertController: AlertController, private platform: Platform) { }
+  carouselUrl = 'https://cit.platform.smartcommunitylab.it/comuneintasca-multi/highlights/TrentoInTasca';
+  constructor(private http: HttpClient, private alertController: AlertController, private platform: Platform) { }
 
   async showPopUpExpired(): Promise<any> {
     const alert = await this.alertController.create({
       header: 'La versione di test è scaduta',
-      message: 'Questa applicazione di test è scaduta il '+this.expiringDate,
-      backdropDismiss:false,
+      message: 'Questa applicazione di test è scaduta il ' + this.expiringDate,
+      backdropDismiss: false,
       buttons: [
         {
           text: 'Ok',
           handler: () => {
             navigator['app'].exitApp();
-        }}]}
+          }
+        }]
+    }
     );
 
-    await alert.present();  }
+    await alert.present();
+  }
   async showPopupExpiring(): Promise<any> {
     const alert = await this.alertController.create({
       header: 'La versione di test sta scadendo',
-      message: 'Questa applicazione di test  scadrá il '+this.expiringDate,
+      message: 'Questa applicazione di test  scadrá il ' + this.expiringDate,
       buttons: ['OK']
     });
 
@@ -41,23 +45,23 @@ export class ConfigService {
   }
   isExpired(): any {
     var today = moment()
-    var expiringDate = moment(this.expiringDate,'DD-MM-YYYY');
+    var expiringDate = moment(this.expiringDate, 'DD-MM-YYYY');
     if (expiringDate.isBefore(today))
       return true;
     return false
 
   }
   getVersion(): any {
-   return this.version;
+    return this.version;
   }
   private appModuleName: string = "app-module";
   private menu: any;
   private carousel: any;
   private moduleEntries: any;
   private allModuleEntries: any;
-  private defaultPosition= {
-    lat:46.0748,
-    long:11.1217
+  private defaultPosition = {
+    lat: 46.0748,
+    long: 11.1217
   }
 
   Init(): Promise<any> {
@@ -128,10 +132,13 @@ export class ConfigService {
     return this.carousel;
   }
   loadCarousel(): any {
+    console.log("load carousel");
     if (this.carousel) {
       return Promise.resolve(this.carousel);
     }
-    this.http.get("assets/configuration/carousel.json").toPromise().then(response => {
+    this.http.get(this.carouselUrl).toPromise().then(response => {
+      console.log("response"+response);
+
       this.carousel = response;
     });
   }

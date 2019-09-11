@@ -53,14 +53,21 @@ ion-item {
     font-weight: bold;
 }
 .icon-home {
-    font-size: 20px;
-    text-align: center;
+    font-size: 23px;    text-align: center;
     width: 100%;
-    height: 100%;
+    display: inline-block;
+    /* font-size: 35px; */
+    /* color: #ffC977; */
+    vertical-align: middle;
 }
 .icon-bar {
     font-size: 30px;
 
+}
+.header-street {
+    display: flex!important;
+     align-content: center!important;
+     align-items: center!important;
 }
 .locate {
     font-size: 30px!important;

@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="it.smartcommunitylab.comuneintasca.trento" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="it.smartcommunitylab.comuneintasca.trento" version="0.0.2" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>La mia Trento</name>
     <description>Tutti i servizi del comune di Trento a portata di mano</description>
     <author email="hi@ionicframework.com" href="http://ionicframework.com/">Smart Community Lab</author>
@@ -89,9 +89,6 @@
     </platform>
     <allow-navigation href="http://192.168.42.201:8100" sessionid="73e1aba0" />
     <allow-navigation href="http://192.168.42.201:8101" sessionid="352ccd8c" />
-    <chcp>
-        <config-file url="https://tn.smartcommunitylab.it/modularapp/chcp.json" />
-    </chcp>
     <allow-navigation href="http://192.168.1.197:8100" sessionid="929c171e" />
     <allow-navigation href="http://192.168.31.104:8100" sessionid="ab1a51a0" />
     <allow-navigation href="http://192.168.31.104:8101" sessionid="6b434ccf" />

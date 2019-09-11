@@ -7,6 +7,7 @@ import { DatePipe } from '@angular/common';
 import { NotificationService } from '../../services/notification.service';
 import { Platform } from '@ionic/angular';
 import { element } from '@angular/core/src/render3';
+import { UtilService } from '../../services/util.service';
 
 @Component({
   selector: 'app-street-detail',
@@ -28,7 +29,7 @@ export class StreetDetailPage implements OnInit {
     private datePipe: DatePipe,
     private notSrv: NotificationService,
     private route: ActivatedRoute,
-    private platform: Platform
+    private utils: UtilService
   ) {
     this.language = window[this.config.getAppModuleName()]['language'];
     this.translate.use(this.language);
@@ -114,10 +115,17 @@ export class StreetDetailPage implements OnInit {
       this.streetDetails.forEach(element => {
         this.notSrv.disableNotification(element);
       })
+      this.translate.get('add_not').subscribe(x => {
+      this.utils.showGenericConnectionMessage(x+this.streetDetails[0].streetName);
+      });
+
     } else {
       this.streetDetails.forEach(element => {
         this.notSrv.setNotification(element);
       })
+      this.translate.get('remove_not').subscribe(x => {
+        this.utils.showGenericConnectionMessage(x+this.streetDetails[0].streetName);
+        });
     }
     this.notif = this.convertToMapId(this.notSrv.getNotStreets());
   }

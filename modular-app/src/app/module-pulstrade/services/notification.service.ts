@@ -5,6 +5,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { ConfigService } from 'src/app/services/config.service';
 import { MapService } from './map.service';
 import { start } from 'repl';
+import { UtilService } from './util.service';
 @Injectable({
   providedIn: 'root'
 })
@@ -20,7 +21,8 @@ export class NotificationService {
     private platform: Platform,
     private translate: TranslateService,
     private config: ConfigService,
-    private map: MapService
+    private map: MapService,
+    private utils: UtilService
   ) {
     this.language = window[this.config.getAppModuleName()]['language'];
     this.translate.use(this.language);
@@ -45,6 +47,7 @@ export class NotificationService {
     this.platform.ready().then(() => {
       /** Get translations */
       this.translate.get('IN-CLEANING').subscribe(tr => {
+        var add1=this.translate.instant('add_not');
         // const tmp = new Date(new Date().getTime() + 20000).getTime(); // SOLO PER DEBUG; DA TOGLIERE
 
         const noti = [];
@@ -88,6 +91,9 @@ export class NotificationService {
    * @param street streets object
    */
   public disableNotification(street) {
+
+    //toast 
+
     // street.forEach(s => {
     let id = this.notifiedStreets.findIndex(n => n.idNumber === street.idNumber);
     if (id >= 0) {

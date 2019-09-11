@@ -613,7 +613,7 @@ getTextWidth() {
           </div>
           <ion-row class="line-title">
             <ion-col size="12"  >
-              {this.title}
+              <span class="title">{this.title}</span>
             </ion-col>
           </ion-row>
           <ion-row class="day-bar">

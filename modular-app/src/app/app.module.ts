@@ -25,6 +25,7 @@ import { HotCodePush } from '@ionic-native/hot-code-push/ngx';
 import { CallNumber } from '@ionic-native/call-number/ngx';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { FirebaseX } from '@ionic-native/firebase-x/ngx';
+import { LinkDirective } from './directives/link.directive';
 export function initializeAppSetting(appInitService: SettingService) {
   return (): Promise<any> => {
     return appInitService.Init();
@@ -44,7 +45,7 @@ export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/common/i18n/', '.json');
 }
 @NgModule({
-  declarations: [AppComponent, PopoverComponent],
+  declarations: [AppComponent, PopoverComponent, LinkDirective],
   entryComponents: [PopoverComponent],
   imports: [
     HttpClientModule,

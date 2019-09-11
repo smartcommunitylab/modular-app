@@ -7,6 +7,8 @@ import { SettingService } from './services/setting.service';
 import { TranslateService } from '@ngx-translate/core';
 import { HotCodePush } from '@ionic-native/hot-code-push/ngx';
 import { FirebaseX } from "@ionic-native/firebase-x/ngx";
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+
 
 @Component({
   selector: 'app-root',
@@ -16,6 +18,7 @@ export class AppComponent {
   navigate: any;
   myLanguage: any;
   constructor(
+    private iab: InAppBrowser,
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
@@ -33,7 +36,6 @@ export class AppComponent {
 
   initializeApp() {
     this.platform.ready().then(() => {
-      // console.log('token')
       if (this.firebase)
       this.firebase.getToken().then(token => console.log(`The token is ${token}`))
       this.statusBar.overlaysWebView(false);            

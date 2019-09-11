@@ -50,23 +50,28 @@
           }
       };
   </script>
-     <script type="text/javascript">
-        // links catch-all/handler
-        document.onclick = function (e) {
-            e = e ||  window.event;
-            var element = e.target || e.srcElement;
-            // making sure there's an URL
-            if ((element.tagName == 'A') && (element.href)) {
-              // opening in a new window
-                window.open(element.href, "_blank", "location=yes");
-                return false;
-            }
-        };
-    </script>
+
 </head>
 
 <body>
   <app-root></app-root>
 </body>
-
+<script type="text/javascript">
+    // links catch-all/handler
+    document.onclick = function (e) {
+        console.log('ciao');
+        e = e ||  window.event;
+        console.log(window.event)
+        var element = e.target || e.srcElement;
+        // making sure there's an URL
+        if ((element.tagName == 'A') && (element.href)) {
+          // opening in a new window
+          e.preventDefault();
+          console.log("opening")
+          alert("opening");
+            window.open(element.href, "_system");
+            return false;
+        }
+    };
+</script>
 </html>

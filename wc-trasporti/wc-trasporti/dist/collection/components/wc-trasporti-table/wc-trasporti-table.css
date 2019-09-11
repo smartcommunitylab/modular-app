@@ -11,7 +11,9 @@
 * {
   font-family: monospace;
 }
-
+.title{
+  font-family: 'Titillium Web'!important;
+}
 #listaFermate {
   position: absolute;
   top: var(--top-table);

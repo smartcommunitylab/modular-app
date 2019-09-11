@@ -8,7 +8,7 @@
   <ion-slides pager="true">
     <ion-slide *ngFor="let slide of elementsGallery">
       <div class="image-container" (click)="openElement(slide)">
-        <img src={{slide.image}}>
+        <img    style=" width: 100% !important;object-fit: cover !important; " src={{slide.image}}>
         <div class="label-slide"></div>
         <div class="string-slide">{{slide.name}}</div>
       </div>

@@ -1,6 +1,6 @@
 {
   "name": "wcs-comune",
-  "version": "0.0.178",
+  "version": "0.0.182",
   "description": "Stencil Component Starter",
   "module": "dist/esm/index.js",
   "main": "dist/index.js",

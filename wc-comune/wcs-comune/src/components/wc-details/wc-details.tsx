@@ -66,7 +66,47 @@ export class WcDetails {
   private tmpContacts = [];
   private strings: any;
   private url: any;
+  componentDidLoad() {
+    const list = this.element.shadowRoot.querySelectorAll('a');
+    // [].forEach.call(list, li => li.style.color = 'red');
+    for (var i = 0; i < list.length; i++) {
+      var k=i;
+      console.log('found element'+list[k].href)
+      list[i].addEventListener('click', function(event) {
+        event.preventDefault();
+        console.log('click');
+        window.open(list[k].href,'_system')
+      // if (!confirm("sure u want to delete " + this.title)) {
+      // }
+  });
+}
+    // this.element.addEventListener('click', function (event) {
+    //   const target = event.target as HTMLAnchorElement;
+    //   console.log('clicked');
+    //   event.preventDefault();
+    //   console.log("target"+JSON.stringify(target))
+    //   console.log("event"+JSON.stringify(event))
+    //   console.log("event.srcElement"+JSON.stringify(event.srcElement))
+    //   var element = event.target || event.srcElement;
+    //  console.log(element['tagName'])
+    //  console.log(element['href'] )
+
+    //   // making sure there's an URL
+    //   if ((element['tagName'] == 'A') && (element['href'])) {
+    //     console.log('link')
+    //   }
+    //   // If the clicked element doesn't have the right selector, bail
+    //   if (!target.matches('a')) return;
+
+    //   // Don't follow the link
+
+    //   // Log the clicked element in the console
+    //   console.log(event.target);
+
+    // }, false);
+  }
   async componentWillLoad() {
+
     if (this.stringsinput) {
       this.strings = JSON.parse(this.stringsinput);
     }
@@ -218,7 +258,7 @@ export class WcDetails {
 
           {this.expanse
             ? <div class="description">
-            <div class="text" innerHTML={this.text}></div>
+              <div class="text" innerHTML={this.text}></div>
               <div class="title-2" style={{ color: this.headingColor }}>
                 {(this.info && this.info != '') ? "Informazioni" : ""}
               </div>

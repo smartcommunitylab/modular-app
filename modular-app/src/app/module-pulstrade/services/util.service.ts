@@ -38,4 +38,12 @@ export class UtilService {
   hideLoading() {
     this.loadingController.dismiss()
   }
+  async showGenericConnectionMessage(message) {
+    const toast = await this.toastController.create({
+      message: message,
+      color:'light',
+      duration: 2000
+    });
+    toast.present();
+  }
 }

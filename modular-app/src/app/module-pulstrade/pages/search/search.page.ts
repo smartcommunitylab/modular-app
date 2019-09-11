@@ -6,6 +6,7 @@ import { MapService } from '../../services/map.service';
 import { DatePipe } from '@angular/common';
 import { NotificationService } from '../../services/notification.service';
 import { Platform } from '@ionic/angular';
+import { UtilService } from '../../services/util.service';
 
 @Component({
   selector: 'app-search',
@@ -30,7 +31,8 @@ export class SearchPage implements OnInit {
     private datePipe: DatePipe,
     private notificationSrv: NotificationService,
     private route: ActivatedRoute,
-    private platform: Platform
+    private platform: Platform,
+    private utils: UtilService
   ) {
     this.language = window[this.config.getAppModuleName()]['language'];
     this.translate.use(this.language);
@@ -137,9 +139,17 @@ export class SearchPage implements OnInit {
 
   toggleNotification(street) {
     if (this.notif[street.idNumber] != undefined) {
-      this.notificationSrv.disableNotification(street);
+      this.translate.get('add_not').subscribe(x => {
+        this.utils.showGenericConnectionMessage(x+street.streetName);
+
+        this.notificationSrv.disableNotification(street);
+      });
     } else {
-      this.notSrv.setNotification(street);
+      this.translate.get('remove_not').subscribe(x => {
+        this.utils.showGenericConnectionMessage(x+street.streetName);
+
+        this.notificationSrv.setNotification(street);
+      });
     }
     this.notif = this.convertToMapId(this.notSrv.getNotStreets());
   }
@@ -171,10 +181,14 @@ export class SearchPage implements OnInit {
           street.forEach(s => {
             element = document.getElementById('not-' + s.idNumber);
             toggle = document.getElementById('tog-' + s.idNumber);
-            this.notificationSrv.setNotification(street);
             element.style.color = 'green';
             this.translate.get('NOTIFY-ENA').subscribe(x => {
               element.innerHTML = x;
+              var message = this.translate.instant('add_not');
+              this.utils.showGenericConnectionMessage(message+street.streetName);
+
+              this.notificationSrv.setNotification(street);
+
             });
             toggle.checked = true;
           });
@@ -182,10 +196,14 @@ export class SearchPage implements OnInit {
           street.forEach(s => {
             element = document.getElementById('not-' + s.idNumber);
             toggle = document.getElementById('tog-' + s.idNumber);
-            this.notificationSrv.disableNotification(street);
             element.style.color = '#737373';
             this.translate.get('NOTIFY-DIS').subscribe(x => {
+              var message = this.translate.instant('remove_not');
               element.innerHTML = x;
+              this.utils.showGenericConnectionMessage(message+street.streetName);
+
+              this.notificationSrv.disableNotification(street);
+
             });
             toggle.checked = false;
           });
