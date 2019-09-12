@@ -393,19 +393,19 @@
   },
   {
     "file": "142.js",
-    "hash": "0dbfcc05058328242821ccea6ed0d37b"
+    "hash": "10ef5687cd3faf25f44036277d008ee6"
   },
   {
     "file": "142.js.map",
-    "hash": "156eec70973e87e3345f8a62c1ab6aff"
+    "hash": "8531ea1b561fd4b4350629e8a698203d"
   },
   {
     "file": "143.js",
-    "hash": "9d7c1721326091520b995f841cbd962c"
+    "hash": "b3cd377a7510172189daac451824fcfa"
   },
   {
     "file": "143.js.map",
-    "hash": "56c9f5d68704926463531efdc7495cc8"
+    "hash": "57812f9af82bddea5fe1e4406f2a8c29"
   },
   {
     "file": "144.js",
@@ -497,11 +497,11 @@
   },
   {
     "file": "154.js",
-    "hash": "44c48d17789f7fd946179085dd716583"
+    "hash": "230f4f292c3d999e8c3ad1b54f7da170"
   },
   {
     "file": "154.js.map",
-    "hash": "eae9f98e11dbb76bb21c51e19e99cd67"
+    "hash": "14033719df610d4f0fdd7c52d9a05289"
   },
   {
     "file": "155.js",
@@ -1373,15 +1373,15 @@
   },
   {
     "file": "assets/info/i18n/de.json",
-    "hash": "2975c110537e4ad85a97c7feac3293c5"
+    "hash": "c651432f6a2c11b3aee3adde512dcb46"
   },
   {
     "file": "assets/info/i18n/en.json",
-    "hash": "2975c110537e4ad85a97c7feac3293c5"
+    "hash": "c651432f6a2c11b3aee3adde512dcb46"
   },
   {
     "file": "assets/info/i18n/it.json",
-    "hash": "2975c110537e4ad85a97c7feac3293c5"
+    "hash": "c651432f6a2c11b3aee3adde512dcb46"
   },
   {
     "file": "assets/module-comune/i18n/de.json",
@@ -1409,15 +1409,15 @@
   },
   {
     "file": "assets/strade/i18n/de.json",
-    "hash": "f29f258e9a7b5c921fd9667fcd83c0f3"
+    "hash": "b328211739a6722368c3651ac9c05dfb"
   },
   {
     "file": "assets/strade/i18n/en.json",
-    "hash": "6c8ac1d7f3ec9b8a617bf12b9bfa9886"
+    "hash": "5f04b302e3820ac95a5dc2149b9345bd"
   },
   {
     "file": "assets/strade/i18n/it.json",
-    "hash": "ce8154373e7f0cf0b36e119abc341460"
+    "hash": "66253157687b292494a40487c2eb6b84"
   },
   {
     "file": "assets/strade/icons/back.svg",
@@ -1597,11 +1597,11 @@
   },
   {
     "file": "main.js",
-    "hash": "61c954fc9b7b5881ca48288aa72142b5"
+    "hash": "9ac6b109a5f4d7317bf54f5646e4b7bf"
   },
   {
     "file": "main.js.map",
-    "hash": "7fb5ccd889358e65dff61854fe40c789"
+    "hash": "8d58321bfee66511b6c426ce09be06e9"
   },
   {
     "file": "marker-icon.png",
@@ -1649,19 +1649,19 @@
   },
   {
     "file": "pages-funerali-funerali-module.js",
-    "hash": "3849d9812b4c69a09973dc47011492d0"
+    "hash": "cfdae2d8fca976cb200a019f38145d33"
   },
   {
     "file": "pages-funerali-funerali-module.js.map",
-    "hash": "dfec71fcc30044d44f8000ccaa648416"
+    "hash": "39799cfd1a21ba62a99f78b19d41a0b8"
   },
   {
     "file": "pages-home-common-home-common-module.js",
-    "hash": "2a235b87ad496c78076a1334d439496a"
+    "hash": "96aa72171343b7eaeb34cbed8cf0339f"
   },
   {
     "file": "pages-home-common-home-common-module.js.map",
-    "hash": "d24b6f1093497a748352fc6ba5e9fe57"
+    "hash": "0a7b46d3f8f447724fdbdf2958c133b4"
   },
   {
     "file": "pages-home-home-module.js",
@@ -1673,19 +1673,19 @@
   },
   {
     "file": "pages-home-ps-home-ps-module.js",
-    "hash": "e2bbda32e173e97becda458870c6a49f"
+    "hash": "9e0586ca400b9195ab682db6ffea6195"
   },
   {
     "file": "pages-home-ps-home-ps-module.js.map",
-    "hash": "b10028dc3f09c011255a49895bb4198e"
+    "hash": "96aacefffa1d60df46cbdc012ba4df54"
   },
   {
     "file": "pages-home-settings-home-settings-module.js",
-    "hash": "c0dfc347812f16d280c9e78f057a48d4"
+    "hash": "9d9c6b700506196f802c72b8156716f2"
   },
   {
     "file": "pages-home-settings-home-settings-module.js.map",
-    "hash": "a4ec8d8779be86062c1a4da8a274bae3"
+    "hash": "504a7d0e0f4dab3b8fc8d93488c7c7c9"
   },
   {
     "file": "pages-home-trasporti-home-trasporti-module.js",
@@ -1801,19 +1801,19 @@
   },
   {
     "file": "pages-notification-notification-module.js",
-    "hash": "6995b2d44221162104d3936682d98ebf"
+    "hash": "e1068393aede8b873a2b389efbfbf330"
   },
   {
     "file": "pages-notification-notification-module.js.map",
-    "hash": "4ae8887c215709cb83d0ed3516f846a9"
+    "hash": "89e7fd96f062f39daac67eec88ccd30f"
   },
   {
     "file": "pages-notizie-notizie-module.js",
-    "hash": "f8078abd166eb95c08af42ad9bd8b69e"
+    "hash": "342002d0516329780650b3eb681890c6"
   },
   {
     "file": "pages-notizie-notizie-module.js.map",
-    "hash": "7a17d57708ce0bbfe438de2a11050c2c"
+    "hash": "2a3d88ec71e63336f5871f5fa151ec85"
   },
   {
     "file": "pages-profile-profile-module.js",
@@ -1825,11 +1825,11 @@
   },
   {
     "file": "pages-search-search-module.js",
-    "hash": "257f7cc8a621a575dff069e61278cfab"
+    "hash": "1f7bbc69e4ed2e2ab261f58ccd0ba6a7"
   },
   {
     "file": "pages-search-search-module.js.map",
-    "hash": "2326dae446a7f58aaaaddfb1e28c36ef"
+    "hash": "24aae81f2d5f5f4b063297c1c3ceecbe"
   },
   {
     "file": "pages-setting-setting-module.js",
@@ -1841,11 +1841,11 @@
   },
   {
     "file": "pages-street-detail-street-detail-module.js",
-    "hash": "0ee1bdc3fc852cb645bfddc18d28a81b"
+    "hash": "19e11b894be597ba1f8955e147d2df27"
   },
   {
     "file": "pages-street-detail-street-detail-module.js.map",
-    "hash": "56542044e6c0420ee0b957eaa03985c3"
+    "hash": "fcbac1b6ee4e1ca50d7a9fdb44060117"
   },
   {
     "file": "pages-tourist-services-tourist-services-module.js",
@@ -1873,11 +1873,11 @@
   },
   {
     "file": "pages-video-video-module.js",
-    "hash": "c1340e93966394bab23a96817beec12e"
+    "hash": "28c3265fe878d3323e7bc4e41376d7ce"
   },
   {
     "file": "pages-video-video-module.js.map",
-    "hash": "bc76d61b2c3005780f49caae3b4c378c"
+    "hash": "118fb10fe7d28ddcad472a8124d923c7"
   },
   {
     "file": "plugins/call-number/www/CallNumber.js",
@@ -2069,11 +2069,11 @@
   },
   {
     "file": "styles.js",
-    "hash": "339e86e017380a87b5386a99f920a365"
+    "hash": "c8794f5e10e41d353700710be09375c4"
   },
   {
     "file": "styles.js.map",
-    "hash": "0df858743d6456baefa0d84b3de96cf0"
+    "hash": "799cc82939582bc968800e275c1ec402"
   },
   {
     "file": "svg/ios-add-circle-outline.svg",
@@ -4861,10 +4861,10 @@
   },
   {
     "file": "vendor.js",
-    "hash": "19e351a3d52ef28eb2bc001606a8916f"
+    "hash": "6290b4474b38fa34f86b46ce05188369"
   },
   {
     "file": "vendor.js.map",
-    "hash": "7116b82e249cb573b6b28b223a802205"
+    "hash": "7318d85aa0999d5e154080944b29b029"
   }
 ]
