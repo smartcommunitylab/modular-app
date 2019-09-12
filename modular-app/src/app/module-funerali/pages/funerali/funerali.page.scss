@@ -4,7 +4,13 @@
     margin: 10px 10px;
     z-index: 9999;
 }
-
+.date-chip {
+    font-size: 18px;
+    font-weight: bold;
+}
+.funeral-container{
+    margin-top: 18px;
+}
 #barraGiorni {
     text-align: center;
     background-color: #f4f5f8;
@@ -89,9 +95,10 @@ ion-list{
     font-weight: bold;
     --background: #e3e3e3;
     --color: #707070;
-    font-size: 22px;
+    font-size: 27px;
     margin-bottom: 8px;
-
+    padding-top: 8px;
+    padding-bottom: 8px;
     div{
         width: 100%;
     }

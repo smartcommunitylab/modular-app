@@ -18,7 +18,7 @@
     </ion-toolbar>
     <div class="wrapper" *ngIf="!search">
             <div id="idDates" class="scrolling-wrapper-flexbox loop">
-                <ion-chip *ngFor="let c of dates" id="{{c}}" (click)="selectInternalElement(c)"
+                <ion-chip class="date-chip" *ngFor="let c of dates" id="{{c}}" (click)="selectInternalElement(c)"
                     [ngClass]="{'datesSelected': isSelected(c)}">
                     <ion-label class="interaction" [ngClass]="{'datesSelected': c==actualVisualized}">{{c}}</ion-label>
                 </ion-chip>
@@ -31,11 +31,11 @@
     <div id="funerali">
         <ion-list no-lines padding *ngIf="!emptyList">
             <div *ngFor="let c of dates">
-                <ion-item class="label-type ion-text-center" sticky *ngIf="oneElement(c)">
+                <ion-item class="label-type ion-text-center  funeral-container" sticky *ngIf="oneElement(c)">
                     <div>{{c}}</div>
                 </ion-item>
-                <div class="content" >
-                    <div *ngFor="let item of showFunerali[c]; let i = index">
+                <div class="content " >
+                    <div  class="funeral-container" *ngFor="let item of showFunerali[c]; let i = index">
                         <div class="{{item.dataFunerale}}" inViewport [inViewportOptions]="{ threshold: [0]}"
                             (inViewportAction)="onIntersection($event)">
                             <dettaglio-morte (indicazioni)="IndicazioniFunerali(i)" (condividi)="CondividiFunerali(item)"
