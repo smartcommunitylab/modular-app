@@ -20,15 +20,15 @@
 }
 
 .container {
-  margin-left: 3%;
   width: 100%;
 }
 
 .horizontal-line {
-  height: 1px;
+  height: 2px;
   background-color: #707070;
   width: 70%;
   margin: auto;
+  margin-bottom: 37px!important;
 }
 
 .container * {
@@ -65,8 +65,11 @@
 .riga {
   height: 75px;
   position: relative;
+  text-align: center;
 }
-
+.text-center {
+  text-align: center;
+}
 #tipoEvento {
   border-top: 1px solid #707070;
   padding-top: 10px;
@@ -173,18 +176,22 @@
 
 .nome {
   font-size: 20px;
-  width: 80%;
+  /* width: 80%; */
   text-align: center;
   padding: 8px;
+  padding-top: 34px;
+  font-weight: bold;
 }
 
 .label {
   color: #9f9f9f;
+  font-size: 19px;
 }
 
 .dato {
   color: #707070;
-
+  font-weight: bold;
+  font-size: 19px;
 }
 
 .azioni {
@@ -210,4 +217,6 @@
 .data-label {
   display: inline-block;
   width: 50%;
+  margin-top: 39px;
+  text-align: center;
 }

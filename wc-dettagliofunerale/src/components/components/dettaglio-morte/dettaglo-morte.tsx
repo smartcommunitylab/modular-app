@@ -85,15 +85,15 @@ export class Sepoltura {
           <div class="dato">{this.funeraleState.dataMorte ? this.funeraleState.dataMorte : ""}</div>
         </div>
         {this.funeraleState.dataPartenza
-          ? <div class="label">{this.stringState["partenzaFunerale"]}</div>
-          : <div class="label">{this.stringState["luogoFunerale"]}</div>
+          ? <div class="label text-center">{this.stringState["partenzaFunerale"]}</div>
+          : <div class="label text-center">{this.stringState["luogoFunerale"]}</div>
         }
-        <div class="dato">{this.funeraleState.luogoFunerale ? this.funeraleState.luogoFunerale : ""}</div>
+        <div class="dato text-center">{this.funeraleState.luogoFunerale ? this.funeraleState.luogoFunerale : ""}</div>
         <div class="data-label">
           <div class="label ">{this.stringState["dataFunerale"]}</div>
           {this.funeraleState.dataPartenza
-            ? <div class="dato l">{this.funeraleState.dataPartenza}</div>
-            : <div class="dato l">{this.funeraleState.dataFunerale ? this.funeraleState.dataFunerale : ""}</div>
+            ? <div class="dato">{this.funeraleState.dataPartenza}</div>
+            : <div class="dato">{this.funeraleState.dataFunerale ? this.funeraleState.dataFunerale : ""}</div>
           }
         </div>
         <div class="data-label">
