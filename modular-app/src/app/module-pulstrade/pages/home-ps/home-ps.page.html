@@ -40,8 +40,8 @@
 </ion-row>
 <ion-row>
 
-  <ion-col class="ion-text-center interaction" id="text-cleaning" size="12" (click)="goToList()"  [style.visibility]="dragging? 'hidden': 'visible'"  >
-    <div *ngIf="labelResult!=0"><b>{{labelResult}}</b> {{'clean_label' | translate}}</div>
+  <ion-col class="ion-text-center interaction" id="text-cleaning" size="12"  [style.visibility]="dragging? 'hidden': 'visible'"  >
+    <div *ngIf="labelResult!=0" (click)="goToList()" ><b>{{labelResult}}</b> {{'clean_label' | translate}}</div>
     <div *ngIf="labelResult==0"><b>{{'no_cleaning' | translate}}</b></div>
   </ion-col>
 </ion-row>
@@ -50,7 +50,7 @@
 <ion-content>
   <div class="map">
     <div id="home-map">
-        <ion-button icon-only item-right (click)="locate()" color="light" class="button-locate" >
+        <ion-button icon-only item-right (click)="locate()"  class="button-locate" >
             <ion-icon  class="locate" name="locate"></ion-icon>
         </ion-button>  
     </div>

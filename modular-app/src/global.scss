@@ -94,29 +94,33 @@ ion-checkbox {
 
 .welcome {
     .alert-button-inner.sc-ion-alert-md {
-        justify-content: center!important;
+        justify-content: center !important;
     }
+
     .alert-message.sc-ion-alert-ios {
         max-height: none !important;
         max-width: none !important;
         padding-top: none;
 
     }
+
     .alert-message.sc-ion-alert-md {
         max-height: none !important;
         max-width: none !important;
         padding-top: none;
 
     }
-.alert-button-group {
-    position: fixed;
-    background-color: white;
-    bottom: 0px;
-    background-color: white;
-    -webkit-box-shadow: 0px 0px 10px rgba(0,0,0,.8);
-    -moz-box-shadow: 0px 0px 10px rgba(0,0,0,.8);
-    box-shadow: 0px 0px 10px rgba(0,0,0,.8);
-}
+
+    .alert-button-group {
+        position: fixed;
+        background-color: white;
+        bottom: 0px;
+        background-color: white;
+        -webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, .8);
+        -moz-box-shadow: 0px 0px 10px rgba(0, 0, 0, .8);
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, .8);
+    }
+
     .title {
         text-align: center;
         font-size: 22px;
@@ -127,6 +131,7 @@ ion-checkbox {
         color: #11B3EF;
 
     }
+
     .last-text {
         padding-bottom: 50px;
     }
@@ -159,14 +164,27 @@ ion-checkbox {
 }
 
 itemlist {
-     display: contents;
+    display: contents;
 }
-ion-title{
+
+ion-title {
     color: #707070;
     font-size: 29px;
     font-weight: bold;
 }
-ion-back-button{
-    --icon-font-size: 40px!important;
-    --padding-start:0px!important;
+
+ion-back-button {
+    --icon-font-size: 40px !important;
+    --padding-start: 0px !important;
+}
+
+.toast-scheme-active {
+    font-size: 18px;
+    color: #2b981f;
+    font-weight: bold;
+}
+.toast-scheme-deactive {
+    font-size: 18px;
+    color: #ff6c00;
+    font-weight: bold;
 }

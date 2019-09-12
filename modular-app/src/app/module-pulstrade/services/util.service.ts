@@ -38,10 +38,15 @@ export class UtilService {
   hideLoading() {
     this.loadingController.dismiss()
   }
-  async showGenericConnectionMessage(message) {
+  async showGenericConnectionMessage(message,active) {
+    var cssClass='';
+    if (active)
+      cssClass='toast-scheme-active';
+      else cssClass='toast-scheme-deactive'
     const toast = await this.toastController.create({
       message: message,
       color:'light',
+      cssClass: cssClass,
       duration: 2000
     });
     toast.present();

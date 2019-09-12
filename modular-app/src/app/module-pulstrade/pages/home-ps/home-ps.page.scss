@@ -71,15 +71,20 @@ ion-item {
 }
 .locate {
     font-size: 30px!important;
+    background-color: white;
+    color: #11B3EF;
 }
 .button-locate{
     position: absolute;
     bottom: 20px;
     right: 20px;
-    width: 50px;
-    height: 50px;
+    width: 55px;
+    height: 55px;
     z-index: 999;
     font-size: inherit;
+    --color: white!important;
+    --background:white!important;
+    --border-radius: 30px;
    
 }
 

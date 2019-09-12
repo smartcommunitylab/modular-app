@@ -139,14 +139,14 @@ export class SearchPage implements OnInit {
 
   toggleNotification(street) {
     if (this.notif[street.idNumber] != undefined) {
-      this.translate.get('add_not').subscribe(x => {
-        this.utils.showGenericConnectionMessage(x+street.streetName);
+      this.translate.get('remove_not').subscribe(x => {
+        this.utils.showGenericConnectionMessage(x+street.streetName,false);
 
         this.notificationSrv.disableNotification(street);
       });
     } else {
-      this.translate.get('remove_not').subscribe(x => {
-        this.utils.showGenericConnectionMessage(x+street.streetName);
+      this.translate.get('add_not').subscribe(x => {
+        this.utils.showGenericConnectionMessage(x+street.streetName,true);
 
         this.notificationSrv.setNotification(street);
       });
@@ -185,7 +185,7 @@ export class SearchPage implements OnInit {
             this.translate.get('NOTIFY-ENA').subscribe(x => {
               element.innerHTML = x;
               var message = this.translate.instant('add_not');
-              this.utils.showGenericConnectionMessage(message+street.streetName);
+              this.utils.showGenericConnectionMessage(message+street.streetName,true);
 
               this.notificationSrv.setNotification(street);
 
@@ -200,7 +200,7 @@ export class SearchPage implements OnInit {
             this.translate.get('NOTIFY-DIS').subscribe(x => {
               var message = this.translate.instant('remove_not');
               element.innerHTML = x;
-              this.utils.showGenericConnectionMessage(message+street.streetName);
+              this.utils.showGenericConnectionMessage(message+street.streetName,false);
 
               this.notificationSrv.disableNotification(street);
 

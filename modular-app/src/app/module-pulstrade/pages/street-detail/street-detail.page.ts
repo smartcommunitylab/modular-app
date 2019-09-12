@@ -115,16 +115,16 @@ export class StreetDetailPage implements OnInit {
       this.streetDetails.forEach(element => {
         this.notSrv.disableNotification(element);
       })
-      this.translate.get('add_not').subscribe(x => {
-      this.utils.showGenericConnectionMessage(x+this.streetDetails[0].streetName);
+      this.translate.get('remove_not').subscribe(x => {
+      this.utils.showGenericConnectionMessage(x+this.streetDetails[0].streetName,false);
       });
 
     } else {
       this.streetDetails.forEach(element => {
         this.notSrv.setNotification(element);
       })
-      this.translate.get('remove_not').subscribe(x => {
-        this.utils.showGenericConnectionMessage(x+this.streetDetails[0].streetName);
+      this.translate.get('add_not').subscribe(x => {
+        this.utils.showGenericConnectionMessage(x+this.streetDetails[0].streetName,true);
         });
     }
     this.notif = this.convertToMapId(this.notSrv.getNotStreets());
