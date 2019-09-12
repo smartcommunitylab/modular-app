@@ -66,44 +66,39 @@ export class WcDetails {
   private tmpContacts = [];
   private strings: any;
   private url: any;
+  
+  
   componentDidLoad() {
     const list = this.element.shadowRoot.querySelectorAll('a');
-    // [].forEach.call(list, li => li.style.color = 'red');
-    for (var i = 0; i < list.length; i++) {
-      var k=i;
-      console.log('found element'+list[k].href)
-      list[i].addEventListener('click', function(event) {
-        event.preventDefault();
-        console.log('click');
-        window.open(list[k].href,'_system')
-      // if (!confirm("sure u want to delete " + this.title)) {
-      // }
-  });
+//     for (var i = 0; i < list.length; i++) {
+//       var k=i;
+//       console.log('found element'+list[k].href)
+//       list[i].addEventListener('click', function(event) {
+//         event.preventDefault();
+//         console.log('click on element'+list[k].href);
+//         window.open(list[k].href,'_system')
+
+//   });
+// }
+for( var i = 0; i < list.length; i++ ){
+  (function(i){
+    list[i].addEventListener('click', function(event) {
+      event.preventDefault();
+        console.log('click on element'+list[i].href);
+        if (!list[i].href.startsWith('http://')  && !list[i].href.startsWith('https://') && !list[i].href.startsWith('mailto:') && !list[i].href.startsWith('tel:') && !list[i].href.startsWith('sms:'))
+        {
+          var str = list[i].href.split("file:///").pop();
+          list[i].href='https://www.comune.trento.it/'+str;
+        }
+        if (list[i].href.indexOf('http://') == 0 || list[i].href.indexOf('https://') == 0 || list[i].href.indexOf('mailto:') == 0 || list[i].href.indexOf('tel:') == 0 || list[i].href.indexOf('sms:') == 0) {
+              window.open(list[i].href, '_system');
+            } else {
+              console.log("blocking broken link: " + list[i].href);
+            }
+      }, false);
+  })(i);
 }
-    // this.element.addEventListener('click', function (event) {
-    //   const target = event.target as HTMLAnchorElement;
-    //   console.log('clicked');
-    //   event.preventDefault();
-    //   console.log("target"+JSON.stringify(target))
-    //   console.log("event"+JSON.stringify(event))
-    //   console.log("event.srcElement"+JSON.stringify(event.srcElement))
-    //   var element = event.target || event.srcElement;
-    //  console.log(element['tagName'])
-    //  console.log(element['href'] )
 
-    //   // making sure there's an URL
-    //   if ((element['tagName'] == 'A') && (element['href'])) {
-    //     console.log('link')
-    //   }
-    //   // If the clicked element doesn't have the right selector, bail
-    //   if (!target.matches('a')) return;
-
-    //   // Don't follow the link
-
-    //   // Log the clicked element in the console
-    //   console.log(event.target);
-
-    // }, false);
   }
   async componentWillLoad() {
 
