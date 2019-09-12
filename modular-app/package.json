@@ -87,7 +87,7 @@
     "wc-trasporti": "0.0.26",
     "wcs-comune": "0.0.190",
     "wcs-dettagliofunerale": "0.0.11",
-    "wcs-info": "^0.1.8",
+    "wcs-info": "^0.2.4",
     "xcode": "^2.0.0",
     "zone.js": "~0.8.26"
   },

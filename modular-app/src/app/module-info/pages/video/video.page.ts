@@ -32,6 +32,7 @@ export class VideoPage {
     "start": 0
   }
   language: any;
+  stringData: any;
 
 
   constructor(private datiService: DatiServiceService, private utils: UtilsService, private plt: Platform, private social: SocialSharing, private config: ConfigService, private translate: TranslateService) {
@@ -65,6 +66,9 @@ export class VideoPage {
 
   }
   ngOnInit() {
+    this.translate.get('data_pubblicazione').subscribe(x=>{
+      this.stringData=x;
+    });
     this.utils.presentLoading();
     this.datiService.getDati(this.parametriPost).then(data => {
       if (data.length == 0) {
@@ -172,6 +176,6 @@ export class VideoPage {
     let anno: string = data.slice(0, 4);
     let mese: string = data.slice(4, 6);
     let giorno: string = data.slice(6, 8);
-    return giorno + "/" + mese + "/" + anno;
+    return this.stringData+ giorno + "/" + mese + "/" + anno;
   }
 }

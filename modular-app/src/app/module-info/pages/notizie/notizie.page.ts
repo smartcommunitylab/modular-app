@@ -35,6 +35,7 @@ export class NotiziePage {
     "start": 0
   }
   language: any;
+  stringData: any;
 
 
   constructor(private datiService: DatiServiceService, 
@@ -63,6 +64,9 @@ export class NotiziePage {
   }
 
   ngOnInit() {
+    this.translate.get('data_pubblicazione').subscribe(x=>{
+      this.stringData=x;
+    });
     this.utils.presentLoading();
     this.datiService.getDati(this.parametriPost).then(data => {
       if (data.length == 0) {
@@ -181,6 +185,6 @@ export class NotiziePage {
     let anno: string = data.slice(0, 4);
     let mese: string = data.slice(4, 6);
     let giorno: string = data.slice(6, 8);
-    return giorno + "/" + mese + "/" + anno;
+    return this.stringData+ giorno + "/" + mese + "/" + anno;
   }
 }

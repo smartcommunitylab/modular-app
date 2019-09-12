@@ -24,9 +24,9 @@
     <div class="ion-padding" *ngIf="!emptyList; else emptyListTemplate">
       <div *ngFor="let item of datiRicerca" id="contenitoreAnteprima">
         <wc-anteprima showimage=false (eventMappa)="visualizzaMappa(item.coordinates[0], item.coordinates[1])"
-          (eventShare)="visualizzaShare(item.title, item.image ,item.description)" id="elemento" img={{item.image}}
+          (eventShare)="visualizzaShare(item.title, item.image ,item.shortAbstract)" id="elemento" img={{item.image}}
           [titolo]="item.title" orario={{item.eventStart}} datapubblicazione={{formattaData(item.created)}}
-          dataevento={{item.eventDate}} durata={{item.eventTiming}} [descrizione]="item.description"
+          dataevento={{item.eventDate}} durata={{item.eventTiming}} [descrizione]="item.shortAbstract"
           luogo={{item.address}}>
         </wc-anteprima>
       </div>

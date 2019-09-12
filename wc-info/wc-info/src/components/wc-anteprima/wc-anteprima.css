@@ -24,6 +24,7 @@
     max-height: 700px;
     top: var(--imgTop);
     position: relative;
+    object-fit: cover !important;
 }
 
 .component .descrizione {
@@ -113,13 +114,17 @@ color: #11b3ef;
 
 #descrizione {
     position: relative;
-    top: 40px;
+    top: 6px;
     text-align: justify;
     display: var(--Mappa_Display);
-    margin: auto;
+    /* margin: auto; */
     width: 96%;
 }
-
+#abstract{
+    font-style: italic;
+    margin-top: 26px;
+    margin-bottom: 26px;
+}
 .info {
     opacity: var(--OpacityReverse);
     position: relative;
@@ -191,7 +196,7 @@ color: #11b3ef;
     cursor: pointer;
 }
 .detail-bar {
-    height: 2px;
+    height: 4px;
     background: #ff6c00;
     background: -moz-linear-gradient(left, #ff6c00 0%, #ff6c00 25%, #f2c60b 25%, #f2c60b 50%, #6c82ff 50%, #6c82ff 75%, #2d981f 75%, #2d981f 100%);
     background: -webkit-gradient(linear, left top, right top, color-stop(0%, #ff6c00), color-stop(25%, #ff6c00), color-stop(25%, #f2c60b), color-stop(50%, #f2c60b), color-stop(50%, #6c82ff), color-stop(75%, #6c82ff), color-stop(50%, #2d981f), color-stop(75%, #2d981f));
@@ -199,5 +204,6 @@ color: #11b3ef;
     background: -o-linear-gradient(left, #ff6c00 0%, #ff6c00 25%, #f2c60b 25%, #f2c60b 50%, #6c82ff 50%, #6c82ff 75%, #2d981f 50%, #2d981f 75%);
     background: -ms-linear-gradient(left, #ff6c00 0%, #ff6c00 25%, #f2c60b 25%, #f2c60b 50%, #6c82ff 50%, #6c82ff 75%, #2d981f 50%, #2d981f 75%);
     background: linear-gradient(to right, #ff6c00 0%, #ff6c00 25%, #f2c60b 25%, #f2c60b 50%, #6c82ff 50%, #6c82ff 75%, #2d981f 50%, #2d981f 75%);
-    margin: 10px 0px;
+    margin: 10px auto;
+    width: 87%;
   }
