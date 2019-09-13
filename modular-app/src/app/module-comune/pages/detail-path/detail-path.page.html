@@ -1,11 +1,11 @@
 <ion-content padding id="path">
-  <div shape="round" class="back-button" (click)="goBack()">
+  <div shape="round" class=" header-button back-button" (click)="goBack()">
     <ion-icon slot="icon-only" name="arrow-round-back"></ion-icon>
   </div>
-  <div shape="round" class="map-button" (click)="goMap()">
+  <div shape="round" class="header-button  map-button" (click)="goMap()">
     <ion-icon slot="icon-only" name="map"></ion-icon>
   </div>
-  <div shape="round" class="share-button" (click)="share()">
+  <div shape="round" class="header-button  share-button" (click)="share()">
     <ion-icon slot="icon-only" name="share"></ion-icon>
   </div>
   <div *ngIf="!isLoading">

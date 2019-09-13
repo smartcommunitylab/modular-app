@@ -159,7 +159,7 @@
 }
 
 .detail-bar {
-  border-radius: 2px;
+  border-radius: 4px;
   height: 4px;
   background: #ff6c00;
   background: -moz-linear-gradient(left, #ff6c00 0%, #ff6c00 25%, #f2c60b 25%, #f2c60b 50%, #6c82ff 50%, #6c82ff 75%, #2d981f 75%, #2d981f 100%);
@@ -168,7 +168,8 @@
   background: -o-linear-gradient(left, #ff6c00 0%, #ff6c00 25%, #f2c60b 25%, #f2c60b 50%, #6c82ff 50%, #6c82ff 75%, #2d981f 50%, #2d981f 75%);
   background: -ms-linear-gradient(left, #ff6c00 0%, #ff6c00 25%, #f2c60b 25%, #f2c60b 50%, #6c82ff 50%, #6c82ff 75%, #2d981f 50%, #2d981f 75%);
   background: linear-gradient(to right, #ff6c00 0%, #ff6c00 25%, #f2c60b 25%, #f2c60b 50%, #6c82ff 50%, #6c82ff 75%, #2d981f 50%, #2d981f 75%);
-  margin: 10px 0px;
+  margin: 10px auto;
+  /* width: 87%; */
 }
 .expanse-image {
   margin: -17px;

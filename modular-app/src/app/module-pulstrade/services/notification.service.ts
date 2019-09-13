@@ -54,13 +54,25 @@ export class NotificationService {
         var today = new Date().getTime();
         if (today < street.cleaningDay) {
           if (!this.checkIfNotify(street.idNumber, street.cleaningDay)) {
-            noti.push({
-              id: street.idNumber,
-              text: `${tr} ${street.streetName}`,
-              data: street.streetName,
-              vibrate: true,
-              trigger: street.cleaningDay
-            });
+            var time =new Date( street.cleaningDay).getTime();
+            if (time)
+
+            noti.push(
+              {
+                id: street.idNumber,
+                text: `${tr} ${street.streetName}`,
+                data: street.streetName,
+                vibrate: true,
+                trigger: { at: time }
+            }
+            //   {
+            //   id: street.idNumber,
+            //   text: `${tr} ${street.streetName}`,
+            //   data: street.streetName,
+            //   vibrate: true,
+            //   trigger: street.cleaningDay
+            // }
+            );
           }
         }
         // street.forEach(s => {

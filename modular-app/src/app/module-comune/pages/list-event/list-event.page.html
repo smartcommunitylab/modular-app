@@ -33,7 +33,7 @@
     </div>
   <div class="wrapper" *ngIf="!presentFilter">
     <div id="idCategories" class="scrolling-wrapper-flexbox loop">
-      <ion-chip *ngFor="let c of categories" id="{{getClassName(c)}}" (click)="selectInternalElement(getClassName(c))" [ngClass]="{'categorySelected': isSelected(c)}">
+      <ion-chip class="date-chip" *ngFor="let c of categories" id="{{getClassName(c)}}" (click)="selectInternalElement(getClassName(c))" [ngClass]="{'categorySelected': isSelected(c)}">
         <ion-label class="interaction" [ngClass]="{'categorySelected': compareActual(c)}">{{getDateSTring(c)}}</ion-label>
       </ion-chip>
     </div>
