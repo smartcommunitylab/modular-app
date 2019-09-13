@@ -64,8 +64,8 @@ export class WcDetails {
   private contactsJSON: DetailsInfo;
   private tmptags = [];
   private tmpContacts = [];
-  private strings: any;
-  private url: any;
+  // private strings: any;
+  // private url: any;
   
   
   componentDidLoad() {
@@ -102,9 +102,9 @@ for( var i = 0; i < list.length; i++ ){
   }
   async componentWillLoad() {
 
-    if (this.stringsinput) {
-      this.strings = JSON.parse(this.stringsinput);
-    }
+    // if (this.stringsinput) {
+    //   this.strings = JSON.parse(this.stringsinput);
+    // }
     // this.strings = await getLocaleComponentStrings(this.element,this.language);
 
     if (this.contacts) {
@@ -159,11 +159,10 @@ for( var i = 0; i < list.length; i++ ){
     if (arr.phone) {
       tmp.phone = arr.phone;
     }
-    if (arr.url) {
-      this.url = arr.url;
-    }
     tmp.share = this.contactsJSON;
-
+    if (arr.url) {
+      tmp.url = arr.url;
+    }
     var keys = Object.keys(tmp);
 
     keys.forEach(k => {
@@ -176,7 +175,7 @@ for( var i = 0; i < list.length; i++ ){
             <div class="icon icon-contact">
               {this.icons[k](this.secondColor)}
             </div>
-            <div class="contactLabel">{this.strings[k]}</div>
+            {/* <div class="contactLabel">{this.strings[k]}</div> */}
           </div>
         </div>
       )
@@ -231,12 +230,12 @@ for( var i = 0; i < list.length; i++ ){
           <div class="contacts">
             {this.tmpContacts}
           </div>
-          {this.url
+          {/* {this.url
             ? <div class="url" onClick={(event: UIEvent) => this.contactClickHandler("url", this.url, event)}>
               {(this.url) ? this.url : ''}
             </div>
             : ""
-          }
+          } */}
           <div class="datetime">
             {(this.contactsJSON) ? ((this.contactsJSON.date) ? this.contactsJSON.date : '') : ''} {(this.contactsJSON) ? ((this.contactsJSON.time) ? this.contactsJSON.time : '') : ''}
           </div>

@@ -196,14 +196,38 @@
 
 .azioni {
   /* display: inline-block; */
-  width: 40%;
-  margin: 10px;
+  width: 40px;
+  height: 40px;
   background-color: white;
-  border-radius: 8px;
+  border-radius: 20px;
   border: 1px solid #11b3ef;
-  min-width: 120px;
+  /* min-width: 120px; */
   margin: auto;
   display: table;
+  padding: 8px;
+  background-color: #fff;
+  border: 2px solid #11b3ef;
+  border-radius: 40px;
+  height: 47px;
+  width: 47px;
+  /* line-height: 38px; */
+  margin: auto;
+  /* padding: 2px 8px; */
+  text-align: center;
+}
+.azioni svg {
+      /* color: #11b3ef; */
+    /* font-size: 20px!important; */
+    /* text-align: center; */
+    /* margin: 0px 8px; */
+    display: -ms-flexbox;
+    display: flex;
+    height: 100%;
+    display: flex!important;
+    -ms-flex-line-pack: center!important;
+    align-content: center!important;
+    -ms-flex-align: center!important;
+    align-items: center!important;
 }
 
 .azione-label {
