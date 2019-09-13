@@ -434,7 +434,7 @@ dailyStreets:any=[];
     var today = moment();
     var nextDate = moment(nextDay);
     var selectedDate = moment(this.selectedDate);
-    if (!nextDay || (selectedDate.isBefore(today) && nextDate.isAfter(today, 'day'))) {
+    if (!nextDay || (selectedDate.isBefore(today,'day') && nextDate.isAfter(today, 'day'))) {
       this.selectedDate = new Date();
       this.showDate = this.selectedDate.toISOString();
       this.future = true;
