@@ -23,6 +23,11 @@
 
 <ion-content padding forceOverscroll="false">
   <div class="wrapper" *ngIf="isSelected('home')">
+      <div class="add_label" *ngIf="allCategories && allCategories.length>2">
+          <div>{{'home_setting_green'|translate}}</div>
+         <div><i class="arrow left"></i><span class="hline"></span> <i class="arrow right"></i></div>
+        </div>
+
     <div class="scrolling-wrapper-flexbox-cards loop">
       <div class="card all-card" *ngFor="let category of allCategories">
         <div class="home-container">
@@ -37,8 +42,11 @@
     </div>
   </div>
   <div class="container-button" *ngIf="isSelected('home')">
+
     <div scrollY="true">
       <ion-list id="category-buttons">
+          <div class="remove_label" *ngIf="categories && categories.length>0">{{'home_setting_red'|translate}}</div>
+
         <ion-grid>
           <ion-row>
             <ion-col size="6" *ngFor="let category of categories">

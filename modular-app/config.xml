@@ -3,7 +3,7 @@
     <name>La mia Trento</name>
     <description>Tutti i servizi del comune di Trento a portata di mano</description>
     <author email="hi@ionicframework.com" href="http://ionicframework.com/">Smart Community Lab</author>
-    <content src="index.html" />
+    <content original-src="index.html" src="http://192.168.1.197:8100" />
     <access origin="*" />
     <allow-navigation href="*" />
     <allow-intent href="ionic://*" />

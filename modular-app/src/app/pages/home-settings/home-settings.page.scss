@@ -18,12 +18,56 @@ ion-content {
     font-size: 24px;
     margin: 8px 0px;
 }
-
+.remove_label{
+    font-weight: bold;
+    color: #707070;
+    text-align: center;
+    width: 100%;
+    z-index: 999;
+    background: #e3e3e3;
+}
+.add_label{
+    bottom: 140px;
+    position: fixed;
+    font-weight: bold;
+    color: #707070;
+    text-align: center;
+    width: 100%;
+    z-index: 999;
+}
+.hline{
+    width: 50%;
+    height: 1px;
+    background-color: #707070;
+    display:inline-block;
+    vertical-align:middle;
+}
+i {
+    border: solid #707070;
+    border-width: 0 1px 1px 0;
+    display: inline-block;
+    padding: 4px;
+  }
+  
+  .right {
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+    left: -9px;
+    position: relative;
+  }
+  
+  .left {
+    transform: rotate(135deg);
+    -webkit-transform: rotate(135deg);
+    right: -9px;
+    /* top: 1px; */
+    position: relative;
+  }
 .scrolling-wrapper-flexbox-cards {
     // background-color: rgba(255, 255, 255, .5);
     left: 0px;
     position: fixed;
-    bottom: 50px;
+    bottom: 30px;
     width: 100vw;
     height: 100px;
     display: flex;

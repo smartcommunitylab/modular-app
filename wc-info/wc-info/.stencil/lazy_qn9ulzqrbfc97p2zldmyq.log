@@ -1,0 +1,162 @@
+import { createEvent as __stencil_createEvent } from "@stencil/core";
+import { getConnect as __stencil_getConnect } from "@stencil/core";
+import { getContext as __stencil_getContext } from "@stencil/core";
+import { getElement as __stencil_getElement } from "@stencil/core";
+import { Host as __stencil_Host } from "@stencil/core";
+import { h as __stencil_h } from "@stencil/core";
+import { registerInstance as __stencil_registerInstance } from "@stencil/core";
+import { h } from '@stencil/core';
+export class cwAnteprima {
+    constructor(hostRef) {
+        __stencil_registerInstance(this, hostRef);
+        this.showimage = true;
+        this.Component_Height = "100px"; //altezza della componente
+        this.Component_Border = "black";
+        this.Titolo_Visibility = "collapse"; //visualizzazione estesa
+        this.Titolo_Colore = "white"; //delay utile a non far scomparire gli elementi prima della chiusura della finestra
+        this.Titolo_Size = "0px"; //visualizzazione estesa
+        this.Img_Position = "absolute";
+        this.Img_Larghezza = "95px";
+        this.Img_Altezza = "95px";
+        this.Img_MarginLeft = "5px";
+        this.Descrizione_Color = "black";
+        this.Mappa_Display = "none";
+        this.Display = "none";
+        this.DisplayReverse = "block";
+        this.Opacity = "0";
+        this.OpacityReverse = "0";
+        this.aperto = false;
+        this.AddDurata = 1;
+        this.chiudiAnteprima = true;
+        this.eventMappa = __stencil_createEvent(this, "eventMappa", 7);
+        this.eventShare = __stencil_createEvent(this, "eventShare", 7);
+    }
+    //passa a visualizzazione compatta
+    close() {
+        this.Component_Height = "100px";
+        this.Component_Border = "black";
+        this.Titolo_Visibility = "none";
+        this.Titolo_Colore = "white";
+        this.Titolo_Size = "0px";
+        this.Img_Position = "absolute";
+        this.Img_Larghezza = "95px";
+        this.Img_Altezza = "95px";
+        this.Img_MarginLeft = "5px";
+        this.Descrizione_Color = "black";
+        this.Mappa_Display = "none";
+        this.Display = "none";
+        this.DisplayReverse = "block";
+        this.Opacity = "0";
+        this.OpacityReverse = "0";
+    }
+    //passa a visualizzazione estesa
+    open() {
+        this.Component_Height = "auto";
+        this.Component_Border = "white";
+        this.Titolo_Visibility = "block";
+        this.Titolo_Colore = "black";
+        this.Titolo_Size = "25px";
+        this.Img_Position = "relative";
+        this.Img_Larghezza = "96%";
+        this.Img_Altezza = "auto";
+        this.Img_MarginLeft = "0px";
+        this.Descrizione_Color = "white";
+        this.Mappa_Display = "block";
+        setTimeout(() => { this.Display = "block"; }, 100);
+        this.DisplayReverse = "none";
+        this.Opacity = "1";
+        setTimeout(() => { this.OpacityReverse = "1"; }, 100);
+    }
+    DataEvento() {
+        if (this.dataevento != "") {
+            this.AddDurata++;
+            return [
+                h("p", null, h("span", null, "data evento: "), this.dataevento)
+            ];
+        }
+        return;
+    }
+    componentDidLoad() {
+        var links = this.element.shadowRoot.querySelector('.external-link');
+        [].forEach.call(links, link => {
+            link.addEventListener("mousedown", function (event) {
+                console.log("href clicked, lets try to stop event propagation");
+                event.stopPropagation();
+                event.preventDefault();
+                return false;
+            });
+        });
+    }
+    Orario() {
+        if (this.orario != "") {
+            this.AddDurata++;
+            return [
+                h("p", null, h("span", null, "orario: "), this.orario)
+            ];
+        }
+        return;
+    }
+    Durata() {
+        if (this.durata != "" && this.AddDurata < 3) {
+            return [
+                h("p", null, h("span", null, "durata: "), this.durata)
+            ];
+        }
+        return;
+    }
+    VisualizzaDettaglio() {
+        if (this.chiudiAnteprima) {
+            if (!this.aperto)
+                this.open();
+            else
+                this.close();
+            this.aperto = !this.aperto;
+        }
+        else
+            this.chiudiAnteprima = true;
+    }
+    VisualizzaMappa(todo) {
+        this.chiudiAnteprima = false;
+        this.eventMappa.emit(todo);
+    }
+    VisualizzaShare(todo) {
+        this.chiudiAnteprima = false;
+        this.eventShare.emit(todo);
+    }
+    render() {
+        var styles = {
+            '--Component_height': this.Component_Height,
+            '--Component_Border': this.Component_Border,
+            '--Titolo_Visibility': this.Titolo_Visibility,
+            '--Titolo_Colore': this.Titolo_Colore,
+            '--Titolo_Size': this.Titolo_Size,
+            '--Img_Position': this.Img_Position,
+            '--Img_Larghezza': this.Img_Larghezza,
+            '--Img_Altezza': this.Img_Altezza,
+            '--Img_MarginLeft': this.Img_MarginLeft,
+            '--Descrizione_Color': this.Descrizione_Color,
+            '--Mappa_Display': this.Mappa_Display,
+            '--Display': this.Display,
+            '--DisplayReverse': this.DisplayReverse,
+            '--Opacity': this.Opacity,
+            '--OpacityReverse': this.OpacityReverse
+        };
+        return [
+            h("div", { class: "component", onClick: () => this.VisualizzaDettaglio(), style: styles }, h("h1", { id: "titolo" }, this.titolo), h("div", { class: "detail-bar" }), this.showimage
+                ? h("img", { src: this.img })
+                : "", h("div", { class: "margine" }), h("div", { class: "contacts" }, this.link && this.link != ""
+                ? h("div", { class: "external-container" }, h("div", { class: "contact-container", onClick: () => this.openLink(this.link) }, h("div", { class: "icon icon-contact" }, h("svg", { xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 512 512" }, h("path", { d: "M416 199.5h-91.4V64H187.4v135.5H96l160 158.1 160-158.1zM96 402.8V448h320v-45.2H96z", fill: "#AB7C94" })))))
+                : "", this.web && this.link != ""
+                ? h("div", { class: "external-container" }, h("div", { class: "contact-container", onClick: () => this.openLink(this.web) }, h("div", { class: "icon icon-contact" }, h("svg", { xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 512 512" }, h("path", { d: "M74.6 256c0-38.3 31.1-69.4 69.4-69.4h88V144h-88c-61.8 0-112 50.2-112 112s50.2 112 112 112h88v-42.6h-88c-38.3 0-69.4-31.1-69.4-69.4zm85.4 22h192v-44H160v44zm208-134h-88v42.6h88c38.3 0 69.4 31.1 69.4 69.4s-31.1 69.4-69.4 69.4h-88V368h88c61.8 0 112-50.2 112-112s-50.2-112-112-112z", fill: "#AB7C94;" }))), "  "))
+                : ""), h("div", { class: "margine" }), h("div", { class: "descrizione" }, h("div", { id: "centra" })), h("div", { id: "Informazioni" }, h("div", { id: "data", innerHTML: this.datapubblicazione }), h("div", { id: "abstract", innerHTML: this.abstract }), h("div", { class: "testo" }, h("p", { id: "descrizione", innerHTML: this.descrizione }))))
+        ];
+    }
+    openLink(web) {
+        window.open(web, '_blank');
+    }
+    getLink(webInner) {
+        return "<a href='" + webInner + "' class='external-link'></a>";
+    }
+    get element() { return __stencil_getElement(this); }
+    static get style() { return "STYLE_TEXT_PLACEHOLDER:wc-anteprima"; }
+}
