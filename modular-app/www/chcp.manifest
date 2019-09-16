@@ -497,11 +497,11 @@
   },
   {
     "file": "154.js",
-    "hash": "230f4f292c3d999e8c3ad1b54f7da170"
+    "hash": "05679be9e7baffc541d92fe127532ee6"
   },
   {
     "file": "154.js.map",
-    "hash": "14033719df610d4f0fdd7c52d9a05289"
+    "hash": "a4f41eca74fba5c8b9de0594906f8762"
   },
   {
     "file": "155.js",
@@ -1269,15 +1269,15 @@
   },
   {
     "file": "assets/common/i18n/de.json",
-    "hash": "cbd8f87ce6f52ad7cf870390440b1823"
+    "hash": "b667ef6e8cedd897da40dc2fc4db45c4"
   },
   {
     "file": "assets/common/i18n/en.json",
-    "hash": "92bb4e63a2767d9e4f69fb1f8f2f29b7"
+    "hash": "057df5480c7da5e181b2cd1fad294012"
   },
   {
     "file": "assets/common/i18n/it.json",
-    "hash": "837567178847c46c5deb1d8bee6fdb2d"
+    "hash": "4b94d93c9155f66809fadb7686515692"
   },
   {
     "file": "assets/comune/i18n/de.json",
@@ -1665,11 +1665,11 @@
   },
   {
     "file": "pages-home-home-module.js",
-    "hash": "d87464b6f08850e6c652bcd848224fce"
+    "hash": "920bae955079dd2cb164a7e1c499934f"
   },
   {
     "file": "pages-home-home-module.js.map",
-    "hash": "05bbd1e466dfcde2cba0beb3e78545b6"
+    "hash": "7a0ba5b9ce2a4705ed814e789d8da367"
   },
   {
     "file": "pages-home-ps-home-ps-module.js",
@@ -1681,11 +1681,11 @@
   },
   {
     "file": "pages-home-settings-home-settings-module.js",
-    "hash": "9d9c6b700506196f802c72b8156716f2"
+    "hash": "ae3fa651aecd246aaa1a8b13474afe1f"
   },
   {
     "file": "pages-home-settings-home-settings-module.js.map",
-    "hash": "504a7d0e0f4dab3b8fc8d93488c7c7c9"
+    "hash": "19cd925332885858bd17665081e12247"
   },
   {
     "file": "pages-home-trasporti-home-trasporti-module.js",
