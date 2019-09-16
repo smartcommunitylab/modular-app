@@ -8,13 +8,13 @@
     "bike": "",
     "menu_taxi": "",
     "err_too_many_markers":"Troppi marker",
-    "label_delay":"RITARDO",
-    "label_trips":"TIPO",
-    "urbano":"Autobus",
-    "trains":"Treni",
-    "timetable_label":"Orari",
-    "choose_direction_label":"Scegli una direzione",
-    "initdb_label":"Inizializzazione dati in corso, attendere prego",
-    "no_table":"Nessun viaggio presente per la data selezionata"
+    "label_delay":"DELAY",
+    "label_trips":"TYPE",
+    "urbano":"Bus",
+    "trains":"Trains",
+    "timetable_label":"Timetable",
+    "choose_direction_label":"Choose direction",
+    "initdb_label":"Data initialization on going, please wait",
+    "no_table":"No journey available for the selected date"
 
 }

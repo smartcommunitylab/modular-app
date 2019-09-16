@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import * as moment from 'moment';
 import { AlertController } from '@ionic/angular';
 import { Platform } from '@ionic/angular';
@@ -14,7 +14,7 @@ export class ConfigService {
   expiringDate = '20-09-2019'
   // version = 'test';
   version = 'prod';
-  numberVersion='2.0.0alpha2';
+  numberVersion = '2.0.0alpha2';
   carouselUrl = 'https://cit.platform.smartcommunitylab.it/comuneintasca-multi/highlights/TrentoInTasca';
   private appModuleName: string = "app-module";
   private menu: any;
@@ -137,12 +137,13 @@ export class ConfigService {
     return this.carousel;
   }
   loadCarousel(): any {
+    let params = new HttpParams().set('profile', this.getChoosen())
     console.log("load carousel");
     if (this.carousel) {
       return Promise.resolve(this.carousel);
     }
-    this.http.get(this.carouselUrl).toPromise().then(response => {
-      console.log("response"+response);
+    this.http.get(this.carouselUrl, { params: params }).toPromise().then(response => {
+      console.log("response" + response);
 
       this.carousel = response;
     });

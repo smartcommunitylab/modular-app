@@ -14,18 +14,18 @@
     "NOTIFY-DIS": "Deaktivierte Benachrichtigungen",
     "DETAILS": "Details",
     "IN-CLEANING": "Straße in Sauberkeit",
-    "error_init":"Errore inizializzazione dati",
-    "clean_label":"pulizie programmate su quest'area in questa data",
-    "no_street_future":"Non ci sono pulizie programmate per questa zona dopo la data selezionata",
-    "no_street_past":"Non ci sono pulizie programmate per questa zona prima della data selezionata",
-    "no_notify":"Nessuna strada salvata",
-    "no_roads_search":"Nessuna strada trovata",
-    "side_label":"Lato: ",
-    "tratto_label":"Tratto: ",
-    "list_street_label":"Lista pulizie ",
-    "no_cleaning":"Nessuna pulizia programmata",
-    "add_not":"Hai attivato le notifiche per le pulizie strade in ",
-    "remove_not":"Hai disattivato le notifiche pulizie strade per "
+    "error_init":"Dateninitialisierung Fehler",
+    "clean_label":"geplante Reinigung in diesem Bereich in den Daten,",
+    "no_street_future":"keine geplante Reinigung für diesen Bereich nach dem ausgewählten Datum",
+    "no_street_past":"Keine geplante Reinigung für diesen Bereich vor dem ausgewählten Datum",
+    "no_notify":"Keine Straße gespeichern",
+    "no_roads_search":"Keine Straße gefunden",
+    "side_label":"Seite: ",
+    "tratto_label":"Teil: ",
+    "list_street_label":"Reinigungsliste ",
+    "no_cleaning":"Keine planmäßige Reinigung",
+    "add_not":"Sie haben Benachrichtigungen zur Straßenreinigung in aktiviert ",
+    "remove_not":"Sie haben Benachrichtigungen für die Straßenreinigung in deaktiviert "
     
 
 }

@@ -22,6 +22,54 @@
     }
 
   },{
+    "id": "profile_cit_csvimport_Eventi_item_comuneintasca",
+    "name": {
+      "it": "Eventi",
+      "en": "Events",
+      "de": "Events"
+    },
+    "url": "/list-event",
+    "icon": "home",
+    "params": {
+      "selector": {
+        "elementType": "event-item"
+      }
+    }
+  },{
+    "id": "j",
+    "name": {
+      "it": "Trasporti",
+      "en": "Transport",
+      "de": "Verkehrsmittel"
+    },
+    "url": "home-trasporti",
+    "icon": "home"
+
+  },{
+    "id": "184aeb2b2cc299fa85bb3e314eac2b4c",
+    "name": {
+      "it": "Farmacie",
+      "en": "Pharmacy",
+      "de": "Apotheke"
+    },
+    "url": "/farmacie",
+    "icon": "information",
+    "query": {
+      "type": "poi",
+      "classifications": null,
+      "classification": "Farmacia"
+    }
+  },{
+    "id": "profile_cit_2cc4db1674d9e8994658eac954355d31",
+    "name": {
+      "it": "Servizi per il turista",
+      "en": "Tourist services",
+      "de": "Touristendienstleistungen"
+    },
+    "url": "/tourist-services",
+    "icon": "home"
+
+  }, {
     "id": "a",
     "name": {
       "it": "Percorsi Turistici",
@@ -36,32 +84,8 @@
       },
       "type": "itineraries"
     }
-  },{
-    "id": "profile_cit_2cc4db1674d9e8994658eac954355d31",
-    "name": {
-      "it": "Servizi per il turista",
-      "en": "Tourist services",
-      "de": "Touristendienstleistungen"
-    },
-    "url": "/tourist-services",
-    "icon": "home"
-
   },
-  {
-      "id": "profile_cit_csvimport_Eventi_item_comuneintasca",
-      "name": {
-        "it": "Eventi",
-        "en": "Events",
-        "de": "Events"
-      },
-      "url": "/list-event",
-      "icon": "home",
-      "params": {
-        "selector": {
-          "elementType": "event-item"
-        }
-      }
-    }, 
+  
     {
       "id": "profile_cit_csvimport_Mangiare_item_comuneintasca",
       "name": {
@@ -88,13 +112,14 @@
 
 
     },{
-      "id": "j",
+      "id": "g",
+
       "name": {
-        "it": "Trasporti",
-        "en": "Transport",
-        "de": "Verkehrsmittel"
+        "it": "Oggetti Smarriti",
+        "en": "Lost&Found",
+        "de": "Verschollene Gegenstßnde"
       },
-      "url": "home-trasporti",
+      "url": "/notizie",
       "icon": "home"
 
     }
@@ -102,29 +127,16 @@
     
   ],
   "citizen": [    {
-    "id": "184aeb2b2cc299fa85bb3e314eac2b4c",
+    "id": "f",
+  
     "name": {
-      "it": "Farmacie",
-      "en": "Pharmacy",
-      "de": "Apotheke"
+      "it": "Info&Video",
+      "en": "Info&Video",
+      "de": "Infos & Videos"
     },
-    "url": "/farmacie",
-    "icon": "information",
-    "query": {
-      "type": "poi",
-      "classifications": null,
-      "classification": "Farmacia"
-    }
-  }, {
-    "id": "j",
-    "name": {
-      "it": "Trasporti",
-      "en": "Transport",
-      "de": "Verkehrsmittel"
-    },
-    "url": "home-trasporti",
+    "url": "/video",
     "icon": "home"
-
+  
   },{
     "id": "profile_cit_csvimport_Eventi_item_comuneintasca",
     "name": {
@@ -140,26 +152,50 @@
       }
     }
   },{
-      "id": "h",
+    "id": "j",
+    "name": {
+      "it": "Trasporti",
+      "en": "Transport",
+      "de": "Verkehrsmittel"
+    },
+    "url": "home-trasporti",
+    "icon": "home"
 
-      "name": {
-        "it": "Funerali",
-        "en": "Funerals",
-        "de": "Beerdigungen"
-      },
-      "url": "/funerali",
-      "icon": "home"
+  },{
+    "id": "i",
+    "name": {
+      "it": "Pulizia strade",
+      "en": "Street cleaning",
+      "de": "Straßenputzdienst"
+    },
+    "url": "/ps",
+    "icon": "information"
+  },{
+    "id": "h",
 
-    },{
-      "id": "i",
-      "name": {
-        "it": "Pulizia strade",
-        "en": "Street cleaning",
-        "de": "Straßenputzdienst"
-      },
-      "url": "/ps",
-      "icon": "information"
-    },  {
+    "name": {
+      "it": "Funerali",
+      "en": "Funerals",
+      "de": "Beerdigungen"
+    },
+    "url": "/funerali",
+    "icon": "home"
+
+  },{
+    "id": "184aeb2b2cc299fa85bb3e314eac2b4c",
+    "name": {
+      "it": "Farmacie",
+      "en": "Pharmacy",
+      "de": "Apotheke"
+    },
+    "url": "/farmacie",
+    "icon": "information",
+    "query": {
+      "type": "poi",
+      "classifications": null,
+      "classification": "Farmacia"
+    }
+  },   {
       "id": "g",
 
       "name": {
