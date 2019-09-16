@@ -1269,15 +1269,15 @@
   },
   {
     "file": "assets/common/i18n/de.json",
-    "hash": "f35042a90261ed69bbc707b55a1b242c"
+    "hash": "3b7610f8edd070de2051b9e333ee2937"
   },
   {
     "file": "assets/common/i18n/en.json",
-    "hash": "193de3e03fd34d8857f341ef11024c6d"
+    "hash": "05f5c14fe971a2d6d2ef752553f4eccd"
   },
   {
     "file": "assets/common/i18n/it.json",
-    "hash": "ed83b5f60d1a4c2dd610e116e7e53362"
+    "hash": "7fae01bb9f80f05537413247dca3b95b"
   },
   {
     "file": "assets/comune/i18n/de.json",
@@ -1305,11 +1305,11 @@
   },
   {
     "file": "assets/configuration/default-profiles-module.json",
-    "hash": "b1b91bbb846393c697b57b5b0776dc02"
+    "hash": "80034d9c821137d67511ece84cb7a91c"
   },
   {
     "file": "assets/configuration/module-entries.json",
-    "hash": "db9ee2f89f4dacede1e71b8cb43c4d5c"
+    "hash": "8df2652c2ea4a1d2ce519f128e7df2ef"
   },
   {
     "file": "assets/configuration/side-menu.json",
@@ -1373,11 +1373,11 @@
   },
   {
     "file": "assets/info/i18n/de.json",
-    "hash": "c651432f6a2c11b3aee3adde512dcb46"
+    "hash": "a2774ad99985d0b10e83f57d7a5c5422"
   },
   {
     "file": "assets/info/i18n/en.json",
-    "hash": "c651432f6a2c11b3aee3adde512dcb46"
+    "hash": "f2b2345406bf3bc841d22de670332ff7"
   },
   {
     "file": "assets/info/i18n/it.json",
@@ -1409,11 +1409,11 @@
   },
   {
     "file": "assets/strade/i18n/de.json",
-    "hash": "b328211739a6722368c3651ac9c05dfb"
+    "hash": "143865aad57769258784446a60721136"
   },
   {
     "file": "assets/strade/i18n/en.json",
-    "hash": "5f04b302e3820ac95a5dc2149b9345bd"
+    "hash": "9843d6ca152722990e7423c80bbbff50"
   },
   {
     "file": "assets/strade/i18n/it.json",
@@ -1461,11 +1461,11 @@
   },
   {
     "file": "assets/trasporti/i18n/de.json",
-    "hash": "3542d2d03792581d9d35a4ed146b9c7c"
+    "hash": "4e6d0eb64fec6cd0e55e9c4ed6339340"
   },
   {
     "file": "assets/trasporti/i18n/en.json",
-    "hash": "3542d2d03792581d9d35a4ed146b9c7c"
+    "hash": "fdfdbff2d7b470a1b3e68a6dc7d1a8a0"
   },
   {
     "file": "assets/trasporti/i18n/it.json",
@@ -1597,11 +1597,11 @@
   },
   {
     "file": "main.js",
-    "hash": "38bb3180da9fdada871887891b36e07f"
+    "hash": "427946c0de26aa5a33db44004aa4d1dd"
   },
   {
     "file": "main.js.map",
-    "hash": "20cfdd3b2ef218533ad52aef03046e0e"
+    "hash": "9b748d5f022da460b33419f265192862"
   },
   {
     "file": "marker-icon.png",
@@ -1681,11 +1681,11 @@
   },
   {
     "file": "pages-home-settings-home-settings-module.js",
-    "hash": "58f0bd94f0ded08edc42c464aa5330fe"
+    "hash": "6f7b354da6e01f38107ffe246e825c6d"
   },
   {
     "file": "pages-home-settings-home-settings-module.js.map",
-    "hash": "0692ac54b65ce483d1d031a16d230c9b"
+    "hash": "0699ffd312b33351c0e09342759c83a5"
   },
   {
     "file": "pages-home-trasporti-home-trasporti-module.js",
