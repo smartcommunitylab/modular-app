@@ -12,9 +12,19 @@ const MODULE_ENTRIES_KEY: string = "moduleEntries";
 
 export class ConfigService {
   expiringDate = '20-09-2019'
-  version = 'test';
-  // version = 'prod';
+  // version = 'test';
+  version = 'prod';
+  numberVersion='2.0.0alpha2';
   carouselUrl = 'https://cit.platform.smartcommunitylab.it/comuneintasca-multi/highlights/TrentoInTasca';
+  private appModuleName: string = "app-module";
+  private menu: any;
+  private carousel: any;
+  private moduleEntries: any;
+  private allModuleEntries: any;
+  private defaultPosition = {
+    lat: 46.0748,
+    long: 11.1217
+  }
   constructor(private http: HttpClient, private alertController: AlertController, private platform: Platform) { }
 
   async showPopUpExpired(): Promise<any> {
@@ -51,18 +61,13 @@ export class ConfigService {
     return false
 
   }
+  getNumberVersion() {
+    return this.numberVersion;
+  }
   getVersion(): any {
     return this.version;
   }
-  private appModuleName: string = "app-module";
-  private menu: any;
-  private carousel: any;
-  private moduleEntries: any;
-  private allModuleEntries: any;
-  private defaultPosition = {
-    lat: 46.0748,
-    long: 11.1217
-  }
+
 
   Init(): Promise<any> {
     return new Promise<void>((resolve, reject) => {

@@ -26,6 +26,7 @@ export class HomeSettingsPage implements OnInit {
   selectedLanguage: any;
   form: any;
   title: string;
+  version:string;
   constructor(
     private dragulaService: DragulaService,
     private router: Router,
@@ -92,6 +93,7 @@ export class HomeSettingsPage implements OnInit {
     }
   }
   ngOnInit() {
+    this.version = this.config.getNumberVersion();
     this.translate.onDefaultLangChange.subscribe((event: DefaultLangChangeEvent) => {
       this.translate.get('title_app').subscribe(
         value => {

@@ -1269,15 +1269,15 @@
   },
   {
     "file": "assets/common/i18n/de.json",
-    "hash": "b667ef6e8cedd897da40dc2fc4db45c4"
+    "hash": "f35042a90261ed69bbc707b55a1b242c"
   },
   {
     "file": "assets/common/i18n/en.json",
-    "hash": "057df5480c7da5e181b2cd1fad294012"
+    "hash": "193de3e03fd34d8857f341ef11024c6d"
   },
   {
     "file": "assets/common/i18n/it.json",
-    "hash": "4b94d93c9155f66809fadb7686515692"
+    "hash": "ed83b5f60d1a4c2dd610e116e7e53362"
   },
   {
     "file": "assets/comune/i18n/de.json",
@@ -1597,11 +1597,11 @@
   },
   {
     "file": "main.js",
-    "hash": "c8476539ca9ba8ccbd77ef2709eeeb94"
+    "hash": "38bb3180da9fdada871887891b36e07f"
   },
   {
     "file": "main.js.map",
-    "hash": "3131b5d78455b6eeb241fc6094feeb5f"
+    "hash": "20cfdd3b2ef218533ad52aef03046e0e"
   },
   {
     "file": "marker-icon.png",
@@ -1681,11 +1681,11 @@
   },
   {
     "file": "pages-home-settings-home-settings-module.js",
-    "hash": "af24f32337cc0a9c6c565609de7289f6"
+    "hash": "0d2b73797ee93cc8e0108c1a9e87f6f7"
   },
   {
     "file": "pages-home-settings-home-settings-module.js.map",
-    "hash": "dc28819ed27c3bce903c45f11ebbe2e7"
+    "hash": "4fe600c09e2717bda795217285cd746b"
   },
   {
     "file": "pages-home-trasporti-home-trasporti-module.js",

@@ -157,16 +157,27 @@
         </ion-col>
       </ion-row>
       <ion-row>
-        <ion-col>
-            <div class="grey bold ion-text-center"> {{'credits_licenze'|translate}}</div>
-
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col>
-            <div class="credits_mail ion-text-center" (click)="openLink('http://www.smartcommunitylab.it/licenze/')">http://www.smartcommunitylab.it/licenze/</div>
-         </ion-col>
-      </ion-row>
+          <ion-col>
+              <div class="grey bold ion-text-center"> {{'credits_licenze'|translate}}</div>
+  
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+              <div class="credits_mail ion-text-center" (click)="openLink('http://www.smartcommunitylab.it/licenze/')">http://www.smartcommunitylab.it/licenze/</div>
+           </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                <div class="grey bold ion-text-center"> {{'credits_version'|translate}}</div>
+    
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+                <div class="grey ion-text-center">{{version}}</div>
+             </ion-col>
+          </ion-row>
     </ion-grid>
 </div>
   </div>

@@ -22,7 +22,7 @@
       "user_subtitle3":"I servizi",
       "user_text3":"Per iniziare, dicci se sei residente o turista: così possiamo metterti in evidenza le cose che potrebbero interessarti di più. Potrai cambiare questa scelta quando vorrai!",
       "credits_title":"Quest'app e' stata realizzata da:",
-      "credits_version":"versione",
+      "credits_version":"Versione:",
       "credits_collaboration":"Con la collaborazione di:",
       "credits_cultura":"Ufficio 'Cultura e Turismo' del Comune di Trento",
       "credits_tecnical":"Per problemi tecnici:",
@@ -30,6 +30,7 @@
       "credits_licenze":"Licenze:",
       "home_setting_red":"Premi sul rosso per rimuovere i moduli",
       "home_setting_green":"Premi sul verde per aggiungere i moduli"
+      
 
 
 }
