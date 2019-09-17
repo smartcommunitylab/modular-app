@@ -1328,6 +1328,10 @@
     "hash": "562d5fd1b99587774633354b67504afe"
   },
   {
+    "file": "assets/credits/tnsmart.jpg",
+    "hash": "ce474b8c2469b626c74c032ca2996e60"
+  },
+  {
     "file": "assets/credits/tnsmart.png",
     "hash": "213f9c3106c7747a9f9b1dcff3879e19"
   },
@@ -1681,11 +1685,11 @@
   },
   {
     "file": "pages-home-settings-home-settings-module.js",
-    "hash": "6f7b354da6e01f38107ffe246e825c6d"
+    "hash": "8be92f3bf8d11d44ecf3896be13c1290"
   },
   {
     "file": "pages-home-settings-home-settings-module.js.map",
-    "hash": "0699ffd312b33351c0e09342759c83a5"
+    "hash": "d622e0cad98ec4c53df37b542b76f143"
   },
   {
     "file": "pages-home-trasporti-home-trasporti-module.js",
