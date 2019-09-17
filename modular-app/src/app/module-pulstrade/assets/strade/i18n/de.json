@@ -24,8 +24,8 @@
     "tratto_label":"Teil: ",
     "list_street_label":"Reinigungsliste ",
     "no_cleaning":"Keine planmäßige Reinigung",
-    "add_not":"Sie haben Benachrichtigungen zur Straßenreinigung in aktiviert ",
-    "remove_not":"Sie haben Benachrichtigungen für die Straßenreinigung in deaktiviert "
+    "add_not":"Sie haben Benachrichtigungen zur Straßenreinigung in {{streetname}} aktiviert ",
+    "remove_not":"Sie haben Benachrichtigungen für die Straßenreinigung in {{streetname}} deaktiviert "
     
 
 }

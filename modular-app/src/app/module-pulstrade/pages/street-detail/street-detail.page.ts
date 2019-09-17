@@ -115,16 +115,16 @@ export class StreetDetailPage implements OnInit {
       this.streetDetails.forEach(element => {
         this.notSrv.disableNotification(element);
       })
-      this.translate.get('remove_not').subscribe(x => {
-      this.utils.showGenericConnectionMessage(x+this.streetDetails[0].streetName,false);
+      this.translate.get('remove_not',{streetname:this.streetDetails[0].streetName}).subscribe(x => {
+      this.utils.showGenericConnectionMessage(x,false);
       });
 
     } else {
       this.streetDetails.forEach(element => {
         this.notSrv.setNotification(element);
       })
-      this.translate.get('add_not').subscribe(x => {
-        this.utils.showGenericConnectionMessage(x+this.streetDetails[0].streetName,true);
+      this.translate.get('add_not',{streetname:this.streetDetails[0].streetName}).subscribe(x => {
+        this.utils.showGenericConnectionMessage(x,true);
         });
     }
     this.notif = this.convertToMapId(this.notSrv.getNotStreets());

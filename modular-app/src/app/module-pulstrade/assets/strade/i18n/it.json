@@ -24,7 +24,7 @@
     "tratto_label":"Tratto: ",
     "list_street_label":"Lista pulizie ",
     "no_cleaning":"Nessuna pulizia programmata",
-    "add_not":"Hai attivato le notifiche per le pulizie strade in ",
-    "remove_not":"Hai disattivato le notifiche pulizie strade per "
+    "add_not":"Hai attivato le notifiche per le pulizie strade in {{streetname}}",
+    "remove_not":"Hai disattivato le notifiche pulizie strade per {{streetname}}"
 
 }

@@ -24,6 +24,6 @@
     "tratto_label":"Section: ",
     "list_street_label":"List of cleanings ",
     "no_cleaning":"No cleaning scheduled",
-    "add_not":"You have enabled notifications for the cleaning in ",
-    "remove_not":"You have disabled notifications for the cleaning in "
+    "add_not":"You have enabled notifications for the cleaning in {{streetname}}",
+    "remove_not":"You have disabled notifications for the cleaning in {{streetname}}"
 }

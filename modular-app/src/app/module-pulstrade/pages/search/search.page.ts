@@ -139,14 +139,14 @@ export class SearchPage implements OnInit {
 
   toggleNotification(street) {
     if (this.notif[street.idNumber] != undefined) {
-      this.translate.get('remove_not').subscribe(x => {
-        this.utils.showGenericConnectionMessage(x+street.streetName,false);
+      this.translate.get('remove_not',{streetname:street.streetName}).subscribe(x => {
+        this.utils.showGenericConnectionMessage(x,false);
 
         this.notificationSrv.disableNotification(street);
       });
     } else {
-      this.translate.get('add_not').subscribe(x => {
-        this.utils.showGenericConnectionMessage(x+street.streetName,true);
+      this.translate.get('add_not',{streetname:street.streetName}).subscribe(x => {
+        this.utils.showGenericConnectionMessage(x,true);
 
         this.notificationSrv.setNotification(street);
       });
@@ -184,8 +184,8 @@ export class SearchPage implements OnInit {
             element.style.color = 'green';
             this.translate.get('NOTIFY-ENA').subscribe(x => {
               element.innerHTML = x;
-              var message = this.translate.instant('add_not');
-              this.utils.showGenericConnectionMessage(message+street.streetName,true);
+              var message = this.translate.instant('add_not',{streetname:street.streetName});
+              this.utils.showGenericConnectionMessage(message,true);
 
               this.notificationSrv.setNotification(street);
 
@@ -198,9 +198,9 @@ export class SearchPage implements OnInit {
             toggle = document.getElementById('tog-' + s.idNumber);
             element.style.color = '#737373';
             this.translate.get('NOTIFY-DIS').subscribe(x => {
-              var message = this.translate.instant('remove_not');
+              var message = this.translate.instant('remove_not',{streetname:street.streetName});
               element.innerHTML = x;
-              this.utils.showGenericConnectionMessage(message+street.streetName,false);
+              this.utils.showGenericConnectionMessage(message,false);
 
               this.notificationSrv.disableNotification(street);
 
