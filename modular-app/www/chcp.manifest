@@ -1413,15 +1413,15 @@
   },
   {
     "file": "assets/strade/i18n/de.json",
-    "hash": "143865aad57769258784446a60721136"
+    "hash": "a7b716a0a30bc52d3a19beee1e47155a"
   },
   {
     "file": "assets/strade/i18n/en.json",
-    "hash": "9843d6ca152722990e7423c80bbbff50"
+    "hash": "6b8024830dfcf2a1b0736ac82a123fc9"
   },
   {
     "file": "assets/strade/i18n/it.json",
-    "hash": "66253157687b292494a40487c2eb6b84"
+    "hash": "bb530abbc2ddd2bd0a04ce065b81fab1"
   },
   {
     "file": "assets/strade/icons/back.svg",
@@ -1829,11 +1829,11 @@
   },
   {
     "file": "pages-search-search-module.js",
-    "hash": "1f7bbc69e4ed2e2ab261f58ccd0ba6a7"
+    "hash": "0cc4abf83fb334e77e9e04c8e17c8c77"
   },
   {
     "file": "pages-search-search-module.js.map",
-    "hash": "24aae81f2d5f5f4b063297c1c3ceecbe"
+    "hash": "d3c3ce126a54a1eb337b08ca1822f063"
   },
   {
     "file": "pages-setting-setting-module.js",
@@ -1845,11 +1845,11 @@
   },
   {
     "file": "pages-street-detail-street-detail-module.js",
-    "hash": "19e11b894be597ba1f8955e147d2df27"
+    "hash": "e6022bd9759f2db7c25a365d7d101b1b"
   },
   {
     "file": "pages-street-detail-street-detail-module.js.map",
-    "hash": "fcbac1b6ee4e1ca50d7a9fdb44060117"
+    "hash": "05b2948e98e0fa949c20b83a408e45e6"
   },
   {
     "file": "pages-tourist-services-tourist-services-module.js",
