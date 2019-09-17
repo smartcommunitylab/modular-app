@@ -15,7 +15,7 @@ export class SettingService {
   languages: any = {
     'it': 'Italiano',
     'en': 'English',
-    'de': 'Deutch'
+    'de': 'Deutsch'
   };
   setUserLanguage(selectedLanguage: any): any {
     this.setting['language'] = selectedLanguage;
