@@ -1281,15 +1281,15 @@
   },
   {
     "file": "assets/comune/i18n/de.json",
-    "hash": "9294ac6bc12becc4b71ada1a82758d9e"
+    "hash": "fd426f7ca384eefa58f9776e9ad3af8b"
   },
   {
     "file": "assets/comune/i18n/en.json",
-    "hash": "a1ec17705050234f460e067e6cdef519"
+    "hash": "d032532b41758a8227d1f5c6b1f14071"
   },
   {
     "file": "assets/comune/i18n/it.json",
-    "hash": "72bf9e1d6077ea152d7223152c376e50"
+    "hash": "d17ad3f644720d5e386c9476a4e761c7"
   },
   {
     "file": "assets/comune/img/download.svg",
@@ -1305,11 +1305,11 @@
   },
   {
     "file": "assets/configuration/default-profiles-module.json",
-    "hash": "80034d9c821137d67511ece84cb7a91c"
+    "hash": "5a0992fd188b2ff928c46fcd96e6f501"
   },
   {
     "file": "assets/configuration/module-entries.json",
-    "hash": "8df2652c2ea4a1d2ce519f128e7df2ef"
+    "hash": "faa49cfc4d14097df724ad9bf8bc5eb4"
   },
   {
     "file": "assets/configuration/side-menu.json",
@@ -1377,15 +1377,15 @@
   },
   {
     "file": "assets/info/i18n/de.json",
-    "hash": "a2774ad99985d0b10e83f57d7a5c5422"
+    "hash": "9f19d476c205180be45378abb320bd0c"
   },
   {
     "file": "assets/info/i18n/en.json",
-    "hash": "f2b2345406bf3bc841d22de670332ff7"
+    "hash": "31e1a281297de7edd1f0cd5063d3fbf1"
   },
   {
     "file": "assets/info/i18n/it.json",
-    "hash": "c651432f6a2c11b3aee3adde512dcb46"
+    "hash": "04fa4f05052f24cf00c0c01d4be81599"
   },
   {
     "file": "assets/module-comune/i18n/de.json",
@@ -1413,15 +1413,15 @@
   },
   {
     "file": "assets/strade/i18n/de.json",
-    "hash": "a7b716a0a30bc52d3a19beee1e47155a"
+    "hash": "655d2590edde551fd6ccf09782a6fb99"
   },
   {
     "file": "assets/strade/i18n/en.json",
-    "hash": "6b8024830dfcf2a1b0736ac82a123fc9"
+    "hash": "2824004bfa8659c39149fc83efba0b54"
   },
   {
     "file": "assets/strade/i18n/it.json",
-    "hash": "bb530abbc2ddd2bd0a04ce065b81fab1"
+    "hash": "7bd33e2808e4e0481be09e1a25a1146e"
   },
   {
     "file": "assets/strade/icons/back.svg",
@@ -1465,15 +1465,15 @@
   },
   {
     "file": "assets/trasporti/i18n/de.json",
-    "hash": "c2ef267994c003dcaa9f0f43cd57bca8"
+    "hash": "ed481d0c2bf29f5b62abddfcb6e9c09b"
   },
   {
     "file": "assets/trasporti/i18n/en.json",
-    "hash": "dbc413f4f7a345b5b184aa4a4710298f"
+    "hash": "428af38d844ac2da40192672545225ec"
   },
   {
     "file": "assets/trasporti/i18n/it.json",
-    "hash": "3542d2d03792581d9d35a4ed146b9c7c"
+    "hash": "506c55ebce0b2a9dde7848f38492df15"
   },
   {
     "file": "assets/trasporti/marker.png",
@@ -1489,11 +1489,11 @@
   },
   {
     "file": "common.js",
-    "hash": "e6915da464165084bf0092e0209cb756"
+    "hash": "5971cf4e1df7849bae1b75aa80015e1f"
   },
   {
     "file": "common.js.map",
-    "hash": "6f7ad58d90deaba2805698b347a64b9c"
+    "hash": "1b4987cb8dc0219d9ec7bc6e2b2c67da"
   },
   {
     "file": "cordova_plugins.js",
@@ -1653,11 +1653,11 @@
   },
   {
     "file": "pages-funerali-funerali-module.js",
-    "hash": "cfdae2d8fca976cb200a019f38145d33"
+    "hash": "39433627f9a77706f3832b409b018a54"
   },
   {
     "file": "pages-funerali-funerali-module.js.map",
-    "hash": "39799cfd1a21ba62a99f78b19d41a0b8"
+    "hash": "45ec2d5213fbf45a29fcb19336b164e1"
   },
   {
     "file": "pages-home-common-home-common-module.js",
@@ -1677,11 +1677,11 @@
   },
   {
     "file": "pages-home-ps-home-ps-module.js",
-    "hash": "038f381ee46c47feec7712e7d79eed6e"
+    "hash": "472ac757a5561d99d9f680e14e3de2ca"
   },
   {
     "file": "pages-home-ps-home-ps-module.js.map",
-    "hash": "78eb351e4bcbc6fe7ad5af462dbaadee"
+    "hash": "97b68ecae6975d6757563bb5b0885046"
   },
   {
     "file": "pages-home-settings-home-settings-module.js",
@@ -1701,27 +1701,27 @@
   },
   {
     "file": "pages-list-categories-list-categories-module.js",
-    "hash": "03a84092ce690f6c43d8921729ebf567"
+    "hash": "283b4ace8e2a2f2b1709783ec2a42cc2"
   },
   {
     "file": "pages-list-categories-list-categories-module.js.map",
-    "hash": "4713f8b57618f418f2a6998b07d874b2"
+    "hash": "7a3844fd13fbed7f82355e0675a8dd35"
   },
   {
     "file": "pages-list-event-list-event-module.js",
-    "hash": "10aa6292c317d990a4cb079cb5108c2d"
+    "hash": "dbdcd1178648daef349d789d7ffb04a0"
   },
   {
     "file": "pages-list-event-list-event-module.js.map",
-    "hash": "273a47fcffcf2dcb8dccc596080c7ce2"
+    "hash": "1db77bf963b5ecee5f4190cc5f5b4c4c"
   },
   {
     "file": "pages-list-farmacie-list-farmacie-module.js",
-    "hash": "45729c3112ce51fe600794b3300ac617"
+    "hash": "d60f3b461e387143774e8b185901839c"
   },
   {
     "file": "pages-list-farmacie-list-farmacie-module.js.map",
-    "hash": "b3eeb842d169939c2d2ed79e97e71a0d"
+    "hash": "c4842728d3fb6f79a9f1f5c15c583f85"
   },
   {
     "file": "pages-list-food-filter-page-food-filter-page-food-module.js",
@@ -1733,27 +1733,27 @@
   },
   {
     "file": "pages-list-food-list-food-module.js",
-    "hash": "37d1d990ce73de7657c2d12e6a257d96"
+    "hash": "f768ba39abe4e3861bd03de137d8cd93"
   },
   {
     "file": "pages-list-food-list-food-module.js.map",
-    "hash": "53eaf4968d8545a45b6d2565f0b82b73"
+    "hash": "15389a594a99d656b68abeda86510a61"
   },
   {
     "file": "pages-list-path-list-path-module.js",
-    "hash": "a46df750eb764d3a2c5ea9739a95bac1"
+    "hash": "889e8554a1678b1396546a9575ede979"
   },
   {
     "file": "pages-list-path-list-path-module.js.map",
-    "hash": "8aa0611bde158ace5b733504184c1fb7"
+    "hash": "222bb4e1e313e8a62f1a80e1cf705ad0"
   },
   {
     "file": "pages-list-poi-list-poi-module.js",
-    "hash": "7e599a44d2856695f9b3ff0ca67a94c3"
+    "hash": "28a95301628c77ae87b7e5ae103da8d0"
   },
   {
     "file": "pages-list-poi-list-poi-module.js.map",
-    "hash": "bce00caf7560c118b2e256e97aeccd77"
+    "hash": "6ae630c134670ab7e312d685febbc22b"
   },
   {
     "file": "pages-list-rh-filter-page-rh-filter-page-rh-module.js",
@@ -1765,11 +1765,11 @@
   },
   {
     "file": "pages-list-rh-list-rh-module.js",
-    "hash": "558666e70c75a25f95b1f9dd686e08f1"
+    "hash": "da3bf096a361821ab466afea8911e27e"
   },
   {
     "file": "pages-list-rh-list-rh-module.js.map",
-    "hash": "e2008a5ce404f544dd0b40cb6982c57d"
+    "hash": "cccebff7033b88d8492eba920d0ab3b0"
   },
   {
     "file": "pages-list-streets-list-streets-module.js",
@@ -1853,11 +1853,11 @@
   },
   {
     "file": "pages-tourist-services-tourist-services-module.js",
-    "hash": "863fd8b23612ee4e81882743d76672ed"
+    "hash": "2669f7c6017405c26624b7602961973e"
   },
   {
     "file": "pages-tourist-services-tourist-services-module.js.map",
-    "hash": "993bf11053e972c35b2af49a1e5ca309"
+    "hash": "7c07cd0c30797a92ca4856794326b8d4"
   },
   {
     "file": "pages-transport-list-transport-list-module.js",
@@ -1877,11 +1877,11 @@
   },
   {
     "file": "pages-video-video-module.js",
-    "hash": "28c3265fe878d3323e7bc4e41376d7ce"
+    "hash": "dfcf5872996d29b6294c1fa877f42c8a"
   },
   {
     "file": "pages-video-video-module.js.map",
-    "hash": "118fb10fe7d28ddcad472a8124d923c7"
+    "hash": "844529cca9ed240c254ef1a149a92579"
   },
   {
     "file": "plugins/call-number/www/CallNumber.js",
