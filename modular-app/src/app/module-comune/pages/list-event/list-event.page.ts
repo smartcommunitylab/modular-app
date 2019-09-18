@@ -71,6 +71,7 @@ export class ListEventPage implements OnInit {
       });
 
   }
+  
   onScroll(e) {
     // this.isScrolledIntoView();
   }
@@ -171,7 +172,7 @@ export class ListEventPage implements OnInit {
       element.addEventListener('contactClick', async (contact) => {
         var contactParam = JSON.parse((<any>contact).detail)
         if (contactParam.type == 'phone') {
-          window.open('tel:'+contactParam.value,  '_system')
+          window.open('tel:' + contactParam.value, '_system')
 
         }
         if (contactParam.type == 'address') {
@@ -302,7 +303,12 @@ export class ListEventPage implements OnInit {
         this.showPois[p.day.startOf('day').format('DD-MM-YYYY')] = [];
       }
       if (filters ? filters.filter(item => {
-        return (item.isChecked && p.cat.filter(cat => cat == item.value).length > 0)
+        if (p.cat)
+          return (item.isChecked && p.cat.filter(cat => cat == item.value).length > 0)
+        else {
+          console.log(JSON.stringify(p))
+          return false
+        }
         // if (p.cat)
         // return (item.isChecked && (p.cat.filter(cat => cat == item.value).length > 0 || p.parentObjectName == item.value))
         // else (item.isChecked &&   p.parentObjectName == item.value)
@@ -339,7 +345,7 @@ export class ListEventPage implements OnInit {
         else poiElement.description = x.description["it"];
       }
       if (x.image) {
-        poiElement.image = x.image.replace('.jpg','_medium.jpg');;
+        poiElement.image = x.image.replace('.jpg', '_medium.jpg');;
       }
       if (x._id) {
         poiElement.id = x._id;

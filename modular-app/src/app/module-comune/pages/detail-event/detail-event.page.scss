@@ -1,4 +1,4 @@
-.back-button{
+.back-button {
     position: fixed;
     color: #11b3ef;
     --background: white;
@@ -29,4 +29,8 @@
     font-size: 32px;
     // border-radius: 18px;
     z-index: 999;
+
+    ion-icon {
+        height: 100%;
+    }
 }

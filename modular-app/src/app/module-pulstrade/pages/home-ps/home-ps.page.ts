@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { ConfigService } from 'src/app/services/config.service';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -10,6 +10,7 @@ import { ToastController } from '@ionic/angular';
 import { UtilService } from '../../services/util.service';
 import { NotificationService } from '../../services/notification.service';
 import moment from 'moment';
+import { Subscription, fromEvent } from 'rxjs';
 
 @Component({
   selector: 'app-home-ps',
@@ -18,7 +19,8 @@ import moment from 'moment';
   providers: [DatePipe]
 })
 export class HomePage implements OnInit {
-
+  @ViewChild('dateTime') sTime;
+  private backbuttonSubscription: Subscription;
   language: string; /** Actived language */
   myPos: any = this.util.getDefaultPos();
   past: boolean = true;
@@ -106,11 +108,24 @@ dailyStreets:any=[];
         this.myPos = window[this.config.getAppModuleName()]['geolocation'];
       } else this.myPos = this.util.getDefaultPos()
   }
-
+//  ngOnDestroy() {
+//     this.backbuttonSubscription.unsubscribe();
+// }
+focus(){
+console.log("focus");
+}
+cancel(){
+console.log("cancel");
+}
   /**
    * Set current date, get streets ordered by `cleaningDay` property, build map
    */
   ngOnInit() {
+    // const event = fromEvent(document, 'backbutton');
+    // this.backbuttonSubscription = event.subscribe(async () => {
+    //   console.log("click pressed");
+    //   // this.sTime.dismiss();
+    // });
     this.mapSrv.Init().then(() => {
       this.route.queryParams
         .subscribe(params => {

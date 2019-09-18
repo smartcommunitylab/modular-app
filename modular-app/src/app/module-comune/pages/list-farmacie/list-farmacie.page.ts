@@ -130,12 +130,13 @@ export class ListFarmaciePage implements OnInit {
       };
       if (!this.fullPois || this.fullPois.length == 0)
         this.translate.get('init_db').subscribe(value => {
+          this.farmacieTurno = this.translate.instant('farmacie_turno');
           this.dbService.synch(value).then(() => {
             this.dbService.getObjectByQuery(query).then((data) => {
               if (data.docs.length > 0) {
                 this.fullPois = data.docs.map(x => this.convertPois(x));
                 this.addDistance();
-                this.addFarmacieTurno();
+                // this.addFarmacieTurno();
                 this.subCategories(this.fullPois);
                 this.buildShowPois();
                 this.tags = this.buildFilter();
@@ -159,20 +160,10 @@ export class ListFarmaciePage implements OnInit {
     this.turno = false;
   }
   addFarmacieTurno(): any {
-    this.farmacieTurno = `
-    <div class="message">Per informazioni su <strong>orari e turni</strong> consultare l'app <div style="color:#11b3ef" class="ion-text-center"><b>FarmApp</b></div></p></div>
-    `
-    // if (this.fullPois.length > 0)
-    //   this.farmacieTurno = this.fullPois[0].description;
+    // this.farmacieTurno = `
+    // `
   }
   openMarket() {
-    // if (cordova.plugins['market'])
-    //   cordova.plugins['market'].open('com.app.farmappm')
-
-    // this.market.open('com.app.farmappm');
-
-    // cordova.plugins.market.open('your.app.package')
-    //  var value='market://details?id=com.app.farmappm';
     var url = ''
     if (this.plt.is('android'))
       url = 'https://play.google.com/store/apps/details?id=it.pcsoft.FarmComApp'
@@ -180,8 +171,6 @@ export class ListFarmaciePage implements OnInit {
     {
     }
     this.utils.openUrl(url); 
-
-
   }
   addDistance(): any {
     this.fullPois.forEach(element => {

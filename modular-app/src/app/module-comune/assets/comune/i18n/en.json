@@ -21,5 +21,7 @@
     "no_distance_label": "Distance not specified",
     "title_list_poi": "Visit the city",
     "main_event_label": "Main events",
-    "title_filtra":"Filter"
+    "title_filtra":"Filter",
+    "farmacie_turno":"<div class=\"message\">Per informazioni su <strong>orari e turni</strong> consultare l'app <div style=\"color:#11b3ef\" class=\"ion-text-center\"><b>FarmApp</b></div></p></div>"
+
   }
