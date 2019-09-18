@@ -2,7 +2,7 @@
     "HOME": "Home",
     "RH": "Alberghi",
     "Ristoranti":"Ristoranti",
-    "PATH": "Itinerari Turistici",
+    "PATH": "Touristenrouten",
     "EVENTS": "Eventi",
     "MAP": "Mappa",
     "alt_image_string":"Immagine non disponibile",
@@ -12,7 +12,7 @@
     "share_contacts":"Condividi",
     "farmacie_label":"Farmacie",
     "distance_label":"Distanza: ",
-    "trento_informa_label":"Informazioni dal Comune",
+    "trento_informa_label":"Info&Video",
     "avvisi_label":"Oggetti smarriti",
     "empty_list_label":"Nessun elemento presente nella lista",
     "data_pubblicazione":"<b style='color:#707070'>Data pubblicazione: </b>"
