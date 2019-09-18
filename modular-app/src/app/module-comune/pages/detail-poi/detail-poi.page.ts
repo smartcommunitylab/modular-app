@@ -103,19 +103,19 @@ export class DetailPoiPage implements OnInit {
     const poiElement: any = {};
     if (this.poiInput) {
       if (this.poiInput.title) {
-        poiElement.title = this.poiInput.title[this.language];
-        poiElement.title = this.poiInput.title[this.language];
-        poiElement.title = this.poiInput.title["it"];
+        if (this.poiInput.title[this.language])
+          poiElement.title = this.poiInput.title[this.language];
+        else poiElement.title = this.poiInput.title["it"];
       }
       if (this.poiInput.subtitle) {
-        poiElement.subtitle = this.poiInput.subtitle[this.language];
-        poiElement.subtitle = this.poiInput.subtitle[this.language];
-        poiElement.subtitle = this.poiInput.subtitle["it"];
+        if (this.poiInput.subtitle[this.language])
+          poiElement.subtitle = this.poiInput.subtitle[this.language];
+        else poiElement.subtitle = this.poiInput.subtitle["it"];
       }
       if (this.poiInput.description) {
-        poiElement.description = this.poiInput.description[this.language];
-        poiElement.description = this.poiInput.description[this.language];
-        poiElement.description = this.poiInput.description["it"];
+        if (this.poiInput.description[this.language])
+          poiElement.description = this.poiInput.description[this.language];
+        else poiElement.description = this.poiInput.description["it"];
       }
       if (this.poiInput.image) {
         poiElement.image = this.poiInput.image;
