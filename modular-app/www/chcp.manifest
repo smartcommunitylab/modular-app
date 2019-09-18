@@ -1277,19 +1277,19 @@
   },
   {
     "file": "assets/common/i18n/it.json",
-    "hash": "7fae01bb9f80f05537413247dca3b95b"
+    "hash": "c2fdcb1426f416e2551a3cc933198c7e"
   },
   {
     "file": "assets/comune/i18n/de.json",
-    "hash": "165634292448465eaaf595bd0b404b2b"
+    "hash": "05b2a83e6885b3b0715364496d5c21ee"
   },
   {
     "file": "assets/comune/i18n/en.json",
-    "hash": "d9f31d5e57530232aee72f1a1493fbfe"
+    "hash": "01860e6dc9004e559a3b04a0c9ba6eeb"
   },
   {
     "file": "assets/comune/i18n/it.json",
-    "hash": "2aa80bd8bb6ec7caab99114675c31332"
+    "hash": "72bf9e1d6077ea152d7223152c376e50"
   },
   {
     "file": "assets/comune/img/download.svg",
@@ -1489,11 +1489,11 @@
   },
   {
     "file": "common.js",
-    "hash": "a69fb385fe7b9971a780830235917e0f"
+    "hash": "e6915da464165084bf0092e0209cb756"
   },
   {
     "file": "common.js.map",
-    "hash": "e0af427215aa070fdfdde3819042fac4"
+    "hash": "6f7ad58d90deaba2805698b347a64b9c"
   },
   {
     "file": "cordova_plugins.js",
@@ -1601,11 +1601,11 @@
   },
   {
     "file": "main.js",
-    "hash": "427946c0de26aa5a33db44004aa4d1dd"
+    "hash": "9c3e452954f8b181acff57f1f9147fc9"
   },
   {
     "file": "main.js.map",
-    "hash": "9b748d5f022da460b33419f265192862"
+    "hash": "af0c6b1c9e32fa5359d016108308245b"
   },
   {
     "file": "marker-icon.png",
@@ -1613,11 +1613,11 @@
   },
   {
     "file": "pages-detail-event-detail-event-module.js",
-    "hash": "63fe9d5e3bfd75e67951a376f02e5a87"
+    "hash": "7bf1160ba70bc7ce714247ef138c03df"
   },
   {
     "file": "pages-detail-event-detail-event-module.js.map",
-    "hash": "5c89d7526126fd015efab0d2f6f6a37f"
+    "hash": "33316b898116a059559ece752b06300c"
   },
   {
     "file": "pages-detail-info-detail-info-module.js",
@@ -1629,19 +1629,19 @@
   },
   {
     "file": "pages-detail-path-detail-path-module.js",
-    "hash": "fdaa74994ab19b2f2b45d7832c5c495f"
+    "hash": "59b8b0bc4bf3598f13495869ff0f5c87"
   },
   {
     "file": "pages-detail-path-detail-path-module.js.map",
-    "hash": "dcdc2a52607b3097d64465ec53a3f41b"
+    "hash": "f541a423006658053a21e327a779edea"
   },
   {
     "file": "pages-detail-poi-detail-poi-module.js",
-    "hash": "fb4947dcc41092c3ee93fad2a9d35801"
+    "hash": "0312c97a33c00e9b403f646204fe3059"
   },
   {
     "file": "pages-detail-poi-detail-poi-module.js.map",
-    "hash": "86da2c7b4d15779df7fc01fd2e9a79d1"
+    "hash": "8e429c3e353952db3c6011b19f849b8c"
   },
   {
     "file": "pages-favourites-favourites-module.js",
@@ -1677,11 +1677,11 @@
   },
   {
     "file": "pages-home-ps-home-ps-module.js",
-    "hash": "de3b71fe4e53ce8a2aadddb2ae9dab4a"
+    "hash": "038f381ee46c47feec7712e7d79eed6e"
   },
   {
     "file": "pages-home-ps-home-ps-module.js.map",
-    "hash": "c2620097f493f75785182516c1adf66b"
+    "hash": "78eb351e4bcbc6fe7ad5af462dbaadee"
   },
   {
     "file": "pages-home-settings-home-settings-module.js",
@@ -1709,19 +1709,19 @@
   },
   {
     "file": "pages-list-event-list-event-module.js",
-    "hash": "ca6cc6dca8dc4d0ce29b702decdf70dd"
+    "hash": "10aa6292c317d990a4cb079cb5108c2d"
   },
   {
     "file": "pages-list-event-list-event-module.js.map",
-    "hash": "7ee40af2f79ee4ce47cb493597a1c9ec"
+    "hash": "273a47fcffcf2dcb8dccc596080c7ce2"
   },
   {
     "file": "pages-list-farmacie-list-farmacie-module.js",
-    "hash": "1d3e71678275388b723a5532088b2f99"
+    "hash": "45729c3112ce51fe600794b3300ac617"
   },
   {
     "file": "pages-list-farmacie-list-farmacie-module.js.map",
-    "hash": "7c4c530a99d60fb6a1760e5023194b41"
+    "hash": "b3eeb842d169939c2d2ed79e97e71a0d"
   },
   {
     "file": "pages-list-food-filter-page-food-filter-page-food-module.js",
