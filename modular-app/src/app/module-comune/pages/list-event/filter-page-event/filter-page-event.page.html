@@ -18,7 +18,6 @@
       <ion-checkbox (ionChange)="selected=true" slot="end" [(ngModel)]="item.isChecked"></ion-checkbox>
     </ion-item>
   </ion-list>
-
 </ion-content>
 <ion-footer *ngIf="selected">
   <ion-grid>
@@ -28,7 +27,6 @@
       </ion-col>
       <ion-col size="6">
         <ion-button class="button-interaction" (click)="filter()">{{'ok_button'|translate}}</ion-button>
-
       </ion-col>
     </ion-row>
   </ion-grid>
