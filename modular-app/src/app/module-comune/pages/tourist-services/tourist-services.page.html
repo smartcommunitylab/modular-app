@@ -2,7 +2,7 @@
 
   <ion-toolbar>
     <ion-searchbar class="search-services" [ngClass]="{'searchspace': search}" style="display: none"
-      showCancelButton="never" animated (search)="toggleSearch()" (ionInput)="searchChanged($event)"
+      showCancelButton="never" animated   (ionInput)="searchChanged($event)"
       (ionCancel)="toggleSearch()" (ionClear)="toggleSearch()"></ion-searchbar>
     <ion-buttons slot="start">
       <ion-back-button class="interaction"></ion-back-button>

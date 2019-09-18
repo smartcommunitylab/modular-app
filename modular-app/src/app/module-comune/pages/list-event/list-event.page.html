@@ -1,5 +1,5 @@
 <ion-header no-border [ngClass]="{'higher': searchAndIos()}" >
-      <ion-searchbar class="search-event"  [ngClass]="{'searchspace': search}" style="display: none" showCancelButton="always" animated  (search)="toggleSearch()"
+      <ion-searchbar class="search-event"  [ngClass]="{'searchspace': search}" style="display: none" showCancelButton="always" animated 
       (ionInput)="searchChanged($event)" (ionCancel)="toggleSearch()" ></ion-searchbar>
   <ion-toolbar>
 
@@ -42,7 +42,7 @@
 
 <ion-content [scrollEvents]="true" (ionScroll)="onScroll($event)">
 
-  <ion-searchbar style="display: none" showCancelButton animated (search)="toggleSearch()"
+  <ion-searchbar style="display: none" showCancelButton animated  
     (ionInput)="searchChanged($event)" (ionCancel)="toggleSearch()"></ion-searchbar>
   <div *ngIf="!emptyList" >
 

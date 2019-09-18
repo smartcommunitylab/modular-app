@@ -22,5 +22,5 @@
     "title_list_poi":"Visita la città",
     "main_event_label":"Eventi Principali",
     "title_filtra":"Filtra",
-    "farmacie_turno":"<div class=\"message\">Per informazioni su <strong>orari e turni</strong> consultare l'app <div style=\"color:#11b3ef\" class=\"ion-text-center\"><b>FarmApp</b></div></p></div>"
+    "farmacie_turno":"<div class=\"message\">Per informazioni su <strong>orari e turni</strong> consultare l'app <span style=\"color:#11b3ef\" class=\"ion-text-center\"><b>FarmApp</b></span></p></div>"
 }
