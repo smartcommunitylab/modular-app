@@ -31,6 +31,8 @@ export class HomeTrasportiPage extends MainPage implements OnInit {
 
   constructor(private router: Router, private transportService: TransportService, private loadingController: LoadingController, public translate: TranslateService, private dbService: DbService, private config: ConfigService) {
     super(translate);
+    this.language = window[this.config.getAppModuleName()]['language'];
+    this.translate.use(this.language);
   }
 
   async ngOnInit() {

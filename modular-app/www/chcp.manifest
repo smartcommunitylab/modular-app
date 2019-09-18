@@ -1281,11 +1281,11 @@
   },
   {
     "file": "assets/comune/i18n/de.json",
-    "hash": "05b2a83e6885b3b0715364496d5c21ee"
+    "hash": "9294ac6bc12becc4b71ada1a82758d9e"
   },
   {
     "file": "assets/comune/i18n/en.json",
-    "hash": "01860e6dc9004e559a3b04a0c9ba6eeb"
+    "hash": "a1ec17705050234f460e067e6cdef519"
   },
   {
     "file": "assets/comune/i18n/it.json",
@@ -1465,11 +1465,11 @@
   },
   {
     "file": "assets/trasporti/i18n/de.json",
-    "hash": "4e6d0eb64fec6cd0e55e9c4ed6339340"
+    "hash": "c2ef267994c003dcaa9f0f43cd57bca8"
   },
   {
     "file": "assets/trasporti/i18n/en.json",
-    "hash": "fdfdbff2d7b470a1b3e68a6dc7d1a8a0"
+    "hash": "dbc413f4f7a345b5b184aa4a4710298f"
   },
   {
     "file": "assets/trasporti/i18n/it.json",
@@ -1613,11 +1613,11 @@
   },
   {
     "file": "pages-detail-event-detail-event-module.js",
-    "hash": "7bf1160ba70bc7ce714247ef138c03df"
+    "hash": "983593c9f77fcd89297831be765d78ff"
   },
   {
     "file": "pages-detail-event-detail-event-module.js.map",
-    "hash": "33316b898116a059559ece752b06300c"
+    "hash": "8b7a3878f4b5c2e3344c7a117a218bfe"
   },
   {
     "file": "pages-detail-info-detail-info-module.js",
@@ -1629,19 +1629,19 @@
   },
   {
     "file": "pages-detail-path-detail-path-module.js",
-    "hash": "59b8b0bc4bf3598f13495869ff0f5c87"
+    "hash": "bb687d185644fc239b3e1032be8b6276"
   },
   {
     "file": "pages-detail-path-detail-path-module.js.map",
-    "hash": "f541a423006658053a21e327a779edea"
+    "hash": "ea3b27c5664cbd615034ba8a00811892"
   },
   {
     "file": "pages-detail-poi-detail-poi-module.js",
-    "hash": "0312c97a33c00e9b403f646204fe3059"
+    "hash": "534433636500df0b34fa4dcc07b6a79e"
   },
   {
     "file": "pages-detail-poi-detail-poi-module.js.map",
-    "hash": "8e429c3e353952db3c6011b19f849b8c"
+    "hash": "2c4096ff21517721839b56fdcb1471d2"
   },
   {
     "file": "pages-favourites-favourites-module.js",
@@ -1661,11 +1661,11 @@
   },
   {
     "file": "pages-home-common-home-common-module.js",
-    "hash": "96aa72171343b7eaeb34cbed8cf0339f"
+    "hash": "898ec2a2c5c87e1d41b91a5fdedac33b"
   },
   {
     "file": "pages-home-common-home-common-module.js.map",
-    "hash": "0a7b46d3f8f447724fdbdf2958c133b4"
+    "hash": "872ef0cea0dc6d426efb80d27e2a739c"
   },
   {
     "file": "pages-home-home-module.js",
@@ -1685,19 +1685,19 @@
   },
   {
     "file": "pages-home-settings-home-settings-module.js",
-    "hash": "8be92f3bf8d11d44ecf3896be13c1290"
+    "hash": "12ca4106fd36352ea134a851e5258121"
   },
   {
     "file": "pages-home-settings-home-settings-module.js.map",
-    "hash": "d622e0cad98ec4c53df37b542b76f143"
+    "hash": "d15ba796b1482269909c6a0f33991d88"
   },
   {
     "file": "pages-home-trasporti-home-trasporti-module.js",
-    "hash": "47097329faf3b69fa978e46dd46e7862"
+    "hash": "4a9dc31d66c57c82194e28d5b4af0a61"
   },
   {
     "file": "pages-home-trasporti-home-trasporti-module.js.map",
-    "hash": "cac60c00115fcf275f1f4c154a304fb6"
+    "hash": "1217e97e3c6dd8ef6689afebdb383ccb"
   },
   {
     "file": "pages-list-categories-list-categories-module.js",
@@ -2045,11 +2045,11 @@
   },
   {
     "file": "styles.js",
-    "hash": "c8794f5e10e41d353700710be09375c4"
+    "hash": "d68a07a84c926bedea7e69951f95002a"
   },
   {
     "file": "styles.js.map",
-    "hash": "799cc82939582bc968800e275c1ec402"
+    "hash": "a580a005654e8a4d49c4bd755a3f5578"
   },
   {
     "file": "svg/ios-add-circle-outline.svg",
