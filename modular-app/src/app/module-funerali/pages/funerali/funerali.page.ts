@@ -58,7 +58,9 @@ export class FuneraliPage {
   ngOnInit() {
     this.utils.presentLoading()
     this.CaricaDati().then(() => {
-      this.utils.hideLoading();
+      if (this.dates.length > 0) {
+        this.selectFirstDate();}
+              this.utils.hideLoading();
     }, err => {
       this.utils.hideLoading();
     })
@@ -107,7 +109,8 @@ export class FuneraliPage {
   }
   ionViewDidEnter() {
     if (this.dates.length > 0) {
-      this.selectInternalElement(this.refElement);
+      this.selectFirstDate();
+      // this.selectInternalElement(this.refElement);
     }
   }
   subCategories(array: Array<any>) {
