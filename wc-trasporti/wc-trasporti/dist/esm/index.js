@@ -3,4 +3,4 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(require("./es5/index.js"));
+__export(require("./es2017/index.js"));
