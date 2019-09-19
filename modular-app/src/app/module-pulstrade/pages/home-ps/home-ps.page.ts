@@ -108,24 +108,34 @@ dailyStreets:any=[];
         this.myPos = window[this.config.getAppModuleName()]['geolocation'];
       } else this.myPos = this.util.getDefaultPos()
   }
-//  ngOnDestroy() {
-//     this.backbuttonSubscription.unsubscribe();
-// }
+ ngOnDestroy() {
+   if (this.backbuttonSubscription)
+    this.backbuttonSubscription.unsubscribe();
+}
 focus(){
+  const event = fromEvent(document, 'backbutton');
+  if( !this.backbuttonSubscription )
+  this.backbuttonSubscription = event.subscribe(async () => {
+    console.log("click pressed");
+    // this.sTime.dismiss();
+  });
 console.log("focus");
 }
 cancel(){
+  if (this.backbuttonSubscription)
+  this.backbuttonSubscription.unsubscribe();
 console.log("cancel");
 }
+blur(){
+  if (this.backbuttonSubscription)
+  this.backbuttonSubscription.unsubscribe();
+  console.log("blur");
+  }
   /**
    * Set current date, get streets ordered by `cleaningDay` property, build map
    */
   ngOnInit() {
-    // const event = fromEvent(document, 'backbutton');
-    // this.backbuttonSubscription = event.subscribe(async () => {
-    //   console.log("click pressed");
-    //   // this.sTime.dismiss();
-    // });
+
     this.mapSrv.Init().then(() => {
       this.route.queryParams
         .subscribe(params => {

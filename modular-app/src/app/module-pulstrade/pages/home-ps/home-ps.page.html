@@ -27,8 +27,8 @@
   <ion-col  class="ion-text-start interaction " size="2">
     <ion-icon class="icon-home" src="assets/strade/icons/back.svg" (click)="dayBack()"></ion-icon>
   </ion-col>
-  <ion-col class="ion-text-center" size="4" >
-    <ion-datetime #dateTime (ionChange)="setDate($event)" class="date " display-format="DD-MM-YY" picker-format="DD MM YY"
+  <ion-col class="ion-text-center" size="4" (click)="focus($event)">
+    <ion-datetime #dateTime  (ionBlur)="blur($event)" (ionCancel)="cancel($event)"  (ionChange)="setDate($event)" class="date " display-format="DD-MM-YY" picker-format="DD MM YY"
       [value]="showDate"></ion-datetime>
   </ion-col>
   <ion-col class="ion-text-end interaction" size="2">
