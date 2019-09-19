@@ -1653,11 +1653,11 @@
   },
   {
     "file": "pages-funerali-funerali-module.js",
-    "hash": "39433627f9a77706f3832b409b018a54"
+    "hash": "5b729759b7118d3f0e7e646a79f93ff3"
   },
   {
     "file": "pages-funerali-funerali-module.js.map",
-    "hash": "45ec2d5213fbf45a29fcb19336b164e1"
+    "hash": "5c4026d669b1392d5036c3129801ad1f"
   },
   {
     "file": "pages-home-common-home-common-module.js",
@@ -1677,11 +1677,11 @@
   },
   {
     "file": "pages-home-ps-home-ps-module.js",
-    "hash": "472ac757a5561d99d9f680e14e3de2ca"
+    "hash": "a2e688b67afe101da40ccaead3661e74"
   },
   {
     "file": "pages-home-ps-home-ps-module.js.map",
-    "hash": "97b68ecae6975d6757563bb5b0885046"
+    "hash": "d3b53f3f2ef99af0c90c5d627ae19726"
   },
   {
     "file": "pages-home-settings-home-settings-module.js",
@@ -1693,11 +1693,11 @@
   },
   {
     "file": "pages-home-trasporti-home-trasporti-module.js",
-    "hash": "4a9dc31d66c57c82194e28d5b4af0a61"
+    "hash": "afa8e335997c9420f3a89bdf6f6f67dc"
   },
   {
     "file": "pages-home-trasporti-home-trasporti-module.js.map",
-    "hash": "1217e97e3c6dd8ef6689afebdb383ccb"
+    "hash": "345bfe6b2786a959c20b8e8075847417"
   },
   {
     "file": "pages-list-categories-list-categories-module.js",
