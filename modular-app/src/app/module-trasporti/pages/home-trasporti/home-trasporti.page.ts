@@ -189,7 +189,7 @@ export class HomeTrasportiPage extends MainPage implements OnInit {
 
       // group with single route: go to table
     } else if (e.group.routes != null && e.group.routes.length == 1) {
-      this.router.navigate(['/tt', e.ref, e.agencyId, e.group.label, e.group.routes[0].routeSymId, e.title, e.color]);
+      this.router.navigate(['/tt', e.ref, e.agencyId, e.group.label, e.group.routes[0].routeSymId, e.group.routes[0].title, e.color]);
 
       // group with multiple elements: go to group
     } else {
