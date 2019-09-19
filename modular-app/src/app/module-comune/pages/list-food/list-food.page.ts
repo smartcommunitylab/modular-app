@@ -49,7 +49,7 @@ export class ListFoodPage implements OnInit {
     private translate: TranslateService,
     private geoSrv: GeoService,
     private utils: UtilsService,
-    private plt:Platform
+    private plt: Platform
 
   ) {
     if (window[this.config.getAppModuleName()]['language'])
@@ -114,7 +114,7 @@ export class ListFoodPage implements OnInit {
       // console.log(contact)
       var contactParam = JSON.parse((<any>contact).detail)
       if (contactParam.type == 'phone') {
-        window.open('tel:'+contactParam.value,  '_system')
+        window.open('tel:' + contactParam.value, '_system')
 
       }
       if (contactParam.type == 'address') {
@@ -214,7 +214,7 @@ export class ListFoodPage implements OnInit {
         else poiElement.description += '<br/>' + x.description["it"];
       }
       if (x.image) {
-        poiElement.image = x.image.replace('.jpg','_medium.jpg');;
+        poiElement.image = x.image.replace('.jpg', '_medium.jpg');;
       }
       if (x._id) {
         poiElement.id = x._id;
@@ -292,6 +292,8 @@ export class ListFoodPage implements OnInit {
           return (el.category == c);
         });
       });
+      this.orderArray('near', this);
+
     }
   }
   oneElement(category) {
@@ -300,13 +302,22 @@ export class ListFoodPage implements OnInit {
   searchChanged(input: any) {
     clearTimeout(this.typingTimer);
     this.typingTimer = setTimeout(() => {
-      const value = input.detail.target.value;
-      const _this = this;
-      _this.categories.forEach(c => {
-        this.showPois[c] = this.fullPois.filter(function (el) {
-          return (el.title.toLowerCase().indexOf(value.toLowerCase()) > -1);
+      if (input.detail) {
+        const value = input.detail.target.value;
+        const _this = this;
+        _this.categories.forEach(c => {
+          this.showPois[c] = this.fullPois.filter(function (el) {
+            return (el.title.toLowerCase().indexOf(value.toLowerCase()) > -1);
+          });
+          this.orderArray('near', this);
+
         });
-      });
+
+      } else {
+        this.buildShowPois();
+        this.orderArray('near', this);
+
+      }
     }, this.doneTypingInterval);
 
   }
@@ -383,6 +394,8 @@ export class ListFoodPage implements OnInit {
     } else {
       this.buildShowPois();
     }
+    this.orderArray('near', this);
+
   }
 
 

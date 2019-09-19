@@ -448,6 +448,7 @@ export class ListEventPage implements OnInit {
   searchChanged(input: any) {
     clearTimeout(this.typingTimer);
     this.typingTimer = setTimeout(() => {
+      if (input.detail){
       const value = input.detail.target.value;
       const _this = this;
       _this.categories.forEach(c => {
@@ -457,6 +458,13 @@ export class ListEventPage implements OnInit {
           return false
         });
       });
+    }else {
+      this.categories.forEach(c => {
+        this.showPois[c] = this.fullPois.filter(function (el) {
+            return (el.day.startOf('day').format('DD-MM-YYYY') == c.startOf('day').format('DD-MM-YYYY'));
+        });
+      });
+    }
     }, this.doneTypingInterval);
 
   }
