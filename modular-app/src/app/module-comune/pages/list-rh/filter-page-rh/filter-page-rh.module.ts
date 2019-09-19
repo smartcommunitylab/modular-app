@@ -5,22 +5,24 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { FilterPageRhPage } from './filter-page-rh.page';
+// import { FilterPageRhPage } from './filter-page-rh.page';
 
-const routes: Routes = [
-  {
-    path: '',
-    component: FilterPageRhPage
-  }
-];
+// const routes: Routes = [
+//   {
+//     path: '',
+//     component: FilterPageRhPage
+//   }
+// ];
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
-    IonicModule,
-    RouterModule.forChild(routes)
-  ],
-  declarations: [FilterPageRhPage]
+    IonicModule
+    // ,
+    // RouterModule.forChild(routes)
+  ]
+  // ,
+  // declarations: [FilterPageRhPage]
 })
 export class FilterPageRhPageModule {}

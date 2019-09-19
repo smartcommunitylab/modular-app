@@ -5,22 +5,24 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { FilterPageEventPage } from './filter-page-event.page';
+// import { FilterPageEventPage } from './filter-page-event.page';
 
-const routes: Routes = [
-  {
-    path: '',
-    component: FilterPageEventPage
-  }
-];
+// const routes: Routes = [
+//   {
+//     path: '',
+//     component: FilterPageEventPage
+//   }
+// ];
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
-    IonicModule,
-    RouterModule.forChild(routes)
-  ],
-  declarations: [FilterPageEventPage]
+    IonicModule
+    // ,
+    // RouterModule.forChild(routes)
+  ]
+  // ,
+  // declarations: [FilterPageEventPage]
 })
 export class FilterPageEventPageModule {}

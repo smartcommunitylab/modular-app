@@ -13,7 +13,6 @@ const routes: Routes = [
     { path: 'list-rh', loadChildren: './pages/list-rh/list-rh.module#ListRHPageModule' },
     { path: 'detail-poi', loadChildren: './pages/detail-poi/detail-poi.module#DetailPoiPageModule' },
     { path: 'detail-path', loadChildren: './pages/detail-path/detail-path.module#DetailPathPageModule' },
-    { path: 'list-categories', loadChildren: './pages/list-categories/list-categories.module#ListCategoriesPageModule' },
     { path: 'detail-path', loadChildren: './pages/detail-path/detail-path.module#DetailPathPageModule' },
     { path: 'map-path', loadChildren: './pages/map-path/map-path.module#MapPathPageModule' },
     { path: 'list-food', loadChildren: './pages/list-food/list-food.module#ListFoodPageModule' },

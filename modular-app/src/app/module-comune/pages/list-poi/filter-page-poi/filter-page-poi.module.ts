@@ -5,22 +5,24 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { FilterPagePoiPage } from './filter-page-poi.page';
+// import { FilterPagePoiPage } from './filter-page-poi.page';
 
-const routes: Routes = [
-  {
-    path: '',
-    component: FilterPagePoiPage
-  }
-];
+// const routes: Routes = [
+//   {
+//     path: '',
+//     component: FilterPagePoiPage
+//   }
+// ];
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
-    IonicModule,
-    RouterModule.forChild(routes)
-  ],
-  declarations: [FilterPagePoiPage]
+    IonicModule
+    // ,
+    // RouterModule.forChild(routes)
+  ]
+  // ,
+  // declarations: [FilterPagePoiPage]
 })
 export class FilterPagePoiPageModule {}
