@@ -1,8 +1,8 @@
 {
     "home_trasporto": "Transport",
     "menu_plan": "",
-    "menu_real_time_bus_urban": "Autobus",
-    "menu_real_time_train": "Treni",
+    "menu_real_time_bus_urban": "Bus",
+    "menu_real_time_train": "Trains",
     "menu_real_time_park": "",
     "parking": "",
     "bike": "",
