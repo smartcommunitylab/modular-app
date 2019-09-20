@@ -2057,7 +2057,7 @@
   },
   {
     "file": "assets/common/i18n/it.json",
-    "hash": "2f29e386f92ce41efd378e7c2d06de83"
+    "hash": "04e11fb1a94a132e5264d50398f312fe"
   },
   {
     "file": "assets/comune/i18n/de.json",
@@ -2249,7 +2249,7 @@
   },
   {
     "file": "assets/trasporti/i18n/en.json",
-    "hash": "428af38d844ac2da40192672545225ec"
+    "hash": "41ff76af0fa911666762388cb0826fbb"
   },
   {
     "file": "assets/trasporti/i18n/it.json",
@@ -2521,11 +2521,11 @@
   },
   {
     "file": "pages-list-event-list-event-module.js",
-    "hash": "3346b45fa1f7e034ee133da521ba304b"
+    "hash": "d2e07655bce3bf7ce3d675e14742b622"
   },
   {
     "file": "pages-list-event-list-event-module.js.map",
-    "hash": "44a8cac46fc957bbbed240d50f01aa6d"
+    "hash": "8c010403005eec3793865cc6c6b98978"
   },
   {
     "file": "pages-list-farmacie-list-farmacie-module.js",
@@ -2553,11 +2553,11 @@
   },
   {
     "file": "pages-list-path-list-path-module.js",
-    "hash": "889e8554a1678b1396546a9575ede979"
+    "hash": "e7fc73c16835fb393696e9e780f5c81f"
   },
   {
     "file": "pages-list-path-list-path-module.js.map",
-    "hash": "222bb4e1e313e8a62f1a80e1cf705ad0"
+    "hash": "e5f763d2b188c9c708db58f2f89ef7b6"
   },
   {
     "file": "pages-list-poi-list-poi-module.js",
