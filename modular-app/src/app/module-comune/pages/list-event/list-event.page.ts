@@ -459,11 +459,7 @@ export class ListEventPage implements OnInit {
         });
       });
     }else {
-      this.categories.forEach(c => {
-        this.showPois[c] = this.fullPois.filter(function (el) {
-            return (el.day.startOf('day').format('DD-MM-YYYY') == c.startOf('day').format('DD-MM-YYYY'));
-        });
-      });
+      this.buildShowPois()
     }
     }, this.doneTypingInterval);
 
