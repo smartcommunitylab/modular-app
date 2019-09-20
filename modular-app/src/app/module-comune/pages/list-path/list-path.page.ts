@@ -4,6 +4,7 @@ import { DbService } from '../../services/db.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { UtilsService } from '../../services/utils.service';
+import { ConfigService } from '../../services/config.service';
 
 @Component({
   selector: 'app-list-path',
@@ -20,8 +21,9 @@ export class ListPathPage implements OnInit {
   search = false;
 
   constructor(public navCtrl: NavController,private plt: Platform, private utils: UtilsService, public dbService: DbService, public alertCtrl: AlertController,
-    private router: Router, private route: ActivatedRoute, private translate: TranslateService) {
-    this.translate.use(this.language);
+    private router: Router, private route: ActivatedRoute, private translate: TranslateService, private config:ConfigService) {
+      this.language = window[this.config.getAppModuleName()]['language'];
+      this.translate.use(this.language);
   }
   ngOnInit() {
     this.utils.presentLoading();
