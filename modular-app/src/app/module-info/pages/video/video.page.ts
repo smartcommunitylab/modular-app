@@ -76,6 +76,7 @@ export class VideoPage {
       }
       this.DatiEvento = data;
       this.DatiEvento.forEach(evento => {
+        if (evento.image)
         evento.image = evento.image.replace('.jpg', '_medium.jpg');
       })
       this.datiRicerca = this.DatiEvento;
@@ -90,7 +91,7 @@ export class VideoPage {
     this.isRicercaOpen = !this.isRicercaOpen;
     const searchbar = <HTMLElement>document.querySelector('.search-video');
     if (searchbar.style.display === 'none') {
-      searchbar.style.display = 'unset';
+      searchbar.style.display = 'contents';
       searchbar.focus();
       this.datiRicerca = this.DatiEvento;
     } else {

@@ -23,7 +23,10 @@ html {
 .fixed {
     position: fixed !important;
 }
-
+.searchbar-input {
+    border: 0 !important;
+    box-shadow: none !important;
+}
 .spacing {
     height: 50px !important;
 }
