@@ -1,5 +1,5 @@
 <ion-header [ngClass]="{'higher': searchAndIos()}" >
-    <ion-searchbar class="search-notizie" [ngClass]="{'searchspace': isRicercaOpen}" style="display: none"  showCancelButton="always" animated (ionChange)="Ricerca()" (ionCancel)="OpenCloseRicerca()"  placeholder="Cerca" id="barraDiRicerca"
+    <ion-searchbar class="search-notizie" [ngClass]="{'searchspace': isRicercaOpen}" style="display: none"  showCancelButton="always" animated (ionChange)="Ricerca()" (ionCancel)="OpenCloseRicerca()"   placeholder="{{'label_search' | translate}}" id="barraDiRicerca"
     [(ngModel)]="daCercare"></ion-searchbar>
   <ion-toolbar>
 

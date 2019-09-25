@@ -22,6 +22,7 @@
     "title_list_poi": "Besuche die Stadt",
     "main_event_label": "Wichtige Evente",
     "title_filtra":"Filter",
+    "label_search":"Suche",
     "farmacie_turno":"<div class=\"message\"><strong>Öffnungszeiten und Apotheke im Dienst </strong> nutzen Sie bitte die App  <span style=\"color:#11b3ef\" class=\"ion-text-center\"><b>FarmApp</b></span></p></div>"
 
 }

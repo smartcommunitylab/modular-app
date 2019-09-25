@@ -15,5 +15,7 @@
     "trento_informa_label":"Info&Video",
     "avvisi_label":"Oggetti smarriti",
     "empty_list_label":"Nessun elemento presente nella lista",
-    "data_pubblicazione":"<b style='color:#707070'>Data pubblicazione: </b>"
+    "data_pubblicazione":"<b style='color:#707070'>Data pubblicazione: </b>",
+    "label_search":"Cerca"
+
 }

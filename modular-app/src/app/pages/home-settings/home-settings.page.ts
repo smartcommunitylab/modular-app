@@ -131,7 +131,7 @@ export class HomeSettingsPage implements OnInit {
   saveHome() {
     this.config.storeModuleEntries(this.categories);
     this.saveOtherSetting();
-    this.close();
+    //this.close();
   }
   close() {
     this.navCtrl.navigateRoot('/home-common');

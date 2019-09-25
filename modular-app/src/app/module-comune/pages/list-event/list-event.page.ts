@@ -318,6 +318,8 @@ export class ListEventPage implements OnInit {
     });
     //orderArray
     this.orderArray('asc', this);
+    this.content.scrollToTop(1500);
+
   }
 
   convertPois(x) {

@@ -15,5 +15,6 @@
     "trento_informa_label":"Infos&Videos",
     "avvisi_label":"Verlorene Gegenstände",
     "empty_list_label":"Keine Elemente in der Liste",
-    "data_pubblicazione":"<b style='color:#707070'>Veröffentlichungsdatum: </b>"
+    "data_pubblicazione":"<b style='color:#707070'>Veröffentlichungsdatum: </b>",
+    "label_search":"Suche"
 }

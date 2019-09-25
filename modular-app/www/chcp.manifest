@@ -13,7 +13,7 @@
   },
   {
     "file": "1.js",
-    "hash": "7cb55db7539474f3c101e6bad781789f"
+    "hash": "fdad8ca1c2b6e41a87b5bbb232375e19"
   },
   {
     "file": "1.js.map",
@@ -2061,15 +2061,15 @@
   },
   {
     "file": "assets/comune/i18n/de.json",
-    "hash": "fd426f7ca384eefa58f9776e9ad3af8b"
+    "hash": "e1d850a1f811f98d8713cd1e64b287e1"
   },
   {
     "file": "assets/comune/i18n/en.json",
-    "hash": "d032532b41758a8227d1f5c6b1f14071"
+    "hash": "87c8b40abbfc8ac8d9d4575ee25e7dab"
   },
   {
     "file": "assets/comune/i18n/it.json",
-    "hash": "d17ad3f644720d5e386c9476a4e761c7"
+    "hash": "f38fbd182cf6fab933423259fe0eb52d"
   },
   {
     "file": "assets/comune/img/download.svg",
@@ -2137,15 +2137,15 @@
   },
   {
     "file": "assets/funerali/i18n/de.json",
-    "hash": "4276101f2140ec7432328f5514fbb657"
+    "hash": "1ed6d102d7ddfadb42f123eae5503698"
   },
   {
     "file": "assets/funerali/i18n/en.json",
-    "hash": "a1dbd6fda3d279528e6c59436363114d"
+    "hash": "067e21ad484bf7574d4701cbd1ce5a88"
   },
   {
     "file": "assets/funerali/i18n/it.json",
-    "hash": "5bb7bf0bdee302f38ee741231ba49252"
+    "hash": "c9f2f5f38fe0a96377417d3fd29fea81"
   },
   {
     "file": "assets/icon/favicon.png",
@@ -2157,15 +2157,15 @@
   },
   {
     "file": "assets/info/i18n/de.json",
-    "hash": "9f19d476c205180be45378abb320bd0c"
+    "hash": "8b4ed9c72600e914a934767913e3e867"
   },
   {
     "file": "assets/info/i18n/en.json",
-    "hash": "31e1a281297de7edd1f0cd5063d3fbf1"
+    "hash": "cec7c854e7a0ea11ce56fc8718751863"
   },
   {
     "file": "assets/info/i18n/it.json",
-    "hash": "04fa4f05052f24cf00c0c01d4be81599"
+    "hash": "ca80676c2ded2ba0e377ea4598d75a05"
   },
   {
     "file": "assets/module-comune/i18n/de.json",
@@ -2465,11 +2465,11 @@
   },
   {
     "file": "pages-funerali-funerali-module.js",
-    "hash": "5b729759b7118d3f0e7e646a79f93ff3"
+    "hash": "0d367908076efd13e8f10908cb26b162"
   },
   {
     "file": "pages-funerali-funerali-module.js.map",
-    "hash": "5c4026d669b1392d5036c3129801ad1f"
+    "hash": "96029ffcfac41388de2f2e0bdf74cd1d"
   },
   {
     "file": "pages-home-common-home-common-module.js",
@@ -2521,19 +2521,19 @@
   },
   {
     "file": "pages-list-event-list-event-module.js",
-    "hash": "d2e07655bce3bf7ce3d675e14742b622"
+    "hash": "3fbd6bc6257ba2b09401945502272aba"
   },
   {
     "file": "pages-list-event-list-event-module.js.map",
-    "hash": "8c010403005eec3793865cc6c6b98978"
+    "hash": "8c5163fcef92867278588f258cd0d14f"
   },
   {
     "file": "pages-list-farmacie-list-farmacie-module.js",
-    "hash": "d60f3b461e387143774e8b185901839c"
+    "hash": "16742e608d2a530169eef35b43607994"
   },
   {
     "file": "pages-list-farmacie-list-farmacie-module.js.map",
-    "hash": "c4842728d3fb6f79a9f1f5c15c583f85"
+    "hash": "9efea1e7d05f4d9b3aa3527889921457"
   },
   {
     "file": "pages-list-food-filter-page-food-filter-page-food-module.js",
@@ -2545,27 +2545,27 @@
   },
   {
     "file": "pages-list-food-list-food-module.js",
-    "hash": "1a9e76f2d578f4486a4574e6603d190b"
+    "hash": "ecf154d6b8bd1a3054d8a17064cc80dd"
   },
   {
     "file": "pages-list-food-list-food-module.js.map",
-    "hash": "95f32d32ec7582f9cebab4cb117dcc26"
+    "hash": "42245efad26bfc06f7527e5fdc737099"
   },
   {
     "file": "pages-list-path-list-path-module.js",
-    "hash": "e7fc73c16835fb393696e9e780f5c81f"
+    "hash": "6f13a24b9c4cf3fbf6ecc053ef70f5ea"
   },
   {
     "file": "pages-list-path-list-path-module.js.map",
-    "hash": "e5f763d2b188c9c708db58f2f89ef7b6"
+    "hash": "8b489e26e2e71fb6cd566375e739a5af"
   },
   {
     "file": "pages-list-poi-list-poi-module.js",
-    "hash": "28a95301628c77ae87b7e5ae103da8d0"
+    "hash": "73517993b60361083b08a05bd3d3abb9"
   },
   {
     "file": "pages-list-poi-list-poi-module.js.map",
-    "hash": "6ae630c134670ab7e312d685febbc22b"
+    "hash": "b06a54efca8efad169b22219f87a1406"
   },
   {
     "file": "pages-list-rh-filter-page-rh-filter-page-rh-module.js",
@@ -2577,11 +2577,11 @@
   },
   {
     "file": "pages-list-rh-list-rh-module.js",
-    "hash": "e67eca0360436a559d99b82870a575ae"
+    "hash": "929397070eaa5adbb5d4090396214280"
   },
   {
     "file": "pages-list-rh-list-rh-module.js.map",
-    "hash": "347520e059ad7fa2b9454b094eff72b3"
+    "hash": "51d88fc70cfc0084d76c274a5a3b041a"
   },
   {
     "file": "pages-list-streets-list-streets-module.js",
@@ -2625,11 +2625,11 @@
   },
   {
     "file": "pages-notizie-notizie-module.js",
-    "hash": "342002d0516329780650b3eb681890c6"
+    "hash": "b8229c082d6d08ddc3a7cf111b98dfe8"
   },
   {
     "file": "pages-notizie-notizie-module.js.map",
-    "hash": "2a3d88ec71e63336f5871f5fa151ec85"
+    "hash": "de07b0a880b0aa3055c3223a2e7ca768"
   },
   {
     "file": "pages-profile-profile-module.js",
@@ -2665,11 +2665,11 @@
   },
   {
     "file": "pages-tourist-services-tourist-services-module.js",
-    "hash": "2669f7c6017405c26624b7602961973e"
+    "hash": "26515b3d63dcef1f614c6c80ac72b777"
   },
   {
     "file": "pages-tourist-services-tourist-services-module.js.map",
-    "hash": "7c07cd0c30797a92ca4856794326b8d4"
+    "hash": "dbf44aee9f5a18f06a05961c8664641c"
   },
   {
     "file": "pages-transport-list-transport-list-module.js",

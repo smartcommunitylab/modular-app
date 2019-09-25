@@ -9,5 +9,6 @@
     "condividi": "Share",
     "title_funerali": "Funerals",
     "network_message": "Error during data reception",
-    "empty_list": "No scheduled funeral"
+    "empty_list": "No scheduled funeral",
+    "label_search":"Search"
   }

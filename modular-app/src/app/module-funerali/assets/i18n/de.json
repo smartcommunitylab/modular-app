@@ -9,5 +9,6 @@
     "condividi": "Teilen",
     "title_funerali": "Beerdigungen",
     "network_message": "Fehler bei der Datenaufnahme",
-    "empty_list": "Keine Beerdigung"
+    "empty_list": "Keine Beerdigung",
+    "label_search":"Suche"
   }

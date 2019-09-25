@@ -15,5 +15,7 @@
     "trento_informa_label":"Info&Video",
     "avvisi_label":"Lost&Found",
     "empty_list_label":"No elements in the list",
-    "data_pubblicazione":"<b style='color:#707070'>Release date: </b>"
+    "data_pubblicazione":"<b style='color:#707070'>Release date: </b>",
+    "label_search":"Search"
+
 }
