@@ -93,6 +93,7 @@ export class HomeSettingsPage implements OnInit {
     }
   }
   ngOnInit() {
+    this.config.loadCarousel();
     this.version = this.config.getNumberVersion();
     this.translate.onDefaultLangChange.subscribe((event: DefaultLangChangeEvent) => {
       this.translate.get('title_app').subscribe(

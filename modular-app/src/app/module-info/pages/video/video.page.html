@@ -1,12 +1,15 @@
 <ion-header [ngClass]="{'higher': searchAndIos()}">
+  <!-- <ion-searchbar class="search-video" [ngClass]="{'searchspace': isRicercaOpen}" style="display: none"
+    showCancelButton="always" animated (ionChange)="Ricerca()" (ionCancel)="OpenCloseRicerca()" placeholder="Cerca"
+    id="barraDiRicerca" [(ngModel)]="daCercare"></ion-searchbar> -->
   <ion-toolbar>
-    <ion-searchbar class="search-video" [ngClass]="{'searchspace': isRicercaOpen}" style="display: none"
+ <ion-searchbar mode="md" class="search-video" [ngClass]="{'searchspace': isRicercaOpen}" style="display: none"
     showCancelButton="always" animated (ionChange)="Ricerca()" (ionCancel)="OpenCloseRicerca()" placeholder="Cerca"
     id="barraDiRicerca" [(ngModel)]="daCercare"></ion-searchbar>
-    <ion-buttons slot="start" *ngIf="!isRicercaOpen">
+    <ion-buttons slot="start">
       <ion-back-button class="interaction"></ion-back-button>
     </ion-buttons>
-    <ion-title *ngIf="!isRicercaOpen" float-left id="TITOLO">{{'trento_informa_label'|translate}}</ion-title>
+    <ion-title float-left id="TITOLO" *ngIf="!isRicercaOpen">{{'trento_informa_label'|translate}}</ion-title>
     <ion-buttons slot="end" *ngIf="!isRicercaOpen">
 
       <ion-button fill="clear" float-right (click)="OpenCloseRicerca()" id="btnImpostazioniRicerca" color="light">

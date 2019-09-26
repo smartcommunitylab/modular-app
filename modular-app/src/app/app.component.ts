@@ -38,8 +38,12 @@ export class AppComponent {
     this.platform.ready().then(() => {
       if (this.firebase)
       this.firebase.getToken().then(token => console.log(`The token is ${token}`))
-      this.statusBar.overlaysWebView(false);            
+
+      this.statusBar.overlaysWebView(true);
       this.statusBar.styleLightContent();
+  
+      // this.statusBar.overlaysWebView(false);            
+      // this.statusBar.styleLightContent();
       this.splashScreen.hide();
       this.updateApp();
     });

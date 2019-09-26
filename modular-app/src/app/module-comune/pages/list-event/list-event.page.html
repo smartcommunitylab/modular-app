@@ -1,6 +1,6 @@
 <ion-header no-border [ngClass]="{'higher': searchAndIos()}" >
-      <ion-searchbar class="search-event"  [ngClass]="{'searchspace': search}" style="display: none" showCancelButton="always" animated 
-      (ionInput)="searchChanged($event)" (ionCancel)="toggleSearch()" placeholder="{{'label_search' | translate}}" ></ion-searchbar>
+      <ion-searchbar class="search-event"  [ngClass]="{'searchspace': search}" style="display: none" showCancelButton="always" animated  (search)="toggleSearch()"
+      (ionInput)="searchChanged($event)" (ionCancel)="toggleSearch()" ></ion-searchbar>
   <ion-toolbar>
 
     <ion-buttons slot="start">
@@ -22,9 +22,9 @@
       <div class="scrolling-wrapper-flexbox loop">
         <div class="container" *ngFor="let tag of tags">
         <div class="tag"  *ngIf="tag.isChecked">
-          <div class="tag-text" (click)="removeTag(tag)">
+          <div class="tag-text">
             {{tag.value}}
-            <ion-icon name="close-circle" ></ion-icon>
+            <ion-icon name="close-circle" (click)="removeTag(tag)"></ion-icon>
           </div>
           
         </div>
@@ -33,7 +33,7 @@
     </div>
   <div class="wrapper" *ngIf="!presentFilter">
     <div id="idCategories" class="scrolling-wrapper-flexbox loop">
-      <ion-chip class="date-chip" *ngFor="let c of categories" id="{{getClassName(c)}}" (click)="selectInternalElement(getClassName(c))" [ngClass]="{'categorySelected': isSelected(c)}">
+      <ion-chip *ngFor="let c of categories" id="{{getClassName(c)}}" (click)="selectInternalElement(getClassName(c))" [ngClass]="{'categorySelected': isSelected(c)}">
         <ion-label class="interaction" [ngClass]="{'categorySelected': compareActual(c)}">{{getDateSTring(c)}}</ion-label>
       </ion-chip>
     </div>
@@ -42,7 +42,7 @@
 
 <ion-content [scrollEvents]="true" (ionScroll)="onScroll($event)">
 
-  <ion-searchbar style="display: none" showCancelButton animated  
+  <ion-searchbar style="display: none" showCancelButton animated (search)="toggleSearch()"
     (ionInput)="searchChanged($event)" (ionCancel)="toggleSearch()"></ion-searchbar>
   <div *ngIf="!emptyList" >
 
