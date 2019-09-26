@@ -256,13 +256,15 @@ export class ListPoiPage implements OnInit {
   toggleSearch() {
     this.search = !this.search;
     const searchbar = <HTMLElement>document.querySelector('.search-poi');
+    const searchbarinside = <HTMLElement>document.querySelector('.searchbar-input-container');
+
     if (searchbar.style.display === 'none') {
-      searchbar.style.display = 'unset';
-      this.presentFilter = true;
+      searchbar.style.display = 'contents';
+      searchbarinside.style.visibility = 'visible';      this.presentFilter = true;
       searchbar.focus();
     } else {
       searchbar.style.display = 'none';
-      this.presentFilter = false;
+      searchbarinside.style.visibility = 'hidden';       this.presentFilter = false;
       this.categories.forEach(c => {
         this.showPois[c] = this.fullPois.filter(function (el) {
           return (el.cat[0] == c);

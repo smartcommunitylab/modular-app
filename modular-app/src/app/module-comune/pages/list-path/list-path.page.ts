@@ -103,12 +103,14 @@ export class ListPathPage implements OnInit {
   toggleSearch() {
     this.search = !this.search;
     const searchbar = <HTMLElement>document.querySelector('.search-path');
+    const searchbarinside = <HTMLElement>document.querySelector('.searchbar-input-container');
+
     if (searchbar.style.display === 'none') {
-      searchbar.style.display = 'unset';
-      searchbar.focus();
+      searchbar.style.display = 'contents';
+      searchbarinside.style.visibility = 'visible';      searchbar.focus();
     } else {
       searchbar.style.display = 'none';
-      this.pois = this.fullPois;
+      searchbarinside.style.visibility = 'hidden';       this.pois = this.fullPois;
     }
   }
 

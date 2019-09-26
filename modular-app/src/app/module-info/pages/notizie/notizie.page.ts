@@ -102,13 +102,14 @@ export class NotiziePage {
   OpenCloseRicerca() {
     this.isRicercaOpen = !this.isRicercaOpen;
     const searchbar = <HTMLElement>document.querySelector('.search-notizie');
+    const searchbarinside = <HTMLElement>document.querySelector('.searchbar-input-container');
     if (searchbar.style.display === 'none') {
-      searchbar.style.display = 'unset';
-      searchbar.focus();
+      searchbar.style.display = 'contents';
+      searchbarinside.style.visibility = 'visible';      searchbar.focus();
       this.datiRicerca = this.DatiEvento;
     } else {
       searchbar.style.display = 'none';
-    }
+      searchbarinside.style.visibility = 'hidden';    }
   }
 
 

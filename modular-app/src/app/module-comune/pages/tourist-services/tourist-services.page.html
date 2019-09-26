@@ -1,20 +1,21 @@
 <ion-header no-border [ngClass]="{'higher': searchAndIos()}">
 
   <ion-toolbar>
-    <ion-searchbar class="search-services" [ngClass]="{'searchspace': search}" style="display: none"
-      showCancelButton="never" animated   (ionInput)="searchChanged($event)"
-      (ionCancel)="toggleSearch()" (ionClear)="toggleSearch()" placeholder="{{'label_search' | translate}}"></ion-searchbar>
-    <ion-buttons slot="start">
+    <ion-buttons slot="start" *ngIf="!search">
       <ion-back-button class="interaction"></ion-back-button>
     </ion-buttons>
-    <ion-buttons slot="end">
+    <ion-buttons slot="end" *ngIf="!search">
       <ion-button (click)="toggleSearch()">
         <ion-icon name="search"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-title>
+    <ion-title *ngIf="!search">
       {{'service_label' | translate}}
     </ion-title>
+    <ion-searchbar mode="md"  class="search-services" [ngClass]="{'searchspace': search}" style="display: none"
+    showCancelButton="always" animated   (ionInput)="searchChanged($event)"
+    (ionCancel)="toggleSearch()" (ionClear)="toggleSearch()" placeholder="{{'label_search' | translate}}"></ion-searchbar>
+ 
   </ion-toolbar>
   <div class="wrapper" *ngIf="!firstAccess">
     <div class="scrolling-wrapper-flexbox loop">

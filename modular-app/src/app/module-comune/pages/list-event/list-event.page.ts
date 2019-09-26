@@ -430,12 +430,17 @@ export class ListEventPage implements OnInit {
   toggleSearch() {
     this.search = !this.search;
     const searchbar = <HTMLElement>document.querySelector('.search-event');
+    const searchbarinside = <HTMLElement>document.querySelector('.searchbar-input-container');
+
     if (searchbar.style.display === 'none') {
-      searchbar.style.display = 'unset';
+      searchbar.style.display = 'contents';
+      searchbarinside.style.visibility = 'visible';
       this.presentFilter = true;
       searchbar.focus();
     } else {
       searchbar.style.display = 'none';
+      searchbarinside.style.visibility = 'hidden';
+
       this.presentFilter = false;
       this.categories.forEach(c => {
         this.showPois[c] = this.fullPois.filter(function (el) {

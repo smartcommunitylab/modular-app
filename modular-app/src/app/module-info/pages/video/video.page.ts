@@ -90,13 +90,19 @@ export class VideoPage {
   OpenCloseRicerca() {
     this.isRicercaOpen = !this.isRicercaOpen;
     const searchbar = <HTMLElement>document.querySelector('.search-video');
+    const searchbarinside = <HTMLElement>document.querySelector('.searchbar-input-container');
+    console.log(searchbarinside)
     if (searchbar.style.display === 'none') {
       searchbar.style.display = 'contents';
+      searchbarinside.style.visibility = 'visible';
       searchbar.focus();
       this.datiRicerca = this.DatiEvento;
     } else {
       searchbar.style.display = 'none';
+      searchbarinside.style.visibility = 'hidden';
     }
+    console.log(searchbarinside)
+
     // if (!this.isRicercaOpen) {
     //   document.getElementById("barraDiRicerca").style.display = "inherit";
     //   document.getElementById("btnImpostazioniRicerca").innerHTML = "<svg width='24' height='24' viewBox='0 0 24 24'><path fill='none' d='M0 0h24v24H0V0z'/><path d='M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z'/></svg>";

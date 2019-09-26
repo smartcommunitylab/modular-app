@@ -1,12 +1,11 @@
 <ion-header [ngClass]="{'higher': searchAndIos()}" >
-    <ion-searchbar class="search-notizie" [ngClass]="{'searchspace': isRicercaOpen}" style="display: none"  showCancelButton="always" animated (ionChange)="Ricerca()" (ionCancel)="OpenCloseRicerca()"   placeholder="{{'label_search' | translate}}" id="barraDiRicerca"
-    [(ngModel)]="daCercare"></ion-searchbar>
+   
   <ion-toolbar>
 
-      <ion-buttons slot="start">
+      <ion-buttons slot="start" *ngIf="!isRicercaOpen">
         <ion-back-button class="interaction"></ion-back-button>
       </ion-buttons>
-      <ion-title float-left id="TITOLO"> {{'avvisi_label'|translate}}
+      <ion-title float-left id="TITOLO" *ngIf="!isRicercaOpen"> {{'avvisi_label'|translate}}
       </ion-title>
       <ion-buttons slot="end" *ngIf="!isRicercaOpen">
         <ion-button fill="clear" float-right (click)="OpenCloseRicerca()" id="btnImpostazioniRicerca" color="light">
@@ -17,6 +16,8 @@
           </svg>
         </ion-button>
     </ion-buttons>
+    <ion-searchbar mode="md"  class="search-notizie" [ngClass]="{'searchspace': isRicercaOpen}" style="display: none"  showCancelButton="always" animated (ionChange)="Ricerca()" (ionCancel)="OpenCloseRicerca()"   placeholder="{{'label_search' | translate}}" id="barraDiRicerca"
+    [(ngModel)]="daCercare"></ion-searchbar>
   </ion-toolbar>
 
 </ion-header>

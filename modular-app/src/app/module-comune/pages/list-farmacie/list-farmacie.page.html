@@ -1,19 +1,20 @@
 <ion-header  [ngClass]="{'higher': searchAndIos()}" >
-    <ion-searchbar  class="search-farmacie" [ngClass]="{'searchspace': search}" style="display: none" showCancelButton="always" animated  
-    (ionInput)="searchChanged($event)" (ionCancel)="toggleSearch()" placeholder="{{'label_search' | translate}}"></ion-searchbar>
-  <ion-toolbar>
+   <ion-toolbar>
 
-    <ion-buttons slot="start">
+    <ion-buttons slot="start" *ngIf="!search">
       <ion-back-button class="interaction"></ion-back-button>
     </ion-buttons>
-    <ion-buttons slot="end">
+    <ion-buttons slot="end" *ngIf="!search">
       <ion-button (click)="toggleSearch()">
         <ion-icon name="search"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-title>
+    <ion-title *ngIf="!search">
       {{'farmacie_label' | translate}}
     </ion-title>
+    <ion-searchbar  mode="md"  class="search-farmacie" [ngClass]="{'searchspace': search}" style="display: none" showCancelButton="always" animated  
+    (ionInput)="searchChanged($event)" (ionCancel)="toggleSearch()" placeholder="{{'label_search' | translate}}"></ion-searchbar>
+  
   </ion-toolbar>
 </ion-header>
 

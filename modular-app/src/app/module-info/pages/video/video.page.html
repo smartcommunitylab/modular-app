@@ -1,12 +1,11 @@
 <ion-header [ngClass]="{'higher': searchAndIos()}">
-  <!-- <ion-searchbar class="search-video" [ngClass]="{'searchspace': isRicercaOpen}" style="display: none"
+  <!-- <ion-searchbar  mode="md" class="search-video" [ngClass]="{'searchspace': isRicercaOpen}" style="display: none"
     showCancelButton="always" animated (ionChange)="Ricerca()" (ionCancel)="OpenCloseRicerca()" placeholder="Cerca"
     id="barraDiRicerca" [(ngModel)]="daCercare"></ion-searchbar> -->
   <ion-toolbar>
- <ion-searchbar mode="md" class="search-video" [ngClass]="{'searchspace': isRicercaOpen}" style="display: none"
-    showCancelButton="always" animated (ionChange)="Ricerca()" (ionCancel)="OpenCloseRicerca()" placeholder="Cerca"
-    id="barraDiRicerca" [(ngModel)]="daCercare"></ion-searchbar>
-    <ion-buttons slot="start">
+
+
+    <ion-buttons slot="start" *ngIf="!isRicercaOpen">
       <ion-back-button class="interaction"></ion-back-button>
     </ion-buttons>
     <ion-title float-left id="TITOLO" *ngIf="!isRicercaOpen">{{'trento_informa_label'|translate}}</ion-title>
@@ -20,6 +19,9 @@
         </svg>
       </ion-button>
     </ion-buttons>
+     <ion-searchbar mode="md" class="search-video" [ngClass]="{'searchspace': isRicercaOpen}" style="display: none"
+    showCancelButton="always" animated (ionChange)="Ricerca()" (ionCancel)="OpenCloseRicerca()" placeholder="Cerca"
+    id="barraDiRicerca" [(ngModel)]="daCercare"></ion-searchbar>
   </ion-toolbar>
 
 </ion-header>

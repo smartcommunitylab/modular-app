@@ -239,13 +239,15 @@ export class TouristServicesPage implements OnInit {
   toggleSearch() {
     this.search = !this.search;
     const searchbar = <HTMLElement>document.querySelector('.search-services');
+    const searchbarinside = <HTMLElement>document.querySelector('.searchbar-input-container');
+
     if (searchbar.style.display === 'none') {
-      searchbar.style.display = 'unset';
-      searchbar.focus();
+      searchbar.style.display = 'contents';
+      searchbarinside.style.visibility = 'visible';       searchbar.focus();
     } else {
       this.emptyList = false;
       searchbar.style.display = 'none';
-      this.categories.forEach(c => {
+      searchbarinside.style.visibility = 'hidden';       this.categories.forEach(c => {
         this.showPois[c] = this.fullPois.filter(function (el) {
           return (el.category == c);
         });

@@ -1,12 +1,11 @@
 <ion-header no-border [ngClass]="{'higher': searchAndIos()}" >
-      <ion-searchbar class="search-event"  [ngClass]="{'searchspace': search}" style="display: none" showCancelButton="always" animated  (search)="toggleSearch()"
-      (ionInput)="searchChanged($event)" (ionCancel)="toggleSearch()" ></ion-searchbar>
+      
   <ion-toolbar>
 
-    <ion-buttons slot="start">
+    <ion-buttons slot="start" *ngIf="!search">
       <ion-back-button class="interaction"></ion-back-button>
     </ion-buttons>
-    <ion-buttons slot="end">
+    <ion-buttons slot="end" *ngIf="!search">
       <ion-button (click)="filterClicked()">
         <ion-icon name="options"></ion-icon>
       </ion-button>
@@ -14,9 +13,11 @@
         <ion-icon name="search"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-title>
+    <ion-title *ngIf="!search">
       {{'EVENTS' | translate}}
     </ion-title>
+    <ion-searchbar mode="md" class="search-event"  [ngClass]="{'searchspace': search}" style="display: none" showCancelButton="always" animated  (search)="toggleSearch()"
+      (ionInput)="searchChanged($event)" (ionCancel)="toggleSearch()" ></ion-searchbar>
   </ion-toolbar>
   <div class="wrapper" *ngIf="presentFilter">
       <div class="scrolling-wrapper-flexbox loop">
