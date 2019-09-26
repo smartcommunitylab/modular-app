@@ -39,9 +39,13 @@ export class AppComponent {
       if (this.firebase)
       this.firebase.getToken().then(token => console.log(`The token is ${token}`))
 
+      if (this.platform.is("android")){
       this.statusBar.overlaysWebView(true);
       this.statusBar.styleLightContent();
-  
+  } else {
+    this.statusBar.styleBlackOpaque();
+
+  }
       // this.statusBar.overlaysWebView(false);            
       // this.statusBar.styleLightContent();
       this.splashScreen.hide();
