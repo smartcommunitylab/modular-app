@@ -40,7 +40,7 @@ export class AppComponent {
       this.firebase.getToken().then(token => console.log(`The token is ${token}`))
 
       if (this.platform.is("android")){
-      this.statusBar.overlaysWebView(true);
+      this.statusBar.overlaysWebView(false);
       this.statusBar.styleLightContent();
   } else {
     this.statusBar.styleBlackOpaque();
@@ -68,10 +68,10 @@ export class AppComponent {
   }
   updateApp(): any {
     console.log('Update:'); 
-    if (this.hotCodePush)
-    this.hotCodePush.fetchUpdate({}).then(data => { 
-      console.log('Update available'); 
-    });
+    // if (this.hotCodePush)
+    // this.hotCodePush.fetchUpdate({}).then(data => { 
+    //   console.log('Update available'); 
+    // });
   }
   sideMenu(): Promise<any> {
     return this.config.loadMenu();
