@@ -61,6 +61,11 @@
                 "input": "src/app/module-trasporti/assets/trasporti",
                 "output": "assets/trasporti"
               }
+              ,  {
+                "glob": "**/*",
+                "input": "node_modules/intersection-observer",
+                "output": "assets/js"
+              }
             ],
             "styles": [{
                 "input": "src/theme/variables.scss"

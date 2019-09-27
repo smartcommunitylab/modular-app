@@ -314,6 +314,8 @@ export class FuneraliPage {
 
   //gestisce l'apertura e la chiusura della ricerca
   OpenCloseRicerca() {
+    this.isRicercaOpen = !this.isRicercaOpen;
+    console.log('isRicercaOpen');
     if (!this.isRicercaOpen) {
       document.getElementById("ricercaNome").style.display = "inherit";
       if (this.isSepoltura) {
@@ -323,7 +325,7 @@ export class FuneraliPage {
         document.getElementById("buttonGiorni").style.visibility = "visible";
       }
       document.getElementById("btnOpen").innerHTML = '<ion-icon color="dark" name="close"></ion-icon>'; //imposta come svg in alto a destra una croce
-      this.isRicercaOpen = true;
+      // this.isRicercaOpen = true;
     }
     else {
       this.CloseRicerca();
@@ -387,7 +389,7 @@ export class FuneraliPage {
     document.getElementById("ricercaNome").style.display = "none";
     document.getElementById("barraGiorni").style.height = "0px";
     document.getElementById("btnOpen").innerHTML = '<ion-icon color="dark" name="search"></ion-icon>';
-    this.isRicercaOpen = false;
+    // this.isRicercaOpen = false;
     this.isGiorniOpen = false;
   }
 

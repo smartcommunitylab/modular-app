@@ -44,6 +44,7 @@ export class AppComponent {
       this.statusBar.styleLightContent();
   } else {
     this.statusBar.styleBlackOpaque();
+    this.statusBar.backgroundColorByHexString("#333");
 
   }
       // this.statusBar.overlaysWebView(false);            
@@ -68,10 +69,10 @@ export class AppComponent {
   }
   updateApp(): any {
     console.log('Update:'); 
-    if (this.hotCodePush)
-    this.hotCodePush.fetchUpdate({}).then(data => { 
-      console.log('Update available'); 
-    });
+    // if (this.hotCodePush)
+    // this.hotCodePush.fetchUpdate({}).then(data => { 
+    //   console.log('Update available'); 
+    // });
   }
   sideMenu(): Promise<any> {
     return this.config.loadMenu();
