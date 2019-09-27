@@ -53,8 +53,8 @@ export class DetailPoiPage implements OnInit {
       // console.log(contact)
       var contactParam = JSON.parse((<any>contact).detail)
       if (contactParam.type == 'phone') {
-        window.open('tel:'+contactParam.value,  '_system')
-
+        var numberCall = contactParam.value.replace(/\D/g,''); 
+        window.open('tel:'+numberCall,  '_system')
       }
       if (contactParam.type == 'address') {
         this.utils.openAddressMap(contactParam.value);
