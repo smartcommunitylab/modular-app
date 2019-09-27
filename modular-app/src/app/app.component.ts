@@ -44,6 +44,7 @@ export class AppComponent {
       this.statusBar.styleLightContent();
   } else {
     this.statusBar.styleBlackOpaque();
+    this.statusBar.backgroundColorByHexString("#333");
 
   }
       // this.statusBar.overlaysWebView(false);            
