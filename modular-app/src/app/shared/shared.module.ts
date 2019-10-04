@@ -15,7 +15,6 @@ import { ItemListComponent, ListItemDirective } from './itemlist/itemlist.compon
     FormsModule,
     InViewportModule,
     TranslateModule
-
   ],
   entryComponents: [ ItemListComponent, FilterPage],
   declarations: [

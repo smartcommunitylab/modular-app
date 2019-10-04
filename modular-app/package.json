@@ -40,13 +40,14 @@
     "@ionic/angular": "^4.0.3",
     "@ngx-translate/core": "^11.0.1",
     "@ngx-translate/http-loader": "^4.0.0",
+    "@saritasa/cordova-hot-code-push-plugin": "git+https://github.com/Saritasa/cordova-hot-code-push.git",
     "@types/pouchdb": "6.3.3",
     "add-cors-to-couchdb": "0.0.6",
     "android-versions": "^1.4.0",
     "c-coffee-icon": "0.0.2",
     "cordova": "^9.0.0",
     "cordova-clean": "^1.3.5",
-    "cordova-hot-code-push-plugin": "git+https://github.com/wangjingzhao/cordova-hot-code-push.git",
+    "cordova-hot-code-push-plugin": "1.5.3",
     "cordova-ios": "5.0.1",
     "cordova-plugin-androidx": "^1.0.2",
     "cordova-plugin-badge": "^0.8.8",
@@ -80,6 +81,7 @@
     "ng2-dragula": "^2.1.1",
     "pouchdb": "^7.0.0",
     "pouchdb-find": "^7.0.0",
+    "properties-parser": "^0.3.1",
     "rxjs": "^6.3.3",
     "start": "5.1.0",
     "tslib": "^1.9.3",
@@ -147,7 +149,8 @@
         "ANDROID_SUPPORT_ANNOTATIONS_VERSION": "27.+"
       },
       "cordova-sqlite-storage": {},
-      "cordova-plugin-firebasex": {}
+      "cordova-plugin-firebasex": {},
+      "cordova-hot-code-push-plugin": {}
     },
     "platforms": [
       "ios"

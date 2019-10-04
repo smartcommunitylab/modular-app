@@ -4,12 +4,9 @@ import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { ListEventPage } from './list-event.page';
-import { TranslateModule } from '@ngx-translate/core';
-import { HttpClient } from '@angular/common/http';
-import { TranslateLoader } from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { InViewportModule } from 'ng-in-viewport';
 import { FilterPageEventPage } from './filter-page-event/filter-page-event.page';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 const routes: Routes = [
   {
@@ -17,24 +14,17 @@ const routes: Routes = [
     component: ListEventPage
   }
 ];
-export function HttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http, './assets/comune/i18n/', '.json');
-}
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     InViewportModule,
     IonicModule,
-    TranslateModule.forRoot({ loader: {
-      provide: TranslateLoader,
-      useFactory: HttpLoaderFactory,
-      deps: [HttpClient]
-    }}),
+    SharedModule,
     RouterModule.forChild(routes)
   ],
-  entryComponents:[FilterPageEventPage],
+  entryComponents: [FilterPageEventPage],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
-  declarations: [ListEventPage,FilterPageEventPage]
+  declarations: [ListEventPage, FilterPageEventPage]
 })
 export class ListEventPageModule {}

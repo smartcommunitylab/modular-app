@@ -2,8 +2,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController, AlertController, PopoverController, Events, ModalController, Platform } from '@ionic/angular';
 import { DbService } from '../../services/db.service';
-import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
-import { PopoverComponent } from 'src/app/shared/popover/popover.component';
+import { Router, ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { GeoService } from 'src/app/services/geo.service';
 import { AlertInput } from '@ionic/core';

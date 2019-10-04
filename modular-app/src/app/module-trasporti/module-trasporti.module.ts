@@ -8,14 +8,16 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { ConfigService } from './services/config.service';
 import { DbService } from './services/db.service';
 import { SQLite } from '@ionic-native/sqlite/ngx';
+import { TranslationLoaderService } from '../services/translation-loader.service';
+import { SharedModule } from '../shared/shared.module';
 
-export function HttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http, "./assets/trasporti/i18n/", ".json");
-}
+// export function HttpLoaderFactory(http: HttpClient) {
+//   return new TranslateHttpLoader(http, "./assets/trasporti/i18n/", ".json");
+// }
 export function initializeDb(dbService: DbService) {
   return (): Promise<any> => {
     return dbService.Init();
-  }
+  };
 }
 @NgModule({
   declarations: [],
@@ -24,13 +26,7 @@ export function initializeDb(dbService: DbService) {
     CommonModule,
     HttpClientModule,
     routing,
-    TranslateModule.forChild({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
-        deps: [HttpClient]
-      }, isolate: true
-    }),
+    SharedModule
   ]
 })
 export class TrasportiModule {
@@ -46,15 +42,10 @@ export class TrasportiModule {
           useFactory: appInitialize,
           multi: true
         }
-        // ,        {
-        //   provide: APP_INITIALIZER,
-        //   useFactory: (db: DbService) => function () { return db.Init() },
-        //   deps: [DbService],
-        //   multi: true
-        // }
-
-
       ]
     };
+  }
+  constructor(private translationLoader: TranslationLoaderService) {
+    this.translationLoader.loadTranslations('./assets/trasporti/i18n/', '.json');
   }
 }

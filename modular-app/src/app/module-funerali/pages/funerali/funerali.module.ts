@@ -7,9 +7,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { FuneraliPage } from './funerali.page';
 import { InViewportModule } from 'ng-in-viewport';
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { HttpClient } from '@angular/common/http';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 const routes: Routes = [
   {
@@ -17,20 +15,16 @@ const routes: Routes = [
     component: FuneraliPage
   }
 ];
-export function HttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http, './assets/funerali/i18n/', '.json');
-}
+// export function HttpLoaderFactory(http: HttpClient) {
+//   return new TranslateHttpLoader(http, './assets/funerali/i18n/', '.json');
+// }
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     InViewportModule,
     IonicModule,
-    TranslateModule.forRoot({ loader: {
-      provide: TranslateLoader,
-      useFactory: HttpLoaderFactory,
-      deps: [HttpClient]
-    }}),
+    SharedModule,
     RouterModule.forChild(routes)
   ],
   declarations: [FuneraliPage],

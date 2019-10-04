@@ -28,7 +28,7 @@ export class DbService {
 
     this.remoteDb = new PouchDB('https://cit.platform.smartcommunitylab.it/comuneintasca2');
     // 'http://192.168.42.201:5984/comune-in-tasca';
-    //'http://192.168.1.197:5984/comune-in-tasca'
+    // 'http://192.168.1.197:5984/comune-in-tasca'
     // 'http://127.0.0.1:5984/comune-in-tasca';
 
     this.contentTypes = {
@@ -52,54 +52,54 @@ export class DbService {
   }
 
   onSyncChange(arg0: string, onSyncChange: any): any {
-    throw new Error("Method not implemented.");
+    throw new Error('Method not implemented.');
   }
   onSyncPaused(arg0: string, onSyncPaused: any): any {
-    throw new Error("Method not implemented.");
+    throw new Error('Method not implemented.');
   }
   onSyncError(arg0: string, onSyncError: any): any {
-    throw new Error("Method not implemented.");
+    throw new Error('Method not implemented.');
   }
   getObjectByType(type, id) {
     return this.getObjectById(id);
   }
   lastTimeSynch() {
-    var date = new Date().getTime();
-    var last = parseInt(localStorage.getItem('UPDATE_SYNCH') || '0');
-    return date - last
+    const date = new Date().getTime();
+    const last = parseInt(localStorage.getItem('UPDATE_SYNCH') || '0', 10);
+    return date - last;
   }
   updateLastTimeSynch() {
     localStorage.setItem('UPDATE_SYNCH', new Date().getTime().toString());
   }
 
   synch(message?: string): Promise<any> {
-    console.log('enter in synch')
+    console.log('enter in synch');
     return new Promise(async (resolve, reject) => {
       if (this.lastTimeSynch() > this.MIN_SYNCH_TIME) {
         const loading = await this.loadingController.create({
           message: message || this.translate.instant('init_db')
         });
-        if (!localStorage.getItem('UPDATE_SYNCH'))
+        if (!localStorage.getItem('UPDATE_SYNCH')) {
           await loading.present();
-        console.log('this.lastTimeSynch()>this.MIN_SYNCH_TIME')
-        this.remoteDb.replicate.to(this.db, { checkpoint: "target" }).on('complete', () => {
-          console.log('synch done')
+        }
+        console.log('this.lastTimeSynch()>this.MIN_SYNCH_TIME');
+        this.remoteDb.replicate.to(this.db, { checkpoint: 'target' }).on('complete', () => {
+          console.log('synch done');
           loading.dismiss();
           this.updateLastTimeSynch();
           resolve();
         }).on('error', function (err) {
-          console.log('error in sync' + err)
+          console.log('error in sync' + err);
 
           // boo, we hit an error!
           resolve();
         });
-      }
-      else {
-        console.log('this.lastTimeSynch()<this.MIN_SYNCH_TIME')
+      } else {
+        console.log('this.lastTimeSynch()<this.MIN_SYNCH_TIME');
 
         resolve();
       }
-    })
+    });
   }
   getMenuById(identificator) {
     return this.db.find({
@@ -164,39 +164,37 @@ export class DbService {
       }
     }
     if (query.selector) {
-      if (query.selector['elementType'] == 'event-item') {
+      if (query.selector['elementType'] === 'event-item') {
         return this.db.find({
           selector: {
-
-            "$or": [
+            '$or': [
               {
-                  
-                    "elementType": "event-item",
-                    "$nor": [
+                    'elementType': 'event-item',
+                    '$nor': [
                       {
-                        "fromTime": {
-                          "$lte": new Date().getTime()
+                        'fromTime': {
+                          '$lte': new Date().getTime()
                         }
                       }, {
-                        "toTime": {
-                          "$lte": new Date().getTime()
+                        'toTime': {
+                          '$lte': new Date().getTime()
                         }
                       }],
-                      "$and": [
+                      '$and': [
                                 {
-                                  "fromTime": {
-                                    "$gte": new Date().getTime()
+                                  'fromTime': {
+                                    '$gte': new Date().getTime()
                                   }
                                 }, {
-                                  "fromTime": {
-                                    "$lte": new Date().getTime() + 7 * 24 * 60 * 60 * 1000
+                                  'fromTime': {
+                                    '$lte': new Date().getTime() + 7 * 24 * 60 * 60 * 1000
                                   }
                                 }
                               ]
 
               },
               // {
-              //   "elementType": "main-event-item"
+              //   'elementType': 'main-event-item'
               // }
             ]
 
@@ -204,7 +202,7 @@ export class DbService {
         });
       }
     }
-    return this.db.find(query);
+    return this.synch().then(() => this.db.find(query));
   }
 
   getPois() {

@@ -1,5 +1,4 @@
 {
-    "HOME": "Home",
     "RH": "Hotels",
     "Ristoranti": "Restaurants",
     "PATH": "Tourist routes",
@@ -14,15 +13,10 @@
     "distance_label": "Distance:",
     "poi_list": "Stop",
     "service_label": "Tourist services",
-    "empty_list": "Empty list",
-    "cancel_button": "Cancel",
-    "ok_button": "Ok",
     "init_db": "Data download in progress...please wait",
     "no_distance_label": "Distance not specified",
     "title_list_poi": "Visit the city",
     "main_event_label": "Main events",
-    "title_filtra":"Filter",
-    "label_search":"Search",
     "farmacie_turno":"<div class=\"message\">  <strong>Opening times and pharmacy on duty </strong> please use the App <span style=\"color:#11b3ef\" class=\"ion-text-center\"><b>FarmApp</b></span></p></div>"
 
 

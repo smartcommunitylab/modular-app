@@ -29,6 +29,6 @@ const routes: Routes = [
     RouterModule.forChild(routes)
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  declarations: [HomeSettingsPage,DelayDragDirective]
+  declarations: [HomeSettingsPage, DelayDragDirective]
 })
 export class HomeSettingsPageModule {}

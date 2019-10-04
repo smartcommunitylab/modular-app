@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { NavController, AlertController, PopoverController, Events, IonContent, ModalController, LoadingController, Platform } from '@ionic/angular';
+import { NavController, AlertController, Events, IonContent, ModalController, LoadingController, Platform } from '@ionic/angular';
 import { DbService } from '../../services/db.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
@@ -32,13 +32,11 @@ export class ListEventPage implements OnInit {
   @ViewChild(IonContent) content: IonContent;
   actualVisualized: string;
   presentFilter = false;
-  emptyList: boolean = false;
+  emptyList = false;
   mainEventLabel: any;
   todayDate: any = moment();
   nextWeekDate: any = moment().add(1, 'weeks');
   constructor(
-    private globalUtils: GlobalUtils,
-    private loading: LoadingController,
     public navCtrl: NavController,
     private modalController: ModalController,
     public dbService: DbService,
@@ -613,12 +611,6 @@ export class ListEventPage implements OnInit {
 
   showPopover() {
     this.buildAlert('cat');
-    // const popover = await this.popoverController.create({
-    //   component: PopoverComponent,
-    //   componentProps: {elements: this.fullCategories, controller: this.popoverController},
-    //   translucent: true
-    // });
-    // return await popover.present();
   }
 
   changeCategory(cat: any, _this?: any) {

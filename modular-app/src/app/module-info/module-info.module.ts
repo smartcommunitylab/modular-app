@@ -4,26 +4,17 @@ import { appInitialize } from './app-initialize';
 import { ConfigService } from '../services/config.service';
 import { routing } from './lazy.routing';
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
-export function HttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http, './assets/info/i18n/', '.json');
-}
+import { SharedModule } from '../shared/shared.module';
+import { TranslationLoaderService } from '../services/translation-loader.service';
+
 @NgModule({
   imports: [
     CommonModule,
     HttpClientModule,
     HttpModule,
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
-        deps: [HttpClient]
-      },
-      isolate: true
-    }),
+    SharedModule,
     routing
   ],
   declarations: [
@@ -39,7 +30,6 @@ export class InfoModule {
   static forRoot(): ModuleWithProviders {
     return {
       ngModule: InfoModule,
-      
       providers: [
         ConfigService,
         SocialSharing,
@@ -51,4 +41,8 @@ export class InfoModule {
       ]
     };
   }
+  constructor(private translationLoader: TranslationLoaderService) {
+    this.translationLoader.loadTranslations('./assets/info/i18n/', '.json');
+  }
+
 }

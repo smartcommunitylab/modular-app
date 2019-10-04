@@ -2,11 +2,11 @@ import { Component } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-import { ConfigService } from './services/config.service'
+import { ConfigService } from './services/config.service';
 import { SettingService } from './services/setting.service';
 import { TranslateService } from '@ngx-translate/core';
 import { HotCodePush } from '@ionic-native/hot-code-push/ngx';
-import { FirebaseX } from "@ionic-native/firebase-x/ngx";
+import { FirebaseX } from '@ionic-native/firebase-x/ngx';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
 
@@ -36,18 +36,19 @@ export class AppComponent {
 
   initializeApp() {
     this.platform.ready().then(() => {
-      if (this.firebase)
-      this.firebase.getToken().then(token => console.log(`The token is ${token}`))
-      
-      if (this.platform.is("android")){
-      this.statusBar.overlaysWebView(false);
-      this.statusBar.styleLightContent();
-  } else {
-    this.statusBar.styleBlackOpaque();
-    this.statusBar.backgroundColorByHexString("#333");
+      if (this.firebase) {
+        this.firebase.getToken().then(token => console.log(`The token is ${token}`));
+      }
 
-  }
-      // this.statusBar.overlaysWebView(false);            
+      if (this.platform.is('android')) {
+        this.statusBar.overlaysWebView(false);
+        this.statusBar.styleLightContent();
+      } else {
+        this.statusBar.styleBlackOpaque();
+        this.statusBar.backgroundColorByHexString('#333');
+
+      }
+      // this.statusBar.overlaysWebView(false);
       // this.statusBar.styleLightContent();
       this.splashScreen.hide();
       this.updateApp();
@@ -68,10 +69,10 @@ export class AppComponent {
     }
   }
   updateApp(): any {
-    console.log('Update:'); 
+    console.log('Update:');
     // if (this.hotCodePush)
-    // this.hotCodePush.fetchUpdate({}).then(data => { 
-    //   console.log('Update available'); 
+    // this.hotCodePush.fetchUpdate({}).then(data => {
+    //   console.log('Update available');
     // });
   }
   sideMenu(): Promise<any> {

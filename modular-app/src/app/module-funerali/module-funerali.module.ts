@@ -4,10 +4,9 @@ import { appInitialize } from './app-initialize';
 import { ConfigService } from '../services/config.service';
 import { routing } from './lazy.routing';
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
+import { TranslationLoaderService } from '../services/translation-loader.service';
 
 @NgModule({
   imports: [
@@ -40,4 +39,8 @@ export class FuneraliModule {
       ]
     };
   }
+  constructor(private translationLoader: TranslationLoaderService) {
+    this.translationLoader.loadTranslations('./assets/funerali/i18n/', '.json');
+  }
+
 }
