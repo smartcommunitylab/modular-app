@@ -1,9 +1,7 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { NavController, AlertController, IonContent, ModalController, Platform } from '@ionic/angular';
+import { Component, OnInit } from '@angular/core';
+import { NavController, ModalController } from '@ionic/angular';
 import { DbService } from '../../services/db.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
-import { ConfigService } from '../../services/config.service';
 import { ListPage } from 'src/app/shared/itemlist/listpage.page';
 import { Observable } from 'rxjs';
 import { UtilsService } from 'src/app/services/utils.service';
@@ -14,7 +12,6 @@ import { UtilsService } from 'src/app/services/utils.service';
   styleUrls: ['./list-poi.page.scss'],
 })
 export class ListPoiPage extends ListPage implements OnInit {
-  language: string;
   category: any;
   stringsContact: any;
   altImage: string;
@@ -48,7 +45,8 @@ export class ListPoiPage extends ListPage implements OnInit {
       this.utils.presentLoading();
       this.dbService.getObjectByQuery(this.category.query).then((data) => {
         if (data.docs.length > 0) {
-          const res = data.docs.map(x => this.convertPois(x));
+          const res = data.docs.map(x =>
+            this.utils.convertObject(x, ['title', 'classification', 'cat', 'subtitle', 'description'], ['image', 'id', '_id']));
           this.utils.hideLoading();
           observer.next(res);
         }
@@ -64,54 +62,4 @@ export class ListPoiPage extends ListPage implements OnInit {
     this.router.navigate(['/detail-poi'], { queryParams: { id: id, type: 'POI' } });
   }
 
-  convertPois(x) {
-    const poiElement: any = {};
-    if (x) {
-      if (x.title) {
-        if (x.title[this.language]) {
-          poiElement.title = x.title[this.language];
-        } else {
-          poiElement.title = x.title['it'];
-        }
-      }
-      if (x.classification) {
-        if (x.classification[this.language]) {
-          poiElement.classification = x.classification[this.language];
-        } else {
-          poiElement.classification = x.classification['it'];
-        }
-      }
-      if (x.cat) {
-        if (x.cat[this.language]) {
-          poiElement.cat = x.cat[this.language];
-        } else {
-          poiElement.cat = x.cat['it'];
-        }
-      }
-      if (x.subtitle) {
-        if (x.subtitle[this.language]) {
-          poiElement.subtitle = x.subtitle[this.language];
-        } else {
-          poiElement.subtitle = x.subtitle['it'];
-        }
-      }
-      if (x.description) {
-        if (x.description[this.language]) {
-          poiElement.description = x.description[this.language];
-        } else {
-          poiElement.description = x.description['it'];
-        }
-      }
-      if (x.image) {
-        poiElement.image = x.image;
-      }
-      if (x.id) {
-        poiElement.id = x.id;
-      }
-      if (x._id) {
-        poiElement.id = x._id;
-      }
-    }
-    return poiElement;
-  }
 }

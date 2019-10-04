@@ -47,7 +47,9 @@ export function initializeAppConfig(configService: ConfigService) {
     BrowserModule,
     DragulaModule.forRoot(),
     TranslateModule.forRoot(),
-    IonicModule.forRoot(),
+    IonicModule.forRoot({
+      backButtonText: ''
+    }),
     ComuneModule.forRoot(),
     AppRoutingModule,
     ModulePulstradeModule.forRoot(),

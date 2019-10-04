@@ -43,8 +43,8 @@
 
 <ion-content [scrollEvents]="true" (ionScroll)="onScroll($event)">
 
-  <ion-searchbar style="display: none" showCancelButton animated (search)="toggleSearch()"
-    (ionInput)="searchChanged($event)" (ionCancel)="toggleSearch()"></ion-searchbar>
+  <!-- <ion-searchbar style="display: none" showCancelButton animated (search)="toggleSearch()"
+    (ionInput)="searchChanged($event)" (ionCancel)="toggleSearch()"></ion-searchbar> -->
   <div *ngIf="!emptyList" >
 
   <ion-list no-lines id="poi-list">

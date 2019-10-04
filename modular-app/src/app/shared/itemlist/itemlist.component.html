@@ -1,12 +1,12 @@
 <ion-header no-border  [ngClass]="{'higher': isIOS && search}" >
-  <ion-searchbar class="search" [ngClass]="{'searchspace': search}" style="display: none" showCancelButton="always"  animated 
+  <ion-searchbar mode="md" class="search" [ngClass]="{'searchspace': search}" style="display: none" showCancelButton="always"  animated (search)="toggleSearch()"
     (ionInput)="searchChanged($event)" (ionCancel)="toggleSearch()" ></ion-searchbar>
   <ion-toolbar>    
     <ion-buttons slot="start">
         <ion-button class="interaction" (click)="goBack()">
             <ion-icon name="arrow-back"></ion-icon>
         </ion-button>
-    </ion-buttons>
+      </ion-buttons>
         
     <ion-buttons slot="end">
       <ng-content select="[buttons]"></ng-content>
@@ -63,6 +63,6 @@
           </ion-list>    
     </div>
     <div class="empty-list" *ngIf="items != null && emptyList">
-        {{'empty_list' | translate}}
+      <ng-content select="[empty]"></ng-content> 
     </div>
   </ion-content>

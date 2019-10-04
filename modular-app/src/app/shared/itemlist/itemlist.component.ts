@@ -101,6 +101,8 @@ export class ItemListComponent implements OnInit {
 
   searchChanged(input: any) {
     clearTimeout(this.typingTimer);
+    if (!input.detail) { return; }
+
     this.typingTimer = setTimeout(() => {
       const value = input.detail.target.value;
       this.onSearchUpdate(value);
