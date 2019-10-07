@@ -94,21 +94,7 @@ export class ListFarmaciePage extends ComuneListPage implements OnInit {
     res.description = description;
     res.text += tmp;
     res.infos = JSON.stringify(res);
-    this.updateDistance(res);
     return res;
-  }
-
-  updateDistance(element) {
-    if (element.location && element.location[0] && element.location[1]) {
-      const dist = this.geoSrv.getDistanceKM(
-        { lat: this.mypos.lat, lon: this.mypos.long },
-        { lat: element.location[0], lon: element.location[1] });
-      element.distanceVal = dist;
-      element.distance = (this.translate.instant('distance_label') + ' ' + dist.toFixed(2) + ' Km');
-    } else {
-      element.distanceVal = 0;
-      element.distance = this.translate.instant('no_distance_label');
-    }
   }
 
   closeTurno() {

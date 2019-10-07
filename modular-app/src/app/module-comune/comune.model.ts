@@ -51,6 +51,7 @@ export class ComuneListPage extends ListPage implements OnInit {
           this.dbService.getObjectByQuery(query).then((data) => {
             if (data.docs.length > 0) {
               const res = this.processList(data.docs);
+              res.forEach(o => this.updateDistance(o));
               this.utils.hideLoading();
               observer.next(res);
             }

@@ -49,7 +49,6 @@ export class ListPoiPage extends ComuneListPage implements OnInit {
     if (res.image) {
       res.image = x.image.replace('.jpg', '_medium.jpg');
     }
-    this.updateDistance(res);
     return res;
   }
 }

@@ -75,7 +75,6 @@ export class ListRHPage extends ComuneListPage implements OnInit {
     res.description = description;
     res.text += tmp;
     res.infos = JSON.stringify(res);
-    this.updateDistance(res);
     return res;
   }
 
