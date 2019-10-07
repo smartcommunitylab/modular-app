@@ -34,6 +34,8 @@ export class ItemListComponent implements OnInit {
   title: string;
   @Input()
   items: any;
+  @Input()
+  events: any;
 
   @Output()
   searchEnd = new EventEmitter<boolean>();
@@ -45,6 +47,8 @@ export class ItemListComponent implements OnInit {
   expand = new EventEmitter<string>();
   @Output()
   contact = new EventEmitter<any>();
+  @Output()
+  customEvent = new EventEmitter<any>();
 
   @ContentChild(ListItemDirective, {read: TemplateRef}) listItem;
 
@@ -75,6 +79,13 @@ export class ItemListComponent implements OnInit {
         this.firstAccess = false;
         this.onTagsChanged(this.tags);
       });
+      if (this.events) {
+        this.events.split(',').forEach((s) => {
+          element.addEventListener(s.trim(), async (evt) => {
+            this.customEvent.emit({data: (<any>evt).detail, name: s.trim()});
+          });
+        });
+      }
     }
   }
 

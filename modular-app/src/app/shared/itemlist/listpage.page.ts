@@ -108,4 +108,7 @@ export class ListPage {
   onContact(data: any) {
     this.utils.openContact(data);
   }
+
+  onCustomEvent(data: any) {
+  }
 }

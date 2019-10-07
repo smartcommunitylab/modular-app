@@ -10,7 +10,7 @@
         
     <ion-buttons slot="end">
       <ng-content select="[buttons]"></ng-content>
-      <ion-button (click)="filterClicked()">
+      <ion-button (click)="filterClicked()" *ngIf="tags && tags.length > 0">
         <ion-icon name="options"></ion-icon>
       </ion-button>
       <ion-button (click)="toggleSearch()">

@@ -1,27 +1,13 @@
-<ion-header [ngClass]="{'higher': searchAndIos()}" >
-    <ion-toolbar>
+<itemlist  title="{{'PATH' | translate}}" 
+  [tags]="tags" [categories]="categories" [items]="filtered" [currentCategory]="actualVisualized" [events]="'pathSelected'"
+  (searchUpdate)="onSearchUpdate($event)" (searchEnd)="onSearchEnd($event)"
+  (customEvent)="onCustomEvent($event)">
 
-      <ion-buttons slot="start" *ngIf="!search">
-          <ion-back-button class="interaction"></ion-back-button>
-        </ion-buttons>
-        <ion-buttons slot="end" *ngIf="!search">
-            <ion-button (click)="toggleSearch()">
-              <ion-icon name="search"></ion-icon>
-            </ion-button>
-          </ion-buttons>
-      <ion-title *ngIf="!search">
-          {{'PATH'|translate}}
-        </ion-title>
-        <ion-searchbar mode="md" class="search-path" [ngClass]="{'searchspace': search}" style="display: none" showCancelButton="always" animated  
-        (ionInput)="searchChanged($event)" (ionCancel)="toggleSearch()" placeholder="{{'label_search' | translate}}" ></ion-searchbar>
-       
-    </ion-toolbar>
-  </ion-header>
+    <div *listItem="let item">
+        <wc-path-list-el type="PATH" [id]="item.id" [img]="item.image" [title]="item.title" [text]="item.subtitle" 
+        main-color="#11b3ef" desc-color="#707070">
+        </wc-path-list-el>
+    </div> 
 
-<ion-content >
-  <ion-list no-lines id="path-list" >
-    <div class="item-container" *ngFor="let poi of pois">      
-      <wc-path-list-el type="PATH" [id]="poi.id" [img]="poi.image" [title]="poi.title" [text]="poi.subtitle" main-color="#11b3ef" desc-color="#707070"></wc-path-list-el>
-    </div>
-  </ion-list>
-</ion-content>
+    <div empty>{{'empty_list' | translate}}</div>
+</itemlist>
