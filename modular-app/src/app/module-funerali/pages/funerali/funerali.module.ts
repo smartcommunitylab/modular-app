@@ -8,6 +8,7 @@ import { IonicModule } from '@ionic/angular';
 import { FuneraliPage } from './funerali.page';
 import { InViewportModule } from 'ng-in-viewport';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { TranslationLoaderService } from 'src/app/services/translation-loader.service';
 
 const routes: Routes = [
   {
@@ -15,9 +16,7 @@ const routes: Routes = [
     component: FuneraliPage
   }
 ];
-// export function HttpLoaderFactory(http: HttpClient) {
-//   return new TranslateHttpLoader(http, './assets/funerali/i18n/', '.json');
-// }
+
 @NgModule({
   imports: [
     CommonModule,
@@ -31,5 +30,8 @@ const routes: Routes = [
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class FuneraliPageModule {
+  constructor(private translationLoader: TranslationLoaderService) {
+    this.translationLoader.loadTranslations('./assets/funerali/i18n/', '.json');
+  }
 
 }

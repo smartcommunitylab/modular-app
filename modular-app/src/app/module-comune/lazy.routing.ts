@@ -20,7 +20,6 @@ const routes: Routes = [
     { path: 'farmacie', loadChildren: './pages/list-farmacie/list-farmacie.module#ListFarmaciePageModule' },
     { path: 'detail-info', loadChildren: './pages/detail-info/detail-info.module#DetailInfoPageModule' },
     { path: 'tourist-services', loadChildren: './pages/tourist-services/tourist-services.module#TouristServicesPageModule' },
-    { path: 'filter-page-food', loadChildren: './pages/list-food/filter-page-food/filter-page-food.module#FilterPageFoodPageModule' },
   { path: 'detail-event', loadChildren: './pages/detail-event/detail-event.module#DetailEventPageModule' },
 
 ];

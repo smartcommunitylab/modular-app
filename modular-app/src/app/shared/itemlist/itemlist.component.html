@@ -49,7 +49,7 @@
     <div *ngIf="items != null && !emptyList">
         <ion-list no-lines id="itemlist" #itemlist>
             <div class="list-container" *ngFor="let c of categories">
-              <ion-item class="label-type ion-text-center" sticky *ngIf="items[c].length > 0 && !presentFilter">
+              <ion-item class="label-type ion-text-center" sticky *ngIf="c && items[c].length > 0 && !presentFilter">
                   <div id="{{'list_'+c}}">{{c}}</div>
               </ion-item>
               <div class="content" >

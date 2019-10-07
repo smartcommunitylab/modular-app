@@ -2,18 +2,13 @@ import { NgModule, ModuleWithProviders, APP_INITIALIZER, CUSTOM_ELEMENTS_SCHEMA,
 import { CommonModule, DatePipe } from '@angular/common';
 import { routing } from './lazy.routing';
 import { appInitialize } from './app-initialize';
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { HttpClientModule } from '@angular/common/http';
 import { ConfigService } from './services/config.service';
 import { DbService } from './services/db.service';
 import { SQLite } from '@ionic-native/sqlite/ngx';
 import { TranslationLoaderService } from '../services/translation-loader.service';
 import { SharedModule } from '../shared/shared.module';
 
-// export function HttpLoaderFactory(http: HttpClient) {
-//   return new TranslateHttpLoader(http, "./assets/trasporti/i18n/", ".json");
-// }
 export function initializeDb(dbService: DbService) {
   return (): Promise<any> => {
     return dbService.Init();

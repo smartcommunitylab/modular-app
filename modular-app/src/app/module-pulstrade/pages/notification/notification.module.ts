@@ -14,9 +14,6 @@ const routes: Routes = [
     component: NotificationPage
   }
 ];
-// export function HttpLoaderFactory(http: HttpClient) {
-//   return new TranslateHttpLoader(http, './assets/strade/i18n/', '.json');
-// }
 @NgModule({
   imports: [
     CommonModule,

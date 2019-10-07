@@ -17,7 +17,8 @@
     "no_distance_label": "Distance not specified",
     "title_list_poi": "Visit the city",
     "main_event_label": "Main events",
-    "farmacie_turno":"<div class=\"message\">  <strong>Opening times and pharmacy on duty </strong> please use the App <span style=\"color:#11b3ef\" class=\"ion-text-center\"><b>FarmApp</b></span></p></div>"
+    "farmacie_turno":"<div class=\"message\">  <strong>Opening times and pharmacy on duty </strong> please use the App <span style=\"color:#11b3ef\" class=\"ion-text-center\"><b>FarmApp</b></span></p></div>",
+    "closing": "Closed: "
 
 
   }

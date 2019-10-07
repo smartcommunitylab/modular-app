@@ -17,6 +17,7 @@
     "no_distance_label": "Entfernung nicht angegeben",
     "title_list_poi": "Besuche die Stadt",
     "main_event_label": "Wichtige Evente",
-    "farmacie_turno":"<div class=\"message\"><strong>Öffnungszeiten und Apotheke im Dienst </strong> nutzen Sie bitte die App  <span style=\"color:#11b3ef\" class=\"ion-text-center\"><b>FarmApp</b></span></p></div>"
+    "farmacie_turno":"<div class=\"message\"><strong>Öffnungszeiten und Apotheke im Dienst </strong> nutzen Sie bitte die App  <span style=\"color:#11b3ef\" class=\"ion-text-center\"><b>FarmApp</b></span></p></div>",
+    "closing": "Chiusura: "
 
 }

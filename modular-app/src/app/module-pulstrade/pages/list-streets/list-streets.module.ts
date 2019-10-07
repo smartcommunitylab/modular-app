@@ -6,6 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { ListStreetsPage } from './list-streets.page';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { TranslationLoaderService } from 'src/app/services/translation-loader.service';
 
 const routes: Routes = [
   {
@@ -13,9 +14,7 @@ const routes: Routes = [
     component: ListStreetsPage
   }
 ];
-// export function HttpLoaderFactory(http: HttpClient) {
-//   return new TranslateHttpLoader(http, './assets/strade/i18n/', '.json');
-// }
+
 @NgModule({
   imports: [
     CommonModule,
