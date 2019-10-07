@@ -7,7 +7,6 @@ import { IonicModule } from '@ionic/angular';
 
 import { ListRHPage } from './list-rh.page';
 
-import { FilterPageRhPage } from './filter-page-rh/filter-page-rh.page';
 import { SharedModule } from 'src/app/shared/shared.module';
 
 const routes: Routes = [
@@ -24,8 +23,8 @@ const routes: Routes = [
     SharedModule,
     RouterModule.forChild(routes)
   ],
-  entryComponents: [FilterPageRhPage],
+  entryComponents: [],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
-  declarations: [ListRHPage, FilterPageRhPage]
+  declarations: [ListRHPage]
 })
 export class ListRHPageModule {}

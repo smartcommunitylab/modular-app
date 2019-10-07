@@ -13,7 +13,7 @@ export class FilterPageFoodPage implements OnInit {
   original: any;
   private backbuttonSubscription: Subscription;
 
-  constructor(navParams: NavParams, private modalCtrl:ModalController) {
+  constructor(navParams: NavParams, private modalCtrl: ModalController) {
     // componentProps can also be accessed at construction time using NavParams
     console.log(navParams.get('filters'));
   }
@@ -28,11 +28,12 @@ export class FilterPageFoodPage implements OnInit {
             modal.dismiss();
         }
     });
-    this.original = this.filters.map(x => Object.assign({}, x)); 
+    this.original = this.filters.map(x => Object.assign({}, x));
 
     this.filters.forEach(element => {
-      if (element.isChecked)
+      if (element.isChecked) {
         return this.selected = true;
+      }
     });
   }
 closeModal() {

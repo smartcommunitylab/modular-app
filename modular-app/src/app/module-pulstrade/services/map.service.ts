@@ -23,14 +23,14 @@ export class MapService {
   Init(): Promise<any> {
     return this.platform.ready().then(() => {
       return new Promise<void>((resolve, reject) => {
-        this.loadData().then(()=> {
+        this.loadData().then(() => {
           resolve();
-        },err => {
+        }, err => {
           reject();
         });
-        
+
       });
-    })
+    });
   }
   getDefaultCenter(): any {
     return [this.defaultCenter.lat, this.defaultCenter.long];
@@ -40,18 +40,18 @@ export class MapService {
    * @return an `Array` of streets
    */
   loadData(): Promise<any> {
-    var deferred =  new Promise((resolve,reject)=>{
+    const deferred =  new Promise((resolve, reject) => {
       if (this.data) {
         return resolve(this.data);
       }
        this.http.get('https://tn.smartcommunitylab.it/streetcleaning/rest/street').toPromise().then(response => {
       //  this.http.get('./assets/strade/data/spazzamento.json').toPromise().then(response => {
           this.data = this.buildFinalData(response);
-        resolve()
+        resolve();
       }, err => {
         reject();
       });
-    })
+    });
     return deferred;
   }
   /**

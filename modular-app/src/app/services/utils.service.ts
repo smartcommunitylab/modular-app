@@ -86,7 +86,7 @@ export class UtilsService {
           if (data[f][this.translate.currentLang]) {
             res[f] = data[f][this.translate.currentLang];
           } else {
-            res[f] = data[f][this.translate.defaultLang || 'it'];
+            res[f] = data[f][this.translate.defaultLang] || data[f]['it'];
           }
         }
       });

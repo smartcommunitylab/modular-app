@@ -62,6 +62,19 @@ export class ItemListComponent implements OnInit {
       element.addEventListener('contactClick', async (contact) => {
         this.contact.emit(JSON.parse((<any>contact).detail));
       });
+
+      element.addEventListener('tagClicked', async (tag) => {
+        const tagSelected = (<any>tag).detail;
+        this.tags = this.tags.map(item => {
+          return {
+            'value': item.value,
+            'isChecked': item.value === tagSelected
+          };
+        });
+        this.presentFilter = true;
+        this.firstAccess = false;
+        this.onTagsChanged(this.tags);
+      });
     }
   }
 

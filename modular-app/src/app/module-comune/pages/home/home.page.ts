@@ -2,30 +2,28 @@ import { Component } from '@angular/core';
 import { NavController, AlertController } from '@ionic/angular';
 import { DbService } from '../../services/db.service';
 import { Router } from '@angular/router';
-import { ConfigService } from '../../services/config.service'
+import { ConfigService } from '../../services/config.service';
 import { TranslateService } from '@ngx-translate/core';
-import { MainPage } from '../../class/MainPage'
+import { UtilsService } from 'src/app/services/utils.service';
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage extends MainPage {
+export class HomePage {
   categories: any = [];
   elementsGallery: string[] = null;
   pois: any = [];
-  language: string = "it";
   elementsGalleryStr: string;
-  constructor(public navCtrl: NavController, public translate: TranslateService, private config: ConfigService, private router: Router, public dbService: DbService, public alertCtrl: AlertController) {
-    super(translate, navCtrl);
-  }
-  ngOnInit() {
-    this.translate.get('title_page').subscribe(
-      value => {
-        console.log(value);
-      }
-    );
-  }
+  constructor(
+    public navCtrl: NavController,
+    public translate: TranslateService,
+    private config: ConfigService,
+    private router: Router,
+    public dbService: DbService,
+    public alertCtrl: AlertController,
+    public utils: UtilsService) {}
+
   ionViewDidEnter() {
     this.elementsGallery = [];
     this.config.init();
@@ -46,7 +44,7 @@ export class HomePage extends MainPage {
     });
     window.addEventListener('elementSelected', item => {
       console.log(item);
-      this.goToItem(item["detail"]);
+      this.goToItem(item['detail']);
     });
 
   }
@@ -59,35 +57,18 @@ export class HomePage extends MainPage {
 
   }
 
-
   convertGallery(x) {
-    const galleryElement: any = {};
     if (x && x.key) {
-      if (x.key.name) {
-        galleryElement.name = x.key.name[this.language];
-      }
-      if (x.key.image) {
-        galleryElement.image = x.key.image[this.language];
-      }
-      if (x.key.objectIds) {
-        galleryElement.objectIds = x.key.objectIds;
-      }
+      return this.utils.convertObject(x.key, ['name', 'image'], ['objectIds']);
     }
-    return galleryElement;
+    return {};
   }
 
   convertCategories(x) {
-    const categoryElement: any = {};
-    categoryElement.id = x.key.id;
     if (x && x.key) {
-      if (x.key.name) {
-        categoryElement.name = x.key.name[this.language];
-      }
-      if (x.key.image) {
-        categoryElement.image = x.key.image;
-      }
+      return this.utils.convertObject(x.key, ['name'], ['id', 'image']);
     }
-    return categoryElement;
+    return {};
   }
 
   goToCategory(category) {
@@ -97,10 +78,8 @@ export class HomePage extends MainPage {
   goToItem(item) {
     console.log(item);
     this.dbService.getObjectByDataId(item.objectIds[0]).then(res => {
-      var found = res.docs.filter(obj => {
-        return obj["elementType"] != undefined
-      })
+      const found = res.docs.filter(obj =>  !!obj['elementType']);
       this.router.navigate(['/detail-poi'], { queryParams: { _id: found._id } });
-    })
+    });
   }
 }

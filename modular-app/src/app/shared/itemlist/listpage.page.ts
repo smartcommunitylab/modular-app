@@ -2,6 +2,7 @@ import { ModalController, NavController } from '@ionic/angular';
 import { Observable, of } from 'rxjs';
 import { Router } from '@angular/router';
 import { UtilsService } from 'src/app/services/utils.service';
+import { NgZone } from '@angular/core';
 
 
 export class ListPage {
@@ -16,7 +17,8 @@ export class ListPage {
     public navCtrl: NavController,
     public modalController: ModalController,
     public router: Router,
-    public utils: UtilsService) {
+    public utils: UtilsService,
+    public zone: NgZone) {
   }
 
   init() {
@@ -36,13 +38,13 @@ export class ListPage {
     return item.title.toLowerCase().indexOf(value.toLowerCase()) > -1;
   }
   appliesTag(item: any, value: string) {
-    return item.cat[0] === value;
+    return (this.getItemTags(item) || []).some((t) => t === value);
   }
   getItemTags(item: any) {
     return item.cat;
   }
   getItemCategory(item: any) {
-    return item.cat[0];
+    return item && item.cat && item.cat.length > 0 ? item.cat[0] : null;
   }
 
   filterList(filters?: any[]) {
@@ -61,7 +63,7 @@ export class ListPage {
 
   buildFilter(): any[] {
     const array = this.objects.map(item => this.getItemTags(item));
-    const map = array.reduce((prev, curr: string[]) => {curr.forEach(t => prev[t] = true); return prev; }, {});
+    const map = array.reduce((prev, curr: string[]) => {if (curr) { curr.forEach(t => prev[t] = true); } return prev; }, {});
     const res = [];
     Object.keys(map).forEach(i => res.push({value: i, isChecked: true}));
     res.sort((a, b) => a.value.localeCompare(b.value));
@@ -76,6 +78,7 @@ export class ListPage {
         cats.push(cat);
       }
     });
+    cats.sort();
     this.categories = cats;
     this.currentCategory = this.categories[0];
   }

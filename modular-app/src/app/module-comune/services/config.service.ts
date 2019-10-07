@@ -5,42 +5,41 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class ConfigService {
-  private appModuleName: string = "app-module";
+  private appModuleName = 'app-module';
   private defaultPosition = {
     lat: 46.0748,
     long: 11.1217
-  }
+  };
   private menu = [
     {
-      title: "Home",
-      url: "/home",
-      icon: "home"
+      title: 'Home',
+      url: '/home',
+      icon: 'home'
     }
-  ]
-  constructor() {
+  ];
+  constructor() {}
 
-  }
   init() {
     localStorage.setItem('comune-menu-', JSON.stringify(this.menu));
 
   }
-  getStringContacts(translate,language): Promise<any> {
+  getStringContacts(translate, language): Promise<any> {
     return new Promise<any>((resolve, reject) => {
-      translate.get('phone_contacts').subscribe((phone: string) => {
-        var phone = phone;
+      translate.get('phone_contacts').subscribe((p: string) => {
+        const phone = p;
 
         const address = translate.instant('address_contacts');
         const url = translate.instant('url_contacts');
         const share = translate.instant('share_contacts');
-        var contacts = JSON.stringify({
-          "phone": phone,
-          "address": address,
-          "url":url,
-          "share":share
-        })
-        resolve(contacts)
+        const contacts = JSON.stringify({
+          'phone': phone,
+          'address': address,
+          'url': url,
+          'share': share
+        });
+        resolve(contacts);
       });
-    })
+    });
   }
   getAppModuleName(): string {
     return this.appModuleName;

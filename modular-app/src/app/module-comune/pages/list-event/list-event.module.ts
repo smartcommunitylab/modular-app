@@ -5,7 +5,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { ListEventPage } from './list-event.page';
 import { InViewportModule } from 'ng-in-viewport';
-import { FilterPageEventPage } from './filter-page-event/filter-page-event.page';
 import { SharedModule } from 'src/app/shared/shared.module';
 
 const routes: Routes = [
@@ -23,8 +22,8 @@ const routes: Routes = [
     SharedModule,
     RouterModule.forChild(routes)
   ],
-  entryComponents: [FilterPageEventPage],
+  entryComponents: [],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
-  declarations: [ListEventPage, FilterPageEventPage]
+  declarations: [ListEventPage]
 })
 export class ListEventPageModule {}
