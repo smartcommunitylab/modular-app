@@ -2,17 +2,19 @@ import { Component, OnInit, NgZone } from '@angular/core';
 import { NavController, ModalController } from '@ionic/angular';
 import { DbService } from '../../services/db.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { ListPage } from 'src/app/shared/itemlist/listpage.page';
 import { Observable } from 'rxjs';
 import { UtilsService } from 'src/app/services/utils.service';
-import { X_OK } from 'constants';
+import { ComuneListPage } from '../../comune.model';
+import { GeoService } from 'src/app/services/geo.service';
+import { ConfigService } from 'src/app/services/config.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-list-poi',
   templateUrl: './list-poi.page.html',
   styleUrls: ['./list-poi.page.scss'],
 })
-export class ListPoiPage extends ListPage implements OnInit {
+export class ListPoiPage extends ComuneListPage implements OnInit {
   category: any;
   stringsContact: any;
   altImage: string;
@@ -24,39 +26,15 @@ export class ListPoiPage extends ListPage implements OnInit {
     public route: ActivatedRoute,
     public modalController: ModalController,
     public utils: UtilsService,
+    public geoSrv: GeoService,
+    public config: ConfigService,
+    public translate: TranslateService,
     public zone: NgZone) {
-      super(navCtrl, modalController, router, utils, zone);
-    }
-
-
-  ngOnInit() {
-    this.route.queryParams
-      .subscribe(params => {
-        if (params) {
-          const cat = JSON.parse(params.category);
-          if (!this.category) {
-            this.category = cat;
-            super.init();
-          }
-        }
-      });
+    super(navCtrl, dbService, geoSrv, config, modalController, router, route, utils, translate, zone);
   }
 
-  getList(): Observable<any[]> {
-    return new Observable(observer => {
-      this.utils.presentLoading();
-      this.dbService.getObjectByQuery(this.category.query).then((data) => {
-        if (data.docs.length > 0) {
-          const res = data.docs.map(x => this.convertObject(x));
-          this.utils.hideLoading();
-          observer.next(res);
-        }
-      }, (err) => {
-        this.utils.hideLoading();
-        console.error(err);
-        observer.error(err);
-      });
-    });
+  sort(list) {
+    list.sort((a, b) => a.distanceVal - b.distanceVal);
   }
 
   onExpand(id: string) {
@@ -64,13 +42,14 @@ export class ListPoiPage extends ListPage implements OnInit {
   }
 
   convertObject(x) {
-    const res = this.utils.convertObject(x, ['title', 'classification', 'cat', 'subtitle', 'description'], ['image']);
+    const res = this.utils.convertObject(x, ['title', 'classification', 'cat', 'subtitle', 'description'], ['image', 'location']);
     if (x && x._id) {
       res.id = x._id;
     }
     if (res.image) {
       res.image = x.image.replace('.jpg', '_medium.jpg');
     }
+    this.updateDistance(res);
     return res;
   }
 }

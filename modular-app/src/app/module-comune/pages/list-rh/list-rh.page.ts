@@ -3,22 +3,19 @@ import { Component, OnInit, NgZone } from '@angular/core';
 import { NavController, ModalController } from '@ionic/angular';
 import { DbService } from '../../services/db.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { ListPage } from 'src/app/shared/itemlist/listpage.page';
 import { UtilsService } from 'src/app/services/utils.service';
-import { Observable } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 import { GeoService } from 'src/app/services/geo.service';
-import { ConfigService } from 'src/app/module-trasporti/services/config.service';
+import { ConfigService } from 'src/app/services/config.service';
+import { ComuneListPage } from '../../comune.model';
 
 @Component({
   selector: 'app-list-rh',
   templateUrl: './list-rh.page.html',
   styleUrls: ['./list-rh.page.scss'],
 })
-export class ListRHPage extends ListPage implements OnInit {
+export class ListRHPage extends ComuneListPage implements OnInit {
   category: any;
-  mypos: { lat: number, long: number };
-
 
   constructor(
     public navCtrl: NavController,
@@ -31,44 +28,15 @@ export class ListRHPage extends ListPage implements OnInit {
     public translate: TranslateService,
     public geoSrv: GeoService,
     public config: ConfigService) {
-      super(navCtrl, modalController, router, utils, zone);
+      super(navCtrl, dbService, geoSrv, config, modalController, router, route, utils, translate, zone);
     }
 
-
-  ngOnInit() {
-    this.route.queryParams
-      .subscribe(params => {
-        if (params) {
-          const cat = JSON.parse(params.category);
-          if (!this.category) {
-            this.category = cat;
-            super.init();
-          }
-        }
-      });
+  getQuery() {
+    return { 'selector': { 'elementType': 'hotel-item' } };
   }
 
-  getList(): Observable<any[]> {
-    return new Observable(observer => {
-      this.utils.presentLoading();
-      const query = { 'selector': { 'elementType': 'hotel-item' } };
-      this.mypos = {
-        lat: window[this.config.getAppModuleName()]['geolocation']['lat'],
-        long: window[this.config.getAppModuleName()]['geolocation']['long']
-      };
-      this.dbService.getObjectByQuery(query).then((data) => {
-        if (data.docs.length > 0) {
-          const res = data.docs.map(x => this.convertObject(x));
-          res.sort((a, b) => a.distanceVal - b.distanceVal);
-          this.utils.hideLoading();
-          observer.next(res);
-        }
-      }, (err) => {
-        this.utils.hideLoading();
-        console.error(err);
-        observer.error(err);
-      });
-    });
+  sort(list) {
+    list.sort((a, b) => a.distanceVal - b.distanceVal);
   }
 
   convertObject(x) {
@@ -111,19 +79,6 @@ export class ListRHPage extends ListPage implements OnInit {
     return res;
   }
 
-  updateDistance(element) {
-    if (element.location && element.location[0] && element.location[1]) {
-      const dist = this.geoSrv.getDistanceKM(
-        { lat: this.mypos.lat, lon: this.mypos.long },
-        { lat: element.location[0], lon: element.location[1] });
-      element.distanceVal = dist;
-      element.distance = (this.translate.instant('distance_label') + ' ' + dist.toFixed(2) + ' Km');
-    } else {
-      element.distanceVal = 0;
-      element.distance = this.translate.instant('no_distance_label');
-    }
-
-  }
   getItemCategory(item: any) {
     return null;
   }

@@ -4,60 +4,36 @@ import { NavController, ModalController } from '@ionic/angular';
 import { DbService } from '../../services/db.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { UtilsService } from 'src/app/services/utils.service';
-import { ListPage } from 'src/app/shared/itemlist/listpage.page';
-import { Observable } from 'rxjs';
+import { ComuneListPage } from '../../comune.model';
+import { ConfigService } from 'src/app/services/config.service';
+import { GeoService } from 'src/app/services/geo.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-tourist-services',
   templateUrl: './tourist-services.page.html',
   styleUrls: ['./tourist-services.page.scss'],
 })
-export class TouristServicesPage extends ListPage implements OnInit {
-  category: any;
+export class TouristServicesPage extends ComuneListPage implements OnInit {
   stringsContact: any;
   altImage: string;
 
   constructor(
     public navCtrl: NavController,
     public dbService: DbService,
+    public config: ConfigService,
     public router: Router,
     public route: ActivatedRoute,
     public modalController: ModalController,
     public utils: UtilsService,
+    public geoSrv: GeoService,
+    public translate: TranslateService,
     public zone: NgZone) {
-      super(navCtrl, modalController, router, utils, zone);
+      super(navCtrl, dbService, geoSrv, config, modalController, router, route, utils, translate, zone);
     }
 
-
-  ngOnInit() {
-    this.route.queryParams
-      .subscribe(params => {
-        if (params) {
-          const cat = JSON.parse(params.category);
-          if (!this.category) {
-            this.category = cat;
-            super.init();
-          }
-        }
-      });
-  }
-
-  getList(): Observable<any[]> {
-    return new Observable(observer => {
-      this.utils.presentLoading();
-      const query = { 'selector': {'classification.it': 'Servizi'}};
-      this.dbService.getObjectByQuery(query).then((data) => {
-        if (data.docs.length > 0) {
-          const res = data.docs.map(x => this.convertObject(x));
-          this.utils.hideLoading();
-          observer.next(res);
-        }
-      }, (err) => {
-        this.utils.hideLoading();
-        console.error(err);
-        observer.error(err);
-      });
-    });
+  getQuery() {
+    return { 'selector': {'classification.it': 'Servizi'}};
   }
 
   onExpand(id: string) {

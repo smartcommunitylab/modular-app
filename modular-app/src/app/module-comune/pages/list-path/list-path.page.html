@@ -1,10 +1,10 @@
 <itemlist  title="{{'PATH' | translate}}" 
-  [tags]="tags" [categories]="categories" [items]="filtered" [currentCategory]="actualVisualized" [events]="'pathSelected'"
-  (searchUpdate)="onSearchUpdate($event)" (searchEnd)="onSearchEnd($event)"
-  (customEvent)="onCustomEvent($event)">
+  [tags]="tags" [categories]="categories" [items]="filtered" [currentCategory]="actualVisualized"
+  (searchUpdate)="onSearchUpdate($event)" (searchEnd)="onSearchEnd($event)">
 
     <div *listItem="let item">
         <wc-path-list-el type="PATH" [id]="item.id" [img]="item.image" [title]="item.title" [text]="item.subtitle" 
+        (pathSelected)="onPathSelected($event.detail)"        
         main-color="#11b3ef" desc-color="#707070">
         </wc-path-list-el>
     </div> 

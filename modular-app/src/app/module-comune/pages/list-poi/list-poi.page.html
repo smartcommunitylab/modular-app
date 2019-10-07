@@ -1,11 +1,11 @@
 <itemlist  title="{{'title_list_poi' | translate}}" 
   [tags]="tags" [categories]="categories" [items]="filtered" [currentCategory]="actualVisualized"
-  (tagsChanged)="onTagsChanged($event)" (searchUpdate)="onSearchUpdate($event)" (searchEnd)="onSearchEnd($event)"
-  (expand)="onExpand($event)" (contact)="onContact($event)">
+  (tagsChanged)="onTagsChanged($event)" (searchUpdate)="onSearchUpdate($event)" (searchEnd)="onSearchEnd($event)">
 
     <div *listItem="let item">
       <wc-details [id]="item.id" [img]="item.image" [title]="item.title"
-        [altImage]="altImage" [stringsinput]="stringsContact" 
+        [altImage]="altImage" [stringsinput]="stringsContact" [distance]="item.distance"
+        (contactClick)="onContact($event)" (tagClicked)="il.selectTag($event)" (expandeClick)="onExpand($event.detail)"
         [subtitle]="item.subtitle" [text]="item.text" [info]="item.info" [contacts]="item.infos"
         heading-color="#707070" second-color="#11b3ef" expandable="true" expanse="false">
       </wc-details>

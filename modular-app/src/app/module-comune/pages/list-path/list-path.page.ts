@@ -2,16 +2,19 @@ import { Component, OnInit, NgZone } from '@angular/core';
 import { NavController, ModalController } from '@ionic/angular';
 import { DbService } from '../../services/db.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { ListPage } from 'src/app/shared/itemlist/listpage.page';
 import { UtilsService } from 'src/app/services/utils.service';
 import { Observable } from 'rxjs';
+import { ComuneListPage } from '../../comune.model';
+import { TranslateService } from '@ngx-translate/core';
+import { GeoService } from 'src/app/services/geo.service';
+import { ConfigService } from 'src/app/services/config.service';
 
 @Component({
   selector: 'app-list-path',
   templateUrl: './list-path.page.html',
   styleUrls: ['./list-path.page.scss'],
 })
-export class ListPathPage extends ListPage implements OnInit {
+export class ListPathPage extends ComuneListPage implements OnInit {
   category: any;
   stringsContact: any;
   altImage: string;
@@ -23,39 +26,11 @@ export class ListPathPage extends ListPage implements OnInit {
     public route: ActivatedRoute,
     public modalController: ModalController,
     public utils: UtilsService,
-    public zone: NgZone) {
-      super(navCtrl, modalController, router, utils, zone);
-    }
-
-
-  ngOnInit() {
-    this.route.queryParams
-      .subscribe(params => {
-        if (params) {
-          const cat = JSON.parse(params.category);
-          if (!this.category) {
-            this.category = cat;
-            super.init();
-          }
-        }
-      });
-  }
-
-  getList(): Observable<any[]> {
-    return new Observable(observer => {
-      this.utils.presentLoading();
-      this.dbService.getObjectByQuery(this.category.query).then((data) => {
-        if (data.docs.length > 0) {
-          const res = data.docs.map(x => this.convertObject(x));
-          this.utils.hideLoading();
-          observer.next(res);
-        }
-      }, (err) => {
-        this.utils.hideLoading();
-        console.error(err);
-        observer.error(err);
-      });
-    });
+    public zone: NgZone,
+    public translate: TranslateService,
+    public geoSrv: GeoService,
+    public config: ConfigService) {
+    super(navCtrl, dbService, geoSrv, config, modalController, router, route, utils, translate, zone);
   }
 
   convertObject(x) {
@@ -78,9 +53,7 @@ export class ListPathPage extends ListPage implements OnInit {
     }
   }
 
-  onCustomEvent(evt: any) {
-    if (evt.name === 'pathSelected') {
-      this.router.navigate(['/detail-path'], { queryParams: { id: evt.data } });
-    }
+  onPathSelected(id: string) {
+    this.router.navigate(['/detail-path'], { queryParams: { id } });
   }
 }

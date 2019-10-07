@@ -1,7 +1,6 @@
 import { ModalController, NavController } from '@ionic/angular';
 import { Observable, of } from 'rxjs';
 import { Router } from '@angular/router';
-import { UtilsService } from 'src/app/services/utils.service';
 import { NgZone } from '@angular/core';
 
 
@@ -17,7 +16,6 @@ export class ListPage {
     public navCtrl: NavController,
     public modalController: ModalController,
     public router: Router,
-    public utils: UtilsService,
     public zone: NgZone) {
   }
 
@@ -100,15 +98,5 @@ export class ListPage {
 
   onTagsChanged(values?: any[]) {
     this.filterList(values);
-  }
-
-  onExpand(id: string) {
-  }
-
-  onContact(data: any) {
-    this.utils.openContact(data);
-  }
-
-  onCustomEvent(data: any) {
   }
 }

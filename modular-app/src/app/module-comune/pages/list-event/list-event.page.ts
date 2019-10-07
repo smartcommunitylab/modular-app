@@ -4,14 +4,17 @@ import { DbService } from '../../services/db.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { UtilsService } from 'src/app/services/utils.service';
 import moment from 'moment';
-import { ListPage } from 'src/app/shared/itemlist/listpage.page';
+import { ComuneListPage } from '../../comune.model';
 import { Observable } from 'rxjs';
+import { TranslateService } from '@ngx-translate/core';
+import { GeoService } from 'src/app/services/geo.service';
+import { ConfigService } from 'src/app/services/config.service';
 @Component({
   selector: 'app-list-event',
   templateUrl: './list-event.page.html',
   styleUrls: ['./list-event.page.scss']
 })
-export class ListEventPage extends ListPage implements OnInit {
+export class ListEventPage extends ComuneListPage implements OnInit {
   category: any;
   stringsContact: any;
   altImage: string;
@@ -23,43 +26,18 @@ export class ListEventPage extends ListPage implements OnInit {
     public dbService: DbService,
     public router: Router,
     public route: ActivatedRoute,
-    public events: Events,
     public modalController: ModalController,
     public utils: UtilsService,
-    public zone: NgZone
-  ) {
-    super(navCtrl, modalController, router, utils, zone);
+    public zone: NgZone,
+    public translate: TranslateService,
+    public geoSrv: GeoService,
+    public config: ConfigService) {
+    super(navCtrl, dbService, geoSrv, config, modalController, router, route, utils, translate, zone);
   }
 
-  ngOnInit() {
-    this.route.queryParams
-      .subscribe(params => {
-        if (params) {
-          const cat = JSON.parse(params.category);
-          if (!this.category) {
-            this.category = cat;
-            super.init();
-          }
-        }
-      });
-  }
-
-  getList(): Observable<any[]> {
-    return new Observable(observer => {
-      this.utils.presentLoading();
-      this.dbService.getObjectByQuery(this.category.query).then((data) => {
-
-        if (data.docs.length > 0) {
-          const res = this.spreadEvents(data.docs.map(x => this.convertObject(x)));
-          observer.next(res);
-        }
-        this.utils.hideLoading();
-      }, (err) => {
-        this.utils.hideLoading();
-        console.error(err);
-        observer.error(err);
-      });
-    });
+  processList(list) {
+    const res = super.processList(list);
+    return this.spreadEvents(res);
   }
 
   onExpand(id: string) {

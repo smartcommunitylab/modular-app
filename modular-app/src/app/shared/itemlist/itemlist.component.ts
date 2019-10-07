@@ -1,5 +1,5 @@
-import { Component, OnInit, Input, Output, EventEmitter, ContentChild, Directive, TemplateRef, ViewChild, ElementRef } from '@angular/core';
-import { NavParams, PopoverController, Events, ModalController, Platform, NavController } from '@ionic/angular';
+import { Component, OnInit, Input, Output, EventEmitter, ContentChild, Directive, TemplateRef } from '@angular/core';
+import { ModalController, Platform, NavController } from '@ionic/angular';
 import { FilterPage } from '../filter-page/filter-page.page';
 
 
@@ -17,13 +17,14 @@ export class ListItemDirective {}
 export class ItemListComponent implements OnInit {
 
   search = false;
-  presentFilter = false;
   typingTimer = null;        // timer identifier
   doneTypingInterval = 500;  // time in ms, 5 second for example
   isIOS = false;
 
   firstAccess = true;
 
+  @Input()
+  presentFilter = false;
   @Input()
   currentCategory: string;
   @Input()
@@ -34,8 +35,6 @@ export class ItemListComponent implements OnInit {
   title: string;
   @Input()
   items: any;
-  @Input()
-  events: any;
 
   @Output()
   searchEnd = new EventEmitter<boolean>();
@@ -43,50 +42,20 @@ export class ItemListComponent implements OnInit {
   searchUpdate = new EventEmitter<string>();
   @Output()
   tagsChanged = new EventEmitter<any[]>();
-  @Output()
-  expand = new EventEmitter<string>();
-  @Output()
-  contact = new EventEmitter<any>();
-  @Output()
-  customEvent = new EventEmitter<any>();
 
   @ContentChild(ListItemDirective, {read: TemplateRef}) listItem;
 
-  @ViewChild('itemlist')
-  set itemlist(el: ElementRef) {
-    if (!el) {
-      return;
-    }
-    const element = document.getElementById('itemlist');
-    if (element) {
-      element.addEventListener('expandeClick', async (returnId) => {
-        this.expand.emit((<any>returnId).detail);
-      });
-
-      element.addEventListener('contactClick', async (contact) => {
-        this.contact.emit(JSON.parse((<any>contact).detail));
-      });
-
-      element.addEventListener('tagClicked', async (tag) => {
-        const tagSelected = (<any>tag).detail;
-        this.tags = this.tags.map(item => {
-          return {
-            'value': item.value,
-            'isChecked': item.value === tagSelected
-          };
-        });
-        this.presentFilter = true;
-        this.firstAccess = false;
-        this.onTagsChanged(this.tags);
-      });
-      if (this.events) {
-        this.events.split(',').forEach((s) => {
-          element.addEventListener(s.trim(), async (evt) => {
-            this.customEvent.emit({data: (<any>evt).detail, name: s.trim()});
-          });
-        });
-      }
-    }
+  selectTag(tag) {
+    const tagSelected = (<any>tag).detail;
+    this.tags = this.tags.map(item => {
+      return {
+        'value': item.value,
+        'isChecked': item.value === tagSelected
+      };
+    });
+    this.presentFilter = true;
+    this.firstAccess = false;
+    this.onTagsChanged(this.tags);
   }
 
   constructor(public navCtrl: NavController, public modalController: ModalController, public plt: Platform) {

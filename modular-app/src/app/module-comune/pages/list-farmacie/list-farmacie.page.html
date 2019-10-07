@@ -1,7 +1,6 @@
-<itemlist  title="{{'farmacie_label' | translate}}" 
+<itemlist  title="{{'farmacie_label' | translate}}" #il
   [categories]="categories" [items]="filtered" [currentCategory]="actualVisualized"
-  (searchUpdate)="onSearchUpdate($event)" (searchEnd)="onSearchEnd($event)"
-  (contact)="onContact($event)">
+  (searchUpdate)="onSearchUpdate($event)" (searchEnd)="onSearchEnd($event)">
 
     <div list-header>
       <ion-card class="card-turni" *ngIf="turno">
@@ -14,6 +13,7 @@
 
     <div *listItem="let item">        
       <wc-details [id]="item.id" [title]="item.title" [showimg]=true [showtags]=true 
+        (contactClick)="onContact($event)"
         [altImage]="altImage" [stringsinput]="stringsContact" [distance]="item.distance"
         [subtitle]="item.subtitle" [text]="item.text" [info]="item.info" [contacts]="item.infos"
         heading-color="#707070" second-color="#11b3ef" expandable="false" expanse="false">
