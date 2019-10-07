@@ -1,4 +1,4 @@
-<ion-header no-border >
+<ion-header no-border [ngClass]="{'shadow': search || !categories || categories.length <= 1}">
   <ion-searchbar mode="md" class="search" [ngClass]="{'searchspace': search}" style="display: none" showCancelButton="always"  animated (search)="toggleSearch()"
     (ionInput)="searchChanged($event)" (ionCancel)="toggleSearch()" ></ion-searchbar>
   <ion-toolbar>    
@@ -23,7 +23,7 @@
 </ion-header>
 
 <div class="wrapper" *ngIf="presentFilter && !search">
-  <div class="scrolling-wrapper-flexbox loop">
+  <div class="scrolling-wrapper-flexbox shadow loop">
     <div class="container" *ngFor="let tag of tags">
       <div class="tag" *ngIf="tag.isChecked">
         <div class="tag-text">
@@ -36,7 +36,7 @@
   </div>
 </div>
 <div class="wrapper" *ngIf="!presentFilter">
-  <div class="scrolling-wrapper-flexbox loop">
+  <div class="scrolling-wrapper-flexbox shadow loop" *ngIf="categories && categories.length > 1">
     <ion-chip *ngFor="let c of categories" id="{{c}}" (click)="selectInternalElement(c)"
       [ngClass]="{'categorySelected': c == currentCategory}">
       <ion-label class="interaction" [ngClass]="{'categorySelected': c == currentCategory}">{{c}}</ion-label>
@@ -45,7 +45,9 @@
 </div>
 
 <ion-content [scrollEvents]="true">
-  
+  <div class="cntnt" [ngClass]="{'padding': presentFilter || (categories && categories.length > 1)}">
+    <ng-content select="[list-header]"></ng-content> 
+
     <div *ngIf="items != null && !emptyList">
         <ion-list no-lines id="itemlist" #itemlist>
             <div class="list-container" *ngFor="let c of categories">
@@ -65,4 +67,5 @@
     <div class="empty-list" *ngIf="items != null && emptyList">
       <ng-content select="[empty]"></ng-content> 
     </div>
-  </ion-content>
+  </div>
+</ion-content>

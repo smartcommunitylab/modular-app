@@ -1,11 +1,10 @@
 // tslint:disable: no-shadowed-variable
 import { Component, OnInit, NgZone } from '@angular/core';
-import { NavController, AlertController, PopoverController, Events, ModalController, Platform } from '@ionic/angular';
+import { NavController, ModalController } from '@ionic/angular';
 import { DbService } from '../../services/db.service';
-import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { GeoService } from 'src/app/services/geo.service';
-import { AlertInput } from '@ionic/core';
 import { ConfigService } from '../../services/config.service';
 import { ListPage } from 'src/app/shared/itemlist/listpage.page';
 import { UtilsService } from 'src/app/services/utils.service';
@@ -19,7 +18,6 @@ import { Observable } from 'rxjs';
 export class ListFoodPage extends ListPage implements OnInit {
   category: any;
   mypos: { lat: number, long: number };
-
 
   constructor(
     public navCtrl: NavController,

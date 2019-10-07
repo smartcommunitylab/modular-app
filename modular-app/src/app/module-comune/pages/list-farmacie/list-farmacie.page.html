@@ -1,4 +1,29 @@
-<ion-header  [ngClass]="{'higher': searchAndIos()}" >
+<itemlist  title="{{'farmacie_label' | translate}}" 
+  [categories]="categories" [items]="filtered" [currentCategory]="actualVisualized"
+  (searchUpdate)="onSearchUpdate($event)" (searchEnd)="onSearchEnd($event)"
+  (contact)="onContact($event)">
+
+    <div list-header>
+      <ion-card class="card-turni" *ngIf="turno">
+          <button ion-button icon-only (click)="closeTurno()">
+            <ion-icon name="close"></ion-icon>
+          </button>
+        <div class="message" (click)="openMarket()" [innerHTML]="farmacieTurno"></div>
+      </ion-card>
+    </div>
+
+    <div *listItem="let item">        
+      <wc-details [id]="item.id" [title]="item.title" [showimg]=true [showtags]=true 
+        [altImage]="altImage" [stringsinput]="stringsContact" [distance]="item.distance"
+        [subtitle]="item.subtitle" [text]="item.text" [info]="item.info" [contacts]="item.infos"
+        heading-color="#707070" second-color="#11b3ef" expandable="false" expanse="false">
+      </wc-details>
+    </div> 
+
+    <div empty>{{'empty_list' | translate}}</div>
+</itemlist>
+
+<!-- <ion-header  [ngClass]="{'higher': searchAndIos()}" >
    <ion-toolbar>
 
     <ion-buttons slot="start" *ngIf="!search">
@@ -44,4 +69,4 @@
   <div class="empty-list" *ngIf="emptyList">
       {{'empty_list' | translate}}
   </div>
-</ion-content>
+</ion-content> -->
