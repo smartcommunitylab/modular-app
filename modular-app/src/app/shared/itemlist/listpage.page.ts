@@ -1,8 +1,4 @@
-import { ModalController, NavController } from '@ionic/angular';
 import { Observable, of } from 'rxjs';
-import { Router } from '@angular/router';
-import { NgZone } from '@angular/core';
-
 
 export class ListPage {
 
@@ -12,11 +8,7 @@ export class ListPage {
   filtered: any[] = null;
   currentCategory = null;
 
-  constructor(
-    public navCtrl: NavController,
-    public modalController: ModalController,
-    public router: Router,
-    public zone: NgZone) {
+  constructor() {
   }
 
   init() {

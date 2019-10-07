@@ -24,7 +24,7 @@ export class ComuneListPage extends ListPage implements OnInit {
         public utils: UtilsService,
         public translate: TranslateService,
         public zone: NgZone) {
-        super(navCtrl, modalController, router, zone);
+        super();
     }
 
     ngOnInit() {
