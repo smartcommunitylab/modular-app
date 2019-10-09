@@ -127,7 +127,7 @@ export class DetailPathPage implements OnInit {
       element.addEventListener('expandeClick', async (returnId) => {
         //go to detail
         var id = (<any>returnId).detail
-        this.router.navigate(['/detail-poi'], { queryParams: { id: id, type: 'POI' } });
+        this.router.navigate(['/detail-comune'], { queryParams: { id: id, type: 'POI' } });
         this.paramsSubscription.unsubscribe();
 
       })
@@ -229,7 +229,7 @@ export class DetailPathPage implements OnInit {
   // }
 
   goToPoi(id) {
-    this.router.navigate(['/detail-poi'], { queryParams: { id: id } });
+    this.router.navigate(['/detail-comune'], { queryParams: { id: id } });
   }
 
   toggleSearch() {

@@ -10,7 +10,7 @@
     "en": "https://www.comune.trento.it/var/comunetn/storage/images/aree-tematiche/turismo/info-utili/arrivare-a-trento/5987462-6-ita-IT/Arrivare-a-Trento_imagefull.jpg",
     "de": "https://www.comune.trento.it/var/comunetn/storage/images/aree-tematiche/turismo/info-utili/arrivare-a-trento/5987462-6-ita-IT/Arrivare-a-Trento_imagefull.jpg"
   },
-  "url": "/detail-poi",
+  "url": "/detail-comune",
   "objectIds": [
     "4b8834e1c27b237c07faebc96d8dab37"
   ]
@@ -29,7 +29,7 @@
       "en": "https://www.comune.trento.it/var/comunetn/storage/images/aree-tematiche/turismo/eventi/eventi-principali/trento-smart-city-week/9998836-37-ita-IT/Trento-Smart-City-Week_imagefull.jpg",
       "de": "https://www.comune.trento.it/var/comunetn/storage/images/aree-tematiche/turismo/eventi/eventi-principali/trento-smart-city-week/9998836-37-ita-IT/Trento-Smart-City-Week_imagefull.jpg"
     },
-    "url": "/detail-event",
+    "url": "/detail-comune",
     "objectIds": [
       "a41e85e995c0e17024cb65791b405961"
     ]  },
@@ -45,7 +45,7 @@
       "en": "https://www.comune.trento.it/var/comunetn/storage/images/aree-tematiche/turismo/info-utili/servizi/museum-pass/8523886-15-ita-IT/Museum-Pass_imagefull.jpg",
       "de": "https://www.comune.trento.it/var/comunetn/storage/images/aree-tematiche/turismo/info-utili/servizi/museum-pass/8523886-15-ita-IT/Museum-Pass_imagefull.jpg"
     },
-    "url": "/detail-poi",
+    "url": "/detail-comune",
     "objectIds": [
       "text.3005"
     ]
@@ -62,7 +62,7 @@
       "en": "https://i.imgur.com/AwDAykS.jpg",
       "de": "https://i.imgur.com/AwDAykS.jpg"
     },
-    "url": "/detail-poi",
+    "url": "/detail-comune",
     "objectIds": [
       "cultura.72"
     ]  }

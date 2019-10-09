@@ -4,7 +4,7 @@ import { DbService } from '../../services/db.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { UtilsService } from 'src/app/services/utils.service';
-import { ComuneListPage } from '../../comune.model';
+import { ComuneListPage, POI } from '../../comune.model';
 import { GeoService } from 'src/app/services/geo.service';
 import { ConfigService } from 'src/app/services/config.service';
 import { TranslateService } from '@ngx-translate/core';
@@ -38,17 +38,10 @@ export class ListPoiPage extends ComuneListPage implements OnInit {
   }
 
   onExpand(id: string) {
-    this.router.navigate(['/detail-poi'], { queryParams: { id: id, type: 'POI' } });
+    this.router.navigate(['/detail-comune'], { queryParams: { id } });
   }
 
   convertObject(x) {
-    const res = this.utils.convertObject(x, ['title', 'classification', 'cat', 'subtitle', 'description'], ['image', 'location']);
-    if (x && x._id) {
-      res.id = x._id;
-    }
-    if (res.image) {
-      res.image = x.image.replace('.jpg', '_medium.jpg');
-    }
-    return res;
+    return new POI(x, this.translate);
   }
 }

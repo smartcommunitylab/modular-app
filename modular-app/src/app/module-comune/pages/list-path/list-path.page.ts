@@ -3,8 +3,7 @@ import { NavController, ModalController } from '@ionic/angular';
 import { DbService } from '../../services/db.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { UtilsService } from 'src/app/services/utils.service';
-import { Observable } from 'rxjs';
-import { ComuneListPage } from '../../comune.model';
+import { ComuneListPage, Path } from '../../comune.model';
 import { TranslateService } from '@ngx-translate/core';
 import { GeoService } from 'src/app/services/geo.service';
 import { ConfigService } from 'src/app/services/config.service';
@@ -34,14 +33,7 @@ export class ListPathPage extends ComuneListPage implements OnInit {
   }
 
   convertObject(x) {
-    const res = this.utils.convertObject(x, ['title', 'subtitle', 'description'], ['image']);
-    if (x && x._id) {
-      res.id = x._id;
-    }
-    if (res.image) {
-      res.image = x.image.replace('.jpg', '_medium.jpg');
-    }
-    return res;
+    return new Path(x, this.translate);
   }
 
   ionViewWillLeave() {

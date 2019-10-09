@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { ConfigService } from '../../services/config.service';
 import { TranslateService } from '@ngx-translate/core';
 import { UtilsService } from 'src/app/services/utils.service';
+import { convertObject } from '../../comune.model';
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -59,14 +60,14 @@ export class HomePage {
 
   convertGallery(x) {
     if (x && x.key) {
-      return this.utils.convertObject(x.key, ['name', 'image'], ['objectIds']);
+      return convertObject(x.key, {}, this.translate, ['name', 'image'], ['objectIds']);
     }
     return {};
   }
 
   convertCategories(x) {
     if (x && x.key) {
-      return this.utils.convertObject(x.key, ['name'], ['id', 'image']);
+      return convertObject(x.key, {}, this.translate, ['name'], ['id', 'image']);
     }
     return {};
   }
@@ -79,7 +80,7 @@ export class HomePage {
     console.log(item);
     this.dbService.getObjectByDataId(item.objectIds[0]).then(res => {
       const found = res.docs.filter(obj =>  !!obj['elementType']);
-      this.router.navigate(['/detail-poi'], { queryParams: { _id: found._id } });
+      this.router.navigate(['/detail-comune'], { queryParams: { _id: found._id } });
     });
   }
 }

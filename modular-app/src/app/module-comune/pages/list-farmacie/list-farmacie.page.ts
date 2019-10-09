@@ -5,9 +5,8 @@ import { DbService } from '../../services/db.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { GeoService } from 'src/app/services/geo.service';
-import { Observable } from 'rxjs';
 import { UtilsService } from 'src/app/services/utils.service';
-import { ComuneListPage } from '../../comune.model';
+import { ComuneListPage, Pharmacy } from '../../comune.model';
 import { ConfigService } from 'src/app/services/config.service';
 // import { Market } from '@ionic-native/market';
 
@@ -53,48 +52,7 @@ export class ListFarmaciePage extends ComuneListPage implements OnInit {
   }
 
   convertObject(x) {
-    const res = this.utils.convertObject(x,
-      ['title', 'subtitle', 'description', 'classification', 'cat', 'closing', 'timetable', 'address'],
-      ['image', 'url', 'location']);
-    if (x && x._id) {
-      res.id = x._id;
-    }
-    if (res.image) {
-      res.image = x.image.replace('.jpg', '_medium.jpg');
-    }
-    if (res.timetable) {
-      res.date = res.timetable;
-    }
-    if (res.closing) {
-      res.closing = `<b>${this.translate.instant('closing')}: ${res.closing}</b>`;
-    }
-    if (res.description) {
-      res.text = res.description;
-    }
-    if (x.category) {
-      res.category = x.category.charAt(0).toUpperCase() + x.category.slice(1);
-    }
-    if (res.classification) {
-      res.subtitle = res.classification;
-    }
-    let tmp = '';
-    if (x.contacts) {
-      if (x.contacts.phone) {
-        res.phone = x.contacts.phone;
-      }
-      if (x.contacts.email) {
-        tmp += '<p>' + x.contacts.email + '</p>';
-        res.email = x.contacts.email;
-      }
-    }
-
-    // merge subtime to subscription
-    let description = res.subtitle ? (res.subtitle + '<br>') : '';
-    description += res.description ? res.description : '';
-    res.description = description;
-    res.text += tmp;
-    res.infos = JSON.stringify(res);
-    return res;
+    return new Pharmacy(x, this.translate);
   }
 
   closeTurno() {

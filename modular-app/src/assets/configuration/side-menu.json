@@ -19,7 +19,7 @@
           "en": "Information",
           "de": "Information"
         },
-        "url": "/detail-poi",
+        "url": "/detail-comune",
         "icon": "information"
       },
       {
@@ -28,7 +28,7 @@
           "en": "History",
           "de": "History"
         },
-        "url": "/detail-poi",
+        "url": "/detail-comune",
         "icon": "information"
       },
       {
@@ -37,7 +37,7 @@
           "en": "The Council of Trento",
           "de": "Information"
         },
-        "url": "/detail-poi",
+        "url": "/detail-comune",
         "icon": "information"
       },
       {
@@ -46,7 +46,7 @@
           "en": "Main Events",
           "de": "History"
         },
-        "url": "/detail-poi",
+        "url": "/detail-comune",
         "icon": "information"
       },
       {
@@ -55,7 +55,7 @@
           "en": "Il monte Bondone",
           "de": "History"
         },
-        "url": "/detail-poi",
+        "url": "/detail-comune",
         "icon": "information"
       }
     ]
@@ -73,7 +73,7 @@
           "en": "Museums",
           "de": "Information"
         },
-        "url": "/detail-poi",
+        "url": "/detail-comune",
         "icon": "information"
       },
       {
@@ -82,7 +82,7 @@
           "en": "Historic Building",
           "de": "History"
         },
-        "url": "/detail-poi",
+        "url": "/detail-comune",
         "icon": "information"
       },
       {
@@ -91,7 +91,7 @@
           "en": "Churches",
           "de": "Information"
         },
-        "url": "/detail-poi",
+        "url": "/detail-comune",
         "icon": "information"
       },
       {
@@ -100,7 +100,7 @@
           "en": "Archaeological Areas",
           "de": "History"
         },
-        "url": "/detail-poi",
+        "url": "/detail-comune",
         "icon": "information"
       },
       {
@@ -109,7 +109,7 @@
           "en": "Nature",
           "de": "History"
         },
-        "url": "/detail-poi",
+        "url": "/detail-comune",
         "icon": "information"
       },
       {
@@ -118,7 +118,7 @@
           "en": "Other sites",
           "de": "History"
         },
-        "url": "/detail-poi",
+        "url": "/detail-comune",
         "icon": "information"
       }
     ]
@@ -135,7 +135,7 @@
           "en": "Restaurants",
           "de": "Information"
         },
-        "url": "/detail-poi",
+        "url": "/detail-comune",
         "icon": "information"
       },
       {
@@ -144,7 +144,7 @@
           "en": "Hotel",
           "de": "History"
         },
-        "url": "/detail-poi",
+        "url": "/detail-comune",
         "icon": "information"
       }
     ]
@@ -160,7 +160,7 @@
           "en": "Restaurants",
           "de": "Information"
         },
-        "url": "/detail-poi",
+        "url": "/detail-comune",
         "icon": "information"
       },
       {
@@ -169,7 +169,7 @@
           "en": "Hotel",
           "de": "History"
         },
-        "url": "/detail-poi",
+        "url": "/detail-comune",
         "icon": "information"
       }
     ]
@@ -185,7 +185,7 @@
           "en": "Restaurants",
           "de": "Information"
         },
-        "url": "/detail-poi",
+        "url": "/detail-comune",
         "icon": "information"
       }
     ]
@@ -201,7 +201,7 @@
           "en": "Restaurants",
           "de": "Information"
         },
-        "url": "/detail-poi",
+        "url": "/detail-comune",
         "icon": "information"
       },
       {
@@ -210,7 +210,7 @@
           "en": "Hotel",
           "de": "History"
         },
-        "url": "/detail-poi",
+        "url": "/detail-comune",
         "icon": "information"
       }
     ]

@@ -75,31 +75,5 @@ export class UtilsService {
       }
     }
   }
-
-
-
-  convertObject(data: any, i18nFields?: string[], plainFields?: string[]): any {
-    const res = {};
-    if (i18nFields) {
-      i18nFields.forEach((f) => {
-        if (data[f]) {
-          if (data[f][this.translate.currentLang]) {
-            res[f] = data[f][this.translate.currentLang];
-          } else {
-            res[f] = data[f][this.translate.defaultLang] || data[f]['it'];
-          }
-        }
-      });
-      if (plainFields) {
-        plainFields.forEach((f) => {
-          if (data[f]) {
-            res[f] = data[f];
-          }
-        });
-      }
-    }
-    return res;
-  }
-
 }
 

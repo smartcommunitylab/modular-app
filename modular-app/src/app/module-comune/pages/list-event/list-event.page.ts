@@ -1,14 +1,14 @@
 import { Component, OnInit, NgZone } from '@angular/core';
-import { NavController, Events, ModalController } from '@ionic/angular';
+import { NavController, ModalController } from '@ionic/angular';
 import { DbService } from '../../services/db.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { UtilsService } from 'src/app/services/utils.service';
 import moment from 'moment';
 import { ComuneListPage } from '../../comune.model';
-import { Observable } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 import { GeoService } from 'src/app/services/geo.service';
 import { ConfigService } from 'src/app/services/config.service';
+import { Event } from '../../comune.model';
 @Component({
   selector: 'app-list-event',
   templateUrl: './list-event.page.html',
@@ -18,8 +18,6 @@ export class ListEventPage extends ComuneListPage implements OnInit {
   category: any;
   stringsContact: any;
   altImage: string;
-
-  mainEventLabel: any;
 
   constructor(
     public navCtrl: NavController,
@@ -41,7 +39,7 @@ export class ListEventPage extends ComuneListPage implements OnInit {
   }
 
   onExpand(id: string) {
-    this.router.navigate(['/detail-event'], { queryParams: { id: id, type: 'EVENT' } });
+    this.router.navigate(['/detail-comune'], { queryParams: { id } });
   }
 
   getItemCategory(item: any) {
@@ -74,47 +72,7 @@ export class ListEventPage extends ComuneListPage implements OnInit {
   }
 
   convertObject(x) {
-    const res = this.utils.convertObject(x,
-      ['title', 'classification', 'cat', 'subtitle', 'description', 'eventPeriod', 'eventTiming', 'info', 'address'],
-      ['image', 'topics', 'fromTime', 'toTime', 'url']);
-      if (res.image) {
-        res.image = res.image.replace('.jpg', '_medium.jpg');
-      }
-      if (!res.topics) { res.topics = []; }
-    if (x) {
-      if (x.parentEventId) {
-        if (res.cat) {
-          res.cat.push(JSON.parse(x.parentEventId).objectName);
-        } else { res.topics = [JSON.parse(x.parentEventId).objectName]; }
-      }
-      if (x.category) {
-        if (x.category === 'event') {
-          res.category = this.mainEventLabel;
-          res.cat = [this.mainEventLabel];
-        } else {
-          res.category = x.category;
-        }
-      }
-      if (x.contacts) {
-        if (x.contacts.phone) {
-          res.phone = x.contacts.phone;
-        }
-        if (x.contacts.email) {
-          res.email = x.contacts.email;
-        }
-      }
-      if (x._id) {
-        res.id = x._id;
-      }
-    }
-    if (res.eventPeriod) {
-        res.date = res.eventPeriod;
-    }
-    if (res.eventTiming) {
-        res.time = res.eventTiming;
-    }
-    res.infos = JSON.stringify(res);
-    return res;
+    return new Event(x, this.translate);
   }
 
 }

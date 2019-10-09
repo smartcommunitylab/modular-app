@@ -74,7 +74,7 @@ init() {
       galleryElement.image = x.image[this.language];
     }
     // if (x.url) {
-      galleryElement.url = '/detail-poi';
+      galleryElement.url = '/detail-comune';
     // }
     if (x.params) {
       galleryElement.params = x.params;

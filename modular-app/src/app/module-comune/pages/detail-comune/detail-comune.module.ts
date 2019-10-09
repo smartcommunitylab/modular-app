@@ -2,14 +2,16 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
+
 import { IonicModule } from '@ionic/angular';
-import { DetailPoiPage } from './detail-poi.page';
+
+import { DetailPage } from './detail-comune.page';
 import { SharedModule } from 'src/app/shared/shared.module';
 
 const routes: Routes = [
   {
     path: '',
-    component: DetailPoiPage
+    component: DetailPage
   }
 ];
 
@@ -22,6 +24,6 @@ const routes: Routes = [
     RouterModule.forChild(routes)
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
-  declarations: [DetailPoiPage]
+  declarations: [DetailPage]
 })
-export class DetailPoiPageModule {}
+export class DetailComunePageModule {}

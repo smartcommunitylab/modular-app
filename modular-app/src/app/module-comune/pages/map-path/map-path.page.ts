@@ -46,7 +46,7 @@ export class MapPathPage implements OnInit {
     element.addEventListener('poiSelected', async (poiParam) => {
       var poiId = (<any>poiParam).detail;
       console.log(poiId);
-      this.router.navigate(['/detail-poi'], { queryParams: { id: poiId, type: 'POI' } });
+      this.router.navigate(['/ddetail-comune'], { queryParams: { id: poiId } });
 
     });
     this.myPosParam = JSON.stringify(this.myPos);
