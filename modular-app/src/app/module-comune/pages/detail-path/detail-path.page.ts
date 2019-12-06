@@ -200,7 +200,9 @@ export class DetailPathPage implements OnInit {
     }
   }
   goMap() {
+    if (this.fullPois)
     localStorage.setItem('path', JSON.stringify(this.fullPois));
+    if (this.tracciato)
     localStorage.setItem('tracciato', JSON.stringify(this.tracciato));
     this.paramsSubscription.unsubscribe();
     this.router.navigate(['/map-path'], { queryParams: { id: this.paths.id } });

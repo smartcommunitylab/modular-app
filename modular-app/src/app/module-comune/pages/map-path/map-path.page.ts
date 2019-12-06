@@ -41,8 +41,15 @@ export class MapPathPage implements OnInit {
     else {
       this.myPos = this.config.getDefaultPosition();
     }
-    this.fullPois = JSON.parse(localStorage.getItem('path'));
-    this.tracciato = JSON.parse(localStorage.getItem('tracciato'));
+    if (localStorage.getItem('path'))
+    {this.fullPois = JSON.parse(localStorage.getItem('path'));
+    localStorage.removeItem('path');
+
+  }
+    if (localStorage.getItem('tracciato'))
+    {this.tracciato = JSON.parse(localStorage.getItem('tracciato'));
+    localStorage.removeItem('tracciato');
+    }
 
     const element = document.getElementById('wc-map');
     element.addEventListener('poiSelected', async (poiParam) => {

@@ -129,9 +129,6 @@ export class WcTabs {
         arrayMarker.push(m);
       });
       var group = new leaflet.featureGroup(arrayMarker);
-      var a = group;
-      a=null;
-      group =a;
       map.on('dragend', function() {
         map.invalidateSize();
       })
@@ -144,6 +141,7 @@ export class WcTabs {
       smoothFactor: 1
     });
     polyline.addTo(map);
+    
 //     var pointA = new leaflet.LatLng(46.073526, 11.161608);
 // var pointB = new leaflet.LatLng(46.076362, 11.172101);
 // var pointList = [pointA, pointB];
@@ -164,9 +162,9 @@ export class WcTabs {
     //  leaflet.polyline(polylinePoints).addTo(map)
 
     setTimeout(() => {
-      // map.invalidateSize();
-      // if (arrayMarker.length > 0)
-      //   map.fitBounds(group.getBounds());
+      map.invalidateSize();
+      if (arrayMarker.length > 0)
+        map.fitBounds(group.getBounds());
     }, 500);
   }
   decode(str, precision) {
