@@ -73,9 +73,12 @@ init() {
     if (x.image) {
       galleryElement.image = x.image[this.language];
     }
-    // if (x.url) {
+     if (x.uri) {
+      galleryElement.url = x.uri;;
+     }
+     else {
       galleryElement.url = '/detail-poi';
-    // }
+     }
     if (x.params) {
       galleryElement.params = x.params;
     }

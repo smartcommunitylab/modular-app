@@ -17,6 +17,7 @@ export class DetailPathPage implements OnInit {
   paths: any;
   showPois: any = [];
   fullPois: any = [];
+  tracciato:string="";
   language: string;
   jsonTabs = JSON.stringify([{ target: 'info', icon: 'info' }, { target: 'place', icon: 'place' }, { target: 'map', icon: 'map' }]);
   tabActived = 'info';
@@ -73,7 +74,25 @@ export class DetailPathPage implements OnInit {
 
     });
   }
-
+  manageoLcalId(objectIds): Promise<any> {
+    return new Promise((resolve, reject) => {
+    if (objectIds.length == 1) {
+      this.translate.get('init_db').subscribe(value => {
+        this.dbService.synch(value).then(() => {
+          this.dbService.getObjectByDataId(objectIds[0]).then(data => {
+            resolve(data.docs[0]._id);
+          }, err => {
+            reject
+          });
+        },err => {
+          reject()
+        });
+      },err => {
+        reject()
+      })
+    } else reject()
+  })
+  }
   ngOnInit() {
     this.utils.presentLoading();
     if (window[this.config.getAppModuleName()]['geolocation'])
@@ -85,15 +104,23 @@ export class DetailPathPage implements OnInit {
       this.myPos = this.config.getDefaultPosition();
     }
     this.paramsSubscription = this.route.queryParams
-      .subscribe(params => {
+      .subscribe(async params => {
         if (params) {
-          const id = params.id.split(';')[0];
+          var id =""
+          if (params.id)
+            id = params.id.split(';')[0];
+          if (params.objectIds)
+            id =  await this.manageoLcalId(params.objectIds)
           this.isLoading = true;
           this.translate.get('init_db').subscribe(value => {
             this.dbService.synch(value).then(() => {
               this.dbService.getObjectById(id).then(data => {
                 this.paths = data.docs[0];
+                // console.log("paths"+JSON.stringify(this.paths))
+
                 this.buildLangPaths();
+                if (this.paths)
+                this.tracciato = this.paths.tracciato;
                 this.getPois(this.paths);
               });
             }, err => {
@@ -174,6 +201,7 @@ export class DetailPathPage implements OnInit {
   }
   goMap() {
     localStorage.setItem('path', JSON.stringify(this.fullPois));
+    localStorage.setItem('tracciato', JSON.stringify(this.tracciato));
     this.paramsSubscription.unsubscribe();
     this.router.navigate(['/map-path'], { queryParams: { id: this.paths.id } });
   }

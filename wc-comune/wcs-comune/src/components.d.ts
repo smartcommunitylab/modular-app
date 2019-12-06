@@ -245,6 +245,7 @@ export namespace Components {
     * Oggeto JSON contenente i dettagli dei POI. ULTIMO ELEMENTO = Posizione attuale Array di punti da inserire nella mappa
     */
     'points': string;
+    'tracciato': string;
   }
   interface WcMapAttributes extends StencilHTMLAttributes {
     /**
@@ -261,6 +262,7 @@ export namespace Components {
     * Oggeto JSON contenente i dettagli dei POI. ULTIMO ELEMENTO = Posizione attuale Array di punti da inserire nella mappa
     */
     'points'?: string;
+    'tracciato'?: string;
   }
 
   interface WcModal {
