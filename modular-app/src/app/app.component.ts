@@ -69,10 +69,10 @@ export class AppComponent {
   }
   updateApp(): any {
     console.log('Update:'); 
-    // if (this.hotCodePush)
-    // this.hotCodePush.fetchUpdate({}).then(data => { 
-    //   console.log('Update available'); 
-    // });
+    if (this.hotCodePush)
+    this.hotCodePush.fetchUpdate({}).then(data => { 
+      console.log('Update available'); 
+    });
   }
   sideMenu(): Promise<any> {
     return this.config.loadMenu();
