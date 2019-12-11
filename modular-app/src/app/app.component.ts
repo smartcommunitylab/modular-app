@@ -72,6 +72,8 @@ export class AppComponent {
     if (this.hotCodePush)
     this.hotCodePush.fetchUpdate({}).then(data => { 
       console.log('Update available'); 
+    },err => {
+      console.log('Not available'); 
     });
   }
   sideMenu(): Promise<any> {
