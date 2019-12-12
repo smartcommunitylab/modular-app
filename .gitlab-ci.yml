@@ -11,17 +11,18 @@ stages:
 
 build:
   stage: build
-  image: smartcommunitylab/modular-app:andriod
+  image: smartcommunitylab/modular-app:android
   environment:
     name: develop
   artifacts:
     paths:
-      - modular-app/www
+      - modular-app/www/
   script:
     - cd modular-app
     - cat $GOOGLESERVICEINFO > GoogleService-Info.plist
     - cat $GOOGLESERVICE > google-services.json
-    - ionic cordova build android
+    - npm install && ionic cordova platform add android
+    - ng run app:ionic-cordova-build --platform=android
   only:
     - test
 
