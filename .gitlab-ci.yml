@@ -19,7 +19,8 @@ build:
       - modular-app/www/
   script:
     - cd modular-app
-    - npm install && ionic cordova platform add android
+    # - npm install && ionic cordova platform add android
+    - ionic cordova platform add android
     - ng run app:ionic-cordova-build --platform=android
   only:
     - test
