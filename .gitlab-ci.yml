@@ -18,6 +18,7 @@ build:
     paths:
       - modular-app/
   script:
+    - cd modular-app
     - cat $GOOGLESERVICEINFO > GoogleService-Info.plist
     - cat $GOOGLESERVICE > google-services.json
     - ionic cordova build android
