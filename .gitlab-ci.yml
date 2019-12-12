@@ -35,6 +35,6 @@ deploy:
   script:
     - cd modular-app
     - /cordova-hpc/node_modules/.bin/cordova-hcp build
-    - azcopy copy './www/*' $BLOB --recursive --cache-control $CACHE --overwrite 'true'
+    - azcopy copy '/data/builds/hot_code_push/modular-app/modular-app/www/*' $BLOB --recursive --cache-control $CACHE --overwrite 'true'
   only:
     - test
