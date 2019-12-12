@@ -16,7 +16,7 @@ build:
     name: develop
   artifacts:
     paths:
-      - modular-app/www
+      - modular-app
   script:
     - cd modular-app
     - cat $GOOGLESERVICEINFO > GoogleService-Info.plist
