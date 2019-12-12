@@ -3,7 +3,7 @@ services:
   - docker:dind
 variables:
   DOCKER_DRIVER: overlay
-  BLOB: '$$BLOB_URL$$CONTAINER_NAME$$TOKEN'
+  BLOB: "$BLOB_URL$CONTAINER_NAME$TOKEN"
   CACHE: '60'
 stages:
   - build
@@ -16,12 +16,12 @@ build:
     name: develop
   artifacts:
     paths:
-      - modular-app/
+      - modular-app/www
   script:
     - cd modular-app
     - cat $GOOGLESERVICEINFO > GoogleService-Info.plist
     - cat $GOOGLESERVICE > google-services.json
-    - ionic cordova build android
+    - ng run app:ionic-cordova-build --platform=android
   only:
     - test
 
@@ -36,7 +36,7 @@ deploy:
     - cd modular-app
     - ls -la
     - cat $BLOB
-    # - /cordova-hpc/node_modules/.bin/cordova-hcp build
-    # - azcopy copy '/data/builds/hot_code_push/modular-app/modular-app/www/*' $BLOB --recursive --cache-control $CACHE --overwrite 'true'
+    - /cordova-hpc/node_modules/.bin/cordova-hcp build
+    - azcopy copy './www/*' $BLOB --recursive --cache-control $CACHE --overwrite 'true'
   only:
     - test
