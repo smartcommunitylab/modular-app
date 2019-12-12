@@ -33,7 +33,7 @@ deploy:
   dependencies:
     - build
   script:
-    - cordova-hcp build
+    - /cordova-hpc/node_modules/.bin/cordova-hcp build
     - azcopy copy './www/*' $BLOB --recursive --cache-control $CACHE --overwrite 'true'
   only:
     - test
