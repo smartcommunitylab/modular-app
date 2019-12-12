@@ -1,6 +1,6 @@
 FROM alpine as build
 COPY . /tmp
-RUN apk add --no-cache nodejs npm 
+RUN apk add --no-cache nodejs npm git
 WORKDIR /tmp
 #
 #

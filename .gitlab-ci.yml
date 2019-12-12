@@ -21,8 +21,8 @@ build:
     - cd modular-app
     - cat $GOOGLESERVICEINFO > GoogleService-Info.plist
     - cat $GOOGLESERVICE > google-services.json
-    - npm install && ionic cordova platform add android
-    - ng run app:ionic-cordova-build --platform=android
+    - npm install 
+    - ng run app:ionic-cordova-build --platform=browser
   only:
     - test
 
