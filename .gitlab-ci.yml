@@ -1,0 +1,38 @@
+image: docker:latest
+services:
+  - docker:dind
+variables:
+  DOCKER_DRIVER: overlay
+  BLOB: '$$BLOB_URL$$CONTAINER_NAME$$TOKEN'
+  CACHE: '60'
+stages:
+  - build
+  - deploy
+
+build:
+  stage: build
+  image: smartcommunitylab/modular-app:andriod
+  environment:
+    name: develop
+  artifacts:
+    paths:
+      - modular-app/
+  script:
+    - cat $GOOGLESERVICEINFO > GoogleService-Info.plist
+    - cat $GOOGLESERVICE > google-services.json
+    - ionic cordova build android
+  only:
+    - test
+
+deploy:
+  stage: deploy
+  image: smartcommunitylab/cordova-hcp:slim
+  environment:
+    name: develop
+  dependencies:
+    - build
+  script:
+    - cordova-hcp build
+    - azcopy copy './www/*' $BLOB --recursive --cache-control $CACHE --overwrite 'true'
+  only:
+    - test
