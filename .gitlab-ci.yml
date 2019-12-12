@@ -3,7 +3,7 @@ services:
   - docker:dind
 variables:
   DOCKER_DRIVER: overlay
-  BLOB: "$BLOB_URL$CONTAINER_NAME$TOKEN"
+  BLOB: "$BLOB_URL$CNAME$TOKEN"
   CACHE: '60'
 stages:
   - build
