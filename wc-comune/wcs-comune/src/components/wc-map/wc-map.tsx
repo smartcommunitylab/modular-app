@@ -1,5 +1,7 @@
 import { Component, Prop, Element, Event } from '@stencil/core';
 import leaflet from 'leaflet';
+import { EventEmitter } from '@ionic/core/dist/types/stencil.core';
+// import polyline from 'polyline-encoded';
 
 @Component({
   tag: 'wc-map',
@@ -28,7 +30,7 @@ export class WcTabs {
   @Prop() mainMarkerIcon: string = "marker-icon.png";
   /** Icona marker POI */
   @Prop() poiMarkerIcon: string = "marker-icon.png";
-
+  @Prop() tracciato:string;
   @Event({
     eventName: "poiSelected",
     composed: true,
@@ -127,16 +129,94 @@ export class WcTabs {
         arrayMarker.push(m);
       });
       var group = new leaflet.featureGroup(arrayMarker);
-
+      map.on('dragend', function() {
+        map.invalidateSize();
+      })
     }
+    var coords = this.decode(this.tracciato, 5);
+    var polyline =leaflet.polyline(coords, {
+      color: '#11B3EF',
+      weight: 4,
+      opacity: 1,
+      smoothFactor: 1
+    });
+    polyline.addTo(map);
+    
+//     var pointA = new leaflet.LatLng(46.073526, 11.161608);
+// var pointB = new leaflet.LatLng(46.076362, 11.172101);
+// var pointList = [pointA, pointB];
+
+// var firstpolyline = new leaflet.Polyline(pointList, {
+//     color: 'red',
+//     weight: 3,
+//     opacity: 0.5,
+//     smoothFactor: 1
+// });
+// firstpolyline.addTo(map);
+    // map.fitBounds(polyline.getBounds());
+    // var polylinePoints = [
+    //   [46.073526, 11.161608],
+    //   [46.076362, 11.172101]
+    // ];            
+    
+    //  leaflet.polyline(polylinePoints).addTo(map)
+
     setTimeout(() => {
       map.invalidateSize();
       if (arrayMarker.length > 0)
         map.fitBounds(group.getBounds());
     }, 500);
   }
+  decode(str, precision) {
+    var index = 0,
+        lat = 0,
+        lng = 0,
+        coordinates = [],
+        shift = 0,
+        result = 0,
+        byte = null,
+        latitude_change,
+        longitude_change,
+        factor = Math.pow(10, Number.isInteger(precision) ? precision : 5);
 
+    // Coordinates have variable length when encoded, so just keep
+    // track of whether we've hit the end of the string. In each
+    // loop iteration, a single coordinate is decoded.
+    while (index < str.length) {
+
+        // Reset shift, result, and byte
+        byte = null;
+        shift = 0;
+        result = 0;
+
+        do {
+            byte = str.charCodeAt(index++) - 63;
+            result |= (byte & 0x1f) << shift;
+            shift += 5;
+        } while (byte >= 0x20);
+
+        latitude_change = ((result & 1) ? ~(result >> 1) : (result >> 1));
+
+        shift = result = 0;
+
+        do {
+            byte = str.charCodeAt(index++) - 63;
+            result |= (byte & 0x1f) << shift;
+            shift += 5;
+        } while (byte >= 0x20);
+
+        longitude_change = ((result & 1) ? ~(result >> 1) : (result >> 1));
+
+        lat += latitude_change;
+        lng += longitude_change;
+
+        coordinates.push([lat / factor, lng / factor]);
+    }
+
+    return coordinates;
+};
   render() {
+
     return ([
       <link href="https://unpkg.com/leaflet@1.1.0/dist/leaflet.css" rel="stylesheet" />,
       <div class="map-container">

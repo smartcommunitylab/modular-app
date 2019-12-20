@@ -18,6 +18,7 @@ export class MapPathPage implements OnInit {
   language: any;
   myPos: any;
   myPosParam: any;
+  tracciato: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -40,9 +41,17 @@ export class MapPathPage implements OnInit {
     else {
       this.myPos = this.config.getDefaultPosition();
     }
-    this.fullPois = JSON.parse(localStorage.getItem('path'));
-    const element = document.getElementById('wc-map');
+    if (localStorage.getItem('path'))
+    {this.fullPois = JSON.parse(localStorage.getItem('path'));
+    localStorage.removeItem('path');
 
+  }
+    if (localStorage.getItem('tracciato'))
+    {this.tracciato = JSON.parse(localStorage.getItem('tracciato'));
+    localStorage.removeItem('tracciato');
+    }
+
+    const element = document.getElementById('wc-map');
     element.addEventListener('poiSelected', async (poiParam) => {
       var poiId = (<any>poiParam).detail;
       console.log(poiId);
