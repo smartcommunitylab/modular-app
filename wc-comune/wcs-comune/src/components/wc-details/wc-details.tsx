@@ -1,7 +1,7 @@
 import { Component, Prop, Event, Element } from '@stencil/core';
 import { Icons } from '../../utils/icons';
 import { DetailsInfo } from '../../utils/utils';
-// import { getLocaleComponentStrings } from "../../utils/locale";
+import { getLocaleComponentStrings } from "../../utils/locale";
 
 @Component({
   tag: 'wc-details',
@@ -64,7 +64,7 @@ export class WcDetails {
   private contactsJSON: DetailsInfo;
   private tmptags = [];
   private tmpContacts = [];
-  // private strings: any;
+  private strings: any;
   // private url: any;
   
   
@@ -102,10 +102,10 @@ for( var i = 0; i < list.length; i++ ){
   }
   async componentWillLoad() {
 
-    // if (this.stringsinput) {
-    //   this.strings = JSON.parse(this.stringsinput);
-    // }
-    // this.strings = await getLocaleComponentStrings(this.element,this.language);
+    if (this.stringsinput) {
+      this.strings = JSON.parse(this.stringsinput);
+    }
+    this.strings = await getLocaleComponentStrings(this.element);
 
     if (this.contacts) {
       this.contactsJSON = JSON.parse(this.contacts);

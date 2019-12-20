@@ -90,13 +90,11 @@ export class DbService {
           resolve();
         }).on('error', function (err) {
           console.log('error in sync' + err);
-
           // boo, we hit an error!
           resolve();
         });
       } else {
         console.log('this.lastTimeSynch()<this.MIN_SYNCH_TIME');
-
         resolve();
       }
     });
@@ -119,15 +117,15 @@ export class DbService {
 
 
   getObjectById(id) {
-
-    return this.db.find({
+    return this.synch().then(() => {
+     this.db.find({
       selector: {
         '_id': id
       }
     });
+  })
+
   }
-
-
 
   getObjectByQuery(query) {
     let view = '';

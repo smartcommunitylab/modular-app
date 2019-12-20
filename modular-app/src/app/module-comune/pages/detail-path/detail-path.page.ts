@@ -45,7 +45,6 @@ export class DetailPathPage implements OnInit {
   }
 
   private getPois(path: any) {
-    // this.dbService.synch().then(() => {
     const query = {
       "selector": {
         "$or": []
@@ -78,7 +77,6 @@ export class DetailPathPage implements OnInit {
     return new Promise((resolve, reject) => {
     if (objectIds.length == 1) {
       this.translate.get('init_db').subscribe(value => {
-        this.dbService.synch(value).then(() => {
           this.dbService.getObjectByDataId(objectIds[0]).then(data => {
             resolve(data.docs[0]._id);
           }, err => {
@@ -87,9 +85,7 @@ export class DetailPathPage implements OnInit {
         },err => {
           reject()
         });
-      },err => {
-        reject()
-      })
+      
     } else reject()
   })
   }
@@ -113,9 +109,8 @@ export class DetailPathPage implements OnInit {
             id =  await this.manageoLcalId(params.objectIds)
           this.isLoading = true;
           this.translate.get('init_db').subscribe(value => {
-            this.dbService.synch(value).then(() => {
               this.dbService.getObjectById(id).then(data => {
-                this.paths = data.docs[0];
+                this.paths = data["docs"][0];
                 // console.log("paths"+JSON.stringify(this.paths))
 
                 this.buildLangPaths();
@@ -126,7 +121,6 @@ export class DetailPathPage implements OnInit {
             }, err => {
               this.utils.hideLoading();
             })
-          })
         }
       }, err => {
         this.utils.hideLoading();

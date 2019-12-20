@@ -1,18 +1,23 @@
-function getComponentClosestLanguage(/*element: HTMLElement,*/language:string): string {
-    // let closestElement = element.closest("[lang]") as HTMLElement;
-    // return closestElement ? closestElement.lang : "en";
-    return language ? language : "it";
+function getComponentClosestLanguage(element: HTMLElement/*,language:string*/): string {
+    let closestElement = element.closest("[lang]") as HTMLElement;
+    return closestElement ? closestElement.lang : "it";
+    // return language ? language : "it";
   }
   function fetchLocaleStringsForComponent(
     componentName: string,
     locale: string
   ): Promise<any> {
+    console.log("ciao");
+
     return new Promise(
       (resolve, reject): void => {
-        fetch(`"./assets/wcs-comune/i18n/${componentName}.i18n.${locale}.json`).then(
+        fetch(`./i18n/${componentName}.i18n.${locale}.json`).then(
           result => {
-            if (result.ok) resolve(result.json());
-            else reject();
+            // console.log(result.ok);
+            if (result.ok) {
+              resolve(result.json())
+              // console.log(result.json());
+            } else reject();
           },
           () => reject()
         );
@@ -20,10 +25,10 @@ function getComponentClosestLanguage(/*element: HTMLElement,*/language:string): 
     );
   }
   export async function getLocaleComponentStrings(
-    element: HTMLElement, language:string
+    element: HTMLElement/*, language:string*/
   ): Promise<any> {
     let componentName = element.tagName.toLowerCase();
-    let componentLanguage = getComponentClosestLanguage(language);
+    let componentLanguage = getComponentClosestLanguage(element);
     let strings;
     try {
       strings = await fetchLocaleStringsForComponent(

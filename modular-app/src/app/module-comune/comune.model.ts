@@ -65,10 +65,9 @@ export class ComuneListPage extends ListPage implements OnInit {
     return new Observable(observer => {
       this.utils.presentLoading();
       const query = this.getQuery();
-      this.mypos = {
-        lat: window[this.config.getAppModuleName()]['geolocation']['lat'],
-        long: window[this.config.getAppModuleName()]['geolocation']['long']
-      };
+
+      this.setMyPosition();
+
       this.dbService.getObjectByQuery(query).then((data) => {
         if (data.docs.length > 0) {
           const res = this.processList(data.docs);
@@ -81,7 +80,22 @@ export class ComuneListPage extends ListPage implements OnInit {
         console.error(err);
         observer.error(err);
       });
-    });
+    })
+  }
+
+  private setMyPosition() {
+    if (this.config && window[this.config.getAppModuleName()] && window[this.config.getAppModuleName()]['geolocation'] && window[this.config.getAppModuleName()]['geolocation']['lat'] && window[this.config.getAppModuleName()]['geolocation']['long']) {
+      this.mypos = {
+        lat: window[this.config.getAppModuleName()]['geolocation']['lat'],
+        long: window[this.config.getAppModuleName()]['geolocation']['long']
+      };
+    }
+    else {
+      this.mypos = {
+        lat: this.config.getDefaultPosition().lat,
+        long: this.config.getDefaultPosition().long
+      };
+    }
   }
 
   processList(list) {
@@ -144,10 +158,10 @@ export class ComuneDetailPage implements OnInit, OnDestroy {
             this.manageoLocalId(params.objectIds);
           } else if (params) {
             this.dbService.getObjectById(params.id).then(data => {
-              this.item = this.convertObject(data.docs[0]);
+              this.item = this.convertObject(data["docs"][0]);
               if (this.item.image) { this.item.image = this.item.image.replace('_medium.jpg', '.jpg'); }
             });
-          }
+        }
         });
     }
 
@@ -160,12 +174,10 @@ export class ComuneDetailPage implements OnInit, OnDestroy {
 
     manageoLocalId(objectIds: string[]) {
       if (objectIds.length === 1) {
-        this.dbService.synch().then(() => {
           this.dbService.getObjectByDataId(objectIds[0]).then(data => {
             this.item = this.convertObject(data.docs[0]);
             if (this.item.image) { this.item.image = this.item.image.replace('_medium.jpg', '.jpg'); }
           });
-        });
       }
     }
     convertObject(x: any) {

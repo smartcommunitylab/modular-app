@@ -6,6 +6,12 @@ export const config: Config = {
   plugins: [
     sass()
   ],
+  copy: [
+    {
+      src: "**/*.i18n.*.json",
+      dest: "i18n"
+    }
+  ],
   outputTargets: [
     { type: 'dist' },
     { type: 'docs' },
