@@ -4,7 +4,7 @@ services:
 variables:
   DOCKER_DRIVER: overlay
   BLOB: "$BLOB_URL$CNAME$TOKEN"
-  CACHE: '60'
+  CACHE: 'max-age=60,public,must-revalidate'
 stages:
   - build
   - deploy
