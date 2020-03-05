@@ -131,5 +131,4 @@
     <allow-navigation href="http://192.168.28.202:8112" sessionid="d09a47e4" />
     <allow-navigation href="http://192.168.31.180:8100" sessionid="521c6eb0" />
     <allow-navigation href="http://192.168.31.180:8101" sessionid="218fc016" />
-    <engine name="android" spec="7.1.4" />
 </widget>
