@@ -32,7 +32,9 @@ export class ListEventPage extends ComuneListPage implements OnInit {
     public config: ConfigService) {
     super(navCtrl, dbService, geoSrv, config, modalController, router, route, utils, translate, zone);
   }
-
+  getQuery() {
+    return { 'selector': { 'elementType': 'event-item'} };
+  }
   processList(list) {
     const res = super.processList(list);
     return this.spreadEvents(res);
@@ -47,6 +49,9 @@ export class ListEventPage extends ComuneListPage implements OnInit {
   }
   getItemTags(item: any) {
     return item.cat;
+  }
+  ngOnInit() {
+    super.ngOnInit();
   }
 
   spreadEvents(events: any[]): any[] {

@@ -110,6 +110,41 @@ export class HomeTrasportiPage implements OnInit {
       return 'train';
     }
   }
+
+
+  private isScrolledIntoView(el) {
+    var first = el[0].getBoundingClientRect();
+    var last = el[el.length - 1].getBoundingClientRect();
+    var elemTop = first.top;
+    var elemBottom = last.bottom;
+    var isVisible = (elemTop <= window.innerHeight) && (elemBottom >= window.innerHeight);
+      return isVisible;
+  }
+  private setChips() {
+    this.elements.forEach(elem => {
+      var ele = document.getElementsByClassName(elem.ref);
+      var visible = this.isScrolledIntoView(ele);
+      if (visible && this.actualVisualized != ele[0].className) {
+        this.actualVisualized = ele[0].className;
+      } //scroll to position
+      var element = document.getElementById(this.actualVisualized);
+      if (element)
+        element.scrollIntoView({ block: "center" });
+    });
+  }
+  scrolling(event) {
+    this.setChips();
+  }
+
+  scrollComplete(event) {
+    this.setChips();
+
+  }
+  scrollStart(event) {
+    this.setChips();
+
+  }
+
   public onIntersection({ target, visible }: { target: Element; visible: boolean }): void {
     if (visible && this.actualVisualized !== target.className) {
       this.actualVisualized = target.className;

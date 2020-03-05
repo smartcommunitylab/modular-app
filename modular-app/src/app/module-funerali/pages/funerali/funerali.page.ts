@@ -61,8 +61,9 @@ export class FuneraliPage implements OnInit {
     this.utils.presentLoading();
     this.CaricaDati().then(() => {
       if (this.dates.length > 0) {
-        this.selectFirstDate(); }
-              this.utils.hideLoading();
+        this.selectFirstDate();
+      }
+      this.utils.hideLoading();
     }, err => {
       this.utils.hideLoading();
     });
@@ -195,100 +196,61 @@ export class FuneraliPage implements OnInit {
     }
       , 500)
   }
-  scrolling(event) {
-    console.log("scrolling");
 
+  private setChips() {
     this.dates.forEach(data => {
-      var ele=document.getElementsByClassName(data);
+      var ele = document.getElementsByClassName(data);
       var visible = this.isScrolledIntoView(ele);
       if (visible && this.actualVisualized != ele[0].className) {
-        console.log("actualVisualized=target.className" + ele[0].className);
-  
         this.actualVisualized = ele[0].className;
-      }    //scroll to position
+      } //scroll to position
       var element = document.getElementById(this.actualVisualized);
       if (element)
         element.scrollIntoView({ block: "center" });
-    });  }
+    });
+  }
+  scrolling(event) {
+    this.setChips();
+  }
 
-    scrollComplete(event) {
-      console.log("scroll complete");
-  
-      this.dates.forEach(data => {
-        var ele=document.getElementsByClassName(data);
-        var visible = this.isScrolledIntoView(ele);
-        if (visible && this.actualVisualized != ele[0].className) {
-          console.log("actualVisualized=target.className" + ele[0].className);
-    
-          this.actualVisualized = ele[0].className;
-        }    //scroll to position
-        var element = document.getElementById(this.actualVisualized);
-        if (element)
-          element.scrollIntoView({ block: "center" });
-      });
-    }
-    scrollStart(event) {
-      console.log("scroll complete");
-  
-      this.dates.forEach(data => {
-        var ele=document.getElementsByClassName(data);
-        var visible = this.isScrolledIntoView(ele);
-        if (visible && this.actualVisualized != ele[0].className) {
-          console.log("actualVisualized=target.className" + ele[0].className);
-    
-          this.actualVisualized = ele[0].className;
-        }    //scroll to position
-        var element = document.getElementById(this.actualVisualized);
-        if (element)
-          element.scrollIntoView({ block: "center" });
-      });
-    }
+
+
+  scrollComplete(event) {
+    this.setChips();
+
+  }
+  scrollStart(event) {
+    this.setChips();
+
+  }
 
   isScrolledIntoView(el) {
-    console.log("isScrolledIntoView");
-    console.log("el"+JSON.stringify(el));
-
     var first = el[0].getBoundingClientRect();
-    console.log("first"+JSON.stringify(first));
-    var last = el[el.length-1].getBoundingClientRect();
-    console.log("last"+JSON.stringify(last));
-
-    // var rect = el.getBoundingClientRect();
-    // console.log("rect"+rect);
+    var last = el[el.length - 1].getBoundingClientRect();
     var elemTop = first.top;
-    console.log("elemTop"+elemTop);
-
     var elemBottom = last.bottom;
-    console.log("elemBottom"+elemBottom);
+    var isVisible = (elemTop <= window.innerHeight) && (elemBottom >= window.innerHeight);
+      return isVisible;
+  }
+  // scrollComplete(event) {
+  //   this.dates.forEach(data => {
+  //     var ele=document.getElementsByClassName(data);
+  //     console.log("ele[ele.length]" + ele[0].className);
+  //     console.log("this.isScrolledIntoViewTop(ele[0])" + this.isScrolledIntoViewTop(ele[0]));
+  //     console.log("ele[ele.length]" + ele[ele.length-1].className);
+  //     console.log("this.isScrolledIntoViewBottom(ele[ele.length])" + this.isScrolledIntoViewBottom(ele[ele.length-1]));
 
-    // Only completely visible elements return true:
-    var isVisible = (elemTop <= window.innerHeight) && (elemBottom >=window.innerHeight) ;
-    console.log("window.innerHeight"+window.innerHeight);
-    console.log("(elemTop >= 0) && (elemBottom <= window.innerHeight)");
+  //     var visible = this.isScrolledIntoViewTop(ele[0])|| this.isScrolledIntoViewBottom(ele[ele.length]);
+  //     if (visible && this.actualVisualized != ele[0].className) {
+  //       console.log("actualVisualized=target.className" + ele[0].className);
 
-    // Partially visible elements return true:
-    //isVisible = elemTop < window.innerHeight && elemBottom >= 0;
-    return isVisible;
-}
-// scrollComplete(event) {
-//   this.dates.forEach(data => {
-//     var ele=document.getElementsByClassName(data);
-//     console.log("ele[ele.length]" + ele[0].className);
-//     console.log("this.isScrolledIntoViewTop(ele[0])" + this.isScrolledIntoViewTop(ele[0]));
-//     console.log("ele[ele.length]" + ele[ele.length-1].className);
-//     console.log("this.isScrolledIntoViewBottom(ele[ele.length])" + this.isScrolledIntoViewBottom(ele[ele.length-1]));
-
-//     var visible = this.isScrolledIntoViewTop(ele[0])|| this.isScrolledIntoViewBottom(ele[ele.length]);
-//     if (visible && this.actualVisualized != ele[0].className) {
-//       console.log("actualVisualized=target.className" + ele[0].className);
-
-//       this.actualVisualized = ele[0].className;
-//     }    //scroll to position
-//     var element = document.getElementById(this.actualVisualized);
-//     if (element)
-//       element.scrollIntoView({ block: "center" });
-//   });
-// }
+  //       this.actualVisualized = ele[0].className;
+  //     }    //scroll to position
+  //     var element = document.getElementById(this.actualVisualized);
+  //     if (element)
+  //       element.scrollIntoView({ block: "center" });
+  //   });
+  // }
 
   public onIntersection({ target, visible }: { target: Element; visible: boolean }): void {
     console.log("onIntersection");
