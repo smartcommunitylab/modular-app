@@ -5,7 +5,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { ConfigService } from './services/config.service';
 import { SettingService } from './services/setting.service';
 import { TranslateService } from '@ngx-translate/core';
-import { HotCodePush } from '@ionic-native/hot-code-push/ngx';
+// import { HotCodePush } from '@ionic-native/hot-code-push/ngx';
 import { FirebaseX } from '@ionic-native/firebase-x/ngx';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
@@ -25,7 +25,7 @@ export class AppComponent {
     private config: ConfigService,
     private setting: SettingService,
     private translate: TranslateService,
-    private hotCodePush: HotCodePush,
+    // private hotCodePush: HotCodePush,
     private firebase: FirebaseX
   ) {
     this.sideMenu().then(res => {
@@ -51,7 +51,7 @@ export class AppComponent {
       // this.statusBar.overlaysWebView(false);
       // this.statusBar.styleLightContent();
       this.splashScreen.hide();
-      this.updateApp();
+      // this.updateApp();
     });
     this.myLanguage = this.setting.getUserLanguage();
     if (this.myLanguage) {

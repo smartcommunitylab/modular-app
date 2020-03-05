@@ -18,7 +18,7 @@ import { ModulePulstradeModule } from './module-pulstrade/module-pulstrade.modul
 import { DragulaModule } from 'ng2-dragula';
 import { InfoModule } from './module-info/module-info.module';
 import { FuneraliModule } from './module-funerali/module-funerali.module';
-import { HotCodePush } from '@ionic-native/hot-code-push/ngx';
+// import { HotCodePush } from '@ionic-native/hot-code-push/ngx';
 import { CallNumber } from '@ionic-native/call-number/ngx';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { FirebaseX } from '@ionic-native/firebase-x/ngx';
@@ -65,7 +65,7 @@ export function initializeAppConfig(configService: ConfigService) {
     FirebaseX,
     CallNumber,
     InAppBrowser,
-    HotCodePush,
+    // HotCodePush,
     SettingService,
     { provide: APP_INITIALIZER, useFactory: initializeAppConfig, deps: [ConfigService], multi: true },
     { provide: APP_INITIALIZER, useFactory: initializeAppSetting, deps: [SettingService], multi: true },

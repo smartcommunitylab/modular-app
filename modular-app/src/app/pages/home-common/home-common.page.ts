@@ -53,9 +53,23 @@ init() {
   this.language = window[this.config.getAppModuleName()]['language'];
   this.translate.use(this.language); 
   this.elementsGallery = [];
-  this.categories = this.config.getModuleEntries().map(x => this.convertCategories(x));
+  var moduleEntries=this.config.getModuleEntries();
+  if (moduleEntries)
+{  this.categories = this.config.getModuleEntries().map(x => this.convertCategories(x));
   console.log(this.categories);
+
+}   else {
+  console.log("empty categories");
+
+}
+var carousel=this.config.getCarousel();
+  if (carousel)
+{ 
   this.elementsGallery = this.config.getCarousel().map(x => this.convertGallery(x));
+} 
+else {
+  console.log("carosello vuoto");
+}
   window.addEventListener('categorySelected', category => {
     console.log(category);
   });

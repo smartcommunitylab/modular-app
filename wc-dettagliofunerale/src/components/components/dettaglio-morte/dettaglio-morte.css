@@ -244,3 +244,35 @@
   margin-top: 39px;
   text-align: center;
 }
+
+.contact-container {
+  background-color: #fff;
+  border: 2px solid #11b3ef;
+  border-radius: 40px;
+  height: 47px;
+  width: 47px;
+  /* line-height: 38px; */
+  margin: auto;
+  /* padding: 2px 8px; */
+  text-align: center;
+}
+.icon-contact {
+    /* vertical-align: middle; */
+    color: #11b3ef;
+    font-size: 20px!important;
+    /* text-align: center; */
+    margin: 0px 8px;
+    display: -ms-flexbox;
+    display: flex;
+    height: 100%;
+    display: flex!important;
+    -ms-flex-line-pack: center!important;
+    align-content: center!important;
+    -ms-flex-align: center!important;
+    align-items: center!important;
+    
+}
+.icon-contact svg{
+  height: 30px;
+  width: 30px;
+}

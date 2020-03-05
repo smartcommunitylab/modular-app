@@ -110,7 +110,6 @@ export class FuneraliPage implements OnInit {
   ionViewDidEnter() {
     if (this.dates.length > 0) {
       this.selectFirstDate();
-      // this.selectInternalElement(this.refElement);
     }
   }
   subCategories(array: Array<any>) {
@@ -185,38 +184,122 @@ export class FuneraliPage implements OnInit {
     // orderArray
     // this.orderArray('asc', this);
   }
-  // orderArray(condition: string, _this: any) {
-  //   _this.categories.forEach(c => {
-  //     if (condition.indexOf('asc') > -1) {
-  //       _this.showPois[c] = _this.showPois[c].sort((a, b) => (a.fromTime > b.fromTime) ? 1 : -1);
-  //     } else {
-  //       _this.showPois[c] = _this.showPois[c].sort((a, b) => (a.fromTime < b.fromTime) ? 1 : -1);
-  //     }
-  //   });
-  // }
-  selectFirstDate() {
-      setTimeout(() => {
-        // scroll to posiition
-        this.selectInternalElement(this.refElement);
-        const element = document.getElementById(this.actualVisualized);
-        if (element) {
-          element.scrollIntoView({ block: 'center' });
-        }
-      }
-        , 500);
-  }
-  public onIntersection({ target, visible }: { target: Element; visible: boolean }): void {
-    console.log('onIntersection');
 
-    if (visible && this.actualVisualized !== target.className) {
+  selectFirstDate() {
+    setTimeout(() => {
+      //scroll to posiition
+      this.selectInternalElement(this.refElement);
+      var element = document.getElementById(this.actualVisualized);
+      if (element)
+        element.scrollIntoView({ block: "center" });
+    }
+      , 500)
+  }
+  scrolling(event) {
+    console.log("scrolling");
+
+    this.dates.forEach(data => {
+      var ele=document.getElementsByClassName(data);
+      var visible = this.isScrolledIntoView(ele);
+      if (visible && this.actualVisualized != ele[0].className) {
+        console.log("actualVisualized=target.className" + ele[0].className);
+  
+        this.actualVisualized = ele[0].className;
+      }    //scroll to position
+      var element = document.getElementById(this.actualVisualized);
+      if (element)
+        element.scrollIntoView({ block: "center" });
+    });  }
+
+    scrollComplete(event) {
+      console.log("scroll complete");
+  
+      this.dates.forEach(data => {
+        var ele=document.getElementsByClassName(data);
+        var visible = this.isScrolledIntoView(ele);
+        if (visible && this.actualVisualized != ele[0].className) {
+          console.log("actualVisualized=target.className" + ele[0].className);
+    
+          this.actualVisualized = ele[0].className;
+        }    //scroll to position
+        var element = document.getElementById(this.actualVisualized);
+        if (element)
+          element.scrollIntoView({ block: "center" });
+      });
+    }
+    scrollStart(event) {
+      console.log("scroll complete");
+  
+      this.dates.forEach(data => {
+        var ele=document.getElementsByClassName(data);
+        var visible = this.isScrolledIntoView(ele);
+        if (visible && this.actualVisualized != ele[0].className) {
+          console.log("actualVisualized=target.className" + ele[0].className);
+    
+          this.actualVisualized = ele[0].className;
+        }    //scroll to position
+        var element = document.getElementById(this.actualVisualized);
+        if (element)
+          element.scrollIntoView({ block: "center" });
+      });
+    }
+
+  isScrolledIntoView(el) {
+    console.log("isScrolledIntoView");
+    console.log("el"+JSON.stringify(el));
+
+    var first = el[0].getBoundingClientRect();
+    console.log("first"+JSON.stringify(first));
+    var last = el[el.length-1].getBoundingClientRect();
+    console.log("last"+JSON.stringify(last));
+
+    // var rect = el.getBoundingClientRect();
+    // console.log("rect"+rect);
+    var elemTop = first.top;
+    console.log("elemTop"+elemTop);
+
+    var elemBottom = last.bottom;
+    console.log("elemBottom"+elemBottom);
+
+    // Only completely visible elements return true:
+    var isVisible = (elemTop <= window.innerHeight) && (elemBottom >=window.innerHeight) ;
+    console.log("window.innerHeight"+window.innerHeight);
+    console.log("(elemTop >= 0) && (elemBottom <= window.innerHeight)");
+
+    // Partially visible elements return true:
+    //isVisible = elemTop < window.innerHeight && elemBottom >= 0;
+    return isVisible;
+}
+// scrollComplete(event) {
+//   this.dates.forEach(data => {
+//     var ele=document.getElementsByClassName(data);
+//     console.log("ele[ele.length]" + ele[0].className);
+//     console.log("this.isScrolledIntoViewTop(ele[0])" + this.isScrolledIntoViewTop(ele[0]));
+//     console.log("ele[ele.length]" + ele[ele.length-1].className);
+//     console.log("this.isScrolledIntoViewBottom(ele[ele.length])" + this.isScrolledIntoViewBottom(ele[ele.length-1]));
+
+//     var visible = this.isScrolledIntoViewTop(ele[0])|| this.isScrolledIntoViewBottom(ele[ele.length]);
+//     if (visible && this.actualVisualized != ele[0].className) {
+//       console.log("actualVisualized=target.className" + ele[0].className);
+
+//       this.actualVisualized = ele[0].className;
+//     }    //scroll to position
+//     var element = document.getElementById(this.actualVisualized);
+//     if (element)
+//       element.scrollIntoView({ block: "center" });
+//   });
+// }
+
+  public onIntersection({ target, visible }: { target: Element; visible: boolean }): void {
+    console.log("onIntersection");
+    if (visible && this.actualVisualized != target.className) {
+      console.log("actualVisualized=target.className" + target.className);
+
       this.actualVisualized = target.className;
-    }
-    // scroll to posiition
-    const element = document.getElementById(this.actualVisualized);
-    if (element) {
-      element.scrollIntoView({ block: 'center' });
-    }
-    // console.log(JSON.stringify(target) + "  " + visible);
+    }    //scroll to position
+    var element = document.getElementById(this.actualVisualized);
+    if (element)
+      element.scrollIntoView({ block: "center" });
   }
   isSelected(date) {
     return date === this.actualVisualized;
@@ -271,32 +354,21 @@ export class FuneraliPage implements OnInit {
 
   // condividi da mobile per i funerali
   CondividiFunerali(i) {
-    this.social.canShareViaEmail().then(() => {
-      this.social.share(
-        `${i.nome} ${this.luogoFunerale}${i.luogoFunerale} ${this.dataFunerale}${i.dataFunerale} ${this.oraMorte}${i.oraFunerale}`);
-    }).catch(() => {
-      alert('Il servizio di condivisione non è disponibile per questo dispositivo');
-    });
+    // this.social.canShareViaEmail().then(() => {
+    this.social.share(i.nome + " " + this.luogoFunerale + i.luogoFunerale + " " + this.dataFunerale + i.dataFunerale + " " + this.oraMorte + i.oraFunerale);
+    // })
+    // .catch(() => {
+    //   alert("Il servizio di condivisione non è disponibile per questo dispositivo");
+    // });
   }
 
-  // //condividi da mobile per sepolture
-  // CondividSepolture(i) {
-  //   this.social.canShareViaEmail().then(() => {
-  //     this.social.share(this.vetDefunti[i].nominativo + " " + this.vetDefunti[i].paeseSepoltura, null, null);
-  //   }).catch(() => {
-  //     alert("Il servizio di condivisione non è disponibile per questo dispositivo");
-  //   });
-  // }
+
 
   // apre maps
   IndicazioniFunerali(i) {
     window.open(encodeURI(this.linkMappa + this.vetFunerali[i].luogoFunerale), '_system');
   }
 
-  // //apre maps
-  // IndicazioniSepolture(i) {
-  //   window.open(encodeURI(this.linkMappa + this.vetDefunti[i].paeseSepoltura), '_system')
-  // }
 
   // mostra il div contenente i funerali e nasconde le sepolture
   Funerali() {

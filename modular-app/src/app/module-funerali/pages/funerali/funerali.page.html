@@ -27,7 +27,7 @@
         </div>
 </ion-header>
 
-<ion-content>
+<ion-content   [scrollEvents]="true" (ionScroll)="scrolling($event)"  (ionScrollStart)="scrollComplete($event)"(ionScrollEnd)="scrollComplete($event)">
    
     <div id="funerali">
         <ion-list no-lines padding *ngIf="!emptyList">

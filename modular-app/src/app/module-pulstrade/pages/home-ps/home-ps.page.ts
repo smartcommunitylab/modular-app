@@ -135,10 +135,14 @@ blur(){
    * Set current date, get streets ordered by `cleaningDay` property, build map
    */
   ngOnInit() {
-
+    console.log("init map");
+    this.util.presentLoading();
     this.mapSrv.Init().then(() => {
+      console.log("after init");
+      this.util.hideLoading();
       this.route.queryParams
         .subscribe(params => {
+          console.log("subscribe params route");
           this.parseUrlParams(params);
           if (!this.selectedDate) {
             this.selectedDate = new Date();
@@ -146,23 +150,27 @@ blur(){
             this.showDate = this.selectedDate.toISOString();
           }
           if (!this.mapCenter) {
+            console.log("default center");
             // if (this.myPos)
             //   this.mapCenter = [this.myPos.lat ? this.myPos.lat : 0, this.myPos.long ? this.myPos.long : 0];
             // else 
             this.mapCenter = this.mapSrv.getDefaultCenter()
           }
-          if (!this.streets)
+          if (!this.streets){
+            console.log("streets");
             this.streets = this.mapSrv.getData().sort(function (a, b) {
               return a.cleaningDay - b.cleaningDay;
-            });
+            });}
           if (this.mapSrv.getData()[this.mapSrv.getData().length - 1].cleaningDay < this.selectedDate.getTime()) {
             this.future = false;
           }
-          if (!this.map)
-            this.buildMap();
+          if (!this.map){
+            console.log("build map");
+            this.buildMap();}
           // this.updateNotification(this.streets);
         });
     }, err => {
+      this.util.hideLoading();
       this.translate.get('error_init').subscribe(s => {
         this.util.showErrorConnectionMessage(s);
       });
@@ -191,26 +199,7 @@ blur(){
    * Reset center map coordinates
    */
   ionViewWillLeave() {
-    // this.myPos = {};
-    // this.mapSrv.Init().then(() => {
-    //   this.route.queryParams
-    //     .subscribe(params => {
-    //       this.parseUrlParams(params);
-    //       this.selectedDate = new Date();
-    //       this.showDate = this.selectedDate.toISOString();
-    //       if (this.myPos)
-    //         this.mapCenter = [this.myPos.lat ? this.myPos.lat : 0, this.myPos.long ? this.myPos.long : 0];
-    //       else this.mapCenter = this.mapSrv.getDefaultCenter()
-    //       this.streets = this.mapSrv.getData().sort(function (a, b) {
-    //         return a.cleaningDay - b.cleaningDay;
-    //       });
-    //       this.buildMap();
-    //     });
-    // }, err => {
-    //   this.translate.get('error_init').subscribe(s => {
-    //     this.util.showErrorConnectionMessage(s);
-    //   });
-    // })
+
   }
 
   /**
@@ -224,14 +213,14 @@ blur(){
       this.router.navigate([this.router.url + '/' + path]);
     }
   }
-  // setFutureAndPast() {
 
-  // }
   /**
    * Build leaflet map, with custom controls and polylines
    */
   buildMap() {
-    try { this.map.remove(); } catch { } /** Reset map */
+    try {
+       this.map.remove(); 
+      } catch { } /** Reset map */
     // const _this = this;
     this.map = new leaflet.Map('home-map', {minZoom:10, zoomControl: false, attributionControl: false, dragging: true, tap: false }).setView(this.mapCenter, 14);
     this.map.on('dragstart', (e) => {
@@ -311,8 +300,6 @@ blur(){
    */
   async buildPolyline(center) {
     this.dailyStreets = [];
-    // if (this.toast)
-    //   this.toast.dismiss();
     let counter = 0;
     this.labelResult = 0;
     this.past = false;
@@ -325,11 +312,8 @@ blur(){
     }
     if (this.streets) {
       /** Check distance from center map and street */
+      console.log("this.street number"+this.streets.length)
       this.streets.forEach(s => {
-        // const dist = this.geo.getDistanceKM(
-        //   { lat: center[0], lon: center[1] },
-        //   { lat: s.centralCoords[0]['lat'], lon: s.centralCoords[0]['lng'] }
-        // );
         s.idNumber = parseInt(s.streetCode.replace(/\_/g, ''), 10);
         var lato = "";
         var tratto = "";
@@ -385,16 +369,7 @@ blur(){
         }
       });
     }
-    // /**
-    //  * If no polylines built in map, show 'toast' element
-    //  */
-    // if (counter === 0 && this.inZone && this.noCleaning) {
-    //   this.toast = await this.toastCtrl.create({
-    //     message: `${this.noCleaning} ${this.datePipe.transform(this.selectedDate, 'dd/MM/yyyy')} ${this.inZone}`,
-    //     duration: 2000
-    //   });
-    //   await this.toast.present();
-    // }
+
   }
   /**
    * Clear polylines levels
