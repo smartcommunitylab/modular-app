@@ -163,7 +163,7 @@ export class DbService {
     }
     if (query.selector) {
       if (query.selector['elementType'] === 'event-item') {
-        return this.db.find({
+        return this.synch().then(() => this.db.find({
           selector: {
             '$or': [
               {
@@ -197,7 +197,7 @@ export class DbService {
             ]
 
           }
-        });
+        }))
       }
     }
     return this.synch().then(() => this.db.find(query));
