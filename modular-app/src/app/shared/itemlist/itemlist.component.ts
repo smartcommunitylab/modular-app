@@ -159,6 +159,41 @@ export class ItemListComponent implements OnInit {
     this.navCtrl.back();
   }
 
+  private setChips() {
+    this.categories.forEach(c => {
+      var ele = document.getElementsByClassName(c);
+      var visible = this.isScrolledIntoView(ele);
+      if (visible && this.currentCategory != ele[0].className) {
+        this.currentCategory = ele[0].className;
+      } //scroll to position
+      var element = document.getElementById(this.currentCategory);
+      if (element)
+        element.scrollIntoView({ block: "center" });
+    });
+  }
+  scrolling(event) {
+    this.setChips();
+  }
+
+
+
+  scrollComplete(event) {
+    this.setChips();
+
+  }
+  scrollStart(event) {
+    this.setChips();
+
+  }
+
+  isScrolledIntoView(el) {
+    var first = el[0].getBoundingClientRect();
+    var last = el[el.length - 1].getBoundingClientRect();
+    var elemTop = first.top;
+    var elemBottom = last.bottom;
+    var isVisible = (elemTop <= window.innerHeight) && (elemBottom >= window.innerHeight);
+      return isVisible;
+  }
   public onIntersection({ target, visible }: { target: Element; visible: boolean }): void {
     if (visible && this.currentCategory !== target.className) {
       this.currentCategory = target.className;

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { ConfigService } from './config.service';
+import { Platform } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root'
@@ -14,13 +15,14 @@ export class GeoService {
   watchLocationUpdates: any;
   loading: any;
   isWatching: boolean;
-  constructor(private geolocation: Geolocation, private config: ConfigService) {
-
+  constructor(private geolocation: Geolocation, private config: ConfigService, private platform: Platform) {
   }
   Init(): Promise<any> {
     return new Promise<void>((resolve, reject) => {
-      this.watchLocation();
-      resolve();
+      this.platform.ready().then(() => {
+        this.watchLocation();
+        resolve();
+      })
     });
   }
 

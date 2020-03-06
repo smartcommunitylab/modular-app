@@ -117,13 +117,13 @@ export class DbService {
 
 
   getObjectById(id) {
-    return this.synch().then(() => {
-     this.db.find({
+    //  this.synch().then(() => {
+      return this.db.find({
       selector: {
         '_id': id
       }
     });
-  })
+  // })
 
   }
 

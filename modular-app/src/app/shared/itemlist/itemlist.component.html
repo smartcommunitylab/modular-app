@@ -44,7 +44,7 @@
   </div>
 </div>
 
-<ion-content [scrollEvents]="true">
+<ion-content [scrollEvents]="true" (ionScroll)="scrolling($event)"  (ionScrollStart)="scrollComplete($event)"(ionScrollEnd)="scrollComplete($event)">
   <div class="cntnt" [ngClass]="{'padding': presentFilter || (categories && categories.length > 1)}">
     <ng-content select="[list-header]"></ng-content> 
 

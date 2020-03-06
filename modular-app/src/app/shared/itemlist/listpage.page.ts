@@ -70,7 +70,9 @@ export class ListPage {
     });
     cats.sort();
     this.categories = cats;
-    this.currentCategory = this.categories[0];
+    setTimeout(()=> {
+      this.currentCategory = this.categories[0];
+    },500);
   }
 
   onSearchEnd() {
