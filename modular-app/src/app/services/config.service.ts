@@ -14,7 +14,7 @@ export class ConfigService {
   expiringDate = '20-09-2019'
   // version = 'test';
   version = 'prod';
-  numberVersion = '2.0.0';
+  numberVersion = '2.0.1';
   carouselUrl = 'https://cit.platform.smartcommunitylab.it/comuneintasca-multi/highlights/TrentoInTasca';
   private appModuleName: string = "app-module";
   private menu: any;
