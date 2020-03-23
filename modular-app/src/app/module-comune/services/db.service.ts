@@ -100,29 +100,29 @@ export class DbService {
     });
   }
   getMenuById(identificator) {
-    return this.db.find({
+    return this.synch().then(() => this.db.find({
       selector: {
         id: identificator
       }
-    });
+    }));
   }
   getObjectByDataId(id) {
 
-    return this.db.find({
+    return this.synch().then(() => this.db.find({
       selector: {
         'id': id
       }
-    });
+    }));
   }
 
 
   getObjectById(id) {
     //  this.synch().then(() => {
-      return this.db.find({
+      return this.synch().then(() => this.db.find({
       selector: {
         '_id': id
       }
-    });
+    }));
   // })
 
   }
@@ -139,26 +139,26 @@ export class DbService {
         // set classification
         classification = query.classification;
         if (query.type !== 'event') {
-          return this.db.find({
+          return this.synch().then(() => this.db.find({
             selector: {
               'elementType': view,
               'classification.it': classification
             }
-          });
+          }));
         } else {
-          return this.db.find({
+          return this.synch().then(() => this.db.find({
             selector: {
               'elementType': view,
               'category': classification
             }
-          });
+          }));
         }
       } else {
-        return this.db.find({
+        return this.synch().then(() => this.db.find({
           selector: {
             'elementType': view
           }
-        });
+        }));
       }
     }
     if (query.selector) {
