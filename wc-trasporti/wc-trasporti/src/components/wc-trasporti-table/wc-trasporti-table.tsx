@@ -13,7 +13,6 @@ export class AppHome {
   @Element() element: HTMLElement;
 
   @Prop() data: string;
-  colwidth: number;
   @Watch('data')
   reloadTable() {
     this.componentWillLoad();
@@ -23,7 +22,7 @@ export class AppHome {
   @Prop() datetable: string;
   @Watch('datetable')
   watchHandler(newValue: string, oldValue: string) {
-    console.log('animation from' + newValue + 'to' + oldValue);
+    // console.log('animation from' + newValue + 'to' + oldValue);
     this.animateData(oldValue, newValue);
   }
 
@@ -61,6 +60,7 @@ export class AppHome {
   handleScroll(ev) {
     console.log('the body was scrolled', ev);
   }
+  colwidth: number ;
   // littletable = false;
   rowHeight = 20;
   headerRowHeight = 25; // has a border
@@ -103,12 +103,14 @@ export class AppHome {
   }
 getTextWidth() {
   var measurer = this.element.shadowRoot.querySelector('#measurer');
+  console.log("measurer"+JSON.stringify(measurer))
   return (measurer.getBoundingClientRect().width);
 };
   //    set the variables for bigger style
   setBiggerStyle() {
     this.littletable = true;
     var rowHeight = 30;
+    this.colwidth = 90
     this.rowHeight = rowHeight;
     this.headerRowHeight = 30; // has a border
     this.stopsColWidth = 150; // has border
@@ -139,6 +141,7 @@ getTextWidth() {
     this.littletable = false;
     var rowHeight = 20;
     this.rowHeight = rowHeight;
+    this.colwidth = 60;
     // var headerRowHeight = 20; // has a border
     this.stopsColWidth = 100; // has border
     this.fontsize = 12;
@@ -210,6 +213,7 @@ getTextWidth() {
   }
   
   initMeasures(data, noscroll) {
+    console.log("initMeasurer")
     if (window.innerHeight < window.innerWidth) {
       this.stopsColWidth = 170;
     } else {
@@ -232,13 +236,23 @@ getTextWidth() {
 
     if (!noscroll) {
       setTimeout( ()=> {
-
-
         var columnScrollTo = this.locateTablePosition(data, new Date());
+        console.log("columnScrollTo"+columnScrollTo)
+
         columnScrollTo = Math.min(columnScrollTo, data.tripIds.length - (this.scrollWidth - this.stopsColWidth) / this.colwidth);
+        console.log("data.tripIds.length"+data.tripIds.length)
+        console.log("this.scrollWidth"+this.scrollWidth)
+        console.log("this.stopsColWidth"+this.stopsColWidth)
+        console.log("this.colwidth"+this.colwidth)
+
         var pos = this.colwidth * columnScrollTo;
-        var table = this.element.shadowRoot.querySelector('#table-table');
-        table.scrollTo(pos,0);
+        // var table = this.element.shadowRoot.querySelector('#table-table');
+        // table.scrollTo(pos,0);
+        const scroll: HTMLIonContentElement = this.element.shadowRoot.querySelector('#tablescroll');
+        if (scroll) {
+          scroll.scrollToPoint(pos, 0, 200);
+          console.log("scrollTo " + pos);
+        }
 
       }, 300);
     }
@@ -289,22 +303,13 @@ getTextWidth() {
   }
 
   componentDidLoad() {
-    // console.log(this.element);
-    // this.element.shadowRoot.querySelector('#tablescroll').addEventListener('ionScrollEnd', (e) => {
-    //   this.scrollOrari(e);
-    // });
-    // this.element.shadowRoot.querySelector('#tablescroll').addEventListener('ionScroll', (e) => {
-    //   this.scrollOrari(e);
-    // });
-    // this.element.shadowRoot.querySelector('#tablescroll').addEventListener('ionScrollStart', (e) => {
-    //   this.scrollOrari(e);
-    // });
-    // loop over NodeList as per https://css-tricks.com/snippets/javascript/loop-queryselectorall-matches/
     const list = this.element.shadowRoot.querySelectorAll('li.my-list');
     [].forEach.call(list, li => li.style.color = 'red');
 
     this.setStyle();
-    this.colwidth = this.getTextWidth();
+    const width = this.getTextWidth();
+    if (width!=0)
+      this.colwidth=width;
 
   }
   setStyle(): any {
@@ -478,7 +483,7 @@ getTextWidth() {
   // }
   Fetch() {
     if (this.dataTT) {
-      console.log(this.dataTT);
+      // console.log(this.dataTT);
       // this.dataTT = this.data['stopNames'];
       //this.BiancoNero(this.dataTT['stops']);
       // this.dataTT = response['trips'];
@@ -581,6 +586,9 @@ getTextWidth() {
       // backgroundImage:`-webkit-linear-gradient(90deg,#fff, #fff {{rowHeight}}px, #eee {{rowHeight}}px, #eee {{rowHeight*2}}px`;
       backgroundImage: `linear-gradient(180deg,#fff, #fff ${this.rowHeight}px, #eee ${this.rowHeight}px, #eee ${this.rowHeight * 2}px`
     };
+    var styleMeasurer = {
+      fontSize: `${this.fontsize}px`,
+    }
     var styleTableHeader = {
       left: `${this.stopsColWidth}px`,
       top: `${this.header ? this.header.style.top : 0}`,
@@ -686,7 +694,7 @@ getTextWidth() {
                 : ""
               }
               <div id="table-table" innerHTML={this.visualizza(this.orari)} style={styleTableTable} ></div>
-              <div id="measurer" class="mesurer" >123456789</div>
+              <div id="measurer" class="mesurer" style={styleMeasurer}>&nbsp;&nbsp;00:00&nbsp;&nbsp;</div>
 
             </ion-content>
           </div>

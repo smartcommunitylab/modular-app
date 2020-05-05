@@ -152,9 +152,9 @@ export class HomeTrasportiPage implements OnInit {
     console.log(target + '' + visible);
   }
   isSelected(category) {
-    console.log('category.state' + category.state);
-    console.log('this.actualVisualized' + JSON.stringify(this.actualVisualized));
-    console.log(' category.state == this.actualVisualized' + (category.state === this.actualVisualized));
+    // console.log('category.state' + category.state);
+    // console.log('this.actualVisualized' + JSON.stringify(this.actualVisualized));
+    // console.log(' category.state == this.actualVisualized' + (category.state === this.actualVisualized));
     return category.state === this.actualVisualized;
   }
   getIconStyle(elem) {

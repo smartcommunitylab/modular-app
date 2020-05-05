@@ -86,7 +86,7 @@
     "start": "5.1.0",
     "tslib": "^1.9.3",
     "wc-dettagliofunerale": "^0.2.3",
-    "wc-trasporti": "0.0.27",
+    "wc-trasporti": "0.0.53",
     "wcs-comune": "0.0.198",
     "wcs-dettagliofunerale": "0.0.17",
     "wcs-info": "^0.2.5",

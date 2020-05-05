@@ -4,7 +4,6 @@ import '@ionic/core';
 export declare class AppHome {
     element: HTMLElement;
     data: string;
-    colwidth: number;
     reloadTable(): void;
     dataTT: any;
     fontsize: number;
@@ -38,6 +37,7 @@ export declare class AppHome {
     private subtitleBar;
     tableCornerStr: string[];
     handleScroll(ev: any): void;
+    colwidth: number;
     rowHeight: number;
     headerRowHeight: number;
     stopsColWidth: number;
