@@ -5,8 +5,8 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { ConfigService } from './services/config.service';
 import { SettingService } from './services/setting.service';
 import { TranslateService } from '@ngx-translate/core';
-// import { HotCodePush } from '@ionic-native/hot-code-push/ngx';
 import { FirebaseX } from '@ionic-native/firebase-x/ngx';
+import { CodePush } from '@ionic-native/code-push/ngx';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
 
@@ -25,7 +25,7 @@ export class AppComponent {
     private config: ConfigService,
     private setting: SettingService,
     private translate: TranslateService,
-    // private hotCodePush: HotCodePush,
+    private codePush: CodePush,
     private firebase: FirebaseX
   ) {
     this.sideMenu().then(res => {
@@ -36,6 +36,7 @@ export class AppComponent {
 
   initializeApp() {
     this.platform.ready().then(() => {
+      this.checkCodePush();
       if (this.firebase) {
         this.firebase.getToken().then(token => console.log(`The token is ${token}`));
       }
@@ -68,13 +69,19 @@ export class AppComponent {
       this.translate.setDefaultLang(this.myLanguage);
     }
   }
-  updateApp(): any {
-    console.log('Update:');
-    // if (this.hotCodePush)
-    // this.hotCodePush.fetchUpdate({}).then(data => {
-    //   console.log('Update available');
-    // });
-  }
+  checkCodePush() {
+    
+    this.codePush.sync().subscribe((syncStatus) => console.log(syncStatus));
+    const downloadProgress = (progress) => { console.log(`Downloaded ${progress.receivedBytes} of ${progress.totalBytes}`); }
+    this.codePush.sync({}, downloadProgress).subscribe((syncStatus) => console.log(syncStatus));
+ }
+  // updateApp(): any {
+  //   console.log('Update:');
+  //   // if (this.hotCodePush)
+  //   // this.hotCodePush.fetchUpdate({}).then(data => {
+  //   //   console.log('Update available');
+  //   // });
+  // }
   sideMenu(): Promise<any> {
     return this.config.loadMenu();
   }

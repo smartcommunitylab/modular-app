@@ -24,6 +24,8 @@ import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { FirebaseX } from '@ionic-native/firebase-x/ngx';
 import { LinkDirective } from './directives/link.directive';
 import { TranslationLoaderService } from './services/translation-loader.service';
+import { CodePush } from '@ionic-native/code-push/ngx';
+
 export function initializeAppSetting(appInitService: SettingService) {
   return (): Promise<any> => {
     return appInitService.Init();
@@ -67,6 +69,7 @@ export function initializeAppConfig(configService: ConfigService) {
     InAppBrowser,
     // HotCodePush,
     SettingService,
+    CodePush,
     { provide: APP_INITIALIZER, useFactory: initializeAppConfig, deps: [ConfigService], multi: true },
     { provide: APP_INITIALIZER, useFactory: initializeAppSetting, deps: [SettingService], multi: true },
     { provide: APP_INITIALIZER, useFactory: initializeAppGeo, deps: [GeoService], multi: true },

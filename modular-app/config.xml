@@ -131,7 +131,6 @@
     <allow-navigation href="http://192.168.28.202:8112" sessionid="d09a47e4" />
     <allow-navigation href="http://192.168.31.180:8100" sessionid="521c6eb0" />
     <allow-navigation href="http://192.168.31.180:8101" sessionid="218fc016" />
-    <engine name="android" spec="7.1.4" />
     <allow-navigation href="http://192.168.29.87:8102" sessionid="620d440a" />
     <allow-navigation href="http://192.168.29.87:8103" sessionid="f419cc52" />
     <allow-navigation href="http://192.168.29.87:8104" sessionid="9091fa9c" />
@@ -139,4 +138,13 @@
     <allow-navigation href="http://192.168.29.87:8106" sessionid="8d4bc43e" />
     <allow-navigation href="http://192.168.29.87:8107" sessionid="8a91dff2" />
     <allow-navigation href="http://192.168.29.87:8108" sessionid="021285b1" />
+    <plugin name="cordova-plugin-code-push" spec="^1.12.2" />
+    <platform name="android">
+        <preference name="CodePushDeploymentKey" value="fWadopemmEcZdlALUIdiMQ-z9K3Y7hGRTACFr" />
+    </platform>
+    <platform name="ios">
+        <preference name="CodePushDeploymentKey" value="IWksrwEjc5yFbGy0tIj-SDWNxn1jL-VGaiFEx" />
+    </platform>
+    <engine name="android" spec="8.1.0" />
+    <engine name="ios" spec="5.1.1" />
 </widget>
