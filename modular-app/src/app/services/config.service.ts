@@ -133,8 +133,10 @@ export class ConfigService {
 
   };
 
-  getCarousel(): any {
-    return this.carousel;
+  getCarousel(): Promise<any> {
+    if (this.carousel)
+    return  Promise.resolve(this.carousel);
+    else  return this.loadCarousel()
   }
   loadCarousel(): any {
     let params = new HttpParams().set('profile', this.getChoosen())
@@ -142,11 +144,13 @@ export class ConfigService {
     if (this.carousel) {
       return Promise.resolve(this.carousel);
     }
-    this.http.get(this.carouselUrl, { params: params }).toPromise().then(response => {
+    return this.http.get(this.carouselUrl, { params: params }).toPromise().then(response => {
       console.log("response" + response);
 
       this.carousel = response;
-    });
+      return Promise.resolve(this.carousel);
+    }, err => {
+      return Promise.resolve();});
   }
   getModuleEntries(): any {
     return this.moduleEntries;

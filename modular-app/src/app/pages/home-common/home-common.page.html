@@ -5,6 +5,8 @@
   </ion-toolbar>
 </ion-header>
 <ion-content >
+  <div *ngIf="elementsGallery; else galleryNotLaoded" >
+
   <ion-slides pager="true">
     <ion-slide *ngFor="let slide of elementsGallery">
       <div class="image-container" (click)="openElement(slide)">
@@ -13,7 +15,15 @@
         <div class="string-slide">{{slide.name}}</div>
       </div>
     </ion-slide>
+
   </ion-slides>
+</div>
+<ng-template #galleryNotLaoded>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+ <img class="scroll-down" src="assets/home/reload.png" alt="">
+</ng-template>
   <div class="container">
     <ion-grid id="category-buttons">
       <ion-row>

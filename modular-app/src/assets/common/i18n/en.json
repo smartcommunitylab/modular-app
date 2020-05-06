@@ -34,5 +34,7 @@
   "cancel_button": "Cancel",
   "ok_button": "Ok",
   "title_filter":"Filter",
-  "label_search":"Search"
+  "label_search":"Search",
+  "connection_error": "Connection error."
+
 }

@@ -33,5 +33,7 @@
   "cancel_button":"Annulla",
   "ok_button":"Ok",
   "title_filter":"Filtra",
-  "label_search":"Cerca"
+  "label_search":"Cerca",
+  "connection_error": "Errore di connessione."
+
 }

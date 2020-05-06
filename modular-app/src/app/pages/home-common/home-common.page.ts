@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController, AlertController } from '@ionic/angular';
+import { NavController, AlertController, ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { ConfigService } from '../../services/config.service';
@@ -31,11 +31,11 @@ export class HomeCommonPage implements OnInit {
 
     private utils: UtilsService) {
     this.language = window[this.config.getAppModuleName()]['language'];
-    translate.use(this.language); 
+    translate.use(this.language);
   }
   ngOnInit() {
   }
-  ionViewDidLoad(){
+  ionViewDidLoad() {
 
     this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
 
@@ -49,35 +49,55 @@ export class HomeCommonPage implements OnInit {
     this.init()
 
   }
-init() {
-  this.language = window[this.config.getAppModuleName()]['language'];
-  this.translate.use(this.language); 
-  this.elementsGallery = [];
-  var moduleEntries=this.config.getModuleEntries();
-  if (moduleEntries)
-{  this.categories = this.config.getModuleEntries().map(x => this.convertCategories(x));
-  console.log(this.categories);
+  init() {
+    this.language = window[this.config.getAppModuleName()]['language'];
+    this.translate.use(this.language);
+    this.elementsGallery = [];
+    var moduleEntries = this.config.getModuleEntries();
+    if (moduleEntries) {
+    this.categories = this.config.getModuleEntries().map(x => this.convertCategories(x));
+      console.log(this.categories);
 
-}   else {
-  console.log("empty categories");
+    } else {
+      console.log("empty categories");
 
-}
-var carousel=this.config.getCarousel();
-  if (carousel)
-{ 
-  this.elementsGallery = this.config.getCarousel().map(x => this.convertGallery(x));
-} 
-else {
-  console.log("carosello vuoto");
-}
-  window.addEventListener('categorySelected', category => {
-    console.log(category);
-  });
-  window.addEventListener('elementSelected', item => {
-    console.log(item);
-    this.goToItem(item['detail']);
-  });
-}
+    }
+    this.getCarousel();
+    // var carousel=this.config.getCarousel();
+    //   if (carousel)
+    // { 
+    //   this.elementsGallery = this.config.getCarousel().map(x => this.convertGallery(x));
+    // } 
+    // else {
+    //   console.log("carosello vuoto");
+    //   this.elementsGallery=null;
+    // }
+    window.addEventListener('categorySelected', category => {
+      console.log(category);
+    });
+    window.addEventListener('elementSelected', item => {
+      console.log(item);
+      this.goToItem(item['detail']);
+    });
+  }
+  getCarousel(): Promise<any> {
+    return this.config.getCarousel().then(carousel => {
+      if (carousel) {
+        this.elementsGallery = carousel.map(x => this.convertGallery(x));
+        return Promise.resolve()
+      }
+      else {
+        console.log("carosello vuoto");
+        this.elementsGallery = null;
+        this.translate.get('connection_error').subscribe(
+          value => {
+            this.utils.showToast(value);
+          }
+        );
+        return Promise.resolve()
+      }
+    })
+  }
   convertGallery(x) {
     const galleryElement: any = {};
 
@@ -87,12 +107,12 @@ else {
     if (x.image) {
       galleryElement.image = x.image[this.language];
     }
-     if (x.uri) {
+    if (x.uri) {
       galleryElement.url = x.uri;;
-     }
-     else {
+    }
+    else {
       galleryElement.url = '/detail-poi';
-     }
+    }
     if (x.params) {
       galleryElement.params = x.params;
     }
@@ -113,9 +133,9 @@ else {
     if (x.icon) {
       categoryElement.icon = x.icon;
     }
-     if (x.url) {
+    if (x.url) {
       categoryElement.url = x.url;
-     }
+    }
     if (x.params) {
       categoryElement.params = x.params;
     }
@@ -164,10 +184,21 @@ else {
       );
       this.translate.get('error_data').subscribe(
         value => {
-          console.log("element.url"+element.url+"element.objectIds"+element.objectIds)
+          console.log("element.url" + element.url + "element.objectIds" + element.objectIds)
           this.utils.showToast(value);
         }
       );
     }
+  }
+  doRefresh(event) {
+    console.log('Begin async operation');
+
+    // setTimeout(() => {
+      console.log('Async operation has ended');
+      this.getCarousel().then(()=> {
+        event.target.complete();
+
+      })
+    // }, 100);
   }
 }

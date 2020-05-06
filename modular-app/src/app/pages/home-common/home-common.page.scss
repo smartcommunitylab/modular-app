@@ -19,6 +19,9 @@ ion-toolbar {
 ion-content {
     --ion-background-color: #efefef;
     height: 100%;
+    .scroll-down{
+        width: 100%;;
+    }
 }
 
 .title-home {
