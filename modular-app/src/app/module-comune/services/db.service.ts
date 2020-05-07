@@ -72,12 +72,12 @@ export class DbService {
     localStorage.setItem('UPDATE_SYNCH', new Date().getTime().toString());
   }
 
-  synch(message?: string): Promise<any> {
+  synch(forced?:boolean): Promise<any> {
     console.log('enter in synch');
     return new Promise(async (resolve, reject) => {
-      if (this.lastTimeSynch() > this.MIN_SYNCH_TIME) {
+      if (this.lastTimeSynch() > this.MIN_SYNCH_TIME||forced==true) {
         const loading = await this.loadingController.create({
-          message: message || this.translate.instant('init_db')
+          message:this.translate.instant('init_db')
         });
         if (!localStorage.getItem('UPDATE_SYNCH')) {
           await loading.present();
@@ -106,9 +106,9 @@ export class DbService {
       }
     }));
   }
-  getObjectByDataId(id) {
+  getObjectByDataId(id,forced?) {
 
-    return this.synch().then(() => this.db.find({
+    return this.synch(forced).then(() => this.db.find({
       selector: {
         'id': id
       }

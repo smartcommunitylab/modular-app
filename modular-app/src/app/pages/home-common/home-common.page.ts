@@ -174,7 +174,7 @@ export class HomeCommonPage implements OnInit {
   }
   openElement(element) {
     if (element.url && element.objectIds) {
-      this.router.navigate([element.url], { queryParams: { objectIds: element.objectIds } });
+      this.router.navigate([element.url], { queryParams: { objectIds: element.objectIds, forced:true } });
     } else {
       this.translate.get('title_app').subscribe(
         value => {

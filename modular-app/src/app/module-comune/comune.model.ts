@@ -155,7 +155,7 @@ export class ComuneDetailPage implements OnInit, OnDestroy {
       this.paramsSubscription = this.route.queryParams
         .subscribe(params => {
           if (params.objectIds) {
-            this.manageoLocalId(params.objectIds);
+            this.manageoLocalId(params.objectIds, params.forced=="true");
           } else if (params) {
             this.dbService.getObjectById(params.id).then(data => {
               this.item = this.convertObject(data["docs"][0]);
@@ -172,9 +172,9 @@ export class ComuneDetailPage implements OnInit, OnDestroy {
       this.navCtrl.back();
     }
 
-    manageoLocalId(objectIds: string[]) {
+    manageoLocalId(objectIds: string[], forced:boolean) {
       if (objectIds.length === 1) {
-          this.dbService.getObjectByDataId(objectIds[0]).then(data => {
+          this.dbService.getObjectByDataId(objectIds[0],forced).then(data => {
             this.item = this.convertObject(data.docs[0]);
             if (this.item.image) { this.item.image = this.item.image.replace('_medium.jpg', '.jpg'); }
           });
