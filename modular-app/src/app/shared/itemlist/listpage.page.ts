@@ -68,7 +68,11 @@ export class ListPage {
         cats.push(cat);
       }
     });
-    cats.sort();
+    cats.sort(function(a,b) {
+      a = a.split('-').reverse().join('');
+      b = b.split('-').reverse().join('');
+      return a > b ? 1 : a < b ? -1 : 0;
+    });
     this.categories = cats;
     setTimeout(()=> {
       this.currentCategory = this.categories[0];

@@ -66,8 +66,8 @@ export class ListEventPage extends ComuneListPage implements OnInit {
         let day = moment.max(moment(), from);
         const last = moment.min(moment().add(7, 'days'), to);
         while (day.isBefore(last)) {
-          const copy = Object.assign({}, e);
-          copy.day = day;
+          const copy = JSON.parse(JSON.stringify(e));
+          copy.day = day.clone();
           day = day.add(1, 'days');
           res.push(copy);
         }
