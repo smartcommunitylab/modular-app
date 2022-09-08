@@ -69,7 +69,7 @@
     "intersection-observer": "^0.7.0",
     "ionic-angular": "^3.9.8",
     "ionic-long-press": "^1.5.0",
-    "jszip": "^2.6.0",
+    "jszip": "^2.7.0",
     "jszip-utils": "0.0.2",
     "moment": "^2.24.0",
     "ng-in-viewport": "^6.0.3",
