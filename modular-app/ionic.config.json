@@ -1,7 +1,0 @@
-{
-  "name": "modularApp",
-  "integrations": {
-    "cordova": {}
-  },
-  "type": "angular"
-}
