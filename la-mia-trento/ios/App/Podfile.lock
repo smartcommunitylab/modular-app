@@ -57,7 +57,7 @@ SPEC CHECKSUMS:
   CapacitorLocalNotifications: c2d8b14794064fd4814b1d6c4ddbac8029afa295
   CapacitorSplashScreen: 5fa2ab5e46cf5cc530cf16a51c80c7a986579ccd
   CapacitorStatusBar: 565c0a1ebd79bb40d797606a8992b4a105885309
-  CordovaPlugins: 1a38cdd72f9617fc9c924933039edd27ea459335
+  CordovaPlugins: 2b6638cf3a20e64ada2b19230c00ef1a49608808
 
 PODFILE CHECKSUM: 8efe690e7c5276ca3c9d531b8a42aed4c2f10545
 
