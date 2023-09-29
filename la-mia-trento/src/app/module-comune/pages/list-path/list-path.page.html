@@ -1,0 +1,27 @@
+<ion-header [ngClass]="{'higher': searchAndIos()}" >
+    <ion-toolbar>
+
+      <ion-buttons slot="start" *ngIf="!search">
+          <ion-back-button class="interaction"></ion-back-button>
+        </ion-buttons>
+        <ion-buttons slot="end" *ngIf="!search">
+            <ion-button (click)="toggleSearch()">
+              <ion-icon name="search"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+      <ion-title *ngIf="!search">
+          {{'PATH'|translate}}
+        </ion-title>
+        <ion-searchbar mode="md" class="search-path" [ngClass]="{'searchspace': search}" style="display: none" showCancelButton="always" animated  
+        (ionInput)="searchChanged($event)" (ionCancel)="toggleSearch()" placeholder="{{'label_search' | translate}}" ></ion-searchbar>
+       
+    </ion-toolbar>
+  </ion-header>
+
+<ion-content >
+  <ion-list no-lines id="path-list" >
+    <div class="item-container" *ngFor="let poi of pois">      
+      <wc-path-list-el type="PATH" [identifier]="poi.id" [img]="poi.image" [titlePath]="poi.title" [text]="poi.subtitle" main-color="#11b3ef" desc-color="#707070"></wc-path-list-el>
+    </div>
+  </ion-list>
+</ion-content>

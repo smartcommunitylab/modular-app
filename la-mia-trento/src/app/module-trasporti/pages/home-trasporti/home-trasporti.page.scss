@@ -1,0 +1,89 @@
+.wrapper {
+
+    .scrolling-wrapper-flexbox {
+        -webkit-box-shadow: 0 10px 20px -20px rgba(0, 0, 0, 0.19), 0 6px 6px -6px rgba(0, 0, 0, 0.23);
+        -moz-box-shadow: 0 10px 20px -20px rgba(0, 0, 0, 0.19), 0 6px 6px -6px rgba(0, 0, 0, 0.23);
+        -ms-box-shadow: 0 10px 20px -20px rgba(0, 0, 0, 0.19), 0 6px 6px -6px rgba(0, 0, 0, 0.23);
+        -o-box-shadow: 0 10px 20px -20px rgba(0, 0, 0, 0.19), 0 6px 6px -6px rgba(0, 0, 0, 0.23);
+        box-shadow: 0 10px 20px -20px rgba(0, 0, 0, 0.19), 0 6px 6px -6px rgba(0, 0, 0, 0.23);
+        background-color: white;
+        width: 100%;
+        display: flex;
+        overflow-x: auto;
+        z-index: 999;
+        position: fixed;
+        padding-left: 12px;
+
+        ion-chip {
+            flex: 0 0 auto;
+            background-color: white;
+
+            ion-label {
+                font-size: 19px;
+                font-weight: bold;
+                padding: 13px;            }
+        }
+    }
+}
+
+.line-container {
+    padding-top: 40px;
+
+    .card-tt {
+        display: table;
+
+        .name-line {
+            display: table-cell;
+            vertical-align: middle;
+            padding-left: 12px;
+        }
+    }
+
+    .line-tt {
+        border-radius: 8px;
+        height: 49px;
+        width: 49px;
+        text-align: center;
+        line-height: 34px;
+        display: inline-block;
+        margin: 4px;
+        font-size: 24px;
+    }
+
+    .label-type {
+        width: 100%;
+        font-weight: bold;
+        --background: #e3e3e3;
+        --color: #707070;
+        font-size: 22px;
+
+        div {
+            width: 100%;
+        }
+    }
+}
+.block-tt{
+    --padding-start: 3px!important;
+    padding-top: 12px;
+    padding-bottom: 11px;
+}
+.interaction {
+    color: #11b3ef !important;
+}
+
+.categorySelected {
+    color: white !important;
+    background-color: #11b3ef !important;
+}
+
+.header-icon {
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 24px;
+    margin-right: 8px;
+}
+
+.header-text {
+    display: inline-block;
+    vertical-align: middle;
+}

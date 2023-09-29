@@ -1,0 +1,36 @@
+#barraDiRicerca{
+    // display: none;
+}
+
+#contenitoreAnteprima{
+    padding-bottom: 6px;
+}
+.interaction {
+    color: #11b3ef!important;
+}
+ion-searchbar {
+    // position: fixed;
+    // width: calc(100% - 60px);
+    // top: 3px;
+    // top: 58px;
+    z-index: 999;
+}
+
+ion-title{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+}
+.searchspace {
+    background-color:white;
+}
+.higher{
+    height: 100px;
+    background-color:white;
+}
+.empty-list {
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+}

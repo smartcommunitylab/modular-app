@@ -1,0 +1,132 @@
+.content {
+    padding-left: 2%;
+    padding-right: 2%;
+}
+
+ion-searchbar {
+    // position: fixed;
+    // width: calc(100% - 60px);
+    // top: 3px;
+    // top: 58px;
+    z-index: 999;
+}
+
+.column {
+    float: left;
+}
+
+.c-text {
+    width: 60%;
+    margin-left: 20%;
+}
+
+.c-btn {
+    width: 40%;
+    margin-bottom: 3%;
+}
+
+.row {
+    text-align: center;
+    vertical-align: middle;
+    height: 40px;
+}
+
+.row::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.order-icon {
+    transform: rotate(90deg)
+}
+ion-list {
+    padding-top:40px;
+}
+.date-chip {
+    font-size: 18px;
+    font-weight: bold;
+}
+.wrapper {
+
+    .scrolling-wrapper-flexbox {
+        -webkit-box-shadow: 0 10px 20px -20px rgba(0, 0, 0, 0.19), 0 6px 6px -6px rgba(0, 0, 0, 0.23);
+        -moz-box-shadow: 0 10px 20px -20px rgba(0, 0, 0, 0.19), 0 6px 6px -6px rgba(0, 0, 0, 0.23);
+        -ms-box-shadow: 0 10px 20px -20px rgba(0, 0, 0, 0.19), 0 6px 6px -6px rgba(0, 0, 0, 0.23);
+        -o-box-shadow: 0 10px 20px -20px rgba(0, 0, 0, 0.19), 0 6px 6px -6px rgba(0, 0, 0, 0.23);
+        box-shadow: 0 10px 20px -20px rgba(0, 0, 0, 0.19), 0 6px 6px -6px rgba(0, 0, 0, 0.23);
+        background-color: white;
+        width: 100%;
+        display: flex;
+        overflow-x: auto;
+        z-index: 999;
+        position: fixed;
+
+        .container {
+            flex: 0 0 auto;
+
+            .tag {
+                flex: 0 0 auto;
+                margin: 8px;
+
+                .tag-text {
+                    padding: 4px;
+                    color: white;
+                    background-color: #11b3ef;
+                }
+            }
+
+        }
+
+        ion-chip {
+            flex: 0 0 auto;
+            background-color: white;
+            font-size: 20px;
+            ion-label {
+                font-size: 16px;
+                padding: 0px 8px;
+            }
+        }
+    }
+}
+
+.interaction {
+    color: #11b3ef !important;
+}
+
+.categorySelected {
+    color: white !important;
+    background-color: #11b3ef !important;
+}
+
+.label-type {
+    width: 100%;
+    font-weight: bold;
+    --background: #e3e3e3;
+    --color: #707070;
+    font-size: 22px;
+
+    div {
+        width: 100%;
+    }
+}
+
+.list-container {
+    margin-top: 30px;
+}
+ion-toolbar{
+    ion-buttons{
+        ion-button{
+            font-size: 20px;
+        }
+    }
+}
+ion-title{
+    font-weight: bold;
+}
+.searchspace {
+    background-color:white;
+}
+.higher{
+    height: 100px;
+}

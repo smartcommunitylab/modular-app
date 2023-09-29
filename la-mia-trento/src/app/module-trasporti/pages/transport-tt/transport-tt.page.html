@@ -1,0 +1,25 @@
+<ion-header no-border>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button class="interaction"></ion-back-button>
+        </ion-buttons>
+        <ion-title>
+            <div class="ion-text-center" *ngIf="groupId!==title">{{groupId}}</div>
+        </ion-title>
+        <ion-buttons slot="end">
+            <ion-icon src="assets/trasporti/wheelchair.svg" class="tt-button" [ngClass]="{'filled': accessibility,'not-filled': !accessibility}"
+                (click)="changeAccessibility()"></ion-icon>
+            <ion-icon src="assets/trasporti/enlarge.svg" class="tt-button" [ngClass]="{'filled': !littletable,'not-filled': littletable}" (click)="changeSize()">
+            </ion-icon>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <div id="table-tt">
+        <wc-trasporti-table id="table" *ngIf="data" [agencyid]="agencyId" [datetable]="datetable" [lang]="lang" [color]="color" [data]="data" [title]="title" [day]="day" [arrows]="true"
+            [littletable]="littletable" [showtrips]="showtrips" [showHeader]="showHeader"  [labeldelay]="labeldelay" [labeltrips]="labeltrips"
+            [accessibility]="accessibility"  [tripsvalue]="tripsvalue" [emptytable]="emptyTable" [emptytablelabel]="noTable"></wc-trasporti-table>
+    </div>
+
+</ion-content>

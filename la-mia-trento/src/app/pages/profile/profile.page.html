@@ -1,0 +1,28 @@
+ <ion-content>
+     <img src="assets/sfondoHome.png" alt="">
+     <ion-grid>
+         <ion-row>
+             <ion-col>
+                 <div class="main-title ion-text-center">{{'title_app'|translate}}</div>
+             </ion-col>
+         </ion-row>
+         <ion-row>
+             <ion-col>
+                 <div class="second-title ion-text-center">{{'title_first_launch'|translate}}</div>
+             </ion-col>
+         </ion-row>
+             <ion-row text-center>
+                 <ion-col class="ion-text-center">
+                     <div>
+                     <ion-button (click)="chooseProfile('citizen')">
+                         {{'citizen_profile_label'|translate}}</ion-button>
+                    </div>
+                    </ion-col>
+             </ion-row>
+             <ion-row text-center class="ion-text-center">
+                 <ion-col>
+                     <ion-button (click)="chooseProfile('turist')">{{'turist_profile_label'|translate}}</ion-button>
+                 </ion-col>
+             </ion-row>
+     </ion-grid>
+ </ion-content>

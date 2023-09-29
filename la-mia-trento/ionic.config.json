@@ -1,0 +1,8 @@
+{
+  "name": "La mia Trento",
+  "integrations": {
+    "cordova": {},
+    "capacitor": {}
+  },
+  "type": "angular"
+}

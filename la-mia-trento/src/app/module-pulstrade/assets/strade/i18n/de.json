@@ -1,0 +1,31 @@
+{
+    "HOME": "Straßenreinigung",
+    "SEARCH": "Suche",
+    "CALENDAR": "Kalender",
+    "NOTIFY": "Benachrichtigungsmanagement",
+    "NO-CLEANING": "Keine Reinigung geplant",
+    "IN-ZONE": "in diesem Bereich",
+    "NO-PARKING-FROM": "Kein Parken von",
+    "TO": "bis",
+    "FOR": "für",
+    "IN-DATE": "am datum",
+    "CLOSED": "Kein parkplatz: ",
+    "NOTIFY-ENA": "Aktivierte Benachrichtigungen",
+    "NOTIFY-DIS": "Deaktivierte Benachrichtigungen",
+    "DETAILS": "Details",
+    "IN-CLEANING": "Straße in Sauberkeit",
+    "error_init":"Dateninitialisierung Fehler",
+    "clean_label":"geplante Reinigung in diesem Bereich in den Daten,",
+    "no_street_future":"keine geplante Reinigung für diesen Bereich nach dem ausgewählten Datum",
+    "no_street_past":"Keine geplante Reinigung für diesen Bereich vor dem ausgewählten Datum",
+    "no_notify":"Keine Straße gespeichern",
+    "no_roads_search":"Keine Straße gefunden",
+    "side_label":"Seite: ",
+    "tratto_label":"Teil: ",
+    "list_street_label":"Reinigungsliste ",
+    "no_cleaning":"Keine planmäßige Reinigung",
+    "add_not":"Sie haben Benachrichtigungen zur Straßenreinigung in {{streetname}} aktiviert ",
+    "remove_not":"Sie haben Benachrichtigungen für die Straßenreinigung in {{streetname}} deaktiviert "
+    
+
+}

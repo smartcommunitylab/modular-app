@@ -1,0 +1,20 @@
+{
+    "home_trasporto": "Verkehrsmittel",
+    "menu_plan": "",
+    "menu_real_time_bus_urban": "Bus",
+    "menu_real_time_train": "Zuge",
+    "menu_real_time_park": "",
+    "parking": "",
+    "bike": "",
+    "menu_taxi": "",
+    "err_too_many_markers":"Troppi marker",
+    "label_delay":"VERSPÄTUNG",
+    "label_trips":"TYP",
+    "urbano":"Bus",
+    "trains":"Zuge",
+    "timetable_label":"Stunden",
+    "choose_direction_label":"wählen Sie die Richtung",
+    "initdb_label":"Dateninitialisierung läuft, bitte warten",
+    "no_table":"Keine Reise für das ausgewählte Datum"
+
+}

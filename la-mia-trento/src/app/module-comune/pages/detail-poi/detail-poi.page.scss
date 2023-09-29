@@ -1,0 +1,38 @@
+.back-button{
+    position: fixed;
+    color: #11b3ef;
+    --background: white;
+    border-radius: 24px;
+    border: 2px solid #11b3ef;
+    width: 48px;
+    height: 48px;
+    line-height: 48px;
+    text-align: center;
+    background-color: white;
+    font-size: 44px;
+    // border-radius: 18px;
+    z-index: 999;
+    top: 16px;
+    left: 16px;
+}
+.share-button {
+    position: fixed;
+    color: #11b3ef;
+    --background: white;
+    border-radius: 24px;
+    right: 16px;
+    border: 2px solid #11b3ef;
+    width: 48px;
+    height: 48px;
+    line-height: 48px;
+    text-align: center;
+    background-color: white;
+    top: 16px;
+    font-size: 32px;
+
+    // border-radius: 18px;
+    z-index: 999;
+    ion-icon {
+        height: 100%;
+    }
+}

@@ -1,0 +1,42 @@
+ion-card {
+    background: white !important;
+}
+.left {
+    float: left;
+    width: 75%;
+    // padding-bottom: 5%;
+}
+.right {
+    float: right;
+    vertical-align: middle;
+}
+.notification {
+    text-align: center;
+}
+.interaction {
+    color: #11B3EF!important;
+}
+
+.icon-notification{
+    font-size: 30px;
+}
+.result{
+    font-size: 30px;
+}
+.sub-result{
+    font-size: 15px;
+}
+ion-searchbar {
+    // position: fixed;
+    // width: calc(100% - 60px);
+    // top: 3px;
+    // // top: 58px;
+    z-index: 999;
+}
+.no-results{
+    text-align: center;
+    font-size: 22px;
+    font-weight: bold;
+    color: #707070;
+
+}

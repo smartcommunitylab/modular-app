@@ -1,0 +1,6 @@
+<ion-content>
+    <div shape="round" class="back-button" (click)="goBack()">
+        <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+      </div>
+    <wc-map id="wc-map" [tracciato]="tracciato" [mypos]="myPosParam" [points]="mapPoints" main-marker-icon="assets/comune/img/marker.svg" poi-marker-icon="assets/comune/img/download.svg"></wc-map>
+</ion-content>

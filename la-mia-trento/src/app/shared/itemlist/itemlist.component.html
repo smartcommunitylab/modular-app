@@ -1,0 +1,68 @@
+<ion-header no-border  [ngClass]="{'higher': isIOS && search}" >
+  <ion-searchbar class="search" [ngClass]="{'searchspace': search}" style="display: none" showCancelButton="always"  animated 
+    (ionInput)="searchChanged($event)" (ionCancel)="toggleSearch()" ></ion-searchbar>
+  <ion-toolbar>    
+    <ion-buttons slot="start">
+        <ion-button class="interaction" (click)="goBack()">
+            <ion-icon name="arrow-back"></ion-icon>
+        </ion-button>
+    </ion-buttons>
+        
+    <ion-buttons slot="end">
+      <ng-content select="[buttons]"></ng-content>
+      <ion-button (click)="filterClicked()">
+        <ion-icon name="options"></ion-icon>
+      </ion-button>
+      <ion-button (click)="toggleSearch()">
+        <ion-icon name="search"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  
+    <ion-title> {{title}} </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<div class="wrapper" *ngIf="presentFilter && !search">
+  <div class="scrolling-wrapper-flexbox loop">
+    <div class="container" *ngFor="let tag of tags">
+      <div class="tag" *ngIf="tag.isChecked">
+        <div class="tag-text">
+          {{tag.value}}
+          <ion-icon name="close-circle" (click)="removeTag(tag)"></ion-icon>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+<div class="wrapper" *ngIf="!presentFilter">
+  <div class="scrolling-wrapper-flexbox loop">
+    <ion-chip *ngFor="let c of categories" id="{{c}}" (click)="selectInternalElement(c)"
+      [ngClass]="{'categorySelected': c === currentCategory}">
+      <ion-label class="interaction" [ngClass]="{'categorySelected': c === currentCategory}">{{c}}</ion-label>
+    </ion-chip>
+  </div>
+</div>
+
+<ion-content [scrollEvents]="true">
+  
+    <div *ngIf="items !== null && !emptyList">
+        <ion-list no-lines id="itemlist" #itemlist>
+            <div class="list-container" *ngFor="let c of categories">
+              <ion-item class="label-type ion-text-center" sticky *ngIf="items[c].length > 0 && !presentFilter">
+                  <div id="{{'list_'+c}}">{{c}}</div>
+              </ion-item>
+              <div class="content" >
+                <div *ngFor="let item of items[c]; let i = index" inViewport 
+                [inViewportOptions]="{ threshold: [0] }" (inViewportAction)="onIntersection($event)"
+                class="{{c}}">
+                    <ng-container *ngTemplateOutlet="listItem ; context: {$implicit: item} "></ng-container>
+                </div>
+              </div>
+            </div>
+          </ion-list>    
+    </div>
+    <div class="empty-list" *ngIf="items !== null && emptyList">
+        {{'empty_list' | translate}}
+    </div>
+  </ion-content>

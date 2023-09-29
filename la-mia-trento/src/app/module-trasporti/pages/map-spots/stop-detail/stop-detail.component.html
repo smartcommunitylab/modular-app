@@ -1,0 +1,6 @@
+<p *ngIf="!detail">
+  <ion-item *ngFor="let item of lines" (click)="selectElement(item)">
+    {{item.route}}  {{item.name}} 
+  </ion-item>
+</p>
+<app-stop-single-line *ngIf="detail" [stop]="selectedStop"></app-stop-single-line>

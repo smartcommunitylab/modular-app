@@ -1,0 +1,47 @@
+<ion-header  [ngClass]="{'higher': searchAndIos()}" >
+   <ion-toolbar>
+
+    <ion-buttons slot="start" *ngIf="!search">
+      <ion-back-button class="interaction"></ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="end" *ngIf="!search">
+      <ion-button (click)="toggleSearch()">
+        <ion-icon name="search"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title *ngIf="!search">
+      {{'farmacie_label' | translate}}
+    </ion-title>
+    <ion-searchbar  mode="md"  class="search-farmacie" [ngClass]="{'searchspace': search}" style="display: none" showCancelButton="always" animated  
+    (ionInput)="searchChanged($event)" (ionCancel)="toggleSearch()" placeholder="{{'label_search' | translate}}"></ion-searchbar>
+  
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <ion-card class="card-turni" *ngIf="turno && farmacieTurno">
+      <button ion-button icon-only (click)="closeTurno()">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    <div class="message" (click)="openMarket()" [innerHTML]="farmacieTurno"></div>
+  </ion-card>
+
+  <ion-list no-lines id="poi-list" >
+    <div *ngIf="!emptyList">
+    <div *ngFor="let c of categories">
+      <div class="content" >
+        <div *ngFor="let poi of showPois[c]; let i = index">
+          <wc-details [stringsinput]="stringsContact" [title]="poi.title"  [showtags]=false [subtitle]="poi.subtitle" [text]="poi.text"
+            [info]="poi.info" [distance]="getDistance(poi)" [contacts]="poi.infos" heading-color="#707070"
+            second-color="#11b3ef" expandable=false expanse=false></wc-details>
+          <div class="spacing" *ngIf="i === showPois.length - 1"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </ion-list>
+  <div class="empty-list" *ngIf="emptyList">
+      {{'empty_list' | translate}}
+  </div>
+</ion-content>

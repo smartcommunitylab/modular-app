@@ -1,0 +1,105 @@
+.content {
+    padding-left:2%;
+    padding-right: 2%;
+}
+ion-searchbar {
+    // position: fixed;
+    // width: calc(100% - 60px);
+    // top: 3px;
+    // top: 58px;
+    z-index: 999;
+}
+.column {
+    float:left;
+}
+.c-text{
+    width: 60%;
+    margin-left: 10%;
+}
+.c-icon {
+    width: 10%;
+    height: 20px;
+    margin-bottom: 2%;
+}
+.c-btn {
+    width: 30%;
+    margin-bottom:3%;
+}
+.row{
+    text-align: center;
+    vertical-align: middle;
+    height: 40px;
+}
+.row::after {
+    content: "";
+    display:table;
+    clear:both;
+}
+.interaction {
+    color: #11b3ef!important;
+}
+.wrapper {
+
+    .scrolling-wrapper-flexbox {
+        -webkit-box-shadow: 0 10px 20px -20px rgba(0, 0, 0, 0.19), 0 6px 6px -6px rgba(0, 0, 0, 0.23);
+        -moz-box-shadow: 0 10px 20px -20px rgba(0, 0, 0, 0.19), 0 6px 6px -6px rgba(0, 0, 0, 0.23);
+        -ms-box-shadow: 0 10px 20px -20px rgba(0, 0, 0, 0.19), 0 6px 6px -6px rgba(0, 0, 0, 0.23);
+        -o-box-shadow: 0 10px 20px -20px rgba(0, 0, 0, 0.19), 0 6px 6px -6px rgba(0, 0, 0, 0.23);
+        box-shadow: 0 10px 20px -20px rgba(0, 0, 0, 0.19), 0 6px 6px -6px rgba(0, 0, 0, 0.23);
+        background-color:white;
+        width: 100%;
+        display: flex;
+        overflow-x: auto;
+        z-index: 999;
+        position: fixed;
+        .container{
+            flex: 0 0 auto;
+        .tag{
+            flex: 0 0 auto;
+            margin: 8px;
+            .tag-text{
+                padding: 4px;
+            color: white;
+            background-color:   #11b3ef;
+            }
+        }
+            
+        }
+
+    }
+}
+.card-turni{
+    border: 1px solid grey;
+    padding: 0px 8px;
+    button {
+        position: absolute;
+        right: 8px;
+        top: 8px;
+        color: #11b3ef;
+        background-color: white;
+        font-size: 18px;
+        ion-icon {
+            font-size: 28px;
+        }
+    }
+    .message{
+        padding-top: 12px;
+        padding-right: 31px;
+    }
+}
+ion-toolbar{
+    ion-buttons{
+        ion-button{
+            font-size: 20px;
+        }
+    }
+}
+ion-title{
+    font-weight: bold;
+}
+.searchspace {
+    background-color:white;
+}
+.higher{
+    height: 100px;
+}

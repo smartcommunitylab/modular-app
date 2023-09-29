@@ -1,0 +1,41 @@
+<ion-header >
+  <!-- <ion-searchbar  (ionCancel)="toggleSearch()" showCancelButton="always" animated (ionInput)="search($event)" placeholder="{{'SEARCH' | translate}}">
+    </ion-searchbar> -->
+<ion-toolbar>
+    <ion-searchbar mode="md" showCancelButton="never" animated (ionInput)="search($event)" placeholder="{{'SEARCH' | translate}}">
+      </ion-searchbar>
+  <ion-buttons slot="start">
+    <ion-back-button class="interaction"></ion-back-button>
+  </ion-buttons>
+  <!-- <ion-title>
+    {{'SEARCH' | translate}}
+  </ion-title> -->
+</ion-toolbar>
+</ion-header>
+
+
+<ion-content padding>
+  <!-- <ion-spinner name="dots" *ngIf="searching"></ion-spinner> -->
+
+<ion-list no-lines *ngIf="showStreets">
+  <div *ngFor="let s of showStreets">
+    <div [id]="s.id">
+      <div>
+        <div class="left" [routerLink]="['/street-detail']" [queryParams]="{street: s.idNumber }" routerDirection="forward">
+          <div class="result interaction" >{{s.streetName}}</div>
+          <div class="sub-result interaction" >{{s.tratto}}</div>
+        </div>
+        <div class="right" (click)="toggleNotification(s)">
+          <ion-icon class="interaction icon-notification" name="notifications" *ngIf="isEnabled(s); else disabled"></ion-icon>
+          <ng-template #disabled>
+            <ion-icon  class="interaction icon-notification" name="notifications-outline"></ion-icon>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-list>
+<div class="no-results" *ngIf="noResults">
+  {{'no_roads_search'|translate}}
+</div>
+</ion-content>

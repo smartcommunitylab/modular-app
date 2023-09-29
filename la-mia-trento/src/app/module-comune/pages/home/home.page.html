@@ -1,0 +1,24 @@
+<ion-header no-border>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+        {{'title_app'|translate}}
+      </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content padding>
+    <wc-gallery id="gallery" [gallery]="elementsGalleryStr">
+    </wc-gallery>
+
+  <ion-grid id="category-buttons">
+    <ion-row>
+      <ion-col *ngFor="let category of categories">
+        <wc-category-button [category]="category.name" [icon]="category.image" icon-align="top" icon-fill="red"
+          text-color="red" (click)="goToCategory(category)">
+        </wc-category-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

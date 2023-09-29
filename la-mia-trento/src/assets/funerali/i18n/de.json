@@ -1,0 +1,14 @@
+{
+    "HOME": "Home",
+    "data_morte": "gestorben am:",
+    "data_funerale": "Beerdigt am:",
+    "ora_morte": "Uhrzeit:",
+    "luogo_funerale": "Ort der Beerdigung:",
+    "partenza_funerale": "Der Leichanm wird an den folgenden Ort transportiert:",
+    "mappa": "Karte",
+    "condividi": "Teilen",
+    "title_funerali": "Beerdigungen",
+    "network_message": "Fehler bei der Datenaufnahme",
+    "empty_list": "Keine Beerdigung",
+    "label_search":"Suche"
+  }

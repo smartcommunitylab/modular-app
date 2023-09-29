@@ -1,0 +1,63 @@
+<ion-header no-border>
+  <ion-toolbar>
+
+    <ion-buttons class="interactive" slot="start">
+      <ion-back-button class="interaction"></ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button [routerLink]="['/ps-notification']">
+        <ion-icon class="icon-bar" name="notifications-outline"></ion-icon>
+      </ion-button>
+      <ion-button [routerLink]="['/ps-search']">
+        <ion-icon class="icon-bar" name="search"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>
+      {{'HOME' | translate}}
+    </ion-title>
+  </ion-toolbar>
+
+</ion-header>
+<ion-row class="header-street">
+    <ion-col class="ion-text-start interaction" size="2">
+        <ion-icon class="icon-home" src="assets/strade/icons/doubleback.svg" (click)="firstDayBck()" *ngIf="past"></ion-icon>
+      </ion-col>
+  <ion-col  class="ion-text-start interaction " size="2">
+    <ion-icon class="icon-home" src="assets/strade/icons/back.svg" (click)="dayBack()"></ion-icon>
+  </ion-col>
+  <ion-col class="ion-text-center" size="4" (click)="focus()">
+    <ion-datetime-button
+    datetime="datetime"></ion-datetime-button
+      >
+  </ion-col>
+  <ion-col class="ion-text-end interaction" size="2">
+    <ion-icon class="icon-home"  src="assets/strade/icons/forward.svg"  (click)="dayForward()"></ion-icon>
+  </ion-col>
+  <ion-col class="ion-text-end interaction" size="2">
+    <ion-icon  class="icon-home"   src="assets/strade/icons/doubleforward.svg" (click)="firstDayFwd()" *ngIf="future"></ion-icon>
+  </ion-col>
+</ion-row>
+<ion-row>
+
+  <ion-col class="ion-text-center interaction" id="text-cleaning" size="12"  [style.visibility]="dragging? 'hidden': 'visible'"  >
+    <div *ngIf="labelResult!==0" (click)="goToList()" ><b>{{labelResult}}</b> {{'clean_label' | translate}}</div>
+    <div *ngIf="labelResult===0"><b>{{'no_cleaning' | translate}}</b></div>
+  </ion-col>
+</ion-row>
+
+
+<ion-content>
+  <div class="map">
+    <div id="home-map">
+        <ion-button icon-only item-right (click)="locate()"  class="button-locate" >
+            <ion-icon  class="locate" name="locate"></ion-icon>
+        </ion-button>  
+    </div>
+  </div>
+</ion-content>
+<ion-modal [keepContentsMounted]="true">
+  <ng-template>
+    <ion-datetime id="datetime" #dateTime  presentation="date" (ionBlur)="blur()" (ionCancel)="cancel()"  (ionChange)="setDate($event)" class="date" 
+    [value]="showDate"></ion-datetime>
+  </ng-template>
+</ion-modal>

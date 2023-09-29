@@ -1,0 +1,18 @@
+
+<!-- <ion-content padding id="poi-container" >
+    <wc-details *ngIf="poi" [title]="poi.title[lang]" [subtitle]="poi.subtitle[lang]"  [text]="poi.description[lang]" [info]="poi.info[lang]" [contacts]="contacts" [img]="poi.image" ></wc-details>
+</ion-content> -->
+<div shape="round" class="back-button" (click)="goBack()">
+  <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+</div>
+<div shape="round" class="share-button" (click)="share()">
+  <ion-icon slot="icon-only" name="share-social"></ion-icon>
+</div>
+<ion-content fullscreen="true" padding id="poi-container">
+
+    <wc-details  *ngIf="poi" [img]="poi.image" [stringsinput]="stringsContact" [title]="poi.title" [altImage]="altImage"
+      [subtitle]="poi.subtitle" [text]="poi.description" [info]="poi.info" [contacts]="contacts"
+      [subtitle]="poi.subtitle" [info]="poi.info" [contacts]="poi.infos" [expandable]=false [expanse]=true heading-color="#707070"
+      second-color="#11b3ef"> </wc-details>
+
+</ion-content>

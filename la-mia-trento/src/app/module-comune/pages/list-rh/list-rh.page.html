@@ -1,0 +1,52 @@
+<ion-header no-border  [ngClass]="{'higher': searchAndIos()}">
+    <ion-toolbar>
+
+      <ion-buttons slot="start" *ngIf="!search">
+        <ion-back-button class="interaction"></ion-back-button>
+      </ion-buttons>
+      <ion-buttons slot="end" *ngIf="!search">
+        <ion-button (click)="filterClicked()">
+          <ion-icon name="options"></ion-icon>
+        </ion-button>
+        <ion-button (click)="toggleSearch()">
+          <ion-icon name="search"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+      <ion-title *ngIf="!search">
+        {{'RH' | translate}}
+      </ion-title>
+      <ion-searchbar mode="md"  class="search-rh" [ngClass]="{'searchspace': search}" style="display: none" showCancelButton="always" animated  
+      (ionInput)="searchChanged($event)" (ionCancel)="toggleSearch()"  placeholder="{{'label_search' | translate}}"></ion-searchbar>
+   
+    </ion-toolbar>
+    <div class="wrapper" *ngIf="!firstAccess">
+        <div class="scrolling-wrapper-flexbox loop">
+          <div class="container" *ngFor="let tag of tags">
+          <div class="tag"  *ngIf="tag.isChecked">
+            <div class="tag-text">
+              {{tag.value}}
+              <ion-icon name="close-circle" (click)="removeTag(tag)"></ion-icon>
+            </div>
+            
+          </div>
+        </div>
+        </div>
+      </div>
+  </ion-header>
+  
+  <ion-content>
+
+  
+    <ion-list no-lines id="poi-list">
+      <div *ngFor="let c of categories">
+        <div class="content" >
+          <div *ngFor="let poi of showPois[c]; let i = index">
+            <wc-details [img]="poi.image" [stringsinput]="stringsContact" [titlePath]="poi.title" [showimg]=true [showtags]=true [altImage]="altImage"
+              [subtitle]="poi.subtitle" [distance]="getDistance(poi)" [text]="poi.text" [info]="poi.info" [contacts]="poi.infos"
+              heading-color="#707070" second-color="#11b3ef" expandable=false expanse=false></wc-details>
+            <div class="spacing" *ngIf="i === showPois.length - 1"></div>
+          </div>
+        </div>
+      </div>
+    </ion-list>
+  </ion-content>

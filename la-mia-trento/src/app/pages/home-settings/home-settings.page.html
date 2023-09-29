@@ -1,0 +1,206 @@
+<ion-header no-border>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <button class="close-setting" ion-button icon-only (click)="close()">
+        <ion-icon name="close"></ion-icon>
+      </button> 
+    </ion-buttons>
+    <ion-title class="title">{{'title_home_setting'|translate}}</ion-title>
+  </ion-toolbar>
+  <div class="wrapper">
+    <div class="scrolling-wrapper-flexbox loop">
+      <ion-chip outline=true (click)="select('home')" [ngClass]="{'chip-selected': isSelected('home')}">
+        <ion-label class="interaction">{{'label_personalizza'|translate}}</ion-label>
+      </ion-chip>
+      <ion-chip outline=true (click)="select('settings')" [ngClass]="{'chip-selected': isSelected('settings')}">
+        <ion-label class="interaction">{{'label_other_settinga'|translate}}</ion-label>
+      </ion-chip>
+      <ion-chip outline=true (click)="select('about')" [ngClass]="{'chip-selected': isSelected('about')}">
+        <ion-label class="interaction">{{'label_about'|translate}}</ion-label>
+      </ion-chip>
+    </div>
+  </div>
+</ion-header>
+
+<ion-content padding forceOverscroll="false" >
+  <div class="wrapper" *ngIf="isSelected('home')">
+    <div class="add_label" *ngIf="allCategories && allCategories.length>2">
+      <div>{{'home_setting_green'|translate}}</div>
+      <div><i class="arrow left"></i><span class="hline"></span> <i class="arrow right"></i></div>
+    </div>
+
+    <div class="scrolling-wrapper-flexbox-cards loop">
+      <div class="card all-card" *ngFor="let category of allCategories">
+        <div class="home-container">
+          <div class="label-button">{{category.name[language]}}</div>
+
+          <div class="add" (click)="addElement(category)">
+            <ion-icon name="add"></ion-icon>
+          </div>
+        </div>
+        <!-- <h2>{{category.name[language]}}</h2> -->
+      </div>
+    </div>
+  </div>
+  <div class="container-button" *ngIf="isSelected('home')">
+
+    <div scrollY="true">
+      <ion-list id="category-buttons">
+        <div class="remove_label" *ngIf="categories && categories.length>0">{{'home_setting_red'|translate}}</div>
+
+        <ion-grid>
+          <ion-row>
+            <ion-col size="6" *ngFor="let category of categories">
+              <div class="home-button">
+                <div class="home-container">
+                  <div class="label-button">{{category.name[language]}}</div>
+                  <div class="close" (click)="removeElement(category)">
+                    <ion-icon name="close"></ion-icon>
+                  </div>
+                </div>
+              </div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-list>
+    </div>
+
+
+  </div>
+  <div  *ngIf="isSelected('settings')">
+    <!-- <ion-list> -->
+      <ion-radio-group (ionChange)="onLanguageChanged($event)" [(ngModel)]="selectedLanguage">
+        <ion-list-header>
+          <ion-label>{{'title_setting'|translate}}</ion-label>
+        </ion-list-header>
+
+        <ion-item *ngFor="let language of languages" lines="none">
+          <ion-label>{{language.value}}</ion-label>
+          <ion-radio slot="start" value="{{language.key}}"></ion-radio>
+        </ion-item>
+
+      </ion-radio-group>
+    <!-- </ion-list> -->
+  </div>
+
+  <div class="wrapper" *ngIf="isSelected('about')">
+    <div class="credits">
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <div class="app-name bold ion-text-center">{{'credits_appName'|translate}}</div>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <div class="grey ion-text-center">{{'credits_version'|translate}}{{version}}</div>
+          </ion-col>
+        </ion-row>
+        
+        <ion-row>
+          <ion-col>
+            <div class="grey bold ion-text-center">{{'credits_collaboration'|translate}}</div>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col class="ion-text-center">
+            <div (click)="openLink('https://www.comune.trento.it/');"><img class="image center"
+                src="./assets/credits/comuneditrento.png" width="70%">
+            </div>
+          </ion-col>
+          <ion-col class="ion-text-center">
+            <div (click)="openLink('https://2019.smartcityweek.it/');"><img class="image center smart-img"
+                src="./assets/credits/tnsmart.jpg" width="100%">
+            </div>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+
+            <ion-col>
+              <div class="grey bold ion-text-center">{{'credits_title'|translate}}</div>
+            </ion-col>
+          </ion-row>
+   
+          <ion-row>
+            <ion-col class="ion-text-center">
+              <div (click)="openLink('http://www.smartcommunitylab.it/')"><img class="image center"
+                  src="./assets/credits/sc.png" width="100%" />
+              </div>
+            </ion-col>
+            <ion-col class="ion-text-center">
+              <div (click)="openLink('https://www.fbk.eu/en/')"><img class="image center" src="./assets/credits/fbk.png"
+                  width="50%" />
+              </div>
+            </ion-col>
+          </ion-row>
+        <ion-row>
+          <ion-col class="ion-text-center">
+            <span class="dot orange"></span>
+            <span class="dot yellow"></span>
+            <span class="dot green"></span>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <div class="grey bold  ion-text-center"> {{'credits_tecnical'|translate}}</div>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <div class="credits_mail ion-text-center" (click)="mailto('lamiatrento@smartcommunitylab.it')">
+                lamiatrento@smartcommunitylab.it</div>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <div class="grey bold  ion-text-center">{{'credits_information'|translate}}</div>
+
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <div class="credits_mail ion-text-center" (click)="mailto('trento.smart@comune.trento.it')">
+              trento.smart@comune.trento.it</div>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <div class="grey bold ion-text-center"> {{'credits_licenze'|translate}}</div>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <div class="credits_mail ion-text-center" (click)="openLink('http://www.smartcommunitylab.it/licenze/')">
+              http://www.smartcommunitylab.it/licenze/</div>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+              <div class="grey bold ion-text-center"> {{'credits_privacy'|translate}}</div>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <div class="credits_mail ion-text-center" (click)="openLink('https://www.smartcommunitylab.it/la-mia-trento-privacy/')">
+                https://www.smartcommunitylab.it/la-mia-trento-privacy/</div>
+            </ion-col>
+          </ion-row>
+        <!-- <ion-row>
+            <ion-col>
+                <div class="grey bold ion-text-center"> {{'credits_version'|translate}} </div>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+                <div class="grey ion-text-center">{{version}}</div>
+             </ion-col>
+          </ion-row> -->
+      </ion-grid>
+    </div>
+  </div>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button class="save-button" (click)="saveHome()">
+      <ion-icon name="save"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
