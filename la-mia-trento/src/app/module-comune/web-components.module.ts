@@ -1,10 +1,6 @@
 import { APP_INITIALIZER, ModuleWithProviders, CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { appInitialize } from './app-initialize';
-import { PathComponent } from './wc-path/wc-path.component';
-import { PoiComponent } from './wc-poi/wc-poi.component';
-import { TabsComponent } from './wc-tabs/wc-tabs.component';
-import { MapComponent } from './wc-map/wc-map.component';
 import { ConfigService } from '../services/config.service';
 import { routing } from './lazy.routing';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
@@ -30,17 +26,10 @@ export function HttpLoaderFactory(http: HttpClient) {
     routing
   ],
   declarations: [
-    PoiComponent, // private and public
-    // LoadingModalComponent,
-    PathComponent,
-    TabsComponent,
-    MapComponent
+
   ],
   exports: [
-    PoiComponent, // private and public
-    PathComponent,
-    TabsComponent,
-    MapComponent
+
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

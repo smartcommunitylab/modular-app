@@ -1,4 +1,4 @@
-package io.ionic.starter;
+package it.smartcommunitylab.comuneintasca.trento;
 
 import com.getcapacitor.BridgeActivity;
 

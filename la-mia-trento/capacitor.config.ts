@@ -1,7 +1,7 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'io.ionic.starter',
+  appId: 'it.smartcommunitylab.comuneintasca.trento',
   appName: 'La mia Trento',
   webDir: 'www',
   server: {

@@ -31,7 +31,12 @@
         <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
-    <li><a href="#implementation">Implementation</a></li>
+    <li><a href="#implementation">Implementation</a>
+    <ul>
+        <li><a href="#structure">Structure of the project</a></li>
+        <li><a href="#newmodule">Create a new module</a></li>
+      </ul>
+    </li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
     <li><a href="#acknowledgments">Acknowledgments</a></li>
@@ -131,19 +136,39 @@ Others tools and framework used are the following
    ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 <!-- IMPLEMENTING YOUR OWN MODULE -->
 
 ## Implementation
 
+Below we describe the current implementation of the modular app and how it can be extended with new modules
+
+### Structure
+
 The structure of the application, as described above, is composed of a container (folder: la-mia-trento) which provides some basic tools for the separate modules and a series of modules integrated with it.
 The separate modules are composed of web components created using Stencil and contain:
-src: the folder with the web components sources
-utils: folder with various utility functions.
-Inside the
 
+* **src**: the folder with the web components sources
+* **utils**: folder with various utility functions
 
+Inside the la-mia-trento/src folder, there are the following sub-folders:
 
+*app*
+
+* **credits**: page and information for the app credits
+* **directive**: Angular directives used in the app
+* **module-x**: each module x represents the separate container for the individual module. Each module will include pages to manage the web components created
+* **pages**: the common pages of the application
+* **services**: common functions and services
+* **shared**: Common pages and components in the app
+
+*assets*
+
+* **configuration**: the main configuration for the container in the shape of different JSON files: the carousel, the modules entries, the citizen and tourist profile
+* **x**: x is the asset folder for the singolar module. Inside you can find translation files, icons e single configuration files
+
+### New module
+
+In order to create a new module a set of operations need to be done
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -174,6 +199,7 @@ Comune di Trento app's page: [https://www.comune.trento.it/Aree-tematiche/Smart-
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- MARKDOWN LINKS & IMAGES -->
+
 [Angular.io]: https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white
 [Angular-url]: https://angular.io/
 [Ionic.com]: https://img.shields.io/badge/ionic-0769AD?style=for-the-badge&logo=ionic&logoColor=white
