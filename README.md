@@ -1,5 +1,6 @@
 <a name="readme-top"></a>
 <br />
+
 <div align="center">
   <a href="https://github.dev/smartcommunitylab/modular-app/tree/2023-new-version">
     <img src="la-mia-trento/resources/icon.png" alt="Logo" width="80" height="80">
@@ -76,7 +77,8 @@ Angular: 16.2.5
 ... router
 
 Package                         Version
----------------------------------------------------------
+---------------------------------------
+
 @angular-devkit/architect       0.1602.2
 @angular-devkit/build-angular   16.2.2
 @angular-devkit/core            16.2.2
@@ -88,26 +90,30 @@ rxjs                            7.8.1
 typescript                      5.0.4
 zone.js                         0.13.3
 
-
 For install the package you can use a tool like npm using the following syntax
-  ```sh
-  npm install npm@8.3.1 -g
-  ```
+
+```sh
+npm install npm@8.3.1 -g
+```
+
 Instruction for setup Angular are provided [here](https://angular.io/guide/setup-local)
 
 Others tools and framework used are the following
+
 * ionic >=7.1.1
+
   ```sh
   npm install ionic@latest -g
   ```
-  Instruction for setup ionic are provided [here](https://ionicframework.com/docs/intro/cli)
 
+  Instruction for setup ionic are provided [here](https://ionicframework.com/docs/intro/cli)
 * stencil
+
   ```sh
   npm install stencil@latest -g
   ```
-  Instruction for setup stencil are provided [here](https://stenciljs.com/docs/getting-started)
 
+  Instruction for setup stencil are provided [here](https://stenciljs.com/docs/getting-started)
 
 ### Installation
 
@@ -115,7 +121,7 @@ Others tools and framework used are the following
    ```sh
    git clone https://github.dev/smartcommunitylab/modular-app/tree/2023-new-version
    ```
-1. Enter in the application folder
+2. Enter in the application folder
    ```sh
     cd la-mia-trento
    ```
@@ -130,11 +136,16 @@ Others tools and framework used are the following
 
 ## Implementation
 
+The structure of the application, as described above, is composed of a container (folder: la-mia-trento) which provides some basic tools for the separate modules and a series of modules integrated with it.
+The separate modules are composed of web components created using Stencil and contain:
+src: the folder with the web components sources
+utils: folder with various utility functions.
+Inside the
+
+
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
 
 <!-- LICENSE -->
 
