@@ -1,7 +1,7 @@
 {
     "appId":"trento",
     "serverURL": "https://tn.smartcommunitylab.it/core.mobility",
-    "githubDataURL": "https://github.com/smartcommunitylab/modular-app/tree/2023-new-version/data",
+    "mobilityDataURL": "https://raw.githubusercontent.com/smartcommunitylab/modular-app/2023-new-version/data",
     "metroparco": "https://tn.smartcommunitylab.it/metroparco/data/tn",
     "messagingServerURL": "https://tn.smartcommunitylab.it/core.communicator",
     "newsRSS": "https://tn.smartcommunitylab.it/core.mobility/announcements/rss/trento",

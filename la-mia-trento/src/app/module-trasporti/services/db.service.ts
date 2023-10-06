@@ -250,7 +250,7 @@ export class DbService {
 
   getDataURL(remote) {
     if (remote) {
-      return this.config.getGithubDataURL() + '/routesDB/' + this.config.getAppId();
+      return this.config.getMobilityDataURL() + '/routesDB/' + this.config.getAppId();
       // return this.config.getServerURL() + '/routesDB/' + this.config.getAppId();
 
     } else {
@@ -333,9 +333,13 @@ export class DbService {
       }
       that.getLocalVersion().then(function (localversion) {
         console.log('got the local version, try remote');
-        that.http.get(that.config.getGithubDataURL() + '/versions').toPromise().then(remoteversion => {
-          console.log('remote version'+remoteversion);
-          if (that.compareversions(localversion, remoteversion) < 0) {
+    //     fetch('https://example.github.io/repo-name/generated.json')
+    // .then((response) => response.json())
+    // .then((data) => console.log(data));
+    fetch(that.config.getMobilityDataURL() + '/versions').then((response) => response.json())
+.then(remoteversion => {
+          console.log('remote version'+remoteversion.json());
+          if (that.compareversions(localversion, remoteversion.json()) < 0) {
             that.installDB(true).then(success, err); //remote
           } else {
             success();
@@ -348,7 +352,9 @@ export class DbService {
   }
 
   syncStops() {
-    this.http.get(this.config.getGithubDataURL() + '/versions').toPromise().then(remoteversion => {
+    fetch(this.config.getMobilityDataURL() + '/versions')
+    .then((response) => response.json())
+    .then(remoteversion => {
       this.syncStopsForVersions(remoteversion);
     })
   };
@@ -425,6 +431,19 @@ export class DbService {
   }
   dbSetup() {
     console.log('dbSetup()');
+    // that.getLocalVersion().then(function (localversion) {
+      console.log('got the local version, try remote');
+      fetch(this.config.getMobilityDataURL() + '/versions').then((response) => response.json())
+      .then(remoteversion => {
+        console.log('remote version'+remoteversion.json());
+      //   if (this.compareversions(localversion, remoteversion) < 0) {
+      //     // that.installDB(true).then(null, null); //remote
+      //   } else {
+      //     // success();
+      //   }
+      //   this.syncStops();
+      // }).catch(null);
+    }, null);
     var that = this;
     var deferred = new Promise((resolve, reject) => {
       var err = function (error) {
