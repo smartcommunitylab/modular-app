@@ -336,10 +336,12 @@ export class DbService {
     //     fetch('https://example.github.io/repo-name/generated.json')
     // .then((response) => response.json())
     // .then((data) => console.log(data));
-    fetch(that.config.getMobilityDataURL() + '/versions').then((response) => response.json())
-.then(remoteversion => {
-          console.log('remote version'+remoteversion.json());
-          if (that.compareversions(localversion, remoteversion.json()) < 0) {
+    fetch(that.config.getMobilityDataURL() + '/versions').then(
+      (response) => response.json()
+      )
+      .then(remoteversion => {
+          console.log('remote version'+remoteversion);
+          if (that.compareversions(localversion, remoteversion) < 0) {
             that.installDB(true).then(success, err); //remote
           } else {
             success();
@@ -353,7 +355,9 @@ export class DbService {
 
   syncStops() {
     fetch(this.config.getMobilityDataURL() + '/versions')
-    .then((response) => response.json())
+    .then(
+      (response) => response.json()
+      )
     .then(remoteversion => {
       this.syncStopsForVersions(remoteversion);
     })
@@ -431,19 +435,6 @@ export class DbService {
   }
   dbSetup() {
     console.log('dbSetup()');
-    // that.getLocalVersion().then(function (localversion) {
-      console.log('got the local version, try remote');
-      fetch(this.config.getMobilityDataURL() + '/versions').then((response) => response.json())
-      .then(remoteversion => {
-        console.log('remote version'+remoteversion.json());
-      //   if (this.compareversions(localversion, remoteversion) < 0) {
-      //     // that.installDB(true).then(null, null); //remote
-      //   } else {
-      //     // success();
-      //   }
-      //   this.syncStops();
-      // }).catch(null);
-    }, null);
     var that = this;
     var deferred = new Promise((resolve, reject) => {
       var err = function (error) {
@@ -472,6 +463,50 @@ export class DbService {
     return deferred;
 
   }
+    // console.log('dbSetup()');
+    // // that.getLocalVersion().then(function (localversion) {
+    //   console.log('got the local version, try remote');
+    //   fetch(this.config.getMobilityDataURL() + '/versions').then(
+    //     (response) => response.json()
+    //     )
+    //   .then(remoteversion => {
+    //     // console.log('remote version'+remoteversion.json());
+    //   //   if (this.compareversions(localversion, remoteversion) < 0) {
+    //   //     // that.installDB(true).then(null, null); //remote
+    //   //   } else {
+    //   //     // success();
+    //   //   }
+    //   //   this.syncStops();
+    //   // }).catch(null);
+    // }, null);
+    // var that = this;
+    // var deferred = new Promise((resolve, reject) => {
+    //   var err = function (error) {
+    //     reject(error);
+    //     console.log("NOT synch: " + error);
+    //   }
+    //   var success = function () {
+    //     resolve(true);
+    //     console.log("synch done");
+    //   }
+
+    //   //try to open db (check if db is present)
+    //   this.localDBisPresent().then(function (result) {
+    //     //use local version of db in data/routesdb.zip
+    //     if (!result) {
+    //       console.log("start install");
+    //       that.installDB(false).then(function () {
+    //         console.log("after install, start synch")
+    //         that.synchDB().then(success, err);
+    //       }, err);
+    //     } else {
+    //       that.synchDB().then(success, err);
+    //     }
+    //   }, err);
+    // })
+    // return deferred;
+
+  // }
 
 };
 
