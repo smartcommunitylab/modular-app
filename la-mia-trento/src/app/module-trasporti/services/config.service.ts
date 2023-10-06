@@ -34,6 +34,10 @@ export class ConfigService {
     if (this.config)
       return this.config['serverURL'];
   }
+  getGithubDataURL(): any {
+    if (this.config)
+      return this.config['githubDataURL'];
+  }
   getMaxMarkers(): any {
     if (this.config)
       return this.config['maxMarkers'];

@@ -250,7 +250,7 @@ export class DbService {
 
   getDataURL(remote) {
     if (remote) {
-      return this.config.getServerURL() + '/routesDB/' + this.config.getAppId();
+      return this.config.getGithubDataURL() + '/routesDB/' + this.config.getAppId();
       // return this.config.getServerURL() + '/routesDB/' + this.config.getAppId();
 
     } else {
@@ -333,7 +333,7 @@ export class DbService {
       }
       that.getLocalVersion().then(function (localversion) {
         console.log('got the local version, try remote');
-        that.http.get(that.config.getServerURL() + '/versions').toPromise().then(remoteversion => {
+        that.http.get(that.config.getGithubDataURL() + '/versions').toPromise().then(remoteversion => {
           console.log('remote version'+remoteversion);
           if (that.compareversions(localversion, remoteversion) < 0) {
             that.installDB(true).then(success, err); //remote
@@ -348,7 +348,7 @@ export class DbService {
   }
 
   syncStops() {
-    this.http.get(this.config.getServerURL() + '/versions').toPromise().then(remoteversion => {
+    this.http.get(this.config.getGithubDataURL() + '/versions').toPromise().then(remoteversion => {
       this.syncStopsForVersions(remoteversion);
     })
   };
