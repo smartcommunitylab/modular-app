@@ -22,10 +22,6 @@ const routes: Routes = [
     { 
         path: 'transport-tt',
         loadChildren: () => import('./pages/transport-tt/transport-tt.module').then(x => x.TransportTtPageModule)
-    },
-    { 
-        path: 'map-spots',
-        loadChildren: () => import('./pages/map-spots/map-spots.module').then(x => x.MapSpotsPageModule)
     }
 ];
 

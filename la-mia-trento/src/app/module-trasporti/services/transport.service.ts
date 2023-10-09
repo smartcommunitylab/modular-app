@@ -170,29 +170,29 @@ export class TransportService {
     }
   }
 
-  getDelays(agency, route, date) {
-    var that = this;
-    var deferred = new Promise((resolve, reject) => {
-      var d = new Date(date);
-      d.setHours(0);
-      d.setMinutes(0);
-      d.setSeconds(0);
-      d.setMilliseconds(0);
-      var from = d.getTime();
-      d.setHours(23);
-      d.setMinutes(59);
-      var to = d.getTime();
-      route = encodeURIComponent(route);
-      that.http.get(that.config.getServerURL() + '/gettransitdelays/' + agency + '/' + route + '/' + from + '/' + to).toPromise()
-        .then(function (data: any) {
-          if (data && data.delays) resolve(data.delays[0]);
-        }).catch(function (err) {
-          reject(err);
-        });
+  // getDelays(agency, route, date) {
+  //   var that = this;
+  //   var deferred = new Promise((resolve, reject) => {
+  //     var d = new Date(date);
+  //     d.setHours(0);
+  //     d.setMinutes(0);
+  //     d.setSeconds(0);
+  //     d.setMilliseconds(0);
+  //     var from = d.getTime();
+  //     d.setHours(23);
+  //     d.setMinutes(59);
+  //     var to = d.getTime();
+  //     route = encodeURIComponent(route);
+  //     that.http.get(that.config.getServerURL() + '/gettransitdelays/' + agency + '/' + route + '/' + from + '/' + to).toPromise()
+  //       .then(function (data: any) {
+  //         if (data && data.delays) resolve(data.delays[0]);
+  //       }).catch(function (err) {
+  //         reject(err);
+  //       });
 
-    })
-    return deferred;
-  }
+  //   })
+  //   return deferred;
+  // }
 
   toWheelChairBoarding(agencyId, stops) {
     var res = [];
@@ -265,13 +265,14 @@ export class TransportService {
         result.tripIds = that.toTrimmedList(data[0].tripIds);
         result.wheelChairBoarding = that.toWheelChairBoarding(agency, that.toTrimmedList(data[0].stopsIDs));
         result.times = that.uncompressTime(data[0].times, result.stops.length);
+        resolve(result);
         // deferred.notify(result);
-        that.getDelays(agency, route, date).then(function (delays: any) {
-          result.delays = delays;
-          resolve(result);
-        }, function () {
-          resolve(result);
-        });
+        // that.getDelays(agency, route, date).then(function (delays: any) {
+        //   result.delays = delays;
+        //   resolve(result);
+        // }, function () {
+        //   resolve(result);
+        // });
         //      DataManager.doQuery("SELECT stopsNames FROM route WHERE agencyID = '"+agency+"' AND linehash = '"+hash+"'",[])
         //      .then(function(data) {
         //        result.stops = toTrimmedList(data);
@@ -293,21 +294,21 @@ export class TransportService {
       }, errCB);
   };
 
-  getNextTrips(agencyId, stopId, numberOfResults?) {
-    var deferred = new Promise((resolve, reject) => {
+  // getNextTrips(agencyId, stopId, numberOfResults?) {
+  //   var deferred = new Promise((resolve, reject) => {
 
 
-      numberOfResults = numberOfResults || 3;
-      this.http.get(this.config.getServerURL() + '/getlimitedtimetable/' + agencyId + '/' + stopId + '/' + numberOfResults).toPromise()
-        .then(function (data) {
-          resolve(data);
-        })
-        .catch(function (err) {
-          reject(err);
-        });
-    })
-    return deferred;
-  };
+  //     numberOfResults = numberOfResults || 3;
+  //     this.http.get(this.config.getServerURL() + '/getlimitedtimetable/' + agencyId + '/' + stopId + '/' + numberOfResults).toPromise()
+  //       .then(function (data) {
+  //         resolve(data);
+  //       })
+  //       .catch(function (err) {
+  //         reject(err);
+  //       });
+  //   })
+  //   return deferred;
+  // };
   // getStopData(ref, agencyId, stopId):any {
   //   let promise = new Promise((resolve, reject) => {
   //     var stop = null;
@@ -360,72 +361,72 @@ export class TransportService {
   //   return promise;
   // }
 
-  getStopData(ref, agencyId, stopId) {
-    var deferred = new Promise((resolve, reject) => {
+  // getStopData(ref, agencyId, stopId) {
+  //   var deferred = new Promise((resolve, reject) => {
 
-      var stop = null;
-      var stops = this.getStopsData([agencyId]);
-      if (stops) {
-        for (var i = 0; i < stops.length; i++) {
-          if (stops[i].id == stopId) {
-            stop = stops[i];
-            break;
-          }
-        }
-        if (stop) {
-          this.getNextTrips(stop.agencyId, stop.id, 5).then(function (data) {
-            var ttData = this.config.getTTData(ref);
-            var flatTTData = this.config.flattenData(ttData, ref);
+  //     var stop = null;
+  //     var stops = this.getStopsData([agencyId]);
+  //     if (stops) {
+  //       for (var i = 0; i < stops.length; i++) {
+  //         if (stops[i].id == stopId) {
+  //           stop = stops[i];
+  //           break;
+  //         }
+  //       }
+  //       if (stop) {
+  //         this.getNextTrips(stop.agencyId, stop.id, 5).then(function (data) {
+  //           var ttData = this.config.getTTData(ref);
+  //           var flatTTData = this.config.flattenData(ttData, ref);
 
-            //pass the right agencyid
-            //find the agencyId and call the right group
-            var flat = null;
-            if (flatTTData[0] && flatTTData[0].group && flatTTData[0].group.groups) {
-              for (var i = 0; i < flatTTData.length; i++) {
-                if (flatTTData[i] && flatTTData[i].group && flatTTData[i].group.groups && flatTTData[i].group.agencyId == stop.agencyId) {
-                  flat = flatTTData[i].group.groups;
-                  break;
-                }
-              }
-            } else {
-              flat = flatTTData;
-            }
-            flat.forEach(function (e) {
-              var list = [];
-              if (e.group) {
-                if (e.group.routes) list = list.concat(e.group.routes);
-                else if (e.group.route) list.push(e.group.route);
-              } else {
-                if (e.routes) list = list.concat(e.routes);
-                else if (e.route) list.push(e.route);
-              }
-              list.forEach(function (r) {
-                if (data[r.routeId] != null) {
-                  data[r.routeId].routeElement = e;
-                  data[r.routeId].routeObject = r;
-                  //                routes.push(data[r.routeId]);
-                } else if (data[r.routeSymId] != null) {
-                  data[r.routeSymId].routeElement = e;
-                  data[r.routeSymId].routeObject = r;
-                  //                routes.push(data[r.routeSymId]);
-                }
-              });
-            });
-            stop.data = data;
-            resolve(stop);
-          }, function (err) {
-            reject(err);
-          });
-        } else {
-          resolve(null);
-        }
-      } else {
-        resolve(null);
-      }
-    })
+  //           //pass the right agencyid
+  //           //find the agencyId and call the right group
+  //           var flat = null;
+  //           if (flatTTData[0] && flatTTData[0].group && flatTTData[0].group.groups) {
+  //             for (var i = 0; i < flatTTData.length; i++) {
+  //               if (flatTTData[i] && flatTTData[i].group && flatTTData[i].group.groups && flatTTData[i].group.agencyId == stop.agencyId) {
+  //                 flat = flatTTData[i].group.groups;
+  //                 break;
+  //               }
+  //             }
+  //           } else {
+  //             flat = flatTTData;
+  //           }
+  //           flat.forEach(function (e) {
+  //             var list = [];
+  //             if (e.group) {
+  //               if (e.group.routes) list = list.concat(e.group.routes);
+  //               else if (e.group.route) list.push(e.group.route);
+  //             } else {
+  //               if (e.routes) list = list.concat(e.routes);
+  //               else if (e.route) list.push(e.route);
+  //             }
+  //             list.forEach(function (r) {
+  //               if (data[r.routeId] != null) {
+  //                 data[r.routeId].routeElement = e;
+  //                 data[r.routeId].routeObject = r;
+  //                 //                routes.push(data[r.routeId]);
+  //               } else if (data[r.routeSymId] != null) {
+  //                 data[r.routeSymId].routeElement = e;
+  //                 data[r.routeSymId].routeObject = r;
+  //                 //                routes.push(data[r.routeSymId]);
+  //               }
+  //             });
+  //           });
+  //           stop.data = data;
+  //           resolve(stop);
+  //         }, function (err) {
+  //           reject(err);
+  //         });
+  //       } else {
+  //         resolve(null);
+  //       }
+  //     } else {
+  //       resolve(null);
+  //     }
+  //   })
 
-    return deferred;
-  }
+  //   return deferred;
+  // }
 
 
   /**
@@ -434,7 +435,7 @@ export class TransportService {
   getTT(agency: string, route: string, date) {
     var that = this;
     var deferred = new Promise((resolve, reject) => {
-      if (!that.platform.is('mobileweb')) {
+      // if (!that.platform.is('mobileweb')) {
         // use cache of calendar hashes
         if (that.calendarCache[agency] == null) {
           that.calendarCache[agency] = {};
@@ -454,31 +455,31 @@ export class TransportService {
         } else {
           that.dataFromHash(agency, route, date, resolve, reject);
         }
-      } else {
-        // use remote call for timetable
-        var d = new Date(date);
-        d.setHours(0);
-        d.setMinutes(0);
-        d.setSeconds(0);
-        d.setMilliseconds(0);
-        var from = d.getTime();
-        d.setHours(23);
-        d.setMinutes(59);
-        var to = d.getTime();
-        route = encodeURIComponent(route);
-        that.http.get(that.config.getServerURL() + '/gettransittimes/' + agency + '/' + route + '/' + from + '/' + to).toPromise()
-          .then(function (data: any) {
-            if (data.times) data.times = data.times[0];
-            if (data.tripIds) data.tripIds = data.tripIds[0];
-            if (data.delays) data.delays = data.delays[0];
-            data.wheelChairBoarding = that.toWheelChairBoarding(agency, data.stopsId);
-            // deferred.notify(data);
-            resolve(data);
-          })
-          .catch(function (err) {
-            reject(err);
-          });
-      }
+      // } else {
+      //   // use remote call for timetable
+      //   var d = new Date(date);
+      //   d.setHours(0);
+      //   d.setMinutes(0);
+      //   d.setSeconds(0);
+      //   d.setMilliseconds(0);
+      //   var from = d.getTime();
+      //   d.setHours(23);
+      //   d.setMinutes(59);
+      //   var to = d.getTime();
+      //   route = encodeURIComponent(route);
+      //   that.http.get(that.config.getServerURL() + '/gettransittimes/' + agency + '/' + route + '/' + from + '/' + to).toPromise()
+      //     .then(function (data: any) {
+      //       if (data.times) data.times = data.times[0];
+      //       if (data.tripIds) data.tripIds = data.tripIds[0];
+      //       if (data.delays) data.delays = data.delays[0];
+      //       data.wheelChairBoarding = that.toWheelChairBoarding(agency, data.stopsId);
+      //       // deferred.notify(data);
+      //       resolve(data);
+      //     })
+      //     .catch(function (err) {
+      //       reject(err);
+      //     });
+      // }
 
     })
     return deferred;
@@ -519,9 +520,9 @@ export class TransportService {
   getTTStopData() {
     return this.ttStopData;
   }
-  getTTStopDataAsync(ref, agencyId, stopId) {
-    return this.getStopData(ref, agencyId, stopId);
-  }
+  // getTTStopDataAsync(ref, agencyId, stopId) {
+  //   return this.getStopData(ref, agencyId, stopId);
+  // }
   setTTStopData(stopData) {
     this.ttStopData = stopData;
   }

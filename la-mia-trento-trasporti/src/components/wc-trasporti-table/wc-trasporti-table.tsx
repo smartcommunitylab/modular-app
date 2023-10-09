@@ -634,7 +634,7 @@ getTextWidth() {
           <div class={"tt-table" + (this.accessibility === true ? ' tt-table-acc' : ' ')}>
             {this.orari && this.showHeader
               ? <div id="table-corner" style={styleTableCorner} >
-                <div style={styleAccessibility} > <ion-icon class="table-accessibility" name="person"></ion-icon>
+                <div style={styleAccessibility} class="invisible"> <ion-icon class="table-accessibility" name="person"></ion-icon>
                   <span class="corner-delay">{this.tableCornerStr[0]}</span>
                 </div>
                 {
@@ -679,7 +679,7 @@ getTextWidth() {
               </div>
               {this.showHeader
                 ? <div id="table-header" style={styleTableHeader}>
-                  <div innerHTML={this.headStr[0]}></div>
+                  <div innerHTML={this.headStr[0]} class="invisible"></div>
                   {this.header_row_number == 2
                     ? <div innerHTML={this.headStr[1]} class="header-row-types"></div>
                     : ""

@@ -57,7 +57,7 @@
     "la-mia-trento-comune": "^0.0.17",
     "la-mia-trento-funerale": "^0.0.5",
     "la-mia-trento-info": "^0.0.3",
-    "la-mia-trento-trasporti": "^0.0.3",
+    "la-mia-trento-trasporti": "^0.0.6",
     "leaflet": "^1.9.4",
     "moment": "^2.29.4",
     "ng-in-viewport": "^16.0.0",
