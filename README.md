@@ -9,7 +9,7 @@
 <h3 align="center">Modular App</h3>
 
 <p align="center">
-    This modular app aims to bring together different applications developed for the municipality of Trento within a single app. Each module can be developed independently and easily integrated within the container
+    This modular app aims to bring together different applications developed for the municipality of Trento within a single app. Each module can be developed independently and easily integrated within the container. In the following README you can find details on how the container and the separate modules' are integrated. Choosing the branch 'new-modules-example' you will find example of creating a new module and the authentication part.
     <br />
 </div>
 
