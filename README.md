@@ -34,7 +34,6 @@
     <li><a href="#implementation">Implementation</a>
     <ul>
         <li><a href="#structure">Structure of the project</a></li>
-        <li><a href="#newmodule">Create a new module</a></li>
       </ul>
     </li>
     <li><a href="#license">License</a></li>
@@ -140,7 +139,7 @@ Others tools and framework used are the following
 
 ## Implementation
 
-Below we describe the current implementation of the modular app and how it can be extended with new modules
+Below we describe the current implementation of the modular app. The branch'new-modules-example' shows how implements a new module and how to integrate authentication.
 
 ### Structure
 
@@ -164,13 +163,26 @@ Inside the la-mia-trento/src folder, there are the following sub-folders:
 *assets*
 
 * **configuration**: the main configuration for the container in the shape of different JSON files: the carousel, the modules entries, the citizen and tourist profile
-* **x**: x is the asset folder for the singolar module. Inside you can find translation files, icons e single configuration files
+* **x**: x is the asset folder for the singolar module. Inside you can find translation files, icons e single configuration files.
+  Some important files are present
 
-### New module
+  * module-entries.json: the configuration file for accessing the modules, contains the names in the various languages, the routing for the app, the icon to show and if there are parameters to pass to the module
+  * default-profiles-module.json:the configuration file that groups the modules by tourist and citizen type. The modules are the same as the modules-entries.json content
 
-In order to create a new module a set of operations need to be done
+The basic idea is that the container application store a set of shared information that every module can access (for example the language).
+After the installation of the application, for example, the application ask to the user the profile and store on localStorage the choices.
+Every module in the application is lazy loaded and keep a set of local assets, pages and service. After that the button is clicked, the router check the routing using the module-entries.json and loading the module with the subcomponent. Inside the different pages of the modules, a set of web components created using stencil are loaded using the local data. For example wc-anteprima is a web component loaded inside notizie.page.html that show news coming from Comune di Trento. Based on the configuration of the web component, it shows different options like image, link and so on.
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+In the main project folders there are the modules project folders:
+
+* la-mia-trento-comune: the module responsible for loading info of events, restaurants, museum, tourist path and mode
+* la-mia-trento-funerale: the module that show the last funerals in town
+* la-mia-trento-info: this module show last news with eventually links for videos
+* la-mia-trento-trasporti: this module show the city council public transportation timetable
+
+Let's enter in la-mia-trento-info, for example. Inside you can find the stencil project. The src folder contains *components* amd *utils* and opening you can find the details of the webcomponent used directly into the ionic application.
+
+span
 
 <!-- LICENSE -->
 

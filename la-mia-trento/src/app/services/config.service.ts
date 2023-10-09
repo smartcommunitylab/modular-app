@@ -109,12 +109,6 @@ export class ConfigService {
         const profile = await lastValueFrom(profile$);
         this.storeModuleEntries(profile[type]);
         resolve();
-        // this.http.get("assets/configuration/default-profiles-module.json").toPromise().then(response => {
-        //   this.storeModuleEntries(response[type]);
-        //   resolve();
-        // }, errror => {
-        //   reject();
-        // });
       }
       else {
         resolve();
