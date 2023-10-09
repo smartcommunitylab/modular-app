@@ -251,7 +251,6 @@ export class DbService {
   getDataURL(remote) {
     if (remote) {
       return this.config.getMobilityDataURL() + '/routesDB/' + this.config.getAppId()+'.zip';
-      // return this.config.getServerURL() + '/routesDB/' + this.config.getAppId();
 
     } else {
       return this.LOCAL_DATA_URL;
