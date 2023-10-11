@@ -18,6 +18,15 @@
     }
   }
 
+},{
+  "id": "helo-world",
+  "name": {
+    "it": "Ciao mondo",
+    "en": "Buenas dias",
+    "de": "Guten morgen"
+  },
+  "url": "/hello"
+
 }, {
   "id": "f",
 

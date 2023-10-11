@@ -24,6 +24,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { LinkDirective } from './directives/link.directive';
 import { SharedModule } from './shared/shared.module';
 import { DragulaModule, DragulaService } from 'ng2-dragula';
+import { HelloModule } from './module-hello-world/web-components.module';
 export function initializeAppSetting(appInitService: SettingService) {
   return (): Promise<any> => {
     return appInitService.Init();
@@ -68,6 +69,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     ModulePulstradeModule.forRoot(),
     FuneraliModule.forRoot(),
     InfoModule.forRoot(),
+    HelloModule.forRoot(),
     AppRoutingModule,
     TrasportiModule.forRoot(),
     AppRoutingModule],
