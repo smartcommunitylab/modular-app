@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { SettingService } from 'src/app/services/setting.service';
 import { NavController } from '@ionic/angular';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-home-settings',
@@ -27,6 +28,9 @@ export class HomeSettingsPage implements OnInit, AfterViewInit {
   form: any;
   title: string;
   version:string;
+  user$ = this.authService.user$;
+  events$ = this.authService.events$;
+  isAuthenticated$ = this.authService.isAuthenticated$;
   constructor(
     private dragulaService: DragulaService,
     private router: Router,
@@ -34,8 +38,9 @@ export class HomeSettingsPage implements OnInit, AfterViewInit {
     // private navCtrl: NavController,
     private config: ConfigService,
     public translate: TranslateService,
-    private settings: SettingService
-  ) {
+    private settings: SettingService,
+    private authService:AuthService
+     ) {
     this.language = window[this.config.getAppModuleName()]['language'];
     this.setLanguages();
     translate.use(this.language);
@@ -94,6 +99,7 @@ export class HomeSettingsPage implements OnInit, AfterViewInit {
   }
   ngOnInit() {
     this.config.loadCarousel();
+    // this.authService.init();
     this.version = this.config.getNumberVersion();
     this.translate.onDefaultLangChange.subscribe((event: DefaultLangChangeEvent) => {
       this.translate.get('title_app').subscribe(
@@ -103,6 +109,12 @@ export class HomeSettingsPage implements OnInit, AfterViewInit {
       );
 
     });
+  }
+  public async signIn() {
+    await this.authService.login();
+  }
+  public async signOut() {
+    await this.authService.logout();
   }
   doSomething() {
     console.log('longpress')

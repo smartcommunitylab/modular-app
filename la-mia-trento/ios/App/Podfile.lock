@@ -1,4 +1,7 @@
 PODS:
+  - ByteowlsCapacitorOauth2 (5.0.0):
+    - Capacitor
+    - OAuthSwift (= 2.2.0)
   - Capacitor (5.4.0):
     - CapacitorCordova
   - CapacitorApp (5.0.6):
@@ -16,8 +19,10 @@ PODS:
     - Capacitor
   - CordovaPlugins (5.4.0):
     - CapacitorCordova
+  - OAuthSwift (2.2.0)
 
 DEPENDENCIES:
+  - "ByteowlsCapacitorOauth2 (from `../../node_modules/@byteowls/capacitor-oauth2`)"
   - "Capacitor (from `../../node_modules/@capacitor/ios`)"
   - "CapacitorApp (from `../../node_modules/@capacitor/app`)"
   - "CapacitorCordova (from `../../node_modules/@capacitor/ios`)"
@@ -28,7 +33,13 @@ DEPENDENCIES:
   - "CapacitorStatusBar (from `../../node_modules/@capacitor/status-bar`)"
   - CordovaPlugins (from `../capacitor-cordova-ios-plugins`)
 
+SPEC REPOS:
+  https://cdn.cocoapods.org/:
+    - OAuthSwift
+
 EXTERNAL SOURCES:
+  ByteowlsCapacitorOauth2:
+    :path: "../../node_modules/@byteowls/capacitor-oauth2"
   Capacitor:
     :path: "../../node_modules/@capacitor/ios"
   CapacitorApp:
@@ -49,6 +60,7 @@ EXTERNAL SOURCES:
     :path: "../capacitor-cordova-ios-plugins"
 
 SPEC CHECKSUMS:
+  ByteowlsCapacitorOauth2: 9e7cdae2bf251463a6ad89493e27fb288bf694d7
   Capacitor: a5cd803e02b471591c81165f400ace01f40b11d3
   CapacitorApp: 024e1b1bea5f883d79f6330d309bc441c88ad04a
   CapacitorCordova: 66ce22f9976de30fd816f746e9e92e07d6befafd
@@ -58,7 +70,8 @@ SPEC CHECKSUMS:
   CapacitorSplashScreen: 5fa2ab5e46cf5cc530cf16a51c80c7a986579ccd
   CapacitorStatusBar: 565c0a1ebd79bb40d797606a8992b4a105885309
   CordovaPlugins: 2b6638cf3a20e64ada2b19230c00ef1a49608808
+  OAuthSwift: 75efbb5bd9a4b2b71a37bd7e986bf3f55ddd54c6
 
-PODFILE CHECKSUM: 8efe690e7c5276ca3c9d531b8a42aed4c2f10545
+PODFILE CHECKSUM: ef3475325d3269495a5aaaefacf260bf61f5e152
 
 COCOAPODS: 1.11.2

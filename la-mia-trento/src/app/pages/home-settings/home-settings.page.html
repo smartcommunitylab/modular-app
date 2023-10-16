@@ -18,6 +18,9 @@
       <ion-chip outline=true (click)="select('about')" [ngClass]="{'chip-selected': isSelected('about')}">
         <ion-label class="interaction">{{'label_about'|translate}}</ion-label>
       </ion-chip>
+      <ion-chip outline=true (click)="select('auth')" [ngClass]="{'chip-selected': isSelected('auth')}">
+        <ion-label class="interaction">{{'label_auth'|translate}}</ion-label>
+      </ion-chip>
     </div>
   </div>
 </ion-header>
@@ -198,9 +201,23 @@
       </ion-grid>
     </div>
   </div>
+  <div  *ngIf="isSelected('auth')">
+    <ion-button (click)="signIn()"*ngIf="(isAuthenticated$ | async) === false">Sign In</ion-button>
+    <ion-card *ngIf="isAuthenticated$ | async">
+      <ion-card-header>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-button (click)="signOut()">Sign Out</ion-button>
+        <div *ngIf="user$ | async as user">
+          {{user | json}}
+      </div>
+    </ion-card-content>
+    </ion-card>
+  </div>
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button class="save-button" (click)="saveHome()">
       <ion-icon name="save"></ion-icon>
     </ion-fab-button>
   </ion-fab>
+  
 </ion-content>

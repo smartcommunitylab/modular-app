@@ -23,6 +23,20 @@ const routes: Routes = [
   { path: 'home-settings', 
   loadChildren: () => import('./pages/home-settings/home-settings.module').then(x => x.HomeSettingsPageModule)
 },
+{
+  path: 'auth/callback',
+  loadChildren: () =>
+    import('./auth/auth-pages/auth-callback/auth-callback.module').then(
+      (m) => m.AuthCallbackPageModule
+    ),
+},
+{
+  path: 'auth/endsession',
+  loadChildren: () =>
+    import('./auth/auth-pages/end-session/end-session.module').then(
+      (m) => m.EndSessionPageModule
+    ),
+},
 ]  
 ;
 

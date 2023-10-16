@@ -8,6 +8,7 @@ import { TranslateService } from '@ngx-translate/core';
 // import { FirebaseX } from "@ionic-native/firebase-x/ngx";
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { register } from 'swiper/element/bundle';
+import { AuthService } from './auth/auth.service';
 
 register();
 
@@ -27,7 +28,7 @@ export class AppComponent {
     private config: ConfigService,
     private setting: SettingService,
     private translate: TranslateService,
-    // private firebase: FirebaseX
+    private authService: AuthService
   ) {
     this.sideMenu().then(res => {
       this.navigate = res;
@@ -36,10 +37,10 @@ export class AppComponent {
   }
 
   initializeApp() {
-    this.platform.ready().then(() => {
+    this.platform.ready().then(async () => {
       // if (this.firebase)
       // this.firebase.getToken().then(token => console.log(`The token is ${token}`))
-      
+      await this.authService.init();
       if (this.platform.is("android")){
       this.statusBar.overlaysWebView(false);
       this.statusBar.styleLightContent();

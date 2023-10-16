@@ -25,6 +25,15 @@ import { LinkDirective } from './directives/link.directive';
 import { SharedModule } from './shared/shared.module';
 import { DragulaModule, DragulaService } from 'ng2-dragula';
 import { HelloModule } from './module-hello-world/web-components.module';
+import { AuthModule } from './auth/auth.module';
+import { IonicStorageModule } from '@ionic/storage-angular';
+import * as CordovaSQLiteDriver from 'localforage-cordovasqlitedriver';
+
+const Drivers = {
+  SecureStorage: 'ionicSecureStorage',
+  IndexedDB: 'asyncStorage',
+  LocalStorage: 'localStorageWrapper',
+};
 export function initializeAppSetting(appInitService: SettingService) {
   return (): Promise<any> => {
     return appInitService.Init();
@@ -52,6 +61,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     HttpClientModule,
     BrowserModule,
     SharedModule,
+    AuthModule,
     IonicModule.forRoot({
       innerHTMLTemplatesEnabled:true
     }),
@@ -72,6 +82,14 @@ export function HttpLoaderFactory(http: HttpClient) {
     HelloModule.forRoot(),
     AppRoutingModule,
     TrasportiModule.forRoot(),
+    IonicStorageModule.forRoot({
+      driverOrder: [
+        // eslint-disable-next-line no-underscore-dangle
+        CordovaSQLiteDriver._driver,
+        Drivers.IndexedDB,
+        Drivers.LocalStorage,
+      ],
+    }),
     AppRoutingModule],
   providers: [
     StatusBar,
