@@ -70,8 +70,9 @@ This chapter shows how to create a stencil form and integrate it into your appli
 
 ### Creation
 
-First of all, the Stencil library must be installed on your machine
+First of all, the Stencil library must be installed on your machine.
 Follow the guide [here](https://stenciljs.com/).
+
 After the installation create the new collection with the command
 
 ```
@@ -81,7 +82,6 @@ npm init stencil
 ```
 
 Select `component` option and put the name of the project.
-
 In this example the name is `la-mia-trento-hello-world`
 
 Enter in the folder just created and install the missing npm missing packets
@@ -102,7 +102,7 @@ First of all open `stencil.config.ts` and remove the line
     },
 ```
 
-By default the component create is my-component. You can change manually the entries or delete the folder component/my-component and then create the new one with
+By default the component create is my-component. You can change manually the entries or delete the folder `component/my-component` and then create the new one with
 
 ```
 stencil generate hello-component
@@ -170,7 +170,7 @@ pages                    -> page or pages with the web components
 web-components.module.ts -> definition of the new module
 ```
 
-The first file defines a function for loading all the custom elements and is called in the hello.module.ts
+The first file defines a function for loading all the custom elements and is called in the `hello.module.ts`
 
 ```
 import { defineCustomElements as WcHello } from 'la-mia-trento-hello-world/dist/loader';
@@ -209,7 +209,7 @@ export const routing: ModuleWithProviders<RouterModule>  = RouterModule.forChild
 
 ```
 
-The module file initialize the components and definnes the fact we are using a schema CUSTOM_ELEMENTS_SCHEMA.
+The module file initialize the components and defines the fact we are using a schema CUSTOM_ELEMENTS_SCHEMA.
 
 ```
 import { APP_INITIALIZER, ModuleWithProviders, CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
@@ -271,6 +271,39 @@ Finally add the  following row in the `app.module.ts`
     ...
 ```
 
+Last but not least, you have to add your module to the menu. Open the `module-entries.json` and add the new entry
+```
+...
+->,{
+  "id": "helo-world",
+  "name": {
+    "it": "Ciao mondo",
+    "en": "Buenas dias",
+    "de": "Guten morgen"
+  },
+  "url": "/hello"
+},
+...
+```
+If you want add it to a specific profile at the installation phase, open `default-profiles-module.json` and add it in one of them. For example, if you want add it to the citizen profile:
+```
+{
+  "turist": [
+    ....
+],
+ ->"citizen": [    {
+   "id": "helo-world",
+  "name": {
+    "it": "Ciao mondo",
+    "en": "Buenas dias",
+    "de": "Guten morgen"
+  },
+  "url": "/hello"
+   "icon": "home"
+  },
+  ...
+```
+Now your module is ready to be visualized.
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- Authentication -->
