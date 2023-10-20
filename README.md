@@ -167,9 +167,9 @@ Inside the la-mia-trento/src folder, there are the following sub-folders:
 * **configuration**: the main configuration for the container in the shape of different JSON files: the carousel, the modules entries, the citizen and tourist profile
   * module-entries.json: the configuration file for accessing the modules, contains the names in the various languages, the routing for the app, the icon to show and if there are parameters to pass to the module
   * default-profiles-module.json:the configuration file that groups the modules by tourist and citizen type. The modules are the same as the modules-entries.json content
-* **common**: todo
-* **credits**: todo
-* **fonts**: todo
+* **common/i18n**: the files with the translations into Italian, German and English
+* **credits**: the credits images
+* **fonts**: The Titillium font used in the app
 * **x**: x is the asset folder for the singolar module. Inside you can find translation files, icons e single configuration files.
   Some important files are present
 
