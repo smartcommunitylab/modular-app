@@ -28,6 +28,7 @@ import { HelloModule } from './module-hello-world/web-components.module';
 import { AuthModule } from './auth/auth.module';
 import { IonicStorageModule } from '@ionic/storage-angular';
 import * as CordovaSQLiteDriver from 'localforage-cordovasqlitedriver';
+import { ClaudioModule } from './module-claudio/web-components.module';
 
 const Drivers = {
   SecureStorage: 'ionicSecureStorage',
@@ -80,6 +81,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     FuneraliModule.forRoot(),
     InfoModule.forRoot(),
     HelloModule.forRoot(),
+    ClaudioModule.forRoot(),
     AppRoutingModule,
     TrasportiModule.forRoot(),
     IonicStorageModule.forRoot({
