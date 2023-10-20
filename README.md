@@ -101,12 +101,19 @@ First of all open `stencil.config.ts` and remove the line
   ->  esmLoaderPath: '../loader',
     },
 ```
+After that open `package.json` and remove the line
 
+```
+ "files": [
+    "dist/",
+  ->"loader/"
+  ],
+```
 By default the component create is my-component. You can change manually the entries or delete the folder `component/my-component` and then create the new one with
-
 ```
-stencil generate hello-component
+npm run generate
 ```
+Insert the name of the component `hello` and say yes to the creation of the Stylesheet, Spec Test e E2E Test
 
 Now you are ready to implement your code.
 
@@ -127,7 +134,7 @@ The build and and the publish works as usual using the npm commands
 
 ## Integrate inside the existing app
 
-After you have created the new components and module using Stencil, you have to integrate in the existing application.
+After you have created the new components and module using Stencil, you have to integrate in the existing application. 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -135,10 +142,10 @@ After you have created the new components and module using Stencil, you have to 
 
 ### Installation
 
-First of all you have to install using npm
+First of all enter in the folder of the container app  `la-mia-trento` and install the component created wiht npm command
 
 ```
-npm i hello-component
+npm i la-mia-trento-hello-world
 ```
 
 After this in your `node_modules` folder you will find the new module created.
@@ -170,7 +177,7 @@ pages                    -> page or pages with the web components
 web-components.module.ts -> definition of the new module
 ```
 
-The first file defines a function for loading all the custom elements and is called in the `hello.module.ts`
+The first file defines a function for loading all the custom elements and is called in the `web-components.module.ts`
 
 ```
 import { defineCustomElements as WcHello } from 'la-mia-trento-hello-world/dist/loader';
@@ -251,10 +258,31 @@ export class HelloModule {
     };
   }
 }
-
-
+```
+Entering in the pages/hello folder you will find a set of files like these
+```
+    hello.module.ts     -> module that use the web component 
+    hello.page.html     -> html page that include the <hello-component> tag
+    hello.page.scss     -> style for the page
+    hello.page.spec.ts  -> unit test
+    hello.page.ts       -> the ts code
+```
+You can generate   enter in the folder pages and generate the a new page with `ng generate page [nome]`
+Remember to change  the `[nome.module.ts]` adding the custom element schema:
+```
+...
+schemas: [CUSTOM_ELEMENTS_SCHEMA]
+...
 ```
 
+The component is added in the page in this way
+```
+...
+   <ion-content>
+ ->    <hello-component></hello-component>
+    </ion-content>
+...
+```
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ### Modification of the files
