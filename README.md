@@ -36,6 +36,7 @@
         <li><a href="#structure">Structure of the project</a></li>
       </ul>
     </li>
+        <li><a href="#How application works">How application works</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
     <li><a href="#acknowledgments">Acknowledgments</a></li>
@@ -133,6 +134,10 @@ Others tools and framework used are the following
    ```sh
    npm i
    ```
+4. Run the application
+   ```sh
+   npm run start
+   ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 <!-- IMPLEMENTING YOUR OWN MODULE -->
@@ -144,10 +149,7 @@ Below we describe the current implementation of the modular app. The branch'new-
 ### Structure
 
 The structure of the application, as described above, is composed of a container (folder: la-mia-trento) which provides some basic tools for the separate modules and a series of modules integrated with it.
-The separate modules are composed of web components created using Stencil and contain:
 
-* **src**: the folder with the web components sources
-* **utils**: folder with various utility functions
 
 Inside the la-mia-trento/src folder, there are the following sub-folders:
 
@@ -156,19 +158,22 @@ Inside the la-mia-trento/src folder, there are the following sub-folders:
 * **credits**: page and information for the app credits
 * **directive**: Angular directives used in the app
 * **module-x**: each module x represents the separate container for the individual module. Each module will include pages to manage the web components created
-* **pages**: the common pages of the application
+* **pages**: the pages of the application container (home, settings, ...)
 * **services**: common functions and services
-* **shared**: Common pages and components in the app
+* **shared**: Shared pages and components in the app
 
 *assets*
 
 * **configuration**: the main configuration for the container in the shape of different JSON files: the carousel, the modules entries, the citizen and tourist profile
+  * module-entries.json: the configuration file for accessing the modules, contains the names in the various languages, the routing for the app, the icon to show and if there are parameters to pass to the module
+  * default-profiles-module.json:the configuration file that groups the modules by tourist and citizen type. The modules are the same as the modules-entries.json content
+* **common**: todo
+* **credits**: todo
+* **fonts**: todo
 * **x**: x is the asset folder for the singolar module. Inside you can find translation files, icons e single configuration files.
   Some important files are present
 
-  * module-entries.json: the configuration file for accessing the modules, contains the names in the various languages, the routing for the app, the icon to show and if there are parameters to pass to the module
-  * default-profiles-module.json:the configuration file that groups the modules by tourist and citizen type. The modules are the same as the modules-entries.json content
-
+## How the application works
 The basic idea is that the container application store a set of shared information that every module can access (for example the language).
 After the installation of the application, for example, the application ask to the user the profile and store on localStorage the choices.
 Every module in the application is lazy loaded and keep a set of local assets, pages and service. After that the button is clicked, the router check the routing using the module-entries.json and loading the module with the subcomponent. Inside the different pages of the modules, a set of web components created using stencil are loaded using the local data. For example wc-anteprima is a web component loaded inside notizie.page.html that show news coming from Comune di Trento. Based on the configuration of the web component, it shows different options like image, link and so on.
@@ -181,8 +186,12 @@ In the main project folders there are the modules project folders:
 * la-mia-trento-trasporti: this module show the city council public transportation timetable
 
 Let's enter in la-mia-trento-info, for example. Inside you can find the stencil project. The src folder contains *components* amd *utils* and opening you can find the details of the webcomponent used directly into the ionic application.
+The separate modules are composed of web components created using Stencil and contain:
 
-span
+* **src/components**: the folder with the web components sources
+* **src/assets**: xxx
+* **src/utils**: folder with various utility functions
+
 
 <!-- LICENSE -->
 
