@@ -262,11 +262,9 @@ export class FuneraliPage {
 
   //condividi da mobile per i funerali
   CondividiFunerali(i) {
-    this.social.canShareViaEmail().then(() => {
-      this.social.share(i.nome + " " + this.luogoFunerale + i.luogoFunerale + " " + this.dataFunerale + i.dataFunerale + " " + this.oraMorte + i.oraFunerale);
-    }).catch(() => {
-      alert("Il servizio di condivisione non è disponibile per questo dispositivo");
-    });
+    var msg =(i.nome + " " + this.luogoFunerale + i.luogoFunerale + " " + this.dataFunerale + i.dataFunerale + " " + this.oraMorte + i.oraFunerale)
+    this.social?.share(msg);
+    
   }
 
   // //condividi da mobile per sepolture
