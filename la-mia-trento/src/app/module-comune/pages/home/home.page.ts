@@ -28,7 +28,6 @@ export class HomePage extends MainPage {
   }
   override ionViewDidEnter() {
     this.elementsGallery = [];
-    this.config.init();
     this.dbService.getCategories().then((data) => {
       // set button categories
       this.categories = data.map(x => this.convertCategories(x));

@@ -408,7 +408,7 @@ export class WcTrasportiStop {
   }
 
   remoteFetch(): any {
-    fetch('https://os.smartcommunitylab.it/core.mobility/timetable/' + this.citta + '/' + this.numero)
+    fetch(process.env.mobility_api+'/timetable/' + this.citta + '/' + this.numero)
       .then((response: Response) => {
         response.json()
       })

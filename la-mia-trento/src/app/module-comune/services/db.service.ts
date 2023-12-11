@@ -2,10 +2,9 @@
 import { Injectable } from '@angular/core';
 import PouchDB from 'pouchdb';
 import PouchDBFind from 'pouchdb-find';
-import { resolve } from 'url';
 import { LoadingController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
-import { ConfigService } from './config.service';
+import { environment } from 'src/environments/environment';
 PouchDB.plugin(PouchDBFind);
 
 @Injectable({
@@ -24,12 +23,8 @@ export class DbService {
   MIN_SYNCH_TIME: number = 24 * 60 * 60 * 1000;
   constructor(private loadingController: LoadingController, private translate: TranslateService) {
 
-    this.db = new PouchDB('comune-in-tasca');
-
-    this.remoteDb = new PouchDB('https://cit.platform.smartcommunitylab.it/comuneintasca2');
-    // 'http://192.168.42.201:5984/comune-in-tasca';
-    //'http://192.168.1.197:5984/comune-in-tasca'
-    // 'http://127.0.0.1:5984/comune-in-tasca';
+    this.db = new PouchDB(environment.dbName);
+    this.remoteDb = new PouchDB(environment.dbURL);
 
     this.contentTypes = {
       'content': 'content-item',
@@ -46,8 +41,6 @@ export class DbService {
       retry: true,
       continuous: true
     };
-    // var url = 'http://192.168.42.201:5984/comune-in-tasca';
-    // var opts = { live: true, retry: true };
 
   }
 

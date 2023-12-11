@@ -4,6 +4,7 @@ import * as moment from 'moment';
 import { AlertController } from '@ionic/angular';
 import { Platform } from '@ionic/angular';
 import { lastValueFrom } from 'rxjs';
+import { environment } from 'src/environments/environment';
 const CHOOSEN_KEY: string = "choosen";
 const MODULE_ENTRIES_KEY: string = "moduleEntries";
 
@@ -16,7 +17,7 @@ export class ConfigService {
   // version = 'test';
   version = 'prod';
   numberVersion = '2.0.6';
-  carouselUrl = 'https://cit.platform.smartcommunitylab.it/comuneintasca-multi/highlights/TrentoInTasca';
+  carouselUrl = environment.carouselUrl;
   private appModuleName: string = "app-module";
   private menu: any;
   private carousel: any;

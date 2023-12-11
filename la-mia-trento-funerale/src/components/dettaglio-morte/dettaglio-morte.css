@@ -115,14 +115,44 @@
 }
 
 #secondaIcona {
-  left: 42%;
+  display: flex;
+  justify-content: center;
+  background-color: rgb(255, 255, 255);
+  border-top-width: 2px;
+  border-right-width: 2px;
+  border-bottom-width: 2px;
+  border-left-width: 2px;
+  border-top-style: solid;
+  border-right-style: solid;
+  border-bottom-style: solid;
+  border-left-style: solid;
+  border-top-color: rgb(17, 179, 239);
+  border-right-color: rgb(17, 179, 239);
+  border-bottom-color: rgb(17, 179, 239);
+  border-left-color: rgb(17, 179, 239);
+  border-top-left-radius: 40px;
+  border-top-right-radius: 40px;
+  border-bottom-right-radius: 40px;
+  border-bottom-left-radius: 40px;
+  height: 47px;
+  width: 47px;
+  margin-top: auto;
 
 }
-
+.share{
+  color: rgb(17, 179, 239);
+  margin-top: 0px;
+  height: 100%;
+  font-size: 28px;
+  display: flex;
+  align-content: center;
+  align-items: center;
+}
 .chiudi {
   margin-top: -12px;
   text-align: center;
 }
+
 
 .chiudi p {
   font-size: 19px;

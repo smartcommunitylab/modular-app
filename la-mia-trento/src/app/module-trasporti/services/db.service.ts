@@ -6,6 +6,7 @@ import * as JSZip from 'jszip';
 import * as JSZipUtils from 'jszip-utils';
 import { HttpClient } from '@angular/common/http';
 import { File } from '@ionic-native/file/ngx';
+import { environment } from 'src/environments/environment';
 
 declare var cordova: any;
 
@@ -35,7 +36,7 @@ export class DbService {
   }
 
   getDBFileShortName() {
-    return "routesdb_" + this.config.getAppId() + ".db";
+    return "routesdb_" + environment.appId + ".db";
   };
 
   getDBPath() {
@@ -65,7 +66,7 @@ export class DbService {
   getStopsData(agencies) {
     var res = [];
     agencies.forEach((a) => {
-      var local = localStorage[this.config.getAppId() + "_stops_" + a];
+      var local = localStorage[environment.appId + "_stops_" + a];
       if (local) {
         local = JSON.parse(local);
         if (local && local.length > 0) {
@@ -81,7 +82,7 @@ export class DbService {
   getNextTrips(agencyId, stopId, numberOfResults): any {
     let promise = new Promise((resolve, reject) => {
       numberOfResults = numberOfResults || 3;
-      this.http.get(this.config.getServerURL() + '/getlimitedtimetable/' + agencyId + '/' + stopId + '/' + numberOfResults).toPromise().then(data => {
+      this.http.get(environment.serverURL + '/getlimitedtimetable/' + agencyId + '/' + stopId + '/' + numberOfResults).toPromise().then(data => {
         resolve(data);
       }, err => {
         reject(err);
@@ -119,29 +120,6 @@ export class DbService {
             errorcallback();
           });
         })
-
-      // }, (err) => {
-      //   console.log('not copied')
-      //   console.log(err);
-      //   if (err.code = 516) {
-      //     console.log('error 516');
-      //     (<any>window).sqlitePlugin.openDatabase({
-      //       name: this.getDBFileShortName(),
-      //       location: 'default'
-      //     }, (db) => {
-      //       that.db = db;
-      //       console.log('opened, try to query')
-      //       db.executeSql("select * from version", [], (res) => {
-      //         console.log('version present');
-      //         console.log(JSON.stringify(res))
-      //         successcallback();
-      //       }, (e) => {
-      //         console.log(JSON.stringify(e));
-      //         errorcallback();
-      //       });
-      //     })
-      //   }
-      // })
     } else {
       console.log('this.db is NOT null'+JSON.stringify(this.db));
       successcallback();
@@ -250,9 +228,11 @@ export class DbService {
 
   getDataURL(remote) {
     if (remote) {
-      return this.config.getMobilityDataURL() + '/routesDB/' + this.config.getAppId()+'.zip';
+      return environment.mobilityDataURL + '/routesDB/' + environment.appId+'.zip';
 
     } else {
+      console.log("local"+this.LOCAL_DATA_URL);
+
       return this.LOCAL_DATA_URL;
     }
   }
@@ -332,9 +312,7 @@ export class DbService {
       }
       that.getLocalVersion().then(function (localversion) {
         console.log('got the local version, try remote');
-    //     fetch('https://example.github.io/repo-name/generated.json')
-    // .then((response) => response.json())
-    // .then((data) => console.log(data));
+
     fetch(that.config.getMobilityDataURL() + '/versions').then(
       (response) => response.json()
       )
@@ -353,7 +331,7 @@ export class DbService {
   }
 
   syncStops() {
-    fetch(this.config.getMobilityDataURL() + '/versions')
+    fetch(environment.mobilityDataURL + '/versions')
     .then(
       (response) => response.json()
       )
@@ -363,14 +341,14 @@ export class DbService {
   };
 
   readLocalStopVersions() {
-    var localStopVersionsKey = this.config.getAppId() + "_localStopVersions";
+    var localStopVersionsKey = environment.appId + "_localStopVersions";
     var localVersions = localStorage[localStopVersionsKey];
     if (localVersions) localVersions = JSON.parse(localVersions);
     else localVersions = {};
     return localVersions;
   };
   writeLocalStopVersion(agency, version) {
-    var localStopVersionsKey = this.config.getAppId() + "_localStopVersions";
+    var localStopVersionsKey = environment.appId + "_localStopVersions";
     var lv = this.readLocalStopVersions();
     lv[agency] = version;
     localStorage[localStopVersionsKey] = JSON.stringify(lv);
@@ -378,9 +356,9 @@ export class DbService {
 
   syncStopsForVersions(remoteversion) {
     var that = this;
-    var agencies = this.config.getAppAgencies();
+    var agencies = environment.agencies;
     var versions = {};
-    var localStopVersionsKey = this.config.getAppId() + "_localStopVersions";
+    var localStopVersionsKey = environment.appId + "_localStopVersions";
     var localversion = this.readLocalStopVersions();
 
     agencies.forEach(function (a) {
@@ -462,50 +440,5 @@ export class DbService {
     return deferred;
 
   }
-    // console.log('dbSetup()');
-    // // that.getLocalVersion().then(function (localversion) {
-    //   console.log('got the local version, try remote');
-    //   fetch(this.config.getMobilityDataURL() + '/versions').then(
-    //     (response) => response.json()
-    //     )
-    //   .then(remoteversion => {
-    //     // console.log('remote version'+remoteversion.json());
-    //   //   if (this.compareversions(localversion, remoteversion) < 0) {
-    //   //     // that.installDB(true).then(null, null); //remote
-    //   //   } else {
-    //   //     // success();
-    //   //   }
-    //   //   this.syncStops();
-    //   // }).catch(null);
-    // }, null);
-    // var that = this;
-    // var deferred = new Promise((resolve, reject) => {
-    //   var err = function (error) {
-    //     reject(error);
-    //     console.log("NOT synch: " + error);
-    //   }
-    //   var success = function () {
-    //     resolve(true);
-    //     console.log("synch done");
-    //   }
-
-    //   //try to open db (check if db is present)
-    //   this.localDBisPresent().then(function (result) {
-    //     //use local version of db in data/routesdb.zip
-    //     if (!result) {
-    //       console.log("start install");
-    //       that.installDB(false).then(function () {
-    //         console.log("after install, start synch")
-    //         that.synchDB().then(success, err);
-    //       }, err);
-    //     } else {
-    //       that.synchDB().then(success, err);
-    //     }
-    //   }, err);
-    // })
-    // return deferred;
-
-  // }
-
 };
 

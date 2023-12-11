@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { GeoService } from 'src/app/services/geo.service';
 import { Platform } from '@ionic/angular';
+import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
@@ -44,7 +45,7 @@ export class MapService {
       if (this.data) {
         return resolve(this.data);
       }
-       this.http.get('https://tn.smartcommunitylab.it/streetcleaning/rest/street').toPromise().then(response => {
+       this.http.get(environment.streetcleaningBaseDataAPI).toPromise().then(response => {
       //  this.http.get('./assets/strade/data/spazzamento.json').toPromise().then(response => {
           this.data = this.buildFinalData(response);
           resolve(this.data)

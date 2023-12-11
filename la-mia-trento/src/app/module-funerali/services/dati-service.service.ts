@@ -1,12 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class DatiService {
-  urlBase = 'https://tn.smartcommunitylab.it/trentorienta/api/funerali/';
+  urlBase =  environment.trentorientaBaseDataAPI+environment.funeraliAPI;
 
   constructor(private http: HttpClient) { }
 

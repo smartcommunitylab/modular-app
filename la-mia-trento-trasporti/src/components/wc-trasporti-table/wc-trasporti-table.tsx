@@ -103,7 +103,9 @@ export class AppHome {
   }
 getTextWidth() {
   var measurer = this.element.shadowRoot.querySelector('#measurer');
+  if (measurer)
   return (measurer.getBoundingClientRect().width);
+  return 0;
 };
   //    set the variables for bigger style
   setBiggerStyle() {
@@ -493,7 +495,7 @@ getTextWidth() {
   }
 
   remoteFetch(): any {
-    fetch('https://os.smartcommunitylab.it/core.mobility/timetable/' + this.citta + '/' + this.numero)
+    fetch(process.env.mobility_api+'/timetable/' + this.citta + '/' + this.numero)
       .then((response: Response) => {
         response.json()
       })
@@ -620,10 +622,10 @@ getTextWidth() {
           </ion-row>
           <ion-row class="day-bar">
             <ion-col size="1" class="col col-25 tt-day btn" onClick={() => this.prevDate()}>
-              <ion-icon name="arrow-dropleft"></ion-icon>
+              <ion-icon name="arrow-back"></ion-icon>
             </ion-col>
             <ion-col size="10" class="col col-50 tt-day ">{this.datetable}</ion-col>
-            <ion-col size="1" class="col col-25 tt-day btn" onClick={() => this.nextDate()}><ion-icon name="arrow-dropright"></ion-icon>
+            <ion-col size="1" class="col col-25 tt-day btn" onClick={() => this.nextDate()}><ion-icon name="arrow-forward"></ion-icon>
             </ion-col>
           </ion-row>
         </div>

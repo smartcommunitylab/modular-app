@@ -1,30 +1,7 @@
 {
     "appId":"trento",
-    "serverURL": "https://tn.smartcommunitylab.it/core.mobility",
-    "mobilityDataURL": "https://raw.githubusercontent.com/smartcommunitylab/modular-app/2023-new-version/data",
-    "smartcheck_options": [
-        1,
-        4,
-        5
-    ],
-    "plan_default_options": {
-        "routeType": "fastest",
-        "transportTypes": [
-            "WALK",
-            "TRANSIT"
-        ]
-    },
-    "plan_policy": "Trento",
-    "maxMarkers":30,
-    "taxi_id": "TAXI_TRENTO",
-    "taxi_accuracy": 65,
     "accessibility": true,
-    "agencies": [5, 6, 10, 12, 17],
     "extraurban_agencies": [17],
-    "broadcast_notifications_options": [
-        1,
-        4
-    ],
     "center_map": [
         46.069672,
         11.121270

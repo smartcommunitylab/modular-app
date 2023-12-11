@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
@@ -12,7 +13,7 @@ export class DatiServiceService {
     let promise = new Promise((resolve, reject) => {
 
     let vetDati = [];
-    let url = 'https://tn.smartcommunitylab.it/trentorienta/api/events';
+    let url = environment.trentorientaBaseDataAPI+environment.eventiAPI;
     this.http.post(url,parametri)
     .toPromise()
     .then( (res:any) => { // Success
