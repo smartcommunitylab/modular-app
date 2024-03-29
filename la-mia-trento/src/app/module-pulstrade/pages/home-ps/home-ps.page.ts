@@ -147,7 +147,7 @@ blur(){
           if (!this.selectedDate) {
             this.selectedDate = new Date();
             this.selectedDate.setHours(0, 0, 0, 0);
-            this.showDate = this.selectedDate.toISOString();
+            this.showDate = this.getISOWithUtc(this.selectedDate).toISOString();;
           }
           if (!this.mapCenter) {
             console.log("default center");
@@ -344,7 +344,7 @@ blur(){
          */
         // if (inDate && ((dist < ((17 % this.map.getZoom()) - 1) || dist < 0.3))) {
         if (inDate && bounds.contains([s.centralCoords[0], s.centralCoords[0]])) {
-
+          console.log(s);
           this.labelResult++;
           this.dailyStreets.push(s);
           const popupContent = (inDate) ? closedStreetContent : freeStreetContent;
@@ -389,13 +389,16 @@ blur(){
       }
     }
   }
+   getISOWithUtc(date:Date) {
+    return new Date(date.getTime()-date.getTimezoneOffset()*60*1000);
+  }
   /**
    * Go one day back
    */
   dayBack() {
     this.glow();
     this.selectedDate.setDate(this.selectedDate.getDate() - 1);
-    this.showDate = this.selectedDate.toISOString();
+    this.showDate = this.getISOWithUtc(this.selectedDate).toISOString(); //this.selectedDate.toISOString();
     this.mapCenter = [this.map.getCenter().lat, this.map.getCenter().lng];
     this.buildPolyline(this.mapCenter);
     this.map?.invalidateSize();
@@ -442,11 +445,11 @@ blur(){
     var selectedDate = moment(this.selectedDate);
     if (!nextDay || (selectedDate.isBefore(today,'day') && nextDate.isAfter(today, 'day'))) {
       this.selectedDate = new Date();
-      this.showDate = this.selectedDate.toISOString();
+      this.showDate = this.getISOWithUtc(this.selectedDate).toISOString();;
       this.future = true;
     } else if (nextDay != null && nextDay > this.selectedDate.getTime()) {
       this.selectedDate = new Date(nextDay);
-      this.showDate = this.selectedDate.toISOString();
+      this.showDate = this.getISOWithUtc(this.selectedDate).toISOString();;
       this.future = true;
 
     } else {
@@ -498,12 +501,12 @@ blur(){
     var selectedDate = moment(this.selectedDate);
     if (!prevDay || (selectedDate.isAfter(today, 'day') && prevDate.isBefore(today, 'day'))) {
       this.selectedDate = new Date();
-      this.showDate = this.selectedDate.toISOString();
+      this.showDate = this.getISOWithUtc(this.selectedDate).toISOString();;
       this.past = true;
     }
     else if (prevDay != null && prevDay < this.selectedDate.getTime()) {
       this.selectedDate = new Date(prevDay);
-      this.showDate = this.selectedDate.toISOString();
+      this.showDate = this.getISOWithUtc(this.selectedDate).toISOString();;
       this.past = true;
     } else {
       this.toast = await this.toastCtrl.create({
@@ -523,7 +526,7 @@ blur(){
    */
   setDate(event: any) {
     this.selectedDate = new Date(event.detail.value);
-    this.showDate = this.selectedDate.toISOString();
+    this.showDate = this.getISOWithUtc(this.selectedDate).toISOString();;
     if (this.mapSrv.getData()[this.mapSrv.getData().length - 1].cleaningDay < this.selectedDate.getTime()) {
       this.future = false;
     }
