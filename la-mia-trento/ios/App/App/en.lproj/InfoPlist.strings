@@ -1,0 +1,8 @@
+/* 
+  InfoPlist.strings
+  App
+
+  Created by Smart Community Lab on 31/05/2024.
+  
+*/
+NSLocationAlwaysAndWhenInUseUsageDescription="This app requires to access to your location in order to provide a better user experience and location-related information";

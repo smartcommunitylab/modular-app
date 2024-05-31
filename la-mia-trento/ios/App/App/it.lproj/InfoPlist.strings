@@ -1,0 +1,8 @@
+/* 
+  InfoPlist.strings
+  App
+
+  Created by Smart Community Lab on 31/05/2024.
+  
+*/
+NSLocationAlwaysAndWhenInUseUsageDescription="Durante l'ultilizzo dell'applicazione é consigliabile la condivisione della posizione per un migliore esperienza d'uso";
