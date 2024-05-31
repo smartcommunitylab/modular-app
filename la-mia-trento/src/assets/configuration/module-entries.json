@@ -108,29 +108,6 @@
     "type": "itineraries"
   }
 }, {
-    "id": "profile_cit_csvimport_Mangiare_item_comuneintasca",
-    "name": {
-      "it": "Ristoranti ",
-      "en": "Restaurants ",
-      "de": "Restaurants "
-    },
-    "url": "/list-food",
-    "icon": "home"
-
-
-  }, 
-  {
-    "id": "profile_cit_csvimport_dormire_item_comuneintasca",
-    "name": {
-      "it": " Alberghi",
-      "en": "Hotels",
-      "de": " Hotels"
-    },
-    "url": "/list-rh",
-    "icon": "home"
-
-
-  },{
     "id": "g",
   
     "name": {
