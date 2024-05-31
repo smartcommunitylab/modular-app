@@ -1,9 +1,0 @@
-/* 
-  InfoPlist.strings
-  App
-
-  Created by Smart Community Lab on 27/10/2023.
-  
-*/
-NSLocationAlwaysAndWhenInUseUsageDescription="Diese App benötigt Zugriff auf den Standort, um Informationen und Daten zum Standort des Benutzers bereitzustellen, z. B. zu Veranstaltungen oder Restaurants.";
-NSLocationWhenInUseUsageDescription="Diese App benötigt Zugriff auf den Standort, um Informationen und Daten zum Standort des Benutzers bereitzustellen, z. B. zu Veranstaltungen oder Restaurants.";
