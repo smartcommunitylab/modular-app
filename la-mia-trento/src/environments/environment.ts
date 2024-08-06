@@ -4,7 +4,6 @@
 
 export const environment = {
   production: false,
-  serverURL: "https://tn.smartcommunitylab.it/core.mobility",
   mobilityDataURL: "https://raw.githubusercontent.com/smartcommunitylab/modular-app/2023-new-version/data",
   dbURL: "https://apps.comune.trento.it/comuneintascadb",
   dbName: "comune-in-tasca",

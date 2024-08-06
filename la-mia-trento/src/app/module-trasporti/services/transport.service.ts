@@ -170,30 +170,6 @@ export class TransportService {
     }
   }
 
-  // getDelays(agency, route, date) {
-  //   var that = this;
-  //   var deferred = new Promise((resolve, reject) => {
-  //     var d = new Date(date);
-  //     d.setHours(0);
-  //     d.setMinutes(0);
-  //     d.setSeconds(0);
-  //     d.setMilliseconds(0);
-  //     var from = d.getTime();
-  //     d.setHours(23);
-  //     d.setMinutes(59);
-  //     var to = d.getTime();
-  //     route = encodeURIComponent(route);
-  //     that.http.get(that.config.getServerURL() + '/gettransitdelays/' + agency + '/' + route + '/' + from + '/' + to).toPromise()
-  //       .then(function (data: any) {
-  //         if (data && data.delays) resolve(data.delays[0]);
-  //       }).catch(function (err) {
-  //         reject(err);
-  //       });
-
-  //   })
-  //   return deferred;
-  // }
-
   toWheelChairBoarding(agencyId, stops) {
     var res = [];
     var that = this;
@@ -296,31 +272,7 @@ export class TransportService {
         } else {
           that.dataFromHash(agency, route, date, resolve, reject);
         }
-      // } else {
-      //   // use remote call for timetable
-      //   var d = new Date(date);
-      //   d.setHours(0);
-      //   d.setMinutes(0);
-      //   d.setSeconds(0);
-      //   d.setMilliseconds(0);
-      //   var from = d.getTime();
-      //   d.setHours(23);
-      //   d.setMinutes(59);
-      //   var to = d.getTime();
-      //   route = encodeURIComponent(route);
-      //   that.http.get(that.config.getServerURL() + '/gettransittimes/' + agency + '/' + route + '/' + from + '/' + to).toPromise()
-      //     .then(function (data: any) {
-      //       if (data.times) data.times = data.times[0];
-      //       if (data.tripIds) data.tripIds = data.tripIds[0];
-      //       if (data.delays) data.delays = data.delays[0];
-      //       data.wheelChairBoarding = that.toWheelChairBoarding(agency, data.stopsId);
-      //       // deferred.notify(data);
-      //       resolve(data);
-      //     })
-      //     .catch(function (err) {
-      //       reject(err);
-      //     });
-      // }
+     
 
     })
     return deferred;

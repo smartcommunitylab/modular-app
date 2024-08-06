@@ -30,9 +30,6 @@ export class ConfigService {
   getAppAgencies(): any {
     return environment.agencies;
   }
-  getServerURL(): any {
-    return environment.serverURL;
-  }
   getMobilityDataURL(): any {
     return environment.mobilityDataURL;
   }

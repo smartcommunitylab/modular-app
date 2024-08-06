@@ -79,18 +79,7 @@ export class DbService {
     });
     return res;
   };
-  getNextTrips(agencyId, stopId, numberOfResults): any {
-    let promise = new Promise((resolve, reject) => {
-      numberOfResults = numberOfResults || 3;
-      this.http.get(environment.serverURL + '/getlimitedtimetable/' + agencyId + '/' + stopId + '/' + numberOfResults).toPromise().then(data => {
-        resolve(data);
-      }, err => {
-        reject(err);
 
-      })
-    })
-    return promise;
-  };
 
 
 
@@ -366,17 +355,6 @@ export class DbService {
       var localStops = localStorage[key];
       var localVersion = localversion[a] ? localversion[a] : -1;
       var remoteVersion = remoteversion[a] ? remoteversion[a] : -1;
-
-      if (!localStops || localVersion < remoteVersion) {
-        that.http.get(that.config.getServerURL() + '/geostops/' + a + '?lat=' + that.config.getMapPosition().lat + '&lng=' + that.config.getMapPosition().long + '&radius=5').toPromise().then(stops => {
-          if (Object.prototype.toString.call(stops) === '[object Array]') {
-            localStorage[key] = JSON.stringify(stops);
-            that.writeLocalStopVersion(a, remoteVersion);
-          }
-        }).catch((error: Error) => {
-          console.error('ERROR SYNC STOP DATA: ' + error);
-        });
-      }
     });
   }
 
