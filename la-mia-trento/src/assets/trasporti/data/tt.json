@@ -170,7 +170,16 @@
                                     "routeSymId": "01A",
                                     "title": "Ospedale - P. Dante - Sopramonte",
                                     "label": "1",
-                                    "wheelChairBoarding": 1
+                                    "wheelChairBoarding": 1,
+                                    "links": [
+                                        {"title":"Festivo",
+                                        "url":"https://www.trentinotrasporti.it/pdforari/urbani/linee/OrariDiDirettrice-T24E-T-01_A-Festivo.PDF"
+                                        },
+                                        {"title":"Festivo",
+                                         "url":"https://www.trentinotrasporti.it/pdforari/urbani/linee/OrariDiDirettrice-T24E-T-01_A-Feriale.PDF "
+                                        }
+                                        
+                                    ]
                                 },
                                 {
                                     "routeId": "1R",
@@ -244,6 +253,7 @@
                                     "title": "Piazza Dante - P.Fiera - Povo - Oltrecastello",
                                     "label": "5",
                                     "wheelChairBoarding": 1
+                                    
                                 },
                                 {
                                     "routeId": "05R",

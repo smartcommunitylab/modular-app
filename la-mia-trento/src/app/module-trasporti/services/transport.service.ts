@@ -91,6 +91,7 @@ export class TransportService {
           group: e.groups[j],
           color: e.groups[j].color,
           label: e.groups[j].label,
+           links: e.groups[j].links? e.groups[j].links:null,
           title: e.groups[j].title ? e.groups[j].title : e.groups[j].label,
           gridCode: e.groups[j].gridCode
         });
@@ -104,7 +105,9 @@ export class TransportService {
           route: e.routes[j],
           color: e.color,
           label: e.routes[j].label ? e.routes[j].label : e.label,
-          title: e.routes[j].title ? e.routes[j].title : e.title
+          title: e.routes[j].title ? e.routes[j].title : e.title,
+           links: e.routes[j].links? e.routes[j].links:null,
+
         });
       }
     }

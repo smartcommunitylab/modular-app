@@ -7,7 +7,7 @@ android {
         applicationId "it.smartcommunitylab.comuneintasca.trento"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 17
+        versionCode 18
         versionName "2.0.8"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         aaptOptions {

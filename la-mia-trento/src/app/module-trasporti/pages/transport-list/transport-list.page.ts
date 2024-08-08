@@ -3,6 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { TransportService } from '../../services/transport.service';
 import { TranslateService } from '@ngx-translate/core';
 import { ConfigService } from '../../services/config.service';
+import { ModalLinkComponent } from './modalLinkComponent';
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-transport-list',
@@ -29,6 +31,7 @@ export class TransportListPage implements OnInit {
     private transport: TransportService,
     private translate: TranslateService,
     private config: ConfigService,
+    private modalCtrl: ModalController,
     private router: Router) { 
       var language = this.config.getLanguage();
     this.translate.use(language);
@@ -62,14 +65,30 @@ export class TransportListPage implements OnInit {
     return index!=this.elements.length-1
   }
 
-  selectElement(e) {
+  async selectElement(e) {
     // route element: go to table
     if (e.route != null) {
-      this.router.navigate(['/tt',e.ref,e.agencyId,this.groupId,e.route.routeSymId,e.title, this.color]);
+      console.log(e.links);
+      const modal = await this.modalCtrl.create({
+        component: ModalLinkComponent,
+        componentProps: {
+          'links': e.links
+        }
+      });
+      modal.present();
+      // this.router.navigate(['/tt',e.ref,e.agencyId,this.groupId,e.route.routeSymId,e.title, this.color]);
 
       // group with single route: go to table
     } else if (e.group.routes != null && e.group.routes.length == 1) {
-      this.router.navigate(['/tt',e.ref,e.agencyId,e.group.label,e.group.routes[0].routeSymId,e.title,this.color]);
+      console.log(e.links);
+      const modal = await this.modalCtrl.create({
+        component: ModalLinkComponent,
+        componentProps: {
+          'links': e.links
+        }
+      });
+      modal.present();
+      // this.router.navigate(['/tt',e.ref,e.agencyId,e.group.label,e.group.routes[0].routeSymId,e.title,this.color]);
 
       // group with multiple elements: go to group
     } else {
@@ -120,3 +139,13 @@ export class TransportListPage implements OnInit {
 
 
 }
+async function openModalPdf(links: any) {
+    const modal = await this.modalCtrl.create({
+      component: ModalLinkComponent,
+      componentProps: {
+        'links': links
+      }
+    });
+    modal.present();
+  }
+

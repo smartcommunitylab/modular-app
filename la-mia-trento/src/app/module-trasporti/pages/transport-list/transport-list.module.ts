@@ -9,6 +9,7 @@ import { TransportListPage } from './transport-list.page';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { HttpClient } from '@angular/common/http';
+import { ModalLinkComponent } from './modalLinkComponent';
 
 const routes: Routes = [
   {
@@ -32,6 +33,6 @@ export function HttpLoaderFactory(http: HttpClient) {
       }, isolate: true
     }),    RouterModule.forChild(routes)
   ],
-  declarations: [TransportListPage]
+  declarations: [TransportListPage,ModalLinkComponent]
 })
 export class TransportListPageModule {}
