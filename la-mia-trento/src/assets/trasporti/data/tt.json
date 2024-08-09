@@ -33,7 +33,6 @@
                             "color": "#cd251c",
                             "showTrips": true,
                             "wheelChairBoarding": 0
-
                         },
                         {
                             "routeId": "BV_R1_R",
@@ -42,10 +41,9 @@
                             "color": "#cd251c",
                             "showTrips": true,
                             "wheelChairBoarding": 0
-
                         }
-          ]
-        },
+                    ]
+                },
                 {
                     "agencyId": "6",
                     "color": "#cd251c",
@@ -66,8 +64,8 @@
                             "showTrips": true,
                             "wheelChairBoarding": 0
                         }
-          ]
-        },
+                    ]
+                },
                 {
                     "agencyId": "10",
                     "color": "#cd251c",
@@ -86,9 +84,9 @@
                             "title": "Malé - Trento",
                             "wheelChairBoarding": 0
                         }
-          ]
-        }
-      ]
+                    ]
+                }
+            ]
         },
         "urbano": {
             "view": "grid",
@@ -103,65 +101,6 @@
                     "hasMap": true,
                     "groups": [
                         {
-                            "label": "A",
-                            "color": "#b8b8b4",
-                            "routes": [
-                                {
-                                    "routeId": "_A",
-                                    "routeSymId": "%20AC",
-                                    "title": "P. Dante - Osp. S. Chiara - Clarina - P. Dante",
-                                    "label": "A",
-                                    "wheelChairBoarding": 1
-                                }
-              ]
-            },
-                        {
-                            "label": "B",
-                            "color": "#717780",
-                            "routes": [
-                                {
-                                    "routeId": "_B",
-                                    "routeSymId": "%20BC",
-                                    "title": "Piazza Dante - Laste - Piazza Dante",
-                                    "label": "B",
-                                    "wheelChairBoarding": 1
-                                }
-              ]
-            },
-                        {
-                            "label": "C",
-                            "color": "#000000",
-                            "routes": [
-                                {
-                                    "routeId": "Ca",
-                                    "routeSymId": "Ca",
-                                    "title": "RSA S. Bartolomeo - RSA Angeli Custodi",
-                                    "label": "C",
-                                    "wheelChairBoarding": 2
-                                },
-                                {
-                                    "routeId": "Cr",
-                                    "routeSymId": "Cr",
-                                    "title": "RSA Angeli Custodi - RSA S. Bartolomeo",
-                                    "label": "C",
-                                    "wheelChairBoarding": 2
-                                }
-              ]
-            },
-                        {
-                            "label": "NP",
-                            "color": "#7f8080",
-                            "routes": [
-                                {
-                                    "routeId": "NPA",
-                                    "routeSymId": "NPC",
-                                    "title": "Navetta parcheggi: Ex Zuffo - Monte Baldo - Ex Zuffo",
-                                    "label": "NP",
-                                    "wheelChairBoarding": 1
-                                }
-              ]
-            },
-                        {
                             "label": "1",
                             "color": "#1a3f6f",
                             "routes": [
@@ -172,13 +111,14 @@
                                     "label": "1",
                                     "wheelChairBoarding": 1,
                                     "links": [
-                                        {"title":"Festivo",
-                                        "url":"https://www.trentinotrasporti.it/pdforari/urbani/linee/OrariDiDirettrice-T24E-T-01_A-Festivo.PDF"
+                                        {
+                                            "title": "Festivo",
+                                            "url": "https://www.trentinotrasporti.it/pdforari/urbani/linee/OrariDiDirettrice-T24E-T-01_A-Festivo.PDF"
                                         },
-                                        {"title":"Feriale",
-                                         "url":"https://www.trentinotrasporti.it/pdforari/urbani/linee/OrariDiDirettrice-T24E-T-01_A-Feriale.PDF "
+                                        {
+                                            "title": "Feriale",
+                                            "url": "https://www.trentinotrasporti.it/pdforari/urbani/linee/OrariDiDirettrice-T24E-T-01_A-Feriale.PDF"
                                         }
-                                        
                                     ]
                                 },
                                 {
@@ -186,10 +126,20 @@
                                     "routeSymId": "01R",
                                     "title": "Sopramonte - P.Dante - Ospedale",
                                     "label": "1",
-                                    "wheelChairBoarding": 1
+                                    "wheelChairBoarding": 1,
+                                    "links": [
+                                        {
+                                            "title": "Festivo",
+                                            "url": "https://www.trentinotrasporti.it/pdforari/urbani/linee/OrariDiDirettrice-T24E-T-01_R-Festivo.PDF"
+                                        },
+                                        {
+                                            "title": "Feriale",
+                                            "url": "https://www.trentinotrasporti.it/pdforari/urbani/linee/OrariDiDirettrice-T24E-T-01_R-Feriale.PDF"
+                                        }
+                                    ]
                                 }
-              ]
-            },
+                            ]
+                        },
                         {
                             "label": "2",
                             "color": "#d4592c",
@@ -199,10 +149,20 @@
                                     "routeSymId": "02C",
                                     "title": "Piedicastello - Stazione - Osp. S. Chiara - Regione - Piedicastello",
                                     "label": "2",
-                                    "wheelChairBoarding": 1
+                                    "wheelChairBoarding": 1,
+                                    "links": [
+                                        {
+                                            "title": "Festivo",
+                                            "url": "https://www.trentinotrasporti.it/pdforari/urbani/linee/OrariDiDirettrice-T24E-T-02_C-Festivo.PDF"
+                                        },
+                                        {
+                                            "title": "Feriale",
+                                            "url": "https://www.trentinotrasporti.it/pdforari/urbani/linee/OrariDiDirettrice-T24E-T-02_C-Feriale.PDF"
+                                        }
+                                    ]
                                 }
-              ]
-            },
+                            ]
+                        },
                         {
                             "label": "3",
                             "color": "#bf2c26",
@@ -212,17 +172,37 @@
                                     "routeSymId": "03A",
                                     "title": "Cortesano - Gardolo - P. Dante - Villazzano 3",
                                     "label": "3",
-                                    "wheelChairBoarding": 1
+                                    "wheelChairBoarding": 1,
+                                    "links": [
+                                        {
+                                            "title": "Festivo",
+                                            "url": "https://www.trentinotrasporti.it/pdforari/urbani/linee/OrariDiDirettrice-T24E-T-03_A-Festivo.PDF"
+                                        },
+                                        {
+                                            "title": "Feriale",
+                                            "url": "https://www.trentinotrasporti.it/pdforari/urbani/linee/OrariDiDirettrice-T24E-T-03_A-Feriale.PDF"
+                                        }
+                                    ]
                                 },
                                 {
                                     "routeId": "03R",
                                     "routeSymId": "03R",
                                     "title": "Villazzano 3 - P. Dante - Gardolo - Cortesano",
                                     "label": "3",
-                                    "wheelChairBoarding": 1
+                                    "wheelChairBoarding": 1,
+                                    "links": [
+                                        {
+                                            "title": "Festivo",
+                                            "url": "https://www.trentinotrasporti.it/pdforari/urbani/linee/OrariDiDirettrice-T24E-T-03_R-Festivo.PDF"
+                                        },
+                                        {
+                                            "title": "Feriale",
+                                            "url": "https://www.trentinotrasporti.it/pdforari/urbani/linee/OrariDiDirettrice-T24E-T-03_R-Feriale.PDF"
+                                        }
+                                    ]
                                 }
-              ]
-            },
+                            ]
+                        },
                         {
                             "label": "4",
                             "color": "#0977b7",
@@ -232,17 +212,37 @@
                                     "routeSymId": "04A",
                                     "title": "Gardolo - Roncafort - Stazione - Via Degasperi - Madonna Bianca",
                                     "label": "4",
-                                    "wheelChairBoarding": 1
+                                    "wheelChairBoarding": 1,
+                                    "links": [
+                                        {
+                                            "title": "Festivo",
+                                            "url": "https://www.trentinotrasporti.it/pdforari/urbani/linee/OrariDiDirettrice-T24E-T-04_A-Festivo.PDF"
+                                        },
+                                        {
+                                            "title": "Feriale",
+                                            "url": "https://www.trentinotrasporti.it/pdforari/urbani/linee/OrariDiDirettrice-T24E-T-04_A-Feriale.PDF"
+                                        }
+                                    ]
                                 },
                                 {
                                     "routeId": "04R",
                                     "routeSymId": "04R",
                                     "title": "Madonna Bianca - Via Degasperi - Regione - Roncafort - Gardolo",
                                     "label": "4",
-                                    "wheelChairBoarding": 1
+                                    "wheelChairBoarding": 1,
+                                    "links": [
+                                        {
+                                            "title": "Festivo",
+                                            "url": "https://www.trentinotrasporti.it/pdforari/urbani/linee/OrariDiDirettrice-T24E-T-04_R-Festivo.PDF"
+                                        },
+                                        {
+                                            "title": "Feriale",
+                                            "url": "https://www.trentinotrasporti.it/pdforari/urbani/linee/OrariDiDirettrice-T24E-T-04_R-Feriale.PDF"
+                                        }
+                                    ]
                                 }
-              ]
-            },
+                            ]
+                        },
                         {
                             "label": "5",
                             "color": "#f8ad1e",
@@ -252,18 +252,56 @@
                                     "routeSymId": "05A",
                                     "title": "Piazza Dante - P.Fiera - Povo - Oltrecastello",
                                     "label": "5",
-                                    "wheelChairBoarding": 1
-                                    
+                                    "wheelChairBoarding": 1,
+                                    "links": [
+                                        {
+                                            "title": "Festivo",
+                                            "url": "https://www.trentinotrasporti.it/pdforari/urbani/linee/OrariDiDirettrice-T24E-T-05_A-Festivo.PDF"
+                                        },
+                                        {
+                                            "title": "Feriale",
+                                            "url": "https://www.trentinotrasporti.it/pdforari/urbani/linee/OrariDiDirettrice-T24E-T-05_A-Feriale.PDF"
+                                        }
+                                    ]
                                 },
                                 {
                                     "routeId": "05R",
                                     "routeSymId": "05R",
                                     "title": "Oltrecastello - Povo - P.Aquila - P. Dante",
                                     "label": "5",
-                                    "wheelChairBoarding": 1
+                                    "wheelChairBoarding": 1,
+                                    "links": [
+                                        {
+                                            "title": "Festivo",
+                                            "url": "https://www.trentinotrasporti.it/pdforari/urbani/linee/OrariDiDirettrice-T24E-T-05_R-Festivo.PDF"
+                                        },
+                                        {
+                                            "title": "Feriale",
+                                            "url": "https://www.trentinotrasporti.it/pdforari/urbani/linee/OrariDiDirettrice-T24E-T-05_R-Feriale.PDF"
+                                        }
+                                    ]
                                 }
-              ]
-            },
+                            ]
+                        },
+                        {
+                            "label": "5/",
+                            "color": "#f8ad1e",
+                            "routes": [
+                                {
+                                    "routeId": "05b",
+                                    "routeSymId": "05b",
+                                    "title": "P.Dante - P.Fiera - Università Mesiano-Povo",
+                                    "label": "5/",
+                                    "wheelChairBoarding": 1,
+                                    "links": [
+                                        {
+                                            "title": "Feriale",
+                                            "url": "https://www.trentinotrasporti.it/pdforari/urbani/linee/OrariDiDirettrice-T24E-T-05_b-Feriale.PDF"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
                         {
                             "label": "6",
                             "color": "#6eae46",
@@ -273,17 +311,37 @@
                                     "routeSymId": "06A",
                                     "title": "Vela - P. Dante - Villazzano - Grotta",
                                     "label": "6",
-                                    "wheelChairBoarding": 1
+                                    "wheelChairBoarding": 1,
+                                    "links": [
+                                        {
+                                            "title": "Festivo",
+                                            "url": "https://www.trentinotrasporti.it/pdforari/urbani/linee/OrariDiDirettrice-T24E-T-06_A-Festivo.PDF"
+                                        },
+                                        {
+                                            "title": "Feriale",
+                                            "url": "https://www.trentinotrasporti.it/pdforari/urbani/linee/OrariDiDirettrice-T24E-T-06_A-Feriale.PDF"
+                                        }
+                                    ]
                                 },
                                 {
                                     "routeId": "06R",
                                     "routeSymId": "06R",
                                     "title": "Grotta - Villazzano - P. Dante - Vela",
                                     "label": "6",
-                                    "wheelChairBoarding": 1
+                                    "wheelChairBoarding": 1,
+                                    "links": [
+                                        {
+                                            "title": "Festivo",
+                                            "url": "https://www.trentinotrasporti.it/pdforari/urbani/linee/OrariDiDirettrice-T24E-T-06_R-Festivo.PDF"
+                                        },
+                                        {
+                                            "title": "Feriale",
+                                            "url": "https://www.trentinotrasporti.it/pdforari/urbani/linee/OrariDiDirettrice-T24E-T-06_R-Feriale.PDF"
+                                        }
+                                    ]
                                 }
-              ]
-            },
+                            ]
+                        },
                         {
                             "label": "7",
                             "color": "#179585",
@@ -293,17 +351,29 @@
                                     "routeSymId": "07A",
                                     "title": "Canova - Melta - Piazza Dante - Gocciadoro",
                                     "label": "7",
-                                    "wheelChairBoarding": 1
+                                    "wheelChairBoarding": 1,
+                                    "links": [
+                                        {
+                                            "title": "Feriale",
+                                            "url": "https://www.trentinotrasporti.it/pdforari/urbani/linee/OrariDiDirettrice-T24E-T-07_A-Feriale.PDF"
+                                        }
+                                    ]
                                 },
                                 {
                                     "routeId": "07R",
                                     "routeSymId": "07R",
                                     "title": "Gocciadoro - Piazza Dante - Melta - Canova",
                                     "label": "7",
-                                    "wheelChairBoarding": 1
+                                    "wheelChairBoarding": 1,
+                                    "links": [
+                                        {
+                                            "title": "Feriale",
+                                            "url": "https://www.trentinotrasporti.it/pdforari/urbani/linee/OrariDiDirettrice-T24E-T-07_R-Feriale.PDF"
+                                        }
+                                    ]
                                 }
-              ]
-            },
+                            ]
+                        },
                         {
                             "label": "8",
                             "color": "#543428",
@@ -313,17 +383,37 @@
                                     "routeSymId": "08A",
                                     "title": "Centochiavi - Piazza Dante - Mattarello",
                                     "label": "8",
-                                    "wheelChairBoarding": 1
+                                    "wheelChairBoarding": 1,
+                                    "links": [
+                                        {
+                                            "title": "Festivo",
+                                            "url": "https://www.trentinotrasporti.it/pdforari/urbani/linee/OrariDiDirettrice-T24E-T-08_A-Festivo.PDF"
+                                        },
+                                        {
+                                            "title": "Feriale",
+                                            "url": "https://www.trentinotrasporti.it/pdforari/urbani/linee/OrariDiDirettrice-T24E-T-08_A-Feriale.PDF"
+                                        }
+                                    ]
                                 },
                                 {
                                     "routeId": "08R",
                                     "routeSymId": "08R",
                                     "title": "Mattarello -  Piazza Dante -  Centochiavi",
                                     "label": "8",
-                                    "wheelChairBoarding": 1
+                                    "wheelChairBoarding": 1,
+                                    "links": [
+                                        {
+                                            "title": "Festivo",
+                                            "url": "https://www.trentinotrasporti.it/pdforari/urbani/linee/OrariDiDirettrice-T24E-T-08_R-Festivo.PDF"
+                                        },
+                                        {
+                                            "title": "Feriale",
+                                            "url": "https://www.trentinotrasporti.it/pdforari/urbani/linee/OrariDiDirettrice-T24E-T-08_R-Feriale.PDF"
+                                        }
+                                    ]
                                 }
-              ]
-            },
+                            ]
+                        },
                         {
                             "label": "9",
                             "color": "#894d2d",
@@ -333,17 +423,29 @@
                                     "routeSymId": "09A",
                                     "title": "P. Dante - S. Donà - Cognola - Villamontagna",
                                     "label": "9",
-                                    "wheelChairBoarding": 1
+                                    "wheelChairBoarding": 1,
+                                    "links": [
+                                        {
+                                            "title": "Feriale",
+                                            "url": "https://www.trentinotrasporti.it/pdforari/urbani/linee/OrariDiDirettrice-T24E-T-09_A-Feriale.PDF"
+                                        }
+                                    ]
                                 },
                                 {
                                     "routeId": "09R",
                                     "routeSymId": "09R",
                                     "title": "Villamontagna - Cognola - S. Donà - P. Dante",
                                     "label": "9",
-                                    "wheelChairBoarding": 1
+                                    "wheelChairBoarding": 1,
+                                    "links": [
+                                        {
+                                            "title": "Feriale",
+                                            "url": "https://www.trentinotrasporti.it/pdforari/urbani/linee/OrariDiDirettrice-T24E-T-09_R-Feriale.PDF"
+                                        }
+                                    ]
                                 }
-              ]
-            },
+                            ]
+                        },
                         {
                             "label": "10",
                             "color": "#125547",
@@ -353,17 +455,37 @@
                                     "routeSymId": "10A",
                                     "title": "P. Dante - Martignano - Cognola / Montevaccino",
                                     "label": "10",
-                                    "wheelChairBoarding": 1
+                                    "wheelChairBoarding": 1,
+                                    "links": [
+                                        {
+                                            "title": "Festivo",
+                                            "url": "https://www.trentinotrasporti.it/pdforari/urbani/linee/OrariDiDirettrice-T24E-T-10_A-Festivo.PDF"
+                                        },
+                                        {
+                                            "title": "Feriale",
+                                            "url": "https://www.trentinotrasporti.it/pdforari/urbani/linee/OrariDiDirettrice-T24E-T-10_A-Feriale.PDF"
+                                        }
+                                    ]
                                 },
                                 {
                                     "routeId": "10R",
                                     "routeSymId": "10R",
                                     "title": "Cognola / Montevaccino - Martignano - P. Dante",
                                     "label": "10",
-                                    "wheelChairBoarding": 1
+                                    "wheelChairBoarding": 1,
+                                    "links": [
+                                        {
+                                            "title": "Festivo",
+                                            "url": "https://www.trentinotrasporti.it/pdforari/urbani/linee/OrariDiDirettrice-T24E-T-10_R-Festivo.PDF"
+                                        },
+                                        {
+                                            "title": "Feriale",
+                                            "url": "https://www.trentinotrasporti.it/pdforari/urbani/linee/OrariDiDirettrice-T24E-T-10_R-Feriale.PDF"
+                                        }
+                                    ]
                                 }
-              ]
-            },
+                            ]
+                        },
                         {
                             "label": "11",
                             "color": "#572f75",
@@ -373,17 +495,29 @@
                                     "routeSymId": "11A",
                                     "title": "Piazza Dante - Via Brennero - Gardolo - Spini",
                                     "label": "11",
-                                    "wheelChairBoarding": 1
+                                    "wheelChairBoarding": 1,
+                                    "links": [
+                                        {
+                                            "title": "Feriale",
+                                            "url": "https://www.trentinotrasporti.it/pdforari/urbani/linee/OrariDiDirettrice-T24E-T-11_A-Feriale.PDF"
+                                        }
+                                    ]
                                 },
                                 {
                                     "routeId": "11R",
                                     "routeSymId": "11R",
                                     "title": "Spini di Gardolo - Via Brennero - Piazza Dante",
                                     "label": "11",
-                                    "wheelChairBoarding": 1
+                                    "wheelChairBoarding": 1,
+                                    "links": [
+                                        {
+                                            "title": "Feriale",
+                                            "url": "https://www.trentinotrasporti.it/pdforari/urbani/linee/OrariDiDirettrice-T24E-T-11_R-Feriale.PDF"
+                                        }
+                                    ]
                                 }
-              ]
-            },
+                            ]
+                        },
                         {
                             "label": "12",
                             "color": "#922840",
@@ -393,17 +527,37 @@
                                     "routeSymId": "12A",
                                     "title": "P. Dante - Via Ghiaie - Ravina - Romagnano",
                                     "label": "12",
-                                    "wheelChairBoarding": 1
+                                    "wheelChairBoarding": 1,
+                                    "links": [
+                                        {
+                                            "title": "Festivo",
+                                            "url": "https://www.trentinotrasporti.it/pdforari/urbani/linee/OrariDiDirettrice-T24E-T-12_A-Festivo.PDF"
+                                        },
+                                        {
+                                            "title": "Feriale",
+                                            "url": "https://www.trentinotrasporti.it/pdforari/urbani/linee/OrariDiDirettrice-T24E-T-12_A-Feriale.PDF"
+                                        }
+                                    ]
                                 },
                                 {
                                     "routeId": "12R",
                                     "routeSymId": "12R",
                                     "title": "Romagnano - Ravina - Via Ghiaie - P. Dante",
                                     "label": "12",
-                                    "wheelChairBoarding": 1
+                                    "wheelChairBoarding": 1,
+                                    "links": [
+                                        {
+                                            "title": "Festivo",
+                                            "url": "https://www.trentinotrasporti.it/pdforari/urbani/linee/OrariDiDirettrice-T24E-T-12_R-Festivo.PDF"
+                                        },
+                                        {
+                                            "title": "Feriale",
+                                            "url": "https://www.trentinotrasporti.it/pdforari/urbani/linee/OrariDiDirettrice-T24E-T-12_R-Feriale.PDF"
+                                        }
+                                    ]
                                 }
-              ]
-            },
+                            ]
+                        },
                         {
                             "label": "13",
                             "color": "#b55f8e",
@@ -413,17 +567,29 @@
                                     "routeSymId": "13A",
                                     "title": "P. Dante - Rosmini - S. Rocco - Povo polo soc.",
                                     "label": "13",
-                                    "wheelChairBoarding": 1
+                                    "wheelChairBoarding": 1,
+                                    "links": [
+                                        {
+                                            "title": "Feriale",
+                                            "url": "https://www.trentinotrasporti.it/pdforari/urbani/linee/OrariDiDirettrice-T24E-T-13_A-Feriale.PDF"
+                                        }
+                                    ]
                                 },
                                 {
                                     "routeId": "13R",
                                     "routeSymId": "13R",
                                     "title": "Povo - S. Rocco - Rosmini - Piazza Dante",
                                     "label": "13",
-                                    "wheelChairBoarding": 1
+                                    "wheelChairBoarding": 1,
+                                    "links": [
+                                        {
+                                            "title": "Feriale",
+                                            "url": "https://www.trentinotrasporti.it/pdforari/urbani/linee/OrariDiDirettrice-T24E-T-13_R-Feriale.PDF"
+                                        }
+                                    ]
                                 }
-              ]
-            },
+                            ]
+                        },
                         {
                             "label": "14",
                             "color": "#db8fac",
@@ -433,17 +599,29 @@
                                     "routeSymId": "14A",
                                     "title": "P. Dante - Via Sanseverino - Belvedere Ravina",
                                     "label": "14",
-                                    "wheelChairBoarding": 2
+                                    "wheelChairBoarding": 2,
+                                    "links": [
+                                        {
+                                            "title": "Feriale",
+                                            "url": "https://www.trentinotrasporti.it/pdforari/urbani/linee/OrariDiDirettrice-T24E-T-14_A-Feriale.PDF"
+                                        }
+                                    ]
                                 },
                                 {
                                     "routeId": "14R",
                                     "routeSymId": "14R",
                                     "title": "Belvedere Ravina - Via Sanseverino - P. Dante",
                                     "label": "14",
-                                    "wheelChairBoarding": 2
+                                    "wheelChairBoarding": 2,
+                                    "links": [
+                                        {
+                                            "title": "Feriale",
+                                            "url": "https://www.trentinotrasporti.it/pdforari/urbani/linee/OrariDiDirettrice-T24E-T-14_R-Feriale.PDF"
+                                        }
+                                    ]
                                 }
-              ]
-            },
+                            ]
+                        },
                         {
                             "label": "15",
                             "color": "#81bb46",
@@ -453,17 +631,29 @@
                                     "routeSymId": "15A",
                                     "title": "Piazza Dante - Interporto - Spini di Gardolo",
                                     "label": "15",
-                                    "wheelChairBoarding": 1
+                                    "wheelChairBoarding": 1,
+                                    "links": [
+                                        {
+                                            "title": "Feriale",
+                                            "url": "https://www.trentinotrasporti.it/pdforari/urbani/linee/OrariDiDirettrice-T24E-T-15_A-Feriale.PDF"
+                                        }
+                                    ]
                                 },
                                 {
                                     "routeId": "15R",
                                     "routeSymId": "15R",
                                     "title": "Spini di Gardolo - Interporto - Piazza Dante",
                                     "label": "15",
-                                    "wheelChairBoarding": 1
+                                    "wheelChairBoarding": 1,
+                                    "links": [
+                                        {
+                                            "title": "Feriale",
+                                            "url": "https://www.trentinotrasporti.it/pdforari/urbani/linee/OrariDiDirettrice-T24E-T-15_R-Feriale.PDF"
+                                        }
+                                    ]
                                 }
-              ]
-            },
+                            ]
+                        },
                         {
                             "label": "16",
                             "color": "#262e5f",
@@ -473,17 +663,29 @@
                                     "routeSymId": "16A",
                                     "title": "Centochiavi - Martignano - Cognola - Povo",
                                     "label": "16",
-                                    "wheelChairBoarding": 1
+                                    "wheelChairBoarding": 1,
+                                    "links": [
+                                        {
+                                            "title": "Feriale",
+                                            "url": "https://www.trentinotrasporti.it/pdforari/urbani/linee/OrariDiDirettrice-T24E-T-16_A-Feriale.PDF"
+                                        }
+                                    ]
                                 },
                                 {
                                     "routeId": "16R",
                                     "routeSymId": "16R",
                                     "title": "Povo - Cognola - Martignano - Centochiavi",
                                     "label": "16",
-                                    "wheelChairBoarding": 1
+                                    "wheelChairBoarding": 1,
+                                    "links": [
+                                        {
+                                            "title": "Feriale",
+                                            "url": "https://www.trentinotrasporti.it/pdforari/urbani/linee/OrariDiDirettrice-T24E-T-16_R-Feriale.PDF"
+                                        }
+                                    ]
                                 }
-              ]
-            },
+                            ]
+                        },
                         {
                             "label": "17",
                             "color": "#2993c4",
@@ -493,17 +695,283 @@
                                     "routeSymId": "17A",
                                     "title": "Piazza Dante - Via Bolzano - Lamar - Lavis",
                                     "label": "17",
-                                    "wheelChairBoarding": 1
+                                    "wheelChairBoarding": 1,
+                                    "links": [
+                                        {
+                                            "title": "Festivo",
+                                            "url": "https://www.trentinotrasporti.it/pdforari/urbani/linee/OrariDiDirettrice-T24E-T-17_A-Festivo.PDF"
+                                        },
+                                        {
+                                            "title": "Feriale",
+                                            "url": "https://www.trentinotrasporti.it/pdforari/urbani/linee/OrariDiDirettrice-T24E-T-17_A-Feriale.PDF"
+                                        }
+                                    ]
                                 },
                                 {
                                     "routeId": "17R",
                                     "routeSymId": "17R",
                                     "title": "Lavis - S.Lazzaro - Via Bolzano - P.Dante",
                                     "label": "17",
-                                    "wheelChairBoarding": 1
+                                    "wheelChairBoarding": 1,
+                                    "links": [
+                                        {
+                                            "title": "Festivo",
+                                            "url": "https://www.trentinotrasporti.it/pdforari/urbani/linee/OrariDiDirettrice-T24E-T-17_R-Festivo.PDF"
+                                        },
+                                        {
+                                            "title": "Feriale",
+                                            "url": "https://www.trentinotrasporti.it/pdforari/urbani/linee/OrariDiDirettrice-T24E-T-17_R-Feriale.PDF"
+                                        }
+                                    ]
                                 }
-              ]
-            },
+                            ]
+                        },
+                        {
+                            "label": "19",
+                            "color": "#000000",
+                            "routes": [
+                                {
+                                    "routeId": "19",
+                                    "routeSymId": "19C",
+                                    "title": "Stazione - Buc - M.Baldo - Muse - Regione",
+                                    "label": "19",
+                                    "wheelChairBoarding": 1,
+                                    "links": [
+                                        {
+                                            "title": "Festivo",
+                                            "url": "https://www.trentinotrasporti.it/pdforari/urbani/linee/OrariDiDirettrice-T24E-T-19_C-Festivo.PDF"
+                                        },
+                                        {
+                                            "title": "Feriale",
+                                            "url": "https://www.trentinotrasporti.it/pdforari/urbani/linee/OrariDiDirettrice-T24E-T-19_C-Feriale.PDF"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "label": "A",
+                            "color": "#b8b8b4",
+                            "routes": [
+                                {
+                                    "routeId": "_A",
+                                    "routeSymId": "%20AC",
+                                    "title": "P. Dante - Osp. S. Chiara - Clarina - P. Dante",
+                                    "label": "A",
+                                    "wheelChairBoarding": 1,
+                                    "links": [
+                                        {
+                                            "title": "Festivo",
+                                            "url": "https://www.trentinotrasporti.it/pdforari/urbani/linee/OrariDiDirettrice-T24E-T-%20A_C-Festivo.PDF"
+                                        },
+                                        {
+                                            "title": "Feriale",
+                                            "url": "https://www.trentinotrasporti.it/pdforari/urbani/linee/OrariDiDirettrice-T24E-T-%20A_C-Feriale.PDF"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "label": "C",
+                            "color": "#000000",
+                            "routes": [
+                                {
+                                    "routeId": "Ca",
+                                    "routeSymId": "Ca",
+                                    "title": "RSA S. Bartolomeo - RSA Angeli Custodi",
+                                    "label": "C",
+                                    "wheelChairBoarding": 2,
+                                    "links": [
+                                        {
+                                            "title": "Feriale",
+                                            "url": "https://www.trentinotrasporti.it/pdforari/urbani/linee/OrariDiDirettrice-T24E-T-%20C_A-Feriale.PDF"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "routeId": "Cr",
+                                    "routeSymId": "Cr",
+                                    "title": "RSA Angeli Custodi - RSA S. Bartolomeo",
+                                    "label": "C",
+                                    "wheelChairBoarding": 2,
+                                    "links": [
+                                        {
+                                            "title": "Feriale",
+                                            "url": "https://www.trentinotrasporti.it/pdforari/urbani/linee/OrariDiDirettrice-T24E-T-%20C_R-Feriale.PDF"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "label": "G",
+                            "color": "#572f75",
+                            "routes": [
+                                {
+                                    "routeId": "%20GA",
+                                    "routeSymId": "%20GA",
+                                    "title": "Gardolo - Gardolo di Mezzo e Spini",
+                                    "label": "Gardolo - Gardolo di Mezzo e Spini",
+                                    "wheelChairBoarding": 1,
+                                    "links": [
+                                        {
+                                            "title": "Feriale",
+                                            "url": "https://www.trentinotrasporti.it/pdforari/urbani/linee/OrariDiDirettrice-T24E-T-%20G_A-Feriale.PDF"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "routeId": "%20GR",
+                                    "routeSymId": "%20GR",
+                                    "title": "Spini e Gardolo di Mezzo - Gardolo",
+                                    "label": "Spini e Gardolo di Mezzo - Gardolo",
+                                    "wheelChairBoarding": 1,
+                                    "links": [
+                                        {
+                                            "title": "Feriale",
+                                            "url": "https://www.trentinotrasporti.it/pdforari/urbani/linee/OrariDiDirettrice-T24E-T-%20G_R-Feriale.PDF"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "label": "M",
+                            "color": "#125547",
+                            "routes": [
+                                {
+                                    "routeId": "Ma",
+                                    "routeSymId": "Ma",
+                                    "title": "Martignano - Montevaccino",
+                                    "label": "M",
+                                    "wheelChairBoarding": 1,
+                                    "links": [
+                                        {
+                                            "title": "Feriale",
+                                            "url": "https://www.trentinotrasporti.it/pdforari/urbani/linee/OrariDiDirettrice-T24E-T-%20M_A-Feriale.PDF"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "routeId": "Mr",
+                                    "routeSymId": "Mr",
+                                    "title": "Montevaccino - Martignano",
+                                    "label": "M",
+                                    "wheelChairBoarding": 1,
+                                    "links": [
+                                        {
+                                            "title": "Feriale",
+                                            "url": "https://www.trentinotrasporti.it/pdforari/urbani/linee/OrariDiDirettrice-T24E-T-%20M_R-Feriale.PDF"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "label": "N",
+                            "color": "#7f8080",
+                            "routes": [
+                                {
+                                    "routeId": "NA",
+                                    "routeSymId": "NA",
+                                    "title": "N ZUFFO - VIA ROSMINI - ITALCEMENTI",
+                                    "label": "N",
+                                    "wheelChairBoarding": 1,
+                                    "links": [
+                                        {
+                                            "title": "Festivo",
+                                            "url": "https://www.trentinotrasporti.it/pdforari/urbani/linee/OrariDiDirettrice-T24E-T-%20N_A-Festivo.PDF"
+                                        },
+                                        {
+                                            "title": "Feriale",
+                                            "url": "https://www.trentinotrasporti.it/pdforari/urbani/linee/OrariDiDirettrice-T24E-T-%20N_A-Feriale.PDF"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "routeId": "NR",
+                                    "routeSymId": "NR",
+                                    "title": "N ITALCEMENTI - VIA ROSMINI - ZUFFO",
+                                    "label": "N",
+                                    "wheelChairBoarding": 1,
+                                    "links": [
+                                        {
+                                            "title": "Festivo",
+                                            "url": "https://www.trentinotrasporti.it/pdforari/urbani/linee/OrariDiDirettrice-T24E-T-%20N_R-Festivo.PDF"
+                                        },
+                                        {
+                                            "title": "Feriale",
+                                            "url": "https://www.trentinotrasporti.it/pdforari/urbani/linee/OrariDiDirettrice-T24E-T-%20N_R-Feriale.PDF"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "label": "P",
+                            "color": "#bf2c26",
+                            "routes": [
+                                {
+                                    "routeId": "Pa",
+                                    "routeSymId": "Pa",
+                                    "title": "Centochiavi - Martignano - Cognola - Povo",
+                                    "label": "P",
+                                    "wheelChairBoarding": 1,
+                                    "links": [
+                                        {
+                                            "title": "Feriale",
+                                            "url": "https://www.trentinotrasporti.it/pdforari/urbani/linee/OrariDiDirettrice-T24E-T-%20P_A-Feriale.PDF"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "routeId": "Pr",
+                                    "routeSymId": "Pr",
+                                    "title": "Povo - Cognola - Martignano - Centochiavi",
+                                    "label": "P",
+                                    "wheelChairBoarding": 1,
+                                    "links": [
+                                        {
+                                            "title": "Feriale",
+                                            "url": "https://www.trentinotrasporti.it/pdforari/urbani/linee/OrariDiDirettrice-T24E-T-%20P_R-Feriale.PDF"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "label": "CM",
+                            "color": "#f8ad1e",
+                            "routes": [
+                                {
+                                    "routeId": "CMA",
+                                    "routeSymId": "CMA",
+                                    "title": "Povo - Borino - Celva - Passo Cimirlo",
+                                    "label": "Povo - Borino - Celva - Passo Cimirlo",
+                                    "wheelChairBoarding": 1,
+                                    "links": [
+                                        {
+                                            "title": "Feriale",
+                                            "url": "https://www.trentinotrasporti.it/pdforari/urbani/linee/OrariDiDirettrice-T24E-T-CM_A-Feriale.PDF"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "routeId": "CMR",
+                                    "routeSymId": "CMR",
+                                    "title": "Passo Cimirlo - Celva - Borino - Povo",
+                                    "label": "Passo Cimirlo - Celva - Borino - Povo",
+                                    "wheelChairBoarding": 1,
+                                    "links": [
+                                        {
+                                            "title": "Feriale",
+                                            "url": "https://www.trentinotrasporti.it/pdforari/urbani/linee/OrariDiDirettrice-T24E-T-CM_R-Feriale.PDF"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
                         {
                             "label": "Funivia",
                             "color": "#016a6a",
@@ -523,51 +991,11 @@
                                     "label": "Sardagna - Trento",
                                     "wheelChairBoarding": 1
                                 }
-              ]
-            },
-                        {
-                            "label": "CM",
-                            "color": "#f8ad1e",
-                            "routes": [
-                                {
-                                    "routeId": "CMA",
-                                    "routeSymId": "CMA",
-                                    "title": "Povo - Borino - Celva - Passo Cimirlo",
-                                    "label": "Povo - Borino - Celva - Passo Cimirlo",
-                                    "wheelChairBoarding": 1
-                                },
-                                {
-                                    "routeId": "CMR",
-                                    "routeSymId": "CMR",
-                                    "title": "Passo Cimirlo - Celva - Borino - Povo",
-                                    "label": "Passo Cimirlo - Celva - Borino - Povo",
-                                    "wheelChairBoarding": 1
-                                }
-              ]
-            },
-                        {
-                            "label": "G",
-                            "color": "#572f75",
-                            "routes": [
-                                {
-                                    "routeId": "%20GA",
-                                    "routeSymId": "%20GA",
-                                    "title": "Gardolo - Gardolo di Mezzo e Spini",
-                                    "label": "Gardolo - Gardolo di Mezzo e Spini",
-                                    "wheelChairBoarding": 1
-                                },
-                                {
-                                    "routeId": "%20GR",
-                                    "routeSymId": "%20GR",
-                                    "title": "Spini e Gardolo di Mezzo - Gardolo",
-                                    "label": "Spini e Gardolo di Mezzo - Gardolo",
-                                    "wheelChairBoarding": 1
-                                }
-              ]
-            }
-          ]
-        }
-      ]
+                            ]
+                        }
+                    ]
+                }
+            ]
         }
     }
 }
